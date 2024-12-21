@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'primary': "#07AEAF",
+        'secondary': '#FE9900'
       },
       screens: {
         sm: '375px',
