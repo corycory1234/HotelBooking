@@ -5,7 +5,7 @@ import { RootState, AppDispatch } from "@/store/store";
 import Carousel_Offer from "@/components/home/client-Carousel-Offer";
 import Carousel_Near from "@/components/home/client-Carousel-Near";
 import Menu from "@/components/menu";
-import DateRangePicker from "@/components/datepicker/dateRangePicker";
+import Client_Form_Search from "@/components/client-Form-Search/client-Form-Search";
 
 export default function Home() {
   // const dispatch: AppDispatch = useDispatch();
@@ -39,11 +39,7 @@ export default function Home() {
         {/* Swiper 輪播圖 */}
         <div className="bg-white rounded-t-3xl h-screen w-full bg-gradient-to-b from-[#F9F9F9] to-slate-50">
           <div className="">
-            <div className="flex flex-col p-4 gap-4 justify-center items-center">
-              <input type="text" placeholder="要去哪"/>
-              <DateRangePicker></DateRangePicker>
-            </div>
-
+            <Client_Form_Search></Client_Form_Search>
           </div>
 
           <div className="flex flex-col p-4 gap-4">
