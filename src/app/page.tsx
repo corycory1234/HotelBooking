@@ -39,7 +39,9 @@ export default function Home() {
         {/* Swiper 輪播圖 */}
         <div className="bg-white rounded-t-3xl h-screen w-full bg-gradient-to-b from-[#F9F9F9] to-slate-50">
           <div className="">
+            {/* 這個組件裡面有三個 hidden input: room, adult, child */}
             <Client_Form_Search></Client_Form_Search>
+            {/* 這個組件裡面有三個 hidden input: room, adult, child */}
           </div>
 
           <div className="flex flex-col p-4 gap-4">

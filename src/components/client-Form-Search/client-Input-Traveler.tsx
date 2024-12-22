@@ -1,7 +1,10 @@
 'use client';
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Click_Outside from "../clickOutside";
 
 export default function Client_Input_Traveler () {
+  // 3. 建立 ref 來追蹤 dropdown 元素
+  const dropDownRef = useRef<HTMLDivElement>(null);
   const [room, setRoom] = useState<number>(1);
   const [adult, setAdult] = useState<number>(1);
   const [child, setChild] = useState<number>(0);
@@ -36,12 +39,21 @@ export default function Client_Input_Traveler () {
     setShowDropDown(!showDropDown)
   }
 
+  // 2. 點外層, 隱藏 房間人數下拉選單
+  Click_Outside(dropDownRef, () => setShowDropDown(false))
+
   return <>
-    <div className="relative w-full">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute right-2 text-primary">
+    {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
+      <input type="hidden" name="room" value={room} />
+      <input type="hidden" name="adult" value={adult} />
+      <input type="hidden" name="child" value={child} />
+    {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
+
+    <div className="relative w-full" ref={dropDownRef}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2 right-2 text-primary">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
       </svg>
-      <button className="w-full px-4 rounded outline-none hover:outline-secondary text-left bg-white"
+      <button className="w-full py-2 px-4 rounded outline-none hover:outline-secondary text-left bg-white"
         onClick={toggle_ShowDropDown}
         type="button">
         {`${room} Room – ${adult} Adult, ${child} Child`}
