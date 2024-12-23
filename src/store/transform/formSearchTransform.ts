@@ -24,13 +24,13 @@ const formSearch_Transform = createTransform(
 
 
     // (A) 將 dateRange 的 startDate/endDate 從字串轉 Date
-    if(outboundState.dateRange) {
-      const {startDate, endDate} = outboundState.dateRange;
-      outboundState.dateRange = {
-        startDate: startDate ? new Date(startDate) : null,
-        endDate: endDate ? new Date(endDate) : null,
-      };
-    }
+    // if(outboundState.dateRange) {
+    //   const {startDate, endDate} = outboundState.dateRange;
+    //   outboundState.dateRange = {
+    //     startDate: startDate ? new Date(startDate) : null,
+    //     endDate: endDate ? new Date(endDate) : null,
+    //   };
+    // }
 
     // (B) 將數字欄位 (room, adult, child) 從字串轉 number
     // 需要先判斷它是否是字串
