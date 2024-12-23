@@ -5,8 +5,7 @@ import { Submit_Search } from "@/actions";
 
 export default function Client_Form_Search () {
   return <>
-    <form action={Submit_Search} className="flex flex-col p-4 gap-4 justify-center items-center"
-    method="POST">
+    <form action={Submit_Search} className="flex flex-col p-4 gap-4 justify-center items-center">
       <Client_Input_Keyword></Client_Input_Keyword>
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>

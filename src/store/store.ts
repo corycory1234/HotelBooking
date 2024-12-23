@@ -7,6 +7,8 @@ import numberReducer from "@/store/test/testSlice";
 import formSearch_Reducer from "@/store/form-Search/formSearchSlice"
 // 引入 transform, 把 date字串 轉 date物件格式, 不然無日曆法渲染, 造成報錯
 import formSearch_Transform from "./transform/formSearchTransform";
+// 先從 redux-persist/es/constants 或 redux-persist 中引入要忽略的 action 常數：
+import {FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER,} from "redux-persist";
 
 // 1. 合併各 slice 的 reducer
 const rootReducer = combineReducers({
@@ -31,6 +33,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store  = configureStore({
   reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== "production",
+  // 4.2 這樣就能避免在執行 persist/PERSIST 或 REGISTER 時出現非序列化值的警告。
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, "formSearch/updateDateRange"],
+      },
+    })
   // 4.1 原先不安裝 redux-persist 之寫法
   // reducer: {
   //   number: numberReducer,
