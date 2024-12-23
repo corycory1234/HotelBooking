@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
+import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 // 若需要 sessionStorage，改成 import storageSession from "redux-persist/lib/storage/session";
 import numberReducer from "@/store/test/testSlice";
@@ -16,8 +16,12 @@ const rootReducer = combineReducers({
   formSearch: formSearch_Reducer
 })
 
+//
+// 2. 定義 RootState 並包含 PersistPartial
+export type RootState = ReturnType<typeof rootReducer>;
+
 // 2. 建立 persistConfig
-const persistConfig = {
+const persistConfig: PersistConfig<RootState> = {
   key: "root",
   storage,
   whitelist: ["formSearch"],
@@ -50,5 +54,5 @@ export const store  = configureStore({
 // 5. 建立 persistor 供 <PersistGate> 使用
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
