@@ -1,39 +1,22 @@
 'use client';
 import { useState, useRef } from "react";
 import Click_Outside from "../clickOutside";
+import { useDispatch, useSelector } from "react-redux";
+import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "@/store/form-Search/formSearchSlice";
+import { RootState, AppDispatch } from "@/store/store";
 
 export default function Client_Input_Traveler () {
+  // 1. 提取Redux - formSearch 表單 Room房間量、Adult成人、Child小孩
+  const dispatch: AppDispatch = useDispatch();
+  const room = useSelector((state: RootState) => state.formSearch!.room);
+  const adult = useSelector((state: RootState) => state.formSearch!.adult);
+  const child = useSelector((state: RootState) => state.formSearch!.child);
+
+
   // 3. 建立 ref 來追蹤 dropdown 元素
   const dropDownRef = useRef<HTMLDivElement>(null);
-  const [room, setRoom] = useState<number>(1);
-  const [adult, setAdult] = useState<number>(1);
-  const [child, setChild] = useState<number>(0);
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   
-  const addRoom = (num: number) => {
-    setRoom(room + num);
-  };
-  const minusRoom = (num: number) => {
-    if(room <=1) return;
-    setRoom(room - num);
-  };
-  
-  const addAdult = (num: number) => {
-    setAdult(adult + num);
-  };
-  const minusAdult= (num: number) => {
-    if(adult <=1) return;
-    setAdult(adult - num);
-  };
-
-  const addChild = (num: number) => {
-    setChild(child + num);
-  };
-  const minusChild = (num: number) => {
-    if(child <=0) return;
-    setChild(child - num)
-  }
-
   // 1. 打開 選人數清單
   const toggle_ShowDropDown = () => {
     setShowDropDown(!showDropDown)
@@ -66,13 +49,13 @@ export default function Client_Input_Traveler () {
           <div className="flex justify-between items-center py-2 border-b-2">
             <p>{room} Room</p>
             <div className="flex gap-4">
-              <button onClick={() => minusRoom(1)} type="button">
+              <button onClick={() => dispatch(minusRoom())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${room<=1 ? 'text-gray-400' : 'text-primary'}`}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </button>
 
-              <button onClick={() => addRoom(1)} type="button">
+              <button onClick={() => dispatch(addRoom())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-primary">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -85,13 +68,13 @@ export default function Client_Input_Traveler () {
           <div className="flex justify-between items-center py-2 border-b-2">
             <p>{adult} Adult</p>
             <div className="flex gap-4">
-              <button onClick={() => minusAdult(1)} type="button">
+              <button onClick={() => dispatch(minusAdult())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${adult<=1 ? 'text-gray-400' : 'text-primary'}`}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </button>
 
-              <button onClick={() => addAdult(1)} type="button">
+              <button onClick={() => dispatch(addAdult())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-primary">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
@@ -104,13 +87,13 @@ export default function Client_Input_Traveler () {
           <div className="flex justify-between items-center py-2 border-b-2">
             <p>{child} Child</p>
             <div className="flex gap-4">
-              <button onClick={() => minusChild(1)} type="button">
+              <button onClick={() => dispatch(minusChild())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${child<=1 ? 'text-gray-400' : 'text-primary'}`}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </button>
 
-              <button onClick={() => addChild(1)} type="button">
+              <button onClick={() => dispatch(addChild())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-primary">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>

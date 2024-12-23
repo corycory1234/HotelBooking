@@ -1,12 +1,12 @@
 'use client';
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateKeyword } from "@/store/form-Search/formSearchSlice";
+import { RootState, AppDispatch } from "@/store/store";
 
 export default function Client_Input_Keyword () {
-  const [keword, setKeyword] = useState<string>("")
-  const getKeyword = (newKeyWord: string) => {
-    console.log(newKeyWord);
-    setKeyword(newKeyWord);
-  }
+  // 1. 提取 Redux - formSeach表單 keyword
+  const dispatch: AppDispatch = useDispatch();
+  const keyword = useSelector((state: RootState) => state.formSearch!.keyword)
 
   return <>
   <div className="relative w-full">
@@ -15,10 +15,13 @@ export default function Client_Input_Keyword () {
       <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
     </svg>
 
+
     <input type="text" placeholder="Where are you going?" 
     className="w-full py-2 px-4 rounded outline-none hover:outline-secondary bg-white"
-    onChange={(event) => getKeyword(event.target.value)}
+    onChange={(event) => dispatch(updateKeyword(event.target.value))}
+    value={keyword}
     name="destination"/>
+
 
   </div>
 
