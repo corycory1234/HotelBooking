@@ -37,14 +37,14 @@ export default function Home() {
         {/* 上層 BG圖 */}
         
         {/* Swiper 輪播圖 */}
-        <div className="bg-white rounded-t-3xl h-screen w-full bg-gradient-to-b from-[#F9F9F9] to-slate-50">
+        <div className="bg-white rounded-t-3xl min-h-screen w-full bg-gradient-to-b from-[#F9F9F9] to-slate-50 flex flex-col">
           <div className="">
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
             <Client_Form_Search></Client_Form_Search>
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
           </div>
 
-          <div className="flex flex-col p-4 gap-4">
+          <div className="flex flex-col p-4 gap-4 pb-20">
             <h2>Popular Offer</h2>
             <div className="flex">
               <Carousel_Offer></Carousel_Offer>

@@ -1,6 +1,7 @@
 'use client';
 // 1. Redux-Toolkit 於 客戶端設置
 import { Provider } from "react-redux";
+// 2. 引入 persistor, 才能使用 localStorage
 import { store, persistor } from "@/store/store";
 import { PersistGate } from "redux-persist/integration/react";
 

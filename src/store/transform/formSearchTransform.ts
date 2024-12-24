@@ -7,54 +7,42 @@ interface Form_Search {
   room: number,
   adult: number,
   child: number
-}
+};
 
-// 1. 假設我們只針對 formSearch slice 做日期轉換
+// 工具函式：解析數字
+const parseNumberField = (value: unknown): number =>
+  typeof value === "string" ? parseInt(value, 10) : (value as number);
 
-const formSearch_Transform = createTransform<Form_Search, Form_Search>(
+// 工具函式：解析日期
+const parseDateField = (date: string | null | undefined): Date | null =>
+  date ? new Date(date) : null;
+
+// 1.  假設我們只針對 formSearch slice 做日期轉換
+// 1.1 createTransform<InboundState, OutboundState>, 
+// 1.2 我們 存取 & 提出 的泛型是一致的, 所以 <Form_Search, Form_Search> 倆個都要寫
+const formSearch_Transform = createTransform<Form_Search, Form_Search> (
   // inboundState：存進 localStorage 前呼叫
   (inboundState, key) => {
      // 這裡可以視需要做轉換，也可以直接回傳
     return inboundState
   },
 
-  // outboundState：重新載入(rehydrate)時呼叫
+  // 2. outboundState：重新載入(rehydrate)時呼叫
   (outboundState, key) => {
     if(!outboundState) return outboundState
 
     return {
       ...outboundState,
-      room: typeof outboundState.room === "string" ? parseInt(outboundState.room, 10) : outboundState.room,
-      adult: typeof outboundState.adult === "string" ? parseInt(outboundState.adult, 10) : outboundState.adult,
-      child: typeof outboundState.child === "string" ? parseInt(outboundState.child, 10) : outboundState.child,
+      // room: typeof outboundState.room === "string" ? parseInt(outboundState.room, 10) : outboundState.room,
+      // adult: typeof outboundState.adult === "string" ? parseInt(outboundState.adult, 10) : outboundState.adult,
+      // child: typeof outboundState.child === "string" ? parseInt(outboundState.child, 10) : outboundState.child,
+      room: parseNumberField(outboundState.room),
+      adult: parseNumberField(outboundState.adult),
+      child: parseNumberField(outboundState.child),
     };
-
-
-    // (A) 將 dateRange 的 startDate/endDate 從字串轉 Date
-    // if(outboundState.dateRange) {
-    //   const {startDate, endDate} = outboundState.dateRange;
-    //   outboundState.dateRange = {
-    //     startDate: startDate ? new Date(startDate) : null,
-    //     endDate: endDate ? new Date(endDate) : null,
-    //   };
-    // }
-
-    // (B) 將數字欄位 (room, adult, child) 從字串轉 number
-    // 需要先判斷它是否是字串
-    // if(typeof outboundState.room === "string") {
-    //   outboundState.room = parseInt(outboundState.room, 10);
-    // };
-    // if(typeof outboundState.adult === "string") {
-    //   outboundState.adult = parseInt(outboundState.adult, 10);
-    // };
-    // if(typeof outboundState.child === "string") {
-    //   outboundState.child = parseInt(outboundState.child, 10);
-    // }
-
-    // return outboundState;
   },
 
-   // 設定 whitelist => 只對 formSearch 這個 slice 生效
+   // 3.設定 whitelist => 只對 formSearch 這個 slice 生效
   { whitelist: ["formSearch"] }
 );
 

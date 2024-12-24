@@ -1,9 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-// 若需要 sessionStorage，改成 import storageSession from "redux-persist/lib/storage/session";
 import numberReducer from "@/store/test/testSlice";
-// import keywordReducer from "@/store/form-Search/formSearchSlice";
 import formSearch_Reducer from "@/store/form-Search/formSearchSlice"
 // 引入 transform, 把 date字串 轉 date物件格式, 不然無日曆法渲染, 造成報錯
 import formSearch_Transform from "./transform/formSearchTransform";
@@ -16,17 +14,13 @@ const rootReducer = combineReducers({
   formSearch: formSearch_Reducer
 })
 
-//
-// 2. 定義 RootState 並包含 PersistPartial
-export type RootState = ReturnType<typeof rootReducer>;
 
 // 2. 建立 persistConfig
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
   storage,
   whitelist: ["formSearch"],
-  // 你也可以只想持久化部分 slice，例如：whitelist: ["formSearch"] 或 blacklist: ["number"]
-  // whitelist: ["formSearch"],
+  // 2.1 你也可以只想持久化部分 slice，例如：whitelist: ["formSearch"] 或 blacklist: ["number"]
   transforms: [formSearch_Transform]
 };
 
@@ -54,5 +48,8 @@ export const store  = configureStore({
 // 5. 建立 persistor 供 <PersistGate> 使用
 export const persistor = persistStore(store);
 
+// 6. 定義 RootState 並包含 PersistPartial
+export type RootState = ReturnType<typeof rootReducer>;
 // export type RootState = ReturnType<typeof store.getState>;
+
 export type AppDispatch = typeof store.dispatch;
