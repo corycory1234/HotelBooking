@@ -9,7 +9,7 @@ export default function HotelList () {
 
 
 <div className="fixed top-[56px] left-0 right-0 bg-white z-40 border-b border-gray-100">
-  <Server_Form_Search></Server_Form_Search>
+  {/* <Server_Form_Search></Server_Form_Search> */}
   {/* <div className="p-4">
     <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
       <i className="fas fa-location-dot text-gray-400"></i>
@@ -51,7 +51,7 @@ export default function HotelList () {
       <option>Guest Rating</option>
     </select>
   </div>
-  <div className="space-y-4 pt-40">
+  <div className="space-y-4">
     <article className="bg-white rounded-lg overflow-hidden shadow-sm">
       <img src="/hotellist/hotellist_1.webp" alt="Hotel Room" className="w-full h-[200px] object-cover object-top"/>
       <div className="p-4">
