@@ -5,7 +5,7 @@ import { RootState, AppDispatch } from "@/store/store";
 import Carousel_Offer from "@/components/home/client-Carousel-Offer";
 import Carousel_Near from "@/components/home/client-Carousel-Near";
 import Menu from "@/components/menu";
-import Client_Form_Search from "@/components/client-Form-Search/client-Form-Search";
+import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
 
 export default function Home() {
   // const dispatch: AppDispatch = useDispatch();
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="bg-white rounded-t-3xl min-h-screen w-full bg-gradient-to-b from-[#F9F9F9] to-slate-50 flex flex-col">
           <div className="">
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
-            <Client_Form_Search></Client_Form_Search>
+            <Server_Form_Search></Server_Form_Search>
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
           </div>
 
