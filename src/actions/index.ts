@@ -12,5 +12,5 @@ export async function Submit_Search(formData: FormData) {
   console.log(destination);
   console.log(dateRange);
   console.log(room, adult, child);
-  
+  revalidatePath("/hotellist");
 }

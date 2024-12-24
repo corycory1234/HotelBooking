@@ -2,6 +2,7 @@ import Client_Input_Keyword from "./client-Input-Keyword";
 import DateRangePicker from "./dateRangePicker";
 import Client_Input_Traveler from "./client-Input-Traveler";
 import { Submit_Search } from "@/actions";
+import Link from "next/link";
 
 export default function Client_Form_Search () {
   return <>
@@ -9,7 +10,9 @@ export default function Client_Form_Search () {
       <Client_Input_Keyword></Client_Input_Keyword>
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>
-      <button className="bg-primary rounded w-full py-2 px-4">Search</button>
+      <button className="bg-primary rounded w-full ">
+        <Link className="w-full block py-2 px-4" href={"/hotellist"}>Search</Link>
+      </button>
     </form>
   </>
 }
