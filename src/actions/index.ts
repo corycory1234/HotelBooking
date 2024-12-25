@@ -13,7 +13,20 @@ export async function Submit_Search(formData: FormData) {
   console.log(destination);
   console.log(dateRange);
   console.log(room, adult, child);
+
+  // 2. URL參數, 轉字串
+  const timestamp = +new Date();
+  const query = new URLSearchParams({
+    destination,
+    dateRange,
+    room: String(room),
+    adult: String(adult),
+    child: String(child),
+    timestamp: String(timestamp)
+  }).toString()
+
+
   // 1.1 跳轉「飯店列表」
-  redirect("/hotellist");
+  redirect(`/hotellist?${query}`);
   // revalidatePath("/hotellist");
 }

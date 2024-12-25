@@ -1,12 +1,12 @@
-import { headers } from "next/headers"
+// import { headers } from "next/headers"
 import Link from "next/link";
 import Client_Show_Keyword from "../client-Show-Keyword";
 import Modal from "../modal/modal";
 
 export default function BackPage() {
-  const headerList = headers();
-  const referer = headerList.get("referer") || "/";
-  console.log(referer);
+  // const headerList = headers();
+  // const referer = headerList.get("referer") || "/";
+  // console.log(referer);
 
 
   return <>

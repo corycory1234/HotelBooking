@@ -1,7 +1,24 @@
+'use client';
 import BackPage from "@/components/back-Page/backPage";
 import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function HotelList () {
+  // 1.  這些Params都來自於 Server Action - Submit_Form函式
+  // 1.1 必須要對接這些Params, /hotellist?destination...路由, 才可以運作
+  const searchParams = useSearchParams();
+  const destination = searchParams.get("destination");
+  // const dateRange = searchParams.get("dateRange");
+  const room = searchParams.get("room");
+  const adult = searchParams.get("adult");
+  const child = searchParams.get("child");
+  const timestamp = searchParams.get("timestamp");
+
+  // 2. 監聽 Params
+  useEffect(() => {
+    console.log(destination, room, adult, child, timestamp);
+  },[destination, room, adult, child, timestamp])
 
   return <>
   <title>HOTEL</title>
