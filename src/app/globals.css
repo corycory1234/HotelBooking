@@ -18,6 +18,13 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-}body::-webkit-scrollbar {
-  display: none;
+}
+
+/* 1. 隱藏捲軸但仍可滑動 */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* for IE and Edge */
+  scrollbar-width: none;    /* for Firefox */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;            /* for Chrome, Safari, and Opera */
 }

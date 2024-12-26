@@ -3,6 +3,7 @@ import BackPage from "@/components/back-Page/backPage";
 import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import Client_Filter_Button from "@/components/client-Filter-Button";
 
 export default function HotelList () {
   // 1.  這些Params都來自於 Server Action - Submit_Form函式
@@ -26,37 +27,11 @@ export default function HotelList () {
 
 
 <div className="fixed top-[56px] left-0 right-0 bg-white z-40 border-b border-gray-100">
-  {/* <Server_Form_Search></Server_Form_Search> */}
-  {/* <div className="p-4">
-    <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
-      <i className="fas fa-location-dot text-gray-400"></i>
-      <input type="text" placeholder="Location" className="bg-transparent border-none w-full text-sm placeholder:text-gray-400"/>
-    </div>
-    <div className="flex gap-3 mt-3">
-      <div className="flex-1">
-        <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
-          <i className="fas fa-calendar text-gray-400"></i>
-          <input type="date" className="bg-transparent border-none w-full text-sm"/>
-        </div>
-      </div>
-      <div className="flex-1">
-        <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
-          <i className="fas fa-calendar text-gray-400"></i>
-          <input type="date" className="bg-transparent border-none w-full text-sm"/>
-        </div>
-      </div>
-    </div>
-  </div> */}
-  <div className="px-4 pb-3 flex items-center gap-3 overflow-x-auto no-scrollbar">
-    <button className="flex items-center gap-2 px-3 py-1.5 bg-custom text-white rounded-full text-sm !rounded-button">
-      <i className="fas fa-filter"></i>
-      <span>Filters</span>
-    </button>
-    <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded-full text-sm !rounded-button">5 Star</button>
-    <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded-full text-sm !rounded-button">Pool</button>
-    <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded-full text-sm !rounded-button">Spa</button>
-    <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded-full text-sm !rounded-button">Beach</button>
-  </div>
+  {/* Filter 與 熱門搜尋條件 */}
+    <Client_Filter_Button></Client_Filter_Button>
+  {/* Filter 與 熱門搜尋條件 */}
+
+
 </div>
 <main className="mt-[190px] px-4 pb-4">
   <div className="flex items-center justify-between mb-4">

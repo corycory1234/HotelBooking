@@ -96,38 +96,12 @@ export default function DateRangePicker () {
           onChange={(newValue: any) => selectDate(newValue)}
         />
 
-
-
-
-
         {/* 隱藏的輸入框，用於表單提交 */}
                 <input 
           type="hidden" 
           name="datepicker" 
           value={storedDateRange || ""} 
         />
-
-
       </>
-      
-      
-      
-    //   <Datepicker
-    //   i18n={navigator.language}
-    //   primaryColor={"teal"}
-    //   minDate={MIN_DATE}
-    //   maxDate={MAX_DATE}
-    //   popoverDirection="down"
-    //   // inputClassName="w-full outline-none hover:outline-secondary rounded px-4"
-    //   toggleClassName="absolute bg-primary rounded-r-lg text-white right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
-    //   inputId="datepicker"
-    //   inputName="datepicker"
-    //   required={true}
-    //   readOnly={true}
-    //   startFrom={START_FROM}
-    //   separator="to" 
-    //   value={dateRange} 
-    //   onChange={(newValue: DateValueType) => dispatch(updateDateRange(newValue))}
-    // /> 
     );
 };

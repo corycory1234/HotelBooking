@@ -13,7 +13,6 @@ interface Form_Search {
 const initialState: Form_Search = {
   keyword: "",
   dateRange: null,
-  // dateRange: null,
   room: 1,
   adult: 1,
   child: 0
