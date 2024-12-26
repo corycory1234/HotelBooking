@@ -9,6 +9,8 @@ import { useSearchParams } from "next/navigation";
 
 export default function Client_Show_Keyword () {
   const keyword = useSelector((state: RootState) => state.formSearch.keyword);
+  // 4. replace(/\d{4}-/g, "") - replace搭配正則，把"202X -"拿掉
+  const dateRange = useSelector((state: RootState) => state.formSearch.dateRange)?.replace(/\d{4}-/g, "");
   const [formSearch, setFormSearch] = useState<boolean>(false);
   const show_FormSearch = () => {
     setFormSearch(!formSearch);
@@ -29,7 +31,7 @@ export default function Client_Show_Keyword () {
   },[destination, room, adult, child, timestamp])
 
   return <>
-    <p onClick={show_FormSearch} className="text-center">{keyword} ･ OO月 XX日</p>
+    <p onClick={show_FormSearch} className="text-center">{keyword} ･ {dateRange}</p>
 
     {/* Modal彈跳視窗 */}
       <Modal isOpen={formSearch} onClose={() => setFormSearch(false)}>

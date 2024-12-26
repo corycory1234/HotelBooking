@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Form_Search {
   keyword: string,
+  dateRange: string | null,
   // dateRange: DateValueType,
   room: number,
   adult: number,
@@ -11,6 +12,7 @@ interface Form_Search {
 
 const initialState: Form_Search = {
   keyword: "",
+  dateRange: null,
   // dateRange: null,
   room: 1,
   adult: 1,
@@ -23,6 +25,9 @@ const formSearch_Slice = createSlice({
   reducers: {
     updateKeyword: (state, action: PayloadAction<string>) => { 
       state.keyword = action.payload },
+    updateDateRange: (state, action: PayloadAction<string | null>) => {
+      state.dateRange = action.payload;
+    },
     // updateDateRange: (state, action: PayloadAction<DateValueType>) => {
     //   state.dateRange = action.payload
     // },
@@ -44,5 +49,5 @@ const formSearch_Slice = createSlice({
   }
 });
 
-export const { updateKeyword, addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild } = formSearch_Slice.actions;
+export const { updateKeyword, addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild, updateDateRange } = formSearch_Slice.actions;
 export default formSearch_Slice.reducer;
