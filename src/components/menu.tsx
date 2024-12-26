@@ -15,7 +15,7 @@ export default function Menu () {
   const pathName = usePathname();
 
   return <>
-    <div className="bg-white flex justify-between p-4 fixed bottom-0 left-0 right-0 z-10">
+    <div className="bg-white flex justify-between p-4 fixed bottom-0 left-0 right-0 z-50">
       {menu.map((item, index) => 
         <Link href={`${item.url}`} className="flex flex-col justify-center items-center gap-2" key={index}>
           <img src={item.Imgurl} alt="" className={`${item.url === pathName ? 'text-primary' : ''}`}/>
