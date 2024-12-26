@@ -93,7 +93,7 @@ export default function DateRangePicker () {
           startFrom={START_FROM}
           separator="to" 
           value={value} 
-          onChange={(newValue: DateValueType) => selectDate(newValue)}
+          onChange={(newValue: any) => selectDate(newValue)}
         />
 
 
