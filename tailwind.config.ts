@@ -13,7 +13,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         'primary': "#07AEAF",
-        'secondary': '#FE9900'
+        'secondary': '#FE9900',
+        'gray': "#9295A3",
+        'softGray': "#F2F2F2",
       },
       screens: {
         sm: '375px',
@@ -21,7 +23,8 @@ export default {
         lg: '1024px'
       },
       backgroundImage: {
-        'home-explore': "url(/home/Home_Explore_BG.png)"
+        'home-explore': "url(/home/Home_Explore_BG.png)",
+        'email': "url(/account/Email.svg)"
       }
     },
   },

@@ -33,7 +33,7 @@ export default function HotelList () {
 
 
 </div>
-<main className="mt-[190px] px-4 pb-4">
+<main className="pt-28 px-4 pb-4">
   <div className="flex items-center justify-between mb-4">
     <p className="text-sm text-gray-500">245 hotels found</p>
     <select className="text-sm border-none bg-transparent">

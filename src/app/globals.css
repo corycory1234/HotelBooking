@@ -30,3 +30,8 @@ body {
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;            /* for Chrome, Safari, and Opera */
 }
+
+/* 2. Tailwind - 自定義漸層背景 */
+.my-bg-gradient {
+  @apply bg-gradient-to-b from-[#F9F9F9] to-slate-50 rounded-t-3xl;
+}

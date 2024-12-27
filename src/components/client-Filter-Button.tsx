@@ -172,9 +172,12 @@ export default function Client_Filter_Button () {
           </div>
         </div>
 
-        <div className="flex border-t p-4 gap-4">      <button className="flex-1 py-2 border border-gray-300 !rounded-button">Reset</button>
-          <button className="flex-1 py-2 bg-custom text-white !rounded-button">Apply</button>
+        {/** 重置 & 確定 按鈕 */}
+        <div className="flex border-t p-4 gap-4 justify-between items-center">      
+          <button className="basis-1/2 py-2 border border-gray-300 rounded">Reset</button>
+          <button className="basis-1/2 py-2 border border-gray-300 rounded bg-primary">Apply</button>
         </div>
+        {/** 重置 & 確定 按鈕 */}
       </div>
 
 

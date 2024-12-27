@@ -6,6 +6,7 @@ import Carousel_Offer from "@/components/home/client-Carousel-Offer";
 import Carousel_Near from "@/components/home/client-Carousel-Near";
 import Menu from "@/components/menu";
 import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
+import Link from "next/link";
 
 export default function Home() {
   // const dispatch: AppDispatch = useDispatch();
@@ -18,7 +19,9 @@ export default function Home() {
       <div className="bg-home-explore w-full h-52 lg:h-64 bg-no-repeat bg-cover bg-center">
         <div className="flex justify-between p-4">
           <img src="/menu/Menu.svg" alt="" />
-          <img src="/account/Avatar.png" alt="" />
+          <Link href={"/auth"}>
+            <img src="/account/Avatar.png" alt="" />
+          </Link>
         </div>
 
         
@@ -37,7 +40,7 @@ export default function Home() {
         {/* 上層 BG圖 */}
         
         {/* Swiper 輪播圖 */}
-        <div className="bg-white rounded-t-3xl min-h-screen w-full bg-gradient-to-b from-[#F9F9F9] to-slate-50 flex flex-col">
+        <div className="min-h-screen w-full my-bg-gradient flex flex-col">
           <div className="">
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
             <Server_Form_Search></Server_Form_Search>
