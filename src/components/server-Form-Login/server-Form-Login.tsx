@@ -1,5 +1,13 @@
-import Client_Input_Password from "./client-Input-Password"
+'use client';
+
+import Client_Input_Password from "./client-Input-Password";
+import { Submit_Login } from "@/actions/login";
+import { useFormState } from "react-dom";
+
+const initialState = { message: ""};
+
 export default function Server_Form_Login () {
+  const [state, formAction] = useFormState(Submit_Login, initialState)
 
 
   return <>
@@ -14,18 +22,20 @@ export default function Server_Form_Login () {
       </div>
       {/** 電子郵件 SVG */}
 
-      <form action="" className="flex flex-col px-4 pt-14 gap-4">
+      <form action={formAction} className="flex flex-col px-4 pt-14 gap-4">
 
         {/** 電子郵件 */}
-        <label htmlFor="email" className="text-gray">Enter Email</label>
-        <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"/>
+        <label htmlFor="account" className="text-gray">Enter Email</label>
+        <input type="text" id="account" name="account" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"/>
+        <p aria-live="polite" className="text-lg text-red-300">{state?.emailError}</p>
         {/** 電子郵件 */}
 
         {/* 密碼 */}
         <Client_Input_Password></Client_Input_Password>
+        <p aria-live="polite" className="text-lg text-red-300">{state?.passwordError}</p>
         {/* 密碼 */}
         
-        <button type="button" className="bg-primary rounded-lg py-3 text-white">Sign In</button>
+        <button className="bg-primary rounded-lg py-3 text-white">Sign In</button>
       </form>
       
       <div className="pt-28 flex flex-col justify-center items-center gap-4">
