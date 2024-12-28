@@ -1,6 +1,6 @@
 import { headers } from "next/headers"
 import Link from "next/link";
-import Server_Form_Login from "@/components/server-Form-Login/server-Form-Login";
+import Server_Form_Login from "@/components/server-Form-Login/client-Form-Login";
 
 export default function Login () {
   const headerList = headers();

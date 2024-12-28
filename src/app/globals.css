@@ -35,3 +35,8 @@ body {
 .my-bg-gradient {
   @apply bg-gradient-to-b from-[#F9F9F9] to-slate-50 rounded-t-3xl;
 }
+
+/* 3. Tailwind - 強制改Swiper - Pagination 顏色*/
+.swiper-pagination-bullet-active {
+  @apply bg-[#FE9900] !important
+}

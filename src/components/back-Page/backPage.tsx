@@ -10,7 +10,7 @@ export default function BackPage() {
 
 
   return <>
-    <nav className="fixed top-0 left-0 right-0 bg-primary">
+    <nav className="fixed top-0 left-0 right-0 bg-primary z-40">
       <div className="px-4 h-[56px] flex items-center gap-4">
           <button type="button" className="basis-1/12">
             <Link href={'/'}>

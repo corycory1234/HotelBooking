@@ -16,6 +16,7 @@ export default {
         'secondary': '#FE9900',
         'gray': "#9295A3",
         'softGray': "#F2F2F2",
+        'red': "#DC3811"
       },
       screens: {
         sm: '375px',

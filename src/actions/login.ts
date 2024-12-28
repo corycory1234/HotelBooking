@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
-  email: z.string().email("Email格式不正確"),
+  email: z.string().email("Invalid Email"),
   password: z.string()
   .min(8, {message: "Must be 8 or more characters long"})
   .max(12, {message: "Must be 12 or fewer characters long"})
@@ -15,7 +15,9 @@ const schema = z.object({
 
 // 1. <form> 登入
 export async function Submit_Login(prevState: any, formData: FormData) {
-  // console.log(account, password);
+  const account = formData.get("account");
+  const password = formData.get("password");
+  console.log(account, password);
 
   const validateFields = schema.safeParse({
     email: formData.get("account"),
