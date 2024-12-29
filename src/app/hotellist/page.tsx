@@ -8,78 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Half_Modal from "@/components/modal/half-modal";
-
-
-// 0. 飯店列表 - 卡片
-const hotel_List = [
-  {
-    id: "1",
-    name: "The Ritz-Carlton",
-    images: [
-      {
-        url: "/hotellist/hotellist_1.webp",
-        description: "hotel1"
-      },
-      {
-        url: "/hotellist/hotellist_2.webp",
-        description: "hotel2"
-      },
-      {
-        url: "/hotellist/hotellist_3.webp",
-        description: "hotel3"
-    }
-    ],
-    distance: "Downtown • 0.5 mi from center",
-    rating: "4.8",
-    facilities: ["Pool", "Spa", "Restaurant"],
-    price: 599,
-  },
-  {
-    id: "2",
-    name: "Four Seasons Hotel",
-    images: [      
-      {
-        url: "/hotellist/hotellist_2.webp",
-        description: "hotel2"
-      },
-      {
-          url: "/hotellist/hotellist_3.webp",
-          description: "hotel3"
-      },
-      {
-        url: "/hotellist/hotellist_1.webp",
-        description: "hotel1"
-      }
-  ] ,
-    distance: "Waterfront • 1.2 mi from center",
-    rating: "4.9",
-    facilities: ["Beach", "Gym", "Bar"],
-    price: 799,
-  },
-  {
-    id: "3",
-    name: "Mandarin Oriental",
-    images: [
-      {
-        url: "/hotellist/hotellist_3.webp",
-        description: "hotel3"
-      },
-      {
-          url: "/hotellist/hotellist_1.webp",
-          description: "hotel1"
-      },
-      {
-        url: "/hotellist/hotellist_2.webp",
-        description: "hotel2"
-      },
-    ],
-    distance: "Marina Bay • 2.0 mi from center",
-    rating: "3.7",
-    facilities: ["Pool", "Spa", "Wifi"],
-    price: 699,
-  }
-]
+import Half_Modal from "@/components/modal/half-Modal";
+import Hotel_List from "@/fakeData/hotel_List.json";
 
 export default function HotelList () {
   // 1.  這些Params都來自於 Server Action - Submit_Form函式
@@ -101,11 +31,14 @@ export default function HotelList () {
   const [formSort, setFormSort] = useState<boolean>(false);
   const show_FormSort = () => {
     setFormSort(!formSort)
-  }
+  };
+
+  // 4. Sort 傳遞<input type="radio"> 之 Value 與 傳遞函式 set_Sort_Value
+  const [sort_Value, set_Sort_Value] = useState("");
 
   return <>
   <title>HOTEL</title>
-    <BackPage></BackPage>
+  <BackPage></BackPage>
 
   <div className="fixed top-[56px] left-0 right-0 bg-white z-40 border-b border-gray">
     {/* Filter 與 熱門搜尋條件 */}
@@ -116,7 +49,7 @@ export default function HotelList () {
 <main className="pt-28 px-4 pb-4">
 
   <div className="flex items-center justify-between pb-4">
-    <p className="text-sm">{hotel_List.length} hotels</p>
+    <p className="text-sm">{Hotel_List.length} hotels</p>
     
     {/* ↑↓Sort 排序  */}
     <div className="flex items-center gap-1 border border-gray rounded px-2 py-1" onClick={show_FormSort}>
@@ -128,50 +61,16 @@ export default function HotelList () {
     {/* ↑↓Sort 排序  */}
 
     {/* ↑↓Sort 排序 - 彈跳Modal  */}
-    <Half_Modal isOpen={formSort} onClose={() => setFormSort(false)}>
-      <div className="flex flex-col pt-12">
-        <p className="px-4 pb-4">Sort By</p>
-        <form action="" className="flex flex-col justify-between gap-20">
-          <div>
-            <div className="flex justify-between px-4">
-              <label htmlFor="priceLow">{`Price (Low ~ High)`}</label>
-              <input type="radio" name="sort" id="priceLow" value="priceLow"/>
-            </div>
-            <div className="flex justify-between px-4">
-              <label htmlFor="priceHigh">{`Price (High ~ Low)`}</label>
-              <input type="radio" name="sort" id="priceHigh" value="priceHigh"/>
-            </div>
-            <div className="flex justify-between px-4">
-              <label htmlFor="ratingHigh">{`Rating (High ~ Low)`}</label>
-              <input type="radio" name="sort" id="ratingHigh" value="ratingHigh"/>
-            </div>
-            <div className="flex justify-between px-4">
-              <label htmlFor="ratingLow">{`Rating (Low ~ High)`}</label>
-              <input type="radio" name="sort" id="ratingLow" value="ratingLow"/>
-            </div>
+    <Half_Modal isOpen={formSort} onClose={() => setFormSort(false)} 
+    sort_Value={sort_Value} 
+    set_Sort_Value={set_Sort_Value}>
 
-          </div>
-
-          <div className="flex justify-between gap-2 px-4">
-            <button type="button" className="basis-1/2 bg-white rounded-lg border border-gray p-1" onClick={() => setFormSort(false)}> Cancel </button>
-            <button type="button" className="basis-1/2 bg-primary rounded-lg p-1"> Apply </button>
-          </div>
-          
-        </form>
-      </div>
     </Half_Modal>
     {/* ↑↓Sort 排序 - 彈跳Modal  */}
-    
-    {/* <select className="text-sm border-none bg-transparent" onClick={show_FormSort}>
-      <option>Sort by: Recommended</option>
-      <option>Price: Low to High</option>
-      <option>Price: High to Low</option>
-      <option>Guest Rating</option>
-    </select> */}
   </div>
   
   {/** 飯店卡片 */}
-  {hotel_List.map((item) => {
+  {Hotel_List.map((item) => {
     return <div key={item.id} className="space-y-4">
       <article className="bg-white rounded-lg overflow-hidden shadow-sm">
       

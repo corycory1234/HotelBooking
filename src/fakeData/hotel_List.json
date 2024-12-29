@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "name": "The Ritz-Carlton",
+    "images": [
+      {
+        "url": "/hotellist/hotellist_1.webp",
+        "description": "hotel1"
+      },
+      {
+        "url": "/hotellist/hotellist_2.webp",
+        "description": "hotel2"
+      },
+      {
+        "url": "/hotellist/hotellist_3.webp",
+        "description": "hotel3"
+    }
+    ],
+    "distance": "Downtown • 0.5 mi from center",
+    "rating": 4.8,
+    "facilities": ["Pool", "Spa", "Restaurant"],
+    "price": 999
+  },
+  {
+    "id": "2",
+    "name": "Four Seasons Hotel",
+    "images": [      
+      {
+        "url": "/hotellist/hotellist_2.webp",
+        "description": "hotel2"
+      },
+      {
+          "url": "/hotellist/hotellist_3.webp",
+          "description": "hotel3"
+      },
+      {
+        "url": "/hotellist/hotellist_1.webp",
+        "description": "hotel1"
+      }
+  ] ,
+    "distance": "Waterfront • 1.2 mi from center",
+    "rating": 2.9,
+    "facilities": ["Beach", "Gym", "Bar"],
+    "price": 799
+  },
+  {
+    "id": "3",
+    "name": "Mandarin Oriental",
+    "images": [
+      {
+        "url": "/hotellist/hotellist_3.webp",
+        "description": "hotel3"
+      },
+      {
+          "url": "/hotellist/hotellist_1.webp",
+          "description": "hotel1"
+      },
+      {
+        "url": "/hotellist/hotellist_2.webp",
+        "description": "hotel2"
+      }
+    ],
+    "distance": "Marina Bay • 2.0 mi from center",
+    "rating": 3.7,
+    "facilities": ["Pool", "Spa", "Wifi"],
+    "price": 699
+  }
+]
