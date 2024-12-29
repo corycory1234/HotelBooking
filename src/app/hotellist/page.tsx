@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Half_Modal from "@/components/modal/half-Modal";
+import Half_Modal from "@/components/modal/half-modal";
 import Hotel_List from "@/fakeData/hotel_List.json";
 
 export default function HotelList () {
