@@ -26,6 +26,17 @@ export default {
       backgroundImage: {
         'home-explore': "url(/home/Home_Explore_BG.png)",
         'email': "url(/account/Email.svg)"
+      },
+      keyframes: {
+        // 1.Sort 排序動畫
+        slideUp: {
+          '0%': { transform: 'translateY(100%)', },
+          '100%': { transform: 'translateY(0)', },
+        }
+      },
+      animation: {
+        // 1.Sort 排序動畫
+        'slide-up': 'slideUp .3s ease-out'
       }
     },
   },

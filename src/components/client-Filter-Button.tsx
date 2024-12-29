@@ -17,10 +17,10 @@ export default function Client_Filter_Button () {
         </svg>
         Filters
       </button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded text-sm">5 Star</button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded text-sm">Pool</button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded text-sm">Spa</button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray-200 rounded text-sm">Beach</button>
+      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">5 Star</button>
+      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Pool</button>
+      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Spa</button>
+      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Beach</button>
     </div>
     {/* Filter 與 熱門搜尋條件 */}
 
@@ -31,33 +31,36 @@ export default function Client_Filter_Button () {
 
 
       <div className="mx-auto flex flex-col">    
-        <div className="flex justify-between items-center p-4 border-b">
+        <div className="flex justify-between items-center p-4 border-b border-gray">
           <h2 className="text-lg font-semibold">Filter</h2>
-          <button className="text-gray-500">        <i className="fas fa-times text-lg"></i>
-          </button>
         </div>
 
         <div className="flex flex-col overflow-y-auto px-4 py-2">
           <div className="mb-6">        <h3 className="font-medium mb-3">Price Range</h3>
             <div className="flex items-center gap-4">
-              <input type="number" placeholder="Min" className="w-full px-3 py-2 border rounded-lg text-sm" />          <span className="text-gray-400">-</span>
-              <input type="number" placeholder="Max" className="w-full px-3 py-2 border rounded-lg text-sm" />        </div>
+              <input type="number" placeholder="Min" className="w-full px-3 py-2 border border-gray rounded-lg text-sm" />          
+              <span className="text-gray-400">-</span>
+              <input type="number" placeholder="Max" className="w-full px-3 py-2 border border-gray rounded-lg text-sm" />        
+            </div>
           </div>
 
           <div className="mb-6">
             <h3 className="font-medium mb-3">Categories</h3>
             <div className="space-y-2">          <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>
                 <span>Electronics</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Fashion</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Fashion</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Home & Living</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Home & Living</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Sports & Outdoor</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Sports & Outdoor</span>
               </label>
             </div>
           </div>
@@ -137,18 +140,22 @@ export default function Client_Filter_Button () {
 
           <div className="mb-6">
             <h3 className="font-medium mb-3">Brands</h3>
-            <input type="search" placeholder="Search brands" className="w-full px-3 py-2 border rounded-lg mb-3 text-sm"/>        <div className="space-y-2">
+            <input type="search" placeholder="Search brands" className="w-full px-3 py-2 border border-gray rounded-lg mb-3 text-sm"/>        <div className="space-y-2">
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Apple</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Apple</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Samsung</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Samsung</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Nike</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Nike</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="w-4 h-4 rounded border-gray-300"/>            <span>Adidas</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-gray"/>            
+                <span>Adidas</span>
               </label>
             </div>
           </div>
@@ -157,25 +164,29 @@ export default function Client_Filter_Button () {
             <h3 className="font-medium mb-3">Sort By</h3>
             <div className="space-y-2">
               <label className="flex items-center gap-2">
-                <input type="radio" name="sort" className="w-4 h-4"/>            <span>Latest</span>
+                <input type="radio" name="sort" className="w-4 h-4"/>            
+                <span>Latest</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="radio" name="sort" className="w-4 h-4"/>            <span>Popular</span>
+                <input type="radio" name="sort" className="w-4 h-4"/>            
+                <span>Popular</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="radio" name="sort" className="w-4 h-4"/>            <span>Price: High to Low</span>
+                <input type="radio" name="sort" className="w-4 h-4"/>            
+                <span>Price: High to Low</span>
               </label>
               <label className="flex items-center gap-2">
-                <input type="radio" name="sort" className="w-4 h-4"/>            <span>Price: Low to High</span>
+                <input type="radio" name="sort" className="w-4 h-4"/>            
+                <span>Price: Low to High</span>
               </label>
             </div>
           </div>
         </div>
 
         {/** 重置 & 確定 按鈕 */}
-        <div className="flex border-t p-4 gap-4 justify-between items-center">      
-          <button className="basis-1/2 py-2 border border-gray-300 rounded">Reset</button>
-          <button className="basis-1/2 py-2 border border-gray-300 rounded bg-primary">Apply</button>
+        <div className="flex border-t border-gray p-4 gap-4 justify-between items-center">      
+          <button className="basis-1/2 py-2 border border-gray rounded">Reset</button>
+          <button className="basis-1/2 py-2 rounded bg-primary">Apply</button>
         </div>
         {/** 重置 & 確定 按鈕 */}
       </div>
