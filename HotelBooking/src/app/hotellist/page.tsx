@@ -10,6 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Half_Modal from "../../components/modal/half-modal";
 import Hotel_List from "../../fakeData/hotel_List.json";
+import { Submit_Search } from "@/actions";
 
 export default function HotelList () {
   // 1.  這些Params都來自於 Server Action - Submit_Form函式
@@ -25,6 +26,7 @@ export default function HotelList () {
   // 2. 監聽 Params
   useEffect(() => {
     console.log(destination, room, adult, child, timestamp);
+    Submit_Search
   },[destination, room, adult, child, timestamp])
 
   // 3. Sort 彈跳Modal開關

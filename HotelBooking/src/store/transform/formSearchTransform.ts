@@ -6,7 +6,8 @@ interface Form_Search {
   // dateRange: DateValueType;
   room: number,
   adult: number,
-  child: number
+  child: number,
+  rating: number | null
 };
 
 // 工具函式：解析數字
@@ -39,6 +40,7 @@ const formSearch_Transform = createTransform<Form_Search, Form_Search> (
       room: parseNumberField(outboundState.room),
       adult: parseNumberField(outboundState.adult),
       child: parseNumberField(outboundState.child),
+      rating: parseNumberField(outboundState.rating)
     };
   },
 

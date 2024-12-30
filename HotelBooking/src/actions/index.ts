@@ -10,9 +10,15 @@ export async function Submit_Search(formData: FormData) {
   const room = formData.get("room");
   const adult = formData.get("adult");
   const child = formData.get("child");
+  const rating = formData.getAll("rating");
+  const bedType = formData.getAll("bedType") as string [];
   console.log(destination);
   console.log(dateRange);
   console.log(room, adult, child);
+  console.log(rating, "星級");
+  console.log("床型", bedType);
+  
+  
 
   // 2. URL參數, 轉字串
   const timestamp = +new Date();

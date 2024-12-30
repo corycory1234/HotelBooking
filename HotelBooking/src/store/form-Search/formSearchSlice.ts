@@ -7,7 +7,9 @@ interface Form_Search {
   // dateRange: DateValueType,
   room: number,
   adult: number,
-  child: number
+  child: number,
+  bedType: string[] | null,
+  rating: number[] | null,
 }
 
 const initialState: Form_Search = {
@@ -15,7 +17,9 @@ const initialState: Form_Search = {
   dateRange: null,
   room: 1,
   adult: 1,
-  child: 0
+  child: 0,
+  bedType: [],
+  rating: [],
 };
 
 const formSearch_Slice = createSlice({
@@ -44,9 +48,29 @@ const formSearch_Slice = createSlice({
     minusChild: (state) => {
       if(state.child <=0) return;
       state.child -=1
-    },    
+    },
+    // Filter 星級
+    updateRating: (state, action: PayloadAction<number[] | null>) => {
+      state.rating = action.payload;
+      console.log(state.rating, "Redux 飯店星級");
+    },
+    // Filter 床型
+    updateBedType: (state, action: PayloadAction<string[] | null>) => {
+      state.bedType = action.payload
+      console.log(state.bedType, "Redux 房型");
+    }      
   }
 });
 
-export const { updateKeyword, addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild, updateDateRange } = formSearch_Slice.actions;
+export const { updateKeyword, 
+  addRoom, 
+  minusRoom, 
+  addAdult, 
+  minusAdult, 
+  addChild, 
+  minusChild, 
+  updateDateRange, 
+  updateRating,
+  updateBedType, 
+} = formSearch_Slice.actions;
 export default formSearch_Slice.reducer;
