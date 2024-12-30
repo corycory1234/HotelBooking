@@ -40,3 +40,15 @@ body {
 .swiper-pagination-bullet-active {
   @apply bg-[#FE9900] !important
 }
+
+/* 4. Tailwind - 自定義 <input type="radio"> 圓圈顏色*/
+input[type="radio"] {
+  @apply appearance-none w-4 h-4 border-2 rounded-full cursor-pointer;
+}
+input[type="radio"]:checked::before {
+  content: "";
+  @apply block w-full h-full bg-secondary rounded-full mx-auto my-auto;
+}
+input[type="radio"]:checked {
+  @apply accent-secondary
+}

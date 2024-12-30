@@ -2,6 +2,7 @@
 import ReactDOM from "react-dom";
 import Hotel_List from "../../fakeData/hotel_List.json";
 
+// 1. Props傳遞數據 給Modal彈跳視窗 之 interface
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -12,10 +13,10 @@ interface ModalProps {
 
 export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value }: ModalProps) {
 
-  // 1. 沒props過來，整包 Half_Modal 為 null，因此不渲染
+  // 2. 沒props過來，整包 Half_Modal 為 null，因此不渲染
   if (!isOpen) return null;
 
-  // 2. 排序 - Switch Case 綜合函式
+  // 3. 排序 - Switch Case 綜合函式
   const sortHotels = (sort_Option: string) => {
     switch(sort_Option) {
       case "priceLow":
@@ -50,9 +51,9 @@ export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value
 
         {/* ↑↓Sort 排序 - 彈跳Modal  */}
         <div className="flex flex-col pt-12">
-          <p className="px-4 pb-4">Sort By</p>
-          <form action="" className="flex flex-col justify-between gap-20">
-            <div>
+          <p className="px-4 pb-4 text-lg font-bold">Sort By</p>
+          <form action="" className="flex flex-col justify-between gap-4">
+
               <div className="flex justify-between px-4">
                 <label htmlFor="priceLow">{`Price (Low ~ High)`}</label>
                 <input type="radio" name="sort" id="priceLow" value="priceLow" onChange={() => sortHotels("priceLow")}
@@ -73,8 +74,6 @@ export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value
                 <input type="radio" name="sort" id="ratingLow" value="ratingLow" onChange={() => sortHotels("ratingLow")}
                 checked={sort_Value === "ratingLow"}/>
               </div>
-
-            </div>
 
             {/* <div className="flex justify-between gap-2 px-4">
               <button type="button" className="basis-1/2 bg-white rounded-lg border border-gray p-1" onClick={onClose}> Cancel </button>
