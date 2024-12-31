@@ -26,7 +26,8 @@ export default function Client_Filter_Button () {
     } else {
       set_Checked_Rating(prev => prev.filter(item => item !== rating))
     }
-  }
+  };
+  const bedTypeFromStore = useSelector((state: RootState) => state.formSearch.bedType);
 
   // 3. 房型陣列
   const [checked_Beds, set_Checked_Beds] = useState<string[]>([]);
@@ -37,11 +38,13 @@ export default function Client_Filter_Button () {
       set_Checked_Beds(prev => prev.filter(item => item !== bed));
     }
   };
+  const ratingFromStore = useSelector((state: RootState) => state.formSearch.rating);
 
   // 4.
   const handleSubmit = () => {
     // 一次把整個 checked_Beds陣列、checked_Rating陣列 都丟給 Redux
-    dispatch(updateBedType(checked_Beds), updateRating(checked_Rating));
+    dispatch(updateBedType(checked_Beds));
+    dispatch(updateRating(checked_Rating));
   };
 
 
@@ -61,6 +64,31 @@ export default function Client_Filter_Button () {
     setFilter_Boolean(false);
   },[timestamp])
 
+  // 5. 監聽 Redux - 房型 bedType
+  useEffect(() => {
+    if(bedTypeFromStore){
+      set_Checked_Beds(bedTypeFromStore)
+    } else {
+      set_Checked_Beds([])
+    }
+  },[bedTypeFromStore]);
+
+  // 6. 監聽 Redux - 飯店星級 rating
+  useEffect(() => {
+    // ratingFromStore 可能是 null 或 number[]
+    if (ratingFromStore) {
+      set_Checked_Rating(ratingFromStore);
+    } else {
+      set_Checked_Rating([]);
+    }
+  }, [ratingFromStore]);
+
+  // 7. 初始化所有篩選條件 - 按下也會直接關Modal, 有BUG, 
+  // 7.1 觸發到 Server Action, 但改成 tpye="button", 再F5, 篩選條件仍是上次的Redux狀態  
+  const reset = () => {
+    set_Checked_Beds([]);
+    set_Checked_Rating([]);
+  }
 
 
 
@@ -276,7 +304,7 @@ export default function Client_Filter_Button () {
 
         {/** 重置 & 確定 按鈕 */}
         <div className="flex border-t border-gray p-4 gap-4 justify-between items-center">      
-          <button className="basis-1/2 py-2 border border-gray rounded">Reset</button>
+          <button className="basis-1/2 py-2 border border-gray rounded" onClick={reset}>Reset</button>
           <button className="basis-1/2 py-2 rounded bg-primary" onClick={handleSubmit}>Apply</button>
         </div>
         {/** 重置 & 確定 按鈕 */}
