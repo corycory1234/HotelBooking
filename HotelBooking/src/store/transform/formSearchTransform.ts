@@ -25,7 +25,6 @@ const parseStringArray = (value: unknown): string[] | null => {
   // 2.1 若可能是字串就嘗試用 JSON.parse
   if(typeof value === "string") {
     try {
-      const parsed = JSON.parse(value);
       return Array.isArray(parsed) ? parsed : null;
     } catch (error) {
       return null
@@ -70,20 +69,6 @@ const formSearch_Transform = createTransform<Form_Search, Form_Search> (
   },
 
   // 4.5 outboundState：重新載入(rehydrate)時呼叫
-  (outboundState, key) => {
-    if(!outboundState) return outboundState
-
-    return {
-      ...outboundState,
-      room: parseNumberField(outboundState.room),
-      adult: parseNumberField(outboundState.adult),
-      child: parseNumberField(outboundState.child),
-      rating: parseNumberArray(outboundState.rating),
-      bedType: parseStringArray(outboundState.bedType)
-    };
-  },
-
-   // 4.5 設定 whitelist => 只對 formSearch 這個 slice 生效
   { whitelist: ["formSearch"] }
 );
 
