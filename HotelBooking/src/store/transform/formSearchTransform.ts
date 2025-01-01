@@ -7,8 +7,10 @@ interface Form_Search {
   room: number,
   adult: number,
   child: number,
+  rangeSlider: number | number[],
   rating: number[] | null,
   bedType: string[] | null;
+  facility: string[] | null;
 };
 
 // 1. 工具函式：解析數字
@@ -78,8 +80,10 @@ const formSearch_Transform = createTransform<Form_Search, Form_Search> (
       room: parseNumberField(outboundState.room),
       adult: parseNumberField(outboundState.adult),
       child: parseNumberField(outboundState.child),
+      rangeSlider: parseNumberField(outboundState.rangeSlider),
       rating: parseNumberArray(outboundState.rating),
-      bedType: parseStringArray(outboundState.bedType)
+      bedType: parseStringArray(outboundState.bedType),
+      facility: parseStringArray(outboundState.facility)
     };
   },
 

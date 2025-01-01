@@ -8,8 +8,10 @@ interface Form_Search {
   room: number,
   adult: number,
   child: number,
+  rangeSlider: number | number[],
   bedType: string[] | null,
   rating: number[] | null,
+  facility: string[] | null,
 }
 
 const initialState: Form_Search = {
@@ -18,8 +20,10 @@ const initialState: Form_Search = {
   room: 1,
   adult: 1,
   child: 0,
+  rangeSlider: [0, 9999],
   bedType: [],
   rating: [],
+  facility: [],
 };
 
 const formSearch_Slice = createSlice({
@@ -58,7 +62,17 @@ const formSearch_Slice = createSlice({
     updateBedType: (state, action: PayloadAction<string[] | null>) => {
       state.bedType = action.payload
       console.log(state.bedType, "Redux 房型");
-    }      
+    },
+    // Filter 設施
+    updateFacility: (state, action: PayloadAction<string[] | null>) => {
+      state.facility = action.payload;
+      console.log(state.facility, "Redux 設施");
+    },
+    // Filter RangeSlider 最小房價-最大房價
+    updateRangeSlider: (state, action: PayloadAction<number | number[]>) => {
+      state.rangeSlider = action.payload
+      console.log(state.rangeSlider, "最小房價 - 最大房價");
+    }
   }
 });
 
@@ -71,6 +85,8 @@ export const { updateKeyword,
   minusChild, 
   updateDateRange, 
   updateRating,
-  updateBedType, 
+  updateBedType,
+  updateFacility,
+  updateRangeSlider 
 } = formSearch_Slice.actions;
 export default formSearch_Slice.reducer;

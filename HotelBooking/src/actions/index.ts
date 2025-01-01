@@ -10,13 +10,17 @@ export async function Submit_Search(formData: FormData) {
   const room = formData.get("room");
   const adult = formData.get("adult");
   const child = formData.get("child");
+  const rangeslider = formData.getAll("rangeSlider");
   const rating = formData.getAll("rating");
   const bedType = formData.getAll("bedType") as string [];
+  const facility = formData.getAll("facility") as string [];
   console.log(destination);
   console.log(dateRange);
   console.log(room, adult, child);
   console.log(rating, "星級");
   console.log("床型", bedType);
+  console.log("設施", facility);
+  console.log("最小最大房錢", rangeslider);
   
   
 
@@ -28,7 +32,11 @@ export async function Submit_Search(formData: FormData) {
     room: String(room),
     adult: String(adult),
     child: String(child),
-    timestamp: String(timestamp)
+    rangeslider: String(rangeslider),
+    timestamp: String(timestamp),
+    bedtype: String(bedType),
+    rating: String(rating),
+    facility: String(facility),
   }).toString()
 
 

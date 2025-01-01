@@ -1,11 +1,16 @@
 import type { Config } from "tailwindcss";
 
+// Next UI for 價錢-Range Slider
+const {nextui} = require("@nextui-org/theme"); 
+
 export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.{js,ts}",
+    "./node_modules/@nextui-org/theme/dist/components/slider.js",
+    // "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -40,5 +45,6 @@ export default {
       }
     },
   },
-  plugins: [],
+  darkMode: "class",
+  plugins: [nextui],
 } satisfies Config;
