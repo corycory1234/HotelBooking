@@ -27,6 +27,7 @@ const parseStringArray = (value: unknown): string[] | null => {
   // 2.1 若可能是字串就嘗試用 JSON.parse
   if(typeof value === "string") {
     try {
+      const parsed = JSON.parse(value);
       return Array.isArray(parsed) ? parsed : null;
     } catch (error) {
       return null
