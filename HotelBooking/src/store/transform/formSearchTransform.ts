@@ -7,8 +7,10 @@ interface Form_Search {
   room: number,
   adult: number,
   child: number,
+  rangeSlider: number | number[],
   rating: number[] | null,
   bedType: string[] | null;
+  facility: string[] | null;
 };
 
 // 1. 工具函式：解析數字
@@ -69,6 +71,22 @@ const formSearch_Transform = createTransform<Form_Search, Form_Search> (
   },
 
   // 4.5 outboundState：重新載入(rehydrate)時呼叫
+  (outboundState, key) => {
+    if(!outboundState) return outboundState
+
+    return {
+      ...outboundState,
+      room: parseNumberField(outboundState.room),
+      adult: parseNumberField(outboundState.adult),
+      child: parseNumberField(outboundState.child),
+      rangeSlider: parseNumberField(outboundState.rangeSlider),
+      rating: parseNumberArray(outboundState.rating),
+      bedType: parseStringArray(outboundState.bedType),
+      facility: parseStringArray(outboundState.facility)
+    };
+  },
+
+   // 4.5 設定 whitelist => 只對 formSearch 這個 slice 生效
   { whitelist: ["formSearch"] }
 );
 
