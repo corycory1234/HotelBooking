@@ -1,16 +1,20 @@
 'use client';
 import Modal from "./modal/modal";
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/store/store";
 import { Submit_Search } from "@/actions";
 import { useSearchParams } from "next/navigation";
 import Client_RangeSlider from "./server-Form-Search/client_RangeSlider";
 import Client_BedType from "./server-Form-Search/client_BedType";
 import Client_Rating from "./server-Form-Search/client_Rating";
 import Client_Faciliy from "./server-Form-Search/client_Facility";
+import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
 
 export default function Client_Filter_Button () {
+
+  // 0. 取 Redux - Action「搜尋相關函式」
+  const dispatch: AppDispatch = useDispatch();
 
   // 1.  取 Redux「搜尋相關數據」
   const destination = useSelector((state: RootState) => state.formSearch.keyword);
@@ -35,13 +39,12 @@ export default function Client_Filter_Button () {
     setFilter_Boolean(false);
   },[timestamp])
 
-  // 5. 初始化所有篩選條件 - 按下也會直接關Modal, 有BUG, 
-  // 5.1 觸發到 Server Action, 但改成 tpye="button", 再F5, 篩選條件仍是上次的Redux狀態  
+  // 5. 初始化所有篩選條件 
   const reset = () => {
-    // set_Checked_Beds([]);
-    // set_Checked_Rating([]);
-    // set_Checked_Facility([]);
-    // setValue([])
+    dispatch(updateRangeSlider([0,9999]));
+    dispatch(updateBedType([]));
+    dispatch(updateRating([]));
+    dispatch(updateFacility([]));
   }
 
  // 6. 送出<form>按鈕
@@ -100,24 +103,24 @@ export default function Client_Filter_Button () {
           <h2 className="text-lg font-semibold">Filter</h2>
         </div>
 
-        <div className="flex flex-col overflow-y-auto px-4 py-2">
+        <div className="flex flex-col overflow-y-auto px-4 py-2 gap-6">
           
           {/** 最小最大旅館價格 - RangeSlider */}
-          <div className="mb-6">        
+          <div className="border-b border-gray pb-4">        
             <h3 className="font-medium mb-3">Price Range</h3>
               <Client_RangeSlider></Client_RangeSlider>
           </div>
           {/** 最小最大旅館價格 - RangeSlider */}
 
           {/* 床型 */}
-          <div className="mb-6">
+          <div className="border-b border-gray pb-4">
             <h3 className="font-medium mb-3">Bed Type</h3>
             <Client_BedType></Client_BedType>
           </div>
           {/* 床型 */}
 
           {/** 飯店星級 */}
-          <div className="mb-6">
+          <div className="border-b border-gray pb-4">
             <h3 className="font-medium mb-3">Rating</h3>
             <Client_Rating></Client_Rating>
           </div>
@@ -125,7 +128,7 @@ export default function Client_Filter_Button () {
 
 
           {/** 設施 */}
-          <div className="mb-6">
+          <div className="">
           <h3 className="font-medium mb-3">Facility</h3>
           <Client_Faciliy></Client_Faciliy>
           </div>
@@ -135,7 +138,7 @@ export default function Client_Filter_Button () {
 
         {/** 重置 & 確定 按鈕 */}
         <div className="flex border-t border-gray p-4 gap-4 justify-between items-center">      
-          <button className="basis-1/2 py-2 border border-gray rounded" onClick={reset}>Reset</button>
+          <button className="basis-1/2 py-2 border border-gray rounded" type="button" onClick={reset}>Reset</button>
           <button className="basis-1/2 py-2 rounded bg-primary">Apply</button>
         </div>
         {/** 重置 & 確定 按鈕 */}
