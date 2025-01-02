@@ -41,7 +41,7 @@ export default function Client_Form_Register () {
         <p aria-live="polite" className="text-lg text-red">{state?.confirmError}</p>
         {/* 再次確認密碼 */}
         
-        <button className="bg-primary rounded-lg py-3 text-white">Sign In</button>
+        <button className="bg-primary rounded-lg py-3 text-white">Register</button>
       </form>
       
       <div className="pt-4 flex flex-col justify-center items-center gap-4">

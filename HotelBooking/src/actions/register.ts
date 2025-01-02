@@ -19,6 +19,13 @@ const schema = z.object({
   path: ["confirm"]
 });
 
+// 4. 定義API返回之類型
+interface RegisterResponse {
+  message: string,
+  data?: any;
+  error?: string;
+}
+
 
 
 // 1. <form> 註冊
@@ -26,8 +33,11 @@ export async function Submit_Register(prevState: any, formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
   const confirm = formData.get("confirm");
+  const rawFormData = Object.fromEntries(formData)
   console.log(email, password, confirm);
-
+  console.log(rawFormData, "Form表單資料");
+  
+  // 2. zod 校驗
   const validateFields = schema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -45,17 +55,43 @@ export async function Submit_Register(prevState: any, formData: FormData) {
     }
   }
 
-  if(validateFields.success) {
-    revalidatePath("/");
-    redirect("/");
-  };
+  // 3. 打API
+  try {
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:3000';
+    console.log(backendUrl, "環境變數網址");
+    
+    const response = await fetch(`${backendUrl}/register`, {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password })
+    });
 
-  return {
-    ...prevState,
-    message: "Success!",
-    emailError: "",
-    passwordError: "",
-    confirm: ""
+    const data: RegisterResponse = await response.json();
+    console.log(data, "註冊返回之response");
+    
+    if(!response.ok) {
+      return {
+        ...prevState,
+        message: data.error || 'Registration 失敗'
+      }
+    };
+
+    // 3.2 註冊成功，重驗證路徑並重定向
+    // revalidatePath("/");
+    redirect("/");
+
+  } catch (error) {
+    console.log(error);
+    return {
+      ...prevState,
+      message: '註冊失敗, 有錯誤'
+    }
   }
+
+  // if(validateFields.success) {
+  //   revalidatePath("/");
+  //   redirect("/");
+  // };
+
 
 }
