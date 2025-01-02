@@ -1,17 +1,18 @@
 'use client';
 
-import Client_Input_Password from "./client-Input-Password";
-import { Submit_Login } from "../../actions/login";
+import Client_Input_Password from "@/components/server_Form_Login/client_Input_Password";
+import Client_Input_Confirm_Password from "./client_Input_Confirm_Password";
+import { Submit_Register } from "@/actions/register";
 import { useFormState } from "react-dom";
+import Link from "next/link";
 
 const initialState = { message: ""};
 
-export default function Server_Form_Login () {
-  const [state, formAction] = useFormState(Submit_Login, initialState)
-
+export default function Client_Form_Register () {
+  const [state, formAction] = useFormState(Submit_Register, initialState)
 
   return <>
-    <div className="relative">
+  <div className="relative">
       <img src="/Logo.svg" className="absolute left-[40%] w-20 h-20" alt="" /> 
     </div>
       
@@ -25,8 +26,8 @@ export default function Server_Form_Login () {
       <form action={formAction} className="flex flex-col px-4 pt-14 gap-4">
 
         {/** 電子郵件 */}
-        <label htmlFor="account" className="text-gray">Enter Email</label>
-        <input type="text" id="account" name="account" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"/>
+        <label htmlFor="email" className="text-gray">Enter Email</label>
+        <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"/>
         <p aria-live="polite" className="text-lg text-red">{state?.emailError}</p>
         {/** 電子郵件 */}
 
@@ -34,13 +35,19 @@ export default function Server_Form_Login () {
         <Client_Input_Password></Client_Input_Password>
         <p aria-live="polite" className="text-lg text-red">{state?.passwordError}</p>
         {/* 密碼 */}
+
+        {/* 再次確認密碼 */}
+        <Client_Input_Confirm_Password></Client_Input_Confirm_Password>
+        <p aria-live="polite" className="text-lg text-red">{state?.confirmError}</p>
+        {/* 再次確認密碼 */}
         
         <button className="bg-primary rounded-lg py-3 text-white">Sign In</button>
       </form>
       
-      <div className="pt-28 flex flex-col justify-center items-center gap-4">
+      <div className="pt-4 flex flex-col justify-center items-center gap-4">
+        <p className="text-gray">Already have account? <Link href={'/auth'} className="text-primary font-semibold">Sign In</Link></p>
         <p className="text-center text-sm">Or Sign in With</p>
-        <button className="bg-white rounded-lg py-3 px-6">
+        <button className="bg-white rounded-lg py-3 px-6" type="button">
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>

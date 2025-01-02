@@ -3,7 +3,7 @@ import React from "react";
 import ProviderRedux from "../provider/provider";
 import { Metadata } from "next";
 // 1. Next UI, for 價錢 Range Slider
-import {NextUIProvider} from "@nextui-org/system";
+// import {NextUIProvider} from "@nextui-org/system";
 
 export const metadata = {
   title: "HotelBooking",
@@ -16,9 +16,9 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
     <html lang="en">
       <body>
       <ProviderRedux>
-        <NextUIProvider>
+        {/* <NextUIProvider> */}
           {children}
-        </NextUIProvider>
+        {/* </NextUIProvider> */}
       </ProviderRedux>
       </body>
     </html>
