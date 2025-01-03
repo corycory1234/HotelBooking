@@ -52,7 +52,7 @@ export default function Home() {
             <div className="">
               <Carousel_Offer></Carousel_Offer>
             </div>
-            <h2>Hotels Near You</h2>
+            <h2 className="font-bold">Hotels Near You</h2>
             <div className="bg-white rounded-t-xl p-1">
               <Carousel_Near></Carousel_Near>
             </div>
