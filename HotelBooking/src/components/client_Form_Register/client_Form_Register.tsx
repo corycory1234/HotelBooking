@@ -13,7 +13,7 @@ export default function Client_Form_Register () {
 
   return <>
   <div className="relative">
-      <img src="/Logo.svg" className="absolute left-[40%] w-20 h-20" alt="" /> 
+      <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20" alt="" /> 
     </div>
       
     <div className="my-bg-gradient min-h-full flex flex-col mt-10">

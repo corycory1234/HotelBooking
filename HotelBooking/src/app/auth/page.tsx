@@ -9,16 +9,16 @@ export default function Login () {
   console.log(referer);
 
   return <>
-    <div className="bg-primary h-screen">
-      <div className="px-4 h-[56px] flex items-center">
-          <button type="button" className="basis-1/2">
+    <div className="bg-primary h-screen relative">
+      <p className="text-white text-center p-4">Sign In</p>
+      <div className="absolute top-4 left-4 h-[56px]">
+          <button type="button" className="">
             <Link href={referer}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-white">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
               </svg>
             </Link>
           </button>
-          <p className="text-white basis-1/2">Sign In</p>
       </div>
 
       {/* Login表單 */}

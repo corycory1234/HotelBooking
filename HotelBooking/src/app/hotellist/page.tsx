@@ -11,6 +11,7 @@ import 'swiper/css/pagination';
 import Half_Modal from "../../components/modal/half-modal";
 import Hotel_List from "../../fakeData/hotel_List.json";
 import { Submit_Search } from "@/actions";
+import Link from "next/link";
 
 export default function HotelList () {
   // 1.  這些Params都來自於 Server Action - Submit_Form函式
@@ -116,7 +117,9 @@ export default function HotelList () {
               <span className="text-xl font-semibold">$ {item.price}</span>
               <span className="text-sm text-gray-500">/night</span>
             </div>
-            <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium">Book Now</button>
+            <Link href={`/hotellist/${item.id}`}>
+              <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium">Book Now</button>
+            </Link>
           </div>
 
 
