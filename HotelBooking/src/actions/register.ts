@@ -16,7 +16,7 @@ const schema = z.object({
   return data.password === data.confirm;
 }, {
   message: "Passwords don't match",
-  path: ["confirm"]
+  path: ["confirm"] // 這不知道甚麼意思
 });
 
 // 4. 定義API返回之類型

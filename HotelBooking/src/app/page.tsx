@@ -48,8 +48,8 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col p-4 gap-4 pb-20">
-            <h2>Popular Offer</h2>
-            <div className="flex">
+            <h2 className="font-bold">Popular Offer</h2>
+            <div className="">
               <Carousel_Offer></Carousel_Offer>
             </div>
             <h2>Hotels Near You</h2>
