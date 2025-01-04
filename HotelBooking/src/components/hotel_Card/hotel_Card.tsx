@@ -22,7 +22,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   const [selected_Tab, set_Selected_Tab] = useState(0);
   
   return <>
-  <div className="flex flex-col p-4 gap-4">
+  <div className="flex flex-col p-4 gap-4 my-bg-gradient ">
 
     <div className="">
     {/* Swiper 飯店圖片 */}
@@ -71,19 +71,29 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     })}
     {/* 飯店介紹 - 對照Tab高亮切換 */}
 
-    <div className="flex justify-between flex-wrap gap-y-2">
+    {/** 飯店設施 */}
+    <div className="flex flex-wrap gap-y-2">
       {selected_Tab === 1 && the_Hotel?.facilities.map((facility, index) => {
 
-        return <div key={index} className="basis-1/3 md:basis-1/4 flex flex-col items-center">
-          {/* {SvgIcon ? <SvgIcon className="w-6 h-6"></SvgIcon> : <span>沒SVG</span>} */}
+        return <div key={index} className="basis-1/4 md:basis-1/5 flex flex-col items-center">
           <div className="bg-softGray rounded-[2rem]">
-            <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-4"></FacilitySVG>
+            <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3 text-secondary"></FacilitySVG>
           </div>
           <p className="" key={index}> {facility} </p>
         </div>
       })}
     </div>
-
+    {/** 飯店設施 */}
+    
+    {/** 飯店價錢、跳轉付款頁面按鈕 */}
+    <div className="bg-white rounded-lg flex justify-between items-center py-2 px-3">
+      <div className="flex">
+        <span className="text-primary font-bold">{"$"+the_Hotel?.price + "/"} </span>
+        <span className="text-gray"> night</span>
+      </div>
+      <button className="bg-primary text-white rounded-lg p-2">Book Now</button>
+    </div>
+    {/** 飯店價錢、跳轉付款頁面按鈕 */}
 
   </div>
   </>
