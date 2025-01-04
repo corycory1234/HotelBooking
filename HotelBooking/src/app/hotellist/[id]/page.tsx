@@ -33,8 +33,8 @@ export default function Hotel_Detail () {
   return <>
   {/* 返回上頁按鈕、Modla 彈跳<form>搜尋視窗 */}
   <div className="bg-primary relative">
-    <div className="flex flex-col py-4">
-      <p className="text-center" onClick={show_FormSearch}>{the_Hotel?.name}</p>
+    <div className="flex flex-col py-2 cursor-pointer" onClick={show_FormSearch}>
+      <p className="text-center">{the_Hotel?.name}</p>
       <p className="text-center">{redux_DateRange}</p>
     </div>
 

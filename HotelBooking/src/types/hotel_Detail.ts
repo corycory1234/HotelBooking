@@ -7,4 +7,5 @@ export interface Hotel_Detail_Interface {
   rating: number,
   facilities: string[],
   price: number,
+  intro: string[]
 }

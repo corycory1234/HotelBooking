@@ -3,14 +3,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { useState } from "react";
+import FacilitySVG from "../client_Svg/client_Svg";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
   the_Hotel: Hotel_Detail_Interface | undefined
 };
 
+// 2. Tab - 詳細、設施、評價陣列
+const tab = ["Details", "Facilities", "Review"]
+
 export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
+  // 1. 父元件 HotelList props 指定飯店 之數據
   console.log(the_Hotel, "props傳遞");
+
+  // 2. Tab - 數字對應 tab陣列索引值 之高亮切換
+  const [selected_Tab, set_Selected_Tab] = useState(0);
   
   return <>
   <div className="flex flex-col p-4 gap-4">
@@ -39,11 +48,43 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       </Swiper>
     {/* Swiper 飯店圖片 */}
     </div>
+    
+    {/* Tab 高亮切換 */}
+    <div className="flex justify-between">
+      <ul className="flex gap-2">
+        {tab.map((item, index) => {
+          return <li key={index} onClick={() => set_Selected_Tab(index)} className="flex flex-col items-center cursor-pointer">
+            <span className={`${selected_Tab === index ? 'text-primary' : ''} `}>{item}</span>
+            {selected_Tab === index && <span className="text-primary mt-[-6px]">●</span>}
+          </li>
+        })}
+      </ul>
+      <p className="flex flex-col items-center text-blue cursor-pointer">Directions
+        <span className="text-blue mt-[-6px]">○</span>
+      </p>
+    </div>
+    {/* Tab 高亮切換 */}
+    
+    {/* 飯店介紹 - 對照Tab高亮切換 */}
+    {selected_Tab === 0 && the_Hotel?.intro.map((details, index) => {
+      return <p key={index}> {details} </p>
+    })}
+    {/* 飯店介紹 - 對照Tab高亮切換 */}
 
-    <p>123</p>
+    <div className="flex justify-between flex-wrap gap-y-2">
+      {selected_Tab === 1 && the_Hotel?.facilities.map((facility, index) => {
+
+        return <div key={index} className="basis-1/3 md:basis-1/4 flex flex-col items-center">
+          {/* {SvgIcon ? <SvgIcon className="w-6 h-6"></SvgIcon> : <span>沒SVG</span>} */}
+          <div className="bg-softGray rounded-[2rem]">
+            <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-4"></FacilitySVG>
+          </div>
+          <p className="" key={index}> {facility} </p>
+        </div>
+      })}
+    </div>
+
+
   </div>
-
-
-
   </>
 }

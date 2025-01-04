@@ -21,11 +21,12 @@ export default {
         'secondary': '#FE9900',
         'gray': "#9295A3",
         'softGray': "#F2F2F2",
-        'red': "#DC3811"
+        'red': "#DC3811",
+        'blue': "#3266CC"
       },
       screens: {
         sm: '375px',
-        md: '768px',
+        md: '576px',
         lg: '1024px'
       },
       backgroundImage: {
