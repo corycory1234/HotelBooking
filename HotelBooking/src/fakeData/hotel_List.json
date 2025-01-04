@@ -22,8 +22,30 @@
     "price": 999,
     "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays.",
     "The Ritz-Carlton features luxurious rooms and suites, world-class dining options, spa facilities, and fitness centers, ensuring guests can fully unwind during their stay. Attention to detail is at the heart of the experience, from personalized concierge services to thoughtfully curated activities. Whether hosting weddings, meetings, or enjoying a private getaway, The Ritz-Carlton is the ultimate choice for those seeking exceptional quality and sophistication."
+    ],
+    "reviews": [
+      { 
+        "id": "1",
+        "name": "John",
+        "date": "2024-12-25",
+        "rating": 4,
+        "comment": "“This is A great hotel to live in, but it doesn't have AC”" 
+      },
+      { 
+        "id": "2",
+        "name": "Kate",
+        "date": "2024-11-25",
+        "rating": 3,
+        "comment": "“This is A suck hotel to live in, but it doesn't have AC”" 
+      },
+      { 
+        "id": "3",
+        "name": "John",
+        "date": "2024-10-25",
+        "rating": 2,
+        "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
+      }
     ]
-
   },
   {
     "id": "2",
@@ -48,6 +70,29 @@
     "price": 799,
     "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays.",
     "The Ritz-Carlton features luxurious rooms and suites, world-class dining options, spa facilities, and fitness centers, ensuring guests can fully unwind during their stay. Attention to detail is at the heart of the experience, from personalized concierge services to thoughtfully curated activities. Whether hosting weddings, meetings, or enjoying a private getaway, The Ritz-Carlton is the ultimate choice for those seeking exceptional quality and sophistication."
+    ],
+    "reviews": [
+      { 
+        "id": "1",
+        "name": "Rose",
+        "date": "2024-12-25",
+        "rating": 4,
+        "comment": "“This is A great hotel to live in, but it doesn't have AC”" 
+      },
+      { 
+        "id": "2",
+        "name": "Lorem",
+        "date": "2024-09-25",
+        "rating": 4,
+        "comment": "“This is A suck hotel to live in, but it doesn't have AC”" 
+      },
+      { 
+        "id": "3",
+        "name": "Nick",
+        "date": "2024-08-25",
+        "rating": 2,
+        "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
+      }
     ]
   },
   {
@@ -73,6 +118,29 @@
     "price": 699,
     "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays.",
     "The Ritz-Carlton features luxurious rooms and suites, world-class dining options, spa facilities, and fitness centers, ensuring guests can fully unwind during their stay. Attention to detail is at the heart of the experience, from personalized concierge services to thoughtfully curated activities. Whether hosting weddings, meetings, or enjoying a private getaway, The Ritz-Carlton is the ultimate choice for those seeking exceptional quality and sophistication."
+    ],
+    "reviews": [
+      { 
+        "id": "1",
+        "name": "Nina",
+        "date": "2024-12-25",
+        "rating": 5,
+        "comment": "“This is A great hotel to live in, but it doesn't have AC”" 
+      },
+      { 
+        "id": "2",
+        "name": "Patty",
+        "date": "2024-06-25",
+        "rating": 4,
+        "comment": "“This is A suck hotel to live in, but it doesn't have AC”" 
+      },
+      { 
+        "id": "3",
+        "name": "Ronaldo",
+        "date": "2024-05-15",
+        "rating": 2,
+        "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
+      }
     ]
   }
 ]

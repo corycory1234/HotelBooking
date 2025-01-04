@@ -4,7 +4,9 @@ import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useState } from "react";
-import FacilitySVG from "../client_Svg/client_Svg";
+import {FacilitySVG, HomeSVG} from "../client_Svg/client_Svg";
+import { Customer_Rating } from "../starrating/customer_Rating";
+import Link from "next/link";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -77,7 +79,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         return <div key={index} className="basis-1/4 md:basis-1/5 flex flex-col items-center">
           <div className="bg-softGray rounded-[2rem]">
-            <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3 text-secondary"></FacilitySVG>
+            <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3"></FacilitySVG>
           </div>
           <p className="" key={index}> {facility} </p>
         </div>
@@ -85,15 +87,54 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     </div>
     {/** 飯店設施 */}
     
+
+    {/** 飯店評論 */}
+      {selected_Tab === 2 && 
+        <div className="flex flex-col gap-2">
+          
+          {/** 總平均評價 */}
+          <div className="flex gap-2 border-b border-softGray py-2">
+            <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
+            <p>{the_Hotel?.rating}</p>
+            <p>{the_Hotel?.reviews.length + " Reviews"}</p>
+          </div>
+          {/** 總平均評價 */}
+
+            {/** 留言、星星評價 */}
+            {the_Hotel?.reviews.map((item) => {
+              return <div key={item.id}>
+              <div className="flex justify-between">
+                <p className="text-primary">{item.name} - {item.date}</p>
+                <div className="flex">
+                  <Customer_Rating rating={item.rating} className="w-4 h-auto"></Customer_Rating>
+                </div>
+              </div>
+              <p className="py-2">{item.comment}</p>
+              
+            </div>
+            })}
+            {/** 留言、星星評價 */}
+        
+      </div>
+      }
+    {/** 飯店評論 */}
+
+
+
+
+
     {/** 飯店價錢、跳轉付款頁面按鈕 */}
     <div className="bg-white rounded-lg flex justify-between items-center py-2 px-3">
       <div className="flex">
         <span className="text-primary font-bold">{"$"+the_Hotel?.price + "/"} </span>
         <span className="text-gray"> night</span>
       </div>
-      <button className="bg-primary text-white rounded-lg p-2">Book Now</button>
+      <Link href={"/payment"}>
+        <button className="bg-primary text-white rounded-lg p-2">Book Now</button>
+      </Link>
     </div>
     {/** 飯店價錢、跳轉付款頁面按鈕 */}
+
 
   </div>
   </>

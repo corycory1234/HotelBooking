@@ -7,5 +7,6 @@ export interface Hotel_Detail_Interface {
   rating: number,
   facilities: string[],
   price: number,
-  intro: string[]
+  intro: string[],
+  reviews: {id: string, name: string, date: string, rating: number, comment: string}[]
 }

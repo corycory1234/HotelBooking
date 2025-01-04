@@ -13,11 +13,25 @@ interface Props {
   className?: string;
 }
 
-export default function FacilitySVG({ name, className }: Props) {
+// 1. Public資料 > Facility資料 之SVG
+export function FacilitySVG({ name, className }: Props) {
   // 假設放在 /public/facility/bar.svg
   const src = `/facility/${name}.svg`;
 
   return (
-    <InlineSVGNoSSR src={src} className={className} loader={<span>Loading...</span>} />
+    <InlineSVGNoSSR src={src} className={className} 
+      // loader={<span>Loading...</span>} 
+    />
   );
+};
+
+// 2. Public資料 > Home資料 之SVG
+export function HomeSVG({name, className }: Props) {
+  const src = `/home/${name}.svg`;
+
+  return (
+    <InlineSVGNoSSR src={src} className={className} 
+      // loader={<span>Loading...</span>} 
+    />
+  )
 }
