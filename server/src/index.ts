@@ -1,10 +1,24 @@
 import express from 'express';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import cors from 'cors';
+import { errorHandler } from './middlewares/errorHandler';
+import v1Routes from './routes/v1';
 
 const app = express();
+
+app.use(cors());
+// 或者指定允許的來源
+// app.use(cors({
+//   origin: 'http://localhost:5173', // 只允許特定網域
+//   methods: ['GET', 'POST'],        // 允許的 HTTP 方法
+//   allowedHeaders: ['Content-Type'] // 允許的 HTTP 標頭
+// }));
 app.use(express.json());
+
+// API 路由
+app.use('/api/v1', v1Routes);
+
+// 錯誤處理中間件
+app.use(errorHandler);
 
 const port = process.env.PORT || 3000;
 

@@ -1,3 +1,6 @@
+我幫你更新 README.md，主要根據當前專案結構和使用的技術進行調整：
+
+```markdown
 # Hotel Booking API
 
 這是一個使用 Node.js、Express、TypeScript、Drizzle ORM 和 Supabase 建立的飯店訂房系統 API。
@@ -39,70 +42,104 @@ cp .env.example .env
 # 編輯 .env 檔案，填入你的 Supabase 設定
 ```
 
-4. 資料庫遷移
-```bash
-# 生成遷移檔案
-npm run generate
+## 環境變數說明
 
-# 執行遷移
-npm run migrate
+```env
+PORT=3000
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+DATABASE_URL=your_supabase_connection_string
 ```
-
-5. 啟動開發伺服器
-```bash
-npm run dev
-```
-
-## 可用的指令
-
-- `npm run dev`: 啟動開發伺服器
-- `npm run build`: 建立生產版本
-- `npm run start`: 執行生產版本
-- `npm run generate`: 生成資料庫遷移檔案
-- `npm run migrate`: 執行資料庫遷移
 
 ## 專案結構
 
 ```
 src/
-├── db/                 # 資料庫相關
-│   ├── schema/        # 資料表定義
-│   ├── migrations/    # 遷移檔案
-│   └── index.ts       # 資料庫連線設定
-├── routes/            # API 路由
-├── controllers/       # 控制器
-├── services/         # 業務邏輯
-└── index.ts          # 主程式入口
+├── db/
+│   ├── schema/
+│   │   ├── users.ts       # 用戶相關表格
+│   │   ├── hotels.ts      # 飯店相關表格
+│   │   ├── rooms.ts       # 房型相關表格
+│   │   ├── bookings.ts    # 訂單相關表格
+│   │   ├── reviews.ts     # 評價相關表格
+│   │   ├── favorites.ts   # 收藏相關表格
+│   │   └── index.ts       # Schema 匯出
+│   └── index.ts           # 資料庫連線設定
+├── routes/
+│   └── v1/
+│       ├── auth.ts        # 認證相關路由
+│       ├── hotels.ts      # 飯店相關路由
+│       ├── bookings.ts    # 訂單相關路由
+│       ├── reviews.ts     # 評價相關路由
+│       └── index.ts       # 路由整合
+├── controllers/           # API 控制器
+├── utils/                 # 工具函數
+├── middlewares/          # 中間件
+└── index.ts              # 主程式入口
 ```
 
-## API 文件
+## API 路由
 
-[待補充]
+### 認證相關
+- POST `/api/v1/auth/register` - 用戶註冊
+- POST `/api/v1/auth/login` - 用戶登入
+- POST `/api/v1/auth/google` - Google 登入
 
-## 環境變數說明
+### 飯店相關
+- GET `/api/v1/hotels` - 獲取飯店列表
+- GET `/api/v1/hotels/:id` - 獲取飯店詳情
+- GET `/api/v1/hotels/:id/rooms` - 獲取飯店房型
+- POST `/api/v1/hotels` - 新增飯店（需要認證）
 
-- `PORT`: 伺服器執行的埠號
-- `SUPABASE_URL`: Supabase 專案 URL
-- `SUPABASE_ANON_KEY`: Supabase 匿名金鑰
-- `DATABASE_URL`: 資料庫連線字串
+### 訂單相關
+- POST `/api/v1/bookings` - 建立訂單
+- GET `/api/v1/bookings` - 獲取訂單列表
+- GET `/api/v1/bookings/:id` - 獲取訂單詳情
+- DELETE `/api/v1/bookings/:id` - 取消訂單
+
+### 評價相關
+- POST `/api/v1/reviews/hotels/:hotelId` - 新增評價
+- GET `/api/v1/reviews/hotels/:hotelId` - 獲取評價列表
 
 ## 開發指南
 
 1. 新增資料表
    - 在 `src/db/schema` 資料夾中建立新的 schema 檔案
-   - 執行 `npm run generate` 生成遷移檔案
-   - 執行 `npm run migrate` 更新資料庫
+   - 在 `src/db/schema/index.ts` 匯出新增的 schema
+   - 確保相關的表格關聯正確設置
 
 2. 新增 API 路由
-   - 在 `src/routes` 資料夾中建立新的路由檔案
-   - 在 `src/controllers` 建立對應的控制器
-   - 在主程式中註冊路由
+   - 在 `src/routes/v1` 資料夾中建立新的路由檔案
+   - 在路由檔案中實作對應的邏輯
+   - 在 `src/routes/v1/index.ts` 中註冊新路由
 
-## 貢獻指南
+3. 錯誤處理
+   - 所有的 API 回應都應該遵循統一的格式
+   - 成功回應：
+     ```json
+     {
+       "status": "success",
+       "data": {...}
+     }
+     ```
+   - 錯誤回應：
+     ```json
+     {
+       "status": "error",
+       "message": "錯誤訊息"
+     }
+     ```
 
-[待補充]
+## 待開發功能
 
-## 授權
+- [ ] 會員系統完善
+- [ ] 訂單管理系統
+- [ ] 評價系統
+- [ ] 房型管理
+- [ ] 訂單取消與退款流程
+- [ ] 後台管理系統
 
-[授權方式]
+## License
+
+MIT
 ```
