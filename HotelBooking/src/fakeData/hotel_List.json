@@ -45,7 +45,8 @@
         "rating": 2,
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
-    ]
+    ],
+    "address": "695 Sukhumvit Rd, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"
   },
   {
     "id": "2",
@@ -93,7 +94,8 @@
         "rating": 2,
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
-    ]
+    ],
+    "address": "Shop 13, Lemon Grove Shopping Centre, 427-441 Victoria Ave, Chatswood NSW 2067, Australia"
   },
   {
     "id": "3",
@@ -141,6 +143,7 @@
         "rating": 2,
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
-    ]
+    ],
+    "address": "中國广东省广州市天河区兆业街佳兆业广场4层"
   }
 ]

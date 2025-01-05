@@ -18,7 +18,8 @@ const initialState: Hotel_Detail_Interface = {
       rating: 0,
       comment: ""
     }
-  ]
+  ],
+  address: ""
 };
 
 const hotel_Detail_Slice = createSlice({

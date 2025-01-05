@@ -13,5 +13,6 @@ export interface Hotel_Detail_Interface {
     name: string, 
     date: string, 
     rating: number, 
-    comment: string }[]
+    comment: string }[],
+  address: string
 }
