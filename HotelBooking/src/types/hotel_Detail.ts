@@ -4,9 +4,14 @@ export interface Hotel_Detail_Interface {
   name: string,
   images: {url: string, description: string}[],
   distance: string,
-  rating: number,
+  rating: number | null,
   facilities: string[],
-  price: number,
+  price: number | null,
   intro: string[],
-  reviews: {id: string, name: string, date: string, rating: number, comment: string}[]
+  reviews: {
+    id: string, 
+    name: string, 
+    date: string, 
+    rating: number, 
+    comment: string }[]
 }

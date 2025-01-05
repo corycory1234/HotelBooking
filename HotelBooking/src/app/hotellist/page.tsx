@@ -104,10 +104,10 @@ export default function HotelList () {
                 </span>
             </div>
           </div>
-          <div className="flex gap-2 mt-3">
+          <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-hidden">
             {item.facilities.map((facility, index) => {
               return <span className="text-xs px-2 py-1 bg-softGray rounded" key={index}>
-                {facility}
+                {facility.charAt(0).toUpperCase() + facility.slice(1)}
               </span>
             })}
 

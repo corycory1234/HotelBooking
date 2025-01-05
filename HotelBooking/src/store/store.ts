@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import numberReducer from "./test/testSlice";
-import formSearch_Reducer from "./form-Search/formSearchSlice"
+import formSearch_Reducer from "./form-Search/formSearchSlice";
+import hotel_Detail_Reducer from "./hotel_Detail/hotel_Detail";
+
 // 引入 transform, 把 date字串 轉 date物件格式, 不然無日曆法渲染, 造成報錯
 import formSearch_Transform from "./transform/formSearchTransform";
 // 先從 redux-persist/es/constants 或 redux-persist 中引入要忽略的 action 常數：
@@ -10,8 +11,8 @@ import {FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER,} from "redux-persist";
 
 // 1. 合併各 slice 的 reducer
 const rootReducer = combineReducers({
-  number: numberReducer,
-  formSearch: formSearch_Reducer
+  formSearch: formSearch_Reducer,
+  hotel_Detail: hotel_Detail_Reducer,
 })
 
 
@@ -40,7 +41,6 @@ export const store  = configureStore({
     })
   // 4.1 原先不安裝 redux-persist 之寫法
   // reducer: {
-  //   number: numberReducer,
   //   formSearch: keywordReducer,
   // }
 });

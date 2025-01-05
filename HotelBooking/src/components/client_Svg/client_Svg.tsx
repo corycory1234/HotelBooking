@@ -8,13 +8,13 @@ const InlineSVGNoSSR = dynamic(() => import("react-inlinesvg"), {
   ssr: false,
 });
 
-interface Props {
+interface SVG_Interface {
   name: string;      // 例如 "bar"
   className?: string;
 }
 
 // 1. Public資料 > Facility資料 之SVG
-export function FacilitySVG({ name, className }: Props) {
+export function FacilitySVG({ name, className }: SVG_Interface) {
   // 假設放在 /public/facility/bar.svg
   const src = `/facility/${name}.svg`;
 
@@ -26,7 +26,7 @@ export function FacilitySVG({ name, className }: Props) {
 };
 
 // 2. Public資料 > Home資料 之SVG
-export function HomeSVG({name, className }: Props) {
+export function HomeSVG({name, className }: SVG_Interface) {
   const src = `/home/${name}.svg`;
 
   return (

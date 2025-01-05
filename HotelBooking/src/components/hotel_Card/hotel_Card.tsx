@@ -26,8 +26,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   return <>
   <div className="flex flex-col p-4 gap-4 my-bg-gradient ">
 
+    {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
     <div className="">
-    {/* Swiper 飯店圖片 */}
       <Swiper slidesPerView={1} 
         spaceBetween={5} 
         pagination={{clickable: true}} 
@@ -48,8 +48,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
           </SwiperSlide>
         })}
       </Swiper>
-    {/* Swiper 飯店圖片 */}
     </div>
+    {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
     
     {/* Tab 高亮切換 */}
     <div className="flex justify-between">
@@ -74,14 +74,14 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     {/* 飯店介紹 - 對照Tab高亮切換 */}
 
     {/** 飯店設施 */}
-    <div className="flex flex-wrap gap-y-2">
+    <div className="flex flex-wrap gap-2">
       {selected_Tab === 1 && the_Hotel?.facilities.map((facility, index) => {
 
-        return <div key={index} className="basis-1/4 md:basis-1/5 flex flex-col items-center">
+        return <div key={index} className="flex flex-col items-center">
           <div className="bg-softGray rounded-[2rem]">
             <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3"></FacilitySVG>
           </div>
-          <p className="" key={index}> {facility} </p>
+          <p className="text-sm" key={index}> {facility.charAt(0).toUpperCase() + facility.slice(1)} </p>
         </div>
       })}
     </div>
@@ -90,7 +90,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
     {/** 飯店評論 */}
       {selected_Tab === 2 && 
-        <div className="flex flex-col gap-2">
+        <div className=" mt-[-30px] flex flex-col gap-2">
           
           {/** 總平均評價 */}
           <div className="flex gap-2 border-b border-softGray py-2">
