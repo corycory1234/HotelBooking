@@ -46,11 +46,11 @@ export default function Client_Input_Traveler () {
       { showDropDown &&
         <div className="flex flex-col gap-2 pl-4 pr-2">
           {/* 房間 */}
-          <div className="flex justify-between items-center py-2 border-b-2">
+          <div className="flex justify-between items-center py-2 border-b-2 border-gray">
             <p>{room} Room</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusRoom())} type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${room<=1 ? 'text-gray-400' : 'text-primary'}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${room<=1 ? 'text-gray' : 'text-primary'}`}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </button>
@@ -65,11 +65,11 @@ export default function Client_Input_Traveler () {
           {/* 房間 */}
 
           {/* 成人 */}
-          <div className="flex justify-between items-center py-2 border-b-2">
+          <div className="flex justify-between items-center py-2 border-b-2 border-gray">
             <p>{adult} Adult</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusAdult())} type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${adult<=1 ? 'text-gray-400' : 'text-primary'}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${adult<=1 ? 'text-gray' : 'text-primary'}`}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </button>
@@ -84,11 +84,11 @@ export default function Client_Input_Traveler () {
           {/* 成人 */}
 
           {/* 小孩 */}
-          <div className="flex justify-between items-center py-2 border-b-2">
+          <div className="flex justify-between items-center py-2 border-b-2 border-gray">
             <p>{child} Child</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusChild())} type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${child<=1 ? 'text-gray-400' : 'text-primary'}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${child<=1 ? 'text-gray' : 'text-primary'}`}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
               </button>
