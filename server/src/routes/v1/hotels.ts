@@ -1,4 +1,5 @@
 import express from 'express';
+import 'dotenv/config';
 import { hotelController } from '../../controllers/hotel.controller';
 import { authenticate } from '../../middlewares/auth';
 
@@ -21,6 +22,6 @@ router.get('/:id/rooms', async (req, res) => {
 });
 
 // 需要認證的路由
-router.post('/', authenticate, hotelController.createHotel);
+// router.post('/', authenticate, hotelController.createHotel);
 
 export default router;

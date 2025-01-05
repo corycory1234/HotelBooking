@@ -6,8 +6,8 @@
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "generate": "drizzle-kit generate:pg",
-    "migrate": "ts-node src/db/migrate.ts"
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate"
   },
   "author": "",
   "license": "ISC",

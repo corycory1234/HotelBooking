@@ -7,7 +7,7 @@ export const users = pgTable("users", {
     name: varchar("name", { length: 255 }),
     phone: varchar("phone", { length: 20 }),
     avatar: text("avatar"),
-    provider: varchar("provider", { length: 20 }).default("local"), // local, google
+    provider: varchar("provider", { length: 20 }).default("local"), // 提供者 local, google
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
 });

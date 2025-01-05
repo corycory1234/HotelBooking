@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { errorHandler } from './middlewares/errorHandler';
 import v1Routes from './routes/v1';
+import 'dotenv/config';
 
 const app = express();
 
@@ -51,7 +52,7 @@ app.get('/', (req, res) => {
 //   });
 
 //   if (error) return res.status(400).json({ error: error.message });
-//   res.status(201).json({ message: "User registered successfully!", data });
+  // res.status(201).json({ message: "User registered successfully!", data });
 // });
 
 // // 用戶登入路由
