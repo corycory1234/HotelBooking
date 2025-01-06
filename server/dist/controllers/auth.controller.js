@@ -47,6 +47,7 @@ exports.authController = {
                 });
                 if (error)
                     throw error;
+                console.log(data);
                 res.json({
                     status: "success",
                     data,
