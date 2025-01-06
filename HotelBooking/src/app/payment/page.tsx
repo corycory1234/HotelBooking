@@ -74,11 +74,10 @@ export default function Payment () {
         </div>
       </div>
       <div className="border-t border-gray"></div>
-      <div className="flex gap-1">
-        <p>{nights + " Nights,"}</p>
-        <p>{redux_Fomr_Search.room + " Room"}</p>
-        <p>{`(${redux_Fomr_Search.adult}  Adults`} {`${redux_Fomr_Search.child >0 ? redux_Fomr_Search.child + ' Childs'  : ''})`}</p>
-        <p></p>
+      <div className="flex gap-x-1">
+        <p className="text-sm font-semibold">{nights + " Nights,"}</p>
+        <p className="text-sm font-semibold">{redux_Fomr_Search.room + " Rooms"}</p>
+        <p className="text-sm font-semibold">{`(${redux_Fomr_Search.adult}  Adults`} {`${redux_Fomr_Search.child >0 ? redux_Fomr_Search.child + ' Childs'  : ''})`}</p>
       </div>
       <p className="border-b border-gray"></p>
 
