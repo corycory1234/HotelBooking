@@ -9,6 +9,7 @@ import Modal from "@/components/modal/modal";
 import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
 import Hotel_Card from "@/components/hotel_Card/hotel_Card";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
+import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
 
 export default function Hotel_Detail () {
   // 1. 返回上一頁
@@ -20,8 +21,9 @@ export default function Hotel_Detail () {
   // 3. dispatch 拿取 Redux 之 Action函式
   const dispatch = useDispatch();
 
-  // 4. 撈 JSON 當中的指定飯店
-  const the_Found_Hotel = hotel_List.find((item) => params.id === item.id);
+  // 4. 撈 JSON 當中的指定飯店 - JSON 假資料要吃 TS型別, 不然會報錯
+  const hotel_List_Typed: Hotel_Detail_Interface[] = hotel_List as Hotel_Detail_Interface[];
+  const the_Found_Hotel = hotel_List_Typed.find((item) => params.id === item.id);
 
   // 5.  生命週期：組件載入後，dispatch 更新 Redux
   // 5.1 也可寫在 useEffect 中，只在 id 變動時重新 dispatch

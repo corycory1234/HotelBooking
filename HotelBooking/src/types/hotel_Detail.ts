@@ -25,5 +25,5 @@ export interface Hotel_Room_Type_Interface {
   id: string,
   price: number | null,
   images: {url: string, description: string}[],
-  availability: number | null,
+  availability: number,
 }
