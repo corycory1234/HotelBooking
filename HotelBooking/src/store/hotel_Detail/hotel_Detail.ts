@@ -19,7 +19,11 @@ const initialState: Hotel_Detail_Interface = {
       comment: ""
     }
   ],
-  address: ""
+  address: "",
+  roomType: [
+    {id:"", roomType: "singleRoom", price: null, availability: null, images: [{url:"", description:""}]},
+    {id:"", roomType: "doubleRoom", price: null, availability: null, images: [{url:"", description:""}]}
+  ]
 };
 
 const hotel_Detail_Slice = createSlice({

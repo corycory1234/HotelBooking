@@ -46,8 +46,25 @@
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
     ],
-    "address": "695 Sukhumvit Rd, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand"
+    "address": "695 Sukhumvit Rd, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
+    "roomType": [
+      {
+        "id": "room1",
+        "roomType": "singleRoom",
+        "price": 1099,
+        "images": [ {"url": "/roomtype/single/singleroom1.jpg","description": "hotel2"},{"url": "/roomtype/single/singleroom2.jpg","description": "hotel3"},{"url": "/roomtype/single/singleroom3.jpg", "description": "hotel1"}],
+        "availability": 5
+      },
+      {
+        "id": "room2",
+        "roomType": "doubleRoom",
+        "price": 2999,
+        "images": [ {"url": "/roomtype/double/doubleroom1.jpg","description": "hotel2"},{"url": "/roomtype/double/doubleroom2.jpg","description": "hotel3"},{"url": "/roomtype/double/doubleroom3.jpg", "description": "hotel1"}],
+        "availability": 3
+      }
+    ]
   },
+  
   {
     "id": "2",
     "name": "Four Seasons Hotel",
@@ -95,8 +112,25 @@
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
     ],
-    "address": "Shop 13, Lemon Grove Shopping Centre, 427-441 Victoria Ave, Chatswood NSW 2067, Australia"
+    "address": "Shop 13, Lemon Grove Shopping Centre, 427-441 Victoria Ave, Chatswood NSW 2067, Australia",
+    "roomType": [
+      {
+        "id": "room1",
+        "roomType": "singleRoom",
+        "price": 799,
+        "images": [ {"url": "/roomtype/single/singleroom1.jpg","description": "hotel2"},{"url": "/roomtype/single/singleroom2.jpg","description": "hotel3"},{"url": "/roomtype/single/singleroom3.jpg", "description": "hotel1"}],
+        "availability": 3
+      },
+      {
+        "id": "room2",
+        "roomType": "doubleRoom",
+        "price": 1399,
+        "images": [ {"url": "/roomtype/double/doubleroom1.jpg","description": "hotel2"},{"url": "/roomtype/double/doubleroom2.jpg","description": "hotel3"},{"url": "/roomtype/double/doubleroom3.jpg", "description": "hotel1"}],
+        "availability": 2
+      }
+    ]
   },
+
   {
     "id": "3",
     "name": "Mandarin Oriental",
@@ -144,6 +178,22 @@
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
     ],
-    "address": "中國广东省广州市天河区兆业街佳兆业广场4层"
+    "address": "中國广东省广州市天河区兆业街佳兆业广场4层",
+    "roomType": [
+      {
+        "id": "room1",
+        "roomType": "singleRoom",
+        "price": 399,
+        "images": [ {"url": "/roomtype/single/singleroom1.jpg","description": "hotel2"},{"url": "/roomtype/single/singleroom2.jpg","description": "hotel3"},{"url": "/roomtype/single/singleroom3.jpg", "description": "hotel1"}],
+        "availability": 10
+      },
+      {
+        "id": "room2",
+        "roomType": "doubleRoom",
+        "price": 599,
+        "images": [ {"url": "/roomtype/double/doubleroom1.jpg","description": "hotel2"},{"url": "/roomtype/double/doubleroom2.jpg","description": "hotel3"},{"url": "/roomtype/double/doubleroom3.jpg", "description": "hotel1"}],
+        "availability": 3
+      }
+    ]
   }
 ]

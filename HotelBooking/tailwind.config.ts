@@ -20,7 +20,7 @@ export default {
         'primary': "#07AEAF",
         'secondary': '#FE9900',
         'gray': "#9295A3",
-        'softGray': "#F2F2F2",
+        'softGray': "#D3D3D3",
         'strokeGray': "#EBF4FF",
         'red': "#DC3811",
         'blue': "#3266CC"

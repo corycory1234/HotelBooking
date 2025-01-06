@@ -7,6 +7,7 @@ import { useState } from "react";
 import {FacilitySVG, HomeSVG} from "../client_Svg/client_Svg";
 import { Customer_Rating } from "../starrating/customer_Rating";
 import Link from "next/link";
+import Room_Type from "./hotel_Room_Type";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -14,7 +15,7 @@ interface Hotel_Card_Interface {
 };
 
 // 2. Tab - 詳細、設施、評價陣列
-const tab = ["Details", "Facilities", "Review"]
+const tab = ["Details", "Rooms", "Facilities", "Review"]
 
 export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 1. 父元件 HotelList props 指定飯店 之數據
@@ -24,10 +25,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   const [selected_Tab, set_Selected_Tab] = useState(0);
   
   return <>
-  <div className="flex flex-col p-4 gap-4 my-bg-gradient ">
-
-    {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
-    <div className="">
+      {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
+      <div className="">
       <Swiper slidesPerView={1} 
         spaceBetween={5} 
         pagination={{clickable: true}} 
@@ -36,7 +35,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
         {the_Hotel?.images.map((img, index) => {
           return <SwiperSlide key={index}>
             <div className="relative">
-              <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top rounded-t-3xl"/>
+              <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top"/>
               <p className="absolute bottom-2 right-8 text-white text-sm">
                 { (index<10 ? "0"+(index+1): index+1) + "/" + (the_Hotel.images.length<10 ? "0" + the_Hotel.images.length : the_Hotel.images.length)}
               </p>
@@ -50,10 +49,13 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       </Swiper>
     </div>
     {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
-    
+  <div className="flex flex-col p-4 gap-4 my-bg-gradient ">
+
+    <p className="font-bold">{the_Hotel?.name}</p>
+
     {/* Tab 高亮切換 */}
-    <div className="flex justify-between">
-      <ul className="flex gap-2">
+    {/* <div className="flex overflow-x-auto scrollbar-hidden"> */}
+      <ul className="flex gap-2 border-b border-softGray overflow-x-auto scrollbar-hidden">
         {tab.map((item, index) => {
           return <li key={index} onClick={() => set_Selected_Tab(index)} className="flex flex-col items-center cursor-pointer">
             <span className={`${selected_Tab === index ? 'text-primary' : ''} `}>{item}</span>
@@ -61,10 +63,10 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
           </li>
         })}
       </ul>
-      <p className="flex flex-col items-center text-blue cursor-pointer">Directions
+      {/* <p className="flex flex-col items-center text-blue cursor-pointer">Directions
         <span className="text-blue mt-[-6px]">○</span>
-      </p>
-    </div>
+      </p> */}
+    {/* </div> */}
     {/* Tab 高亮切換 */}
     
     {/* 飯店介紹 - 對照Tab高亮切換 */}
@@ -73,9 +75,17 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     })}
     {/* 飯店介紹 - 對照Tab高亮切換 */}
 
+
+    {/** 房型 */}
+    <div>
+      {selected_Tab === 1 && <Room_Type></Room_Type>}
+    </div>
+    {/** 房型 */}
+
+
     {/** 飯店設施 */}
     <div className="flex flex-wrap gap-2">
-      {selected_Tab === 1 && the_Hotel?.facilities.map((facility, index) => {
+      {selected_Tab === 2 && the_Hotel?.facilities.map((facility, index) => {
 
         return <div key={index} className="flex flex-col items-center">
           <div className="bg-softGray rounded-[2rem]">
@@ -89,7 +99,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     
 
     {/** 飯店評論 */}
-      {selected_Tab === 2 && 
+      {selected_Tab === 3 && 
         <div className=" mt-[-30px] flex flex-col gap-2">
           
           {/** 總平均評價 */}
