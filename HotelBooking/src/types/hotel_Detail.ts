@@ -26,4 +26,8 @@ export interface Hotel_Room_Type_Interface {
   price: number | null,
   images: {url: string, description: string}[],
   availability: number,
+  smoke: boolean | null,
+  amenity: string[],
+  roomsize: number | null,
+  maxOccupancy: number | null;
 }

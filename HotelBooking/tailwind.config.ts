@@ -22,7 +22,7 @@ export default {
         'gray': "#9295A3",
         'softGray': "#D3D3D3",
         'strokeGray': "#EBF4FF",
-        'red': "#DC3811",
+        'customRed': "#DC3811",
         'blue': "#3266CC"
       },
       screens: {

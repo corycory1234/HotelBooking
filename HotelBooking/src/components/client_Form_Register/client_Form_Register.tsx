@@ -28,17 +28,17 @@ export default function Client_Form_Register () {
         {/** 電子郵件 */}
         <label htmlFor="email" className="text-gray">Enter Email</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"/>
-        <p aria-live="polite" className="text-lg text-red">{state?.emailError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{state?.emailError}</p>
         {/** 電子郵件 */}
 
         {/* 密碼 */}
         <Client_Input_Password></Client_Input_Password>
-        <p aria-live="polite" className="text-lg text-red">{state?.passwordError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{state?.passwordError}</p>
         {/* 密碼 */}
 
         {/* 再次確認密碼 */}
         <Client_Input_Confirm_Password></Client_Input_Confirm_Password>
-        <p aria-live="polite" className="text-lg text-red">{state?.confirmError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{state?.confirmError}</p>
         {/* 再次確認密碼 */}
         
         <button className="bg-primary rounded-lg py-3 text-white">Register</button>

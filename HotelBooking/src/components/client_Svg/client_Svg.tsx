@@ -9,7 +9,7 @@ const InlineSVGNoSSR = dynamic(() => import("react-inlinesvg"), {
 });
 
 interface SVG_Interface {
-  name: string;      // 例如 "bar"
+  name: string | number;      // 例如 "bar"
   className?: string;
 }
 
@@ -28,6 +28,17 @@ export function FacilitySVG({ name, className }: SVG_Interface) {
 // 2. Public資料 > Home資料 之SVG
 export function HomeSVG({name, className }: SVG_Interface) {
   const src = `/home/${name}.svg`;
+
+  return (
+    <InlineSVGNoSSR src={src} className={className} 
+      // loader={<span>Loading...</span>} 
+    />
+  )
+}
+
+// 3. Public資料 > otherSvg資料 之SVG
+export function OtherSVG({name, className }: SVG_Interface) {
+  const src = `/otherSvg/${name}.svg`;
 
   return (
     <InlineSVGNoSSR src={src} className={className} 

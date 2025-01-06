@@ -24,7 +24,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 2. Tab - 數字對應 tab陣列索引值 之高亮切換
   const [selected_Tab, set_Selected_Tab] = useState(0);
   
-  return <>
+  return <div className="relative flex flex-col gap-2">
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
       <div className="">
       <Swiper slidesPerView={1} 
@@ -49,13 +49,13 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       </Swiper>
     </div>
     {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
-  <div className="flex flex-col p-4 gap-4 my-bg-gradient ">
+    
+    {/** 飯店名，吃Sticky，滾動固定Top */}
+    <p className="font-bold px-4 bg-white sticky top-0 z-10">{the_Hotel?.name}</p>
+    {/** 飯店名，吃Sticky，滾動固定Top */}
 
-    <p className="font-bold">{the_Hotel?.name}</p>
-
-    {/* Tab 高亮切換 */}
-    {/* <div className="flex overflow-x-auto scrollbar-hidden"> */}
-      <ul className="flex gap-2 border-b border-softGray overflow-x-auto scrollbar-hidden">
+    {/* Tab 高亮切換，吃Sticky，滾動固定Top */}
+      <ul className="flex gap-2 border-b border-softGray overflow-x-auto scrollbar-hidden bg-white sticky top-6 z-10 px-4 py-1">
         {tab.map((item, index) => {
           return <li key={index} onClick={() => set_Selected_Tab(index)} className="flex flex-col items-center cursor-pointer">
             <span className={`${selected_Tab === index ? 'text-primary' : ''} `}>{item}</span>
@@ -63,16 +63,20 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
           </li>
         })}
       </ul>
-      {/* <p className="flex flex-col items-center text-blue cursor-pointer">Directions
-        <span className="text-blue mt-[-6px]">○</span>
-      </p> */}
-    {/* </div> */}
-    {/* Tab 高亮切換 */}
-    
+    {/* Tab 高亮切換，吃Sticky，滾動固定Top */}
+
+
+
+  <div className="flex flex-col p-4 gap-4 my-bg-gradient">
+
     {/* 飯店介紹 - 對照Tab高亮切換 */}
-    {selected_Tab === 0 && the_Hotel?.intro.map((details, index) => {
-      return <p key={index}> {details} </p>
-    })}
+    {selected_Tab === 0 && <div className="flex flex-col gap-2">
+      {the_Hotel?.intro.map((details, index) => {
+        return <p key={index}> {details} </p>
+      })}
+      <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+    </div>
+    }
     {/* 飯店介紹 - 對照Tab高亮切換 */}
 
 
@@ -84,17 +88,22 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
     {/** 飯店設施 */}
-    <div className="flex flex-wrap gap-2">
-      {selected_Tab === 2 && the_Hotel?.facilities.map((facility, index) => {
+      {selected_Tab === 2 && <div className="flex flex-col gap-2">
 
-        return <div key={index} className="flex flex-col items-center">
-          <div className="bg-softGray rounded-[2rem]">
-            <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3"></FacilitySVG>
-          </div>
-          <p className="text-sm" key={index}> {facility.charAt(0).toUpperCase() + facility.slice(1)} </p>
+        <div className="flex flex-wrap gap-2">
+          {the_Hotel?.facilities.map((facility, index) => {
+            return <div key={index} className="flex flex-col items-center">
+              <div className="bg-softGray rounded-[2rem]">
+                <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3"></FacilitySVG>
+              </div>
+              <p className="text-sm" key={index}> {facility.charAt(0).toUpperCase() + facility.slice(1)} </p>
+            </div>
+          })}
         </div>
-      })}
-    </div>
+
+        <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+      </div>
+      }
     {/** 飯店設施 */}
     
 
@@ -124,7 +133,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
             </div>
             })}
             {/** 留言、星星評價 */}
-        
+          
+          <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
       </div>
       }
     {/** 飯店評論 */}
@@ -134,7 +144,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
     {/** 飯店價錢、跳轉付款頁面按鈕 */}
-    <div className="bg-white rounded-lg flex justify-between items-center py-2 px-3">
+    {/* <div className="bg-white rounded-lg flex justify-between items-center py-2 px-3">
       <div className="flex">
         <span className="text-primary font-bold">{"$"+the_Hotel?.price + "/"} </span>
         <span className="text-gray"> night</span>
@@ -142,10 +152,12 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       <Link href={"/payment"}>
         <button className="bg-primary text-white rounded-lg p-2">Book Now</button>
       </Link>
-    </div>
+
+      <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+    </div> */}
     {/** 飯店價錢、跳轉付款頁面按鈕 */}
 
 
   </div>
-  </>
+  </div>
 }

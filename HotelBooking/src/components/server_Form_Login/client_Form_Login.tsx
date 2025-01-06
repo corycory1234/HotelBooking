@@ -28,12 +28,12 @@ export default function Server_Form_Login () {
         {/** 電子郵件 */}
         <label htmlFor="account" className="text-gray">Enter Email</label>
         <input type="text" id="account" name="account" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"/>
-        <p aria-live="polite" className="text-lg text-red">{state?.emailError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{state?.emailError}</p>
         {/** 電子郵件 */}
 
         {/* 密碼 */}
         <Client_Input_Password></Client_Input_Password>
-        <p aria-live="polite" className="text-lg text-red">{state?.passwordError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{state?.passwordError}</p>
         {/* 密碼 */}
         
         <button className="bg-primary rounded-lg py-3 text-white">Sign In</button>

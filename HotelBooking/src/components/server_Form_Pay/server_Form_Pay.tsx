@@ -13,15 +13,15 @@ export default function Server_Form_Pay () {
   <form action={formAction} className="flex flex-col gap-2">
     <label htmlFor="name" className="text-gray">Name</label>
     <input type="text" id="name" name="name" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-red">{state.nameError}</p>
+    <p aria-live="polite" className="text-customRed">{state.nameError}</p>
 
     <label htmlFor="surname" className="text-gray">Surname</label>
     <input type="text" id="surname" name="surname" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-red">{state.surnameError}</p>
+    <p aria-live="polite" className="text-customRed">{state.surnameError}</p>
 
     <label htmlFor="email" className="text-gray">Email Address</label>
     <input type="text" id="email" name="email" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-red">{state.emailError}</p>
+    <p aria-live="polite" className="text-customRed">{state.emailError}</p>
 
     <label htmlFor="country" className="text-gray">Country</label>
     <select name="country" id="country" className="rounded-lg border-2 border-softGray p-2">
@@ -33,7 +33,7 @@ export default function Server_Form_Pay () {
 
     <label htmlFor="phone" className="text-gray">Phone Number</label>
     <input type="text" id="phone" name="phone" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-red">{state.phoneError}</p>
+    <p aria-live="polite" className="text-customRed">{state.phoneError}</p>
 
     <button className="bg-primary text-white rounded-xl py-4 mt-6"> Proceed to Pay</button>
   </form>  
