@@ -19,21 +19,10 @@ export default function Room_Type() {
   const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10), redux_Fomr_Search.dateRange?.slice(13))
 
   return <>
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       {redux_Hotel_Room_Type.map((room) => {
         return <div key={room.id} className="flex flex-col gap-2">
         
-        {/** 房型名稱、房間大小、最多幾人住 */}
-        <p className="font-bold">{room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
-        <div className="flex gap-1">
-          <OtherSVG name={"roomsize"} className="w-4 h-auto"></OtherSVG>
-          <p>{room.roomsize + "㎡"}</p>
-          <OtherSVG name={"maxoccupancy"} className="w-4 h-auto"></OtherSVG>
-          <p>{"Max " + room.maxOccupancy + " People"}</p>
-        </div>
-        {/** 房型名稱、房間大小、最多幾人住 */}
-
-
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
         <div className="">
           <Swiper slidesPerView={1}
@@ -64,7 +53,18 @@ export default function Room_Type() {
           </Swiper>
         </div>
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
+
         
+        {/** 房型名稱、房間大小、最多幾人住 */}
+        <p className="font-bold">{room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+        <div className="flex gap-1">
+          <OtherSVG name={"roomsize"} className="w-4 h-auto"></OtherSVG>
+          <p>{room.roomsize + "㎡"}</p>
+          <OtherSVG name={"maxoccupancy"} className="w-4 h-auto"></OtherSVG>
+          <p>{"Max " + room.maxOccupancy + " People"}</p>
+        </div>
+        {/** 房型名稱、房間大小、最多幾人住 */}
+
 
 
         <div className="flex flex-col p-2 border border-gray rounded gap-2">
@@ -73,12 +73,12 @@ export default function Room_Type() {
           <div className="flex gap-2 flex-wrap">
             {/** 禁菸房 | 吸菸房 */}
             {room.smoke ? 
-            <div className="flex gap-1 items-center">
+            <div className="flex gap-1 bg-softGray rounded p-1">
               <OtherSVG name={"smoking"} className="w-4 h-auto"/>
               <span className="text-xs">Smoking Room</span>
             </div>
             : 
-            <div className="flex gap-1">
+            <div className="flex gap-1 bg-softGray rounded p-1">
               <OtherSVG name={"nosmoking"} className="w-4 h-auto"></OtherSVG>
               <span className="text-xs">No-Smoking Room</span>
             </div>
@@ -87,7 +87,7 @@ export default function Room_Type() {
 
             {/** 房間裡的設施 */}
             {room.amenity.map((item, index) => {
-              return <div className="flex gap-1" key={index}>
+              return <div className="flex gap-1 bg-softGray rounded p-1" key={index}>
                 <OtherSVG name={item} className="w-4 h-auto"/> 
                 <span className="text-xs">{item}</span>
               </div>
