@@ -8,7 +8,7 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Link from "next/link";
 
-export default function Room_Type() {
+export default function Hotel_Room_Type() {
   // 1. Redux - 飯店明細
   const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
   const redux_Hotel_Room_Type = redux_Hotel_Detail.roomType;
@@ -97,15 +97,6 @@ export default function Room_Type() {
           </div>
           {/** 房間裡的SVG */}
           
-          {/** 房型價錢、住幾晚、人數 */}
-          {/* <div className="flex flex-col">
-            <p className="font-bold text-lg">{room.price}</p>
-            <p className="text-gray text-sm">
-              {nights + " Nights"} | {redux_Fomr_Search.adult + " Adults"} {redux_Fomr_Search.child ? "|" + redux_Fomr_Search.child + " Childs" : ""}
-              </p>
-          </div> */}
-          {/** 房型價錢、住幾晚、人數 */}
-
 
           {/** Book按鈕 */}
           <div className="flex justify-between items-end">

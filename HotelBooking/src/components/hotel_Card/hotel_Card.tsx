@@ -4,24 +4,16 @@ import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useEffect, useState } from "react";
-import {FacilitySVG, HomeSVG, OtherSVG} from "../client_Svg/client_Svg";
-import { Customer_Rating } from "../starrating/customer_Rating";
-import Link from "next/link";
-import Room_Type from "./hotel_Room_Type";
-import { Review_Type_Interface } from "@/types/hotel_Detail";
+import { HomeSVG, OtherSVG } from "../client_Svg/client_Svg";
+import Hotel_Room_Type from "./hotel_Room_Type";
+import Hotel_Facility from "./hotel_Facility";
+import Hotel_Customer_Review from "./hotel_Customer_Review";
+
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
   the_Hotel: Hotel_Detail_Interface | undefined
 };
-
-// interface Review_Type_Interface {
-//   id: string,
-//   name: string,
-//   date: string,
-//   rating: number,
-//   comment: string,
-// }
 
 // 2. Tab - 詳細、設施、評價陣列
 const tab = ["Overview", "Rooms", "Facilities", "Review"]
@@ -33,32 +25,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 2. Tab - 數字對應 tab陣列索引值 之高亮切換
   const [selected_Tab, set_Selected_Tab] = useState(0);
 
-  // 3. 低星、高星評論
-  const [sorted_Review, set_Sorted_Review] = useState<Review_Type_Interface[]>([]);
-  useEffect(() => {
-    if(the_Hotel?.reviews) {
-      const sorted = [...the_Hotel?.reviews].sort((a,b) => b.rating - a.rating);
-      set_Sorted_Review(sorted);
-    }
-  },[the_Hotel])
-  const rating_Arr = {...the_Hotel}
-  const select_Rating = (rating_Value: string) => {
-    if (!the_Hotel?.reviews) return;
-    let sorted;
-    switch (rating_Value) {
-      case "lowRating":
-        sorted =  [...the_Hotel?.reviews].sort((a,b) => a.rating - b.rating)
-        break;
-      case "highRating":
-        sorted = [...the_Hotel?.reviews].sort((a,b) => b.rating - a.rating)
-      default:
-        sorted = [...the_Hotel?.reviews]
-    }
-    set_Sorted_Review(sorted as [])
-  }
-  
 
-  
+
   return <div className="relative flex flex-col gap-2">
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
       <div className="">
@@ -102,7 +70,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
 
-  <div className="flex flex-col p-4 gap-4 my-bg-gradient">
+  <div className="flex flex-col p-4 my-bg-gradient">
 
     {/* 飯店介紹 - 對照Tab高亮切換 */}
     {selected_Tab === 0 && <div className="flex flex-col gap-2">
@@ -129,25 +97,14 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
     {/** 房型 */}
     <div>
-      {selected_Tab === 1 && <Room_Type></Room_Type>}
+      {selected_Tab === 1 && <Hotel_Room_Type></Hotel_Room_Type>}
     </div>
     {/** 房型 */}
 
 
     {/** 飯店設施 */}
       {selected_Tab === 2 && <div className="flex flex-col gap-2">
-
-        <div className="flex flex-wrap gap-2">
-          {the_Hotel?.facilities.map((facility, index) => {
-            return <div key={index} className="flex flex-col items-center">
-              <div className="bg-softGray rounded-[2rem]">
-                <FacilitySVG name={facility} className="w-12 md:w-24 h-auto p-3"></FacilitySVG>
-              </div>
-              <p className="text-sm" key={index}> {facility.charAt(0).toUpperCase() + facility.slice(1)} </p>
-            </div>
-          })}
-        </div>
-
+        <Hotel_Facility></Hotel_Facility>
         <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
       </div>
       }
@@ -155,64 +112,15 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     
 
     {/** 飯店評論 */}
-      {selected_Tab === 3 && 
-        <div className=" mt-[-30px] flex flex-col gap-2">
-          
-          {/** 總平均評價 */}
-          <div className="flex justify-between items-center py-2 border-b border-softGray">
-            <div className="flex gap-2 items-center">
-              <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
-              <p>{the_Hotel?.rating}</p>
-              <p>{the_Hotel?.reviews.length + " Reviews"}</p>
-            </div>
-            {/** 排序評價 */}
-              <select name="" id="" className="border-2 border-softGray p-1 rounded" onChange={(event) => select_Rating(event.target.value)}>
-                <option value="hightRating">High</option>
-                <option value="lowRating">Low</option>
-              </select>
-            {/** 排序評價 */}
-          </div>
-          {/** 總平均評價 */}
-
-            {/** 留言、星星評價 */}
-            {sorted_Review.map((item) => {
-              return <div key={item.id}>
-              <div className="flex justify-between">
-                <p className="text-primary">{item.name} - {item.date}</p>
-                <div className="flex">
-                  <Customer_Rating rating={item.rating} className="w-4 h-auto"></Customer_Rating>
-                </div>
-              </div>
-              <p className="py-2">{item.comment}</p>
-              
-            </div>
-            })}
-            {/** 留言、星星評價 */}
-          
-          <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+      {selected_Tab === 3 &&
+      <div className=" flex flex-col gap-2">
+        <Hotel_Customer_Review></Hotel_Customer_Review>
+        <button className="bg-primary text-white rounded-lg p-2" onClick={() => set_Selected_Tab(1)}>Book Now</button>
       </div>
       }
     {/** 飯店評論 */}
 
 
-
-
-
-    {/** 飯店價錢、跳轉付款頁面按鈕 */}
-    {/* <div className="bg-white rounded-lg flex justify-between items-center py-2 px-3">
-      <div className="flex">
-        <span className="text-primary font-bold">{"$"+the_Hotel?.price + "/"} </span>
-        <span className="text-gray"> night</span>
-      </div>
-      <Link href={"/payment"}>
-        <button className="bg-primary text-white rounded-lg p-2">Book Now</button>
-      </Link>
-
-      <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
-    </div> */}
-    {/** 飯店價錢、跳轉付款頁面按鈕 */}
-
-
   </div>
-  </div>
+</div>
 }
