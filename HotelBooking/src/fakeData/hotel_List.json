@@ -18,10 +18,9 @@
     ],
     "distance": "Downtown • 0.5 mi from center",
     "rating": 4.8,
-    "facilities": ["pool", "spa", "meal", "wifi" ,"ktv", "pickup", "checkin" ,"laundry" , "tv"],
+    "facilities": ["pool", "spa", "meal", "wifi" ,"ktv", "pickup", "checkin" ,"laundry" , "tv" , "water", "slipper", "ac"],
     "price": 999,
-    "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays.",
-    "The Ritz-Carlton features luxurious rooms and suites, world-class dining options, spa facilities, and fitness centers, ensuring guests can fully unwind during their stay. Attention to detail is at the heart of the experience, from personalized concierge services to thoughtfully curated activities. Whether hosting weddings, meetings, or enjoying a private getaway, The Ritz-Carlton is the ultimate choice for those seeking exceptional quality and sophistication."
+    "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays."
     ],
     "reviews": [
       { 
@@ -47,6 +46,8 @@
       }
     ],
     "address": "695 Sukhumvit Rd, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
+    "country": "Thailand",
+    "city": "Bangkok",
     "roomType": [
       {
         "id": "room1",
@@ -92,10 +93,9 @@
   ] ,
     "distance": "Waterfront • 1.2 mi from center",
     "rating": 2.9,
-    "facilities": ["beach", "gym", "bar", "wifi" ,"ktv", "pickup", "checkin","laundry", "tv"],
+    "facilities": ["beach", "gym", "bar", "wifi" ,"ktv", "pickup", "checkin","laundry", "tv", "water", "slipper", "ac"],
     "price": 799,
-    "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays.",
-    "The Ritz-Carlton features luxurious rooms and suites, world-class dining options, spa facilities, and fitness centers, ensuring guests can fully unwind during their stay. Attention to detail is at the heart of the experience, from personalized concierge services to thoughtfully curated activities. Whether hosting weddings, meetings, or enjoying a private getaway, The Ritz-Carlton is the ultimate choice for those seeking exceptional quality and sophistication."
+    "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays."
     ],
     "reviews": [
       { 
@@ -121,6 +121,8 @@
       }
     ],
     "address": "Shop 13, Lemon Grove Shopping Centre, 427-441 Victoria Ave, Chatswood NSW 2067, Australia",
+    "country": "Australia",
+    "city": "Brisbane",
     "roomType": [
       {
         "id": "room1",
@@ -166,10 +168,9 @@
     ],
     "distance": "Marina Bay • 2.0 mi from center",
     "rating": 3.7,
-    "facilities": ["pool", "spa", "wifi" ,"ktv", "pickup", "checkin", "laundry", "tv"],
+    "facilities": ["pool", "spa", "wifi" ,"ktv", "pickup", "checkin", "laundry", "tv", "water", "slipper", "ac"],
     "price": 699,
-    "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays.",
-    "The Ritz-Carlton features luxurious rooms and suites, world-class dining options, spa facilities, and fitness centers, ensuring guests can fully unwind during their stay. Attention to detail is at the heart of the experience, from personalized concierge services to thoughtfully curated activities. Whether hosting weddings, meetings, or enjoying a private getaway, The Ritz-Carlton is the ultimate choice for those seeking exceptional quality and sophistication."
+    "intro": ["The Ritz-Carlton is a globally renowned luxury hotel brand, celebrated for its exceptional service and refined hospitality experience. Known for its timeless elegance and sophisticated design, the hotel seamlessly blends modern amenities with classic luxury, offering guests unparalleled comfort and indulgence. Whether for business or leisure, The Ritz-Carlton caters to every guest's needs, creating unforgettable stays."
     ],
     "reviews": [
       { 
@@ -195,6 +196,8 @@
       }
     ],
     "address": "中國广东省广州市天河区兆业街佳兆业广场4层",
+    "country": "China",
+    "city": "Guanzhou",
     "roomType": [
       {
         "id": "room1",

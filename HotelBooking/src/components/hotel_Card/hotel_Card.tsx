@@ -4,7 +4,7 @@ import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { useState } from "react";
-import {FacilitySVG, HomeSVG} from "../client_Svg/client_Svg";
+import {FacilitySVG, HomeSVG, OtherSVG} from "../client_Svg/client_Svg";
 import { Customer_Rating } from "../starrating/customer_Rating";
 import Link from "next/link";
 import Room_Type from "./hotel_Room_Type";
@@ -15,7 +15,7 @@ interface Hotel_Card_Interface {
 };
 
 // 2. Tab - 詳細、設施、評價陣列
-const tab = ["Details", "Rooms", "Facilities", "Review"]
+const tab = ["Overview", "Rooms", "Facilities", "Review"]
 
 export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 1. 父元件 HotelList props 指定飯店 之數據
@@ -71,6 +71,18 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
     {/* 飯店介紹 - 對照Tab高亮切換 */}
     {selected_Tab === 0 && <div className="flex flex-col gap-2">
+      <div className="flex gap-1">
+        <OtherSVG name={"location"} className="w-5 h-auto"></OtherSVG>
+        <p>{the_Hotel?.city + ", " + the_Hotel?.country}</p>
+      </div>
+      {/** 飯店地圖 */}
+      <p className="text-primary font-semibold cursor-pointer">Shown On the Map</p>
+      {/** 飯店地圖 */}
+      <div className="flex gap-1">
+        <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
+        <p className="bg-blue text-white font-semibold rounded px-2">{the_Hotel?.rating}</p>
+        <p className="text-primary font-semibold">{"Reviews：" + the_Hotel?.reviews.length}</p>
+      </div>
       {the_Hotel?.intro.map((details, index) => {
         return <p key={index}> {details} </p>
       })}

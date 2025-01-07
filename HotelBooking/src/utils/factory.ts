@@ -19,6 +19,8 @@ export const create_Initial_HotelDetail = (): Hotel_Detail_Interface => ({
     }
   ],
   address: "",
+  country: "",
+  city: "",
   roomType: [
     { 
       id: "", 

@@ -15,6 +15,8 @@ export interface Hotel_Detail_Interface {
     rating: number, 
     comment: string }[],
   address: string,
+  country: string,
+  city: string,
   roomType: Hotel_Room_Type_Interface[]
 }
 
