@@ -33,3 +33,11 @@ export interface Hotel_Room_Type_Interface {
   roomsize: number | null,
   maxOccupancy: number | null;
 }
+
+export interface Review_Type_Interface {
+  id: string,
+  name: string,
+  date: string,
+  rating: number,
+  comment: string,
+}

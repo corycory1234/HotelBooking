@@ -3,16 +3,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {FacilitySVG, HomeSVG, OtherSVG} from "../client_Svg/client_Svg";
 import { Customer_Rating } from "../starrating/customer_Rating";
 import Link from "next/link";
 import Room_Type from "./hotel_Room_Type";
+import { Review_Type_Interface } from "@/types/hotel_Detail";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
   the_Hotel: Hotel_Detail_Interface | undefined
 };
+
+// interface Review_Type_Interface {
+//   id: string,
+//   name: string,
+//   date: string,
+//   rating: number,
+//   comment: string,
+// }
 
 // 2. Tab - 詳細、設施、評價陣列
 const tab = ["Overview", "Rooms", "Facilities", "Review"]
@@ -23,6 +32,32 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
   // 2. Tab - 數字對應 tab陣列索引值 之高亮切換
   const [selected_Tab, set_Selected_Tab] = useState(0);
+
+  // 3. 低星、高星評論
+  const [sorted_Review, set_Sorted_Review] = useState<Review_Type_Interface[]>([]);
+  useEffect(() => {
+    if(the_Hotel?.reviews) {
+      const sorted = [...the_Hotel?.reviews].sort((a,b) => b.rating - a.rating);
+      set_Sorted_Review(sorted);
+    }
+  },[the_Hotel])
+  const rating_Arr = {...the_Hotel}
+  const select_Rating = (rating_Value: string) => {
+    if (!the_Hotel?.reviews) return;
+    let sorted;
+    switch (rating_Value) {
+      case "lowRating":
+        sorted =  [...the_Hotel?.reviews].sort((a,b) => a.rating - b.rating)
+        break;
+      case "highRating":
+        sorted = [...the_Hotel?.reviews].sort((a,b) => b.rating - a.rating)
+      default:
+        sorted = [...the_Hotel?.reviews]
+    }
+    set_Sorted_Review(sorted as [])
+  }
+  
+
   
   return <div className="relative flex flex-col gap-2">
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
@@ -124,15 +159,23 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
         <div className=" mt-[-30px] flex flex-col gap-2">
           
           {/** 總平均評價 */}
-          <div className="flex gap-2 border-b border-softGray py-2">
-            <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
-            <p>{the_Hotel?.rating}</p>
-            <p>{the_Hotel?.reviews.length + " Reviews"}</p>
+          <div className="flex justify-between items-center py-2 border-b border-softGray">
+            <div className="flex gap-2 items-center">
+              <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
+              <p>{the_Hotel?.rating}</p>
+              <p>{the_Hotel?.reviews.length + " Reviews"}</p>
+            </div>
+            {/** 排序評價 */}
+              <select name="" id="" className="border-2 border-softGray p-1 rounded" onChange={(event) => select_Rating(event.target.value)}>
+                <option value="hightRating">High</option>
+                <option value="lowRating">Low</option>
+              </select>
+            {/** 排序評價 */}
           </div>
           {/** 總平均評價 */}
 
             {/** 留言、星星評價 */}
-            {the_Hotel?.reviews.map((item) => {
+            {sorted_Review.map((item) => {
               return <div key={item.id}>
               <div className="flex justify-between">
                 <p className="text-primary">{item.name} - {item.date}</p>
