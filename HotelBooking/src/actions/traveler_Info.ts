@@ -1,6 +1,7 @@
 'use server';
 
 import { z } from "zod";
+import { redirect } from "next/navigation";
 
 // 1. zod 校驗規則
 const schema = z.object({
@@ -35,9 +36,12 @@ export async function Submit_Traveler_Info(prevState: any, formData: FormData) {
       emailError: fieldErrors.email?.[0] || "",
       phoneError: fieldErrors.phone?.[0] || "",
     }
-  };
+  } else {
+    // 2.5 暫時校驗成功, 就跳轉 信用卡頁面
+    redirect("/creditcard");
+  }
 
-  // 2.4 串接 API
+  // 2.4 串接 API (2025/01/08 等待API中)
   try {
     const traveler_Info_Url = process.env.BACKEND_URL || 'http://localhost:3000';
     console.log(traveler_Info_Url, "環境變數URL");
@@ -50,6 +54,8 @@ export async function Submit_Traveler_Info(prevState: any, formData: FormData) {
 
     const data: any = await response.json();
     console.log(data, "API返回之 Response");
+
+    redirect("/creditcard");
     
     if(!response.ok) {
       return {

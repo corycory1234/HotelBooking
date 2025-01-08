@@ -5,7 +5,23 @@ import { create_Initial_HotelDetail } from "@/utils/factory";
 // 1. Utils > 拿 factory.ts 當中的「飯店列表 & 巢狀飯店房型」初始值，拿來 Redux 中當 初始值
 // 1.1 若直接把初始值寫再Redux，變成每個巢狀延伸出來的眾多屬性，都還要自己手寫一次
 // 1.2 不如直接在 factory.ts 寫好一個巢狀就好，其他多的 [{item},{item}]，factory.ts 會自己辨識
-const initialState = create_Initial_HotelDetail();
+// const initialState = create_Initial_HotelDetail();
+
+const initialState: Hotel_Detail_Interface = {
+  id: "",
+  name: "",
+  images: [],
+  distance: "",
+  rating: null,
+  facilities: [],
+  price: null,
+  intro: [],
+  reviews: [], // 初始為空陣列
+  address: "",
+  country: "",
+  city: "",
+  roomType: [] // 初始設為空陣列
+} 
 
 const hotel_Detail_Slice = createSlice({
   name: 'hotel_Detail',
