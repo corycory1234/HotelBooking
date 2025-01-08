@@ -1,5 +1,7 @@
 import { useFormState } from "react-dom";
 import { Submit_Traveler_Info } from "@/actions/traveler_Info";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 // 1. Zod 錯誤訊息初始值
 const initialState = {message: ""};
@@ -7,6 +9,9 @@ const initialState = {message: ""};
 export default function Server_Form_Pay () {
   // 2. 透過 useFormState 套用 Server Actino函式 以及 zod錯誤訊息
   const [state, formAction] = useFormState(Submit_Traveler_Info, initialState)
+
+  // 3. 拿取Redux - 預定房型之數據
+  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room)
 
   return <>
 
@@ -35,7 +40,14 @@ export default function Server_Form_Pay () {
     <input type="text" id="phone" name="phone" className="rounded-lg border-2 border-softGray p-2"/>
     <p aria-live="polite" className="text-customRed">{state.phoneError}</p>
 
-    <button className="bg-primary text-white rounded-xl py-4 mt-6"> Proceed to Pay</button>
+    <div className="flex flex-col">
+      <div className="flex justify-between">
+        <p className="font-bold">Total Price</p>
+        <p className="font-bold">$ {redux_Booked_Room.price}</p>
+      </div>
+      <button className="bg-primary text-white rounded-xl py-4 mt-6"> Proceed to Pay</button>
+    </div>
+    
   </form>  
   </>
 }

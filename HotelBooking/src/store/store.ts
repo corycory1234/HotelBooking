@@ -3,6 +3,7 @@ import { persistStore, persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import formSearch_Reducer from "./form-Search/formSearchSlice";
 import hotel_Detail_Reducer from "./hotel_Detail/hotel_Detail";
+import booked_Room_Reducer from "./booked_Room/booked_Room";
 
 // 引入 transform, 把 date字串 轉 date物件格式, 不然無日曆法渲染, 造成報錯
 import formSearch_Transform from "./transform/formSearchTransform";
@@ -13,6 +14,7 @@ import {FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER,} from "redux-persist";
 const rootReducer = combineReducers({
   formSearch: formSearch_Reducer,
   hotel_Detail: hotel_Detail_Reducer,
+  booked_Room: booked_Room_Reducer
 })
 
 
@@ -20,7 +22,7 @@ const rootReducer = combineReducers({
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
   storage,
-  whitelist: ["formSearch", "hotel_Detail"],
+  whitelist: ["formSearch", "hotel_Detail", "booked_Room"],
   // 2.1 你也可以只想持久化部分 slice，例如：whitelist: ["formSearch"] 或 blacklist: ["number"]
   transforms: [formSearch_Transform]
 };

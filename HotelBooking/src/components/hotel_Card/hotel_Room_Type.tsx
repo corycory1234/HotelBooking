@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { update_Booked_Room } from "@/store/booked_Room/booked_Room";
 import { RootState } from "@/store/store";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -7,16 +8,29 @@ import 'swiper/css/pagination';
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Link from "next/link";
+import { Hotel_Room_Type_Interface } from "@/types/hotel_Detail";
+
 
 export default function Hotel_Room_Type() {
   // 1. Redux - 飯店明細
   const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
   const redux_Hotel_Room_Type = redux_Hotel_Detail.roomType;
   console.log(redux_Hotel_Room_Type, "房型數據");
-
+  
   // 2. 住幾晚
   const redux_Fomr_Search = useSelector((state: RootState) => state.formSearch); // Redux - 搜尋參數
   const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10), redux_Fomr_Search.dateRange?.slice(13))
+  
+  // 3. Book Now按鈕，傳遞ID，透過find拉出房型，存入Redux
+  const dispatch = useDispatch();
+  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
+  const book_Room = (id: string) => {
+    const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.id === id);
+    // console.log(the_Booked_Room, "被訂房間初始值");
+    dispatch(update_Booked_Room(the_Booked_Room as Hotel_Room_Type_Interface))
+    console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
+  };
+
 
   return <>
     <div className="flex flex-col gap-4">
@@ -114,7 +128,8 @@ export default function Hotel_Room_Type() {
 
             {/** 跳轉 Payment */}
             <Link href={"/payment"}>
-              <button className="bg-primary p-2 rounded text-white">Book Now</button>
+              <button className="bg-primary p-2 rounded text-white"
+                onClick={() => book_Room(room.id)}>Book Now</button>
             </Link>
             {/** 跳轉 Payment */}
           </div>
