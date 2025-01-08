@@ -52,34 +52,34 @@ class HotelController {
     }
 
     // 新增飯店
-    async createHotel(req: Request, res: Response) {
-        try {
-            const {
-                name,
-                description,
-                address,
-                latitude,
-                longitude,
-                amenities,
-            } = req.body;
+    // async createHotel(req: Request, res: Response) {
+    //     try {
+    //         const {
+    //             name,
+    //             description,
+    //             address,
+    //             latitude,
+    //             longitude,
+    //             amenities,
+    //         } = req.body;
 
-            const newHotel = await db
-                .insert(hotels)
-                .values({
-                    name,
-                    description,
-                    address,
-                    latitude,
-                    longitude,
-                    amenities,
-                })
-                .returning();
+    //         const newHotel = await db
+    //             .insert(hotels)
+    //             .values({
+    //                 name,
+    //                 description,
+    //                 address,
+    //                 latitude,
+    //                 longitude,
+    //                 amenities,
+    //             })
+    //             .returning();
 
-            res.status(201).json(ApiResponse.success(newHotel[0]));
-        } catch (error) {
-            res.status(500).json(ApiResponse.error((error as Error).message));
-        }
-    }
+    //         res.status(201).json(ApiResponse.success(newHotel[0]));
+    //     } catch (error) {
+    //         res.status(500).json(ApiResponse.error((error as Error).message));
+    //     }
+    // }
 }
 
 export const hotelController = new HotelController();
