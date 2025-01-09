@@ -15,7 +15,7 @@ export default function Swiper_Hotel_Detail({redux_Booked_Room}: Hotel_Card_Inte
 
   return <>
     {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
-    <div className="">
+    <div className="p-4">
       <Swiper slidesPerView={1}
         spaceBetween={5}
         pagination={{ clickable: true }}

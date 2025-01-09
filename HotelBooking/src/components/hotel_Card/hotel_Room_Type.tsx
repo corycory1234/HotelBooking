@@ -9,6 +9,7 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Link from "next/link";
 import { Hotel_Room_Type_Interface } from "@/types/hotel_Detail";
+import { useRouter } from "next/navigation";
 
 
 export default function Hotel_Room_Type() {
@@ -22,13 +23,19 @@ export default function Hotel_Room_Type() {
   const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10), redux_Fomr_Search.dateRange?.slice(13))
   
   // 3. Book Now按鈕，傳遞ID，透過find拉出房型，存入Redux
+  const router = useRouter();
   const dispatch = useDispatch();
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
-  const book_Room = (id: string) => {
+  const book_Room = async (id: string) => {
     const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.id === id);
-    // console.log(the_Booked_Room, "被訂房間初始值");
-    dispatch(update_Booked_Room(the_Booked_Room as Hotel_Room_Type_Interface))
+    const result = dispatch(update_Booked_Room(the_Booked_Room as Hotel_Room_Type_Interface))
     console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
+    console.log(result, "結果");
+    if(result) {
+      router.push("/travelerinfo")
+    } else {
+      alert("訂房失敗")
+    }
   };
 
 
@@ -127,10 +134,10 @@ export default function Hotel_Room_Type() {
             {/** 房型價錢、住幾晚、人數 */}
 
             {/** 跳轉 Payment */}
-            <Link href={"/payment"}>
+            {/* <Link href={"/payment"}> */}
               <button className="bg-primary p-2 rounded text-white"
                 onClick={() => book_Room(room.id)}>Book Now</button>
-            </Link>
+            {/* </Link> */}
             {/** 跳轉 Payment */}
           </div>
           {/** Book按鈕 */}
