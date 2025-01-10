@@ -48,6 +48,9 @@
     "address": "695 Sukhumvit Rd, Khlong Tan Nuea, Watthana, Bangkok 10110, Thailand",
     "country": "Thailand",
     "city": "Bangkok",
+    "tax": 0.1,
+    "checkin": "15:00",
+    "checkout": "11:00",
     "roomType": [
       {
         "id": "room1",
@@ -123,6 +126,9 @@
     "address": "Shop 13, Lemon Grove Shopping Centre, 427-441 Victoria Ave, Chatswood NSW 2067, Australia",
     "country": "Australia",
     "city": "Brisbane",
+    "tax": 0.05,
+    "checkin": "14:00",
+    "checkout": "11:00",
     "roomType": [
       {
         "id": "room1",
@@ -198,6 +204,9 @@
     "address": "中國广东省广州市天河区兆业街佳兆业广场4层",
     "country": "China",
     "city": "Guanzhou",
+    "tax": 0.08,
+    "checkin": "13:00",
+    "checkout": "11:00",
     "roomType": [
       {
         "id": "room1",

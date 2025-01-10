@@ -1,6 +1,7 @@
 // import { ReactNode } from "react";
 import ReactDOM from "react-dom";
-import Hotel_List from "../../fakeData/hotel_List.json";
+// import Hotel_List from "../../fakeData/hotel_List.json";
+import Hotel_List from "@/fakeData/hotel_List.json";
 
 // 1. Props傳遞數據 給Modal彈跳視窗 之 interface
 interface ModalProps {

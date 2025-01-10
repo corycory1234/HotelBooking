@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import exp from "node:constants";
 import React from "react";
 import InlineSVG from "react-inlinesvg";
 
@@ -39,6 +40,17 @@ export function HomeSVG({name, className }: SVG_Interface) {
 // 3. Public資料 > otherSvg資料 之SVG
 export function OtherSVG({name, className }: SVG_Interface) {
   const src = `/otherSvg/${name}.svg`;
+
+  return (
+    <InlineSVGNoSSR src={src} className={className} 
+      // loader={<span>Loading...</span>} 
+    />
+  )
+};
+
+// 4. Public資料 > dashboardsvg資料 之 SVG
+export function DashboardSVG({name, className}: SVG_Interface) {
+  const src = `/dashboardsvg/${name}.svg`;
 
   return (
     <InlineSVGNoSSR src={src} className={className} 

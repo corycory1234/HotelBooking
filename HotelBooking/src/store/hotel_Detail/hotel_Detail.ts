@@ -20,6 +20,9 @@ const initialState: Hotel_Detail_Interface = {
   address: "",
   country: "",
   city: "",
+  tax: 0,
+  checkin: "",
+  checkout: "",
   roomType: [] // 初始設為空陣列
 } 
 

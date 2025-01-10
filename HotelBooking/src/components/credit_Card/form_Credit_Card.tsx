@@ -41,7 +41,10 @@ export default function Form_Credit_Card () {
   };
   
   // 5. 拿取 Redux 預定房型之數據
-  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room)
+  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
+
+  // 6. 拿取 Redux 指定飯店 Tax 數據
+  const redux_Hotel_Tax = useSelector((state: RootState) => state.hotel_Detail.tax);
 
   return <div className="bg-primary rounded-t-3xl p-4">
     
@@ -100,7 +103,7 @@ export default function Form_Credit_Card () {
       
       <div className="flex justify-between">
         <p className="text-sm text-gray">Tax</p>
-        <p className="font-bold">+$200</p>
+        <p className="font-bold">{"+" + Math.round(redux_Hotel_Tax * (redux_Booked_Room.price ?? 0))}</p>
       </div>
 
       <div className="flex justify-between">
@@ -112,7 +115,7 @@ export default function Form_Credit_Card () {
 
       <div className="flex justify-between">
         <p className="text-sm text-gray">Total Amount</p>
-        <p className="font-bold text-primary">{redux_Booked_Room.price as number + 200 - 500 }</p>
+        <p className="font-bold text-primary">{redux_Booked_Room.price as number + (Math.round(redux_Hotel_Tax * (redux_Booked_Room.price ?? 0)) - 500) }</p>
       </div>
     </div>
     {/* 所有金額統計 */}

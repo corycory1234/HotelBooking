@@ -19,9 +19,11 @@ export default function Room_Info () {
   // 5. Redux - 被預訂飯店之之數據
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
   console.log(redux_Booked_Room, "Redux - 被預訂之房型");
+
+
   return <>
   
-{/** 總平均評價、飯店名、飯店地址、入住退房、幾間房、幾晚、住幾人 */}
+  {/** 總平均評價、飯店名、飯店地址、入住退房、幾間房、幾晚、住幾人 */}
       <div className="flex flex-col pb-4 border border-softGray rounded p-4 gap-4">
         <div className="flex justify-between flex-wrap">
           <p className="font-bold text-xl">{redux_Hotel_Detail.name}</p>
@@ -56,7 +58,7 @@ export default function Room_Info () {
             <OtherSVG name={"time"} className="w-4 h-auto"></OtherSVG>
             <p>Chekc In</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(0,10) + " After 15:00"}</p>
+          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(0,10) + ` After ${redux_Hotel_Detail.checkin}`}</p>
         </div>
         {/** 入住時間 */}
         
@@ -66,7 +68,7 @@ export default function Room_Info () {
             <OtherSVG name={"time"} className="w-4 h-auto"></OtherSVG>
             <p>Chekc Out</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(13) + " Before 11:00"} </p>
+          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(13) + ` Before ${redux_Hotel_Detail.checkout}`} </p>
         </div>
         {/** 退房時間 */}
         

@@ -1,6 +1,5 @@
 // 這 client 是為了 <Previous_Page>子元件有用 useRouter, 父願見一定要用 'use client'
 'use client'; 
-
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
 import Swiper_Hotel_Detail from "@/components/swiper_Hotel_Detail/swiper_Hotel_Detail";

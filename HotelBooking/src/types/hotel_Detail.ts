@@ -12,6 +12,9 @@ export interface Hotel_Detail_Interface {
   address: string,
   country: string,
   city: string,
+  tax: number,
+  checkin: string,
+  checkout: string,
   roomType: Hotel_Room_Type_Interface[]
 }[]
 

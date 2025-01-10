@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 const schema = z.object({
   name: z.string().min(4, {message: "Must be 4 or more characters"})
           .max(20, {message: "Must be 20 or fewer characters"})
-          .regex(/^[a-z]+$/, {message: "Must be Alphabet"}), // 只能輸入字母
+          .regex(/^[a-z]+$/i, {message: "Must be Alphabet"}), // 只能輸入字母
   cardnumber: z.string().min(19, {message: "Must be 16 characters"})
           .max(19, {message: "Must be 16 characters"}),
   expireddate: z.string().min(5, {message: "Must be 5 characters"})

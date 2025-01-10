@@ -22,6 +22,7 @@ export default {
         'gray': "#9295A3",
         'softGray': "#D3D3D3",
         'strokeGray': "#EBF4FF",
+        'lightGray': "#f9f9f9",
         'customRed': "#DC3811",
         'blue': "#3266CC"
       },

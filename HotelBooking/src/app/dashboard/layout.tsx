@@ -4,9 +4,9 @@ import Menu from "../../components/menu";
 
 export default function SearchLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return <>
-    <div>
+    <div className="">
       {children}
-      <Menu></Menu>
+      {/* <Menu></Menu> */}
     </div>
   </>
       {/* <ProviderRedux> */}
