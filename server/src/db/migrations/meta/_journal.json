@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1736087249569,
-      "tag": "0000_hesitant_bastion",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1736356132670,
-      "tag": "0001_organic_bushwacker",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1736358535806,
-      "tag": "0002_quick_king_bedlam",
+      "when": 1736531553605,
+      "tag": "0000_worthless_red_skull",
       "breakpoints": true
     }
   ]
