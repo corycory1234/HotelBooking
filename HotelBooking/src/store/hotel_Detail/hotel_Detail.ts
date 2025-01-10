@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
-import { create_Initial_HotelDetail } from "@/utils/factory";
+// import { create_Initial_HotelDetail } from "@/utils/factory";
 
 // 1. Utils > 拿 factory.ts 當中的「飯店列表 & 巢狀飯店房型」初始值，拿來 Redux 中當 初始值
 // 1.1 若直接把初始值寫再Redux，變成每個巢狀延伸出來的眾多屬性，都還要自己手寫一次
