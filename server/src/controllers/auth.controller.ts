@@ -40,7 +40,14 @@ export const authController = {
 
             res.json({
                 success: true,
-                data: result,
+                data: {
+                    user: {
+                        id: result.user.id,
+                        name: result.user.name,
+                        userType: result.user.userType,
+                        email: result.session.user.email
+                    }
+                },
             });
         } catch (error: any) {
             res.status(400).json({

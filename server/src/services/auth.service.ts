@@ -112,6 +112,15 @@ export class AuthService extends BaseService {
                 });
 
             if (authError) {
+
+                if (authError.code === 'invalid_credentials') {
+                    throw new Error('帳號或密碼錯誤');
+                } else if (authError.code === 'email_not_confirmed') {
+                    throw new Error('請先驗證您的信箱');
+                }
+
+                console.log(authError);
+                
                 throw authError;
             }
 
