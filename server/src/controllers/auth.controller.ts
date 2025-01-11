@@ -92,4 +92,21 @@ export const authController = {
             return;
         }
     },
+
+    async forgotPassword(req: Request, res: Response) {
+        try {
+            const { email } = req.body;
+            await authService.forgotPassword(email);
+            
+            res.json({
+                success: true,
+                message: '重設密碼郵件已發送'
+            });
+        } catch (error: any) {
+            res.status(400).json({
+                success: false,
+                message: error.message
+            });
+        }
+    },
 };

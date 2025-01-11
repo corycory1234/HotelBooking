@@ -13,6 +13,10 @@ router.post('/login', authController.login);
 // 登出
 router.post('/logout', authController.logout);
 
+// 忘記密碼
+router.post('/forgot-password', authController.forgotPassword);
+
+
 
 // Google 登入
 router.post('/google', async (req, res) => {

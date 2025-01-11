@@ -105,6 +105,11 @@ export class AuthService extends BaseService {
     // 用戶登入
     async login(data: LoginDTO) {
         try {
+            // 驗證 email
+            if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+                throw new Error("無效的電子郵件格式");
+            }
+
             // Supabase Auth 登入
             const { data: authData, error: authError } =
                 await this.supabase.auth.signInWithPassword({
@@ -165,6 +170,29 @@ export class AuthService extends BaseService {
         }
     }
 
+    // 重設密碼郵件
+    async forgotPassword(email: string) {
+        try {
+            // 驗證 email
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                throw new Error("無效的電子郵件格式");
+            }
+
+            const { error } = await this.supabase.auth.resetPasswordForEmail(
+                email,
+                {
+                    // redirectTo: `${process.env.FRONTEND_URL}/reset-password`,
+                    redirectTo: "http://localhost:3001/reset-password",
+                }
+            );
+
+            if (error) throw error;
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     // 獲取當前用戶資料
     async getCurrentUser(userId: string) {
         try {
@@ -198,23 +226,6 @@ export class AuthService extends BaseService {
                 .returning();
 
             return updatedUser;
-        } catch (error) {
-            throw error;
-        }
-    }
-
-    // 重設密碼郵件
-    async forgotPassword(email: string) {
-        try {
-            const { error } = await this.supabase.auth.resetPasswordForEmail(
-                email,
-                {
-                    redirectTo: `${process.env.FRONTEND_URL}/reset-password`,
-                }
-            );
-
-            if (error) throw error;
-            return true;
         } catch (error) {
             throw error;
         }
