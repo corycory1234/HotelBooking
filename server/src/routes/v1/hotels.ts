@@ -1,6 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
-import { hotelController } from '../../controllers/hotel.controller';
+// import { hotelController } from '../../controllers/hotel.controller';
 import { authenticate } from '../../middlewares/auth';
 
 const router = express.Router();
@@ -11,10 +11,10 @@ const asyncHandler = (fn: Function) => (req: express.Request, res: express.Respo
 };
 
 // 搜尋飯店列表
-router.get('/', hotelController.getHotels);
+// router.get('/', hotelController.getHotels);
 
 // 獲取飯店詳情
-router.get('/:id', asyncHandler(hotelController.getHotel));
+// router.get('/:id', asyncHandler(hotelController.getHotel));
 
 // 獲取飯店房型
 router.get('/:id/rooms', async (req, res) => {
