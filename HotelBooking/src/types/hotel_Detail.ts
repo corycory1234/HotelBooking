@@ -34,8 +34,8 @@ export interface Hotel_Room_Type_Interface {
 
 // 3. 旅客評論
 export interface Review_Type_Interface {
-  id: string,
-  name: string,
+  travelerId: string,
+  travelerName: string,
   date: string,
   rating: number,
   comment: string,
