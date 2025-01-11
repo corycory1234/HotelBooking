@@ -56,3 +56,14 @@ input[type="radio"]:checked::before {
 input[type="radio"]:checked {
   @apply accent-secondary
 }
+
+/* 5. 關掉<input type="number"> 右變的上下箭頭 */
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spin {
+  -moz-appearance: textfield;
+  appearance: none;
+}

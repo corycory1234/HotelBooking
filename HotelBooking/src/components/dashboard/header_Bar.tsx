@@ -4,7 +4,7 @@ import Dashboard_Content from "./dashboard_Content";
 export default function Header_Bar_Dashboard () {
 
   return <>
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col">
 
     {/** 頂部Bar */}
     <div className="flex justify-between items-center px-4 border-b border-softGray">

@@ -14,7 +14,7 @@ export default function Side_Bar () {
   } 
 
   return <>
-  <div className="flex flex-col h-screen gap-10 border-r border-softGray">
+  <div className="flex flex-col h-full gap-10 border-r border-softGray">
     <div className="border-b border-softGray h-[66px] flex justify-center">
       <Link href={"/"}>
         <img className="h-full" src="/Logo.svg" alt="" />
