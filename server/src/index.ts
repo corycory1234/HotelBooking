@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from 'cookie-parser';
 import cors from "cors";
 import { errorHandler } from "./middlewares/errorHandler";
 import v1Routes from "./routes/v1";
@@ -15,6 +16,7 @@ app.use(cors());
 //   allowedHeaders: ['Content-Type'] // 允許的 HTTP 標頭
 // }));
 app.use(express.json());
+app.use(cookieParser());
 
 // API 路由
 app.use("/api/v1", v1Routes);

@@ -45,8 +45,8 @@ export const authController = {
                         id: result.user.id,
                         name: result.user.name,
                         userType: result.user.userType,
-                        email: result.session.user.email
-                    }
+                        email: result.session.user.email,
+                    },
                 },
             });
         } catch (error: any) {
@@ -54,6 +54,42 @@ export const authController = {
                 success: false,
                 message: error.message,
             });
+        }
+    },
+
+    async logout(req: Request, res: Response) {
+        try {
+            const accessToken = req.cookies?.access_token;
+            if (!accessToken) {
+                res.status(401).json({
+                    success: false,
+                    message: "無法存取或 Session 已過期",
+                });
+                return;
+            }
+
+            await authService.logout(accessToken);
+            res.clearCookie("access_token");
+
+            res.json({
+                success: true,
+                message: "登出成功",
+            });
+            return;
+        } catch (error: any) {
+            if (error.message === "Invalid token") {
+                res.status(401).json({
+                    success: false,
+                    message: "無效的 Session",
+                });
+                return;
+            }
+
+            res.status(500).json({
+                success: false,
+                message: "登出失敗，請稍後再試",
+            });
+            return;
         }
     },
 };

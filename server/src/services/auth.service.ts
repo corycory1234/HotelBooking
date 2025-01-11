@@ -54,7 +54,7 @@ export class AuthService extends BaseService {
                 throw new Error("無效的用戶類型");
             }
 
-            // 1. 使用 Supabase Auth 創建用戶
+            // 使用 Supabase Auth 創建用戶
             const { data: authData, error: authError } =
                 await this.supabase.auth.signUp({
                     email: data.email,
@@ -68,8 +68,8 @@ export class AuthService extends BaseService {
                 });
 
             if (authError) {
-                if (authError.code === 'over_email_send_rate_limit') {
-                    const seconds = authError.message.match(/\d+/)?.[0] || '幾';
+                if (authError.code === "over_email_send_rate_limit") {
+                    const seconds = authError.message.match(/\d+/)?.[0] || "幾";
                     throw new Error(`請等待${seconds}秒後再試`);
                 }
                 throw new Error(authError.message || "註冊失敗，請稍後再試");
@@ -79,7 +79,7 @@ export class AuthService extends BaseService {
                 throw new Error("註冊失敗");
             }
 
-            // 2. 創建用戶資料
+            // 創建用戶資料
             const [newUser] = await this.db
                 .insert(users)
                 .values({
@@ -94,7 +94,8 @@ export class AuthService extends BaseService {
                 session: authData.session,
             };
         } catch (error: any) {
-            if (error.code === '23505') {  // PostgreSQL 唯一約束違反的錯誤碼
+            if (error.code === "23505") {
+                // PostgreSQL 唯一約束違反的錯誤碼
                 throw new Error("此用戶已存在，請使用其他電子郵件");
             }
             throw new Error(error.message || "註冊失敗，請稍後再試");
@@ -104,7 +105,7 @@ export class AuthService extends BaseService {
     // 用戶登入
     async login(data: LoginDTO) {
         try {
-            // 1. Supabase Auth 登入
+            // Supabase Auth 登入
             const { data: authData, error: authError } =
                 await this.supabase.auth.signInWithPassword({
                     email: data.email,
@@ -112,19 +113,16 @@ export class AuthService extends BaseService {
                 });
 
             if (authError) {
-
-                if (authError.code === 'invalid_credentials') {
-                    throw new Error('帳號或密碼錯誤');
-                } else if (authError.code === 'email_not_confirmed') {
-                    throw new Error('請先驗證您的信箱');
+                if (authError.code === "invalid_credentials") {
+                    throw new Error("帳號或密碼錯誤");
+                } else if (authError.code === "email_not_confirmed") {
+                    throw new Error("請先驗證您的信箱");
                 }
 
-                console.log(authError);
-                
                 throw authError;
             }
 
-            // 2. 獲取用戶資料
+            // 獲取用戶資料
             const user = await this.db.query.users.findFirst({
                 where: eq(users.id, authData.user.id),
             });
@@ -145,8 +143,22 @@ export class AuthService extends BaseService {
     // 登出
     async logout(refreshToken: string) {
         try {
+            if (!refreshToken) {
+                throw new Error("Invalid refresh token");
+            }
+
             const { error } = await this.supabase.auth.signOut();
-            if (error) throw error;
+
+            if (error) {
+                // 根据 Supabase 的错误类型处理
+                switch (error.message) {
+                    case "Invalid refresh token":
+                        throw new Error("無效的 session");
+                    default:
+                        throw new Error("登出失敗，請稍後再試");
+                }
+            }
+
             return true;
         } catch (error) {
             throw error;

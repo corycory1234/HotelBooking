@@ -10,6 +10,10 @@ router.post('/register', authController.register);
 // 登入
 router.post('/login', authController.login);
 
+// 登出
+router.post('/logout', authController.logout);
+
+
 // Google 登入
 router.post('/google', async (req, res) => {
   // TODO: 實作 Google 登入邏輯
