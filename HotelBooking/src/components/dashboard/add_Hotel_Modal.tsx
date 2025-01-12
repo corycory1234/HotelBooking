@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { add_Hotel_Detail_Interface, add_Review_Type_Interface, add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
+import Add_Hotel_Basic_Info from "./add_Hotel_Basic_Info"; 
+import Add_Hotel_Review from "./add_Hotel_Review";
 
-// 1. 設施初始值
-const facilities = ["beach", "gym", "bar", 
-  "wifi" ,"ktv", "pickup", "24hrcheckin","laundry",  "water", 
-  "slipper", "ac", "pool", "spa", "meal"
-];
 
 // 2. 各種房型初始值
 const roomType_List = ["singleRoom", "doubleRoom", "twinRoom", "queenRoom", "kingRoom"];
@@ -19,9 +16,6 @@ export default function Add_Hotel_Modal() {
   // 1. 所有飯店列表
   const [hotel_List, set_Hotel_List] = useState<add_Hotel_Detail_Interface[]>([]);
 
-  // 2. 留言日期
-  const [date, set_Date] = useState((new Date()).toLocaleDateString());
-  // console.log(date, "今天");
 
   // 3. 指定飯店 - 所有房型列表
   const [roomTypes, set_RoomTypes] = useState<add_Hotel_Room_Type_Interface[]>([
@@ -38,10 +32,10 @@ export default function Add_Hotel_Modal() {
     // }
   ])
 
-  // 4. 再新增一個房型
+  // 4. 再新增一個房型 - 函式
   const add_Room_Type = () => {
     set_RoomTypes([...roomTypes, {
-      room_Type: "",
+      room_Type: "singleRoom",
       roomType_Id: uuidv4(),
       room_Price: null,
       room_Availability: null,
@@ -58,12 +52,12 @@ export default function Add_Hotel_Modal() {
     add_Room_Type()
   },[])
 
-  // 5. 移除房型
+  // 6. 移除房型
   const remove_Room_Type = (index: number) => {
     set_RoomTypes(roomTypes.filter((_, i) => i !== index))
   };
 
-  // 6. 處理房型表單變更
+  // 7. 處理房型表單變更
   const handle_Room_Type_Change = (index: number, field: keyof add_Hotel_Room_Type_Interface, value: any) => {
     const updateRoomTypes = roomTypes.map((room, i) => 
       i === index ? {...room, [field]: value} : room
@@ -71,12 +65,12 @@ export default function Add_Hotel_Modal() {
     set_RoomTypes(updateRoomTypes)
   }
   
-  // 7. 提交 <form> 函式
+  // 8. 提交 <form> 函式
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event?.currentTarget);
 
-    // 3. <form> 拿數據
+    // 9. <form> 拿數據
     const hotel_Id = (hotel_List.length +1).toString(); // 自定義id, 從hotel_List長度去拉
     const hotel_Name = formData.get("hotelname") as string | null;
     const address = formData.get("address") as string | null;
@@ -112,9 +106,9 @@ export default function Add_Hotel_Modal() {
     }))
 
     
-  // 4. 添加評論函數 (這函式要UI去按按鈕才會觸發)
-  // 4.1 在酒店列表中，每個酒店項目下添加一個評論表單，當用戶提交評論時，
-  // 4.2 調用 addReview 函數來更新特定酒店的 reviews
+  // 10. 添加評論函數 (這函式要UI去按按鈕才會觸發)
+  // 10.1 在酒店列表中，每個酒店項目下添加一個評論表單，當用戶提交評論時，
+  // 10.2 調用 addReview 函數來更新特定酒店的 reviews
   const addReview = (hotelId: string, travelerName: string, date: string, traveler_Rating: number, comment: string) => {
     const newReview: add_Review_Type_Interface = {
       travelerId: uuidv4(), // 使用 UUID 生成唯一 ID
@@ -123,7 +117,9 @@ export default function Add_Hotel_Modal() {
       traveler_Rating,
       comment,
     };
-    // 4.3 這邊很複雜
+    // 10.3 如果ID匹配正確, 展開運算子指定Hotel(是物件), 
+    // 10.3 並將原先評論列表(是陣列) 也展開運算子, 後面將 newReview 補進新陣列裡面
+    // 10.3 若ID不匹配的話, 就保持原先 : hotel  
     set_Hotel_List((prevHotels) => 
       prevHotels.map((hotel) => {
         return hotel.hotel_Id === hotelId ? { ...hotel, review_List: [...hotel.review_List, newReview] } : hotel
@@ -131,7 +127,7 @@ export default function Add_Hotel_Modal() {
     );
   };
 
-    // 5. 評論表單Array & 單一旅客評論 - 初始值
+    // 11. 評論表單Array & 單一旅客評論 - 初始值
     let initialReviews_List: add_Review_Type_Interface[] = [];
     if (travelername && date && traveler_Rating && comment) {
     initialReviews_List.push({
@@ -159,10 +155,10 @@ export default function Add_Hotel_Modal() {
     //   })
     // }
 
-    // 6. 眾多房型Array & 單一房型 - 初始值
+    // 12. 眾多房型Array & 單一房型 - 初始值
     const initialRoomType_List = roomTypes
 
-    // 7. 構建新的酒店物件
+    // 13. 創建新的飯店物件
     const new_Hotel: add_Hotel_Detail_Interface = {
       hotel_Id: hotel_Id,
       hotel_Name: hotel_Name,
@@ -182,7 +178,7 @@ export default function Add_Hotel_Modal() {
     };
 
 
-    // 7. 更新 hotel_List 最新狀態
+    // 14. 最後，更新 hotel_List 最新狀態
     set_Hotel_List((prevState) => [...prevState, new_Hotel]);
     console.log(hotel_List);
   }
@@ -196,125 +192,13 @@ export default function Add_Hotel_Modal() {
       <div className="flex flex-col bg-white rounded border border-softGray p-2 gap-2">
         <p className="font-semibold text-primary">Basic Information</p>
 
-        {/** 酒店名、地址 */}
-        <div className="flex">
-          <div className="basis-1/2 flex gap-2">
-            <label htmlFor="hotelname">Hotel Name</label>
-            <input type="text" id="hotelname" name="hotelname" className="border rounded" />
-          </div>
-          <div className="basis-1/2 flex gap-2">
-            <label htmlFor="address">Address</label>
-            <input type="text" id="address"name="address"className="border rounded"/>
-          </div>
-        </div>
-        {/** 酒店名、地址 */}
-
-        {/** 城市、國家*/}
-        <div className="flex">
-          <div className="basis-1/2 flex gap-2">
-            <label htmlFor="city">City</label>
-            <input type="text" id="city" name="city" className="border rounded" />
-          </div>
-          <div className="basis-1/2 flex gap-2">
-            <label htmlFor="country">Country</label>
-            <input type="text" id="country"name="country"className="border rounded"/>
-          </div>
-        </div>
-        {/** 城市、國家*/}
-        
-        {/** 飯店最小價錢 ?、稅Tax、飯店星級平價(初始值 0)*/}
-        <div className="flex gap-2">
-          <div className="flex gap-2">
-            <label htmlFor="price">Price</label>
-            <input type="number" id="price" name="price" className="border rounded no-spin max-w-20"/>
-          </div>
-          <div className="flex gap-2">
-            <label htmlFor="tax">Tax %</label>
-            <input type="number" id="tax" name="tax" step="0.01" className="border rounded no-spin max-w-20"/>
-          </div>
-          <div className="flex gap-2">
-            <label htmlFor="totalrating">totalRating</label>
-            <input type="number" id="totalrating"name="totalrating"className="border rounded no-spin max-w-20"/>
-          </div>
-        </div>
-        {/** 飯店最小價錢 ?、稅Tax、飯店星級平價(初始值 0)*/}
-
-        {/** 入住、退房時間 */}
-        <div className="flex gap-2">
-          <label htmlFor="checkin">Check-in Time</label>
-          <select id="checkin" name="checkin" className="border rounded">
-            {Array.from({ length: 24 }, (_, hour) => [
-              `${hour.toString().padStart(2, "0")}:00`,
-              `${hour.toString().padStart(2, "0")}:30`,
-            ]).flat().map((time) => (
-              <option key={time} value={time}>{time}</option>
-            ))}
-          </select>
-
-
-          <label htmlFor="checkout">Check-out Time</label>
-          <select id="checkout" name="checkout" className="border rounded">
-            {Array.from({ length: 24 }, (_, hour) => [
-              `${hour.toString().padStart(2, "0")}:00`,
-              `${hour.toString().padStart(2, "0")}:30`,
-            ]).flat().map((time) => (
-              <option key={time} value={time}>{time}</option>
-            ))}
-          </select>
-        </div>  
-        {/** 入住、退房時間 */}   
-
-        {/** 設施 */}
-        <div className="flex flex-col gap-2">
-          <p className="font-semibold text-primary">Facilities</p>
-          <div className="flex flex-wrap gap-2">
-            {facilities.map((facility) => (
-              <div key={facility} className="flex items-center gap-2">
-                <input type="checkbox" id={facility} name="facilities" value={facility} />
-                <label htmlFor={facility}>{facility.charAt(0).toUpperCase() + facility.slice(1)}</label>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/** 設施 */}
-        
-
-        {/** 飯店介紹 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="intro" className="font-semibold text-primary">Introduction</label>
-          <textarea name="intro" id="intro" className="border rounded"></textarea>
-        </div>
-        {/** 飯店介紹 */}
-        
-        {/** 上傳飯店輪播圖 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="hotelimages" className="font-semibold text-primary">Upload Images</label>
-          <input type="file" id="hotelimages" name="hotelimages" accept="images/*"
-          multiple className="border rounded" />
-        </div>
-        {/** 上傳飯店輪播圖 */}
+        {/** 基本飯店資訊 */}
+        <Add_Hotel_Basic_Info></Add_Hotel_Basic_Info>
+        {/** 基本飯店資訊 */}
         
         {/** 旅客留言、評價 */}
-        <div className="flex flex-col gap-2">
-          <p className="font-semibold text-primary">Comment</p>
-          <div className="flex gap-2">
-            <label htmlFor="travelername">Name</label>
-            <input type="text" id="travelername" name="travelername" className="border rounded"/>
-            <label htmlFor="date">Date</label>
-            <input type="text" readOnly id="date" name="date" className="border rounded" value={date}/>
-            <label htmlFor="rating">Rating</label>
-            <select name="rating" id="rating" className="border rounded">
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-              <option value={5}>5</option>
-            </select>
-          </div>
-          <textarea name="comment" id="comment" className="border rounded"></textarea>
-        </div>
+        <Add_Hotel_Review></Add_Hotel_Review>
         {/** 旅客留言、評價 */}
-          
       </div>
       
 
