@@ -1,8 +1,12 @@
+'use client';
 import { useState, useEffect } from "react";
 import { add_Hotel_Detail_Interface, add_Review_Type_Interface, add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail";
 import { v4 as uuidv4 } from 'uuid';
 import Add_Hotel_Basic_Info from "./add_Hotel_Basic_Info"; 
 import Add_Hotel_Review from "./add_Hotel_Review";
+import { useSelector, useDispatch } from "react-redux";
+import { add_One_Hotel } from "@/store/cms/Hotel_List_Slice";
+import { RootState, AppDispatch } from "@/store/store";
 
 
 // 2. 各種房型初始值
@@ -12,6 +16,9 @@ const roomType_List = ["singleRoom", "doubleRoom", "twinRoom", "queenRoom", "kin
 const amenity = ["shower", "bathtub", "breakfast", "tv", ];
 
 export default function Add_Hotel_Modal() {
+  const dispatch: AppDispatch = useDispatch();
+  const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List);
+  console.log(redux_Hotel_List, "Redux - 飯店列表");
   
   // 1. 所有飯店列表
   const [hotel_List, set_Hotel_List] = useState<add_Hotel_Detail_Interface[]>([]);
@@ -71,7 +78,7 @@ export default function Add_Hotel_Modal() {
     const formData = new FormData(event?.currentTarget);
 
     // 9. <form> 拿數據
-    const hotel_Id = (hotel_List.length +1).toString(); // 自定義id, 從hotel_List長度去拉
+    const hotel_Id = (redux_Hotel_List.length +1).toString(); // 自定義id, 從hotel_List長度去拉
     const hotel_Name = formData.get("hotelname") as string | null;
     const address = formData.get("address") as string | null;
     const city = formData.get("city") as string | null;
@@ -179,8 +186,10 @@ export default function Add_Hotel_Modal() {
 
 
     // 14. 最後，更新 hotel_List 最新狀態
-    set_Hotel_List((prevState) => [...prevState, new_Hotel]);
-    console.log(hotel_List);
+    // set_Hotel_List((prevState) => [...prevState, new_Hotel]);
+    // console.log(hotel_List);
+    dispatch(add_One_Hotel(new_Hotel));
+    console.log("Redux - 飯店列表", redux_Hotel_List);
   }
 
   

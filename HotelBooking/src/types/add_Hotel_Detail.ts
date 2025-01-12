@@ -1,6 +1,9 @@
-// 1. 飯店明細
+// 0. 飯店列表 - 陣列
+export type Hotel_List_Type = add_Hotel_Detail_Interface[]
+
+// 1. 飯店明細 - 物件
 export interface add_Hotel_Detail_Interface {
-  hotel_Id: string,
+  hotel_Id: string | null,
   hotel_Name: string | null,
   hotel_Image_List: {url: string, description: string}[] | null,
   // distance: string,
@@ -16,7 +19,7 @@ export interface add_Hotel_Detail_Interface {
   checkout: string | null,
   review_List: add_Review_Type_Interface[],
   roomType_List: add_Hotel_Room_Type_Interface[]
-}[];
+};
 
 // 2. 旅客評論
 export interface add_Review_Type_Interface {
