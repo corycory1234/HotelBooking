@@ -181,8 +181,8 @@ export class AuthService extends BaseService {
             const { error } = await this.supabase.auth.resetPasswordForEmail(
                 email,
                 {
-                    // redirectTo: `${process.env.FRONTEND_URL}/reset-password`,
-                    redirectTo: "http://localhost:3001/reset-password",
+                    redirectTo: `${process.env.FRONTEND_URL}/reset-password`,
+                    // redirectTo: "http://localhost:3001/reset-password",
                 }
             );
 
@@ -223,57 +223,57 @@ export class AuthService extends BaseService {
     }
 
     // 更新用戶資料
-    async updateUser(
-        userId: string,
-        data: { name?: string; userType?: UserType }
-    ) {
-        try {
-            const [updatedUser] = await this.db
-                .update(users)
-                .set({
-                    ...data,
-                    updatedAt: new Date(),
-                })
-                .where(eq(users.id, userId))
-                .returning();
+    // async updateUser(
+    //     userId: string,
+    //     data: { name?: string; userType?: UserType }
+    // ) {
+    //     try {
+    //         const [updatedUser] = await this.db
+    //             .update(users)
+    //             .set({
+    //                 ...data,
+    //                 updatedAt: new Date(),
+    //             })
+    //             .where(eq(users.id, userId))
+    //             .returning();
 
-            return updatedUser;
-        } catch (error) {
-            throw error;
-        }
-    }
+    //         return updatedUser;
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
 
     // 驗證 session
-    async verifySession(accessToken: string) {
-        try {
-            const {
-                data: { user },
-                error,
-            } = await this.supabase.auth.getUser(accessToken);
+    // async verifySession(accessToken: string) {
+    //     try {
+    //         const {
+    //             data: { user },
+    //             error,
+    //         } = await this.supabase.auth.getUser(accessToken);
 
-            if (error || !user) {
-                throw new Error("Invalid session");
-            }
+    //         if (error || !user) {
+    //             throw new Error("Invalid session");
+    //         }
 
-            return user;
-        } catch (error) {
-            throw error;
-        }
-    }
+    //         return user;
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
 
     // 刷新 token
-    async refreshSession(refreshToken: string) {
-        try {
-            const { data, error } = await this.supabase.auth.refreshSession({
-                refresh_token: refreshToken,
-            });
+    // async refreshSession(refreshToken: string) {
+    //     try {
+    //         const { data, error } = await this.supabase.auth.refreshSession({
+    //             refresh_token: refreshToken,
+    //         });
 
-            if (error) throw error;
-            return data;
-        } catch (error) {
-            throw error;
-        }
-    }
+    //         if (error) throw error;
+    //         return data;
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
 }
 
 // 導出實例
