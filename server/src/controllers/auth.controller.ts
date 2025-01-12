@@ -97,16 +97,50 @@ export const authController = {
         try {
             const { email } = req.body;
             await authService.forgotPassword(email);
-            
+
             res.json({
                 success: true,
-                message: '重設密碼郵件已發送'
+                message: "重設密碼郵件已發送",
             });
+            return;
         } catch (error: any) {
             res.status(400).json({
                 success: false,
-                message: error.message
+                message: error.message,
             });
+            return;
+        }
+    },
+
+    async getCurrentUser(req: Request, res: Response) {
+        try {
+            const token = req.cookies?.access_token;
+            if (!token) {
+                res.status(401).json({
+                    success: false,
+                    message: "未登入",
+                });
+                return;
+            }
+
+            const user = await authService.getCurrentUser(token);
+
+            res.json({
+                success: true,
+                data: {
+                    id: user.id,
+                    name: user.name,
+                    userType: user.userType,
+                    email: user.email,
+                },
+            });
+            return;
+        } catch (error: any) {
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            });
+            return;
         }
     },
 };

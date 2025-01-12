@@ -194,17 +194,29 @@ export class AuthService extends BaseService {
     }
 
     // 獲取當前用戶資料
-    async getCurrentUser(userId: string) {
+    async getCurrentUser(token: string) {
         try {
-            const user = await this.db.query.users.findFirst({
-                where: eq(users.id, userId),
+            // 先通過 token 獲取用戶資訊
+            const { data: { user }, error } = await this.supabase.auth.getUser(token);
+            
+            if (error || !user) {
+                throw new Error("Invalid token");
+            }
+    
+            // 使用獲取到的 user.id (UUID) 去查詢資料庫
+            const dbUser = await this.db.query.users.findFirst({
+                where: eq(users.id, user.id),
             });
-
-            if (!user) {
+    
+            if (!dbUser) {
                 throw new Error("User not found");
             }
-
-            return user;
+    
+            // 合併 Supabase Auth 的 email 和資料庫的用戶資料
+            return {
+                ...dbUser,
+                email: user.email
+            };
         } catch (error) {
             throw error;
         }

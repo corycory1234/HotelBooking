@@ -1,7 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 // import { hotelController } from '../../controllers/hotel.controller';
-import { authenticate } from '../../middlewares/auth';
+// import { authenticate } from '../../middlewares/auth';
 
 const router = express.Router();
 

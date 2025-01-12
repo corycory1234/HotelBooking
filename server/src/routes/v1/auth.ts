@@ -16,6 +16,9 @@ router.post('/logout', authController.logout);
 // 忘記密碼
 router.post('/forgot-password', authController.forgotPassword);
 
+// 取得當前用戶資訊
+router.get('/me', authController.getCurrentUser);
+
 
 
 // Google 登入
