@@ -1,15 +1,30 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.hotels = void 0;
-const pg_core_1 = require("drizzle-orm/pg-core");
-exports.hotels = (0, pg_core_1.pgTable)("hotels", {
-    id: (0, pg_core_1.uuid)("id").primaryKey().defaultRandom(),
-    name: (0, pg_core_1.varchar)("name", { length: 255 }).notNull(),
-    description: (0, pg_core_1.text)("description"),
-    address: (0, pg_core_1.text)("address").notNull(),
-    latitude: (0, pg_core_1.decimal)("latitude", { precision: 10, scale: 8 }),
-    longitude: (0, pg_core_1.decimal)("longitude", { precision: 11, scale: 8 }),
-    amenities: (0, pg_core_1.jsonb)("amenities").$type(), // 設施列表
-    createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow(),
-    updatedAt: (0, pg_core_1.timestamp)("updated_at").defaultNow(),
-});
+// import {
+//     pgTable,
+//     uuid,
+//     varchar,
+//     text,
+//     timestamp,
+//     decimal,
+//     jsonb,
+//     integer
+// } from "drizzle-orm/pg-core";
+// import { HotelImage, HotelReview } from "../../types/hotel";
+// import { RoomType } from "../../types/room";
+// export const hotels = pgTable("hotels", {
+//     id: uuid("id").primaryKey().defaultRandom(),
+//     name: varchar("name", { length: 255 }).notNull(),
+//     images: jsonb("images").$type<HotelImage[]>(),
+//     distance: text("distance"),
+//     rating: decimal("rating", { precision: 3, scale: 1 }),
+//     facilities: jsonb("facilities").$type<string[]>().notNull(), // 設施列表
+//     price: integer("price").notNull(),
+//     intro: jsonb("intro").$type<string[]>(),
+//     reviews: jsonb("reviews").$type<HotelReview[]>(),
+//     address: text("address").notNull(),
+//     country: text("country").notNull(),
+//     city: text("city").notNull(),
+//     roomType: jsonb("room_type").$type<RoomType[]>(),
+//     createdAt: timestamp("created_at").defaultNow(),
+//     updatedAt: timestamp("updated_at").defaultNow(),
+// });

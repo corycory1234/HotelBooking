@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const errorHandler_1 = require("./middlewares/errorHandler");
 const v1_1 = __importDefault(require("./routes/v1"));
@@ -18,6 +19,7 @@ app.use((0, cors_1.default)());
 //   allowedHeaders: ['Content-Type'] // 允許的 HTTP 標頭
 // }));
 app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
 // API 路由
 app.use("/api/v1", v1_1.default);
 // 錯誤處理中間件

@@ -20,6 +20,12 @@ const router = express_1.default.Router();
 router.post('/register', auth_controller_1.authController.register);
 // 登入
 router.post('/login', auth_controller_1.authController.login);
+// 登出
+router.post('/logout', auth_controller_1.authController.logout);
+// 忘記密碼
+router.post('/forgot-password', auth_controller_1.authController.forgotPassword);
+// 取得當前用戶資訊
+router.get('/me', auth_controller_1.authController.getCurrentUser);
 // Google 登入
 router.post('/google', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // TODO: 實作 Google 登入邏輯

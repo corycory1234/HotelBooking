@@ -14,16 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
-const hotel_controller_1 = require("../../controllers/hotel.controller");
+// import { hotelController } from '../../controllers/hotel.controller';
+// import { authenticate } from '../../middlewares/auth';
 const router = express_1.default.Router();
 // 使用 async handler 包裝控制器方法
 const asyncHandler = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
 // 搜尋飯店列表
-router.get('/', hotel_controller_1.hotelController.getHotels);
+// router.get('/', hotelController.getHotels);
 // 獲取飯店詳情
-router.get('/:id', asyncHandler(hotel_controller_1.hotelController.getHotel));
+// router.get('/:id', asyncHandler(hotelController.getHotel));
 // 獲取飯店房型
 router.get('/:id/rooms', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // TODO: 實作房型列表邏輯
