@@ -8,18 +8,29 @@ export const authMiddleware = async (
     next: NextFunction
 ) => {
     try {
-        const accessToken = req.cookies.access_token;
+        const accessToken = req.cookies?.access_token;
         
         if (!accessToken) {
-            throw new Error('未登入');
+            return res.status(401).json({
+                success: false,
+                message: '未登入'
+            });
         }
 
-        const user = await authService.verifySession(accessToken);
-        req.user = user;
+        const { data, error } = await authService.verifySession(accessToken);
+        
+        if (error || !data.user) {
+            return res.status(401).json({
+                success: false,
+                message: error?.message || '無效的 session'
+            });
+        }
+
+        req.user = data.user;
         
         next();
     } catch (error: any) {
-        res.status(401).json({
+        return res.status(401).json({
             success: false,
             message: '請重新登入'
         });

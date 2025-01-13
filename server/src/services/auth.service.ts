@@ -197,25 +197,28 @@ export class AuthService extends BaseService {
     async getCurrentUser(token: string) {
         try {
             // 先通過 token 獲取用戶資訊
-            const { data: { user }, error } = await this.supabase.auth.getUser(token);
-            
+            const {
+                data: { user },
+                error,
+            } = await this.supabase.auth.getUser(token);
+
             if (error || !user) {
                 throw new Error("Invalid token");
             }
-    
+
             // 使用獲取到的 user.id (UUID) 去查詢資料庫
             const dbUser = await this.db.query.users.findFirst({
                 where: eq(users.id, user.id),
             });
-    
+
             if (!dbUser) {
                 throw new Error("User not found");
             }
-    
+
             // 合併 Supabase Auth 的 email 和資料庫的用戶資料
             return {
                 ...dbUser,
-                email: user.email
+                email: user.email,
             };
         } catch (error) {
             throw error;
@@ -244,22 +247,55 @@ export class AuthService extends BaseService {
     // }
 
     // 驗證 session
-    // async verifySession(accessToken: string) {
-    //     try {
-    //         const {
-    //             data: { user },
-    //             error,
-    //         } = await this.supabase.auth.getUser(accessToken);
+    async verifySession(accessToken: string) {
+        try {
+            const { data, error } = await this.supabase.auth.getUser(
+                accessToken
+            );
 
-    //         if (error || !user) {
-    //             throw new Error("Invalid session");
-    //         }
+            if (error) {
+                return {
+                    data: { user: null },
+                    error: new Error(error.message),
+                };
+            }
 
-    //         return user;
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
+            if (!data.user) {
+                return {
+                    data: { user: null },
+                    error: new Error("使用者不存在"),
+                };
+            }
+
+            // 檢查資料庫中的用戶資料
+            const dbUser = await this.db.query.users.findFirst({
+                where: eq(users.id, data.user.id),
+            });
+
+            if (!dbUser) {
+                return {
+                    data: { user: null },
+                    error: new Error("使用者資料不存在"),
+                };
+            }
+
+            // 明確返回非 null 的用戶資料
+            return {
+                data: {
+                    user: {
+                        ...dbUser,
+                        email: data.user.email,
+                    },
+                },
+                error: null,
+            };
+        } catch (error: any) {
+            return {
+                data: { user: null },
+                error: new Error(error.message),
+            };
+        }
+    }
 
     // 刷新 token
     // async refreshSession(refreshToken: string) {
