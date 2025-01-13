@@ -5,7 +5,7 @@ export type Hotel_List_Type = add_Hotel_Detail_Interface[]
 export interface add_Hotel_Detail_Interface {
   hotel_Id: string | null,
   hotel_Name: string | null,
-  hotel_Image_List: {url: string, description: string}[] | null,
+  hotel_Image_List: {url: string, description: string}[],
   // distance: string,
   totalRating: number | null,
   facility_List: string[] | null,

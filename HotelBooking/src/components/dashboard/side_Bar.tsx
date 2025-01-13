@@ -3,7 +3,7 @@ import { DashboardSVG } from "../client_Svg/client_Svg";
 import { useState } from "react";
 import Link from "next/link";
 
-const dashboard_Menu = ["Dashboard", "Hotels", "Bookings", "Reviews", "Promotions", "Coupons"];
+const dashboard_Menu = ["dashboard", "hotellist", "bookings", "reviews", "promotions", "coupons"];
 
 export default function Side_Bar () {
   
@@ -11,6 +11,7 @@ export default function Side_Bar () {
   const [clicked_Menu, set_Clicked_Menu] = useState(0);
   const handle_Cliked_Menu = (num: number) => {
     set_Clicked_Menu(num)
+    // console.log("現在的索引值", num);
   } 
 
   return <>
@@ -24,11 +25,13 @@ export default function Side_Bar () {
     {dashboard_Menu.map((item, index) => {
       return (
         <div key={index} className="flex flex-col pl-4">
-          <div className={`flex gap-2 cursor-pointer ${index === clicked_Menu ? 'bg-strokeGray rounded' : ''}`} 
-            onClick={() => handle_Cliked_Menu(index)}>
-            <DashboardSVG name={item} className="w-4 h-auto"></DashboardSVG>
-            <p>{item}</p>
-          </div>
+          <Link href={`/dashboard/${item}`} onClick={() => handle_Cliked_Menu(index)}>
+            <div className={`flex gap-2 cursor-pointer ${index === clicked_Menu ? 'bg-strokeGray rounded' : ''}`} 
+              >
+              <DashboardSVG name={item} className="w-4 h-auto"></DashboardSVG>
+              <p>{item}</p>
+            </div>
+          </Link>
         </div>
       )
     })}

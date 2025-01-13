@@ -339,43 +339,15 @@ export default function Add_Hotel_Modal() {
         </div>
         {/** 上傳房型輪播圖 */}
 
-        
            {/* 添加房型按鈕 */}
           <button type="button" onClick={add_Room_Type} className="bg-primary text-white px-4 py-2 rounded">
             再新增一個房型
           </button>
 
-
-
           </div>
         })}
-        
-
-
-
-
-
-
       </div>
       {/** 創建房型 */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       {/** 傳送formData 給後端 Server */}

@@ -21,9 +21,23 @@ const hotel_Detail_Slice = createSlice({
     add_One_Hotel: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
       console.log(action.payload, "看一下Action.payload");
       return [...state, action.payload]
+    },
+
+    // 3. 編輯指定飯店
+    edit_One_Hotel: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
+      console.log(action.payload, "看一下 編輯 - action.payload");
+      // return [...state, action.payload]
+      // 3.1 state 是飯店列表初始值 (不管已經有hotel, 或是沒有), 如果id匹配, 
+      // 3.2 才將新編輯數據 蓋掉 舊數據, 也就是 「? action.payload」
+      return state.map((item) => item.hotel_Id === action.payload.hotel_Id ? action.payload : item)
+    },
+
+    // 4. 刪除指定飯店
+    remove_One_Hotel: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
+      return state.filter((item) => item.hotel_Id !== action.payload.hotel_Id ? action.payload : item);
     }
   }
 });
 
-export const { add_One_Hotel } = hotel_Detail_Slice.actions;
+export const { add_One_Hotel, edit_One_Hotel, remove_One_Hotel } = hotel_Detail_Slice.actions;
 export default hotel_Detail_Slice.reducer;
