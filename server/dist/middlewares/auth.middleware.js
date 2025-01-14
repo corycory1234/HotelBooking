@@ -16,26 +16,29 @@ const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     try {
         const accessToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
         if (!accessToken) {
-            return res.status(401).json({
+            res.status(401).json({
                 success: false,
-                message: '未登入'
+                message: "未登入",
             });
+            return;
         }
         const { data, error } = yield auth_service_1.authService.verifySession(accessToken);
         if (error || !data.user) {
-            return res.status(401).json({
+            res.status(401).json({
                 success: false,
-                message: (error === null || error === void 0 ? void 0 : error.message) || '無效的 session'
+                message: (error === null || error === void 0 ? void 0 : error.message) || "無效的 session",
             });
+            return;
         }
         req.user = data.user;
         next();
     }
     catch (error) {
-        return res.status(401).json({
+        res.status(401).json({
             success: false,
-            message: '請重新登入'
+            message: "請重新登入",
         });
+        return;
     }
 });
 exports.authMiddleware = authMiddleware;

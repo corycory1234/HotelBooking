@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 require("dotenv/config");
 const auth_controller_1 = require("../../controllers/auth.controller");
+const auth_middleware_1 = require("../../middlewares/auth.middleware");
 const router = express_1.default.Router();
 // 註冊
 router.post('/register', auth_controller_1.authController.register);
@@ -25,7 +26,7 @@ router.post('/logout', auth_controller_1.authController.logout);
 // 忘記密碼
 router.post('/forgot-password', auth_controller_1.authController.forgotPassword);
 // 取得當前用戶資訊
-router.get('/me', auth_controller_1.authController.getCurrentUser);
+router.get('/me', auth_middleware_1.authMiddleware, auth_controller_1.authController.getCurrentUser);
 // Google 登入
 router.post('/google', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // TODO: 實作 Google 登入邏輯

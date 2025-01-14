@@ -229,11 +229,17 @@ class AuthService extends base_service_1.BaseService {
     verifySession(accessToken) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!accessToken) {
+                    return {
+                        data: { user: null },
+                        error: new Error("未登入"),
+                    };
+                }
                 const { data, error } = yield this.supabase.auth.getUser(accessToken);
                 if (error) {
                     return {
                         data: { user: null },
-                        error: new Error(error.message),
+                        error: new Error("未登入"), // 將所有認證錯誤統一顯示為"未登入"
                     };
                 }
                 if (!data.user) {
