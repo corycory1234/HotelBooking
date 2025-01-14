@@ -249,6 +249,13 @@ export class AuthService extends BaseService {
     // 驗證 session
     async verifySession(accessToken: string) {
         try {
+            if (!accessToken) {
+                return {
+                    data: { user: null },
+                    error: new Error("未登入"),
+                };
+            }
+
             const { data, error } = await this.supabase.auth.getUser(
                 accessToken
             );
@@ -256,7 +263,7 @@ export class AuthService extends BaseService {
             if (error) {
                 return {
                     data: { user: null },
-                    error: new Error(error.message),
+                    error: new Error("未登入"), // 將所有認證錯誤統一顯示為"未登入"
                 };
             }
 

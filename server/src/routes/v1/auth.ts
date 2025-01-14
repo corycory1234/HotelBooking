@@ -1,6 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import { authController } from '../../controllers/auth.controller';
+import { authMiddleware } from '../../middlewares/auth.middleware';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.post('/logout', authController.logout);
 router.post('/forgot-password', authController.forgotPassword);
 
 // 取得當前用戶資訊
-router.get('/me', authController.getCurrentUser);
+router.get('/me', authMiddleware, authController.getCurrentUser);
 
 
 
