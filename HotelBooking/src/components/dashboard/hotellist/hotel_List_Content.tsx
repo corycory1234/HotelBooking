@@ -10,7 +10,7 @@ import { add_Hotel_Detail_Interface, add_Review_Type_Interface, add_Hotel_Room_T
 export default function Hotel_List_Content () {
   // 1. Redux - 飯店列表
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List);
-  console.log("Redux - 飯店列表", redux_Hotel_List);
+  // console.log("Redux - 飯店列表", redux_Hotel_List);
   
   // 2. 打開 Modal 彈跳視窗
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false)
@@ -68,7 +68,7 @@ export default function Hotel_List_Content () {
     // 3.2 如果有找到, 就傳 the_Found_Hotel 數據
     if(the_Found_Hotel) {
       set_The_Editing_Hotel(the_Found_Hotel)
-      console.log(the_Editing_Hotel, "準備被編輯之飯店");
+      // console.log(the_Editing_Hotel, "準備被編輯之飯店");
     }
   }
 
@@ -128,46 +128,7 @@ export default function Hotel_List_Content () {
               </td>
             </tr>
 
-
-
-
             })}
-            {/* <tr>
-              <td className="border-b border-softGray p-2">
-                <div className="flex items-center gap-2">
-                  <img src="/home/Popular_1.webp" alt="" className="w-10 rounded"/>
-                  <p>Grand President Hotel Bangkok</p>
-                </div>
-              </td>
-              <td className="border-b border-softGray p-2">Bangkok</td>
-              <td className="border-b border-softGray p-2">50</td>
-              <td className="border-b border-softGray p-2">Active</td>
-              <td className="border-b border-softGray p-2 ">
-                <div className="flex gap-2">
-                  <DashboardSVG name={"edit"} className="w-4 h-auto"></DashboardSVG>
-                  <DashboardSVG name={"delete"} className="w-4 h-auto"></DashboardSVG>
-
-                </div>
-              </td>
-              
-            </tr>
-            <tr>
-              <td className="border-b border-softGray p-2">
-                <div className="flex items-center gap-2">
-                  <img src="/home/Popular_2.webp" alt="" className="w-10 rounded"/>
-                  <p>Josh Hotel</p>
-                </div>
-              </td>
-              <td className="border-b border-softGray p-2">China</td>
-              <td className="border-b border-softGray p-2">172</td>
-              <td className="border-b border-softGray p-2">Closed</td>
-              <td className="border-b border-softGray p-2">
-              <div className="flex gap-2">
-                <DashboardSVG name={"edit"} className="w-4 h-auto"></DashboardSVG>
-                <DashboardSVG name={"delete"} className="w-4 h-auto"></DashboardSVG>
-                </div>
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>
