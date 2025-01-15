@@ -1,8 +1,14 @@
 'use client';
 import { useState } from "react";
 
-export default function Client_Input_Password () {
+interface Client_Input_Password_Interface {
+  password: string;
+  setPassword: (value: string) => void;
+}
+
+export default function Client_Input_Password ({password, setPassword}: Client_Input_Password_Interface) {
   const [password_Boolean, set_Password_Boolean] = useState(false);
+  // const [password, setPassword] = useState("");
   const show_Password = () => {
     set_Password_Boolean(!password_Boolean);
   }
@@ -28,7 +34,8 @@ export default function Client_Input_Password () {
 
 
   <label htmlFor="password" className="text-gray">Password</label>
-  <input type={password_Boolean ? 'text' : 'password'} id="password" name="password" className="rounded border-2 border-softGray py-2 px-10"/>
+  <input type={password_Boolean ? 'text' : 'password'} id="password" name="password" className="rounded border-2 border-softGray py-2 px-10"
+    value={password} onChange={(event) => setPassword(event.target.value)}/>
   
   </>
   

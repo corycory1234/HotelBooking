@@ -1,8 +1,14 @@
 'use client';
 import { useState } from "react";
 
-export default function Client_Input_Confirm_Password () {
+interface Client_Input_Confirm_Password_Interface {
+  confirm: string;
+  setConfirm: (value: string) => void;
+}
+
+export default function Client_Input_Confirm_Password ({confirm, setConfirm}: Client_Input_Confirm_Password_Interface) {
   const [password_Boolean, set_Password_Boolean] = useState(false);
+  // const [confirm, setConfirm] = useState("");
   const show_Password = () => {
     set_Password_Boolean(!password_Boolean);
   }
@@ -28,7 +34,8 @@ export default function Client_Input_Confirm_Password () {
 
 
   <label htmlFor="confirm" className="text-gray">Confirm Password</label>
-  <input type={password_Boolean ? 'text' : 'password'} id="confirm" name="confirm" className="rounded border-2 border-softGray py-2 px-10"/>
+  <input type={password_Boolean ? 'text' : 'password'} id="confirm" name="confirm" className="rounded border-2 border-softGray py-2 px-10"
+    value={confirm} onChange={(event) => setConfirm(event.target.value)}/>
   
   </>
   
