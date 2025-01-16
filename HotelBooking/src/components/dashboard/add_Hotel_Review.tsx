@@ -24,7 +24,10 @@ export default function Add_Hotel_Review () {
             <option value={5}>5</option>
           </select>
         </div>
-        <textarea name="comment" id="comment" className="border rounded"></textarea>
+        <textarea name="comment" id="comment" className="border rounded w-full" rows={4}></textarea>
+        
+        <label className="font-semibold text-primary">Reply</label>
+        <textarea name="reply" id="reply" className="border rounded w-full" rows={4}></textarea>
       </div>
       {/** 旅客留言、評價 */}
   </>

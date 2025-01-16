@@ -34,6 +34,7 @@ export interface add_Review_Type_Interface {
   date: string,
   traveler_Rating: number | null,
   comment: string,
+  reply: string | null
 }
 
 // 2. 房型 (主流做法：同一層就能看到 roomType、images)
@@ -48,5 +49,7 @@ export interface add_Hotel_Room_Type_Interface {
   smoke: string | null,
   amenity_List: string[] | null,
   room_Size: number | null,
-  max_People: number | null;
+  max_People: number | null,
+  view: string | null,
+  bed_Type: string | null
 }

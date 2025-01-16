@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import { add_Hotel_Detail_Interface, add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail"
+import { add_Hotel_Detail_Interface, add_Hotel_Room_Type_Interface, add_Review_Type_Interface } from "@/types/add_Hotel_Detail"
 import { edit_One_Hotel } from "@/store/cms/Hotel_List_Slice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
@@ -25,6 +25,12 @@ const roomType_List = ["singleRoom", "doubleRoom", "twinRoom", "queenRoom", "kin
 // 4. 房型內設施初始值
 const amenity = ["shower", "bathtub", "breakfast", "tv", ];
 
+// 5. 房型景觀初始值
+const room_View_List = ["sea view", "forest view", "city view", "lake view", "street view", "mountain view"];
+
+// 6. 床型
+const bed_Type_List = ["single bed", "double bed", "queen bed", "king bed" ,"twin beds", "tatami"]
+
 
 
 export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Editing_Hotel_Interface) {
@@ -34,12 +40,12 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
   const dispatch: AppDispatch = useDispatch();
   
   // 6. 本地 formData, 管理 <form>表單 裡面所有的<input>、<select>等等
-  const [formData, set_FomrData] = useState<add_Hotel_Detail_Interface | null>(null);
+  const [formData, set_FormData] = useState<add_Hotel_Detail_Interface | null>(null);
 
   // 7. 如果拿到 the_Editing_Hotel(有值時), 就{展開運算子}, 帶入給 formData
   useEffect(() => {
     if(the_Editing_Hotel) {
-      set_FomrData({...the_Editing_Hotel})
+      set_FormData({...the_Editing_Hotel})
     }
   },[the_Editing_Hotel]);
 
@@ -56,7 +62,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     // 8.5 但這種方法對應不了巢狀, 像"facility_List" 若照上述方法走, facility_List: [] 會對應不到value
     // 8.5 因為 facility_List 是 陣列包字串
     if(event.target.name !== "facilities") {
-      set_FomrData({...formData, [name]: value});
+      set_FormData({...formData, [name]: value});
       return;
     };
   };
@@ -81,7 +87,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     };
 
     // 9.6 最後更新 formData, 主要針對 facility_List 更新
-    set_FomrData({...formData, facility_List: new_Facilities})
+    set_FormData({...formData, facility_List: new_Facilities})
   };
 
   // 10. 輪播圖渲染於 <form> - 失敗, 待有空解決
@@ -101,7 +107,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     const new_Review_List = [...formData.review_List];
     new_Review_List[index] = {...new_Review_List[index], [name]: value};
     // 11.2 更新 formData
-    set_FomrData({...formData, review_List: new_Review_List});
+    set_FormData({...formData, review_List: new_Review_List});
   };
 
 
@@ -116,8 +122,26 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     const new_Room_Types = [...old_Room_Types];
     new_Room_Types[index] = updateRoomTypes;
     // 12.4 更新 formData
-    set_FomrData({...formData, roomType_List: new_Room_Types});
+    set_FormData({...formData, roomType_List: new_Room_Types});
   };
+
+  // 13. 再新增一個評論 - 函式
+  const add_Review = () => {
+    if(!formData) return;
+    const old_Review_List = formData.review_List ?? [];
+    // 13.1 準備一個預設的 review 物件
+    const new_Review: add_Review_Type_Interface = {
+      travelerId: uuidv4(),
+      travelerName: "",
+      date: "",
+      traveler_Rating: null,
+      comment: "",
+      reply: "",
+    };
+    // 13.2 新評論陣列, 展開運算子就評論陣列, 再於[] 補上「新評論-物件」
+    const new_Review_List = [...old_Review_List, new_Review];
+    set_FormData({...formData, review_List: new_Review_List});
+  }
 
   // 13. 再新增一個房型 - 函式
   const add_Room_Type = () => {
@@ -127,6 +151,8 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     const new_Room_Type: add_Hotel_Room_Type_Interface = {
       room_Type: "singleRoom",
       roomType_Id: uuidv4(),
+      view: "sea view",
+      bed_Type: "single bed",
       room_Price: null,
       room_Availability: null,
       smoke: null,
@@ -137,8 +163,20 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     };
     // 13.2 新房型陣列, 展開運算子舊房型列表, 再於[]最後面補上「新房型-物件」
     const new_Room_Type_List = [...old_Room_Type_List, new_Room_Type];
-    set_FomrData({...formData, roomType_List: new_Room_Type_List})
+    set_FormData({...formData, roomType_List: new_Room_Type_List})
   };
+
+  // 14. 刪除指定評論
+  const remove_Review = (index: number) => {
+    if(!formData) return;
+    const old_Review_List = formData.review_List ?? [];
+    const new_Review_List = [...old_Review_List];
+    new_Review_List.splice(index, 1);
+    // 14.1 刪除玩, 要立馬更新本地狀態, 再呼叫 dispatch 去更新 Redux
+    const update_FormData = {...formData, review_List: new_Review_List};
+    set_FormData(update_FormData);
+    dispatch(edit_One_Hotel(update_FormData));
+  }
 
   // 14. 刪除指定房型
   const remove_Room_Type = (index: number) => {
@@ -148,9 +186,9 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     new_Room_Type_List.splice(index, 1)
     // 10.1 刪除完, 要立馬更新本地狀態, 再呼叫 dispatch 去更新 Redux, 最後自動關閉
     const update_FormData = {...formData, roomType_List: new_Room_Type_List};
-    set_FomrData(update_FormData);
+    set_FormData(update_FormData);
     dispatch(edit_One_Hotel(update_FormData))
-    onClose();
+    // onClose();
   }
   
 
@@ -370,7 +408,11 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
 
 {/** 基本飯店資訊 */}
           
-
+          {/** 再新增一個評論 */}
+          <div className="flex justify-end">
+            <button type="button" onClick={add_Review} className="bg-primary text-white rounded py-2 w-1/2">新增一個評論</button>
+          </div>
+          {/** 再新增一個評論 */}
 
           {/** 旅客留言、評價 */}
             <div className="flex flex-col gap-2">
@@ -396,6 +438,15 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
                     </div>
                     <textarea name="comment" id="comment" className="border rounded" 
                       value={item.comment} onChange={(event) => handle_Review_List_Change(event, index)}></textarea>
+
+                    
+                    <p className="font-semibold text-primary">Reply</p>
+                    <textarea name="reply" id="reply" className="border rounded w-full" rows={4}
+                      value={item.reply ?? ""} onChange={(event) => handle_Review_List_Change(event, index)}>
+                    </textarea>
+                    <button type="button" onClick={() => remove_Review(index)} className="bg-customRed text-white px-4 py-2 rounded">
+                      刪除此留言及回覆
+                    </button>
                     
                     </div>
                   })}
@@ -421,7 +472,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
 
         {/** 選擇房型 */}
         <label htmlFor={`roomtype_${roomType.roomType_Id}`} className="font-semibold">Select Room Type</label>
-        <select name={`roomtype[${index}].room_Type`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded" 
+        <select name={`roomtype[${index}].room_Type`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded py-2" 
         value={roomType.room_Type} onChange={(event) => handle_Room_Type_Change(index, "room_Type", event.target.value)} required>
           {roomType_List.map((room) => {
             return <option key={room} value={room}>
@@ -430,6 +481,33 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
           })}
         </select>
         {/** 選擇房型 */}
+
+
+        {/** 選擇房型景觀 */}
+        <label htmlFor={`roomtype_${roomType.roomType_Id}`} className="font-semibold">Select Room View</label>
+        <select name={`roomtype[${index}].view`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded py-2" 
+          value={roomType.view ?? ""} onChange={(event) => handle_Room_Type_Change(index, "view", event.target.value)} required>
+          {room_View_List.map((view) => {
+            return <option key={view} value={view}>
+              {view.charAt(0).toUpperCase() + view.slice(1)}
+            </option>
+          })}
+        </select>
+        {/** 選擇房型景觀 */}
+
+        
+        {/** 選擇床型 */}
+        <label htmlFor={`roomtype_${roomType.roomType_Id}`} className="font-semibold">Select Bed Type</label>
+        <select name={`roomtype[${index}].bed_Type`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded py-2" 
+          value={roomType.bed_Type ?? ""} onChange={(event) => handle_Room_Type_Change(index, "bed_Type", event.target.value)} required>
+          {bed_Type_List.map((bed_Type) => {
+            return <option key={bed_Type} value={bed_Type}>
+              {bed_Type.charAt(0).toUpperCase() + bed_Type.slice(1)}
+            </option>
+          })}
+        </select>
+        {/** 選擇床型 */}
+
         
         {/** 房型價錢、 該房型共幾間、吸菸房*/}
         <div className="flex gap-2">

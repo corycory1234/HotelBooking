@@ -15,6 +15,12 @@ const roomType_List = ["singleRoom", "doubleRoom", "twinRoom", "queenRoom", "kin
 // 3. 房型內設施初始值
 const amenity = ["shower", "bathtub", "breakfast", "tv", ];
 
+// 4. 房型景觀初始值
+const room_View_List = ["sea view", "forest view", "city view", "lake view", "street view", "mountain view"]
+
+// 5. 床型
+const bed_Type_List = ["single bed", "double bed", "queen bed", "king bed" ,"twin beds", "tatami"]
+
 export default function Add_Hotel_Modal() {
   const dispatch: AppDispatch = useDispatch();
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List);
@@ -44,6 +50,8 @@ export default function Add_Hotel_Modal() {
     set_RoomTypes([...roomTypes, {
       room_Type: "singleRoom",
       roomType_Id: uuidv4(),
+      view: "sea view",
+      bed_Type: "single bed",
       room_Price: null,
       room_Availability: null,
       smoke: null,
@@ -105,6 +113,7 @@ export default function Add_Hotel_Modal() {
     const date = formData.get("date") as string | null;
     const traveler_Rating = formData.get("rating") as string | null;
     const comment = formData.get("comment") as string | null;
+    const reply = formData.get("reply") as string | null;
     const room_Type = formData.get("roomtype") as string | null;;
     const room_Price = formData.get("roomprice") as number | null;
     const room_Availability = formData.get("availability") as number | null;;
@@ -122,13 +131,14 @@ export default function Add_Hotel_Modal() {
   // 10. 添加評論函數 (這函式要UI去按按鈕才會觸發)
   // 10.1 在酒店列表中，每個酒店項目下添加一個評論表單，當用戶提交評論時，
   // 10.2 調用 addReview 函數來更新特定酒店的 reviews
-  const addReview = (hotelId: string, travelerName: string, date: string, traveler_Rating: number, comment: string) => {
+  const addReview = (hotelId: string, travelerName: string, date: string, traveler_Rating: number, comment: string, reply: string) => {
     const newReview: add_Review_Type_Interface = {
       travelerId: uuidv4(), // 使用 UUID 生成唯一 ID
       travelerName,
       date,
       traveler_Rating,
       comment,
+      reply,
     };
     // 10.3 如果ID匹配正確, 展開運算子指定Hotel(是物件), 
     // 10.3 並將原先評論列表(是陣列) 也展開運算子, 後面將 newReview 補進新陣列裡面
@@ -149,6 +159,7 @@ export default function Add_Hotel_Modal() {
         date: date,
         traveler_Rating: + traveler_Rating,
         comment: comment,
+        reply: reply,
       });
     };
 
@@ -238,7 +249,7 @@ export default function Add_Hotel_Modal() {
 
         {/** 選擇房型 */}
         <label htmlFor={`roomtype_${roomType.roomType_Id}`} className="font-semibold">Select Room Type</label>
-        <select name={`roomtype[${index}].room_Type`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded" 
+        <select name={`roomtype[${index}].room_Type`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded py-2" 
         value={roomType.room_Type} onChange={(event) => handle_Room_Type_Change(index, "room_Type", event.target.value)} required>
           {roomType_List.map((room) => {
             return <option key={room} value={room}>
@@ -247,6 +258,32 @@ export default function Add_Hotel_Modal() {
           })}
         </select>
         {/** 選擇房型 */}
+
+        {/** 選擇房型景觀 */}
+        <label htmlFor={`roomtype_${roomType.roomType_Id}`} className="font-semibold">Select Room View</label>
+        <select name={`roomtype[${index}].view`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded py-2" 
+          value={roomType.view ?? ""} onChange={(event) => handle_Room_Type_Change(index, "view", event.target.value)} required>
+          {room_View_List.map((view) => {
+            return <option key={view} value={view}>
+              {view.charAt(0).toUpperCase() + view.slice(1)}
+            </option>
+          })}
+        </select>
+         {/** 選擇房型景觀 */}
+
+
+        {/** 選擇床型 */}
+        <label htmlFor={`roomtype_${roomType.roomType_Id}`} className="font-semibold">Select Bed Type</label>
+        <select name={`roomtype[${index}].bed_Type`} id={`roomtype_${roomType.roomType_Id}`} className="border rounded py-2" 
+          value={roomType.bed_Type ?? ""} onChange={(event) => handle_Room_Type_Change(index, "bed_Type", event.target.value)} required>
+          {bed_Type_List.map((bed_Type) => {
+            return <option key={bed_Type} value={bed_Type}>
+              {bed_Type.charAt(0).toUpperCase() + bed_Type.slice(1)}
+            </option>
+          })}
+        </select>
+         {/** 選擇床型 */}
+        
         
         {/** 房型價錢、 該房型共幾間、吸菸房*/}
         <div className="flex gap-2">
