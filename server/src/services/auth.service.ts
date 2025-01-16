@@ -305,18 +305,32 @@ export class AuthService extends BaseService {
     }
 
     // 刷新 token
-    // async refreshSession(refreshToken: string) {
-    //     try {
-    //         const { data, error } = await this.supabase.auth.refreshSession({
-    //             refresh_token: refreshToken,
-    //         });
+    async refreshSession(refreshToken: string) {
+        try {
+            if (!refreshToken) {
+                throw new Error("無效的 refresh token");
+            }
 
-    //         if (error) throw error;
-    //         return data;
-    //     } catch (error) {
-    //         throw error;
-    //     }
-    // }
+            const { data, error } = await this.supabase.auth.refreshSession({
+                refresh_token: refreshToken,
+            });
+
+            if (error) {
+                if (error.message === "Invalid refresh token") {
+                    throw new Error("Session 已過期，請重新登入");
+                }
+                throw error;
+            }
+
+            if (!data.session) {
+                throw new Error("刷新 session 失敗");
+            }
+
+            return data;
+        } catch (error: any) {
+            throw error;
+        }
+    }
 }
 
 // 導出實例

@@ -20,7 +20,11 @@ router.post('/forgot-password', authController.forgotPassword);
 // 取得當前用戶資訊
 router.get('/me', authMiddleware, authController.getCurrentUser);
 
+// 驗證 session
+router.get('/verify-session', authController.verifySession);
 
+// 刷新 token
+router.post('/refresh-token', authController.refreshToken);
 
 // Google 登入
 router.post('/google', async (req, res) => {
