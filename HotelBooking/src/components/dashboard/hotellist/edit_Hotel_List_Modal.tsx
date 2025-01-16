@@ -175,7 +175,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
         <div className="flex flex-col bg-white rounded border border-softGray p-2 gap-2">
           <p className="font-semibold text-primary">Basic Information</p>
   
-    {/** 基本飯店資訊 */}
+{/** 基本飯店資訊 */}
 
     {/** 酒店名、地址 */}
     <div className="flex">
@@ -265,6 +265,57 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     </div>
     {/** 入住、退房時間 */}
 
+    {/** 經緯度 */}     
+    <div className="flex gap-2">
+      <label className="flex gap-2">
+        Latitude
+        <input type="number" id="latitude" name="latitude" className="border rounded no-spin max-w-20"
+        step="any"
+        value={formData.latitude ?? 0}
+        onChange={handle_Change}/>
+      </label>
+      <label className="flex gap-2">
+        Longtitude
+        <input type="number" id="longtitude" name="longtitude" className="border rounded no-spin max-w-20"
+        step="any"
+        value={formData.longtitude ?? 0}
+        onChange={handle_Change}/>
+      </label>
+    </div>
+    {/** 經緯度 */}
+
+    {/** 是否開放中 */}
+    <div className="flex gap-2">
+      <label className="flex gap-2">
+        Is Open
+        <select name="is_Open" id="is_Open" className="border rounded"
+          value={formData.is_Open ?? ""}
+          onChange={handle_Change}>
+          <option value="open">Open</option>
+          <option value="close">Close</option>
+        </select>
+      </label>
+    </div>
+    {/** 是否開放中 */}
+
+    {/** 飯店電話、飯店郵件 */}
+    <div className="flex gap-2">
+      <label className="flex gap-2">
+        Hotel Phone
+        <input type="text" id="hotel_Phone" name="hotel_Phone" className="border rounded"
+        value={formData.hotel_Phone ?? ""}
+        onChange={handle_Change}/>
+      </label>
+
+      <label className="flex gap-2">
+        Hotel Email
+        <input type="text" id="hotel_Email" name="hotel_Email" className="border rounded"
+          value={formData.hotel_Email ?? ""}
+          onChange={handle_Change}/>
+      </label>
+    </div>
+    {/** 飯店電話、飯店郵件 */}
+
     {/** 設施 */}
     <div className="flex flex-col gap-2">
       <p className="font-semibold text-primary">Facilities</p>
@@ -305,8 +356,19 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     </div>
     {/** 上傳飯店輪播圖 - 失敗, 待有空解決*/}
 
+    {/** 取消政策 */}
+    <label className="flex flex-col gap-2">
+      <p className="text-primary font-semibold">Cancellation Policy</p>
+      <textarea name="cancellation_Policy" id="cancellation_Policy" 
+        className="rounded border w-full h-auto" rows={4}
+        value={formData.cancellation_Policy ?? ""}
+        onChange={handle_Change}>
+      </textarea>
+    </label>
+    {/** 取消政策 */}
+    
 
-          {/** 基本飯店資訊 */}
+{/** 基本飯店資訊 */}
           
 
 

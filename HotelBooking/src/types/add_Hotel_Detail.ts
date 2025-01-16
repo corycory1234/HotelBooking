@@ -17,6 +17,12 @@ export interface add_Hotel_Detail_Interface {
   tax: number | null,
   checkin: string | null,
   checkout: string | null,
+  latitude: number | null,
+  longtitude: number | null,
+  is_Open: string | null,
+  hotel_Phone: string | null,
+  hotel_Email: string | null,
+  cancellation_Policy: string | null,
   review_List: add_Review_Type_Interface[],
   roomType_List: add_Hotel_Room_Type_Interface[]
 };

@@ -50,8 +50,8 @@ export default function Hotel_Detail () {
   {/* 返回上頁按鈕、Modla 彈跳<form>搜尋視窗 */}
   <div className="bg-primary relative">
     <div className="flex flex-col py-2 cursor-pointer" onClick={show_FormSearch}>
-      <p className="text-center">{redux_Hotel_Detail?.name}</p>
-      <p className="text-center">{redux_DateRange}</p>
+      <p className="text-center text-white">{redux_Hotel_Detail?.name}</p>
+      <p className="text-center text-white">{redux_DateRange}</p>
     </div>
 
       <div className="absolute top-4 left-4 z-10 h-[56px]">

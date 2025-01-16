@@ -76,6 +76,48 @@ export default function Add_Hotel_Basic_Info() {
     </div>
     {/** 入住、退房時間 */}
 
+    {/** 經緯度 */}     
+    <div className="flex gap-2">
+      <label className="flex gap-2">
+        Latitude
+        <input type="number" id="latitude" name="latitude" className="border rounded no-spin max-w-20"
+        step="any"/>
+      </label>
+      <label className="flex gap-2">
+        Longtitude
+        <input type="number" id="longtitude" name="longtitude" className="border rounded no-spin max-w-20"
+        step="any"/>
+      </label>
+    </div>
+    {/** 經緯度 */}
+
+    {/** 是否營業 */}
+    <div className="flex gap-2">
+      <label className="flex gap-2">
+        Is OPEN ?
+        <select name="is_Open" id="is_Open" className="border rounded">
+          <option value="open">Open</option>
+          <option value="close">Close</option>
+        </select>
+        </label>
+
+    </div>
+    {/** 是否營業 */}
+
+    {/** 飯店電話、飯店郵件 */}
+    <div className="flex gap-2">
+      <label className="flex gap-2">
+        Hotel Phone
+        <input type="text" id="hotel_Phone" name="hotel_Phone" className="border rounded"/>
+      </label>
+
+      <label className="flex gap-2">
+        Hotel Email
+        <input type="text" id="hotel_Email" name="hotel_Email" className="border rounded"/>
+      </label>
+    </div>
+    {/** 飯店電話、飯店郵件 */}
+
     {/** 設施 */}
     <div className="flex flex-col gap-2">
       <p className="font-semibold text-primary">Facilities</p>
@@ -105,6 +147,15 @@ export default function Add_Hotel_Basic_Info() {
         multiple className="border rounded" />
     </div>
     {/** 上傳飯店輪播圖 */}
+
+    {/** 取消政策 */}
+      <label className="flex flex-col gap-2">
+        <p className="text-primary font-semibold">Cancellation Policy</p>
+        <textarea name="cancellation_Policy" id="cancellation_Policy" 
+          className="rounded border w-full h-auto" rows={4}>
+        </textarea>
+      </label>
+    {/** 取消政策 */}
 
 
 

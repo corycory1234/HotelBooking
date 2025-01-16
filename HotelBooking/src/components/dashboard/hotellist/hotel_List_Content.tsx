@@ -10,7 +10,7 @@ import { add_Hotel_Detail_Interface, add_Review_Type_Interface, add_Hotel_Room_T
 export default function Hotel_List_Content () {
   // 1. Redux - 飯店列表
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List);
-  // console.log("Redux - 飯店列表", redux_Hotel_List);
+  console.log("Redux - 飯店列表", redux_Hotel_List);
   
   // 2. 打開 Modal 彈跳視窗
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false)
@@ -38,6 +38,12 @@ export default function Hotel_List_Content () {
       tax: null,
       checkin: null,
       checkout: null,
+      latitude: null,
+      longtitude: null,
+      is_Open: null,
+      hotel_Phone: null,
+      hotel_Email: null,
+      cancellation_Policy: null,
       review_List: [],
       roomType_List: []
   })
@@ -60,6 +66,12 @@ export default function Hotel_List_Content () {
         tax: null,
         checkin: null,
         checkout: null,
+        latitude: null,
+        longtitude: null,
+        is_Open: null,
+        hotel_Phone: null,
+        hotel_Email: null,
+        cancellation_Policy: null,
         review_List: [],
         roomType_List: []
       });
@@ -68,7 +80,7 @@ export default function Hotel_List_Content () {
     // 3.2 如果有找到, 就傳 the_Found_Hotel 數據
     if(the_Found_Hotel) {
       set_The_Editing_Hotel(the_Found_Hotel)
-      // console.log(the_Editing_Hotel, "準備被編輯之飯店");
+      console.log(the_Editing_Hotel, "準備被編輯之飯店");
     }
   }
 

@@ -16,7 +16,8 @@ interface Hotel_Card_Interface {
 };
 
 // 2. Tab - 詳細、設施、評價陣列
-const tab = ["Overview", "Rooms", "Facilities", "Review"]
+// const tab = ["Overview", "Rooms", "Facilities", "Review"]
+const tab = ["Overview", "Rooms", "Review"]
 
 export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 1. 父元件 HotelList props 指定飯店 之數據
@@ -27,7 +28,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
 
-  return <div className="relative flex flex-col gap-2">
+  return <>
+  <div className="relative flex flex-col gap-2">
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
       <div className="">
       <Swiper slidesPerView={1} 
@@ -67,7 +69,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
         })}
       </ul>
     {/* Tab 高亮切換，吃Sticky，滾動固定Top */}
-
+    </div>
 
 
   <div className="flex flex-col p-4 my-bg-gradient">
@@ -89,6 +91,8 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       {the_Hotel?.intro.map((details, index) => {
         return <p key={index}> {details} </p>
       })}
+      <div className="border-b-2 border-softGray"></div>
+      <Hotel_Facility></Hotel_Facility>
       <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
     </div>
     }
@@ -103,16 +107,16 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
     {/** 飯店設施 */}
-      {selected_Tab === 2 && <div className="flex flex-col gap-2">
+      {/* {selected_Tab === 2 && <div className="flex flex-col gap-2">
         <Hotel_Facility></Hotel_Facility>
         <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
       </div>
-      }
+      } */}
     {/** 飯店設施 */}
     
 
     {/** 飯店評論 */}
-      {selected_Tab === 3 &&
+      {selected_Tab === 2 &&
       <div className=" flex flex-col gap-2">
         <Hotel_Customer_Review></Hotel_Customer_Review>
         <button className="bg-primary text-white rounded-lg p-2" onClick={() => set_Selected_Tab(1)}>Book Now</button>
@@ -122,5 +126,6 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
   </div>
-</div>
+
+</> 
 }

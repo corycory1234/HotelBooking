@@ -31,7 +31,7 @@ export default function Client_Show_Keyword () {
   },[destination, room, adult, child, timestamp])
 
   return <>
-    <p onClick={show_FormSearch} className="text-center">{keyword} ･ {dateRange}</p>
+    <p onClick={show_FormSearch} className="text-center text-white cursor-pointer">{keyword} ･ {dateRange}</p>
 
     {/* Modal彈跳視窗 */}
       <Modal isOpen={formSearch} onClose={() => setFormSearch(false)}>

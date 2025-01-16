@@ -88,6 +88,12 @@ export default function Add_Hotel_Modal() {
     const totalRating = formData.get("totalrating") ? Number(formData.get("totalrating")) : null;
     const checkin = formData.get("checkin") as string | null;
     const checkout = formData.get("checkout") as string | null;
+    const latitude = formData.get("latitude") as number | null;
+    const longtitude = formData.get("longtitude") as number | null;
+    const is_Open = formData.get("is_Open") as string | null;
+    const hotel_Phone = formData.get("hotel_Phone") as string | null;
+    const hotel_Email = formData.get("hotel_Email") as string | null;
+    const cancellation_Policy = formData.get("cancellation_Policy") as string | null;
     const facilitiy_List = formData.getAll("facilities") as string[] | null;
     const intro = formData.get("intro") as string | null;
     const hotelimFiles = formData.getAll("hotelimages") as File[];
@@ -177,6 +183,12 @@ export default function Add_Hotel_Modal() {
       totalRating: totalRating,
       checkin: checkin,
       checkout: checkout,
+      latitude: latitude,
+      longtitude: longtitude,
+      is_Open: is_Open,
+      hotel_Phone: hotel_Phone,
+      hotel_Email: hotel_Email,
+      cancellation_Policy: cancellation_Policy,
       facility_List: facilitiy_List,
       hotel_Intro: intro,
       hotel_Image_List: hotel_Image_List,
