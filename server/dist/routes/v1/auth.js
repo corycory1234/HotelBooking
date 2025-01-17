@@ -27,6 +27,10 @@ router.post('/logout', auth_controller_1.authController.logout);
 router.post('/forgot-password', auth_controller_1.authController.forgotPassword);
 // 取得當前用戶資訊
 router.get('/me', auth_middleware_1.authMiddleware, auth_controller_1.authController.getCurrentUser);
+// 驗證 session
+router.get('/verify-session', auth_controller_1.authController.verifySession);
+// 刷新 token
+router.post('/refresh-token', auth_controller_1.authController.refreshToken);
 // Google 登入
 router.post('/google', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // TODO: 實作 Google 登入邏輯

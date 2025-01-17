@@ -10,14 +10,16 @@ const errorHandler_1 = require("./middlewares/errorHandler");
 const v1_1 = __importDefault(require("./routes/v1"));
 require("dotenv/config");
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
+const fontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
 app.use((0, cors_1.default)());
 // 或者指定允許的來源
-// app.use(cors({
-//   origin: 'http://localhost:5173', // 只允許特定網域
-//   methods: ['GET', 'POST'],        // 允許的 HTTP 方法
-//   allowedHeaders: ['Content-Type'] // 允許的 HTTP 標頭
-// }));
+app.use((0, cors_1.default)({
+    origin: ['http://localhost:3000', fontendUrl], // 允許的前端網域
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允許的 HTTP 方法
+    allowedHeaders: ['Content-Type', 'Authorization'], // 允許的 Headers
+    credentials: true // 允許攜帶認證資訊(cookies)
+}));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 // API 路由

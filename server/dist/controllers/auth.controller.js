@@ -44,8 +44,16 @@ exports.authController = {
                     res.cookie("access_token", result.session.access_token, {
                         httpOnly: true,
                         secure: process.env.NODE_ENV === "production",
-                        sameSite: "lax",
+                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 在 production 時設為 none
                         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+                        domain: process.env.COOKIE_DOMAIN || undefined // 設定 cookie domain
+                    });
+                    res.cookie("refresh_token", result.session.refresh_token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === "production",
+                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 在 production 時設為 none
+                        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+                        domain: process.env.COOKIE_DOMAIN || undefined // 設定 cookie domain
                     });
                 }
                 res.json({
@@ -154,6 +162,81 @@ exports.authController = {
                     message: error.message,
                 });
                 return;
+            }
+        });
+    },
+    verifySession(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            try {
+                const accessToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
+                if (!accessToken) {
+                    res.status(401).json({
+                        success: false,
+                        message: "未登入",
+                    });
+                    return;
+                }
+                const result = yield auth_service_1.authService.verifySession(accessToken);
+                if (result.error) {
+                    res.status(401).json({
+                        success: false,
+                        message: result.error.message,
+                    });
+                    return;
+                }
+                res.json({
+                    success: true,
+                    data: result.data,
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    success: false,
+                    message: error.message,
+                });
+            }
+        });
+    },
+    refreshToken(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            try {
+                const refreshToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.refresh_token;
+                if (!refreshToken) {
+                    res.status(401).json({
+                        success: false,
+                        message: "未登入",
+                    });
+                    return;
+                }
+                const result = yield auth_service_1.authService.refreshSession(refreshToken);
+                if (result.session) {
+                    // 更新 access_token
+                    res.cookie("access_token", result.session.access_token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === "production",
+                        sameSite: "lax",
+                        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+                    });
+                    // 更新 refresh_token
+                    res.cookie("refresh_token", result.session.refresh_token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === "production",
+                        sameSite: "lax",
+                        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+                    });
+                }
+                // 簡化回應內容，只需要告訴前端更新成功即可
+                res.json({
+                    success: true,
+                });
+            }
+            catch (error) {
+                res.status(401).json({
+                    success: false,
+                    message: "請重新登入",
+                });
             }
         });
     },

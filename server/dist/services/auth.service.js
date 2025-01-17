@@ -274,6 +274,32 @@ class AuthService extends base_service_1.BaseService {
             }
         });
     }
+    // 刷新 token
+    refreshSession(refreshToken) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (!refreshToken) {
+                    throw new Error("無效的 refresh token");
+                }
+                const { data, error } = yield this.supabase.auth.refreshSession({
+                    refresh_token: refreshToken,
+                });
+                if (error) {
+                    if (error.message === "Invalid refresh token") {
+                        throw new Error("Session 已過期，請重新登入");
+                    }
+                    throw error;
+                }
+                if (!data.session) {
+                    throw new Error("刷新 session 失敗");
+                }
+                return data;
+            }
+            catch (error) {
+                throw error;
+            }
+        });
+    }
 }
 exports.AuthService = AuthService;
 // 導出實例
