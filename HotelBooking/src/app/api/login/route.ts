@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
     const response = await fetch(login_Url, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password}),
+      credentials: 'include' // 同源政策 CORS 需要
     });
 
     // 4.1 拿回Response

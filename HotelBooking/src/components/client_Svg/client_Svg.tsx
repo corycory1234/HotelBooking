@@ -58,3 +58,14 @@ export function DashboardSVG({name, className}: SVG_Interface) {
     />
   )
 }
+
+// 5. Public資料 > profilte資料 之 SVG
+export function ProfileSVG({name, className}: SVG_Interface) {
+  const src = `/profile/${name}.svg`;
+  
+  return (
+    <InlineSVGNoSSR src={src} className={className}
+      // loader={<span>Loading...</span>} 
+    />
+  )
+} 
