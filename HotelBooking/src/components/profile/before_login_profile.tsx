@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const language_List = ["zh-TW", "en-US"];
 
-export default function Profile () {
+export default function Before_Login_Profile () {
   // 1. 多國語系切換 - 如果是 zh-TW, 就吃zh-TW; 若不是, 一率吃en-US
   const [language, set_Language] = useState<string>(language_List.includes(navigator.language) ? navigator.language : "en-US")
   const switch_Language = (new_Language: string) => {
@@ -36,7 +36,10 @@ export default function Profile () {
 
     {/** 多國語系切換 */}
     <div className="flex justify-between">
-      <ProfileSVG name={"language"} className="w-5 h-auto" ></ProfileSVG>
+      <div className="flex gap-2">
+        <ProfileSVG name={"language"} className="w-5 h-auto" ></ProfileSVG>
+        <p>Languages</p>
+      </div>
       <select name="language" id="language" value={language} className="border rounded px-1 py-1" 
         onChange={(event) => switch_Language(event.target.value)}>
         <option value="zh-TW">繁體中文</option>

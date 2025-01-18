@@ -5,35 +5,52 @@ import { OtherSVG } from "@/components/client_Svg/client_Svg";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
+import { z } from 'zod';
 
-interface response_Message_Interface {
+// 1. zod 校驗錯誤之訊息
+const schema = z.object({
+  email: z.string().email("Invalid Email")
+});
+// 2. zod 錯誤訊息之接口
+interface zod_Response_Interface {
+  success: boolean;
   emailError: string;
 }
 
 export default function Forget_Password() {
   const router = useRouter();
 
-  //1. 本地 <input> 的狀態
+  // 3. 本地 <input> 的狀態
   const [email, setEmail] = useState("");
-  const [response, set_Response] = useState<response_Message_Interface>(); // API返回 Zod錯誤訊息狀態
+  const [zod_Response, set_Zod_Response] = useState<zod_Response_Interface>(); // API返回 Zod錯誤訊息狀態
+  const [response, set_Response] = useState();
 
-  // 2. loading 布林開關 
+  // 4. loading 布林開關 
   const [loading_Boolean, set_Loading_Boolean] = useState(false);
 
-  // 3. 忘記密碼表單提交
+  // 5. 忘記密碼表單提交
   const handle_Foget_Password = async (event: React.FormEvent) => {
     event.preventDefault(); // 阻止瀏覽器默認提交
+
+    // 6 zod 校驗, 並 更新錯誤訊息
+    const validateFields = schema.safeParse({email});
+    if(!validateFields.success) {
+      const { fieldErrors } = validateFields.error.flatten();
+      return set_Zod_Response({success: false, emailError: fieldErrors?.email?.[0] || ""})
+    };
     set_Loading_Boolean(true); // loading 開始動畫
 
+    // 7. 執行 忘記密碼API
     try {
-      const API_Response = await fetch("/api/forgetpassword", {
+      const forget_Password_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/forgot-password";
+      const api_Response = await fetch(forget_Password_Url, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email})
       });
 
-      const data = await API_Response.json();
-      if(!API_Response.ok) {
+      const data = await api_Response.json();
+      if(!api_Response.ok) {
         console.log(data, "忘記密碼執行失敗");
         set_Response(data);
         toast.error(data.message)
@@ -90,7 +107,7 @@ export default function Forget_Password() {
         <label htmlFor="email" className="text-gray">Enter Email</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"
           value={email} onChange={(event) => setEmail(event.target.value)}/>
-        <p aria-live="polite" className="text-lg text-customRed">{response?.emailError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
         {/** 電子郵件 */}
 
         {/* 密碼 */}

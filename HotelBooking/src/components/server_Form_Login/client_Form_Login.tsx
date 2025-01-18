@@ -9,11 +9,21 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
+import { z } from "zod";
 
 // const initialState = { message: ""};
 
-// 1. API返回 Zod 錯誤訊息 之 接口
-interface response_Message_Interface {
+// 1. zod 校驗錯誤之訊息
+const schema = z.object({
+  email: z.string().email("Invalid Email"),
+  password: z.string()
+  .min(8, {message: "Must be 8 or more characters long"})
+  .max(20, {message: "Must be 12 or fewer characters long"})
+})
+
+// 2. API返回 Zod 錯誤訊息 之 接口
+interface zod_Response_Interface {
+  success: boolean;
   emailError: string;
   passwordError: string;
 }
@@ -21,37 +31,60 @@ interface response_Message_Interface {
 export default function Server_Form_Login () {
   const router = useRouter()
 
-  // 1. Server Action 的狀態 與 函式
+  // Server Action 的狀態 與 函式
   // const [state, formAction] = useFormState(Submit_Login, initialState)
   
-  //1. 本地 <input> 的狀態
+  // 3. 本地 <input> 的狀態
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [response, set_Response] = useState<response_Message_Interface>(); // API返回 Zod錯誤訊息狀態
-  
-  // 2. loading 布林開關 
+
+  // 4. 接 API返回之response 與 Zod錯誤訊息之response
+  const [zod_Response, set_Zod_Response] = useState<zod_Response_Interface>(); // API返回 Zod錯誤訊息狀態
+
+  // 5. 監聽 API返回 response 之數據
+  const [response, set_Response] = useState();
+  useEffect(() => {
+    console.log("API返回數據",response);
+  },[response])
+
+
+  // 6. loading 布林開關 
   const [loading_Boolean, set_Loading_Boolean] = useState(false);
 
-  // 3. 登入表單提交
+  // 7. 登入表單提交
   const handle_Login = async (event: React.FormEvent) => {
     event.preventDefault(); // 阻止瀏覽器默認提交
     set_Loading_Boolean(true); // loading 開始動畫
+    const login_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/login";
+
 
     try {
-      const API_Response = await fetch("/api/login", {
+      // 8. Zod 驗證
+      const validateFields = schema.safeParse({email, password});
+        // 8.1 Zod 校驗之錯誤訊息
+        if(!validateFields.success) {
+          const { fieldErrors } = validateFields.error.flatten();
+          return set_Zod_Response({ success: false,
+            // 這邊 emailError 或 passwordError 都可能是陣列
+            emailError: fieldErrors.email?.[0] || "", // 只取第一個錯誤訊息
+            passwordError: fieldErrors.password?.[0] || ""
+          })      
+        };
+
+      // 9. 開始串接 API接口
+      const api_Response = await fetch(login_Url, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({email, password}),
+        // credentials: 'include' // 同源政策 CORS 需要
       });
 
-      const data = await API_Response.json();
-      if(!API_Response.ok) {
-        console.log(data, "登入失敗");
+      const data = await api_Response.json();
+      if(!api_Response.ok) {
         set_Response(data);
-        toast.error(data.message)
+        toast.error("Login Failed")
       } else {
-        console.log(data, "登入成功");
-        toast.success(data.message);
+        toast.success("Login OK");
         set_Response(data);
         await sleep(3000);
         router.push("/");
@@ -63,19 +96,25 @@ export default function Server_Form_Login () {
     }
   }
 
-  // 2. 監聽 Server Action - API返回狀態，成功會跳Toast, 3秒後回首頁
-  // useEffect(() => {
-  //   if(state.success === true && state.message) {
-  //     toast.success(state.message);
-  //     setTimeout(() => {
-  //       router.push("/");
-  //     }, 3000)
-  //   };
-  //   if(state.success === false && state.message) {
-  //     toast.error(state.message)
-  //   }
-  // },[state.success, state.message])
 
+  // 9.驗證帳號是否有登入
+  const verify_Token = async () => {
+    const verify_session_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/verify-session";
+
+    try {
+      const response = await fetch(verify_session_Url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
 
   return <>
@@ -96,12 +135,12 @@ export default function Server_Form_Login () {
         <label htmlFor="email" className="text-gray">Enter Email</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"
           value={email} onChange={(event) => setEmail(event.target.value)}/>
-        <p aria-live="polite" className="text-lg text-customRed">{response?.emailError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
         {/** 電子郵件 */}
 
         {/* 密碼 */}
         <Client_Input_Password password={password} setPassword={setPassword}></Client_Input_Password>
-        <p aria-live="polite" className="text-lg text-customRed">{response?.passwordError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.passwordError}</p>
         {/* 密碼 */}
         
         {loading_Boolean ?
@@ -124,6 +163,8 @@ export default function Server_Form_Login () {
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>
+
+      <button onClick={verify_Token}>驗證</button>
       
     </div>
   </>

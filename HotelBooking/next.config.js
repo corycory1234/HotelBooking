@@ -18,14 +18,15 @@ const nextConfig = {
   },
 
   // 2.
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/:path*`
-      }
-    ]
-  }
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/:path*`,
+  //       // destination: 'https://hotel-booking-api-iota.vercel.app/api/v1/:path*'
+  //     }
+  //   ]
+  // }
 }
 
 module.exports = nextConfig

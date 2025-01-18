@@ -10,11 +10,29 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import { sleep } from "@/utils/sleep";
+import { z } from "zod";
 
 // const initialState = { message: ""};
 
-// 1. API返回 Zod 錯誤訊息 之 接口
-interface response_Message_Interface {
+// 1. 密碼最小8, 最長20, 必須有1個字母大寫
+const schema = z.object({
+  email: z.string().email("Invalid Email"),
+  password: z.string()
+    .min(8, { message: "Must be 8 or more characters long" })
+    .max(20, { message: "Must be 12 or fewer characters long" })
+    .refine((value) => /[A-Z]/.test(value), {message: "Must Contain 1 Upper Character"}),
+  // 1.1 Zod 校驗「密碼」與「再次確認密碼」  
+  confirm: z.string()
+}).refine((data) => data.password === data.confirm, 
+{
+  message: "Password doesn't match",
+  path: ["confirm"] // 這裡表示，如果不符合，會把錯誤提示掛在 confirm 這個欄位上
+});
+
+
+// 2. API返回 Zod 錯誤訊息 之 接口
+interface zod_Response_Interface {
+  success: boolean;
   emailError: string;
   passwordError: string;
   confirmError: string;
@@ -23,57 +41,72 @@ interface response_Message_Interface {
 export default function Client_Form_Register () {
   const router = useRouter();
 
-  // 1. 本地 <input> 的狀態
+  // 3. 本地 <input> 的狀態
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [response_Msg, set_Response_Msg] = useState<response_Message_Interface>(); // API返回 Zod錯誤訊息狀態
+  const name = "tester"; // 後端額外需要之欄位
+  const userType = "hotelier"; // 後端額外需要之欄位
 
-  // 1. Server Action 的狀態 與 函式
+  // 4. 接 Zod 錯誤訊息之 response
+  const [zod_Response, set_Zod_Response] = useState<zod_Response_Interface>(); // API返回 Zod錯誤訊息狀態
+
+  // 5. 監聽 API返回 response 之數據
+  const[response, set_Response] = useState();
+  useEffect(() => {
+    console.log("API返回數據", response);
+  },[response])
+
+  // Server Action 的狀態 與 函式
   // const [state, formAction] = useFormState(Submit_Register, initialState);
 
-  // 2. loading 布林開關 
+  // 6. loading 布林開關 
   const [loading_Boolean, set_Loading_Boolean] = useState(false);
 
-  // 3. 註冊表單提交
+  // 7. 註冊表單提交
   const handle_Register = async (event: React.FormEvent) => {
     event.preventDefault(); // 阻止瀏覽器默認提交
     set_Loading_Boolean(true); // loading 開始動畫
+    const register_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/register";
+
     try {
-      const response = await fetch("/api/register", {
+    // 7. zod 校驗
+    const validateFields = schema.safeParse({email, password, confirm});
+    //  7.1 zod 校驗之錯誤訊息
+    if(!validateFields.success) {
+      const { fieldErrors } = validateFields.error.flatten();
+      return set_Zod_Response({success: false, 
+        emailError: fieldErrors.email?.[0] || "", // 只取第一個錯誤訊息
+        passwordError: fieldErrors.password?.[0] || "",
+        confirmError: fieldErrors.confirm?.[0] || ""
+      })
+    };
+
+      // 8. 開始串接 API接口
+      const api_Response = await fetch(register_Url, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({email, password, confirm})
+        body: JSON.stringify({email, password, confirm, name, userType})
       });
-      const data = await response.json();
-      if(!response.ok) {
-        console.log(data, "註冊失敗");
-        set_Response_Msg(data)
-        toast.error(data.message);
+      const data = await api_Response.json();
+
+      if(!api_Response.ok) {
+        // console.log(data, "註冊失敗");
+        set_Response(data)
+        toast.error("Regisration Failed");
       } else {
-        console.log(data, "註冊成功");
-        toast.success(data.message);
+        // console.log(data, "註冊成功");
+        toast.success("Regisration OK");
         await sleep(3000);
         router.push("/");
       }
     } catch (error) {
       console.log("註冊失誤", error);
+    } finally {
+      set_Loading_Boolean(false); // loading 停止動畫
     }
-    set_Loading_Boolean(false); // loading 停止動畫
   };
 
-  // 2. 監聽 Server Action - API返回狀態，成功會跳Toast, 3秒後回首頁
-  // useEffect(() => {
-  //   if(state.success === true && state.message) {
-  //     toast.success(state.message);
-  //     setTimeout(() => {
-  //       router.push("/")
-  //     }, 3000)
-  //   };
-  //   if(state.success === false && state.message) {
-  //     toast.error(state.message);
-  //   }
-  // },[state.success, state.message])
 
   return <>
   <div className="relative">
@@ -93,17 +126,17 @@ export default function Client_Form_Register () {
         <label htmlFor="email" className="text-gray">Enter Email</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"
           value={email} onChange={(event) => setEmail(event.target.value)}/>
-        <p aria-live="polite" className="text-lg text-customRed">{response_Msg?.emailError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
         {/** 電子郵件 */}
 
         {/* 密碼 */}
         <Client_Input_Password password={password} setPassword={setPassword}></Client_Input_Password>
-        <p aria-live="polite" className="text-lg text-customRed">{response_Msg?.passwordError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.passwordError}</p>
         {/* 密碼 */}
 
         {/* 再次確認密碼 */}
         <Client_Input_Confirm_Password confirm={confirm} setConfirm={setConfirm}></Client_Input_Confirm_Password>
-        <p aria-live="polite" className="text-lg text-customRed">{response_Msg?.confirmError}</p>
+        <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.confirmError}</p>
         {/* 再次確認密碼 */}
         
         {/** 註冊按鈕、loading按鈕切換 */}
