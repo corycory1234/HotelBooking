@@ -4,7 +4,7 @@ import Menu from "../../components/menu";
 
 export default function TripLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return <>
-    <div>
+    <div className="customized-bg-gradient">
       {children}
       <Menu></Menu>
     </div>

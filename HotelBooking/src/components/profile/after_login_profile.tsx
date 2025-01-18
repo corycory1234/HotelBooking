@@ -51,7 +51,7 @@ export default function After_Login_Profile () {
   }
   
   return <div className="pb-20">
-  {/** 登入 */}
+  {/** 登出 */}
     <div className="bg-primary flex justify-center items-center gap-8 py-8">
       <div className="rounded-full bg-softGray p-2">
         <ProfileSVG name={"user"} className="w-10 h-auto"></ProfileSVG>
@@ -66,14 +66,14 @@ export default function After_Login_Profile () {
           onClick={log_Out}>Log Out
         </button>
         : 
-        <button type="button" className="bg-softGray flex justify-center items-center rounded-lg py-3 gap-2" disabled>
+        <button type="button" className="bg-softGray flex justify-center items-center rounded-lg p-3 gap-2" disabled>
           <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
             Processing...
         </button>
       }
 
     </div>
-  {/** 登入 */}
+  {/** 登出 */}
 
 
   <div className="customized-bg-gradient flex flex-col gap-4 p-4">

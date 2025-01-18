@@ -88,6 +88,7 @@ export default function Server_Form_Login () {
         set_Response(data);
         await sleep(3000);
         router.push("/");
+        await get_User_Info();
       }
     } catch (error) {
       console.log("登入失敗", error);
@@ -113,7 +114,23 @@ export default function Server_Form_Login () {
     } catch (error) {
       console.log(error);
     }
+  }
 
+  // 10. 取得個人數據
+  const [user_Info, set_User_Info] = useState();
+  const get_User_Info = async () => {
+    try {
+      const user_Info_Url =  process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/me";
+      const response = await fetch(user_Info_Url, {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+      });
+      const data = await response.json();
+      console.log(data, "查看個人數據");
+    } 
+    catch (error) {
+      console.log(error);
+    }
   }
 
 
