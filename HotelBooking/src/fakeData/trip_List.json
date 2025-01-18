@@ -1,3 +1,62 @@
 [
-  {}
+  {
+    "booking_Id": "1",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "The Cargo Hotel",
+    "room_Type": "Single Room",
+    "booking_Status": "completed",
+    "checkin": "2024/12/25",
+    "checkout": "2024/12/31",
+    "price": 1250
+  },
+  {
+    "booking_Id": "2",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "Red Planet",
+    "room_Type": "Queen Room",
+    "booking_Status": "completed",
+    "checkin": "2024/10/25",
+    "checkout": "2024/10/31",
+    "price": 2250
+  },
+  {
+    "booking_Id": "3",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "Lazarus Hotel",
+    "room_Type": "Double Room",
+    "booking_Status": "pending",
+    "checkin": "2025/02/01",
+    "checkout": "2025/02/10",
+    "price": 3250
+  },
+  {
+    "booking_Id": "4",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "Orange Hotel",
+    "room_Type": "Twin Room",
+    "booking_Status": "pending",
+    "checkin": "2025/03/01",
+    "checkout": "2025/04/10",
+    "price": 11250
+  },
+  {
+    "booking_Id": "5",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "King Hotel",
+    "room_Type": "King Room",
+    "booking_Status": "cancelled",
+    "checkin": "2024/12/31",
+    "checkout": "2025/01/02",
+    "price": 5250
+  },
+  {
+    "booking_Id": "6",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "Lotus Hotel",
+    "room_Type": "Single Room",
+    "booking_Status": "cancelled",
+    "checkin": "2025/01/01",
+    "checkout": "2025/01/02",
+    "price": 250
+  }
 ]
