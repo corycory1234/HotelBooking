@@ -76,11 +76,12 @@ export default function Booking_Detail () {
         {/** 留言彈跳視窗 */}
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <div className="flex flex-col gap-4 px-4 pt-20">
-
+              <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p>
+              <p>Name: {booking_Detail.traveler_Name}</p>
               {/** 5星評價 */}
               <div className="flex gap-2" >
               {[1,2,3,4,5].map((star: number) => {
-                return <FiveStarSVG name={"emptyStar"} 
+                return <FiveStarSVG name={"emptystar"} 
                   className="w-5 h-auto hover:fill-[#ffdd00]" key={star}
                   fill={star <= hover_Star ? '#ffdd00' : 'white'}
                   onMouseEnter={() => set_Hover_Star(star)}
@@ -90,7 +91,8 @@ export default function Booking_Detail () {
               </div>
               {/** 5星評價 */}
 
-              <textarea name="review" id="review" rows={10} cols={50} className="border"
+              <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
+                placeholder="Leave comment for what you experience from this Hotel"
                 value={review}
                 onChange={(event) => set_Review(event.target.value)}>
               </textarea>
