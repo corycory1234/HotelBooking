@@ -2,6 +2,7 @@
 import Previous_Page from "../previous_Page/previous_Page";
 import { useEffect, useState } from "react";
 import Booking_List_Json from "@/fakeData/trip_List.json";
+import { useRouter } from "next/navigation";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
 interface Booking_List_Interface {
@@ -22,8 +23,10 @@ export default function Trip_List () {
   // 2. Tab 切換訂單按鈕 - 高亮
   const [tab, set_Tab] = useState("Upcoming");
 
-  // 3.
+  // 3. 訂單列表 (按照訂單狀態分類)
   const [booking_List, set_Upcoming_Booking_List] = useState<Booking_List_Interface[]>([]);
+
+  // 4. 點選訂單狀態分類, 取得 Upcoming 訂單狀態陣列
   const select_Booking_Status = (tab_Text: string) => {
     if(tab_Text === "Upcoming") {
       const pending_Booking = Booking_List_Json.filter((item) => {
@@ -46,9 +49,19 @@ export default function Trip_List () {
     }
   }
 
+  // 5. 一進頁面, 先顯示 Upcoming訂單
   useEffect(() => {
     select_Booking_Status("Upcoming")
   },[])
+
+  // 6. 查看「指定訂單」
+  const router = useRouter()
+  const view_Booking = (hotel_Id: string) => {
+    router.push(`trip/${hotel_Id}`)
+  }
+
+
+
 
   return <div className="flex flex-col pb-20">
 
@@ -110,7 +123,8 @@ export default function Trip_List () {
                 <p className="text-gray">Booking ID: #{item.booking_Id}</p>
                 <p className="font-semibold">${item.price}</p>
               </div>
-              <button className="bg-primary text-white rounded py-2">View Details</button>
+              <button className="bg-primary text-white rounded py-2"
+                onClick={() => view_Booking(item.booking_Id)}>View Details</button>
             </div>
             {/** 訂單號碼、價錢、查看訂單 */}
 
