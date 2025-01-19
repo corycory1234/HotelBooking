@@ -11,9 +11,18 @@ interface Booking_List_Interface {
   hotel_Name: string,
   room_Type: string,
   booking_Status: string,
+  start_Date: string,
+  end_Date: string,
   checkin: string,
   checkout: string,
   price: number
+  adults: number,
+  childs: number,
+  tax: number,
+  facility: string[],
+  review: string | null,
+  star_Rating: number | null,
+  traveler_Name: string | null
 }
 
 export default function Trip_List () {
@@ -105,11 +114,11 @@ export default function Trip_List () {
             <div className="flex">
               <div className="w-1/2 flex flex-col">
                 <p className="text-gray">Check-In</p>
-                <p className="font-semibold">{item.checkin}</p>
+                <p className="font-semibold">{item.start_Date}</p>
               </div>
               <div className="w-1/2 flex flex-col">
                 <p className="text-gray">Check-Out</p>
-                <p className="font-semibold">{item.checkout}</p>
+                <p className="font-semibold">{item.end_Date}</p>
               </div>
             </div>
             {/** 入住、退房時間 */}

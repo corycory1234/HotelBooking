@@ -10,8 +10,11 @@ const InlineSVGNoSSR = dynamic(() => import("react-inlinesvg"), {
 });
 
 interface SVG_Interface {
-  name: string | number;      // 例如 "bar"
+  name: string;      // 例如 "bar"
   className?: string;
+  fill?: string,
+  onMouseEnter?: React.MouseEventHandler<SVGSVGElement>,
+  onMouseLeave?: React.MouseEventHandler<SVGSVGElement>
 }
 
 // 1. Public資料 > Facility資料 之SVG
@@ -68,4 +71,15 @@ export function ProfileSVG({name, className}: SVG_Interface) {
       // loader={<span>Loading...</span>} 
     />
   )
-} 
+}
+
+// 6. Public資料 > starrating資料 之 SVG (5星評論)
+export function FiveStarSVG ({name, className, fill, onMouseEnter, onMouseLeave }: SVG_Interface) {
+  const src= `/starrating/${name}.svg`;
+  
+  return <InlineSVGNoSSR src={src} className={className} fill={fill} onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+      // loader={<span>Loading...</span>} 
+    />
+  
+}
