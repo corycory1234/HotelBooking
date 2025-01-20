@@ -6,7 +6,7 @@ import type { DateValueType } from "react-tailwindcss-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 // import { updateDateRange } from "@/store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
-import { updateDateRange } from "../../store/form-Search/formSearchSlice";
+import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
 
 // 2. startDate - 高亮「今天」
 const START_FROM = new Date();
@@ -35,12 +35,21 @@ export default function DateRangePicker () {
 
   const selectDate = (newValue: {startDate: Date | null, endDate: Date | null}) => {
     setValue(newValue);
-
+    console.log(newValue, "手動點選後, 日歷之數據格式");
     const { startDate, endDate } = newValue;
     if(startDate && endDate) {
-      const formattedStart = startDate.toISOString().split("T")[0];
-      const formattedEnd = endDate.toISOString().split("T")[0];
-      dispatch(updateDateRange(`${formattedStart} to ${formattedEnd}`));
+      // console.log(startDate, endDate, "看看日期");
+      // const formattedStart = startDate.toISOString().split("T")[0];
+      // const formattedEnd = endDate.toISOString().split("T")[0];
+      // dispatch(updateDateRange(`${formattedStart} to ${formattedEnd}`));
+
+      // toLocaleString()會是"2025/1/20 上午11:11:11", 再用split(" ")照著" 空白字串", 切出陣列 - 2個元素, 並取第0個
+      const formatted_Start_Date = startDate.toLocaleString().split(" ")[0];
+      const formatted_End_Date = endDate.toLocaleString().split(" ")[0];
+
+      dispatch(updateDateRange(`${formatted_Start_Date} to ${formatted_End_Date}`))
+      dispatch(update_Start_Date(formatted_Start_Date));
+      dispatch(update_End_Date(formatted_End_Date));
     } else {
       dispatch(updateDateRange(null));
     }
@@ -63,10 +72,13 @@ export default function DateRangePicker () {
           endDate: new Date(end)
         })
       }
-      console.log(value);
+      // console.log(value);
     },[ storedDateRange])
 
-    
+    // 測試入住日 退房日
+    const start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
+    const end_Date = useSelector((state: RootState) => state.formSearch.end_Date);
+    console.log(start_Date, end_Date, "測試中");
 
     return (
       // 1. 原始寫法

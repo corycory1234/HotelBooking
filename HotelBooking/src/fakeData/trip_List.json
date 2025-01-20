@@ -16,7 +16,10 @@
     "facility": ["ac", "bar", "beach", "checkin"],
     "review": null,
     "star_Rating": null,
-    "traveler_Name": "Jacob"
+    "traveler_Name": "Jacob",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "100 Ocean Drive, Miami Beach, FL 33139, United States"
   },
   {
     "booking_Id": "2",
@@ -35,7 +38,10 @@
     "facility": ["gym", "ktv", "laundry", "meal"],
     "review": null,
     "star_Rating": null,
-    "traveler_Name": "Jason"
+    "traveler_Name": "Jason",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "100 Ellen Street, Bangkok, Thailand"
   },
   {
     "booking_Id": "3",
@@ -54,7 +60,10 @@
     "facility": ["meal", "bar", "spa", "ac"],
     "review": null,
     "star_Rating": null,
-    "traveler_Name": "Nina"
+    "traveler_Name": "Nina",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "55 Oxford Street, Brisbane, Australia"
   },
   {
     "booking_Id": "4",
@@ -73,7 +82,10 @@
     "facility": ["slipper", "tv", "beach", "pickup"],
     "review": null,
     "star_Rating": null,
-    "traveler_Name": "Lauren"
+    "traveler_Name": "Lauren",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "66 Market Street, Sydney, Australia"
   },
   {
     "booking_Id": "5",
@@ -92,7 +104,10 @@
     "facility": ["water", "wifi", "beach", "laundry"],
     "review": null,
     "star_Rating": null,
-    "traveler_Name": "Laura"
+    "traveler_Name": "Laura",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "2 George Street, Guandong, Chinba"
   },
   {
     "booking_Id": "6",
@@ -111,6 +126,9 @@
     "facility": ["wifi", "laundry", "pickup", "pool"],
     "review": null,
     "star_Rating": null,
-    "traveler_Name": "Max"
+    "traveler_Name": "Max",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "12 Nanjing Street, Taipei, Taiwan"
   }
 ]

@@ -3,27 +3,10 @@ import Previous_Page from "../previous_Page/previous_Page";
 import { useEffect, useState } from "react";
 import Booking_List_Json from "@/fakeData/trip_List.json";
 import { useRouter } from "next/navigation";
+import { Booking_Detail_Interface } from "@/types/booking_Detail";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
-interface Booking_List_Interface {
-  booking_Id: string,
-  booking_Img: string,
-  hotel_Name: string,
-  room_Type: string,
-  booking_Status: string,
-  start_Date: string,
-  end_Date: string,
-  checkin: string,
-  checkout: string,
-  price: number
-  adults: number,
-  childs: number,
-  tax: number,
-  facility: string[],
-  review: string | null,
-  star_Rating: number | null,
-  traveler_Name: string | null
-}
+
 
 export default function Trip_List () {
   // 1. 當前頁面 - 頂端文字，props傳遞給 <Previous_Page>
@@ -33,7 +16,7 @@ export default function Trip_List () {
   const [tab, set_Tab] = useState("Upcoming");
 
   // 3. 訂單列表 (按照訂單狀態分類)
-  const [booking_List, set_Upcoming_Booking_List] = useState<Booking_List_Interface[]>([]);
+  const [booking_List, set_Upcoming_Booking_List] = useState<Booking_Detail_Interface[]>([]);
 
   // 4. 點選訂單狀態分類, 取得 Upcoming 訂單狀態陣列
   const select_Booking_Status = (tab_Text: string) => {

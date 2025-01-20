@@ -7,12 +7,13 @@ import { FacilitySVG } from "@/components/client_Svg/client_Svg";
 import { FiveStarSVG } from "@/components/client_Svg/client_Svg";
 import Modal from "@/components/modal/modal";
 import { useEffect, useState } from "react";
+import { Booking_Detail_Interface } from "@/types/booking_Detail";
 
 export default function Booking_Detail () {
 
   // 1. 匹配「指定訂單」
   const params = useParams();
-  const booking_Detail = Booking_List_Json.find((item) => item.booking_Id === params.id);
+  const booking_Detail = Booking_List_Json.find((item) => item.booking_Id === params.id) as Booking_Detail_Interface;
   console.log(booking_Detail, "指定訂單");
   // 1.1 這個if判斷最好要寫哦, 不然訂單明細很多屬性都要用「?.可選鏈 or as 斷言」, 還有一堆undefined的問題...
   if(!booking_Detail){return <p>沒有此訂單</p>}
@@ -198,7 +199,7 @@ export default function Booking_Detail () {
         <div className="bg-white flex flex-col rounded-lg p-2 gap-2">
           <p className="text-sm font-semibold">Location - 地圖尚未實作</p>
           <img src="/triplist/location.png" alt="" />
-          <p className="text-sm text-gray">100 Ocean Drive, Miami Beach, FL 33139, United States</p>
+          <p className="text-sm text-gray">{booking_Detail.address}</p>
           <button type="button" className="bg-primary text-white rounded py-2">Get Directions</button>
         </div>
         {/** 地圖 */}

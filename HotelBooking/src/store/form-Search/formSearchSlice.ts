@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import type { DateValueType } from "react-tailwindcss-datepicker";
+import type { DateValueType } from "react-tailwindcss-datepicker";
 
 interface Form_Search {
   keyword: string,
   dateRange: string | null,
+  start_Date: Date | null | string,
+  end_Date: Date | null | string,
   // dateRange: DateValueType,
   room: number,
   adult: number,
@@ -17,6 +19,8 @@ interface Form_Search {
 const initialState: Form_Search = {
   keyword: "",
   dateRange: null,
+  start_Date:  null,
+  end_Date:  null,
   room: 1,
   adult: 1,
   child: 0,
@@ -72,6 +76,17 @@ const formSearch_Slice = createSlice({
     updateRangeSlider: (state, action: PayloadAction<number | number[]>) => {
       state.rangeSlider = action.payload
       console.log(state.rangeSlider, "最小房價 - 最大房價");
+    },
+
+    // 更新 入住日
+    update_Start_Date: (state, action: PayloadAction<Date | null | string>) => {
+      state.start_Date = action.payload
+      console.log("Redux的起始日", state.start_Date);
+    },
+    // 更新 退房日
+    update_End_Date: (state, action: PayloadAction<Date | null | string>) => {
+      state.end_Date = action.payload
+      console.log("Redux的退房日", state.end_Date);
     }
   }
 });
@@ -87,6 +102,8 @@ export const { updateKeyword,
   updateRating,
   updateBedType,
   updateFacility,
-  updateRangeSlider 
+  updateRangeSlider,
+  update_Start_Date,
+  update_End_Date
 } = formSearch_Slice.actions;
 export default formSearch_Slice.reducer;

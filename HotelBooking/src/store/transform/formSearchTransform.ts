@@ -11,6 +11,8 @@ interface Form_Search {
   rating: number[] | null,
   bedType: string[] | null;
   facility: string[] | null;
+  start_Date: Date | null,
+  end_Date: Date | null,
 };
 
 // 1. 工具函式：解析數字

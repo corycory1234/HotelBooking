@@ -40,13 +40,13 @@ export default function HotelList () {
   return <>
   <BackPage></BackPage>
 
-  <div className="fixed top-[56px] left-0 right-0 bg-white z-40 border-b border-gray">
+  <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray">
     {/* Filter 與 熱門搜尋條件 */}
       <Client_Filter_Button></Client_Filter_Button>
     {/* Filter 與 熱門搜尋條件 */}
   </div>
 
-<main className="pt-28 px-4 pb-4">
+<main className="p-4">
 
   {/* ↑↓Sort 排序  */}
   <div className="flex items-center justify-between pb-4">

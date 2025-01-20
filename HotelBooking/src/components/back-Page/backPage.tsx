@@ -10,8 +10,8 @@ export default function BackPage() {
 
 
   return <>
-    <nav className="fixed top-0 left-0 right-0 bg-primary z-40">
-      <div className="px-4 h-[56px] flex items-center gap-4">
+    <nav className="sticky top-0 left-0 right-0 bg-primary z-40">
+      <div className="px-4 h-[72px] flex items-center gap-4">
           <button type="button" className="basis-1/12">
             <Link href={'/'}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-white">
