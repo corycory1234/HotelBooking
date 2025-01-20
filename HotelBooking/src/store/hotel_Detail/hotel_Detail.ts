@@ -23,7 +23,9 @@ const initialState: Hotel_Detail_Interface = {
   tax: 0,
   checkin: "",
   checkout: "",
-  roomType: [] // 初始設為空陣列
+  roomType: [], // 初始設為空陣列
+  latitude: null,
+  longtitude: null,
 } 
 
 const hotel_Detail_Slice = createSlice({
