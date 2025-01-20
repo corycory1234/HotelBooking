@@ -74,7 +74,9 @@
         "roomsize": 20,
         "maxOccupancy": 3
       }
-    ]
+    ],
+    "latitude": 13.711908798064055,
+    "longtitude": 100.51066786010331 
   },
   
   {
@@ -123,9 +125,9 @@
         "comment": "“This is a hotel on average to live in, but it doesn't have AC”" 
       }
     ],
-    "address": "Shop 13, Lemon Grove Shopping Centre, 427-441 Victoria Ave, Chatswood NSW 2067, Australia",
-    "country": "Australia",
-    "city": "Brisbane",
+    "address": "300/1 Charoen Krung Road, Sathorn , Bangkok Riverside, Bangkok, Thailand",
+    "country": "Thailand",
+    "city": "Bangkok",
     "tax": 0.05,
     "checkin": "14:00",
     "checkout": "11:00",
@@ -152,7 +154,9 @@
         "roomsize": 18,
         "maxOccupancy": 3
       }
-    ]
+    ],
+    "latitude": 13.711908798064055,
+    "longtitude": 100.51066786010331 
   },
 
   {
@@ -230,6 +234,8 @@
         "roomsize": 22,
         "maxOccupancy": 2
       }
-    ]
+    ],
+    "latitude": 13.711908798064055,
+    "longtitude": 100.51066786010331 
   }
 ]

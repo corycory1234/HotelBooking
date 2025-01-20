@@ -1,3 +1,4 @@
+'use client';  
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -8,7 +9,11 @@ import { HomeSVG, OtherSVG } from "../client_Svg/client_Svg";
 import Hotel_Room_Type from "./hotel_Room_Type";
 import Hotel_Facility from "./hotel_Facility";
 import Hotel_Customer_Review from "./hotel_Customer_Review";
-
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import { LatLngExpression } from "leaflet"; // 從 @types/leaflet 來的
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import Modal from "@/components/modal/modal";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -17,7 +22,14 @@ interface Hotel_Card_Interface {
 
 // 2. Tab - 詳細、設施、評價陣列
 // const tab = ["Overview", "Rooms", "Facilities", "Review"]
-const tab = ["Overview", "Rooms", "Review"]
+const tab = ["Overview", "Rooms", "Review"];
+
+// 3. leaflet 打開地圖彈窗, 所需要的大頭之圖檔
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: "/leaflet/marker-icon-2x.png",
+  iconUrl: "/leaflet/marker-icon.png",
+  shadowUrl: "/leaflet/marker-shadow.png",
+})
 
 export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 1. 父元件 HotelList props 指定飯店 之數據
@@ -25,6 +37,9 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
   // 2. Tab - 數字對應 tab陣列索引值 之高亮切換
   const [selected_Tab, set_Selected_Tab] = useState(0);
+
+  // 3. Modal彈窗 - 布林
+  const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
 
 
 
@@ -80,9 +95,28 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
         <OtherSVG name={"location"} className="w-5 h-auto"></OtherSVG>
         <p>{the_Hotel?.city + ", " + the_Hotel?.country}</p>
       </div>
-      {/** 飯店地圖 */}
-      <p className="text-primary font-semibold cursor-pointer">Shown On the Map</p>
-      {/** 飯店地圖 */}
+
+
+      <p className="text-primary font-semibold cursor-pointer" onClick={() => set_Modal_Boolean(true)}>Shown On the Map</p>
+      
+    {/** React - leaflet 地圖 */}
+      <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
+        <MapContainer
+          center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+          zoom={13}
+          style={{width: "100%" }}
+          className="h-full">
+          <TileLayer
+          // 這裡使用 OpenStreetMap 免費圖資
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+          <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+            <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.name}</Tooltip>
+          </Marker>
+        </MapContainer>
+      </Modal>
+    {/** React - leaflet 地圖 */}
+
+
       <div className="flex gap-1">
         <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
         <p className="bg-blue text-white font-semibold rounded px-2">{the_Hotel?.rating}</p>

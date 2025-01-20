@@ -15,7 +15,9 @@ export interface Hotel_Detail_Interface {
   tax: number,
   checkin: string,
   checkout: string,
-  roomType: Hotel_Room_Type_Interface[]
+  roomType: Hotel_Room_Type_Interface[],
+  latitude: number | null,
+  longtitude: number | null, 
 }[]
 
 // 2. 房型 (主流做法：同一層就能看到 roomType、images)

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Booking_List_Json from "@/fakeData/trip_List.json";
 import { useRouter } from "next/navigation";
 import { Booking_Detail_Interface } from "@/types/booking_Detail";
-// import Not_Found from "../not_Found/not_found";
 import Not_Found from "@/components/not_Found/not_Found";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];

@@ -67,3 +67,7 @@ input[type="radio"]:checked {
   -moz-appearance: textfield;
   appearance: none;
 }
+
+.leaflet-tooltip {
+  @apply font-semibold !important
+}
