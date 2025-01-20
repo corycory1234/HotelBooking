@@ -1,22 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { DateValueType } from "react-tailwindcss-datepicker";
+import { Form_Search_Interface } from "@/types/form_Search";
 
-interface Form_Search {
-  keyword: string,
-  dateRange: string | null,
-  start_Date: Date | null | string,
-  end_Date: Date | null | string,
-  // dateRange: DateValueType,
-  room: number,
-  adult: number,
-  child: number,
-  rangeSlider: number | number[],
-  bedType: string[] | null,
-  rating: number[] | null,
-  facility: string[] | null,
-}
-
-const initialState: Form_Search = {
+const initialState: Form_Search_Interface = {
   keyword: "",
   dateRange: null,
   start_Date:  null,

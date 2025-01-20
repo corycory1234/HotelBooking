@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Booking_List_Json from "@/fakeData/trip_List.json";
 import { useRouter } from "next/navigation";
 import { Booking_Detail_Interface } from "@/types/booking_Detail";
+import Not_Found from "../not_Found/not_found";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
-
 
 export default function Trip_List () {
   // 1. 當前頁面 - 頂端文字，props傳遞給 <Previous_Page>
@@ -55,17 +55,17 @@ export default function Trip_List () {
 
 
 
-  return <div className="flex flex-col pb-20">
+  return <div className={`flex flex-col ${booking_List.length >0 ? 'pb-20' : ''}`}>
 
   {/** 返回上一頁 */}
   <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
   {/** 返回上一頁 */}
 
   {/** Tab 切換訂單按鈕 */}
-  <div className="flex gap-2 py-1 px-4">
+  <div className="flex gap-2 py-1 px-4 flex-wrap">
     {booking_Buttons.map((item, index) => {
       return <button key={index}
-        className={` text-softGray p-2 border border-gray rounded
+        className={`text-softGray text-sm p-2 border border-gray rounded
         ${tab === item ? 'bg-primary text-white' : ''}`}
         onClick={() => select_Booking_Status(item)}> {item}
       </button>
@@ -74,8 +74,11 @@ export default function Trip_List () {
   {/** Tab 切換訂單按鈕 */}
 
   {/** 訂單卡片 */}
-  <div className="flex flex-col p-4 gap-4">
-    {
+  <div className={`flex flex-col p-4 gap-4  ${booking_List.length >0 ? 'customized-bg-gradient' : ''} `}>
+
+    { 
+      booking_List.length === 0 ? <Not_Found you_Have_No_Bookings="You Have No Bookings"></Not_Found> // 找不到訂單SVG
+      :
       booking_List.map((item) => {
         return <div className="flex flex-col gap-4 bg-white rounded-lg px-2 py-4" key={item.booking_Id}>
             {/** 訂單照片、飯店名、房型名、確認|未確認|取消 */}
@@ -84,8 +87,8 @@ export default function Trip_List () {
               <div className="flex flex-col basis-1/2">
                 <p className="font-semibold">{item.hotel_Name}</p>
                 <p className="text-sm">{item.room_Type}</p>
-                <span className={` rounded p-2 w-fit 
-                  ${item.booking_Status === "cancelled" ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
+                <span className={`rounded p-2 w-fit 
+                  ${item.booking_Status === 'cancelled' ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
                 >{item.booking_Status}</span>
               </div>
             </div>

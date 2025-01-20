@@ -32,8 +32,9 @@ export default function Client_Show_Keyword () {
   },[destination, room, adult, child, timestamp])
 
   return <>
-    <div className="flex flex-col items-center text-white cursor-pointer">
-      <p onClick={show_FormSearch} className="">{keyword} ･</p>
+    <div className="flex flex-col items-center text-white cursor-pointer" 
+      onClick={show_FormSearch}>
+      <p className="">{keyword} ･</p>
       <p>{dateRange}</p>
     </div>
 

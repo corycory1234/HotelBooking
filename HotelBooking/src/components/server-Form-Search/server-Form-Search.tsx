@@ -6,6 +6,8 @@ import Client_Input_Traveler from "./client-Input-Traveler";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Toaster_Notify from "../toaster/toaster";
+import toast from "react-hot-toast";
 
 export default function Server_Form_Search () {
   // 0. 路由
@@ -36,10 +38,20 @@ export default function Server_Form_Search () {
     console.log("床型", bedType);
     console.log("設施", facility);
     console.log("最小最大房錢", rangeslider);
+
+    // 2. 吐司訊息, 防止沒輸入數據
+    if(!destination || destination.trim() === ""){
+      toast.error("Please Type Your Destination");
+      return;
+    };
+    if(!dateRange || dateRange.trim() === "") {
+      toast.error("Please Select DateRange");
+      return;
+    };
       
       
     
-      // 2. URL參數, 轉字串
+      // 3. URL參數, 轉字串
       const timestamp = +new Date();
       const query = new URLSearchParams({
         destination,
@@ -57,12 +69,14 @@ export default function Server_Form_Search () {
       }).toString()
     
     
-    // 1.1 跳轉「飯店列表」
+    // 4 跳轉「飯店列表」
     router.push(`/hotellist?${query}`);
   }
 
 
   return <>
+  <Toaster_Notify></Toaster_Notify>
+
     <form onSubmit={submit_Search} className="flex flex-col p-4 gap-4 justify-center items-center">
       <Client_Input_Keyword></Client_Input_Keyword>
       <DateRangePicker></DateRangePicker>
