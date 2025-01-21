@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 // 1. 設施初始值
 const facilities = ["beach", "gym", "bar", 
   "wifi" ,"ktv", "pickup", "24hrcheckin","laundry",  "water", 
@@ -5,6 +7,23 @@ const facilities = ["beach", "gym", "bar",
 ];
 
 export default function Add_Hotel_Basic_Info() {
+  // 2. 推薦景點 - 本地State
+  const [recommendation_List, set_Recommendation_List] = useState<string[]>([]);
+  // 3. onChange事件, 參數必須做好TS辨別
+  const handle_Change_Recommendation = (event: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
+    const new_recommendation_List = [...recommendation_List]; // 必須做好展開運算子
+    new_recommendation_List[index] = event.target.value; // [新一筆景點] = 最新的target.value
+    set_Recommendation_List(new_recommendation_List) // 再更新 本地state狀態
+  }
+  // 4. 新增一筆景點 - 函式
+  // const add_One_Recommendation = () => {
+  //   set_Recommendation_List([...recommendation_List, ""])
+  // }
+
+  // 5. 一進頁面, 先給個預設1筆 <textarea> for 景點
+  // useEffect(() => {
+  //   add_One_Recommendation()
+  // },[])
 
   return <>
 
@@ -139,6 +158,22 @@ export default function Add_Hotel_Basic_Info() {
       <textarea name="intro" id="intro" className="border rounded"></textarea>
     </div>
     {/** 飯店介紹 */}
+
+
+    {/** 鄰近交通 */}
+    <div className="flex flex-col gap-2">
+      <label htmlFor="transportation" className="font-semibold text-primary">Transportation</label>
+      <textarea name="transportation" id="transportation" className="border rounded"></textarea>
+    </div>
+    {/** 鄰近交通 */}
+
+    {/** 推薦景點 */}
+    <div className="flex flex-col gap-2">
+      <label htmlFor="recommendation" className="font-semibold text-primary">Recommendation</label>
+      <textarea name="recommendation" id="recommendation" className="border rounded"></textarea>
+    </div>
+    {/** 推薦景點 */}
+
 
     {/** 上傳飯店輪播圖 */}
     <div className="flex flex-col gap-2">

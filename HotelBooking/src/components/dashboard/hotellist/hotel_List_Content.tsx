@@ -44,6 +44,8 @@ export default function Hotel_List_Content () {
       hotel_Phone: null,
       hotel_Email: null,
       cancellation_Policy: null,
+      transportation: null,
+      recommendation: null,
       review_List: [],
       roomType_List: []
   })
@@ -72,6 +74,8 @@ export default function Hotel_List_Content () {
         hotel_Phone: null,
         hotel_Email: null,
         cancellation_Policy: null,
+        transportation: null,
+        recommendation: null,
         review_List: [],
         roomType_List: []
       });

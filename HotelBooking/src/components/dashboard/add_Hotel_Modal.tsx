@@ -104,6 +104,8 @@ export default function Add_Hotel_Modal() {
     const cancellation_Policy = formData.get("cancellation_Policy") as string | null;
     const facilitiy_List = formData.getAll("facilities") as string[] | null;
     const intro = formData.get("intro") as string | null;
+    const transportation = formData.get("transportation") as string | null;
+    const recommendation = formData.get("recommendation") as string | null;
     const hotelimFiles = formData.getAll("hotelimages") as File[];
     const hotel_Image_List = hotelimFiles.map((item) => ({
       url: URL.createObjectURL(item),
@@ -202,6 +204,8 @@ export default function Add_Hotel_Modal() {
       cancellation_Policy: cancellation_Policy,
       facility_List: facilitiy_List,
       hotel_Intro: intro,
+      transportation: transportation,
+      recommendation: recommendation,
       hotel_Image_List: hotel_Image_List,
       review_List: initialReviews_List,
       roomType_List: initialRoomType_List,

@@ -23,6 +23,8 @@ export interface add_Hotel_Detail_Interface {
   hotel_Phone: string | null,
   hotel_Email: string | null,
   cancellation_Policy: string | null,
+  transportation: string | null,
+  recommendation: string | null,
   review_List: add_Review_Type_Interface[],
   roomType_List: add_Hotel_Room_Type_Interface[]
 };

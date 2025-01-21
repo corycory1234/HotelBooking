@@ -190,6 +190,14 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     dispatch(edit_One_Hotel(update_FormData))
     // onClose();
   }
+
+  // const handle_Change_Recommendation = (event: React.ChangeEvent<HTMLTextAreaElement>, index: number) => {
+  //   if(!formData) return;
+  //   const new_recommendation_List = [...formData.recommendation_List]; // 必須做好展開運算子
+  //   new_recommendation_List[index] = event.target.value; // [新一筆景點] = 最新的target.value
+  //   set_FormData({...formData, recommendation_List: new_recommendation_List});
+  //   // set_Recommendation_List(new_recommendation_List) // 再更新 本地state狀態
+  // }
   
 
   // 15. 最後 - <form> 表單送出所有數據
@@ -380,6 +388,26 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
         onChange={handle_Change}></textarea>
     </div>
     {/** 飯店介紹 */}
+
+    {/** 鄰近交通 */}
+    <div className="flex flex-col gap-2">
+      <label htmlFor="transportation" className="font-semibold text-primary">Transportation</label>
+      <textarea name="transportation" id="transportation" className="border rounded"
+      value={formData.transportation ?? ""}
+      onChange={handle_Change}></textarea>
+    </div>
+    {/** 鄰近交通 */}
+
+
+    {/** 推薦景點 */}
+    <div className="flex flex-col gap-2">
+      <label htmlFor="recommendation" className="font-semibold text-primary">Recommendation</label>
+      <textarea name="recommendation" id="recommendation" className="border rounded"
+        value={formData.recommendation ?? ""}
+        onChange={handle_Change}></textarea>
+    </div>
+    {/** 推薦景點 */}
+
 
     {/** 上傳飯店輪播圖 - 失敗, 待有空解決 */}
     <div className="flex flex-col gap-2">
