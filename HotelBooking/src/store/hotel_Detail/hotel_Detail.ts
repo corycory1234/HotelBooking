@@ -30,7 +30,7 @@ const initialState: Hotel_Detail_Interface = {
   hotel_Email: null,
   cancellation_Policy: null,
   transportation: null,
-  recommendation_List: [],
+  recommendation: null,
 } 
 
 const hotel_Detail_Slice = createSlice({

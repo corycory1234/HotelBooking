@@ -124,9 +124,17 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       {the_Hotel?.intro.map((details, index) => {
         return <p key={index}> {details} </p>
       })}
-      <div className="border-b-2 border-softGray"></div>
+      <div className="border-b border-softGray"></div>
       <Hotel_Facility></Hotel_Facility>
-      <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+
+        {/** 跳轉房型按鈕 */}
+        <div className="bg-white py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <button className="bg-primary text-white rounded-lg py-2 w-full" 
+            onClick={() =>　set_Selected_Tab(1)}>Book Now
+          </button>
+        </div>
+        {/** 跳轉房型按鈕 */}
+      {/* <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() =>　set_Selected_Tab(1)}>Book Now</button> */}
     </div>
     }
     {/* 飯店介紹 - 對照Tab高亮切換 */}
@@ -152,7 +160,15 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       {selected_Tab === 2 &&
       <div className=" flex flex-col gap-2">
         <Hotel_Customer_Review></Hotel_Customer_Review>
-        <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() => set_Selected_Tab(1)}>Book Now</button>
+
+        {/** 跳轉房型按鈕 */}
+        <div className="bg-white py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <button className="bg-primary text-white rounded-lg py-2 w-full" 
+            onClick={() =>　set_Selected_Tab(1)}>Book Now
+          </button>
+        </div>
+        {/** 跳轉房型按鈕 */}
+        {/* <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() => set_Selected_Tab(1)}>Book Now</button> */}
       </div>
       }
     {/** 飯店評論 */}
@@ -253,14 +269,21 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       {/** 推薦景點 */}
       <div className="flex flex-col gap-2">
         <p className="font-semibold">Top Recommendations</p>
-        {the_Hotel?.recommendation_List.map((recommendation) => {
+        {the_Hotel?.recommendation?.split(", ").map((recommendation) => {
           return <div className="flex" key={recommendation}> {recommendation}</div>
         })}
       </div>
       {/** 推薦景點 */}
 
 
-        <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+        {/** 跳轉房型按鈕 */}
+        <div className="bg-white py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <button className="bg-primary text-white rounded-lg py-2 w-full" 
+            onClick={() =>　set_Selected_Tab(1)}>Book Now
+          </button>
+        </div>
+        {/** 跳轉房型按鈕 */}
+
       </div>
 
       }

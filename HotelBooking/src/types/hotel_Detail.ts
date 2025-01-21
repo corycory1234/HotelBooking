@@ -22,7 +22,7 @@ export interface Hotel_Detail_Interface {
   hotel_Email: string | null,
   cancellation_Policy: string | null,
   transportation: string | null,
-  recommendation_List: string[]
+  recommendation: string | null
 }[]
 
 // 2. 房型 (主流做法：同一層就能看到 roomType、images)

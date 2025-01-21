@@ -104,7 +104,7 @@ export default function Server_Form_Login () {
 
     try {
       const response = await fetch(verify_session_Url, {
-        method: "POST",
+        method: "GET",
         headers: {"Content-Type": "application/json"},
       });
 
