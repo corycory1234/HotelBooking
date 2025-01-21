@@ -9,7 +9,7 @@ import { HomeSVG, OtherSVG } from "../client_Svg/client_Svg";
 import Hotel_Room_Type from "./hotel_Room_Type";
 import Hotel_Facility from "./hotel_Facility";
 import Hotel_Customer_Review from "./hotel_Customer_Review";
-import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import { LatLngExpression } from "leaflet"; // 從 @types/leaflet 來的
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -21,8 +21,7 @@ interface Hotel_Card_Interface {
 };
 
 // 2. Tab - 詳細、設施、評價陣列
-// const tab = ["Overview", "Rooms", "Facilities", "Review"]
-const tab = ["Overview", "Rooms", "Review"];
+const tab = ["Overview", "Rooms", "Review", "Information"];
 
 // 3. leaflet 打開地圖彈窗, 所需要的大頭之圖檔
 L.Icon.Default.mergeOptions({
@@ -43,7 +42,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
 
-  return <>
+  return <div className="relative">
   <div className="relative flex flex-col gap-2">
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
       <div className="">
@@ -77,7 +76,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
     {/* Tab 高亮切換，吃Sticky，滾動固定Top */}
       <ul className="flex gap-2 border-b border-softGray overflow-x-auto scrollbar-hidden bg-white sticky top-6 z-10 px-4 py-1">
         {tab.map((item, index) => {
-          return <li key={index} onClick={() => set_Selected_Tab(index)} className="flex flex-col items-center cursor-pointer">
+          return <li key={index} onClick={() => set_Selected_Tab(index)} className="w-1/4  flex-shrink-0 flex flex-col items-center cursor-pointer">
             <span className={`${selected_Tab === index ? 'text-primary' : ''} `}>{item}</span>
             {selected_Tab === index && <span className="text-primary mt-[-6px]">●</span>}
           </li>
@@ -127,7 +126,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       })}
       <div className="border-b-2 border-softGray"></div>
       <Hotel_Facility></Hotel_Facility>
-      <button className="bg-primary text-white rounded-lg p-2" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+      <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
     </div>
     }
     {/* 飯店介紹 - 對照Tab高亮切換 */}
@@ -153,13 +152,121 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       {selected_Tab === 2 &&
       <div className=" flex flex-col gap-2">
         <Hotel_Customer_Review></Hotel_Customer_Review>
-        <button className="bg-primary text-white rounded-lg p-2" onClick={() => set_Selected_Tab(1)}>Book Now</button>
+        <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() => set_Selected_Tab(1)}>Book Now</button>
       </div>
       }
     {/** 飯店評論 */}
+    
 
+    {/** 基本資訊 */}
+      {selected_Tab === 3 && 
+      <div className="flex flex-col gap-4">
+        <p className="font-semibold">Address／Transportation</p>
+        {/** 飯店經緯度 - GoogleMap */}
+        <div className="flex items-center gap-2">
+          <OtherSVG name="marker" className="w-10 h-auto"></OtherSVG>
+          <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longtitude}`}
+            rel="noopener noreferrer" className="customized-underline text-primary">
+            {the_Hotel?.address}
+          </a>
+        </div>
+        {/** 飯店經緯度 - GoogleMap */}
+        
+        <div className="flex items-center gap-2">
+          <OtherSVG name="transportation" className="w-6 h-auto"></OtherSVG>
+          <p className="text-sm font-semibold">{the_Hotel?.transportation}</p>
+        </div>
+
+        {/** React-leaflet 地圖 */}
+          <MapContainer
+            center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+            zoom={15}
+            style={{width: "100%", height: "20rem", borderRadius: "20px"}}>
+            <TileLayer
+            // 這裡使用 OpenStreetMap 免費圖資
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+            <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+              <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.name}</Tooltip>
+            </Marker>
+            </MapContainer>
+        {/** React-leaflet 地圖 */}
+
+      {/** 住宿資訊 */}
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold">Accommodation Info</p>
+        <div className="flex">
+          <div className="w-1/2 flex flex-col">
+            <p>Check-In</p>
+            <p className="font-semibold">{the_Hotel?.checkin}</p>
+          </div>
+          <div className="w-1/2 flex flex-col">
+            <p>Check-Out</p>
+            <p className="font-semibold">{the_Hotel?.checkout}</p>
+          </div>
+        </div>
+
+        {/** 付款資訊 */}
+        <p className="text-sm font-semibold">Payment</p>
+        <div className="flex flex-wrap">
+          <div className="basis-1/2 flex gap-2">
+            <OtherSVG name="master" className="w-4 h-auto"></OtherSVG>
+            <p>Master Card</p>
+          </div>
+          <div className="basis-1/2 flex gap-2">
+            <OtherSVG name="visa" className="w-4 h-auto"></OtherSVG>
+            <p>Visa Card</p>
+          </div>
+          <div className="basis-1/2 flex gap-2">
+            <OtherSVG name="jcb" className="w-4 h-auto"></OtherSVG>
+            <p>JCB Card</p>
+          </div>
+        </div>
+        {/** 付款資訊 */}
+
+        {/** 電話、郵件 */}
+        <div className="flex flex-col">
+          <div className="flex">
+            <p className="basis-1/2">TEL</p>
+            <p className="basis-1/2">{the_Hotel?.hotel_Phone}</p>
+          </div>
+          <div className="flex">
+            <p className="basis-1/2">Email</p>
+            <p className="basis-1/2">{the_Hotel?.hotel_Email}</p>
+          </div>
+        </div>
+        {/** 電話、郵件 */}
+      </div>
+      {/** 住宿資訊 */}
+      
+
+      {/** 取消政策 */}
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold">Cancellation Policy</p>
+        {the_Hotel?.cancellation_Policy?.split(".").map((item) => {
+          return <div className="flex flex-col gap-2" key={item}>
+              <p>{item}</p>
+          </div>
+        })}
+      </div>
+      {/** 取消政策 */}
+
+      {/** 推薦景點 */}
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold">Top Recommendations</p>
+        {the_Hotel?.recommendation_List.map((recommendation) => {
+          return <div className="flex" key={recommendation}> {recommendation}</div>
+        })}
+      </div>
+      {/** 推薦景點 */}
+
+
+        <button className="bg-primary text-white rounded-lg p-2 sticky bottom-0 z-[9999]" onClick={() =>　set_Selected_Tab(1)}>Book Now</button>
+      </div>
+
+      }
+      {/** 基本資訊 */}
 
   </div>
 
-</> 
+</div> 
 }

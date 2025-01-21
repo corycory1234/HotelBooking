@@ -68,6 +68,13 @@ input[type="radio"]:checked {
   appearance: none;
 }
 
+/* 6. leaflet地圖 - 飯店名提示加粗 */
 .leaflet-tooltip {
   @apply font-semibold !important
+};
+
+/* 7. */
+.customized-underline {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
 }
