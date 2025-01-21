@@ -18,7 +18,7 @@ export interface Hotel_Detail_Interface {
   roomType: Hotel_Room_Type_Interface[],
   latitude: number | null,
   longtitude: number | null,
-  hotel_Phone: string | null,
+  hotel_Phone: number | null,
   hotel_Email: string | null,
   cancellation_Policy: string | null,
   transportation: string | null,
