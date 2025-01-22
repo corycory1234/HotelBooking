@@ -1,5 +1,5 @@
 import express from "express";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import { errorHandler } from "./middlewares/errorHandler";
 import v1Routes from "./routes/v1";
@@ -7,16 +7,39 @@ import "dotenv/config";
 
 const app = express();
 const port = process.env.PORT || 3001;
-const fontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+const allowedOrigins = [
+    "http://localhost:3000", // 本地測試
+    process.env.FRONTEND_URL, // 正式網域
+];
 
-app.use(cors());
-// 或者指定允許的來源
-app.use(cors({
-    origin: ['http://localhost:3000', fontendUrl], // 允許的前端網域
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],         // 允許的 HTTP 方法
-    allowedHeaders: ['Content-Type', 'Authorization'],            // 允許的 Headers
-    credentials: true                                             // 允許攜帶認證資訊(cookies)
-  }));
+// 設定 CORS
+app.use(
+    cors({
+        origin: function (
+            origin: string | undefined,
+            callback: (err: Error | null, allow?: boolean) => void
+        ) {
+            // 允許不帶 origin 的請求（如 mobile app 或 Postman）
+            if (!origin) {
+                callback(null, true);
+                return;
+            }
+
+            if (
+                allowedOrigins.indexOf(origin) !== -1 ||
+                process.env.NODE_ENV === "development"
+            ) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true, // 允許跨域請求攜帶 cookie
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+    })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
