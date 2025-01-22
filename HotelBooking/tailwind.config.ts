@@ -45,7 +45,8 @@ export default {
       animation: {
         // 1.Sort 排序動畫
         'slide-up': 'slideUp .3s ease-out',
-        "animate-spin": "spin 1s linear infinite"
+        "animate-spin": "spin 1s linear infinite",
+        "animate-pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
       }
     },
   },

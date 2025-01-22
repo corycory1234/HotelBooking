@@ -20,6 +20,7 @@ export default function Hotel_List_Card() {
     }
   }
 
+
   return <>
 
     {/** 飯店列表卡片 */}
@@ -31,7 +32,8 @@ export default function Hotel_List_Card() {
           <Swiper slidesPerView={1.25} spaceBetween={5} loop={true} pagination={{ clickable: true }} modules={[Pagination]}>
             {item.images.map((img, index) => {
               return <SwiperSlide key={index}>
-                <img src={img.url} alt={img.description} className="w-full h-[200px] object-cover object-top rounded" />
+                <img src={img.url} alt={img.description} 
+                className="w-full h-[200px] object-cover object-top rounded" />
               </SwiperSlide>
             })}
           </Swiper>
@@ -41,7 +43,7 @@ export default function Hotel_List_Card() {
           <div className="p-4">
             <div className="flex justify-between items-start">
               <div>
-                <h3 className="font-medium">{item.name}</h3>
+                <h3 className="font-semibold">{item.name}</h3>
                 <p className="text-sm text-gray-500 mt-1">{item.distance}</p>
               </div>
               <div className="flex items-center gap-1 bg-softGray text-custom px-2 py-1 rounded">

@@ -52,6 +52,34 @@ export default function Trip_List () {
     router.push(`trip/${hotel_Id}`)
   }
 
+  // 7. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
+  const [show_Booking_List, set_Show_Booking_List] = useState<boolean>(false);
+  useEffect(() => {
+    set_Show_Booking_List(false) // 第2次進頁面, 從 true >> false
+    const timer = setTimeout(() => {
+      set_Show_Booking_List(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  },[])
+
+  // 8. Skeleton動畫 - 佔位符
+  const Placeholder_Card = () => {
+    return <div className="flex flex-col gap-2 p-4">
+      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+
+      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+
+      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+    </div>
+  }
+
+
 
 
 
@@ -62,18 +90,24 @@ export default function Trip_List () {
   {/** 返回上一頁 */}
 
   {/** Tab 切換訂單按鈕 */}
-  <div className="flex gap-2 py-1 px-4 flex-wrap">
-    {booking_Buttons.map((item, index) => {
-      return <button key={index}
-        className={`text-softGray text-sm p-2 border border-gray rounded
-        ${tab === item ? 'bg-primary text-white' : ''}`}
-        onClick={() => select_Booking_Status(item)}> {item}
-      </button>
-    })}
-  </div>
+  {show_Booking_List && 
+    <div className="flex gap-2 py-1 px-4 flex-wrap">
+      {booking_Buttons.map((item, index) => {
+        return <button key={index}
+          className={`text-softGray text-sm p-2 border border-gray rounded
+          ${tab === item ? 'bg-primary text-white' : ''}`}
+          onClick={() => select_Booking_Status(item)}> {item}
+        </button>
+      })}
+    </div>
+  }
   {/** Tab 切換訂單按鈕 */}
 
+
   {/** 訂單卡片 */}
+  {!show_Booking_List ? <Placeholder_Card></Placeholder_Card>
+
+  :
   <div className={`flex flex-col p-4 gap-4  ${booking_List.length >0 ? 'customized-bg-gradient' : ''} `}>
 
     { 
@@ -122,16 +156,12 @@ export default function Trip_List () {
                 onClick={() => view_Booking(item.booking_Id)}>View Details</button>
             </div>
             {/** 訂單號碼、價錢、查看訂單 */}
-
-
-
           </div>        
-
-
       })
     }
 
   </div>
+  }
   {/** 訂單卡片 */}
   
   </div>
