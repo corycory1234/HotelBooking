@@ -14,6 +14,7 @@ import { LatLngExpression } from "leaflet"; // 從 @types/leaflet 來的
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Modal from "@/components/modal/modal";
+import { useSearchParams } from "next/navigation";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -31,16 +32,19 @@ L.Icon.Default.mergeOptions({
 })
 
 export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
-  // 1. 父元件 HotelList props 指定飯店 之數據
+  // 1. 拿 timeStamp - URL時間戳
+  const searchParams = useSearchParams();
+
+  // 2. 父元件 HotelList props 指定飯店 之數據
   console.log(the_Hotel, "props傳遞");
 
-  // 2. Tab - 數字對應 tab陣列索引值 之高亮切換
+  // 4. Tab - 數字對應 tab陣列索引值 之高亮切換
   const [selected_Tab, set_Selected_Tab] = useState(0);
 
-  // 3. Modal彈窗 - 布林
+  // 5. Modal彈窗 - 布林
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
 
-  // 4. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
+  // 6. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
   const [show_Hotel_Detail_Card, set_Show_Hotel_Detail_Card] = useState<boolean>(false);
   useEffect(() => {
     set_Show_Hotel_Detail_Card(false);
@@ -48,9 +52,9 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       set_Show_Hotel_Detail_Card(true);
     },2000);
     return () => clearTimeout(timer);
-  },[])
+  },[searchParams.get('timestamp')])
 
-  // 5. Skeleton動畫 - 佔位符
+  // 6. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
     return <div className="flex flex-col gap-2 p-2">
       <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
@@ -173,7 +177,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
         <Hotel_Facility></Hotel_Facility>
 
           {/** 跳轉房型按鈕 */}
-          <div className="bg-white py-2 border-t border-softGray sticky bottom-0 z-10">
+          <div className="bg-white py-2 rounded border-t border-softGray sticky bottom-0 z-10">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
               onClick={() =>　set_Selected_Tab(1)}>Book Now
             </button>
@@ -207,7 +211,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
           <Hotel_Customer_Review></Hotel_Customer_Review>
 
           {/** 跳轉房型按鈕 */}
-          <div className="bg-white py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0 z-[9999]">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
               onClick={() =>　set_Selected_Tab(1)}>Book Now
             </button>
@@ -322,7 +326,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
           {/** 跳轉房型按鈕 */}
-          <div className="bg-white py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0 z-[9999]">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
               onClick={() =>　set_Selected_Tab(1)}>Book Now
             </button>

@@ -63,13 +63,15 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray"></div>
 
     {/** 我的最愛  */}
-    <div className="flex justify-between">
-      <div className="flex gap-2">
-        <ProfileSVG name={"collection"} className="w-5 h-auto"></ProfileSVG>
-        <p>My Collection</p>
+    <Link href={"/mycollection"}>
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <ProfileSVG name={"collection"} className="w-5 h-auto"></ProfileSVG>
+          <p>My Collection</p>
+        </div>
+        <p>{">"}</p>
       </div>
-      <p>{">"}</p>
-    </div>
+    </Link>
     {/** 我的最愛  */}
 
     <div className="border-b-2 border-softGray"></div>
@@ -101,13 +103,15 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray"></div>
 
     {/** 關於我們  */}
-    <div className="flex justify-between">
-      <div className="flex gap-2">
-        <ProfileSVG name={"about"} className="w-5 h-auto"></ProfileSVG>
-        <p>About Go Tour</p>
+    <Link href={"/about"}>
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <ProfileSVG name={"about"} className="w-5 h-auto"></ProfileSVG>
+          <p>About Go Tour</p>
+        </div>
+        <p>{">"}</p>
       </div>
-      <p>{">"}</p>
-    </div>
+    </Link>
     {/** 關於我們  */}
 
 

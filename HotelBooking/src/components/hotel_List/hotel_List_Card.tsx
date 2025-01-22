@@ -5,16 +5,49 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Hotel_List from "../../fakeData/hotel_List.json";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function Hotel_List_Card() {
+  
+  // 1.
+  const redux_Destination = useSelector((state: RootState) => state.formSearch.keyword);
+  const redux_DateRange = useSelector((state: RootState) => state.formSearch.dateRange);
+  const redux_Date_Start = useSelector((state: RootState) => state.formSearch.start_Date);
+  const redux_Date_End = useSelector((state: RootState) => state.formSearch.end_Date);
+  const redux_Room = useSelector((state: RootState) => state.formSearch.room);
+  const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
+  const redux_Child = useSelector((state: RootState) => state.formSearch.child);
+  const redux_RangeSlider = useSelector((state: RootState) => state.formSearch.rangeSlider);
+  const timeStamp = + new Date();
+  const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
+  const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
+  const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
 
   // 1. 查看「指定飯店所有房型」，ID匹配，router跳轉
   const router = useRouter()
   const check_Hotel_RoomType_List = (id: string) => {
     const result = Hotel_List.find((item) => item.id === id);
+
+    
+    const query = new URLSearchParams({
+      destination: redux_Destination,
+      dateRange: redux_DateRange as string,
+      date_Start: redux_Date_Start as string,
+      date_End: redux_Date_End as string,
+      room: String(redux_Room),
+      adult: String(redux_Adult),
+      child: String(redux_Child),
+      rangeslider: String(redux_RangeSlider),
+      timestamp: String(timeStamp),
+      bedType: String(redux_BedType),
+      rating: String(redux_Rating),
+      facility: String(redux_Facility)
+    }).toString()
+
     if(result) {
       console.log(result, "指定飯店 - 所有房型");
-      router.push(`/hotellist/${id}`)
+      router.push(`/hotellist/${id}?${query}`)
     } else {
       alert("沒找到指定飯店 - 所有房型")
     }

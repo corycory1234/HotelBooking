@@ -1,6 +1,5 @@
 'use client';
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import hotel_List from "@/fakeData/hotel_List.json";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
@@ -10,8 +9,16 @@ import Server_Form_Search from "@/components/server-Form-Search/server-Form-Sear
 import Hotel_Card from "@/components/hotel_Card/hotel_Card";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
+import DateRangePicker from "@/components/server-Form-Search/dateRangePicker";
+import Client_Input_Traveler from "@/components/server-Form-Search/client-Input-Traveler";
+import Client_Input_Keyword from "@/components/server-Form-Search/client-Input-Keyword";
+import { updateKeyword } from "@/store/form-Search/formSearchSlice";
+
 
 export default function Hotel_Detail () {
+  // 0.
+  const searchParams = useSearchParams();
+
   // 1. 返回上一頁
   const router = useRouter();
 
@@ -30,6 +37,8 @@ export default function Hotel_Detail () {
   useEffect(() => {
     if(the_Found_Hotel) {
       dispatch(update_Hotel_Detail(the_Found_Hotel));
+       // 5.2 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
+      dispatch(updateKeyword(the_Found_Hotel.name))
     }
   },[params.id]);
 
@@ -41,9 +50,36 @@ export default function Hotel_Detail () {
   // 7. Redux - 入住退房日; replace搭配正則，把"202X -"拿掉
   const redux_DateRange = useSelector((state: RootState) => state.formSearch.dateRange)?.replace(/\d{4}-/g, "");
   
-  // 8. <form>搜尋 Modale 開關
+  // 8. <form>搜尋 Modal 開關
   const [toggle, set_Toggle] = useState<boolean>(false);
   const show_FormSearch = () => set_Toggle(true);
+
+  // 9. Redux - 搜尋關鍵字, 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
+  const redux_Keyword = useSelector((state: RootState) => state.formSearch.keyword);
+
+  // 10. 搜尋指定飯店 - 帶入新參數條件
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const form_Data = new FormData(event?.currentTarget);
+    const dateRange = form_Data.get("datepicker") as string;
+    const room = form_Data.get("room");
+    const adult = form_Data.get("adult");
+    const child = form_Data.get("child");
+    const timestamp = + new Date();
+    const query = new URLSearchParams({
+      destination: redux_Keyword,
+      dateRange,
+      room: String(room),
+      adult: String(adult),
+      child: String(child),
+      timestamp: String(timestamp)
+    }).toString();
+
+
+
+    set_Toggle(false);
+    router.push(`/hotellist/${params.id}?${query}`)
+  }
 
   return <>
   
@@ -67,7 +103,16 @@ export default function Hotel_Detail () {
     {/* Modal彈跳視窗 */}
       <Modal isOpen={toggle} onClose={() => set_Toggle(false)}>
         <h2 className="text-xl font-bold mb-4 p-6">Change Keyword</h2>
-        <Server_Form_Search></Server_Form_Search>
+        {/* <Server_Form_Search></Server_Form_Search> */}
+
+        <form onSubmit={submit} className="flex flex-col gap-2 p-6">
+          {/* <Client_Input_Keyword></Client_Input_Keyword> */}
+          <DateRangePicker></DateRangePicker>
+          <Client_Input_Traveler></Client_Input_Traveler>
+          <button type="submit" className="bg-primary rounded w-full py-2 px-4">
+            Search
+          </button>
+        </form>
       </Modal>
     {/* Modal彈跳視窗 */}
 

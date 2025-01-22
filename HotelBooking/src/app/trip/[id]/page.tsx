@@ -48,6 +48,34 @@ export default function Booking_Detail () {
     set_Hover_Star(1); // 留言完, 清空
     set_Review(""); // 留言完, 清空
   };
+
+
+ // 8. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
+  const [show_Booking_Detail, set_Show_Booking_Detail] = useState<boolean>(false);
+  useEffect(() => {
+    set_Show_Booking_Detail(false) // 第2次進頁面, 從 true >> false
+    const timer = setTimeout(() => {
+      set_Show_Booking_Detail(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  },[])
+
+  // 9. Skeleton動畫 - 佔位符
+  const Placeholder_Card = () => {
+    return <div className="flex flex-col gap-2 p-4">
+      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+
+      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+
+      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+    </div>
+  }
   
 
   return <div className="flex flex-col">
@@ -56,9 +84,13 @@ export default function Booking_Detail () {
       {/** 返回上一頁 */}
 
       {/** 房型圖片 */}
-      <img src={booking_Detail.booking_Img} alt="" />
+      {show_Booking_Detail && <img src={booking_Detail.booking_Img} alt="" />}
       {/** 房型圖片 */}
-      
+    
+
+    {!show_Booking_Detail ? <Placeholder_Card></Placeholder_Card> 
+    :
+    
     <div className="flex flex-col p-4 gap-2">
 
       {/** 留言評價 or 查看評價 */}
@@ -205,5 +237,8 @@ export default function Booking_Detail () {
         {/** 地圖 */}
   
     </div>
+    
+    
+    }
   </div>
 }

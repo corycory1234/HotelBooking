@@ -73,7 +73,7 @@ input[type="radio"]:checked {
   @apply font-semibold !important
 };
 
-/* 7. */
+/* 7. 房型Information, 底線超連結 - 跳轉Google Map*/
 .customized-underline {
   text-decoration: underline;
   text-decoration-skip-ink: none;
