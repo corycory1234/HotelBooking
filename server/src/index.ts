@@ -24,17 +24,27 @@ app.use((req, res, next) => {
     }
 });
 
-// 修改 CORS 設定
-app.use(
-    cors({
-        origin: allowedOrigins,
-        credentials: true,
-        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-        allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
-        exposedHeaders: ["Set-Cookie"],
-        optionsSuccessStatus: 204
-    })
-);
+// 新增 CORS 處理中間件
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    
+    // 檢查請求來源是否在允許列表中
+    if (origin && allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie');
+        res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
+    }
+
+    // 處理 OPTIONS 請求
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(204);
+        return;
+    }
+
+    next();
+});
 
 app.use(express.json());
 app.use(cookieParser());
