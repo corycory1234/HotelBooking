@@ -8,46 +8,16 @@ import "dotenv/config";
 const app = express();
 const port = process.env.PORT || 3001;
 
-// 調試中間件
-app.use((req, res, next) => {
-    console.log('Request Origin:', req.headers.origin);
-    console.log('Request Method:', req.method);
-    console.log('Request Path:', req.path);
-    next();
-});
-
 // CORS 配置
 const corsOptions = {
-    origin: function(origin: string | undefined, callback: (error: Error | null, allow?: boolean) => void) {
-        if (!origin || origin === 'http://localhost:3000') {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: 'http://localhost:3000',  // 直接設定固定值
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['Set-Cookie'],
-    preflightContinue: false,
-    optionsSuccessStatus: 204
+    exposedHeaders: ['Set-Cookie']
 };
 
 app.use(cors(corsOptions));
-
-// 新增額外的 headers 設定
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
-    res.header('Access-Control-Expose-Headers', 'Set-Cookie');
-    
-    // 處理 OPTIONS 請求
-    if (req.method === 'OPTIONS') {
-        res.sendStatus(204);
-        return;
-    }
-    next();
-});
 
 app.use(express.json());
 app.use(cookieParser());
