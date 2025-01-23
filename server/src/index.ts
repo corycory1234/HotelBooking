@@ -19,7 +19,9 @@ const corsOptions = {
 };
 
 app.use((req, res, next) => {
-    res.header('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Referrer-Policy', 'no-referrer-when-downgrade');
     next();
 });
 
