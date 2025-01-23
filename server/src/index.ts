@@ -27,39 +27,14 @@ app.use((req, res, next) => {
 // 修改 CORS 設定
 app.use(
     cors({
-        origin: function (origin, callback) {
-            if (!origin) {
-                callback(null, true);
-                return;
-            }
-
-            if (allowedOrigins.includes(origin) || process.env.NODE_ENV === "development") {
-                callback(null, origin); // 明確返回允許的 origin
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
+        origin: allowedOrigins,
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-        allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
+        allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
         exposedHeaders: ["Set-Cookie"],
-        maxAge: 86400, // 預檢請求的快取時間（24小時）
-        preflightContinue: false,
         optionsSuccessStatus: 204
     })
 );
-
-// 新增額外的 headers 中間件
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    if (origin && allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie');
-    next();
-});
 
 app.use(express.json());
 app.use(cookieParser());
