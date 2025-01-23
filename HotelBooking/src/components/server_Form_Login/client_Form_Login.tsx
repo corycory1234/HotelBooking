@@ -76,7 +76,7 @@ export default function Server_Form_Login () {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({email, password}),
-        // credentials: 'include' // 同源政策 CORS 需要
+        credentials: 'include' // 同源政策 CORS 需要
       });
 
       const data = await api_Response.json();
@@ -106,6 +106,7 @@ export default function Server_Form_Login () {
       const response = await fetch(verify_session_Url, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
+        credentials: 'include' // 同源政策 CORS 需要
       });
 
       const data = await response.json();
@@ -124,6 +125,7 @@ export default function Server_Form_Login () {
       const response = await fetch(user_Info_Url, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
+        credentials: 'include' // 同源政策 CORS 需要
       });
       const data = await response.json();
       console.log(data, "查看個人數據");
