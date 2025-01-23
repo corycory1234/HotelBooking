@@ -10,12 +10,18 @@ const port = process.env.PORT || 3001;
 
 // CORS 配置
 const corsOptions = {
-    origin: 'http://localhost:3000',  // 直接設定固定值
+    origin: 'http://localhost:3000',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['Set-Cookie']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Set-Cookie'],
+    optionsSuccessStatus: 204
 };
+
+app.use((req, res, next) => {
+    res.header('Cross-Origin-Resource-Policy', 'cross-origin');
+    next();
+});
 
 app.use(cors(corsOptions));
 
