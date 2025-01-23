@@ -7,44 +7,12 @@ import "dotenv/config";
 
 const app = express();
 const port = process.env.PORT || 3001;
-const allowedOrigins = [
-    "http://localhost:3000",
-    "https://hotel-booking.vercel.app", // 如果這是你的前端網址
-    "https://hotel-booking-api-iota.vercel.app"
-].filter(Boolean);
 
-// 在所有路由之前加入這個中間件
-app.use((req, res, next) => {
-    // 移除多餘的斜線
-    if (req.path.length > 1 && req.path.endsWith('/')) {
-        const query = req.url.slice(req.path.length);
-        res.redirect(301, req.path.slice(0, -1) + query);
-    } else {
-        next();
-    }
-});
-
-// 新增 CORS 處理中間件
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    
-    // 檢查請求來源是否在允許列表中
-    if (origin && allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-        res.setHeader('Access-Control-Allow-Credentials', 'true');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie');
-        res.setHeader('Access-Control-Expose-Headers', 'Set-Cookie');
-    }
-
-    // 處理 OPTIONS 請求
-    if (req.method === 'OPTIONS') {
-        res.sendStatus(204);
-        return;
-    }
-
-    next();
-});
+// 最簡單的 CORS 配置 - 必須放在最前面
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -200,46 +168,6 @@ app.get("/", (req, res) => {
 </body>
 </html>`);
 });
-
-// require("dotenv").config();
-// const { createClient } = require("@supabase/supabase-js");
-
-// const supabase = createClient(
-//   process.env.SUPABASE_URL,
-//   process.env.SUPABASE_KEY
-// );
-
-// app.get("/", (request, response) => {
-//   response.send(`<h1>Hello, Node</h1>`);
-// });
-
-// // 用戶註冊路由
-// app.post("/register", async (req, res) => {
-//   const { email, password } = req.body;
-
-//   // 使用 Supabase 註冊用戶
-//   const { data, error } = await supabase.auth.signUp({
-//     email,
-//     password,
-//   });
-
-//   if (error) return res.status(400).json({ error: error.message });
-// res.status(201).json({ message: "User registered successfully!", data });
-// });
-
-// // 用戶登入路由
-// app.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-
-//     // 使用 Supabase 登入用戶
-//     const { data, error } = await supabase.auth.signInWithPassword({
-//       email,
-//       password,
-//     });
-
-//     if (error) return res.status(400).json({ error: error.message });
-//     res.status(200).json({ message: 'User logged in successfully!', data });
-//   });
 
 app.listen(port, () => {
     console.log(`伺服器運行在 http://localhost:${port}`);
