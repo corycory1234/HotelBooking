@@ -10,8 +10,12 @@ const port = process.env.PORT || 3001;
 
 // CORS 配置
 const corsOptions = {
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: ['http://localhost:3000', 'https://hotel-booking-api-iota.vercel.app'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Set-Cookie'],
+    optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
@@ -24,15 +28,6 @@ app.use("/api/v1", v1Routes);
 
 // 錯誤處理中間件
 app.use(errorHandler);
-
-app.post('/api/v1/auth/test', (req, res) => {
-    res.cookie('testCookie', 'test', {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none'
-    });
-    res.json({ message: 'cookie set' });
-  });
 
 app.get("/", (req, res) => {
     res.send(`

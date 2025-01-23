@@ -11,15 +11,16 @@ const v1_1 = __importDefault(require("./routes/v1"));
 require("dotenv/config");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3001;
-const fontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
-app.use((0, cors_1.default)());
-// 或者指定允許的來源
-app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', fontendUrl], // 允許的前端網域
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 允許的 HTTP 方法
-    allowedHeaders: ['Content-Type', 'Authorization'], // 允許的 Headers
-    credentials: true // 允許攜帶認證資訊(cookies)
-}));
+// CORS 配置
+const corsOptions = {
+    origin: ['http://localhost:3000', 'https://hotel-booking-api-iota.vercel.app'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Set-Cookie'],
+    optionsSuccessStatus: 204
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 // API 路由
@@ -171,37 +172,6 @@ app.get("/", (req, res) => {
 </body>
 </html>`);
 });
-// require("dotenv").config();
-// const { createClient } = require("@supabase/supabase-js");
-// const supabase = createClient(
-//   process.env.SUPABASE_URL,
-//   process.env.SUPABASE_KEY
-// );
-// app.get("/", (request, response) => {
-//   response.send(`<h1>Hello, Node</h1>`);
-// });
-// // 用戶註冊路由
-// app.post("/register", async (req, res) => {
-//   const { email, password } = req.body;
-//   // 使用 Supabase 註冊用戶
-//   const { data, error } = await supabase.auth.signUp({
-//     email,
-//     password,
-//   });
-//   if (error) return res.status(400).json({ error: error.message });
-// res.status(201).json({ message: "User registered successfully!", data });
-// });
-// // 用戶登入路由
-// app.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-//     // 使用 Supabase 登入用戶
-//     const { data, error } = await supabase.auth.signInWithPassword({
-//       email,
-//       password,
-//     });
-//     if (error) return res.status(400).json({ error: error.message });
-//     res.status(200).json({ message: 'User logged in successfully!', data });
-//   });
 app.listen(port, () => {
     console.log(`伺服器運行在 http://localhost:${port}`);
 });
