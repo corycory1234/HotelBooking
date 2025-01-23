@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 
 // CORS 配置
 const corsOptions = {
-    origin: true,
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
