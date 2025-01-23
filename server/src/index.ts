@@ -8,11 +8,25 @@ import "dotenv/config";
 const app = express();
 const port = process.env.PORT || 3001;
 
-// 最簡單的 CORS 配置 - 必須放在最前面
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+// 調試中間件
+app.use((req, res, next) => {
+    console.log('Request Origin:', req.headers.origin);
+    console.log('Request Method:', req.method);
+    console.log('Request Path:', req.path);
+    next();
+});
+
+// CORS 配置
+const corsOptions = {
+    origin: true, // 允許所有來源，但會根據實際請求的 origin 回傳對應的 header
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['set-cookie']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // 預檢請求處理
 
 app.use(express.json());
 app.use(cookieParser());
