@@ -8,9 +8,9 @@ import "dotenv/config";
 const app = express();
 const port = process.env.PORT || 3001;
 const allowedOrigins = [
-    "http://localhost:3000", // 本地測試
-    process.env.FRONTEND_URL, // 正式網域,
-    'https://hotel-booking-api-iota.vercel.app'
+    "http://localhost:3000",
+    "https://hotel-booking.vercel.app", // 如果這是你的前端網址
+    "https://hotel-booking-api-iota.vercel.app"
 ];
 
 // 設定 CORS
@@ -27,7 +27,7 @@ app.use(
             }
 
             if (
-                allowedOrigins.indexOf(origin) !== -1 ||
+                allowedOrigins.includes(origin) ||
                 process.env.NODE_ENV === "development"
             ) {
                 callback(null, true);
@@ -38,6 +38,7 @@ app.use(
         credentials: true, // 允許跨域請求攜帶 cookie
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+        optionsSuccessStatus: 200 // 新增這行
     })
 );
 
