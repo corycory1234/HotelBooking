@@ -24,36 +24,42 @@ app.use((req, res, next) => {
     }
 });
 
-// 設定 CORS
+// 修改 CORS 設定
 app.use(
     cors({
-        origin: function (
-            origin: string | undefined,
-            callback: (err: Error | null, allow?: boolean) => void
-        ) {
-            // 允許不帶 origin 的請求（如 mobile app 或 Postman）
+        origin: function (origin, callback) {
             if (!origin) {
                 callback(null, true);
                 return;
             }
 
-            if (
-                allowedOrigins.includes(origin) ||
-                process.env.NODE_ENV === "development"
-            ) {
-                callback(null, true);
+            if (allowedOrigins.includes(origin) || process.env.NODE_ENV === "development") {
+                callback(null, origin); // 明確返回允許的 origin
             } else {
                 callback(new Error("Not allowed by CORS"));
             }
         },
-        credentials: true, // 允許跨域請求攜帶 cookie
+        credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
         allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
         exposedHeaders: ["Set-Cookie"],
+        maxAge: 86400, // 預檢請求的快取時間（24小時）
         preflightContinue: false,
         optionsSuccessStatus: 204
     })
 );
+
+// 新增額外的 headers 中間件
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && allowedOrigins.includes(origin)) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie');
+    next();
+});
 
 app.use(express.json());
 app.use(cookieParser());
