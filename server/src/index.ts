@@ -11,7 +11,18 @@ const allowedOrigins = [
     "http://localhost:3000",
     "https://hotel-booking.vercel.app", // 如果這是你的前端網址
     "https://hotel-booking-api-iota.vercel.app"
-];
+].filter(Boolean);
+
+// 在所有路由之前加入這個中間件
+app.use((req, res, next) => {
+    // 移除多餘的斜線
+    if (req.path.length > 1 && req.path.endsWith('/')) {
+        const query = req.url.slice(req.path.length);
+        res.redirect(301, req.path.slice(0, -1) + query);
+    } else {
+        next();
+    }
+});
 
 // 設定 CORS
 app.use(
@@ -36,9 +47,11 @@ app.use(
             }
         },
         credentials: true, // 允許跨域請求攜帶 cookie
-        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
-        optionsSuccessStatus: 200 // 新增這行
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
+        exposedHeaders: ["Set-Cookie"],
+        preflightContinue: false,
+        optionsSuccessStatus: 204
     })
 );
 
