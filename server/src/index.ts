@@ -9,7 +9,8 @@ const app = express();
 const port = process.env.PORT || 3001;
 const allowedOrigins = [
     "http://localhost:3000", // 本地測試
-    process.env.FRONTEND_URL, // 正式網域
+    process.env.FRONTEND_URL, // 正式網域,
+    'https://hotel-booking-api-iota.vercel.app'
 ];
 
 // 設定 CORS
