@@ -18,15 +18,36 @@ app.use((req, res, next) => {
 
 // CORS 配置
 const corsOptions = {
-    origin: true, // 允許所有來源，但會根據實際請求的 origin 回傳對應的 header
+    origin: function(origin: string | undefined, callback: (error: Error | null, allow?: boolean) => void) {
+        if (!origin || origin === 'http://localhost:3000') {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['set-cookie']
+    exposedHeaders: ['Set-Cookie'],
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // 預檢請求處理
+
+// 新增額外的 headers 設定
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
+    res.header('Access-Control-Expose-Headers', 'Set-Cookie');
+    
+    // 處理 OPTIONS 請求
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(204);
+        return;
+    }
+    next();
+});
 
 app.use(express.json());
 app.use(cookieParser());
