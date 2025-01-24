@@ -4,10 +4,18 @@ import { ProfileSVG } from "../client_Svg/client_Svg";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Modal from "../modal/modal";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { OtherSVG } from "../client_Svg/client_Svg";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const language_List = ["zh-TW", "en-US"];
 
 export default function Before_Login_Profile () {
+  // 0.
+  const router = useRouter();
+
   // 1. 多國語系切換 - 如果是 zh-TW, 就吃zh-TW; 若不是, 一率吃en-US
   const [language, set_Language] = useState<string>(language_List.includes(navigator.language) ? navigator.language : "en-US")
   const switch_Language = (new_Language: string) => {
@@ -35,22 +43,79 @@ export default function Before_Login_Profile () {
     set_Switch_Boolean(value)
   };
 
+  // 5. Redux - 查看是否登入狀態
+  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
+  // 2. loading 布林值
+  const [loading_Boolean, set_Loading_Boolean] = useState<boolean>(false);
 
+  // 3. 登出
+  const log_Out = async () => {
+    try {
+      set_Loading_Boolean(true); // loading動畫開始
+      const log_Out_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/logout"
+      const response = await fetch(log_Out_Url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        credentials: 'include'
+      });
+      const data = await response.json();
+      console.log(data, "登出返回response");
+      if(!response.ok) {
+        toast.error(data.message)
+      }else {
+        toast.success("Log Out Successfully");
+        router.push("/")
+      }
+
+    } catch (error) {
+      console.log(error, "錯誤");
+    } finally {
+      set_Loading_Boolean(false); // loading動畫開始
+    }
+  }
+
+  console.log(redux_Verify_Session, ":看redux阿");
 
   
   return <div className="pb-20">
-  {/** 登入 */}
+  
     <div className="bg-primary flex flex-col items-center gap-2 p-8">
       <div className="rounded-full bg-softGray p-2">
         <ProfileSVG name={"user"} className="w-10 h-auto"></ProfileSVG>
       </div>
-      <p className="text-white">Sign in to see deals and manage your trip</p>
-      <Link href={"/auth"}>
-        <button type="button" className="bg-green-700 text-white rounded p-2">Sing In</button>
-      </Link>
+      
+      {redux_Verify_Session.success === false ? <>
+        {/** 登入 */}
+        <p className="text-white">Sign in to see deals and manage your trip</p>
+        <Link href={"/auth"}>
+          <button type="button" className="bg-green-700 text-white rounded p-2">Sing In</button>
+        </Link>
+        {/** 登入 */}
+      </>
+      :
+      <>
+       {/** 登出 */}
+      <div className="flex flex-col gap-2">
+        <p className="text-white">Welcome</p>
+        <p className="text-white">{redux_Verify_Session.data.user.name}</p>
+      </div>
+
+      {loading_Boolean === false ? 
+        <button type="button" className="bg-green-700 text-white rounded p-2"
+          onClick={log_Out}>Log Out
+        </button>
+        : 
+        <button type="button" className="bg-softGray flex justify-center items-center rounded-lg p-3 gap-2" disabled>
+          <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
+            Processing...
+        </button>
+      }
+      {/** 登出 */}
+      </>
+    }
     </div>
-  {/** 登入 */}
+
 
 
   <div className="customized-bg-gradient flex flex-col gap-4 p-4">

@@ -10,8 +10,12 @@ import toast from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import { z } from "zod";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/store/store";
+import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 
 // const initialState = { message: ""};
+
 
 // 1. zod 校驗錯誤之訊息
 const schema = z.object({
@@ -88,6 +92,7 @@ export default function Server_Form_Login () {
         set_Response(data);
         await sleep(3000);
         router.push("/");
+        await verify_Token();
         await get_User_Info();
       }
     } catch (error) {
@@ -99,6 +104,8 @@ export default function Server_Form_Login () {
 
 
   // 9.驗證帳號是否有登入
+  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+  const dispatch: AppDispatch = useDispatch();
   const verify_Token = async () => {
     const verify_session_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/verify-session";
 
@@ -111,7 +118,7 @@ export default function Server_Form_Login () {
 
       const data = await response.json();
       console.log(data);
-
+      dispatch(update_Verify_Session(data));
     } catch (error) {
       console.log(error);
     }
