@@ -8,12 +8,14 @@ import { FiveStarSVG } from "@/components/client_Svg/client_Svg";
 import Modal from "@/components/modal/modal";
 import { useEffect, useState } from "react";
 import { Booking_Detail_Interface } from "@/types/booking_Detail";
+import { OtherSVG } from "@/components/client_Svg/client_Svg";
 
 export default function Booking_Detail () {
 
   // 1. 匹配「指定訂單」
   const params = useParams();
-  const booking_Detail = Booking_List_Json.find((item) => item.booking_Id === params.id) as Booking_Detail_Interface;
+  const booking_Detail_Json = Booking_List_Json.find((item) => item.booking_Id === params.id) as Booking_Detail_Interface;
+  const [booking_Detail, set_Booking_Detail] = useState<Booking_Detail_Interface>(booking_Detail_Json);
   console.log(booking_Detail, "指定訂單");
   // 1.1 這個if判斷最好要寫哦, 不然訂單明細很多屬性都要用「?.可選鏈 or as 斷言」, 還有一堆undefined的問題...
   if(!booking_Detail){return <p>沒有此訂單</p>}
@@ -31,7 +33,10 @@ export default function Booking_Detail () {
   }
 
   // 5. 留言內容 - 本地State
-  const [review, set_Review] = useState<string>("");
+  const [review, set_Review] = useState<string>(booking_Detail.review as string);
+  const handle_Change = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    set_Review(event.target.value);
+  };
 
   // 6. 滑動 1星~5星
   const [hover_Star, set_Hover_Star] = useState<number>(1);
@@ -40,13 +45,15 @@ export default function Booking_Detail () {
   },[hover_Star])
 
   // 7. 送出 評價+留言
-  const submit_Review = () => {
-    const old_Booking = {...booking_Detail};
-    const new_Booking = {...old_Booking, review: review, star_Rating: hover_Star};
-    console.log(new_Booking, "新訂單之留言");
+  const submit_Review = (event:  React.FormEvent) => {
+    event.preventDefault();
+    // const old_Booking = {...booking_Detail};
+    // const new_Booking = {...old_Booking, review: review, star_Rating: hover_Star};
+    // console.log(new_Booking, "新訂單之留言");
+    set_Booking_Detail({...booking_Detail, review: review, star_Rating: hover_Star}) // 記得更新給最原先的「訂單明細本地State」
     set_Modal_Boolean(false);
-    set_Hover_Star(1); // 留言完, 清空
-    set_Review(""); // 留言完, 清空
+    // set_Hover_Star(1); // 留言完, 清空
+    // set_Review(""); // 留言完, 清空
   };
 
 
@@ -97,12 +104,14 @@ export default function Booking_Detail () {
         {<div className="bg-white flex flex-col rounded-lg">
           <p className="text-center">Booking ID {booking_Detail?.booking_Id}</p>
           <div className="p-2">
-            {/** 打開留言 Modal */}
-            <button type="button" className="bg-secondary rounded text-white w-full py-2"
-              onClick={open_Review_Modal}>
-              {booking_Detail.booking_Status === "completed" ? 'Review Your Stay' : 'See Review'}
-            </button>
-            {/** 打開留言 Modal */}
+            {/** 打開留言 Modal - 訂單狀態 completed 才有Modal按鈕 */}
+            {booking_Detail.booking_Status === "completed" && 
+              <button type="button" className="bg-secondary rounded text-white w-full py-2"
+                onClick={open_Review_Modal}>
+                {booking_Detail.booking_Status === "completed" && booking_Detail.review === "" ? 'Review Your Stay' : 'See Review'}
+              </button>
+            }
+            {/** 打開留言 Modal - 訂單狀態 Completed 才有Modal按鈕 */}
           </div>
         </div>}
 
@@ -111,27 +120,62 @@ export default function Booking_Detail () {
             <div className="flex flex-col gap-4 px-4 pt-20">
               <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p>
               <p>Name: {booking_Detail.traveler_Name}</p>
-              {/** 5星評價 */}
-              <div className="flex gap-2" >
-              {[1,2,3,4,5].map((star: number) => {
-                return <FiveStarSVG name={"emptystar"} 
-                  className="w-5 h-auto hover:fill-[#ffdd00]" key={star}
-                  fill={star <= hover_Star ? '#ffdd00' : 'white'}
-                  onMouseEnter={() => set_Hover_Star(star)}
-                  >
-                </FiveStarSVG>
-                })}
-              </div>
+
+                {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
+                {booking_Detail.booking_Status === "completed" && booking_Detail.review === "" && <>
+                  <div className="flex gap-2" >
+                  {[1,2,3,4,5].map((star: number) => {
+                    return <FiveStarSVG name={"emptystar"} 
+                      className="w-5 h-auto hover:fill-[#ffdd00]" key={star}
+                      fill={star <= hover_Star ? '#ffdd00' : 'white'}
+                      onMouseEnter={() => set_Hover_Star(star)}
+                      >
+                    </FiveStarSVG>
+                    })}
+                  </div>
+                  <form onSubmit={submit_Review} className="flex flex-col gap-2">
+                    <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
+                      placeholder="Leave comment for what you experience from this Hotel"
+                      value={review}
+                      onChange={(event) => handle_Change(event)}>
+                    </textarea>
+                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"
+                      >Submit
+                    </button>
+
+                  </form>
+                </>
+              }
+              {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
+
+
+              {/* 訂單狀態 completed, 但已留言, 僅能查看 */}
+              {booking_Detail.booking_Status === "completed" && booking_Detail.review !== "" && <>
+                <div className="flex gap-2" >
+                {Array.from({length: booking_Detail.star_Rating ?? 0}, () => booking_Detail.star_Rating ?? 0).map((star: number, index) => {
+                  return <OtherSVG name={"star"} 
+                    className="w-5 h-auto hover:fill-[#ffdd00]" key={index}
+                    // fill={star <= hover_Star ? '#ffdd00' : 'white'}
+                    // onMouseEnter={() => set_Hover_Star(star)}
+                    >
+                  </OtherSVG>
+                  })}
+                </div>
+                <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
+                placeholder="Leave comment for what you experience from this Hotel"
+                value={review} readOnly>
+                </textarea>
+              </>
+              }
+               {/* 訂單狀態 completed, 但已留言, 僅能查看 */}
+
+
+
               {/** 5星評價 */}
 
-              <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
-                placeholder="Leave comment for what you experience from this Hotel"
-                value={review}
-                onChange={(event) => set_Review(event.target.value)}>
-              </textarea>
-              <button className="bg-primary rounded text-white self-center w-1/2 py-2"
-                onClick={submit_Review}>Submit
-              </button>
+              {/** 5星評價 */}
+              
+
             </div>
           </Modal>
         {/** 留言彈跳視窗 */}

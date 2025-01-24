@@ -113,13 +113,15 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray"></div>
 
     {/** 我的評論  */}
-    <div className="flex justify-between">
-      <div className="flex gap-2">
-        <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
-        <p>My Reviews</p>
+    <Link href={"/myreview"} className="cursor-pointer">
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
+          <p>My Reviews</p>
+        </div>
+        <p>{">"}</p>
       </div>
-      <p>{">"}</p>
-    </div>
+    </Link>
     {/** 我的評論  */}
 
     <div className="border-b-2 border-softGray"></div>

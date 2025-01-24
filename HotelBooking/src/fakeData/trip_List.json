@@ -14,12 +14,15 @@
     "childs": 1,
     "tax": 0.09,
     "facility": ["ac", "bar", "beach", "checkin"],
-    "review": null,
-    "star_Rating": null,
+    "review": "Stay here for 3 days. It's service is pretty well",
+    "star_Rating": 4,
     "traveler_Name": "Jacob",
     "longtitude": 0,
     "latitude": 0,
-    "address": "100 Ocean Drive, Miami Beach, FL 33139, United States"
+    "address": "100 Ocean Drive, Miami Beach, FL 33139, United States",
+    "city": "Miami",
+    "country": "United States",
+    "room": 1
   },
   {
     "booking_Id": "2",
@@ -36,12 +39,15 @@
     "childs": 0,
     "tax": 0.1,
     "facility": ["gym", "ktv", "laundry", "meal"],
-    "review": null,
+    "review": "",
     "star_Rating": null,
     "traveler_Name": "Jason",
     "longtitude": 0,
     "latitude": 0,
-    "address": "100 Ellen Street, Bangkok, Thailand"
+    "address": "100 Ellen Street, Bangkok, Thailand",
+    "city": "Bangkok",
+    "country": "Thailand",
+    "room": 2
   },
   {
     "booking_Id": "3",
@@ -58,12 +64,15 @@
     "childs": 1,
     "tax": 0.05,
     "facility": ["meal", "bar", "spa", "ac"],
-    "review": null,
+    "review": "",
     "star_Rating": null,
     "traveler_Name": "Nina",
     "longtitude": 0,
     "latitude": 0,
-    "address": "55 Oxford Street, Brisbane, Australia"
+    "address": "55 Oxford Street, Brisbane, Australia",
+    "city": "Brisbane",
+    "country": "Australia",
+    "room": 3
   },
   {
     "booking_Id": "4",
@@ -80,12 +89,15 @@
     "childs": 0,
     "tax": 0.08,
     "facility": ["slipper", "tv", "beach", "pickup"],
-    "review": null,
+    "review": "",
     "star_Rating": null,
     "traveler_Name": "Lauren",
     "longtitude": 0,
     "latitude": 0,
-    "address": "66 Market Street, Sydney, Australia"
+    "address": "66 Market Street, Sydney, Australia",
+    "city": "Sydney",
+    "country": "Australia",
+    "room": 4
   },
   {
     "booking_Id": "5",
@@ -102,12 +114,15 @@
     "childs": 1,
     "tax": 0.05,
     "facility": ["water", "wifi", "beach", "laundry"],
-    "review": null,
+    "review": "",
     "star_Rating": null,
     "traveler_Name": "Laura",
     "longtitude": 0,
     "latitude": 0,
-    "address": "2 George Street, Guandong, Chinba"
+    "address": "2 George Street, Guandong, China",
+    "city": "Guandong",
+    "country": "China",
+    "room": 2
   },
   {
     "booking_Id": "6",
@@ -124,11 +139,39 @@
     "childs": 0,
     "tax": 0.1,
     "facility": ["wifi", "laundry", "pickup", "pool"],
-    "review": null,
+    "review": "",
     "star_Rating": null,
     "traveler_Name": "Max",
     "longtitude": 0,
     "latitude": 0,
-    "address": "12 Nanjing Street, Taipei, Taiwan"
+    "address": "12 Nanjing Street, Taipei, Taiwan",
+    "city": "Taipei",
+    "country": "Taiwan",
+    "room": 2
+  },
+  {
+    "booking_Id": "7",
+    "booking_Img": "/triplist/trip_1.jpg",
+    "hotel_Name": "President Hotel",
+    "room_Type": "Twin Room",
+    "booking_Status": "completed",
+    "start_Date": "2024/10/10",
+    "end_Date": "2024/10/20",
+    "checkin": "15:00",
+    "checkout": "11:00",
+    "price": 1250,
+    "adults": 1,
+    "childs": 1,
+    "tax": 0.07,
+    "facility": ["gym", "ktv", "laundry", "meal"],
+    "review": "",
+    "star_Rating": null,
+    "traveler_Name": "Leon",
+    "longtitude": 0,
+    "latitude": 0,
+    "address": "100 Main Street, Kaohsiung, Taiwan",
+    "city": "Kaohsiung",
+    "country": "Taiwan",
+    "room": 1
   }
 ]

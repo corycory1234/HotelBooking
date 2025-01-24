@@ -19,5 +19,8 @@ export interface Booking_Detail_Interface {
   traveler_Name: string | null,
   longtitude: number,
   latitude: number,
-  address: string
+  address: string,
+  city: string,
+  country: string,
+  room: number
 }
