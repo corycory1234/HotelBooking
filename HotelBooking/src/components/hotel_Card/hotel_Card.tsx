@@ -24,7 +24,7 @@ interface Hotel_Card_Interface {
 // 2. Tab - 詳細、設施、評價陣列
 const tab = ["Overview", "Rooms", "Review", "Information"];
 
-// 3. leaflet 打開地圖彈窗, 所需要的大頭之圖檔
+// 3. leaflet 打開地圖彈窗, 所需要的大頭針之圖檔
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "/leaflet/marker-icon-2x.png",
   iconUrl: "/leaflet/marker-icon.png",

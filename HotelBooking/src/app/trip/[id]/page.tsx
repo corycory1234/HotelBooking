@@ -9,6 +9,10 @@ import Modal from "@/components/modal/modal";
 import { useEffect, useState } from "react";
 import { Booking_Detail_Interface } from "@/types/booking_Detail";
 import { OtherSVG } from "@/components/client_Svg/client_Svg";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
+import { LatLngExpression } from "leaflet"; // 從 @types/leaflet 來的
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 export default function Booking_Detail () {
 
@@ -83,6 +87,13 @@ export default function Booking_Detail () {
       <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
     </div>
   }
+
+  // 10. leaflet 打開地圖彈窗, 所需要的大頭針之圖檔
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: "/leaflet/marker-icon-2x.png",
+    iconUrl: "/leaflet/marker-icon.png",
+    shadowUrl: "/leaflet/marker-shadow.png",
+  })
   
 
   return <div className="flex flex-col">
@@ -103,21 +114,21 @@ export default function Booking_Detail () {
       {/** 留言評價 or 查看評價 */}
         {<div className="bg-white flex flex-col rounded-lg">
           <p className="text-center">Booking ID {booking_Detail?.booking_Id}</p>
-          <div className="p-2">
             {/** 打開留言 Modal - 訂單狀態 completed 才有Modal按鈕 */}
             {booking_Detail.booking_Status === "completed" && 
+              <div className="p-2">
               <button type="button" className="bg-secondary rounded text-white w-full py-2"
                 onClick={open_Review_Modal}>
                 {booking_Detail.booking_Status === "completed" && booking_Detail.review === "" ? 'Review Your Stay' : 'See Review'}
               </button>
+              </div>
             }
             {/** 打開留言 Modal - 訂單狀態 Completed 才有Modal按鈕 */}
-          </div>
         </div>}
 
         {/** 留言彈跳視窗 */}
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
-            <div className="flex flex-col gap-4 px-4 pt-20">
+            <div className="flex flex-col gap-4 px-4 pt-20 z-[999]">
               <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p>
               <p>Name: {booking_Detail.traveler_Name}</p>
 
@@ -273,8 +284,25 @@ export default function Booking_Detail () {
         
         {/** 地圖 */}
         <div className="bg-white flex flex-col rounded-lg p-2 gap-2">
-          <p className="text-sm font-semibold">Location - 地圖尚未實作</p>
-          <img src="/triplist/location.png" alt="" />
+          <p className="text-sm font-semibold">Location</p>
+          {/* <img src="/triplist/location.png" alt="" /> */}
+
+
+          <MapContainer
+            center={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]} // 台北 101 位置
+            zoom={13}
+            style={{width: "100%", height: "20rem", borderRadius: "20px", zIndex: 0}}
+            className="h-full">
+            <TileLayer
+            // 這裡使用 OpenStreetMap 免費圖資
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+            <Marker position={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]}>
+              <Tooltip permanent className="leaflet-tooltip ">{booking_Detail?.hotel_Name}</Tooltip>
+            </Marker>
+          </MapContainer>
+
+
+
           <p className="text-sm text-gray">{booking_Detail.address}</p>
           <button type="button" className="bg-primary text-white rounded py-2">Get Directions</button>
         </div>

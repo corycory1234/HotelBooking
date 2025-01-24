@@ -62,7 +62,7 @@ export default function My_Review () {
   };
 
   // 9. 送出 評價+留言
-  const submit_Review = (event:  React.FormEvent, booking_Id: string, index: number) => {
+  const submit_Review = (event:  React.FormEvent, booking_Id: string) => {
     event.preventDefault();
     set_Booking_List_Completed((prev_List) => {
       return prev_List.map((item) => {
@@ -132,10 +132,14 @@ export default function My_Review () {
 
 
           {/** 卡片下方 */}
-          <div className="flex gap-2 p-2">
-            <OtherSVG name="star" className="w-8 h-auto"></OtherSVG>
+          <div className="flex items-center gap-2 p-2">
+            <div className="relative">
+              <OtherSVG name="star" className="w-8 h-auto"></OtherSVG>
+              <p className="absolute top-2 left-3 text-sm">{item.star_Rating}</p>
+            </div>
             <p>{item.review}</p>
 
+            {/** 尚未留言, 才可以點擊按鈕 >> 彈跳視窗 >> 進行留言 */}
             {item.review === "" ? <>
               <button className="bg-secondary rounded text-white w-full py-2" onClick={() => open_Review_Modal(item.booking_Id)}>
                 Review Your Stay
@@ -159,7 +163,7 @@ export default function My_Review () {
                   </div>
 
 
-                  <form onSubmit={(event) => submit_Review(event, booking_Detail?.booking_Id as string, index)} className="flex flex-col gap-2">
+                  <form onSubmit={(event) => submit_Review(event, booking_Detail?.booking_Id as string)} className="flex flex-col gap-2">
                     <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
                       placeholder="Leave comment for what you experience from this Hotel"
                       value={booking_Detail?.review ?? ""}
@@ -177,19 +181,9 @@ export default function My_Review () {
 
 
               </>
-              
-              
-              
-              
-              
-
-
-
-
-
-
               : <></>
             }
+            {/** 尚未留言, 才可以點擊按鈕 >> 彈跳視窗 >> 進行留言 */}
           </div>
           {/** 卡片下方 */}
 
