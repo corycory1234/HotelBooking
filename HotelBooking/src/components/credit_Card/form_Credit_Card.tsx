@@ -97,13 +97,13 @@ export default function Form_Credit_Card () {
       <div className="flex justify-between">
         <p className="text-sm text-gray">Hotel Price</p>
         {/** 房間價格 */}
-        <p className="font-bold">$ {redux_Booked_Room.price}</p>
+        <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
         {/** 房間價格 */}
       </div>
       
       <div className="flex justify-between">
         <p className="text-sm text-gray">Tax</p>
-        <p className="font-bold">{"+" + Math.round(redux_Hotel_Tax * (redux_Booked_Room.price ?? 0))}</p>
+        <p className="font-bold">{"+" + Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0))}</p>
       </div>
 
       <div className="flex justify-between">
@@ -115,7 +115,7 @@ export default function Form_Credit_Card () {
 
       <div className="flex justify-between">
         <p className="text-sm text-gray">Total Amount</p>
-        <p className="font-bold text-primary">{redux_Booked_Room.price as number + (Math.round(redux_Hotel_Tax * (redux_Booked_Room.price ?? 0)) - 500) }</p>
+        <p className="font-bold text-primary">{redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)) - 500) }</p>
       </div>
     </div>
     {/* 所有金額統計 */}

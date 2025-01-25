@@ -26,18 +26,18 @@ export default function Room_Info () {
   {/** 總平均評價、飯店名、飯店地址、入住退房、幾間房、幾晚、住幾人 */}
       <div className="flex flex-col pb-4 border border-softGray rounded p-4 gap-4">
         <div className="flex justify-between flex-wrap">
-          <p className="font-bold text-xl">{redux_Hotel_Detail.name}</p>
+          <p className="font-bold text-xl">{redux_Hotel_Detail.hotel_Name}</p>
           <div className="flex items-center gap-x-1">
             <HomeSVG name={"Star"} className="w-3 h-auto"></HomeSVG>
-            <p className="text-xs text-gray">{redux_Hotel_Detail?.rating}</p>
-            <p className="text-xs text-gray">({redux_Hotel_Detail?.reviews.length + " reviews"})</p>
+            <p className="text-xs text-gray">{redux_Hotel_Detail?.totalRating}</p>
+            <p className="text-xs text-gray">({redux_Hotel_Detail?.review_List.length + " reviews"})</p>
           </div>
         </div>
         <p className="text-xs text-gray">{redux_Hotel_Detail.address}</p>
 
         {/** 房型 */}
         <div className="flex gap-2">
-          <p className="text-lg font-semibold">{redux_Booked_Room.roomType.charAt(0).toUpperCase() + redux_Booked_Room.roomType.slice(1)}</p>
+          <p className="text-lg font-semibold">{redux_Booked_Room.room_Type.charAt(0).toUpperCase() + redux_Booked_Room.room_Type.slice(1)}</p>
             {/** 吸菸|禁菸 */}
             {redux_Booked_Room.smoke ? 
             <div className="flex gap-2 bg-softGray p-1 rounded text-sm">

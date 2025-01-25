@@ -47,7 +47,7 @@ export default function Server_Form_Traveler_Info() {
     <div className="flex flex-col fixed bottom-0 right-0 p-4 customized-bg-gradient  w-full border-t border-softGray">
       <div className="flex justify-between">
         <p className="font-bold">Total Price</p>
-        <p className="font-bold">$ {redux_Booked_Room.price}</p>
+        <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
       </div>
       <button formAction={formAction} className="bg-primary text-white rounded-xl py-4 mt-4"> Proceed to Pay</button>
     </div>
