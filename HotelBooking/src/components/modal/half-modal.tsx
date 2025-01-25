@@ -2,6 +2,8 @@
 import ReactDOM from "react-dom";
 // import Hotel_List from "../../fakeData/hotel_List.json";
 import Hotel_List from "@/fakeData/hotel_List.json";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 // 1. Props傳遞數據 給Modal彈跳視窗 之 interface
 interface ModalProps {
@@ -13,6 +15,9 @@ interface ModalProps {
 }
 
 export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value }: ModalProps) {
+  //
+  const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
+
 
   // 2. 沒props過來，整包 Half_Modal 為 null，因此不渲染
   if (!isOpen) return null;
@@ -21,16 +26,16 @@ export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value
   const sortHotels = (sort_Option: string) => {
     switch(sort_Option) {
       case "priceLow":
-        Hotel_List.sort((a, b) => a.price - b.price); // 2. 排序 - 最低價 >> 最高價
+        redux_Hotel_List.sort((a, b) => (a.price as number) - (b.price as number)); // 2. 排序 - 最低價 >> 最高價
         break;
       case "priceHigh":
-        Hotel_List.sort((a, b) => b.price - a.price); // 3. 排序 - 最高價  >> 最低價
+        redux_Hotel_List.sort((a, b) => (b.price as number) - (a.price as number)); // 3. 排序 - 最高價  >> 最低價
         break;
       case "ratingHigh":
-        Hotel_List.sort((a, b) => b.rating - a.rating); // 4. 排序 - 最低評價 >> 最高評價
+        redux_Hotel_List.sort((a, b) => (b.totalRating as number) - (a.totalRating as number)); // 4. 排序 - 最低評價 >> 最高評價
         break;
       case "ratingLow":
-        Hotel_List.sort((a, b) => a.rating - b.rating); // 5. 排序 - 最高評價 >> 最低評價
+        redux_Hotel_List.sort((a, b) => (a.totalRating as number) - (b.totalRating as number)); // 5. 排序 - 最高評價 >> 最低評價
         break;
     };
     set_Sort_Value(sort_Option); // <input type="radio"> 高亮
