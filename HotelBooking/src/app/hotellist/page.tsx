@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import Client_Filter_Button from "../../components/client-Filter-Button";
 import Hotel_List_Card from "@/components/hotel_List/hotel_List_Card";
 import Half_Modal from "../../components/modal/half-modal";
-import Hotel_List from "../../fakeData/hotel_List.json";
 import { Submit_Search } from "@/actions";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 
 export default function HotelList () {
@@ -29,9 +30,6 @@ export default function HotelList () {
 
   // 3. Sort 彈跳Modal開關
   const [formSort, setFormSort] = useState<boolean>(false);
-  const show_FormSort = () => {
-    setFormSort(!formSort)
-  };
 
   // 4. Sort 傳遞<input type="radio"> 之 Value 與 傳遞函式 set_Sort_Value
   const [sort_Value, set_Sort_Value] = useState("");
@@ -63,6 +61,9 @@ export default function HotelList () {
     </div>
   }
 
+  // 5. Redux - 飯店列表
+  const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List)
+
 
   return <>
   <BackPage></BackPage>
@@ -77,9 +78,9 @@ export default function HotelList () {
 
   {/* ↑↓Sort 排序  */}
   <div className="flex items-center justify-between pb-4">
-    <p className="text-sm">{Hotel_List.length} hotels</p>
+    <p className="text-sm">{redux_Hotel_List.length} hotels</p>
     
-    <div className="flex items-center gap-1 border border-gray rounded px-2 py-1" onClick={show_FormSort}>
+    <div className="flex items-center gap-1 border border-gray rounded px-2 py-1" onClick={()=> setFormSort(true)}>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" >
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
       </svg>

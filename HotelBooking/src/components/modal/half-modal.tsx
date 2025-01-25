@@ -2,8 +2,10 @@
 import ReactDOM from "react-dom";
 // import Hotel_List from "../../fakeData/hotel_List.json";
 import Hotel_List from "@/fakeData/hotel_List.json";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/store/store";
+import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
+import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 
 // 1. Props傳遞數據 給Modal彈跳視窗 之 interface
 interface ModalProps {
@@ -15,8 +17,15 @@ interface ModalProps {
 }
 
 export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value }: ModalProps) {
-  //
+  // 1. Redux - 原始飯店列表
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
+  const dispatch: AppDispatch = useDispatch() 
+
+  // 2. 被 sorted 飯店列表, 不可拿 redux_Hotel_List 去排序, 因為沒有寫 Redux - Action。 
+  // 2.1 再者, 這種偏簡單的排序, 直接寫在前端元件就好, 沒必要再回去更新 Redux, 減少 Redux boilerplate
+  // 2.2 先忽略2點與2.1點 ↑ 這邊切太多元件, 設計沒做好。
+  // 2.3 最後, 再將重新排序後的飯店列表, dispatch傳數據給 Redux 飯店列表...這邊設計沒做好, 暫時只好去變動最原始的Redux - 飯店列表
+  let sorted_Hotel_List: add_Hotel_Detail_Interface[] = [] 
 
 
   // 2. 沒props過來，整包 Half_Modal 為 null，因此不渲染
@@ -26,20 +35,21 @@ export default function Half_Modal({ isOpen, onClose, sort_Value, set_Sort_Value
   const sortHotels = (sort_Option: string) => {
     switch(sort_Option) {
       case "priceLow":
-        redux_Hotel_List.sort((a, b) => (a.price as number) - (b.price as number)); // 2. 排序 - 最低價 >> 最高價
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (a.price as number) - (b.price as number)); // 2. 排序 - 最低價 >> 最高價
         break;
       case "priceHigh":
-        redux_Hotel_List.sort((a, b) => (b.price as number) - (a.price as number)); // 3. 排序 - 最高價  >> 最低價
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (b.price as number) - (a.price as number)); // 3. 排序 - 最高價  >> 最低價
         break;
       case "ratingHigh":
-        redux_Hotel_List.sort((a, b) => (b.totalRating as number) - (a.totalRating as number)); // 4. 排序 - 最低評價 >> 最高評價
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (b.totalRating as number) - (a.totalRating as number)); // 4. 排序 - 最低評價 >> 最高評價
         break;
       case "ratingLow":
-        redux_Hotel_List.sort((a, b) => (a.totalRating as number) - (b.totalRating as number)); // 5. 排序 - 最高評價 >> 最低評價
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (a.totalRating as number) - (b.totalRating as number)); // 5. 排序 - 最高評價 >> 最低評價
         break;
     };
     set_Sort_Value(sort_Option); // <input type="radio"> 高亮
     console.log(sort_Value, 123);
+    dispatch(update_Hotel_List(sorted_Hotel_List));
     onClose() // 選完 <input type="radio">, 關 modal彈跳
   }
 
