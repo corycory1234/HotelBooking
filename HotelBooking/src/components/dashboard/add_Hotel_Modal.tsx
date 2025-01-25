@@ -209,6 +209,8 @@ export default function Add_Hotel_Modal() {
       hotel_Image_List: hotel_Image_List,
       review_List: initialReviews_List,
       roomType_List: initialRoomType_List,
+      distance: "",
+      isCollected: false
     };
 
 
