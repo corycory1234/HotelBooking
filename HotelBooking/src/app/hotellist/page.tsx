@@ -42,7 +42,7 @@ export default function HotelList () {
     set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
     const timer = setTimeout(() => {
       set_Show_Hotel_List(true);
-    }, 3000);
+    }, 1500);
     return () => clearTimeout(timer);
   },[timestamp])
 

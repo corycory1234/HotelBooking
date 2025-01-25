@@ -2,13 +2,14 @@
 import { useRouter, useParams, useSearchParams } from "next/navigation";
 import hotel_List from "@/fakeData/hotel_List.json";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/store";
+import { RootState, AppDispatch } from "@/store/store";
 import { useState, useEffect } from "react";
 import Modal from "@/components/modal/modal";
 import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
-import Hotel_Card from "@/components/hotel_Card/hotel_Card";
+import Hotel_Detail_Card from "@/components/hotel_Card/hotel_Detail_Card";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
+import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import DateRangePicker from "@/components/server-Form-Search/dateRangePicker";
 import Client_Input_Traveler from "@/components/server-Form-Search/client-Input-Traveler";
 import Client_Input_Keyword from "@/components/server-Form-Search/client-Input-Keyword";
@@ -18,6 +19,7 @@ import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 export default function Hotel_Detail () {
   // 0.
   const searchParams = useSearchParams();
+  const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
 
   // 1. 返回上一頁
   const router = useRouter();
@@ -26,11 +28,14 @@ export default function Hotel_Detail () {
   const params = useParams();
 
   // 3. dispatch 拿取 Redux 之 Action函式
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   // 4. 撈 JSON 當中的指定飯店 - JSON 假資料要吃 TS型別, 不然會報錯
-  const hotel_List_Typed: Hotel_Detail_Interface[] = hotel_List as Hotel_Detail_Interface[];
-  const the_Found_Hotel = hotel_List_Typed.find((item) => params.id === item.id);
+  // const hotel_List_Typed: Hotel_Detail_Interface[] = hotel_List as Hotel_Detail_Interface[];
+  const hotel_List_Typed: add_Hotel_Detail_Interface[] = redux_Hotel_List;
+  // const the_Found_Hotel = hotel_List_Typed.find((item) => params.id === item.id);
+  const the_Found_Hotel = hotel_List_Typed.find((item) => item.hotel_Id === params.id);
+
 
   // 5.  生命週期：組件載入後，dispatch 更新 Redux
   // 5.1 也可寫在 useEffect 中，只在 id 變動時重新 dispatch
@@ -38,7 +43,7 @@ export default function Hotel_Detail () {
     if(the_Found_Hotel) {
       dispatch(update_Hotel_Detail(the_Found_Hotel));
        // 5.2 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
-      dispatch(updateKeyword(the_Found_Hotel.name))
+      dispatch(updateKeyword(the_Found_Hotel.hotel_Name as string))
     }
   },[params.id]);
 
@@ -86,7 +91,7 @@ export default function Hotel_Detail () {
   {/* 返回上頁按鈕、Modla 彈跳<form>搜尋視窗 */}
   <div className="bg-primary relative">
     <div className="flex flex-col py-2 cursor-pointer" onClick={show_FormSearch}>
-      <p className="text-center text-white">{redux_Hotel_Detail?.name}</p>
+      <p className="text-center text-white">{redux_Hotel_Detail?.hotel_Name}</p>
       <p className="text-center text-white">{redux_DateRange}</p>
     </div>
 
@@ -118,7 +123,7 @@ export default function Hotel_Detail () {
 
 
     {/** 飯店卡片 */}
-    <Hotel_Card the_Hotel={redux_Hotel_Detail}></Hotel_Card>
+    <Hotel_Detail_Card the_Hotel={redux_Hotel_Detail}></Hotel_Detail_Card>
     {/** 飯店卡片 */}
   </>
 }

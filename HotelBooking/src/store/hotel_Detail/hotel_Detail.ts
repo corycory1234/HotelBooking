@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
+import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 // import { create_Initial_HotelDetail } from "@/utils/factory";
 
 // 1. Utils > 拿 factory.ts 當中的「飯店列表 & 巢狀飯店房型」初始值，拿來 Redux 中當 初始值
@@ -7,37 +8,39 @@ import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
 // 1.2 不如直接在 factory.ts 寫好一個巢狀就好，其他多的 [{item},{item}]，factory.ts 會自己辨識
 // const initialState = create_Initial_HotelDetail();
 
-const initialState: Hotel_Detail_Interface = {
-  id: "",
-  name: "",
-  images: [],
+const initialState: add_Hotel_Detail_Interface = {
+  hotel_Id: "",
+  hotel_Name: "",
+  hotel_Image_List: [],
   distance: "",
-  rating: null,
-  facilities: [],
+  totalRating: null,
+  facility_List: [],
   price: null,
-  intro: [],
-  reviews: [], // 初始為空陣列
+  hotel_Intro: "",
+  review_List: [], // 初始為空陣列
   address: "",
   country: "",
   city: "",
   tax: 0,
   checkin: "",
   checkout: "",
-  roomType: [], // 初始設為空陣列
+  roomType_List: [], // 初始設為空陣列
   latitude: null,
   longtitude: null,
-  hotel_Phone: null,
-  hotel_Email: null,
-  cancellation_Policy: null,
-  transportation: null,
-  recommendation: null,
+  is_Open: "true",
+  hotel_Phone: "",
+  hotel_Email: "",
+  cancellation_Policy: "",
+  transportation: "",
+  recommendation: "",
+  isCollected: false,
 } 
 
 const hotel_Detail_Slice = createSlice({
   name: 'hotel_Detail',
   initialState,
   reducers: {
-    update_Hotel_Detail: (state, action: PayloadAction<Hotel_Detail_Interface>) => {
+    update_Hotel_Detail: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
       return action.payload;
     }
   }

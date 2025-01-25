@@ -4,17 +4,19 @@ import { ProfileSVG } from "../client_Svg/client_Svg";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Modal from "../modal/modal";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/store/store";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 
 const language_List = ["zh-TW", "en-US"];
 
 export default function Before_Login_Profile () {
   // 0.
   const router = useRouter();
+  const dispatch: AppDispatch = useDispatch();
 
   // 1. 多國語系切換 - 如果是 zh-TW, 就吃zh-TW; 若不是, 一率吃en-US
   const [language, set_Language] = useState<string>(language_List.includes(navigator.language) ? navigator.language : "en-US")
@@ -46,10 +48,10 @@ export default function Before_Login_Profile () {
   // 5. Redux - 查看是否登入狀態
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
-  // 2. loading 布林值
+  // 6. loading 布林值
   const [loading_Boolean, set_Loading_Boolean] = useState<boolean>(false);
 
-  // 3. 登出
+  // 7. 登出
   const log_Out = async () => {
     try {
       set_Loading_Boolean(true); // loading動畫開始
@@ -61,6 +63,12 @@ export default function Before_Login_Profile () {
       });
       const data = await response.json();
       console.log(data, "登出返回response");
+      // 3.1 登出後, 給Redux初始值, 這邊寫很爛, 懶得想
+      dispatch(update_Verify_Session({success: false,
+        data: {
+          user: {id: "",name: "",userType: "",createdAt: "",updatedAt: "",email: "",}
+        }}));
+
       if(!response.ok) {
         toast.error(data.message)
       }else {
@@ -75,7 +83,10 @@ export default function Before_Login_Profile () {
     }
   }
 
-  console.log(redux_Verify_Session, ":看redux阿");
+  // 8. 請先登入 - 沒token
+  const please_Login = () => {
+    toast("Please Login First", {icon: "⚠️"})
+  }
 
   
   return <div className="pb-20">
@@ -137,31 +148,34 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray"></div>
     
     {/** 個人資料 */}
-    <div className="flex justify-between cursor-pointer" onClick={() => set_Modal_Boolean(true)}>
-      <div className="flex gap-2">
-        <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
-        <p>Personal Details</p>
+      <div className="flex justify-between cursor-pointer" 
+        onClick={() => redux_Verify_Session.success === true ? set_Modal_Boolean(true) : please_Login()}>
+        <div className="flex gap-2">
+          <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
+          <p>Personal Details</p>
+        </div>
+        <p>{">"}</p>
       </div>
-      <p>{">"}</p>
-    </div>
 
-    <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
-      <div className="flex flex-col gap-2 p-4">
-        <h2 className="text-xl font-semibold">Personal Info</h2>
-        <form className="flex flex-col gap-2" onSubmit={submit}>
-          <label className="flex flex-col gap-1">Name
-            <input type="text" className="border rounded p-2" name="username" id="username"/>
-          </label>
-          <label className="flex flex-col gap-1">Email
-            <input type="text" className="border rounded p-2" name="email" id="email"/>
-          </label>
-          <button type="submit" className="mt-auto bg-primary p-2 rounded"> Submit </button>
-        </form>
-      </div>
-    </Modal>
+      <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
+        <div className="flex flex-col gap-2 p-4">
+          <h2 className="text-xl font-semibold">Personal Info</h2>
+          <form className="flex flex-col gap-2" onSubmit={submit}>
+            <label className="flex flex-col gap-1">Name
+              <input type="text" className="border rounded p-2" name="username" id="username"/>
+            </label>
+            <label className="flex flex-col gap-1">Email
+              <input type="text" className="border rounded p-2" name="email" id="email"/>
+            </label>
+            <button type="submit" className="mt-auto bg-primary p-2 rounded"> Submit </button>
+          </form>
+        </div>
+      </Modal>
     {/** 個人資料 */}
-    
+
+
     <div className="border-b-2 border-softGray"></div>
+
 
     {/** 我的最愛  */}
     <Link href={"/mycollection"}>

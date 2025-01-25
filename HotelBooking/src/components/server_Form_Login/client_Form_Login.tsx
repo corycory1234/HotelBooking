@@ -103,7 +103,7 @@ export default function Server_Form_Login () {
   }
 
 
-  // 9.驗證帳號是否有登入
+  // 9. 驗證帳號是否有登入
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
   const dispatch: AppDispatch = useDispatch();
   const verify_Token = async () => {

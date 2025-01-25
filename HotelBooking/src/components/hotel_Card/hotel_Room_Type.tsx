@@ -9,13 +9,14 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Link from "next/link";
 import { Hotel_Room_Type_Interface } from "@/types/hotel_Detail";
+import { add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail";
 import { useRouter } from "next/navigation";
 
 
 export default function Hotel_Room_Type() {
   // 1. Redux - 飯店明細
   const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
-  const redux_Hotel_Room_Type = redux_Hotel_Detail.roomType;
+  const redux_Hotel_Room_Type = redux_Hotel_Detail.roomType_List;
   console.log(redux_Hotel_Room_Type, "房型數據");
   
   // 2. 住幾晚
@@ -27,8 +28,8 @@ export default function Hotel_Room_Type() {
   const dispatch = useDispatch();
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
   const book_Room = async (id: string) => {
-    const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.id === id);
-    const result = dispatch(update_Booked_Room(the_Booked_Room as Hotel_Room_Type_Interface))
+    const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.roomType_Id === id);
+    const result = dispatch(update_Booked_Room(the_Booked_Room as add_Hotel_Room_Type_Interface))
     console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
     console.log(result, "結果");
     if(result) {
@@ -42,7 +43,7 @@ export default function Hotel_Room_Type() {
   return <>
     <div className="flex flex-col gap-4">
       {redux_Hotel_Room_Type.map((room) => {
-        return <div key={room.id} className="flex flex-col gap-2">
+        return <div key={room.roomType_Id} className="flex flex-col gap-2">
         
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
         <div className="">
@@ -51,20 +52,20 @@ export default function Hotel_Room_Type() {
             pagination={{ clickable: true }}
             modules={[Pagination]}>
   
-            {room?.images.map((img, index) => {
+            {room?.roomType_Image_List?.map((img, index) => {
               return <SwiperSlide key={index}>
                 <div className="relative">
                   <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top rounded-lg" />
                   <p className="absolute bottom-2 right-8 text-white text-sm">
-                    {(index < 10 ? "0" + (index + 1) : index + 1) + "/" + (room.images.length < 10 ? "0" + room.images.length : room.images.length)}
+                    {(index < 10 ? "0" + (index + 1) : index + 1) + "/" + (room.roomType_Image_List.length < 10 ? "0" + room.roomType_Image_List.length : room.roomType_Image_List.length)}
                   </p>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 absolute bottom-2 right-2 text-white">
                     <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0l-2.97 2.97ZM12 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" />
                   </svg>
 
                   {/** 剩3間警示 */}
-                  {room.availability <=3 && 
-                    <p className="absolute top-2 left-2 text-customRed bg-red-50 font-bold px-2 rounded">{"Only " + room.availability + " Left"}</p>
+                  {(room.room_Availability as number) <=3 && 
+                    <p className="absolute top-2 left-2 text-customRed bg-red-50 font-bold px-2 rounded">{"Only " + room.room_Availability + " Left"}</p>
                   }
                   {/** 剩3間警示 */}
                   
@@ -77,12 +78,12 @@ export default function Hotel_Room_Type() {
 
         
         {/** 房型名稱、房間大小、最多幾人住 */}
-        <p className="font-bold">{room.roomType.charAt(0).toUpperCase() + room.roomType.slice(1)}</p>
+        <p className="font-bold">{room.room_Type.charAt(0).toUpperCase() + room.room_Type.slice(1)}</p>
         <div className="flex gap-1">
           <OtherSVG name={"roomsize"} className="w-4 h-auto"></OtherSVG>
-          <p>{room.roomsize + "㎡"}</p>
+          <p>{room.room_Size + "㎡"}</p>
           <OtherSVG name={"maxoccupancy"} className="w-4 h-auto"></OtherSVG>
-          <p>{"Max " + room.maxOccupancy + " People"}</p>
+          <p>{"Max " + room.max_People + " People"}</p>
         </div>
         {/** 房型名稱、房間大小、最多幾人住 */}
 
@@ -107,7 +108,7 @@ export default function Hotel_Room_Type() {
             {/** 禁菸房 | 吸菸房 */}
 
             {/** 房間裡的設施 */}
-            {room.amenity.map((item, index) => {
+            {room.amenity_List?.map((item, index) => {
               return <div className="flex gap-1 bg-softGray rounded p-1" key={index}>
                 <OtherSVG name={item} className="w-4 h-auto"/> 
                 <span className="text-xs">{item}</span>
@@ -125,7 +126,7 @@ export default function Hotel_Room_Type() {
 
             {/** 房型價錢、住幾晚、人數 */}
             <div className="flex flex-col">
-              <p className="font-bold text-lg">{room.price}</p>
+              <p className="font-bold text-lg">{room.room_Price}</p>
               <p className="text-gray text-sm">
                 {nights + " Nights"} | {redux_Fomr_Search.adult + redux_Fomr_Search.child + " Travelers"} 
                 {/* {redux_Fomr_Search.child ? "|" + redux_Fomr_Search.child + " Childs" : ""} */}
@@ -136,7 +137,7 @@ export default function Hotel_Room_Type() {
             {/** 跳轉 Payment */}
             {/* <Link href={"/payment"}> */}
               <button className="bg-primary p-2 rounded text-white"
-                onClick={() => book_Room(room.id)}>Book Now</button>
+                onClick={() => book_Room(room.roomType_Id)}>Book Now</button>
             {/* </Link> */}
             {/** 跳轉 Payment */}
           </div>

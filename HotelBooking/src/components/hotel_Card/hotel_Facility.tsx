@@ -3,13 +3,13 @@ import { RootState } from "@/store/store";
 import { FacilitySVG } from "../client_Svg/client_Svg";
 
 export default function Hotel_Facility () {
-  const redux_Hotel_Detal = useSelector((state: RootState) => state.hotel_Detail);
+  const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
 
 
   return <>
   
   <div className="flex flex-wrap gap-2">
-    {redux_Hotel_Detal?.facilities.map((facility, index) => {
+    {redux_Hotel_Detail?.facility_List?.map((facility, index) => {
       // return <div key={index} className="flex flex-col items-center">
         return <div className="flex justify-center items-center flex-wrap" key={index}>
           <div className="w-1/4 flex flex-col items-center">

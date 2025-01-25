@@ -14,6 +14,7 @@ interface SVG_Interface {
   fill?: string,
   onMouseEnter?: React.MouseEventHandler<SVGSVGElement>,
   onMouseLeave?: React.MouseEventHandler<SVGSVGElement>
+  onClick?: React.MouseEventHandler<SVGSVGElement>,
 }
 
 // 1. Public資料 > Facility資料 之SVG
@@ -40,13 +41,13 @@ export function HomeSVG({name, className }: SVG_Interface) {
 }
 
 // 3. Public資料 > otherSvg資料 之SVG
-export function OtherSVG({name, className }: SVG_Interface) {
+export function OtherSVG({name, className, onClick }: SVG_Interface) {
   const src = `/otherSvg/${name}.svg`;
 
   return (
-    <InlineSVGNoSSR src={src} className={className} 
-      // loader={<span>Loading...</span>} 
-    />
+  <InlineSVGNoSSR src={src} className={className} onClick={onClick}
+    // loader={<span>Loading...</span>} 
+  />
   )
 };
 

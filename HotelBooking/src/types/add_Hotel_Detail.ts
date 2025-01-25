@@ -6,7 +6,7 @@ export interface add_Hotel_Detail_Interface {
   hotel_Id: string | null,
   hotel_Name: string | null,
   hotel_Image_List: {url: string, description: string}[],
-  // distance: string,
+  distance: string,
   totalRating: number | null,
   facility_List: string[] | null,
   price: number | null,
@@ -26,7 +26,8 @@ export interface add_Hotel_Detail_Interface {
   transportation: string | null,
   recommendation: string | null,
   review_List: add_Review_Type_Interface[],
-  roomType_List: add_Hotel_Room_Type_Interface[]
+  roomType_List: add_Hotel_Room_Type_Interface[],
+  isCollected: boolean
 };
 
 // 2. 旅客評論

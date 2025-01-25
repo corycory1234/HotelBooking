@@ -1,5 +1,6 @@
 'use client';  
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
+import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import 'swiper/css';
@@ -18,7 +19,7 @@ import { useSearchParams } from "next/navigation";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
-  the_Hotel: Hotel_Detail_Interface | undefined
+  the_Hotel: add_Hotel_Detail_Interface | undefined
 };
 
 // 2. Tab - 詳細、設施、評價陣列
@@ -31,7 +32,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "/leaflet/marker-shadow.png",
 })
 
-export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
+export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 1. 拿 timeStamp - URL時間戳
   const searchParams = useSearchParams();
 
@@ -100,12 +101,12 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
           pagination={{clickable: true}} 
           modules={[Pagination]}>
 
-          {the_Hotel?.images.map((img, index) => {
+          {the_Hotel?.hotel_Image_List.map((img, index) => {
             return <SwiperSlide key={index}>
               <div className="relative">
                 <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top"/>
                 <p className="absolute bottom-2 right-8 text-white text-sm">
-                  { (index<10 ? "0"+(index+1): index+1) + "/" + (the_Hotel.images.length<10 ? "0" + the_Hotel.images.length : the_Hotel.images.length)}
+                  { (index<10 ? "0"+(index+1): index+1) + "/" + (the_Hotel.hotel_Image_List.length<10 ? "0" + the_Hotel.hotel_Image_List.length : the_Hotel.hotel_Image_List.length)}
                 </p>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 absolute bottom-2 right-2 text-white">
                   <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0l-2.97 2.97ZM12 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" />
@@ -119,7 +120,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
       
       {/** 飯店名，吃Sticky，滾動固定Top */}
-      <p className="font-bold px-4 bg-white sticky top-0 z-10">{the_Hotel?.name}</p>
+      <p className="font-bold px-4 bg-white sticky top-0 z-10">{the_Hotel?.hotel_Name}</p>
       {/** 飯店名，吃Sticky，滾動固定Top */}
 
       {/* Tab 高亮切換，吃Sticky，滾動固定Top */}
@@ -158,7 +159,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
             // 這裡使用 OpenStreetMap 免費圖資
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
             <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
-              <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.name}</Tooltip>
+              <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
             </Marker>
           </MapContainer>
         </Modal>
@@ -167,12 +168,13 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         <div className="flex gap-1">
           <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
-          <p className="bg-blue text-white font-semibold rounded px-2">{the_Hotel?.rating}</p>
-          <p className="text-primary font-semibold">{"Reviews：" + the_Hotel?.reviews.length}</p>
+          <p className="bg-blue text-white font-semibold rounded px-2">{the_Hotel?.totalRating}</p>
+          <p className="text-primary font-semibold">{"Reviews：" + the_Hotel?.review_List.length}</p>
         </div>
-        {the_Hotel?.intro.map((details, index) => {
-          return <p key={index}> {details} </p>
-        })}
+        {/* {the_Hotel?.intro.map((details, index) => {
+          return <p key={index}> {the_Hotel.hotel_Intro} </p>
+        })} */}
+        <p> {the_Hotel?.hotel_Intro} </p>
         <div className="border-b border-softGray"></div>
         <Hotel_Facility></Hotel_Facility>
 
@@ -251,7 +253,7 @@ export default function Hotel_Card ({the_Hotel}: Hotel_Card_Interface) {
               // 這裡使用 OpenStreetMap 免費圖資
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
               <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
-                <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.name}</Tooltip>
+                <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
               </Marker>
               </MapContainer>
           {/** React-leaflet 地圖 */}
