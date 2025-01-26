@@ -1,34 +1,102 @@
+'use client';
 import { useFormState } from "react-dom";
 import { Submit_Traveler_Info } from "@/actions/traveler_Info";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { z } from "zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { sleep } from "@/utils/sleep";
+import { OtherSVG } from "../client_Svg/client_Svg";
+
+interface Zod_Response_Interface {
+  success: boolean,
+  nameError: string,
+  surnameError: string,
+  emailError: string,
+  phoneError: string,
+}
 
 // 1. Zod 錯誤訊息初始值
-const initialState = {message: ""};
+// const initialState = {message: ""};
 
 export default function Server_Form_Traveler_Info() {
-  // 2. 透過 useFormState 套用 Server Actino函式 以及 zod錯誤訊息
-  const [state, formAction] = useFormState(Submit_Traveler_Info, initialState)
+  const router = useRouter();
 
-  // 3. 拿取Redux - 預定房型之數據
+  // 2. zod 校驗規則
+  const schema = z.object({
+    name: z.string().min(1, {message: "Must be 1 or more characters"})
+                    .max(20, {message: "Must be 20 or fewer characters"}),
+    surname: z.string().min(1, {message: "Must be 1 or more characters"})
+                      .max(20, {message: "Must be 20 or fewer characters "}),
+    email: z.string().email("Invalid Email"),
+    phone: z.string().min(10, {message: "Must be 10 or more"})
+                    .max(20, {message: "Must be 20 or fewer"})
+                    .regex(/^\d+$/, { message: "Phone number must contain only digits" }) // 只能輸入數字
+  });
+
+  // 3. 透過 useFormState 套用 Server Actino函式 以及 zod錯誤訊息
+  // const [state, formAction] = useFormState(Submit_Traveler_Info, initialState)
+
+  // 4. zod 校驗, 並更新錯誤訊息
+  const [zod_Response, set_Zod_Response] = useState<Zod_Response_Interface>()
+
+  // 5. loading 樣式開關
+  const [is_Loading, set_Is_Loading] = useState<boolean>(false);
+
+  // 6. 拿取Redux - 預定房型之數據
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room)
+
+  // 7. 送出旅客<form>數據 
+  const submit_Traveler_Info = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const formValue = Object.fromEntries(formData.entries());
+      console.log(formValue, "看看formData一次全拉所有值");
+      const validateFields = schema.safeParse(formValue);
+
+      // 7.2 若驗證失敗, 篩選出個別錯誤訊息
+      if(!validateFields.success) {
+        const { fieldErrors } = validateFields.error.flatten();
+        return set_Zod_Response({
+          // ...prevState,
+          success: false,
+          nameError: fieldErrors.name?.[0] || "",
+          surnameError: fieldErrors.surname?.[0] || "",
+          emailError: fieldErrors.email?.[0] || "",
+          phoneError: fieldErrors.phone?.[0] || "",
+        })
+      } else {
+        // 7.3 暫時校驗成功, 就跳轉 信用卡頁面
+        // redirect("/creditcard");
+        set_Is_Loading(true)
+        await sleep(2000);
+        router.push("/creditcard")
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set_Is_Loading(false);
+    }
+  }
 
   return <>
 
-  <form className="flex flex-col gap-2 p-4">
+  <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-2 p-4">
     <div className="flex flex-col mb-32">
 
     <label htmlFor="name" className="text-gray">Name</label>
     <input type="text" id="name" name="name" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-customRed">{state.nameError}</p>
+    <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
 
     <label htmlFor="surname" className="text-gray">Surname</label>
     <input type="text" id="surname" name="surname" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-customRed">{state.surnameError}</p>
+    <p aria-live="polite" className="text-customRed">{zod_Response?.surnameError}</p>
 
     <label htmlFor="email" className="text-gray">Email Address</label>
     <input type="text" id="email" name="email" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-customRed">{state.emailError}</p>
+    <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
 
     <label htmlFor="country" className="text-gray">Country</label>
     <select name="country" id="country" className="rounded-lg border-2 border-softGray p-2">
@@ -40,7 +108,7 @@ export default function Server_Form_Traveler_Info() {
 
     <label htmlFor="phone" className="text-gray">Phone Number</label>
     <input type="text" id="phone" name="phone" className="rounded-lg border-2 border-softGray p-2"/>
-    <p aria-live="polite" className="text-customRed">{state.phoneError}</p>
+    <p aria-live="polite" className="text-customRed">{zod_Response?.phoneError}</p>
     </div>
 
     {/** formAction 寫在<button>上*/}
@@ -49,7 +117,16 @@ export default function Server_Form_Traveler_Info() {
         <p className="font-bold">Total Price</p>
         <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
       </div>
-      <button formAction={formAction} className="bg-primary text-white rounded-xl py-4 mt-4"> Proceed to Pay</button>
+
+      {!is_Loading ?
+        <button className="bg-primary text-white rounded-xl py-4 mt-4"> Proceed to Pay</button>
+      :
+        <button className="flex justify-center items-center gap-2 bg-softGray text-white rounded-xl py-4 mt-4" disabled>
+          <OtherSVG name="spin" className="w-5 h-auto animate-spin"></OtherSVG>
+            Processing...
+        </button>
+      }
+
     </div>
     {/** formAction 寫在<button>上*/}
 

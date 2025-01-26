@@ -4,15 +4,15 @@
     "hotel_Name": "The Ritz-Carlton",
     "hotel_Image_List": [
       {
-        "url": "/hotellist/hotellist_1.webp",
+        "url": "/collection/collection_1.webp",
         "description": "hotel1"
       },
       {
-        "url": "/hotellist/hotellist_2.webp",
+        "url": "/collection/collection_2.webp",
         "description": "hotel2"
       },
       {
-        "url": "/hotellist/hotellist_3.webp",
+        "url": "/collection/collection_3.webp",
         "description": "hotel3"
     }
     ],
@@ -97,15 +97,15 @@
     "hotel_Name": "Four Seasons Hotel",
     "hotel_Image_List": [      
       {
-        "url": "/hotellist/hotellist_2.webp",
+        "url": "/collection/collection_4.webp",
         "description": "hotel2"
       },
       {
-          "url": "/hotellist/hotellist_3.webp",
+          "url": "/collection/collection_5.webp",
           "description": "hotel3"
       },
       {
-        "url": "/hotellist/hotellist_1.webp",
+        "url": "/collection/collection_1.webp",
         "description": "hotel1"
       }
   ] ,
@@ -190,15 +190,15 @@
     "hotel_Name": "Mandarin Oriental",
     "hotel_Image_List": [
       {
-        "url": "/hotellist/hotellist_3.webp",
+        "url": "/collection/collection_5.webp",
         "description": "hotel3"
       },
       {
-          "url": "/hotellist/hotellist_1.webp",
+          "url": "/collection/collection_4.webp",
           "description": "hotel1"
       },
       {
-        "url": "/hotellist/hotellist_2.webp",
+        "url": "/collection/collection_3.webp",
         "description": "hotel2"
       }
     ],

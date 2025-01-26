@@ -4,15 +4,32 @@ import { useFormState } from "react-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { Pay } from "@/actions/pay";
+import { z } from "zod";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import { sleep } from "@/utils/sleep";
+import { OtherSVG } from "../client_Svg/client_Svg";
 
 // 0. Zod 錯誤訊息初始值
-const initialState = "";
+// const initialState = "";
+
+// 1. Zod 錯誤訊息 - interface接口
+interface Zod_Response_Interface {
+  success: boolean,
+  nameError: string,
+  cardnumberError: string,
+  expireddateError: string,
+  cvvError: string
+}
+
 
 export default function Form_Credit_Card () {
- // 1. 透過 useFormState 套用 Server Actino函式 以及 zod錯誤訊息
-  const [state, formAction] = useFormState(Pay, initialState)
+  const router = useRouter()
 
-  // 2. 信用卡卡號
+  // 2. 透過 useFormState 套用 Server Actino函式 以及 zod錯誤訊息
+  // const [state, formAction] = useFormState(Pay, initialState)
+
+  // 3. 信用卡卡號
   const [cardNumber, set_CardNumber] = useState("")
   const handle_CardNumber_Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value.replace(/\D/g, '') // 拿掉非數字之字串
@@ -46,46 +63,115 @@ export default function Form_Credit_Card () {
   // 6. 拿取 Redux 指定飯店 Tax 數據
   const redux_Hotel_Tax = useSelector((state: RootState) => state.hotel_Detail.tax);
 
+  // 7. loading 樣式開關
+  const [is_Loading, set_Is_Loading] = useState<boolean>(false);
+
+  // 8. zod 校驗規則
+  const schema = z.object({
+    name: z.string().min(4, {message: "Must be 4 or more characters"})
+            .max(20, {message: "Must be 20 or fewer characters"})
+            .regex(/^[a-z]+$/i, {message: "Must be Alphabet"}), // 只能輸入字母
+    cardnumber: z.string().min(19, {message: "Must be 16 characters"})
+            .max(19, {message: "Must be 16 characters"}),
+    expireddate: z.string().min(5, {message: "Must be 5 characters"})
+            .max(5, {message: "Must be 5 characters"}),
+    cvv: z.string().min(3, {message: "Must be 3 characters"})
+            .max(3, {message: "Must be 3 characters"})
+            .regex(/^\d+$/, { message: "CVV must contain only digits" })
+  })
+
+  // 9. zod 校驗, 並更新錯誤訊息
+  const [zod_Response, set_Zod_Response] = useState<Zod_Response_Interface>()
+
+  // 10. 付款
+  const pay = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      event?.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      // 將 fomrData 轉成 物件, 一次性拿 所有 <input> 的 value 跟 name
+      const formValue = Object.fromEntries(formData.entries());
+      console.log(formValue, "所有<input>的 name 與 value");
+      // const {name, cardNumber, expireddate, cvv} = formValue
+      // const name = formData.get("name");
+      // const cardnumber = formData.get("cardnumber");
+      // const expireddate = formData.get("expireddate");
+      // const cvv = formData.get("cvv");
+      // console.log(name, cardnumber, expireddate, cvv);
+  
+      const validateFields = schema.safeParse(
+        // name, cardnumber, expireddate, cvv
+        formValue);
+  
+      // 10.1 若驗證失敗, 篩選出個別錯誤訊息
+      if(!validateFields.success) {
+        const {fieldErrors} = validateFields.error.flatten();
+        return set_Zod_Response({
+          // ...prevState,
+          success: false,
+          nameError: fieldErrors.name?.[0] || "",
+          cardnumberError: fieldErrors.cardnumber?.[0] || "",
+          expireddateError: fieldErrors.expireddate?.[0] || "",
+          cvvError: fieldErrors.cvv?.[0] || "",
+        })
+      } else {
+        // 10.2 暫時校驗成功, 返回首頁
+        set_Is_Loading(true);
+        await sleep(3000);
+        toast.success("You will now be redirected to our secure payment gateway.", 
+          {icon: '💳', duration: 6000, style:{display: 'flex', gap: '1rem'} }
+        );
+        router.push("/") // 這邊應該是導向金流
+        // redirect("/")
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set_Is_Loading(false)
+    }
+  
+  }
+
   return <div className="bg-primary rounded-t-3xl p-4">
+          <Toaster></Toaster>
     
-    <form action={formAction} className="flex flex-col gap-6">
+    <form onSubmit={(event) => pay(event)} className="flex flex-col gap-6">
     {/** 信用卡所有<input> */}
       <div className="bg-white flex flex-col gap-2 rounded-lg p-4">
 
         {/** 信用卡持有人姓名 */}
         <label htmlFor="name" className="text-sm text-gray">Card Holder Name</label>
-        <input type="text" id="name" name="name" className="border-b border-strokeGray py-1" placeholder="Your Name">
+        <input type="text" id="name" name="name" className="border-b border-strokeGray p-1" placeholder="Your Name">
         </input>
-        <p aria-live="polite" className="text-customRed">{state.nameError}</p>
+        <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
         {/** 信用卡持有人姓名 */}
         
         {/** 信用卡卡號 */}
         <label htmlFor="cardnumber" className="text-sm text-gray">Card Number</label>
         <input type="text" id="cardnumber" name="cardnumber" value={cardNumber}
-        className="border-b border-strokeGray py-1"
+        className="border-b border-strokeGray p-1"
         onChange={handle_CardNumber_Change} maxLength={19} placeholder="0000 0000 0000 0000">
         </input>
-        <p aria-live="polite" className="text-customRed">{state.cardnumberError}</p>
+        <p aria-live="polite" className="text-customRed">{zod_Response?.cardnumberError}</p>
         {/** 信用卡卡號 */}
 
         <div className="flex justify-between gap-2">
           {/** 到期日 */}
           <div className="w-1/2 flex flex-col gap-2">
             <label htmlFor="expireddate" className="text-sm text-gray">Expired Date</label>
-            <input type="text" id="expireddate" name="expireddate" className="border-b border-strokeGray py-1"
+            <input type="text" id="expireddate" name="expireddate" className="border-b border-strokeGray p-1"
             onChange={handle_ExpiredDate_Change} maxLength={5} placeholder="MM/YY" value={expired_Date}>
             </input>
-            <p aria-live="polite" className="text-customRed">{state.expireddateError}</p>
+            <p aria-live="polite" className="text-customRed">{zod_Response?.expireddateError}</p>
           </div>
           {/** 到期日 */}
           
           {/** CVV */}
           <div className="w-1/2 flex flex-col gap-2">
             <label htmlFor="cvv" className="text-sm text-gray">CVV</label>
-            <input type="text" id="cvv" name="cvv" className="border-b border-strokeGray py-1"
+            <input type="text" id="cvv" name="cvv" className="border-b border-strokeGray p-1"
             onChange={handle_Cvv_Change} maxLength={3} placeholder="000" value={cvv}>
             </input>
-            <p aria-live="polite" className="text-customRed">{state.cvvError}</p>
+            <p aria-live="polite" className="text-customRed">{zod_Response?.cvvError}</p>
           </div>
           {/** CVV */}
         </div>
@@ -120,10 +206,18 @@ export default function Form_Credit_Card () {
     </div>
     {/* 所有金額統計 */}
 
-    <button 
-      className="bg-secondary text-white text-center font-semibold py-4 rounded-lg">
-      Proceed
-    </button>
+
+    {!is_Loading ? 
+      <button type="submit" className="bg-secondary text-white text-center font-semibold py-4 rounded-lg">
+        Proceed
+      </button>
+    :
+      <button type="submit"
+      className="flex justify-center items-center gap-2 bg-softGray text-white text-center font-semibold py-4 rounded-lg" disabled>
+      <OtherSVG name="spin" className="animate-spin w-5 h-auto"></OtherSVG>
+      Processing...
+      </button>
+    }
 
     </form>
   </div>
