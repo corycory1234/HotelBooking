@@ -10,8 +10,14 @@ import { OtherSVG } from "../client_Svg/client_Svg";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
+import { User_Data_Interface } from "@/types/user_Info";
+import { z } from "zod";
+import { zod_Email_Response_Interface } from "@/types/zod_Error_Response";
 
 const language_List = ["zh-TW", "en-US"];
+
+// 1. zod 校驗錯誤之訊息
+const schema = z.object({email: z.string().email("Invalid Email"),})
 
 export default function Before_Login_Profile () {
   // 0.
@@ -29,14 +35,6 @@ export default function Before_Login_Profile () {
 
   // 2. 個人資料 - Modal彈窗
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
-
-  // 3. 更新個人數據
-  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form_Data = new FormData(event.currentTarget);
-    const name = form_Data.get("username");
-    const email = form_Data.get("email");
-  };
 
   // 4. 訂閱電子報 - Modal彈窗
   const [modal_Subscription, set_modal_Subscription] = useState<boolean>(false);
@@ -88,7 +86,60 @@ export default function Before_Login_Profile () {
     toast("Please Login First", {icon: "⚠️"})
   }
 
+  // 9. 取得個人明細
+  const [user_Info, set_User_Info] = useState<User_Data_Interface>();
+  const open_User_Info_Modal = () => {
+    set_Modal_Boolean(true);
+    get_User_Info()
+  }
+  const get_User_Info = async () => {
+    const user_Info_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/me";
+    const response = await fetch(user_Info_Url, {
+      method: "GET",
+      headers: {"Content-Type": "application/json",},
+      credentials: 'include'
+    })
+    const {data} = await response.json();
+    set_User_Info(data);
+    set_Modal_Boolean(true);
+  };
+
+  // 10. Zod 錯誤訊息之 response
+  const [zod_Response, set_Zod_Response] = useState<zod_Email_Response_Interface>();
+
+  // 11. OnChange事件 - 改 email 跟 name
+  const handle_Change = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(!user_Info) return;
+    const {name, value} = event.target;
+    set_User_Info({...user_Info, [name]: value});
+  }
+
+  // 12. 更新個人數據
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      // 12.1 Zod 驗證
+      const validateFields = schema.safeParse(user_Info);
+        // 12.2 Zod 校驗之錯誤訊息
+        if(!validateFields.success) {
+          const { fieldErrors } = validateFields.error.flatten();
+          return set_Zod_Response({ 
+            success: false,
+            emailError: fieldErrors.email?.[0] || "", // 只取第一個錯誤訊息
+          })      
+        };
+        const formData = new FormData(event.currentTarget);
+        const formValue = Object.fromEntries(formData.entries());
+        // console.log(formValue);
+        set_Modal_Boolean(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   
+
+
   return <div className="pb-20">
   
     <div className="bg-primary flex flex-col items-center gap-2 p-8">
@@ -149,7 +200,7 @@ export default function Before_Login_Profile () {
     
     {/** 個人資料 */}
       <div className="flex justify-between cursor-pointer" 
-        onClick={() => redux_Verify_Session.success === true ? set_Modal_Boolean(true) : please_Login()}>
+        onClick={() => redux_Verify_Session.success === true ? open_User_Info_Modal() : please_Login()}>
         <div className="flex gap-2">
           <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
           <p>Personal Details</p>
@@ -158,17 +209,28 @@ export default function Before_Login_Profile () {
       </div>
 
       <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
-        <div className="flex flex-col gap-2 p-4">
+        <div className="flex flex-col gap-2 p-4 max-h-[90vh]">
           <h2 className="text-xl font-semibold">Personal Info</h2>
+        {
+        !user_Info ? 
+        <div className="flex justify-center items-center py-52">
+          <OtherSVG name="spin" className="w-20 h-auto animate-spin"></OtherSVG>
+        </div>
+
+        :
           <form className="flex flex-col gap-2" onSubmit={submit}>
             <label className="flex flex-col gap-1">Name
-              <input type="text" className="border rounded p-2" name="username" id="username"/>
+              <input type="text" className="border rounded p-2" name="name" id="name"
+              value={user_Info?.name} onChange={(event) => handle_Change(event)}/>
             </label>
             <label className="flex flex-col gap-1">Email
-              <input type="text" className="border rounded p-2" name="email" id="email"/>
+              <input type="text" className="border rounded p-2" name="email" id="email"
+              value={user_Info?.email} onChange={(event) => handle_Change(event)}/>
             </label>
+            <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
             <button type="submit" className="mt-auto bg-primary p-2 rounded"> Submit </button>
           </form>
+        }
         </div>
       </Modal>
     {/** 個人資料 */}
