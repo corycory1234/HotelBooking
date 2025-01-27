@@ -189,8 +189,7 @@ export default function Server_Form_Login () {
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>
-
-      <button onClick={verify_Token}>驗證</button>
+      
       
     </div>
   </>

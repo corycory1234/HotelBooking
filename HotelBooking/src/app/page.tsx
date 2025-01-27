@@ -6,6 +6,7 @@ import Carousel_Near from "../components/home/client-Carousel-Near";
 import Menu from "../components/menu";
 import Server_Form_Search from "../components/server-Form-Search/server-Form-Search";
 import Link from "next/link";
+import Avatar from "@/components/avatar/avatar";
 
 export default function Home() {
   // const dispatch: AppDispatch = useDispatch();
@@ -13,12 +14,13 @@ export default function Home() {
 
   return <>
       <div className="bg-home-explore w-full h-52 lg:h-64 bg-no-repeat bg-cover bg-center">
-        <div className="flex justify-between p-4">
+        {/* <div className="flex justify-between p-4">
           <img src="/menu/Menu.svg" alt="" />
           <Link href={"/auth"}>
             <img src="/account/Avatar.png" alt="" />
           </Link>
-        </div>
+        </div> */}
+        <Avatar></Avatar>
 
         
 

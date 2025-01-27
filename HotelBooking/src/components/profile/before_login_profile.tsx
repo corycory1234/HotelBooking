@@ -13,6 +13,8 @@ import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 import { User_Data_Interface } from "@/types/user_Info";
 import { z } from "zod";
 import { zod_Email_Response_Interface } from "@/types/zod_Error_Response";
+import Image from "next/image";
+import { verify } from "crypto";
 
 const language_List = ["zh-TW", "en-US"];
 
@@ -143,9 +145,19 @@ export default function Before_Login_Profile () {
   return <div className="pb-20">
   
     <div className="bg-primary flex flex-col items-center gap-2 p-8">
-      <div className="rounded-full bg-softGray p-2">
-        <ProfileSVG name={"user"} className="w-10 h-auto"></ProfileSVG>
-      </div>
+
+      {/** 頭像更換 */}
+      {redux_Verify_Session.success === false ? 
+        <div className="rounded-full bg-softGray p-2"> 
+          <ProfileSVG name={"user"} className="w-10 h-auto"></ProfileSVG>
+        </div>
+      :
+        <Image src={"/account/avatarlg.png"} alt="avatar" width={128} height={128} 
+        className="w-24 h-24">
+        </Image>
+      }
+      {/** 頭像更換 */}
+      
       
       {redux_Verify_Session.success === false ? <>
         {/** 登入 */}
@@ -254,15 +266,25 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray"></div>
 
     {/** 我的評論  */}
-    <Link href={"/myreview"} className="cursor-pointer">
-      <div className="flex justify-between">
-        <div className="flex gap-2">
-          <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
-          <p>My Reviews</p>
+      {redux_Verify_Session.success === false ? 
+        <div className="flex justify-between cursor-pointer" onClick={please_Login}>
+          <div className="flex gap-2">
+            <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
+            <p>My Reviews</p>
+          </div>
+          <p>{">"}</p>
         </div>
-        <p>{">"}</p>
-      </div>
-    </Link>
+      :
+        <Link href={"/myreview"} className="cursor-pointer">
+          <div className="flex justify-between">
+            <div className="flex gap-2">
+              <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
+              <p>My Reviews</p>
+            </div>
+            <p>{">"}</p>
+          </div>
+        </Link>
+      }
     {/** 我的評論  */}
 
     <div className="border-b-2 border-softGray"></div>

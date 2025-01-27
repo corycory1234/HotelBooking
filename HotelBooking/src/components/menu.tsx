@@ -2,6 +2,8 @@
 'use client';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const menu = [
   {name: 'Home', svgIcon: 
@@ -35,10 +37,15 @@ const menu = [
 export default function Menu () {
   const pathName = usePathname();
 
+  // 1. Redux - 查看是否登入
+  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+
   return <>
     <div className="bg-white flex justify-between p-4 fixed bottom-0 left-0 right-0 z-50">
       {menu.map((item, index) => 
-        <Link href={`${item.url}`} className="flex flex-col justify-center items-center gap-2" key={index}>
+        <Link href={`${redux_Verify_Session.success === false && 
+          (item.name === 'dashboard' || item.name === 'Trip') ? '/auth' : item.url}`} 
+          className="flex flex-col justify-center items-center gap-2" key={index}>
           <div className={`${item.url === pathName ? 'text-primary' : ''}`}>
             {item.svgIcon}
           </div>
