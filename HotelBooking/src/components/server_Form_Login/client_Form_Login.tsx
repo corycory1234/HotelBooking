@@ -147,19 +147,19 @@ export default function Server_Form_Login () {
   }
 
 
-  return <>
+  return <div className="flex flex-col h-screen my-bg-gradient">
     <div className="relative">
-      <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20" alt="" /> 
+      <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-10" alt="" /> 
     </div>
       
-    <div className="my-bg-gradient min-h-full flex flex-col mt-10">
+    <div className=" flex flex-col mt-10">
       {/** 電子郵件 SVG */}
       <div className="relative">
-        <img src="/account/Email.svg" alt="" className="absolute top-[6.85rem] left-8"/>
+        <img src="/account/Email.svg" alt="" className="absolute top-[3.45rem] left-8"/>
       </div>
       {/** 電子郵件 SVG */}
 
-      <form onSubmit={handle_Login} className="flex flex-col px-4 pt-14 gap-4">
+      <form onSubmit={handle_Login} className="flex flex-col px-4 gap-4">
 
         {/** 電子郵件 */}
         <label htmlFor="email" className="text-gray">Enter Email</label>
@@ -196,5 +196,5 @@ export default function Server_Form_Login () {
       
       
     </div>
-  </>
+  </div>
 }
