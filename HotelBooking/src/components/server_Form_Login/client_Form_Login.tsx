@@ -5,7 +5,7 @@ import { Submit_Login } from "../../actions/login";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
@@ -34,6 +34,10 @@ interface zod_Response_Interface {
 
 export default function Server_Form_Login () {
   const router = useRouter()
+  // 2. 沒有 token, 就跳回'/auth', 但記得要給「當下頁面的搜尋參數」, 好讓登入後, 返回「旅客填寫表單」
+  // 2.1 searchParams 專門拿 URL上的 「？後面的搜尋參數」; 沒有搜尋參數, 就是返回首頁
+  const searchParams = useSearchParams();
+  const redirect_Url = searchParams.get("redirect") || "/";
 
   // Server Action 的狀態 與 函式
   // const [state, formAction] = useFormState(Submit_Login, initialState)
@@ -88,10 +92,10 @@ export default function Server_Form_Login () {
         set_Response(data);
         toast.error("Login Failed")
       } else {
-        toast.success("Login OK");
+        toast.success("Login OK", {duration: 3000});
         set_Response(data);
         await sleep(3000);
-        router.push("/");
+        router.push(redirect_Url);
         await verify_Token();
         await get_User_Info();
       }

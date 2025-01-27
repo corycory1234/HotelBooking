@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
+import toast, {Toaster} from "react-hot-toast";
 
 interface Zod_Response_Interface {
   success: boolean,
@@ -22,6 +23,9 @@ interface Zod_Response_Interface {
 
 export default function Server_Form_Traveler_Info() {
   const router = useRouter();
+
+  // 1. Redux - 查看是否登入
+  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
   // 2. zod 校驗規則
   const schema = z.object({
@@ -67,7 +71,14 @@ export default function Server_Form_Traveler_Info() {
           emailError: fieldErrors.email?.[0] || "",
           phoneError: fieldErrors.phone?.[0] || "",
         })
-      } else {
+      } 
+      // 7.3  沒有 token, 就跳回'/auth', 但記得要給「當下頁面的搜尋參數」, 好讓登入後, 返回「旅客填寫表單」 
+      else if (redux_Verify_Session.success === false) {
+        toast.error("Please Login First", {icon: "⚠️", duration: 2000})
+        await sleep(2000);
+        router.push(`/auth?redirect=${encodeURIComponent('/travelerinfo')}`);
+      } 
+      else {
         // 7.3 暫時校驗成功, 就跳轉 信用卡頁面
         // redirect("/creditcard");
         set_Is_Loading(true)
@@ -82,7 +93,7 @@ export default function Server_Form_Traveler_Info() {
   }
 
   return <>
-
+  <Toaster></Toaster>
   <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-2 p-4">
     <div className="flex flex-col mb-32">
 
