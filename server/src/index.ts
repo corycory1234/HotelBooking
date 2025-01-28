@@ -7,10 +7,12 @@ import "dotenv/config";
 
 const app = express();
 const port = process.env.PORT || 3001;
+const localhostUrl = process.env.LOCALHOST_URL || '';
+const frontendUrl = process.env.FRONTEND_URL || '';
 
 // CORS 配置
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://hotel-booking-api-iota.vercel.app'],
+    origin: [localhostUrl, frontendUrl],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
