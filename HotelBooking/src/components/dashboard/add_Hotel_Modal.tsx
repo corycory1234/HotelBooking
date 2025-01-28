@@ -127,8 +127,12 @@ export default function Add_Hotel_Modal() {
     const roomType_Image_List = roomTypeFiles.map((item) => ({
       url: URL.createObjectURL(item),
       description: "",
-    }))
-
+    }));
+    const distance = formData.get("distance") as string;
+    // 9.1 offer 送出, 必須是物件, 因此若有拿到value, 先斷言是string, 記得先小括號包起來, 外層再Parse; 
+    // 9.2 沒拿到就返回null, 這樣可解決 TS報null的問題
+    // const offer = formData.get("offer") ? JSON.parse(formData.get("offer") as string) : null
+    const offer = formData.get("offer") as string;
     
   // 10. 添加評論函數 (這函式要UI去按按鈕才會觸發)
   // 10.1 在酒店列表中，每個酒店項目下添加一個評論表單，當用戶提交評論時，
@@ -209,8 +213,9 @@ export default function Add_Hotel_Modal() {
       hotel_Image_List: hotel_Image_List,
       review_List: initialReviews_List,
       roomType_List: initialRoomType_List,
-      distance: "",
-      isCollected: false
+      distance: distance,
+      isCollected: false,
+      offer_Id: offer,
     };
 
 

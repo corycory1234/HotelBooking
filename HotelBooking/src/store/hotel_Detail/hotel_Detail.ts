@@ -34,6 +34,7 @@ const initialState: add_Hotel_Detail_Interface = {
   transportation: "",
   recommendation: "",
   isCollected: false,
+  offer_Id: "",
 } 
 
 const hotel_Detail_Slice = createSlice({

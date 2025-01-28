@@ -27,7 +27,8 @@ export interface add_Hotel_Detail_Interface {
   recommendation: string | null,
   review_List: add_Review_Type_Interface[],
   roomType_List: add_Hotel_Room_Type_Interface[],
-  isCollected: boolean
+  isCollected: boolean,
+  offer_Id: string | null
 };
 
 // 2. 旅客評論
@@ -55,4 +56,12 @@ export interface add_Hotel_Room_Type_Interface {
   max_People: number | null,
   view: string | null,
   bed_Type: string | null
+}
+
+// 3. 優惠券
+export interface Hotel_Offer_Interface {
+  offer_Id: string, 
+  offer_Name: string, 
+  offer_Price: number, 
+  offer_Description: string
 }

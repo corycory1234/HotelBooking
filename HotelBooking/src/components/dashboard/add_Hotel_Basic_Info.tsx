@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import offer_List_Json from "@/fakeData/offer_List.json";
 
 // 1. 設施初始值
 const facilities = ["beach", "gym", "bar", 
@@ -119,7 +120,6 @@ export default function Add_Hotel_Basic_Info() {
           <option value="close">Close</option>
         </select>
         </label>
-
     </div>
     {/** 是否營業 */}
 
@@ -191,6 +191,32 @@ export default function Add_Hotel_Basic_Info() {
         </textarea>
       </label>
     {/** 取消政策 */}
+
+
+    {/** 飯店離某些地標之距離 */}
+      <label className="flex flex-col gap-2">
+        <p className="text-primary font-semibold">Distance</p>
+        <textarea name="distance" id="distance" 
+          className="rounded border w-full h-auto" rows={4}>
+        </textarea>
+      </label>
+    {/** 飯店離某些地標之距離 */}
+    
+
+    {/** 飯店優惠券 - 只能選1張 */}
+      <div className="flex flex-col gap-2">
+        <label>
+          <p className="text-primary font-semibold">Offers</p>
+          <select name="offer" id="offer" className="border rounded py-2">
+            {offer_List_Json.map((offer) => {
+              return <option value={offer.offer_Id} key={offer.offer_Id}>
+                {offer.offer_Name}
+                </option>
+            })}
+          </select>
+        </label>
+      </div>
+    {/** 飯店優惠券 - 只能選1張 */}
 
 
 

@@ -1,0 +1,27 @@
+[
+  {"offer_Id": "1", 
+    "offer_Name": "Black Friday", 
+    "offer_Price": 500, 
+    "offer_Description": "Enjoy Your Lucky Friday with the Best Discount Here!"
+  },
+  {"offer_Id": "2", 
+    "offer_Name": "Chinese Lunar New Year", 
+    "offer_Price": 0.2, 
+    "offer_Description": "We provide the family reunion during Chinese Lunar New Year :)"
+  },
+  {"offer_Id": "3", 
+    "offer_Name": "Christmas", 
+    "offer_Price": 0.2, 
+    "offer_Description": "Here is the Gift from Santa Claus!"
+  },
+  {"offer_Id": "4", 
+    "offer_Name": "Valentine's Day", 
+    "offer_Price": 0.1, 
+    "offer_Description": "Book the Room for your fiance or fiancee and your New Born Babe in future!"
+  },
+  {"offer_Id": "5", 
+    "offer_Name": "Group Specials", 
+    "offer_Price": 0.15, 
+    "offer_Description": "Get 15% off provided that your group is more than 4 people!"
+  }
+]

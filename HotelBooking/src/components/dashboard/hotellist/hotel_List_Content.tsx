@@ -27,7 +27,6 @@ export default function Hotel_List_Content () {
       hotel_Id: null,
       hotel_Name: null,
       hotel_Image_List: [],
-      // distance: string,
       totalRating: null,
       facility_List: null,
       price: null,
@@ -49,7 +48,8 @@ export default function Hotel_List_Content () {
       review_List: [],
       roomType_List: [],
       distance: "",
-      isCollected: false
+      isCollected: false,
+      offer: null
   })
   const get_The_Hotel_Data = (id: string | null) => {
     const the_Found_Hotel = redux_Hotel_List.find((item) => item.hotel_Id === id);
@@ -81,7 +81,8 @@ export default function Hotel_List_Content () {
         review_List: [],
         roomType_List: [],
         distance: "",
-        isCollected: false
+        isCollected: false,
+        offer: null
       });
       return;
     }

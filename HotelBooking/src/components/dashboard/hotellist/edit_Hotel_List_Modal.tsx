@@ -5,6 +5,7 @@ import { edit_One_Hotel } from "@/store/cms/Hotel_List_Slice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { v4 as uuidv4 } from 'uuid';
+import offer_List_Json from "@/fakeData/offer_List.json"
 
 // 1. hotel_List_Contet 父傳子 props 傳遞之接口
 interface Editing_Hotel_Interface {
@@ -29,8 +30,7 @@ const amenity = ["shower", "bathtub", "breakfast", "tv", ];
 const room_View_List = ["sea view", "forest view", "city view", "lake view", "street view", "mountain view"];
 
 // 6. 床型
-const bed_Type_List = ["single bed", "double bed", "queen bed", "king bed" ,"twin beds", "tatami"]
-
+const bed_Type_List = ["single bed", "double bed", "queen bed", "king bed" ,"twin beds", "tatami"];
 
 
 export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Editing_Hotel_Interface) {
@@ -199,6 +199,11 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
   //   // set_Recommendation_List(new_recommendation_List) // 再更新 本地state狀態
   // }
   
+
+  // 14. 優惠券 - 查看物件, 但 <Select> value 只綁定 優惠券ID 
+  const the_Selected_Offer = offer_List_Json.find((item) => item.offer_Id === formData?.offer_Id);
+  console.log(the_Selected_Offer, "被改選的Offer優惠券之物件");
+
 
   // 15. 最後 - <form> 表單送出所有數據
   const handle_Submit = (event: React.FormEvent) => {
@@ -432,7 +437,42 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
       </textarea>
     </label>
     {/** 取消政策 */}
-    
+
+
+    {/** 飯店離某些地標之距離 */}
+    <label className="flex flex-col gap-2">
+      <p className="text-primary font-semibold">Distance</p>
+      <textarea name="distance" id="distance" 
+        className="rounded border w-full h-auto" rows={4}
+        value={formData.distance ?? ""}
+        onChange={handle_Change}>
+      </textarea>
+    </label>
+    {/** 飯店離某些地標之距離 */}
+
+    {/** 飯店優惠券 - 只能選1張 */}
+      <label className="flex flex-col gap-2">
+      <p className="text-primary font-semibold">Offers</p>
+      <select name="offer" id="offer" className="border rounded py-2" value={formData?.offer_Id as string}
+        onChange={handle_Change}>
+        {offer_List_Json.map((offer) => {
+          return <option 
+          value={offer.offer_Id} key={offer.offer_Id}>
+            {offer.offer_Name}
+          </option>
+        })}
+      </select>
+
+
+      {/* <textarea name="distance" id="distance" 
+        className="rounded border w-full h-auto" rows={4}
+        value={formData.distance ?? ""}
+        onChange={handle_Change}>
+      </textarea> */}
+    </label>
+    {/** 飯店優惠券 - 只能選1張 */}
+
+
 
 {/** 基本飯店資訊 */}
           

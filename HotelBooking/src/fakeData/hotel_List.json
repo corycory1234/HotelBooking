@@ -89,7 +89,8 @@
     "cancellation_Policy": "Cancellation 7 days or more before check-in: Free cancellation, full refund.Cancellation 3 to 6 days before check-in: 30% of the accommodation fee will be charged as a cancellation fee.Cancellation 1 to 2 days before check-in: 50% of the accommodation fee will be charged as a cancellation fee.Same-day cancellation or no-show: 100% of the accommodation fee will be charged as a cancellation fee.Please note that special promotions or specific room types may have different cancellation policies. For details, please refer to your booking confirmation or contact the hotel directly.",
     "transportation": "About a 5-min walk from Bus Station",
     "recommendation": "2km away from Luxury Department Store, 1km away from Temple",
-    "isCollected": false
+    "isCollected": false,
+    "offer_Id": "1"
   },
   
   {
@@ -182,7 +183,8 @@
     "cancellation_Policy": "Cancellation 7 days or more before check-in: Free cancellation, full refund.Cancellation 3 to 6 days before check-in: 30% of the accommodation fee will be charged as a cancellation fee.Cancellation 1 to 2 days before check-in: 50% of the accommodation fee will be charged as a cancellation fee.Same-day cancellation or no-show: 100% of the accommodation fee will be charged as a cancellation fee.Please note that special promotions or specific room types may have different cancellation policies. For details, please refer to your booking confirmation or contact the hotel directly.",
     "transportation": "About a 7-min walk from Bus Station",
     "recommendation": "4km away from Forest Park, 6km away from Night Market",
-    "isCollected": false
+    "isCollected": false,
+    "offer_Id": "3"
   },
 
   {
@@ -275,6 +277,7 @@
     "cancellation_Policy": "Cancellation 7 days or more before check-in: Free cancellation, full refund.Cancellation 3 to 6 days before check-in: 30% of the accommodation fee will be charged as a cancellation fee.Cancellation 1 to 2 days before check-in: 50% of the accommodation fee will be charged as a cancellation fee.Same-day cancellation or no-show: 100% of the accommodation fee will be charged as a cancellation fee.Please note that special promotions or specific room types may have different cancellation policies. For details, please refer to your booking confirmation or contact the hotel directly.",
     "transportation": "About a 10-min walk from Bus Station",
     "recommendation": "5km away from Green Forest, 6km away Sun Hot Spring",
-    "isCollected": false
+    "isCollected": false,
+    "offer_Id": "5"
   }
 ]
