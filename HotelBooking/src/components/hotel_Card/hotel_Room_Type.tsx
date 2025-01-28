@@ -2,16 +2,19 @@ import { useSelector, useDispatch } from "react-redux";
 import { update_Booked_Room } from "@/store/booked_Room/booked_Room";
 import { RootState } from "@/store/store";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Link from "next/link";
 import { Hotel_Room_Type_Interface } from "@/types/hotel_Detail";
 import { add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail";
 import { useRouter } from "next/navigation";
-
+import { useState } from "react";
+import Modal from "../modal/modal";
+import Full_Modal from "../modal/full-modal";
 
 export default function Hotel_Room_Type() {
   // 1. Redux - 飯店明細
@@ -39,6 +42,18 @@ export default function Hotel_Room_Type() {
     }
   };
 
+  // 9. 透過Swoper, 打開「房型照片彈窗」
+  const [modal_Boolean_Swiper_RoomType, set_Modal_Boolean_Swiper_RoomType] = useState<boolean>(false);
+
+  // 8. 打開滿版彈窗
+  const [full_Modal_Boolean, set_Full_Modal_Boolean] = useState<boolean>(false);
+  const [the_Slide, set_The_Silde] = useState<number>(0);
+  const show_The_Full_Slide = (index: number) =>{
+    set_The_Silde(index);
+    set_Full_Modal_Boolean(true);
+  }
+  
+
 
   return <>
     <div className="flex flex-col gap-4">
@@ -53,9 +68,9 @@ export default function Hotel_Room_Type() {
             modules={[Pagination]}>
   
             {room?.roomType_Image_List?.map((img, index) => {
-              return <SwiperSlide key={index}>
+              return <SwiperSlide key={index} onClick={() => set_Modal_Boolean_Swiper_RoomType(true)}>
                 <div className="relative">
-                  <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top rounded-lg" />
+                  <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover rounded-lg cursor-pointer" />
                   <p className="absolute bottom-2 right-8 text-white text-sm">
                     {(index < 10 ? "0" + (index + 1) : index + 1) + "/" + (room.roomType_Image_List.length < 10 ? "0" + room.roomType_Image_List.length : room.roomType_Image_List.length)}
                   </p>
@@ -73,6 +88,50 @@ export default function Hotel_Room_Type() {
               </SwiperSlide>
             })}
           </Swiper>
+
+        {/** 飯店照片 - 彈跳視窗 */}
+        <Modal isOpen={modal_Boolean_Swiper_RoomType} onClose={() => set_Modal_Boolean_Swiper_RoomType(false)}>
+          <div className="flex flex-col gap-2 pt-4">
+            <p className="text-primary font-semibold text-center">Hotel Pictures</p>
+            <div className="flex flex-wrap p-2  justify-between">
+              {room?.roomType_Image_List?.map((item, index) => {
+                return <img src={item.url} alt={item.description} key={item.description}
+                  className={`${(index ===0 || index %3 === 0 ? 'w-full' : 'w-1/2')} p-1 rounded-lg object-cover cursor-pointer`}
+                  onClick={() => show_The_Full_Slide(index)}/>
+              })}
+            </div>
+          </div>
+        </Modal>
+        {/** 飯店照片 - 彈跳視窗 */}
+
+
+ {/** 飯店照片 - 看滿版照片 - 彈跳視窗 */}
+  <Full_Modal isOpen={full_Modal_Boolean} onClose={() => set_Full_Modal_Boolean(false)}>
+          <Swiper slidesPerView={1} 
+            spaceBetween={5} 
+            pagination={{clickable: true}} 
+            modules={[Pagination, Navigation]}
+            // navigation
+            initialSlide={the_Slide}
+            className="w-full h-full">
+
+            {room?.roomType_Image_List?.map((img, index) => {
+              return <SwiperSlide key={index} className="flex items-center justify-center">
+                <div className="relative flex justify-center items-center">
+                  <img src={img.url} alt={img.description} className="w-full h-[50vh] object-cover"/>
+                  <p className="absolute bottom-2 right-8 text-white text-sm">
+                    { (index<10 ? "0"+(index+1): index+1) + "/" + (room?.roomType_Image_List?.length<10 ? "0" + room?.roomType_Image_List?.length : room?.roomType_Image_List?.length)}
+                  </p>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 absolute bottom-2 right-2 text-white">
+                    <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0l-2.97 2.97ZM12 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" />
+                  </svg>
+
+                </div>
+              </SwiperSlide>
+            })}
+          </Swiper>
+        </Full_Modal>
+        {/** 飯店照片 - 看滿版照片 - 彈跳視窗 */}
         </div>
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
 

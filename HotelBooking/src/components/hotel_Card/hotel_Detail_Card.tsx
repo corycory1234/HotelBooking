@@ -2,9 +2,10 @@
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import { useEffect, useState } from "react";
 import { HomeSVG, OtherSVG } from "../client_Svg/client_Svg";
 import Hotel_Room_Type from "./hotel_Room_Type";
@@ -15,6 +16,7 @@ import { LatLngExpression } from "leaflet"; // 從 @types/leaflet 來的
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Modal from "@/components/modal/modal";
+import Full_Modal from "../modal/full-modal";
 import { useSearchParams } from "next/navigation";
 
 // 1. props傳遞之 介面型別
@@ -85,8 +87,18 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
       </div>
     </div>
-  }
+  };
 
+  // 7. 透過Swiper, 打開「飯店照片彈窗」
+  const [modal_Boolean_Swiper, set_Modal_Boolean_Swiper] = useState<boolean>(false);
+
+  // 8. 打開滿版彈窗
+  const [full_Modal_Boolean, set_Full_Modal_Boolean] = useState<boolean>(false);
+  const [the_Slide, set_The_Silde] = useState<number>(0);
+  const show = (index: number) =>{
+    set_The_Silde(index);
+    set_Full_Modal_Boolean(true);
+  }
 
   return <>
   {!show_Hotel_Detail_Card ? <Placeholder_Card></Placeholder_Card> 
@@ -99,10 +111,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <Swiper slidesPerView={1} 
           spaceBetween={5} 
           pagination={{clickable: true}} 
-          modules={[Pagination]}>
+          modules={[Pagination]}
+          >
 
           {the_Hotel?.hotel_Image_List.map((img, index) => {
-            return <SwiperSlide key={index}>
+            return <SwiperSlide key={index} className="cursor-pointer" onClick={() => set_Modal_Boolean_Swiper(true)}>
               <div className="relative">
                 <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top"/>
                 <p className="absolute bottom-2 right-8 text-white text-sm">
@@ -116,9 +129,56 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
             </SwiperSlide>
           })}
         </Swiper>
+
+        {/** 飯店照片 - 彈跳視窗 */}
+        <Modal isOpen={modal_Boolean_Swiper} onClose={() => set_Modal_Boolean_Swiper(false)}>
+          <div className="flex flex-col gap-2 pt-4">
+            <p className="text-primary font-semibold text-center">Hotel Pictures</p>
+            <div className="flex flex-wrap p-2  justify-between">
+              {the_Hotel?.hotel_Image_List.map((item, index) => {
+                return <img src={item.url} alt={item.description} key={item.description}
+                  className={`${(index ===0 || index %3 === 0 ? 'w-full' : 'w-1/2')} p-1 rounded-lg object-cover cursor-pointer`}
+                  onClick={() => show(index)}/>
+              })}
+            </div>
+          </div>
+        </Modal>
+        {/** 飯店照片 - 彈跳視窗 */}
+        
+
+        {/** 飯店照片 - 看滿版照片 - 彈跳視窗 */}
+        <Full_Modal isOpen={full_Modal_Boolean} onClose={() => set_Full_Modal_Boolean(false)}>
+          <Swiper slidesPerView={1} 
+            spaceBetween={5} 
+            pagination={{clickable: true}} 
+            modules={[Pagination, Navigation]}
+            // navigation
+            initialSlide={the_Slide}
+            className="w-full h-full">
+
+            {the_Hotel?.hotel_Image_List.map((img, index) => {
+              return <SwiperSlide key={index} className="flex items-center justify-center">
+                <div className="relative flex justify-center items-center">
+                  <img src={img.url} alt={img.description} className="w-full h-[50vh] object-cover"/>
+                  <p className="absolute bottom-2 right-8 text-white text-sm">
+                    { (index<10 ? "0"+(index+1): index+1) + "/" + (the_Hotel.hotel_Image_List.length<10 ? "0" + the_Hotel.hotel_Image_List.length : the_Hotel.hotel_Image_List.length)}
+                  </p>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 absolute bottom-2 right-2 text-white">
+                    <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0l-2.97 2.97ZM12 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" />
+                  </svg>
+
+                </div>
+              </SwiperSlide>
+            })}
+          </Swiper>
+        </Full_Modal>
+        {/** 飯店照片 - 看滿版照片 - 彈跳視窗 */}
       </div>
       {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
-      
+
+
+
+
       {/** 飯店名，吃Sticky，滾動固定Top */}
       <p className="font-bold px-4 bg-white sticky top-0 z-10">{the_Hotel?.hotel_Name}</p>
       {/** 飯店名，吃Sticky，滾動固定Top */}

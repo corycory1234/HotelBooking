@@ -78,3 +78,21 @@ input[type="radio"]:checked {
   text-decoration: underline;
   text-decoration-skip-ink: none;
 }
+
+/* 8. Swiper - Navigation 導覽按鈕 (建議桌機上再套用, 目前關掉)*/
+.swiper-button-next,
+.swiper-button-prev {
+  /* @apply text-secondary !important; 
+  @apply bg-gray !important;
+  @apply rounded-[100%] !important;
+  @apply p-4 !important;
+  @apply text-sm !important; */
+  /* background-color: gray;
+  border-radius: 100%; */
+  /* padding: 6px 16px 6px 16px; */
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  /* font-size: 14px !important;
+  color: black; */
+}

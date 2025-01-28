@@ -14,7 +14,23 @@
       {
         "url": "/collection/collection_3.webp",
         "description": "hotel3"
-    }
+      },
+      {
+        "url": "/collection/collection_6.webp",
+        "description": "hotel6"
+      },
+      {
+        "url": "/collection/collection_7.webp",
+        "description": "hotel7"
+      },
+      {
+        "url": "/collection/collection_8.webp",
+        "description": "hotel8"
+      },
+      {
+        "url": "/collection/collection_9.webp",
+        "description": "hotel9"
+      }
     ],
     "distance": "Downtown • 0.5 mi from center",
     "totalRating": 4.8,
@@ -58,7 +74,12 @@
         "roomType_Id": "room1",
         "room_Type": "singleRoom",
         "room_Price": 1099,
-        "roomType_Image_List": [ {"url": "/roomtype/single/singleroom1.jpg","description": "hotel2"},{"url": "/roomtype/single/singleroom2.jpg","description": "hotel3"},{"url": "/roomtype/single/singleroom3.jpg", "description": "hotel1"}],
+        "roomType_Image_List": [
+          {"url": "/roomtype/single/singleroom1.webp","description": "hotel1"},
+          {"url": "/roomtype/single/singleroom2.webp","description": "hotel2"},
+          {"url": "/roomtype/single/singleroom3.webp", "description": "hotel3"},
+          {"url": "/roomtype/single/singleroom4.webp", "description": "hotel4"}
+        ],
         "room_Availability": 5,
         "smoke": "true",
         "amenity_List": ["shower", "bathtub", "breakfast", "tv"],
@@ -71,7 +92,13 @@
         "roomType_Id": "room2",
         "room_Type": "doubleRoom",
         "room_Price": 2999,
-        "roomType_Image_List": [ {"url": "/roomtype/double/doubleroom1.jpg","description": "hotel2"},{"url": "/roomtype/double/doubleroom2.jpg","description": "hotel3"},{"url": "/roomtype/double/doubleroom3.jpg", "description": "hotel1"}],
+        "roomType_Image_List": [ 
+          {"url": "/roomtype/double/doubleroom1.webp","description": "hotel1"},
+          {"url": "/roomtype/double/doubleroom2.webp","description": "hotel2"},
+          {"url": "/roomtype/double/doubleroom3.webp", "description": "hotel3"},
+          {"url": "/roomtype/double/doubleroom4.webp", "description": "hotel4"},
+          {"url": "/roomtype/double/doubleroom5.webp", "description": "hotel5"}
+        ],
         "room_Availability": 3,
         "smoke": "false",
         "amenity_List": ["shower", "breakfast", "tv"],
@@ -108,6 +135,18 @@
       {
         "url": "/collection/collection_1.webp",
         "description": "hotel1"
+      },
+      {
+        "url": "/collection/collection_9.webp",
+        "description": "hotel9"
+      },
+      {
+        "url": "/collection/collection_8.webp",
+        "description": "hotel8"
+      },
+      {
+        "url": "/collection/collection_7.webp",
+        "description": "hotel7"
       }
   ] ,
     "distance": "Waterfront • 1.2 mi from center",
@@ -152,7 +191,12 @@
         "roomType_Id": "room1",
         "room_Type": "singleRoom",
         "room_Price": 799,
-        "roomType_Image_List": [ {"url": "/roomtype/single/singleroom1.jpg","description": "hotel2"},{"url": "/roomtype/single/singleroom2.jpg","description": "hotel3"},{"url": "/roomtype/single/singleroom3.jpg", "description": "hotel1"}],
+        "roomType_Image_List": [
+          {"url": "/roomtype/single/singleroom1.webp","description": "hotel1"},
+          {"url": "/roomtype/single/singleroom2.webp","description": "hotel2"},
+          {"url": "/roomtype/single/singleroom3.webp", "description": "hotel3"},
+          {"url": "/roomtype/single/singleroom4.webp", "description": "hotel4"}
+        ],
         "room_Availability": 3,
         "smoke": "false",
         "amenity_List": ["bathtub", "tv"],
@@ -165,7 +209,13 @@
         "roomType_Id": "room2",
         "room_Type": "doubleRoom",
         "room_Price": 1399,
-        "roomType_Image_List": [ {"url": "/roomtype/double/doubleroom1.jpg","description": "hotel2"},{"url": "/roomtype/double/doubleroom2.jpg","description": "hotel3"},{"url": "/roomtype/double/doubleroom3.jpg", "description": "hotel1"}],
+        "roomType_Image_List": [ 
+          {"url": "/roomtype/double/doubleroom1.webp","description": "hotel1"},
+          {"url": "/roomtype/double/doubleroom2.webp","description": "hotel2"},
+          {"url": "/roomtype/double/doubleroom3.webp", "description": "hotel3"},
+          {"url": "/roomtype/double/doubleroom4.webp", "description": "hotel4"},
+          {"url": "/roomtype/double/doubleroom5.webp", "description": "hotel5"}
+        ],
         "room_Availability": 2,
         "smoke": "true",
         "amenity_List": ["shower", "breakfast", "tv"],
@@ -202,7 +252,20 @@
       {
         "url": "/collection/collection_3.webp",
         "description": "hotel2"
+      },
+      {
+        "url": "/collection/collection_6.webp",
+        "description": "hotel6"
+      },
+      {
+        "url": "/collection/collection_9.webp",
+        "description": "hotel9"
+      },
+      {
+        "url": "/collection/collection_8.webp",
+        "description": "hotel8"
       }
+
     ],
     "distance": "Marina Bay • 2.0 mi from center",
     "totalRating": 3.7,
@@ -246,7 +309,12 @@
         "roomType_Id": "room1",
         "room_Type": "singleRoom",
         "room_Price": 399,
-        "roomType_Image_List": [ {"url": "/roomtype/single/singleroom1.jpg","description": "hotel2"},{"url": "/roomtype/single/singleroom2.jpg","description": "hotel3"},{"url": "/roomtype/single/singleroom3.jpg", "description": "hotel1"}],
+        "roomType_Image_List": [ 
+          {"url": "/roomtype/single/singleroom1.webp","description": "hotel1"},
+          {"url": "/roomtype/single/singleroom2.webp","description": "hotel2"},
+          {"url": "/roomtype/single/singleroom3.webp", "description": "hotel3"},
+          {"url": "/roomtype/single/singleroom4.webp", "description": "hotel4"}
+        ],
         "room_Availability": 10,
         "smoke": "true",
         "amenity_List": ["shower", "bathtub", "breakfast", "tv"],
@@ -259,7 +327,13 @@
         "roomType_Id": "room2",
         "room_Type": "doubleRoom",
         "room_Price": 599,
-        "roomType_Image_List": [ {"url": "/roomtype/double/doubleroom1.jpg","description": "hotel2"},{"url": "/roomtype/double/doubleroom2.jpg","description": "hotel3"},{"url": "/roomtype/double/doubleroom3.jpg", "description": "hotel1"}],
+        "roomType_Image_List": [ 
+          {"url": "/roomtype/double/doubleroom1.webp","description": "hotel1"},
+          {"url": "/roomtype/double/doubleroom2.webp","description": "hotel2"},
+          {"url": "/roomtype/double/doubleroom3.webp", "description": "hotel3"},
+          {"url": "/roomtype/double/doubleroom4.webp", "description": "hotel4"},
+          {"url": "/roomtype/double/doubleroom5.webp", "description": "hotel5"}
+        ],
         "room_Availability": 3,
         "smoke": "true",
         "amenity_List": ["bathtub", "breakfast", "tv"],
