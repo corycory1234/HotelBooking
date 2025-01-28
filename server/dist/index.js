@@ -11,9 +11,11 @@ const v1_1 = __importDefault(require("./routes/v1"));
 require("dotenv/config");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3001;
+const frontendUrl = process.env.FRONTEND_URL || '';
+const localhostUrl = process.env.LOCALHOST_URL || '';
 // CORS 配置
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://hotel-booking-api-iota.vercel.app'],
+    origin: [frontendUrl, localhostUrl],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],

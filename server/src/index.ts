@@ -8,9 +8,12 @@ import "dotenv/config";
 const app = express();
 const port = process.env.PORT || 3001;
 
+const frontendUrl = process.env.FRONTEND_URL || '';
+const localhostUrl = process.env.LOCALHOST_URL || '';
+
 // CORS 配置
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://hotel-booking-delta-gray.vercel.app'],
+    origin: [frontendUrl, localhostUrl],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
