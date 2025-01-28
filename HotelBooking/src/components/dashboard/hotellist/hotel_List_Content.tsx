@@ -49,7 +49,7 @@ export default function Hotel_List_Content () {
       roomType_List: [],
       distance: "",
       isCollected: false,
-      offer: null
+      offer_Id: null
   })
   const get_The_Hotel_Data = (id: string | null) => {
     const the_Found_Hotel = redux_Hotel_List.find((item) => item.hotel_Id === id);
@@ -82,7 +82,7 @@ export default function Hotel_List_Content () {
         roomType_List: [],
         distance: "",
         isCollected: false,
-        offer: null
+        offer_Id: null
       });
       return;
     }
