@@ -13,13 +13,11 @@ export default function Home() {
 
 
   return <>
-      <div className="bg-home-explore w-full h-52 lg:h-64 bg-no-repeat bg-cover bg-center">
-        {/* <div className="flex justify-between p-4">
-          <img src="/menu/Menu.svg" alt="" />
-          <Link href={"/auth"}>
-            <img src="/account/Avatar.png" alt="" />
-          </Link>
-        </div> */}
+
+      <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
+        <div className="sm:hidden md:hidden lg:block">
+          <Menu></Menu>
+        </div>
         <Avatar></Avatar>
 
         
@@ -38,14 +36,14 @@ export default function Home() {
         {/* 上層 BG圖 */}
         
         {/* Swiper 輪播圖 */}
-        <div className="min-h-screen w-full my-bg-gradient flex flex-col">
-          <div className="">
+        <div className="min-h-screen w-full my-bg-gradient lg:bg-none lg:w-5/6 lg:mx-auto flex flex-col">
+          <div className="lg:bg-white lg:rounded-lg">
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
             <Server_Form_Search></Server_Form_Search>
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
           </div>
 
-          <div className="flex flex-col p-4 gap-4 pb-20">
+          <div className="flex flex-col p-4 gap-4 pb-20 lg:px-0">
             <h2 className="font-bold">Popular Offer</h2>
             <div className="">
               <Carousel_Offer></Carousel_Offer>
@@ -61,7 +59,9 @@ export default function Home() {
 
 
     </div>
-    <Menu></Menu>
+    <div className="lg:hidden">
+      <Menu></Menu>
+    </div>
     </>
   ;
 }

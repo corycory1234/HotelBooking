@@ -32,21 +32,31 @@ export default function Client_Input_Traveler () {
       <input type="hidden" name="child" value={child} />
     {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
 
-    <div className="relative w-full" ref={dropDownRef}>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2 right-2 text-primary">
+    <div className="relative w-full lg:w-1/2 lg:flex-1" ref={dropDownRef}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2 lg:top-3 right-2 text-primary">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
       </svg>
-      <button className="w-full py-2 px-4 rounded outline-none hover:outline-secondary text-left bg-white"
+      <button className="w-full py-2 px-4 lg:py-1 rounded outline-none lg:border lg:border-gray text-left bg-white "
         onClick={toggle_ShowDropDown}
         type="button">
-        {`${room} Room – ${adult} Adult, ${child} Child`}
+        <p className="lg:hidden">
+          {`${room} Room – ${adult} Adult, ${child} Child`}
+        </p>
+
+        <div className="hidden lg:flex lg:flex-col lg:text-sm">
+          <div className="lg:flex lg:gap-2">
+            <p>{adult} Adult,</p>
+            <p>{child} Child</p>
+          </div>
+          <p className="text-xs text-gray">{room} Room</p>
+        </div>
       </button>
 
     {/* DropDown 選人清單 */}
       { showDropDown &&
         <div className="flex flex-col gap-2 pl-4 pr-2">
           {/* 房間 */}
-          <div className="flex justify-between items-center py-2 border-b-2 border-gray">
+          <div className="flex justify-between items-center py-2 border-b border-gray">
             <p>{room} Room</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusRoom())} type="button">
@@ -65,7 +75,7 @@ export default function Client_Input_Traveler () {
           {/* 房間 */}
 
           {/* 成人 */}
-          <div className="flex justify-between items-center py-2 border-b-2 border-gray">
+          <div className="flex justify-between items-center py-2 border-b border-gray">
             <p>{adult} Adult</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusAdult())} type="button">
@@ -84,7 +94,7 @@ export default function Client_Input_Traveler () {
           {/* 成人 */}
 
           {/* 小孩 */}
-          <div className="flex justify-between items-center py-2 border-b-2 border-gray">
+          <div className="flex justify-between items-center py-2 border-b border-gray">
             <p>{child} Child</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusChild())} type="button">

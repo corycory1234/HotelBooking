@@ -77,11 +77,13 @@ export default function Server_Form_Search () {
   return <>
   <Toaster_Notify></Toaster_Notify>
 
-    <form onSubmit={submit_Search} className="flex flex-col p-4 gap-4 justify-center items-center">
+    <form onSubmit={submit_Search} className="flex flex-col lg:flex-row lg:flex-wrap p-4 gap-4 
+    lg:shadow-lg lg:rounded-lg
+    items-center">
       <Client_Input_Keyword></Client_Input_Keyword>
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>
-      <button className="bg-primary rounded w-full py-2 px-4">
+      <button className="bg-primary rounded w-full py-2 px-4 lg:w-1/2 lg:mx-auto">
         Search
       </button>
     </form>

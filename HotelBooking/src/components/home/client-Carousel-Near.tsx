@@ -6,19 +6,55 @@ import StarRating from "../starrating/star-Rating";
 export default function CarouselNear() {
   const swiperImg = [
     {
-      url: '/home/Near_1.png',
+      url: '/home/near_1.webp',
       hotelName: 'Pan Pacific Hotel',
       price: 1200,
       ranking: 5,
     },
     {
-      url: '/home/Near_2.png',
+      url: '/home/near_2.webp',
       hotelName: 'Prestige Proga Inn',
       price: 1200,
       ranking: 3,
     },
     {
-      url: '/home/Near_1.png',
+      url: '/home/near_3.webp',
+      hotelName: 'Bangkok Hotel',
+      price: 1200,
+      ranking: 3,
+    },
+    {
+      url: '/home/near_4.webp',
+      hotelName: 'Bangkok Hotel',
+      price: 1200,
+      ranking: 3,
+    },
+    {
+      url: '/home/near_5.webp',
+      hotelName: 'Bangkok Hotel',
+      price: 1200,
+      ranking: 3,
+    },
+    {
+      url: '/home/near_6.webp',
+      hotelName: 'Bangkok Hotel',
+      price: 1200,
+      ranking: 3,
+    },
+    {
+      url: '/home/near_7.webp',
+      hotelName: 'Bangkok Hotel',
+      price: 1200,
+      ranking: 3,
+    },
+    {
+      url: '/home/near_8.webp',
+      hotelName: 'Bangkok Hotel',
+      price: 1200,
+      ranking: 3,
+    },
+    {
+      url: '/home/near_9.webp',
       hotelName: 'Bangkok Hotel',
       price: 1200,
       ranking: 3,
@@ -28,11 +64,14 @@ export default function CarouselNear() {
 
 
   return <>
-    <Swiper slidesPerView={2} spaceBetween={10}>
-
+    <Swiper slidesPerView={2} spaceBetween={20}
+      breakpoints={{
+        1024: {slidesPerView: 4.2}
+      }}>
+        <div className="flex">
         {swiperImg.map((item, index) =>
           <SwiperSlide key={index} className="flex-col">
-            <img className="w-full h-full relative" src={item.url} alt="" />
+            <img className="w-full h-[100px] lg:h-[174.56px] rounded relative" src={item.url} alt="" />
             <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
               <img className="" src="/home/Bookmark.svg" alt="" />
             </div>
@@ -49,6 +88,7 @@ export default function CarouselNear() {
             </div>
           </SwiperSlide>
         )}
+        </div>
 
 
     </Swiper>

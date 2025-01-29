@@ -11,6 +11,7 @@ export default {
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.{js,ts}",
     "./node_modules/@nextui-org/theme/dist/components/slider.js",
     // "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    'node_modules/swiper/swiper-bundle.min.css',
   ],
   theme: {
     extend: {
@@ -33,6 +34,7 @@ export default {
       },
       backgroundImage: {
         'home-explore': "url(/home/Home_Explore_BG.png)",
+        'home-explore-desktop': "url(/home/home_explore_bg_desktop.webp)",
         'email': "url(/account/Email.svg)"
       },
       keyframes: {

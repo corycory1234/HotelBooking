@@ -96,8 +96,10 @@ export default function DateRangePicker () {
           minDate={MIN_DATE}
           maxDate={MAX_DATE}
           popoverDirection="down"
-          // inputClassName="w-full outline-none hover:outline-secondary rounded px-4"
-          toggleClassName="absolute bg-primary rounded-r-lg text-white right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+          containerClassName="w-full lg:w-[50%] lg:inline-block lg:flex"
+          inputClassName="w-full py-2 outline-none lg:border lg:border-gray rounded px-4 lg:w-full lg:py-2 lg:pb-[15px]"
+          toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[52px] lg:h-[57px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
+          lg:relative lg:align-middle lg:py-3 lg:-left-1"
           inputId="datepicker"
           inputName="datepicker"
           required={true}

@@ -41,17 +41,25 @@ export default function Menu () {
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
   return <>
-    <div className="bg-white flex justify-between p-4 fixed bottom-0 left-0 right-0 z-50">
-      {menu.map((item, index) => 
-        <Link href={`${redux_Verify_Session.success === false && 
-          (item.name === 'dashboard' || item.name === 'Trip') ? '/auth' : item.url}`} 
-          className="flex flex-col justify-center items-center gap-2" key={index}>
-          <div className={`${item.url === pathName ? 'text-primary' : ''}`}>
-            {item.svgIcon}
-          </div>
-          <p className={`text-xs ${item.url === pathName ? 'text-primary' : ''}`}>{item.name}</p>
-        </Link>
-      )}
+    <div className="bg-white lg:bg-softGray/20 flex items-center p-4 lg:px-4 lg:py-2 
+      fixed bottom-0 lg:bottom-auto lg:top-0 left-0 right-0 z-50">
+      <Link href={"/"}>
+        <img src="/Logo.svg" alt="gotour" className="hidden lg:block w-10 h-auto"/>
+      </Link>
+        
+
+      <div className="flex-1 flex justify-between lg:justify-end lg:gap-10">
+        {menu.map((item, index) => 
+          <Link href={`${redux_Verify_Session.success === false && 
+            (item.name === 'dashboard' || item.name === 'Trip') ? '/auth' : item.url}`} 
+            className="flex flex-col items-center gap-2" key={index}>
+            <div className={`${item.url === pathName ? 'text-primary' : ''}`}>
+              {item.svgIcon}
+            </div>
+            <p className={`text-xs ${item.url === pathName ? 'text-primary' : ''}`}>{item.name}</p>
+          </Link>
+        )}
+      </div>
     </div>
   
   </>
