@@ -41,14 +41,14 @@ export default function Menu () {
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
   return <>
-    <div className="bg-white lg:bg-softGray/20 flex items-center p-4 lg:px-4 lg:py-2 
-      fixed bottom-0 lg:bottom-auto lg:top-0 left-0 right-0 z-50">
-      <Link href={"/"}>
+    <div className="bg-white flex items-center p-4  
+      fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+      {/* <Link href={"/"}>
         <img src="/Logo.svg" alt="gotour" className="hidden lg:block w-10 h-auto"/>
-      </Link>
+      </Link> */}
         
 
-      <div className="flex-1 flex justify-between lg:justify-end lg:gap-10">
+      <div className="flex-1 flex justify-between">
         {menu.map((item, index) => 
           <Link href={`${redux_Verify_Session.success === false && 
             (item.name === 'dashboard' || item.name === 'Trip') ? '/auth' : item.url}`} 

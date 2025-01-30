@@ -4,6 +4,8 @@ import { RootState, AppDispatch } from "../store/store";
 import Carousel_Offer from "../components/home/client-Carousel-Offer";
 import Carousel_Near from "../components/home/client-Carousel-Near";
 import Menu from "../components/menu";
+import Nav from "@/components/nav/nav";
+import Footer from "@/components/footer/footer";
 import Server_Form_Search from "../components/server-Form-Search/server-Form-Search";
 import Link from "next/link";
 import Avatar from "@/components/avatar/avatar";
@@ -15,9 +17,8 @@ export default function Home() {
   return <>
 
       <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
-        <div className="sm:hidden md:hidden lg:block">
-          <Menu></Menu>
-        </div>
+          {/* <Menu></Menu> */}
+        <Nav></Nav>
         <Avatar></Avatar>
 
         
@@ -53,6 +54,12 @@ export default function Home() {
               <Carousel_Near></Carousel_Near>
             </div>
           </div>
+          
+          {/* <div className="hidden lg:block lg:border-b lg:border-softGray"></div> */}
+
+
+            <Footer></Footer>
+
         </div>
         {/* Swiper 輪播圖 */}
 
