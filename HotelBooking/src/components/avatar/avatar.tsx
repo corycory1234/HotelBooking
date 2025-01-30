@@ -9,8 +9,8 @@ export default function Avatar () {
 
   return <>
     {redux_Verify_Session.success === true ? 
-      <div className="flex justify-end p-2">
-        <Link href={"/profile"}>
+      <div className="flex justify-end p-2 lg:h-[28%]">
+        <Link href={"/profile"} className="lg:hidden">
           <img src="/account/avatarsm.png" alt="" />
         </Link>
       </div>

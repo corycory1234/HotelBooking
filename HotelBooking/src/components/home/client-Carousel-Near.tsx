@@ -1,6 +1,8 @@
 'use client';
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 import 'swiper/css';
+import 'swiper/css/navigation';
 import StarRating from "../starrating/star-Rating";
 
 export default function CarouselNear() {
@@ -65,13 +67,15 @@ export default function CarouselNear() {
 
   return <>
     <Swiper slidesPerView={2} spaceBetween={20}
+      modules={[Navigation]}
+      navigation={true}
       breakpoints={{
-        1024: {slidesPerView: 4.2}
+        1024: {slidesPerView: 5.2}
       }}>
         <div className="flex">
         {swiperImg.map((item, index) =>
           <SwiperSlide key={index} className="flex-col">
-            <img className="w-full h-[100px] lg:h-[174.56px] rounded relative" src={item.url} alt="" />
+            <img className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
             <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
               <img className="" src="/home/Bookmark.svg" alt="" />
             </div>

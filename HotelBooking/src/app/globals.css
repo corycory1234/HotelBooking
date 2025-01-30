@@ -79,20 +79,35 @@ input[type="radio"]:checked {
   text-decoration-skip-ink: none;
 }
 
-/* 8. Swiper - Navigation 導覽按鈕 (建議桌機上再套用, 目前關掉)*/
+/* 8. Swiper - Navigation 導覽按鈕 (桌機上再套用, 手機版關掉)*/
 .swiper-button-next,
 .swiper-button-prev {
-  /* @apply text-secondary !important; 
-  @apply bg-gray !important;
-  @apply rounded-[100%] !important;
-  @apply p-4 !important;
-  @apply text-sm !important; */
-  /* background-color: gray;
-  border-radius: 100%; */
-  /* padding: 6px 16px 6px 16px; */
+  display: none !important;
 }
 .swiper-button-prev:after,
 .swiper-button-next:after {
-  /* font-size: 14px !important;
-  color: black; */
+  /* content:""; */
+  display: none !important;
+}
+@media (min-width: 1024px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: #fff;
+    border-radius: 50%;
+    opacity: .8;
+    box-shadow: 0 0 4px #6d6d6d;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px !important;    /* 新增：固定寬度 */
+    height: 30px !important;   /* 新增：固定高度 */
+    display: flex !important;
+    justify-items: center;
+    align-items: center;
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after  {
+    font-size: 12px !important;
+    color: black;
+    display: block !important;
+  }
 }

@@ -1,6 +1,8 @@
 'use client';
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 import 'swiper/css';
+import 'swiper/css/navigation';
 
 
 
@@ -60,6 +62,8 @@ export default function Carousel() {
 
   return <>
     <Swiper slidesPerView={2.7} spaceBetween={20}
+      modules={[Navigation]}
+      navigation={true}
       breakpoints={{
         1024: {slidesPerView: 4.2}
       }}
