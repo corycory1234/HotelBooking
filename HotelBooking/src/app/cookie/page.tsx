@@ -6,7 +6,7 @@ export default function Cookie () {
 
   return <>
 
-  <div className="flex flex-col gap-2 p-10 overflow-y-auto">
+  <div className="flex flex-col gap-2 px-10 pt-20 overflow-y-auto">
       <h2 className="text-xl font-bold">{title}</h2>
       <p className="text-xs text-gray">Effective Date: {effectiveDate}</p>
       <div className="border-b-2 border-softGray"></div>
@@ -24,7 +24,7 @@ export default function Cookie () {
         ))}
       </ul>
 
-      <div className="mt-8">
+      <div className="py-4">
         <h2 className="text-lg font-semibold">Contact Us</h2>
         <p className="text-sm text-gray-600">Email: {contact.email}</p>
         <p className="text-sm text-gray-600">Phone: {contact.phone}</p>

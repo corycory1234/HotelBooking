@@ -14,7 +14,7 @@ import { User_Data_Interface } from "@/types/user_Info";
 import { z } from "zod";
 import { zod_Email_Response_Interface } from "@/types/zod_Error_Response";
 import Image from "next/image";
-import { verify } from "crypto";
+
 
 const language_List = ["zh-TW", "en-US"];
 
@@ -142,9 +142,9 @@ export default function Before_Login_Profile () {
   
 
 
-  return <div className="pb-20">
+  return <div className="pb-20 lg:pb-0">
   
-    <div className="bg-primary flex flex-col items-center gap-2 p-8">
+    <div className="bg-primary flex flex-col items-center gap-2 p-8 lg:hidden">
 
       {/** 頭像更換 */}
       {redux_Verify_Session.success === false ? 
@@ -192,7 +192,7 @@ export default function Before_Login_Profile () {
 
 
 
-  <div className="customized-bg-gradient flex flex-col gap-4 p-4">
+  <div className="customized-bg-gradient flex flex-col gap-4 p-4 lg:p-2 lg:bg-none lg:gap-6">
 
     {/** 多國語系切換 */}
     <div className="flex justify-between">
@@ -208,7 +208,7 @@ export default function Before_Login_Profile () {
     </div>
     {/** 多國語系切換 */}
 
-    <div className="border-b-2 border-softGray"></div>
+    <div className="border-b-2 border-softGray lg:hidden"></div>
     
     {/** 個人資料 */}
       <div className="flex justify-between cursor-pointer" 
@@ -217,7 +217,7 @@ export default function Before_Login_Profile () {
           <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
           <p>Personal Details</p>
         </div>
-        <p>{">"}</p>
+        <p className="lg:hidden">{">"}</p>
       </div>
 
       <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
@@ -248,7 +248,44 @@ export default function Before_Login_Profile () {
     {/** 個人資料 */}
 
 
-    <div className="border-b-2 border-softGray"></div>
+    <div className="border-b-2 border-softGray lg:hidden"></div>
+
+    {/** 我的訂單  */}
+    {redux_Verify_Session.success === false ? 
+      <div className="hidden lg:block" onClick={please_Login}>
+        <div className="flex justify-between">
+          <div className="flex gap-2">
+            <ProfileSVG name={"trip"} className="w-5 h-auto"></ProfileSVG>
+            <p>My Trip</p>
+          </div>
+          <p className="lg:hidden">{">"}</p>
+        </div>
+      </div>
+      :
+      <Link href={"/trip"} className="hidden lg:block">
+        <div className="flex justify-between">
+          <div className="flex gap-2">
+            <ProfileSVG name={"trip"} className="w-5 h-auto"></ProfileSVG>
+            <p>My Trip</p>
+          </div>
+          <p className="lg:hidden">{">"}</p>
+        </div>
+      </Link>
+    }
+    {/** 我的訂單  */}
+
+
+    {/** 優惠券  */}
+    <Link href={"/offer"} className="hidden lg:block">
+      <div className="flex justify-between">
+        <div className="flex gap-2">
+          <ProfileSVG name={"offer"} className="w-6 h-auto"></ProfileSVG>
+          <p>Offers</p>
+        </div>
+        <p className="lg:hidden">{">"}</p>
+      </div>
+    </Link>
+    {/** 優惠券  */}
 
 
     {/** 我的最愛  */}
@@ -258,12 +295,12 @@ export default function Before_Login_Profile () {
           <ProfileSVG name={"collection"} className="w-5 h-auto"></ProfileSVG>
           <p>My Collection</p>
         </div>
-        <p>{">"}</p>
+        <p className="lg:hidden">{">"}</p>
       </div>
     </Link>
     {/** 我的最愛  */}
 
-    <div className="border-b-2 border-softGray"></div>
+    <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 我的評論  */}
       {redux_Verify_Session.success === false ? 
@@ -272,7 +309,7 @@ export default function Before_Login_Profile () {
             <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
             <p>My Reviews</p>
           </div>
-          <p>{">"}</p>
+          <p className="lg:hidden">{">"}</p>
         </div>
       :
         <Link href={"/myreview"} className="cursor-pointer">
@@ -281,13 +318,13 @@ export default function Before_Login_Profile () {
               <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
               <p>My Reviews</p>
             </div>
-            <p>{">"}</p>
+            <p className="lg:hidden">{">"}</p>
           </div>
         </Link>
       }
     {/** 我的評論  */}
 
-    <div className="border-b-2 border-softGray"></div>
+    <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 訂閱電子報  */}
     <div className="flex justify-between cursor-pointer" onClick={() => set_modal_Subscription(true)}>
@@ -295,7 +332,7 @@ export default function Before_Login_Profile () {
         <ProfileSVG name={"subscribe"} className="w-5 h-auto"></ProfileSVG>
         <p>Subscribe</p>
       </div>
-      <p>{">"}</p>
+      <p className="lg:hidden">{">"}</p>
     </div>
     <Modal isOpen={modal_Subscription} onClose={() => set_modal_Subscription(false)}>
       <div className="flex flex-col gap-2 p-4">
@@ -320,7 +357,7 @@ export default function Before_Login_Profile () {
 
 
 
-    <div className="border-b-2 border-softGray"></div>
+    <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 關於我們  */}
     <Link href={"/about"}>
@@ -329,14 +366,45 @@ export default function Before_Login_Profile () {
           <ProfileSVG name={"about"} className="w-5 h-auto"></ProfileSVG>
           <p>About Go Tour</p>
         </div>
-        <p>{">"}</p>
+        <p className="lg:hidden">{">"}</p>
       </div>
     </Link>
     {/** 關於我們  */}
 
-
+  
+    
+    
 
   </div>
-  
+
+
+    <div className="hidden lg:block border-b border-softGray lg:pt-4"></div>
+    
+    {/** PC桌機 - 登入登出  */}
+    <div className="hidden lg:block lg:pt-4 lg:px-2">
+      {redux_Verify_Session.success === false ? 
+        <Link href={"/auth"} >
+          <div className="flex justify-between">
+            <div className="flex gap-2">
+              <ProfileSVG name={"login"} className="w-5 h-auto"></ProfileSVG>
+              <p>Login</p>
+            </div>
+            <p className="lg:hidden">{">"}</p>
+          </div>
+        </Link>
+      :
+
+        <div>
+          <div className="flex gap-2">
+            <ProfileSVG name={"logout"} className="w-5 h-auto"></ProfileSVG>
+            <button onClick={log_Out}>Logout</button>
+          </div>
+          <p className="lg:hidden">{">"}</p>
+        </div>
+      }
+    </div>
+
+    {/** PC桌機 - 登入登出  */}
+
   </div>
 }

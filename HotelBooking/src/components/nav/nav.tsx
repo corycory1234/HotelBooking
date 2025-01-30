@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { OtherSVG } from "../client_Svg/client_Svg";
+import Full_Half_Modal from "../modal/full-half-modal";
+import Before_Login_Profile from "../profile/before_login_profile";
 
 export default function Nav () {
   // 1. 滾動錨點 - 布林
@@ -18,7 +20,9 @@ export default function Nav () {
       // 2.1 組件卸載, 離開頁面, 清理回收機制, 防止內存外洩
       return ()=> window.removeEventListener('scroll', handle_Scroll);  
     },[])
-
+  
+  // 3.
+  const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
 
 
 return <>
@@ -33,7 +37,13 @@ return <>
 
 
     <div>
-      <OtherSVG name="burgermenu" className="w-7 h-auto cursor-pointer"></OtherSVG>
+      <OtherSVG name="burgermenu" className="w-7 h-auto cursor-pointer"
+        onClick={() => set_Modal_Boolean(true)}>
+      </OtherSVG>
+
+      <Full_Half_Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
+        <Before_Login_Profile></Before_Login_Profile>
+      </Full_Half_Modal>
     </div>
   </div>
 
