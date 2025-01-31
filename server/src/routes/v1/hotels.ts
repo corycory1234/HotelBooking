@@ -1,7 +1,8 @@
 import express from 'express';
 import 'dotenv/config';
-// import { hotelController } from '../../controllers/hotel.controller';
-// import { authenticate } from '../../middlewares/auth';
+import { hotelController } from '../../controllers/hotel.controller';
+import { authMiddleware } from '../../middlewares/auth.middleware';
+import multer from 'multer';
 
 const router = express.Router();
 
@@ -9,6 +10,13 @@ const router = express.Router();
 const asyncHandler = (fn: Function) => (req: express.Request, res: express.Response, next: express.NextFunction) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
+
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024, // 限制 5MB
+    },
+});
 
 // 搜尋飯店列表
 // router.get('/', hotelController.getHotels);
@@ -21,7 +29,23 @@ router.get('/:id/rooms', async (req, res) => {
   // TODO: 實作房型列表邏輯
 });
 
-// 需要認證的路由
-// router.post('/', authenticate, hotelController.createHotel);
+// 新增飯店
+router.post('/', authMiddleware, asyncHandler(hotelController.createHotel));
+
+// 上傳房型照片
+router.post(
+    '/room-types/:roomTypeId/images',
+    authMiddleware,
+    upload.array('images', 5), // 最多一次上傳 5 張
+    asyncHandler(hotelController.uploadRoomTypeImages)
+);
+
+// 上傳飯店照片
+router.post(
+    '/:hotelId/images',
+    authMiddleware,
+    upload.array('images', 10), // 最多一次上傳 10 張
+    asyncHandler(hotelController.uploadHotelImages)
+);
 
 export default router;

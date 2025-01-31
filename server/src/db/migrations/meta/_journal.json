@@ -8,6 +8,20 @@
       "when": 1736531553605,
       "tag": "0000_worthless_red_skull",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1738316095567,
+      "tag": "0001_bored_bug",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738316462294,
+      "tag": "0002_mature_stick",
+      "breakpoints": true
     }
   ]
 }
