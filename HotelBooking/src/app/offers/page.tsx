@@ -1,5 +1,5 @@
-export default function Offers () {
+export default function Offer_List () {
   return <>
-  Offers
+  Offer_List
   </>
 }

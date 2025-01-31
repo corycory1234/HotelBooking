@@ -276,7 +276,7 @@ export default function Before_Login_Profile () {
 
 
     {/** 優惠券  */}
-    <Link href={"/offer"} className="hidden lg:block">
+    {/* <Link href={"/offers"} className="hidden lg:block">
       <div className="flex justify-between">
         <div className="flex gap-2">
           <ProfileSVG name={"offer"} className="w-6 h-auto"></ProfileSVG>
@@ -284,7 +284,7 @@ export default function Before_Login_Profile () {
         </div>
         <p className="lg:hidden">{">"}</p>
       </div>
-    </Link>
+    </Link> */}
     {/** 優惠券  */}
 
 

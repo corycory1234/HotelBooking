@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 
 
 
-export default function Carousel() {
+export default function Carousel_Popular_Destination() {
   const swiperImg = [
     {
       url: '/home/popular_6.webp',

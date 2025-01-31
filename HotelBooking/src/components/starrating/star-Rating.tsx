@@ -8,7 +8,7 @@ export default function StarRating ({ ranking }: {ranking: number}) {
           key={index}
           src="/home/Star.svg"
           alt="Star"
-          className="w-[7px]"
+          className="w-3"
         />
       ))}
     </div>

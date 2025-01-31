@@ -21,7 +21,7 @@ export default function Nav () {
       return ()=> window.removeEventListener('scroll', handle_Scroll);  
     },[])
   
-  // 3.
+  // 3. 漢堡線布林值
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
 
 

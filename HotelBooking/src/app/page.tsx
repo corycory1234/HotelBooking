@@ -1,8 +1,9 @@
 // 'use client';
 // import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
-import Carousel_Offer from "../components/home/client-Carousel-Offer";
+import Carousel_Popular_Destination from "../components/home/carousel_Popular_Destination";
 import Carousel_Near from "../components/home/client-Carousel-Near";
+import Carousel_Offer from "@/components/home/carousel_Offers";
 import Menu from "../components/menu";
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
@@ -25,13 +26,13 @@ export default function Home() {
 
 
         {/* 上層 BG圖 */}
-        <div className="flex p-4">
+        <div className="flex p-4 lg:px-[8.5%]">
           <div className="basis-1/2 flex flex-col">
             <h1 className="text-[24px] text-white font-semibold">Let's Explore The World!</h1>
-            <div className="flex gap-1">
+            {/* <div className="flex gap-1">
               <img src="/home/Location.svg" alt="" />
               <p className="text-[8px] text-white">You're in Dhaka</p>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* 上層 BG圖 */}
@@ -45,12 +46,18 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col p-4 gap-4 pb-20 lg:px-0">
-            <h2 className="font-bold">Popular Offer</h2>
+            <h2 className="font-bold">Popular Destinations</h2>
+            <div className="">
+              <Carousel_Popular_Destination></Carousel_Popular_Destination>
+            </div>
+
+            <h2 className="font-bold">Promotions</h2>
             <div className="">
               <Carousel_Offer></Carousel_Offer>
             </div>
+
             <h2 className="font-bold">Hotels Near You</h2>
-            <div className="bg-white rounded-t-xl p-1">
+            <div className="">
               <Carousel_Near></Carousel_Near>
             </div>
           </div>

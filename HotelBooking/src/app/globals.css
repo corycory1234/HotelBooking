@@ -19,7 +19,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }body::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 /* 1. 隱藏捲軸但仍可滑動 */
