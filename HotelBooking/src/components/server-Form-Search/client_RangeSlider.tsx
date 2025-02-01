@@ -22,7 +22,7 @@ export default function Client_RangeSlider () {
         name="rangeSlider"
         className=""
         formatOptions={{style: "currency", currency: "USD"}}
-        label="Select a budget"
+        label=" "
         maxValue={9999}
         minValue={0}
         step={100}

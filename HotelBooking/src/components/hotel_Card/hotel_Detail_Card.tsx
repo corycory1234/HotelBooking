@@ -273,7 +273,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           <Hotel_Customer_Review></Hotel_Customer_Review>
 
           {/** 跳轉房型按鈕 */}
-          <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
               onClick={() =>　set_Selected_Tab(1)}>Book Now
             </button>
@@ -308,7 +308,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
             <MapContainer
               center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
               zoom={15}
-              style={{width: "100%", height: "20rem", borderRadius: "20px"}}>
+              style={{width: "100%", height: "20rem", borderRadius: "20px", zIndex: 0}}>
               <TileLayer
               // 這裡使用 OpenStreetMap 免費圖資
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
@@ -388,7 +388,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
           {/** 跳轉房型按鈕 */}
-          <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0 z-[9999]">
+          <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
               onClick={() =>　set_Selected_Tab(1)}>Book Now
             </button>

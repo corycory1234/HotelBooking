@@ -68,7 +68,7 @@ export default function HotelList () {
   return <>
   <BackPage></BackPage>
 
-  <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray">
+  <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray lg:hidden">
     {/* Filter 與 熱門搜尋條件 */}
       <Client_Filter_Button></Client_Filter_Button>
     {/* Filter 與 熱門搜尋條件 */}
@@ -77,7 +77,7 @@ export default function HotelList () {
 <main className="p-4">
 
   {/* ↑↓Sort 排序  */}
-  <div className="flex items-center justify-between pb-4">
+  <div className="flex items-center justify-between pb-4 lg:hidden">
     <p className="text-sm">{redux_Hotel_List.length} hotels</p>
     
     <div className="flex items-center gap-1 border border-gray rounded px-2 py-1" onClick={()=> setFormSort(true)}>

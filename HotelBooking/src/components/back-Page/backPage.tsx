@@ -10,7 +10,7 @@ export default function BackPage() {
 
 
   return <>
-    <nav className="sticky top-0 left-0 right-0 bg-primary z-40">
+    <nav className="sticky top-0 left-0 right-0 bg-primary z-40 lg:hidden">
       <div className="px-4 h-[72px] flex items-center gap-4">
           <button type="button" className="basis-1/12">
             <Link href={'/'}>
