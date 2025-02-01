@@ -15,6 +15,7 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { useRouter } from "next/navigation";
+import Form_Search_Pc from "@/components/server-Form-Search/form_Search_Pc";
 
 const initail_Offer = {
   offer_Id: '',
@@ -165,10 +166,17 @@ export default function Offer () {
         </div>
       </div>
       {/** 虛線折價券 */}
+
+
+      {/** <form> 搜尋 */}
+      <h2 className="text-center text-lg lg:p-0 lg:text-3xl font-semibold">Search for hotels by destination</h2>
+      <Form_Search_Pc></Form_Search_Pc>
+      {/** <form> 搜尋 */}
+
       
       <div className="p-4 lg:p-0 flex flex-col items-center gap-2">
         <h2 className="text-lg lg:text-3xl font-semibold">Recommendation</h2>
-        <p className="lg:text-center">Search for applicable hotels from popular prefectures</p>
+        <p className="lg:text-center">Search for applicable hotels from popular countries</p>
       </div>
 
       {/** Tab 國家切換標籤 */}

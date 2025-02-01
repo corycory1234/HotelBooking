@@ -54,7 +54,7 @@ export default function Client_Input_Traveler () {
 
     {/* DropDown 選人清單 */}
       { showDropDown &&
-        <div className="flex flex-col gap-2 pl-4 pr-2">
+        <div className="absolute top-full w-full bg-white z-10 flex flex-col gap-2 pl-4 pr-2 py-2 rounded lg:border lg:border-gray lg: mt-2">
           {/* 房間 */}
           <div className="flex justify-between items-center py-2 border-b border-gray">
             <p>{room} Room</p>
