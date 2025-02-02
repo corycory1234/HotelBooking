@@ -43,10 +43,22 @@ const hotel_Detail_Slice = createSlice({
   reducers: {
     update_Hotel_Detail: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
       return action.payload;
+    },
+
+    // 2. 空心 >> 實心愛心
+    to_Full_Heart_Hotel_Detail: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
+      const payload_Hotel = action.payload;
+      state.isCollected = true;
+    },
+
+    // 3. 實心愛心 >> 空心
+    to_Empty_Heart_Hotel_Detail: (state, action: PayloadAction<add_Hotel_Detail_Interface>) => {
+      const payload_Hotel = action.payload;
+      state.isCollected = false;
     }
   }
 });
 
-export const { update_Hotel_Detail } = hotel_Detail_Slice.actions;
+export const { update_Hotel_Detail, to_Full_Heart_Hotel_Detail, to_Empty_Heart_Hotel_Detail } = hotel_Detail_Slice.actions;
 
 export default hotel_Detail_Slice.reducer;

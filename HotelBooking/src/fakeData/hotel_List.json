@@ -147,6 +147,18 @@
       {
         "url": "/collection/collection_7.webp",
         "description": "hotel7"
+      },
+      {
+        "url": "/collection/collection_7.webp",
+        "description": "hotel8"
+      },
+      {
+        "url": "/collection/collection_4.webp",
+        "description": "hotel9"
+      },
+      {
+        "url": "/collection/collection_3.webp",
+        "description": "hotel10"
       }
   ] ,
     "distance": "Waterfront • 1.2 mi from center",
@@ -188,14 +200,14 @@
     "checkout": "11:00",
     "roomType_List": [
       {
-        "roomType_Id": "room1",
+        "roomType_Id": "111",
         "room_Type": "singleRoom",
         "room_Price": 799,
         "roomType_Image_List": [
-          {"url": "/roomtype/single/singleroom1.webp","description": "hotel1"},
-          {"url": "/roomtype/single/singleroom2.webp","description": "hotel2"},
-          {"url": "/roomtype/single/singleroom3.webp", "description": "hotel3"},
-          {"url": "/roomtype/single/singleroom4.webp", "description": "hotel4"}
+          {"url": "/roomtype/single/singleroom1.webp","description": "singleroom1"},
+          {"url": "/roomtype/single/singleroom2.webp","description": "singleroom2"},
+          {"url": "/roomtype/single/singleroom3.webp", "description": "singleroom3"},
+          {"url": "/roomtype/single/singleroom4.webp", "description": "singleroom4"}
         ],
         "room_Availability": 3,
         "smoke": "false",
@@ -206,15 +218,15 @@
         "bed_Type":"double bed"
       },
       {
-        "roomType_Id": "room2",
+        "roomType_Id": "222",
         "room_Type": "doubleRoom",
         "room_Price": 1399,
         "roomType_Image_List": [ 
-          {"url": "/roomtype/double/doubleroom1.webp","description": "hotel1"},
-          {"url": "/roomtype/double/doubleroom2.webp","description": "hotel2"},
-          {"url": "/roomtype/double/doubleroom3.webp", "description": "hotel3"},
-          {"url": "/roomtype/double/doubleroom4.webp", "description": "hotel4"},
-          {"url": "/roomtype/double/doubleroom5.webp", "description": "hotel5"}
+          {"url": "/roomtype/double/doubleroom1.webp","description": "doubleroom1"},
+          {"url": "/roomtype/double/doubleroom2.webp","description": "doubleroom2"},
+          {"url": "/roomtype/double/doubleroom3.webp", "description": "doubleroom3"},
+          {"url": "/roomtype/double/doubleroom4.webp", "description": "doubleroom4"},
+          {"url": "/roomtype/double/doubleroom5.webp", "description": "doubleroom5"}
         ],
         "room_Availability": 2,
         "smoke": "true",
@@ -231,7 +243,7 @@
     "hotel_Phone": "65334789",
     "hotel_Email": "fourseasons@gmail.com",
     "cancellation_Policy": "Cancellation 7 days or more before check-in: Free cancellation, full refund.Cancellation 3 to 6 days before check-in: 30% of the accommodation fee will be charged as a cancellation fee.Cancellation 1 to 2 days before check-in: 50% of the accommodation fee will be charged as a cancellation fee.Same-day cancellation or no-show: 100% of the accommodation fee will be charged as a cancellation fee.Please note that special promotions or specific room types may have different cancellation policies. For details, please refer to your booking confirmation or contact the hotel directly.",
-    "transportation": "About a 7-min walk from Bus Station",
+    "transportation": "About 7-min walk from Bus Station, About 50-min drive from Airport",
     "recommendation": "4km away from Forest Park, 6km away from Night Market",
     "isCollected": false,
     "offer_Id": "3333"

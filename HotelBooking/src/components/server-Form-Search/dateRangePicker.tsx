@@ -98,7 +98,7 @@ export default function DateRangePicker () {
           popoverDirection="down"
           containerClassName="w-full lg:w-[50%] lg:inline-block lg:flex"
           inputClassName="w-full py-2 outline-none lg:border lg:border-gray rounded px-4 lg:w-full lg:py-2 lg:pb-[15px]"
-          toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[52px] lg:h-[57px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
+          toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[50px] lg:h-[57px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
           lg:relative lg:align-middle lg:py-3 lg:-left-1"
           inputId="datepicker"
           inputName="datepicker"
