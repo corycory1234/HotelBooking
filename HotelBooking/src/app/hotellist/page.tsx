@@ -35,18 +35,18 @@ export default function HotelList () {
   const [sort_Value, set_Sort_Value] = useState("");
 
   // 2. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
-  const [show_Hotel_List, set_Show_Hotel_List] = useState<boolean>(false);
-  useEffect(() => {
-    set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
-    const timer = setTimeout(() => {
-      set_Show_Hotel_List(true);
-    }, 1500);
-    return () => clearTimeout(timer);
-  },[timestamp])
+  // const [show_Hotel_List, set_Show_Hotel_List] = useState<boolean>(false);
+  // useEffect(() => {
+  //   set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
+  //   const timer = setTimeout(() => {
+  //     set_Show_Hotel_List(true);
+  //   }, 1500);
+  //   return () => clearTimeout(timer);
+  // },[timestamp])
 
   // 3. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
-    return <div className="flex flex-col gap-2">
+    return <div className="flex flex-col gap-2 lg:hidden">
       <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
       <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
       <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
@@ -99,8 +99,10 @@ export default function HotelList () {
 
   
   {/** 飯店列表卡片 */}
-    {!show_Hotel_List ? <Placeholder_Card></Placeholder_Card> 
-    :<Hotel_List_Card></Hotel_List_Card>}
+    {/* {!show_Hotel_List ? <Placeholder_Card></Placeholder_Card> 
+    :<Hotel_List_Card></Hotel_List_Card>} */}
+
+<Hotel_List_Card></Hotel_List_Card>
   {/** 飯店列表卡片 */}
 
 </main>

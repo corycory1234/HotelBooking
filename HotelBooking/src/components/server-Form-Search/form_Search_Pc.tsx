@@ -159,15 +159,15 @@ export default function Form_Search_Pc () {
   return <>
   <Toaster_Notify></Toaster_Notify>
 
-  <form onSubmit={submit_Search} className="flex flex-col px-4 lg:flex-row lg:justify-center lg:items-center lg:bg-[#f3f3f3] gap-2 lg:px-20 lg:py-4">
+  <form onSubmit={submit_Search} className="flex flex-col px-4 lg:flex-row lg:justify-center lg:items-center lg:bg-[#f3f3f3] gap-2 lg:px-20 lg:py-2">
     
     <div className="relative lg:basis-1/3">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2.5 right-2 text-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-1.5 right-2 text-primary">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
       </svg>
       <input type="text" placeholder="Where are you going?" 
-      className="w-full py-2 px-4 rounded outline-none border border-gray bg-white lg:h-[57px]"
+      className="w-full py-2 px-4 rounded outline-none border border-gray bg-white lg:h-[44px]"
       onChange={(event) => dispatch(updateKeyword(event.target.value))}
       value={keyword}
       name="destination"/>
@@ -182,9 +182,9 @@ export default function Form_Search_Pc () {
         maxDate={MAX_DATE}
         popoverDirection="down"
         containerClassName="w-full lg:inline-block lg:flex"
-        inputClassName="w-full py-2 outline-none border border-gray rounded px-4 lg:w-full lg:py-2 lg:pb-[15px]"
-        toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[52px] lg:h-[57px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
-        lg:relative lg:align-middle lg:py-3 lg:-left-1"
+        inputClassName="w-full py-2 outline-none border border-gray rounded px-4 lg:w-full lg:pb-[15px] lg:h-[44px]"
+        toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[52px] lg:h-[44px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
+        lg:relative lg:align-middle lg:-left-1"
         inputId="datepicker"
         inputName="datepicker"
         required={true}
@@ -213,22 +213,22 @@ export default function Form_Search_Pc () {
     {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
 
     <div className="relative w-full" ref={dropDownRef}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2 lg:top-2.5 right-2 text-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2 lg:top-2 right-2 text-primary">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
         </svg>
-        <button className="w-full py-2 px-4 lg:py-1 rounded outline-none border border-gray text-left bg-white "
+        <button className="w-full py-2 px-4 lg:pt-1 rounded outline-none border border-gray text-left bg-white lg:h-[44px]"
           onClick={toggle_ShowDropDown}
           type="button">
           <p className="lg:hidden">
             {`${room} Room – ${adult} Adult, ${child} Child`}
           </p>
 
-          <div className="hidden lg:flex lg:flex-col lg:text-sm">
+          <div className="hidden lg:flex lg:flex-col lg:text-[13px]">
             <div className="lg:flex lg:gap-2">
               <p>{adult} Adult,</p>
               <p>{child} Child</p>
             </div>
-            <p className="text-xs text-gray">{room} Room</p>
+            <p className="text-xs lg:text-[13px] text-gray">{room} Room</p>
           </div>
         </button>
 
@@ -302,7 +302,7 @@ export default function Form_Search_Pc () {
 
 {/** Submit 搜尋送出按鈕 */}
     <div className="lg:basis-1/12">
-      <button className="bg-primary text-white rounded w-full py-2 px-4 lg:mx-auto lg:h-[57px]">Search</button>
+      <button className="bg-primary text-white rounded w-full py-2 px-4 lg:mx-auto lg:h-[44px]">Search</button>
     </div>
 {/** Submit 搜尋送出按鈕 */}
 

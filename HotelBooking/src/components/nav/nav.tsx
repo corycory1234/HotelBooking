@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Full_Half_Modal from "../modal/full-half-modal";
 import Before_Login_Profile from "../profile/before_login_profile";
+import { usePathname } from "next/navigation";
 
 export default function Nav () {
   // 1. 滾動錨點 - 布林
@@ -24,12 +25,16 @@ export default function Nav () {
   // 3. 漢堡線布林值
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
 
+  // 4. 不是"/"首頁, <Nav>背景就白色
+  const pathName = usePathname();
+
 
 return <>
 
   <div className={`hidden ${is_Scrolled ? 'lg:bg-white' : 'lg:bg-softGray/20'} 
     lg:flex lg:justify-between lg:items-center lg:w-full
-    lg:px-4 lg:py-2 lg:fixed lg:top-0 lg:z-50`}>
+    lg:px-4 lg:py-2 lg:fixed lg:top-0 lg:z-50
+    ${pathName !== "/" && 'lg:bg-white'}`}>
     
     <Link href={"/"}>
       <img src="/Logo.svg" alt="gotour" className="hidden lg:block w-10 h-auto"/>

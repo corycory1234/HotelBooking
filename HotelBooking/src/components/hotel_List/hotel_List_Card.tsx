@@ -17,6 +17,7 @@ import Advanced_Search_Pc from "../advanced_Search/advanced_Search_Pc";
 import StarRating from "../starrating/star-Rating";
 import { FacilitySVG } from "../client_Svg/client_Svg";
 import how_Many_Nights from "@/utils/how_Many_Nights";
+import { useSearchParams } from "next/navigation";
 
 export default function Hotel_List_Card() {
   // 0. 呼叫 Redux - Action 函式
@@ -110,6 +111,54 @@ export default function Hotel_List_Card() {
     console.log(sort_Value, 123);
     dispatch(update_Hotel_List(sorted_Hotel_List));
     set_FormSort(false) // 選完 <input type="radio">, 關 modal彈跳
+  };
+
+
+  // 2. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
+  const [show_Hotel_List, set_Show_Hotel_List] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const timestamp = searchParams.get("timestamp");
+  useEffect(() => {
+    set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
+    const timer = setTimeout(() => {
+      set_Show_Hotel_List(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  },[timestamp])
+
+  // 3. Skeleton動畫 - 佔位符
+  const Placeholder_Card = () => {
+    return <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 lg:flex-row">
+        <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray lg:w-1/3"></div>
+        
+        <div className="flex flex-col gap-2 lg:w-2/3">
+          <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded lg:w-full"></h3>
+          <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded lg:w-full"></h3>
+          <h3 className="hidden animate-pulse bg-softGray w-1/2 h-6 rounded lg:block lg:w-full"></h3>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 lg:flex-row">
+        <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray lg:w-1/3"></div>
+        
+        <div className="flex flex-col gap-2 lg:w-2/3">
+          <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded lg:w-full"></h3>
+          <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded lg:w-full"></h3>
+          <h3 className="hidden animate-pulse bg-softGray w-1/2 h-6 rounded lg:block lg:w-full"></h3>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 lg:flex-row">
+        <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray lg:w-1/3"></div>
+        
+        <div className="flex flex-col gap-2 lg:w-2/3">
+          <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded lg:w-full"></h3>
+          <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded lg:w-full"></h3>
+          <h3 className="hidden animate-pulse bg-softGray w-1/2 h-6 rounded lg:block lg:w-full"></h3>
+        </div>
+      </div>
+    </div>
   }
   
 
@@ -126,11 +175,13 @@ export default function Hotel_List_Card() {
 
 
 
-
-
     {/** 飯店列表卡片 */}
     <div className="lg:w-2/3 lg:ml-5 lg:flex-1 lg:flex lg:flex-col lg:gap-4 lg:relative">
       
+
+    {!show_Hotel_List ? <Placeholder_Card></Placeholder_Card> 
+      :
+      <>
       {/** Sort排序 - PC */}
       <div className="hidden lg:flex lg:w-[14%] justify-center items-center gap-1 border border-primary rounded-full px-2 py-1 cursor-pointer" onClick={()=> set_FormSort(!formSort)}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-primary" >
@@ -138,12 +189,12 @@ export default function Hotel_List_Card() {
         </svg>
         <span className="text-primary">Sort</span>
       </div>
-
+      
       {/** Sort排序 - 絕對定位<form> - PC */}
       <div className="hidden lg:block">
         {formSort === true && 
             <form className="absolute top-10 z-20 border rounded border-softGray bg-white flex flex-col gap-2 p-4 w-[40%]">
-
+      
                 <div className="flex justify-between items-center ">
                   <label htmlFor="priceLow">{`Price (Low ~ High)`}</label>
                   <input type="radio" name="sort" id="priceLow" value="priceLow" onChange={() => sortHotels("priceLow")}
@@ -170,16 +221,16 @@ export default function Hotel_List_Card() {
       </div>
       {/** Sort排序 - 絕對定位<form> - PC */}
       {/** Sort排序 - PC */}
-
+      
       {/** 總共OO間飯店 - PC */}
       <p className="hidden lg:block lg:border-b lg:border-softGray lg:py-2">{redux_Hotel_List.length} Hotels</p>
       {/** 總共OO間飯店 - PC*/}
-
-    {redux_Hotel_List.map((item) => {
+      
+      {redux_Hotel_List.map((item) => {
       return <div key={item.hotel_Id} className="space-y-4">
         <article className="bg-white rounded-lg overflow-hidden shadow-sm lg:rounded-none lg:border-b lg:border-softGray
         lg:flex lg:gap-4 lg:relative">
-
+      
           {/* Swiper 飯店圖片 */}
           <div className="lg:w-1/3">
             <Swiper slidesPerView={1.25} spaceBetween={5} loop={true} 
@@ -197,8 +248,8 @@ export default function Hotel_List_Card() {
             </Swiper>
           </div>
           {/* Swiper 飯店圖片 */}
-
-
+      
+      
           <div className="p-4 lg:2/3 lg:flex-1 lg:p-0">
             <div className="flex justify-between items-start">
               <div className="flex flex-col gap-2">
@@ -208,7 +259,7 @@ export default function Hotel_List_Card() {
                 <h3 className="font-semibold">{item.hotel_Name}</h3>
                 <p className="text-sm text-gray-500 mt-1">{item.distance}</p>
               </div>
-
+      
               <div className="flex flex-col gap-2 justify-center items-center lg:items-end">
                 <div className="flex items-center gap-1 bg-softGray text-custom px-2 py-1 rounded">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 text-yellow-500">
@@ -218,7 +269,7 @@ export default function Hotel_List_Card() {
                     {item.totalRating}
                   </span>
                 </div>
-
+      
                 {/** 飯店最低價前 - PC */}
                 <p className="hidden lg:block text-xl font-semibold">$ {item.price}</p>
                 {/** 飯店最低價前 - PC */}
@@ -226,7 +277,7 @@ export default function Hotel_List_Card() {
                 {/** 人數、幾間房 - PC */}
                 <p className="hidden lg:block lg:text-sm lg:text-[#6D6D6D]">{redux_Adult + redux_Child} Guests, {how_Many_Nights(redux_Date_Start as string, redux_Date_End as string)} Nights</p>
                 {/** 人數、幾間房 - PC */}
-
+      
                 {/** 我的收藏 - 愛心 */}
                 {item.isCollected === false ? <>
                   <div className="cursor-pointer lg:absolute lg:left-[28%] lg:top-[5%] lg:z-[1]">
@@ -244,25 +295,26 @@ export default function Hotel_List_Card() {
                 </>
                 }
               </div>
-
-
+      
+      
             </div>
-
+      
             {/** 飯店設施 */}
-            <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-hidden lg:grid lg:grid-cols-3">
+            <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-hidden lg:grid lg:grid-cols-5">
               {item.facility_List?.map((facility, index) => {
-                return <div key={index} >
-                    {index <6 && <div className="lg:flex">
+                return <div className="lg:flex" key={index}>
+                    {index <6 && <>
                       <FacilitySVG name={facility} className="hidden lg:block lg:w-4 lg:h-auto"></FacilitySVG>
-                      <span className="text-xs px-2 py-1 bg-softGray rounded lg:bg-transparent" key={index}>
+                      <span className="text-xs px-2 py-1 bg-softGray rounded lg:bg-transparent">
                         {facility.charAt(0).toUpperCase() + facility.slice(1)}
                       </span>
-                      </div>}
+                      </>
+                      }
                 </div>
               })}
             </div>
             {/** 飯店設施 */}
-
+      
             
             <div className="flex items-center justify-between mt-4 lg:mt-0 lg:justify-end lg:pb-2">
               <div className="lg:hidden">
@@ -276,12 +328,18 @@ export default function Hotel_List_Card() {
               </button>
               {/* </Link> */}
             </div>
-
-
+      
+      
           </div>
         </article>
       </div>
-    })}
+      })}
+      
+      </>
+
+    }
+
+
     </div>
     {/** 飯店列表卡片 */}
   </div>
