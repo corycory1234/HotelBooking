@@ -237,7 +237,8 @@ export default function Hotel_List_Card() {
               pagination={{ clickable: true }}
               navigation={true}
               modules={[Pagination, Navigation]}
-              breakpoints={{1024: {slidesPerView: 1, loop:false}, }}
+              breakpoints={{1024: {slidesPerView: 1, loop:false,}, }}
+              className="navigation-go-center"
               >
               {item.hotel_Image_List.map((img, index) => {
                 return <SwiperSlide key={index}>

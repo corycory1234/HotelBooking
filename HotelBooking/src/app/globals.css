@@ -110,4 +110,8 @@ input[type="radio"]:checked {
     color: black;
     display: block !important;
   }
+  /* 為了調整hotel_List 輪播圖包含 Pagination 與 Navigation, 導致Navigation無法置中 */
+  .navigation-go-center {
+    --swiper-navigation-size: 0px; /* 或是你希望的尺寸，如 0px */
+  }
 }
