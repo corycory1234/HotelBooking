@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { useEffect, useState } from "react";
-import { HomeSVG, OtherSVG, FacilitySVG } from "../client_Svg/client_Svg";
+import { HomeSVG, OtherSVG, FacilitySVG, ProfileSVG } from "../client_Svg/client_Svg";
 import Hotel_Room_Type from "./hotel_Room_Type";
 import Hotel_Facility from "./hotel_Facility";
 import Hotel_Customer_Review from "./hotel_Customer_Review";
@@ -26,6 +26,8 @@ import { add_My_Collection, delete_My_Collection } from "@/store/my_Collection/m
 import { update_Hotel_List, to_Full_Heart, to_Empty_Heart  } from "@/store/hotel_List/hotel_List_Slice";
 import { update_Hotel_Detail, to_Full_Heart_Hotel_Detail, to_Empty_Heart_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
 import how_Many_Nights from "@/utils/how_Many_Nights";
+import { update_Booked_Room } from "@/store/booked_Room/booked_Room";
+import { useRouter } from "next/navigation";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -129,9 +131,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       return null;
     }
   }
-  // useEffect(() => {
-  //   console.log(the_Room_Type_Img_List, "有拉到圖片陣列嗎");
-  // },[the_Room_Type_Img_List])
+
 
   // 10. Redux - RoomType 新增收藏飯店 - 
   const dispatch = useDispatch();
@@ -182,14 +182,33 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   };
   // 15. 渲染評論列表之陣列! 用三元去轉換, 一開始用props進來的 the_Hotel?.review_List, 
   // 15.1 若 <select> 改變排序, 就用本地 new_Review_List
-  const review_List_Render: add_Review_Type_Interface[] = new_Review_List !== null ? new_Review_List : (the_Hotel?.review_List ?? [])
+  const review_List_Render: add_Review_Type_Interface[] = new_Review_List !== null ? new_Review_List : (the_Hotel?.review_List ?? []);
+
+  // 16. Redux - 飯店明細
+  const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
+  const redux_Hotel_Room_Type = redux_Hotel_Detail.roomType_List;
+
+  // 17. 訂房按鈕
+  const router = useRouter();
+  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
+  const book_Room = async (id: string) => {
+    const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.roomType_Id === id);
+    const result = dispatch(update_Booked_Room(the_Booked_Room as add_Hotel_Room_Type_Interface))
+    console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
+    console.log(result, "結果");
+    if(result) {
+      router.push("/travelerinfo")
+    } else {
+      alert("訂房失敗")
+    }
+  };
   
 
   return <>
   {!show_Hotel_Detail_Card ? <Placeholder_Card></Placeholder_Card> 
   
   :
-  <div className="relative">
+  <div className="relative lg:py-4">
     <div className="relative flex flex-col gap-2 lg:hidden">
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
         <div className="">
@@ -281,7 +300,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       </div>
     
     {/** 房型照片牆 - PC */}
-    <div className="hidden lg:grid lg:grid-cols-5 gap-2 w-full lg:mt-[136px] lg:px-20 lg:py-2">
+    <div className="hidden lg:grid lg:grid-cols-5 gap-2 w-full lg:mt-[136px] lg:px-20">
 
       {/** 左邊大圖 */}
       <div className="col-span-2">
@@ -731,28 +750,41 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                   <div className="basis-3/4 flex flex-col px-4 py-4 gap-2 border border-softGray rounded h-1/2" key={item.roomType_Id}>
                     
                     {/** 上方單張圖片 */}
-                    <div className="h-1/2 flex gap-2">
-                      <img src={the_Hotel.hotel_Image_List[0].url} alt={the_Hotel.hotel_Image_List[0].description} 
-                        className="rounded w-1/3"/>
+                    <div className="flex justify-between">
+                      <div className="basis-4/5 h-1/2 flex gap-2">
+                        <img src={the_Hotel.hotel_Image_List[0].url} alt={the_Hotel.hotel_Image_List[0].description} 
+                          className="rounded w-1/3"/>
 
-                      <div className="flex flex-col gap-2">
-                        <div className="flex gap-2">
-                          <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1) }</p>
-                          <p className="border bg-[#007CB5] rounded px-2 text-white">{item.view?.slice(0,1).toUpperCase() as string + item.view?.slice(1)}</p>
-                        </div>
-                        
-                        <div className="flex flex-col">
-                        <p className="font-semibold">Room Amenities</p>
-                        <div className="flex gap-2">
-                          {item.amenity_List?.map((amenity) => {
-                            return <div className="flex gap-2">
-                                <OtherSVG name={amenity} className="w-4 h-auto"></OtherSVG>
-                                <p>{amenity}</p>
-                              </div>
-                          })}
-                        </div>
+                        <div className="flex flex-col gap-2">
+                          <div className="flex gap-2">
+                            <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1) }</p>
+                            <p className="border bg-[#007CB5] rounded px-2 text-white">{item.view?.slice(0,1).toUpperCase() as string + item.view?.slice(1)}</p>
+                          </div>
+                          
+                          <div className="flex flex-col">
+                            <p className="font-semibold">Room Amenities</p>
+                            <div className="flex gap-2 flex-wrap">
+                              {item.amenity_List?.map((amenity) => {
+                                return <div className="flex gap-2">
+                                    <OtherSVG name={amenity} className="w-4 h-auto"></OtherSVG>
+                                    <p>{amenity}</p>
+                                  </div>
+                              })}
+                            </div>
+                          </div>
                         </div>
                       </div>
+
+                        {/** 剩幾間房 */}
+                        <div className="basis-1/5">
+                          {(item.room_Availability as number <=3) && 
+                              <p className="bg-softGray rounded text-customRed text-sm font-semibold py-1 text-center">
+                              {item.room_Availability} Left
+                              </p>
+
+                          }
+                        </div>
+                        {/** 剩幾間房 */}
                     </div>
                     {/** 上方單張圖片 */}
                     
@@ -761,17 +793,17 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                     <div className="flex justify-between">
                       <div className="flex flex-col gap-2">
                         {/** 旅客幾人、住幾晚、幾間房 */}
-                        <div className="flex justify-between items-end">
+                        <div className="flex justify-between">
                           <div className="flex gap-2">
-                            <div className="flex gap-2">
+                            <div className="flex">
                               <OtherSVG name="night" className="w-4 h-auto"></OtherSVG>
-                              <p>{how_Many_Nights(redux_Start_Date as string, redux_End_Date as string)} Nights |</p>
+                              <p>{how_Many_Nights(redux_Start_Date as string, redux_End_Date as string)} Nights</p>
                             </div>
-                            <div className="flex gap-2">
+                            <div className="flex">
                               <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
-                              <p>{redux_Room} Rooms |</p>
+                              <p>{redux_Room} Rooms</p>
                             </div>
-                            <div className="flex gap-2">
+                            <div className="flex">
                               <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
                               <p>{redux_Adult + redux_Child} Guests</p>
                             </div>
@@ -823,14 +855,14 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                             <p className="text-sm">Tax Included</p>
                           </div>
                           {/** 剩幾間房 */}
-                          {(item.room_Availability as number <=3) && <div className="flex justify-end">
+                          {/* {(item.room_Availability as number <=3) && <div className="flex justify-end">
                               <p className="bg-softGray rounded text-customRed text-sm font-semibold px-2 py-1">
                               {item.room_Availability} Left
                               </p>
                             </div>
-                          }
+                          } */}
                           {/** 剩幾間房 */}
-                          <button className="bg-primary text-white rounded px-4 py-2">Book Now</button>
+                          <button className="bg-primary text-white rounded px-4 py-2" onClick={() => book_Room(item.roomType_Id)}>Book Now</button>
                         </div>
                       </div>
                       {/** Book Now 按鈕 */}
@@ -848,7 +880,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
 
-        {/** 旅客評價留言 */}
+        {/** 桌機PC - 旅客評價留言 */}
         <div className="flex justify-between">
 
           {/** 左邊平均評價星星 */}
@@ -906,9 +938,127 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
             </div>
           {/** 右邊留言 */}
         </div>
-        {/** 旅客評價留言 */}
+        {/** 桌機PC - 旅客評價留言 */}
+
+        
+
+        {/** PC桌機 - 地圖、check-In、Check-Out、付款方式、電話、地址 */}
+        <div className="flex flex-col gap-2">
+          <h2 className="font-semibold text-2xl">Property Information</h2>
+          {/** React-leaflet 地圖 */}
+          <MapContainer
+              center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+              zoom={15}
+              style={{width: "100%", height: "30rem", borderRadius: "20px", zIndex: 0}}>
+              <TileLayer
+              // 這裡使用 OpenStreetMap 免費圖資
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+                <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
+              </Marker>
+          </MapContainer>
+          {/** React-leaflet 地圖 */}
+          
+
+          <div className="flex justify-between gap-4">
+            {/** 左邊 checkin、checkout、付款方式 */}
+            <div className="basis-1/2 flex flex-col border border-softGray rounded">
+            {/** 上方 Checkin、Checkout */}
+              <div className="flex gap-10 border-b border-softGray p-4">
+                <div className="flex flex-col">
+                  <p className="font-semibold text-sm">Check-in time:</p>
+                  <div className="flex gap-2">
+                    <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
+                    <p className="font-semibold text-lg">After {the_Hotel?.checkin}</p>
+                  </div>
+                </div>
+                <div className="border-r border-softGray"></div>
+                <div className="flex flex-col">
+                  <p className="font-semibold text-sm">Check-out time:</p>
+                  <div className="flex gap-2">
+                    <ProfileSVG name="logout" className="w-4 h-auto"></ProfileSVG>
+                    <p className="font-semibold text-lg">Before {the_Hotel?.checkout}</p>
+                  </div>
+                </div>
+              </div>
+            {/** 上方 Checkin、Checkout */}
+              
+              {/** 付款方式 */}
+              <div className="flex flex-col gap-2 p-4">
+                <p className="font-semibold text-sm">Payment Methods</p>
+                <div className="flex flex-wrap gap-y-2">
+                  <div className="basis-1/2 flex gap-2">
+                    <OtherSVG name="master" className="w-5 h-auto"></OtherSVG>
+                    <p>Master</p>
+                  </div>
+                  <div className="basis-1/2 flex gap-2">
+                    <OtherSVG name="visa" className="w-5 h-auto"></OtherSVG>
+                    <p>Visa</p>
+                  </div>
+                  <div className="basis-1/2 flex gap-2">
+                    <OtherSVG name="jcb" className="w-5 h-auto"></OtherSVG>
+                    <p>JCB</p>
+                  </div>
+                </div>
+              </div>
+              {/** 付款方式 */}
+
+            </div>
+            
+            {/** 右邊飯店地址飯店地址、GoogleMap、電話、郵件 */}
+            <div className="basis-1/2 flex flex-col gap-2">
+              {/** 飯店經緯度 - GoogleMap */}
+              <div className="flex items-center gap-2">
+                <OtherSVG name="marker" className="w-8 h-auto"></OtherSVG>
+                <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longtitude}`}
+                  rel="noopener noreferrer" className="customized-underline text-primary">
+                  {the_Hotel?.address}
+                </a>
+              </div>
+              {/** 飯店經緯度 - GoogleMap */}
+
+              <div className="flex gap-2">
+                <OtherSVG name="phone" className="w-4 h-auto"></OtherSVG>
+                <p>{the_Hotel?.hotel_Phone}</p>
+              </div>
+              <div className="flex gap-2">
+                <OtherSVG name="email" className="w-4 h-auto"></OtherSVG>
+                <p>{the_Hotel?.hotel_Email}</p>
+              </div>
+            </div>
+            {/** 右邊飯店地址飯店地址、GoogleMap、電話、郵件 */}
+
+          </div>
+        </div>
+         {/** PC桌機 - 地圖、check-In、Check-Out、付款方式、電話、地址 */}
+
+        {/** 桌機PC - 取消政策 */}
+        <div className="flex flex-col gap-2">
+          <h2 className="font-semibold text-2xl">Cancellation Policy</h2>
+          <div className="flex flex-col gap-2 border border-softGray rounded p-2">
+            {the_Hotel?.cancellation_Policy?.split(".").map((cancel, index) => {
+              return cancel !== "" &&
+              <div className="flex gap-2" key={cancel}>
+                  <OtherSVG name="policy" className="w-4 h-auto"></OtherSVG>
+                  <p>{cancel}</p>
+              </div>  
+            })}
+          </div>
+        </div>
+        {/** 桌機PC - 取消政策 */}
 
 
+        <div className="flex flex-col gap-2">
+          <h2 className="font-semibold text-2xl">Recommended Spots</h2>
+          <div className="flex flex-col gap-2">
+            {the_Hotel?.recommendation?.split(",").map((spot) => {
+              return <div className="flex gap-2">
+                <OtherSVG name="spot" className="w-4 h-auto"></OtherSVG>
+                <p>{spot}</p>
+              </div>
+            })}
+          </div>
+        </div>
         
       </div>
     {/** 桌機CP - 房型 */}
