@@ -25,6 +25,7 @@ import { RootState, AppDispatch } from "@/store/store";
 import { add_My_Collection, delete_My_Collection } from "@/store/my_Collection/my_Collection_Slice";
 import { update_Hotel_List, to_Full_Heart, to_Empty_Heart  } from "@/store/hotel_List/hotel_List_Slice";
 import { update_Hotel_Detail, to_Full_Heart_Hotel_Detail, to_Empty_Heart_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
+import how_Many_Nights from "@/utils/how_Many_Nights";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -107,7 +108,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
     set_Full_Modal_Boolean(true);
   }
 
-  // 9.
+  // 9. <Swiper> - 滿版彈窗房型照片, 需要額外再寫一個本地狀態, 不然對不到room_Type_Id
   interface Room_Type_Img_List_Interface {
     url:string,
     description: string
@@ -117,8 +118,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   const [the_Room_Type_Img_List, set_The_Room_Type_Img_List] = useState<Room_Type_Img_List_Interface[]>([]);
   const show_The_Room_Type_Pic = (index: number, room_Type_Id: string) => {
     const the_Room_Type = the_Hotel?.roomType_List.find((item) => item.roomType_Id === room_Type_Id);
-    const new_The_Room_Type_List = the_Hotel?.roomType_List.filter((item) => item.roomType_Id ===room_Type_Id );
-    // console.log(new_The_Room_Type_List, "有拉到圖片陣列嗎");
+    // const new_The_Room_Type_List = the_Hotel?.roomType_List.filter((item) => item.roomType_Id ===room_Type_Id );
     console.log(index, "傳參索引值", room_Type_Id, "傳參房型id");
     console.log(the_Room_Type, "有拉到房型嗎");
     if(the_Room_Type){
@@ -129,11 +129,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       return null;
     }
   }
-  useEffect(() => {
-    console.log(the_Room_Type_Img_List, "有拉到圖片陣列嗎");
-  },[the_Room_Type_Img_List])
+  // useEffect(() => {
+  //   console.log(the_Room_Type_Img_List, "有拉到圖片陣列嗎");
+  // },[the_Room_Type_Img_List])
 
-  // 3. 新增收藏飯店
+  // 10. Redux - RoomType 新增收藏飯店 - 
   const dispatch = useDispatch();
   const add_Collection = (hotel: add_Hotel_Detail_Interface) => {
     dispatch(to_Full_Heart(hotel));
@@ -141,13 +141,19 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
     dispatch(to_Full_Heart_Hotel_Detail(hotel));
   }
 
-  // 4. 刪除收藏飯店
+  // 11. Redux - RoomType 刪除收藏飯店
   const delete_Collection = (hotel: add_Hotel_Detail_Interface) => {
     dispatch(to_Empty_Heart(hotel));
     dispatch(delete_My_Collection(hotel));
     dispatch(to_Empty_Heart_Hotel_Detail(hotel))
   }
-  
+
+  // 12.
+  const redux_Start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
+  const redux_End_Date = useSelector((state: RootState) => state.formSearch.end_Date);
+  const redux_Room = useSelector((state: RootState) => state.formSearch.room);
+  const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
+  const redux_Child = useSelector((state: RootState) => state.formSearch.child);
 
   return <>
   {!show_Hotel_Detail_Card ? <Placeholder_Card></Placeholder_Card> 
@@ -628,12 +634,12 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               {the_Hotel?.roomType_List.map((item, index) => {
                 return <div className="flex gap-2">
                   <div className="basis-1/4 flex flex-col" key={index}>
-                    <p className="font-semibold">{item.room_Type} [{item.bed_Type}] {item.smoke === "false" ? '[No Smoking]' : '[Smoking Room]'}</p>
+                    <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1)} [{item.bed_Type}] {item.smoke === "false" ? '[No Smoking]' : '[Smoking Room]'}</p>
 
 
-                    <div className="grid grid-rows-2 gap-2">
+                    <div className="flex flex-col gap-2">
                       {/** 上方房型大圖 */}
-                      <div className="col-span-2 relative">
+                      <div className="relative">
                         {item?.roomType_Image_List.map((room_Pic, index) => {
                           return index === 0 &&
                           <img src={room_Pic.url} alt={room_Pic.description} key={index}
@@ -648,15 +654,17 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         </div>
                       </div>
                       {/** 上方房型大圖 */}
-
-                      <div className="grid grid-cols-2 gap-2">
+                      
+                      {/** 下方2房型小圖 */}
+                      <div className="flex gap-2">
                       {item?.roomType_Image_List.map((room_Pic, index) => {
                           return (index >0 && index <3) &&
                           <img src={room_Pic.url} alt={room_Pic.description} key={index}
-                          className="object-cover w-full h-1/2 rounded cursor-pointer"
+                          className="object-cover w-1/2 h-1/2 rounded cursor-pointer"
                           onClick={() => show_The_Room_Type_Pic(index, item.roomType_Id)}/>
                         })}
                       </div>
+                      {/** 下方2房型小圖 */}
 
                       {/** 房型照片 - 看滿版照片 - 彈跳視窗 */}
                       <Full_Modal isOpen={full_Modal_Room_Type_Boolean} onClose={() => set_Full_Modal_Room_Type_Boolean(false)}>
@@ -688,10 +696,124 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
                     </div>
                   </div>
+                  
+                {/** 右邊卡片資訊 */}
+                  <div className="basis-3/4 flex flex-col px-4 py-4 gap-2 border border-softGray rounded h-1/2" key={item.roomType_Id}>
+                    
+                    {/** 上方單張圖片 */}
+                    <div className="h-1/2 flex gap-2">
+                      <img src={the_Hotel.hotel_Image_List[0].url} alt={the_Hotel.hotel_Image_List[0].description} 
+                        className="rounded w-1/3"/>
 
-                  <div className="basis-3/4 flex" key={item.roomType_Id}>
-                    <p>這邊放房型卡片, 可跳轉到填寫旅客表單</p>
+                      <div className="flex flex-col gap-2">
+                        <div className="flex gap-2">
+                          <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1) }</p>
+                          <p className="border bg-[#007CB5] rounded px-2 text-white">{item.view?.slice(0,1).toUpperCase() as string + item.view?.slice(1)}</p>
+                        </div>
+                        
+                        <div className="flex flex-col">
+                        <p className="font-semibold">Room Amenities</p>
+                        <div className="flex gap-2">
+                          {item.amenity_List?.map((amenity) => {
+                            return <div className="flex gap-2">
+                                <OtherSVG name={amenity} className="w-4 h-auto"></OtherSVG>
+                                <p>{amenity}</p>
+                              </div>
+                          })}
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/** 上方單張圖片 */}
+                    
+                    <div className="border-b border-softGray"></div>
+                    
+                    <div className="flex justify-between">
+
+                      <div className="flex flex-col gap-2">
+                        {/** 旅客幾人、住幾晚、幾間房 */}
+                        <div className="flex justify-between items-end">
+                          <div className="flex gap-2">
+                            <div className="flex gap-2">
+                              <OtherSVG name="night" className="w-4 h-auto"></OtherSVG>
+                              <p>{how_Many_Nights(redux_Start_Date as string, redux_End_Date as string)} Nights |</p>
+                            </div>
+                            <div className="flex gap-2">
+                              <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
+                              <p>{redux_Room} Rooms |</p>
+                            </div>
+                            <div className="flex gap-2">
+                              <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
+                              <p>{redux_Adult + redux_Child} Guests</p>
+                            </div>
+                          </div>
+
+                          {/* <div className="flex gap-2">
+                            <div className="flex flex-col">
+                              <p className="font-semibold">${item.room_Price}</p>
+                              <p className="text-sm">Tax Included</p>
+                            </div>
+                            <button className="bg-primary text-white rounded px-4">Book Now</button>
+                          </div> */}
+                        </div>
+                        {/** 旅客幾人、住幾晚、幾間房 */}
+                        
+                        {/** 抽菸、吸菸 */}
+                        <div className="flex gap-2">
+                          {item.smoke === "false" ? <div className="flex gap-2 border border-black rounded px-2">
+                              <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG><p>No-Smoking Room</p>
+                            </div>
+                            :
+                            <div className="flex gap-2 border border-black rounded px-2">
+                              <OtherSVG name="smoking" className="w-4 h-auto"></OtherSVG><p>Smoking Room</p>
+                            </div>
+                          }
+                        </div>
+                        {/** 抽菸、吸菸 */}
+                        
+                        {/** 房型大小、可住幾人 */}
+                        <div className="flex gap-2">
+                          <div className="flex gap-1">
+                            <OtherSVG name="roomsize" className="w-4 h-auto"></OtherSVG>
+                            <p>{item.room_Size} m²</p>
+                          </div>
+                          <div className="flex gap-1">
+                            <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
+                            <p>Max {item.max_People} Adults</p>
+                          </div>
+                        </div>
+                        {/** 房型大小、可住幾人 */}
+                      
+                      </div>
+
+                      <div className="flex gap-2">
+                        {/** Book Now 按鈕 */}
+                        <div className="flex items-center gap-2">
+                          <div className="flex flex-col">
+                            <p className="font-semibold">${item.room_Price}</p>
+                            <p className="text-sm">Tax Included</p>
+                          </div>
+                          {/** 剩幾間房 */}
+                          {(item.room_Availability as number <=3) && <div className="flex justify-end">
+                              <p className="bg-softGray rounded text-customRed text-sm font-semibold px-2 py-1">
+                              {item.room_Availability} Left
+                              </p>
+                            </div>
+                          }
+                          {/** 剩幾間房 */}
+                          <button className="bg-primary text-white rounded px-4 py-2">Book Now</button>
+                        </div>
+                        {/** Book Now 按鈕 */}
+                        
+                      </div>
+
+                    </div>
                   </div>
+                {/** 右邊卡片資訊 */}
+
+
+
+
                 </div>
                 
               })}
