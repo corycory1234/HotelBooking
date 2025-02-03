@@ -115,3 +115,8 @@ input[type="radio"]:checked {
     --swiper-navigation-size: 0px; /* 或是你希望的尺寸，如 0px */
   }
 }
+
+/*9. */
+html {
+  scroll-behavior: smooth
+}
