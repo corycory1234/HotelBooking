@@ -385,6 +385,47 @@ export class HotelService extends BaseService {
             throw new HotelServiceError('搜尋飯店失敗', 500);
         }
     }
+
+    async getHotelDetails(hotelId: string) {
+        try {
+            // 獲取飯店基本資訊和房型
+            const hotel = await db
+                .select({
+                    hotel: hotels,
+                    rooms: roomTypes
+                })
+                .from(hotels)
+                .leftJoin(roomTypes, eq(hotels.id, roomTypes.hotelId))
+                .where(eq(hotels.id, hotelId))
+                .then(rows => {
+                    if (rows.length === 0) {
+                        throw new HotelServiceError('飯店不存在', 404);
+                    }
+
+                    // 整理資料結構
+                    const hotelInfo = rows[0].hotel;
+                    const roomsList = rows
+                        .filter(row => row.rooms !== null)
+                        .map(row => row.rooms);
+
+                    return {
+                        ...hotelInfo,
+                        roomTypes: roomsList
+                    };
+                });
+
+            return hotel;
+        } catch (error) {
+            console.error('Get hotel details error:', error);
+            if (error instanceof HotelServiceError) {
+                throw error;
+            }
+            throw new HotelServiceError(
+                error instanceof Error ? error.message : '獲取飯店詳情失敗',
+                500
+            );
+        }
+    }
 }
 
 export const hotelService = new HotelService();

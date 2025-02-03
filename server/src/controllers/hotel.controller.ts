@@ -44,20 +44,18 @@ class HotelController {
     async getHotel(req: Request, res: Response) {
         try {
             const { id } = req.params;
-            const hotel = await db
-                .select()
-                .from(hotels)
-                .where(eq(hotels.id, id));
-
-            if (!hotel.length) {
-                return res
-                    .status(404)
-                    .json(ApiResponse.error("Hotel not found"));
-            }
-
-            res.json(ApiResponse.success(hotel[0]));
+            const hotel = await hotelService.getHotelDetails(id);
+            res.json(ApiResponse.success(hotel));
         } catch (error) {
-            res.status(500).json(ApiResponse.error((error as Error).message));
+            console.error('Get hotel error:', error);
+            if (error instanceof Error && 'code' in error) {
+                return res.status((error as any).code).json(
+                    ApiResponse.error(error.message)
+                );
+            }
+            res.status(500).json(ApiResponse.error(
+                error instanceof Error ? error.message : '獲取飯店詳情失敗'
+            ));
         }
     }
 

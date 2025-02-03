@@ -22,7 +22,7 @@ const upload = multer({
 router.get('/', asyncHandler(hotelController.getHotels));
 
 // 獲取飯店詳情
-// router.get('/:id', asyncHandler(hotelController.getHotel));
+router.get('/:id', asyncHandler(hotelController.getHotel));
 
 // 獲取飯店房型
 router.get('/:id/rooms', async (req, res) => {
