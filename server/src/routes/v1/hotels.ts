@@ -19,7 +19,7 @@ const upload = multer({
 });
 
 // 搜尋飯店列表
-// router.get('/', hotelController.getHotels);
+router.get('/', asyncHandler(hotelController.getHotels));
 
 // 獲取飯店詳情
 // router.get('/:id', asyncHandler(hotelController.getHotel));

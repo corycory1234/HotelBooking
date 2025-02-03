@@ -1,8 +1,8 @@
 import { BaseService } from "./base.service";
 import { db } from '../db';
 import { hotels, roomTypes } from '../db/schema';
-import { CreateHotelDTO } from '../types/hotel.types';
-import { eq } from 'drizzle-orm';
+import { CreateHotelDTO, PaginatedResponse, SearchHotelsParams } from '../types/hotel.types';
+import { and, eq, sql } from 'drizzle-orm';
 import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "../utils/s3";
 
@@ -317,6 +317,73 @@ export class HotelService extends BaseService {
 
         // 從 S3 刪除檔案
         await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
+    }
+
+    async searchHotels(params: SearchHotelsParams): Promise<PaginatedResponse<typeof hotels.$inferSelect>> {
+        try {
+            const page = Math.max(1, params.page);
+            const limit = Math.min(50, Math.max(1, params.limit)); // 確保在 1-50 之間
+            const offset = (page - 1) * limit;
+
+            let query = db.select().from(hotels);
+
+            // 建立搜尋條件
+            const conditions = [];
+
+            if (params.city?.trim()) {
+                conditions.push(sql`${hotels.city} ILIKE ${`%${params.city.trim()}%`}`);
+            }
+
+            if (params.minPrice && params.minPrice > 0) {
+                conditions.push(sql`CAST(${hotels.price} AS DECIMAL) >= ${params.minPrice}`);
+            }
+
+            if (params.maxPrice && params.maxPrice > 0) {
+                conditions.push(sql`CAST(${hotels.price} AS DECIMAL) <= ${params.maxPrice}`);
+            }
+
+            if (params.rating && params.rating > 0) {
+                conditions.push(sql`CAST(${hotels.rating} AS DECIMAL) >= ${params.rating}`);
+            }
+
+            if (params.searchQuery?.trim()) {
+                conditions.push(sql`(
+                    ${hotels.name} ILIKE ${`%${params.searchQuery.trim()}%`} OR 
+                    ${hotels.address} ILIKE ${`%${params.searchQuery.trim()}%`}
+                )`);
+            }
+
+            // 加入搜尋條件
+            if (conditions.length > 0) {
+                query = (query as any).where(sql`${and(...conditions)}`);
+            }
+
+            // 計算總數
+            const totalQuery = db.select({ count: sql<number>`count(*)` }).from(hotels);
+            if (conditions.length > 0) {
+                totalQuery.where(sql`${and(...conditions)}`);
+            }
+            const [{ count }] = await totalQuery;
+
+            // 加入分頁並執行查詢
+            const results = await query
+                .orderBy(hotels.createdAt)
+                .limit(limit)
+                .offset(offset);
+
+            const totalPages = Math.ceil(count / limit);
+
+            return {
+                data: results,
+                total: count,
+                page,
+                totalPages,
+                hasMore: page < totalPages
+            };
+        } catch (error) {
+            console.error('Search hotels error:', error);
+            throw new HotelServiceError('搜尋飯店失敗', 500);
+        }
     }
 }
 

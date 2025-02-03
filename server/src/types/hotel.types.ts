@@ -43,3 +43,21 @@ export interface Hotel {
   images: HotelImage[];
   reviews: HotelReview[];
 }
+
+export interface SearchHotelsParams {
+    page: number;          // 改為必填
+    limit: number;         // 改為必填
+    city?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    rating?: number;
+    searchQuery?: string;
+}
+
+export interface PaginatedResponse<T> {
+    data: T[];
+    total: number;
+    page: number;
+    totalPages: number;
+    hasMore: boolean;
+}

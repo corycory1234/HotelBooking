@@ -3,17 +3,40 @@ import { db } from '../db';
 import { hotels } from '../db/schema';
 import { eq } from 'drizzle-orm';
 import { ApiResponse } from '../utils/response';
-import { CreateHotelDTO } from '../types/hotel.types';
+import { CreateHotelDTO, SearchHotelsParams } from '../types/hotel.types';
 import { hotelService } from '../services/hotel.service';
 
 class HotelController {
     // 搜尋飯店列表
     async getHotels(req: Request, res: Response) {
         try {
-            const allHotels = await db.select().from(hotels);
-            res.json(ApiResponse.success(allHotels));
+            // 驗證必填參數
+            const page = parseInt(req.query.page as string);
+            const limit = parseInt(req.query.limit as string);
+
+            if (!page || !limit || isNaN(page) || isNaN(limit)) {
+                return res.status(400).json(
+                    ApiResponse.error("頁碼(page)和筆數(limit)為必填參數")
+                );
+            }
+
+            const searchParams: SearchHotelsParams = {
+                page,
+                limit,
+                city: req.query.city as string || undefined,
+                minPrice: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
+                maxPrice: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
+                rating: req.query.rating ? parseInt(req.query.rating as string) : undefined,
+                searchQuery: req.query.q as string || undefined
+            };
+
+            const results = await hotelService.searchHotels(searchParams);
+            res.json(ApiResponse.success(results));
         } catch (error) {
-            res.status(500).json(ApiResponse.error((error as Error).message));
+            console.error('Get hotels error:', error);
+            res.status(500).json(ApiResponse.error(
+                error instanceof Error ? error.message : '搜尋飯店失敗'
+            ));
         }
     }
 
