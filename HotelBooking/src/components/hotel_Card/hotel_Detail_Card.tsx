@@ -1,6 +1,6 @@
 'use client';  
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
-import { add_Hotel_Detail_Interface, add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail";
+import { add_Hotel_Detail_Interface, add_Hotel_Room_Type_Interface, add_Review_Type_Interface } from "@/types/add_Hotel_Detail";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import 'swiper/css';
@@ -148,12 +148,42 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
     dispatch(to_Empty_Heart_Hotel_Detail(hotel))
   }
 
-  // 12.
+  // 12. Redux - <form>搜尋數據
   const redux_Start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
   const redux_End_Date = useSelector((state: RootState) => state.formSearch.end_Date);
   const redux_Room = useSelector((state: RootState) => state.formSearch.room);
   const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
   const redux_Child = useSelector((state: RootState) => state.formSearch.child);
+
+  // 13. 旅客平均評價 - reduce累加, 再除旅客留言列表.length
+  const [review_Average_Rating, set_Review_Average_Rating] = useState<number>(0);
+  const average_Rating = the_Hotel ? (the_Hotel.review_List.reduce((accu, curr) => accu + (curr.traveler_Rating as number), 0) / the_Hotel.review_List.length).toFixed(1) : 0;
+  useEffect(() => {
+    set_Review_Average_Rating(+ average_Rating)
+  },[])
+
+  // 14. 旅客評價高低排序
+  const [new_Review_List, set_Review_List] = useState<add_Review_Type_Interface[] | null>(null);
+  const [select_Value, set_Select_Value] = useState<string>("");
+  const change_Select_Review_Rating = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const rating_Value = event.target.value;
+    set_Select_Value(rating_Value);
+    if(!the_Hotel?.review_List) return;
+    // 14.1 複製原始 the_Hotel.review_List 陣列, 主要是不去動到 原始 the_Hotel.review_List 的排序
+    const review_List_Copy = the_Hotel?.review_List ? [...the_Hotel.review_List] : [];
+
+    if(rating_Value === "ratingHigh") {
+      review_List_Copy.sort((a, b) => (b.traveler_Rating as number) - (a.traveler_Rating as number));
+    } else {
+      review_List_Copy.sort((a, b) => (a.traveler_Rating as number) - (b.traveler_Rating as number));
+    };
+
+    set_Review_List(review_List_Copy)
+  };
+  // 15. 渲染評論列表之陣列! 用三元去轉換, 一開始用props進來的 the_Hotel?.review_List, 
+  // 15.1 若 <select> 改變排序, 就用本地 new_Review_List
+  const review_List_Render: add_Review_Type_Interface[] = new_Review_List !== null ? new_Review_List : (the_Hotel?.review_List ?? [])
+  
 
   return <>
   {!show_Hotel_Detail_Card ? <Placeholder_Card></Placeholder_Card> 
@@ -549,7 +579,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 我的收藏 - 愛心 */}
 
         {/** 飯店名 */}
-        <h2 className="font-bold text-xl">{the_Hotel?.hotel_Name}</h2>
+        <h2 className="font-semibold text-3xl">{the_Hotel?.hotel_Name}</h2>
         {/** 飯店名 */}
 
         {/** 桌機PC - 飯店都市、飯店地圖 */}
@@ -626,7 +656,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** 桌機PC - 房型照片、各種房型資訊 */}
         <div className="flex flex-col gap-2">
-          <h2 className="font-bold">Explore Our Rooms</h2>
+          <h2 className="font-semibold text-2xl">Explore Our Rooms</h2>
           <p>{the_Hotel?.roomType_List.length} Room Types</p>
           
 
@@ -636,7 +666,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                   <div className="basis-1/4 flex flex-col" key={index}>
                     <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1)} [{item.bed_Type}] {item.smoke === "false" ? '[No Smoking]' : '[Smoking Room]'}</p>
 
-
+                    {/** 左邊卡片資訊 */}
                     <div className="flex flex-col gap-2">
                       {/** 上方房型大圖 */}
                       <div className="relative">
@@ -729,7 +759,6 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                     <div className="border-b border-softGray"></div>
                     
                     <div className="flex justify-between">
-
                       <div className="flex flex-col gap-2">
                         {/** 旅客幾人、住幾晚、幾間房 */}
                         <div className="flex justify-between items-end">
@@ -786,8 +815,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                       
                       </div>
 
+                      {/** Book Now 按鈕 */}
                       <div className="flex gap-2">
-                        {/** Book Now 按鈕 */}
                         <div className="flex items-center gap-2">
                           <div className="flex flex-col">
                             <p className="font-semibold">${item.room_Price}</p>
@@ -803,24 +832,81 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                           {/** 剩幾間房 */}
                           <button className="bg-primary text-white rounded px-4 py-2">Book Now</button>
                         </div>
-                        {/** Book Now 按鈕 */}
-                        
                       </div>
-
+                      {/** Book Now 按鈕 */}
                     </div>
+
+
+
                   </div>
                 {/** 右邊卡片資訊 */}
 
-
-
-
-                </div>
-                
+                </div>                
               })}
           </div>
         </div>
 
 
+
+        {/** 旅客評價留言 */}
+        <div className="flex justify-between">
+
+          {/** 左邊平均評價星星 */}
+          <div className="basis-1/4 flex flex-col gap-2">
+            <h2 className="font-semibold text-2xl">Rating and Reviews</h2>
+            <div className="flex items-center gap-2">
+              <p className="bg-blue rounded px-4 py-1.5 text-white">{the_Hotel?.totalRating}</p>
+              <div className="flex flex-col justify-center">
+                <p className="font-semibold">{(the_Hotel?.totalRating as number) <=4 ? 'Terrible' : 'Excellent'}</p>
+                <p className="text-gray text-sm">{the_Hotel?.review_List.length} reviews from guests</p>
+              </div>
+            </div>
+          </div>
+          {/** 左邊平均評價星星 */}
+          
+          {/** 右邊留言 */}
+            <div className="basis-3/4 flex flex-col gap-2">
+              <div className="">
+                <select className="border border-primary rounded p-2 text-primary" 
+                  value={select_Value} onChange={change_Select_Review_Rating}>
+                  <option value="ratingHigh">Rating High</option>
+                  <option value="ratingLow">Rating Low</option>
+                </select>
+              </div>
+              {review_List_Render.map((review) => {
+                return <>
+                  <div className="flex flex-col gap-2 border border-softGray rounded p-4" key={review.travelerId}>
+                    <div className="flex justify-between">
+                      <div className="flex gap-0.5">
+                        <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
+                        <p className="min-w-16">{review.travelerName}</p>
+                        <p>｜</p>
+                        <OtherSVG name="calendar" className="w-4 h-auto"></OtherSVG>
+                        <p>{review.date}</p>
+                      </div>
+
+                      {/** 旅客評價幾星 */}
+                      <StarRating ranking={review.traveler_Rating as number}></StarRating>
+                      {/** 旅客評價幾星 */}
+                    </div>
+
+                    {/** 旅客留言、飯店回覆 */}
+                      <p className="bg-[#F5F5F5] rounded p-2 text-xs leading-7">{review.comment}</p>
+                      <div className="flex flex-col border border-black rounded p-2">
+                        <div className="flex gap-2">
+                          <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
+                          <p>Reply from {the_Hotel?.hotel_Name}</p>
+                        </div>
+                        <p className="text-xs leading-7">{review.reply}</p>
+                      </div>
+                    {/** 旅客留言、飯店回覆 */}
+                  </div>
+                </>
+              })}
+            </div>
+          {/** 右邊留言 */}
+        </div>
+        {/** 旅客評價留言 */}
 
 
         

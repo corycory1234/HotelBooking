@@ -172,24 +172,24 @@
         "travelerName": "Rose",
         "date": "2024-12-25",
         "traveler_Rating": 4,
-        "comment": "“This is A great hotel to live in, but it doesn't have AC”",
-        "reply": ""  
+        "comment": "“This is A great hotel to live in, but it doesn't have AC. This is A great hotel to live in, but it doesn't have AC.This is A great hotel to live in, but it doesn't have AC”",
+        "reply": "Thanks for you compliment. We will send you a voucher for next stay."  
       },
       { 
         "travelerId": "2",
         "travelerName": "Lorem",
         "date": "2024-09-25",
         "traveler_Rating": 4,
-        "comment": "“This is A suck hotel to live in, but it doesn't have AC”",
-        "reply": ""  
+        "comment": "“This is A suck hotel to live in, but it doesn't have AC. This is A suck hotel to live in, but it doesn't have AC. This is A suck hotel to live in, but it doesn't have AC. This is A suck hotel to live in, but it doesn't have AC”",
+        "reply": "You are impolite in leaving messages here. We will block you in blacklist."  
       },
       { 
         "travelerId": "3",
         "travelerName": "Nick",
         "date": "2024-08-25",
         "traveler_Rating": 2,
-        "comment": "“This is a hotel on average to live in, but it doesn't have AC”",
-        "reply": ""  
+        "comment": "“This is a hotel on average to live in, but it doesn't have AC. his is a hotel on average to live in, but it doesn't have AC. his is a hotel on average to live in, but it doesn't have AC.his is a hotel on average to live in, but it doesn't have AC.”",
+        "reply": "Thanks for you comment. We will improve our service next time."  
       }
     ],
     "address": "300/1 Charoen Krung Road, Sathorn , Bangkok Riverside, Bangkok, Thailand",
