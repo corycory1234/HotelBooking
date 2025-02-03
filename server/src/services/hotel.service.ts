@@ -3,6 +3,8 @@ import { db } from '../db';
 import { hotels, roomTypes } from '../db/schema';
 import { CreateHotelDTO } from '../types/hotel.types';
 import { eq } from 'drizzle-orm';
+import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "../utils/s3";
 
 class HotelServiceError extends Error {
     constructor(message: string, public code: number = 500) {
@@ -14,6 +16,10 @@ class HotelServiceError extends Error {
 export class HotelService extends BaseService {
     async createHotel(hotelData: CreateHotelDTO, token: string) {
         try {
+            if (!token) {
+                throw new HotelServiceError('未提供認證信息', 401);
+            }
+
             const {
                 data: { user },
                 error: authError,
@@ -123,6 +129,194 @@ export class HotelService extends BaseService {
         }
 
         return { isValid: true };
+    }
+
+    // 清理檔案名稱
+    private cleanFileName(fileName: string): string {
+        return fileName
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z0-9.-]/g, '-')
+            .replace(/-{2,}/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+
+    // 通用的上傳圖片方法
+    private async uploadImages(files: Express.Multer.File[], path: string) {
+        return Promise.all(
+            files.map(async (file) => {
+                const cleanedFileName = this.cleanFileName(file.originalname);
+                const fileName = `${Date.now()}-${cleanedFileName}`;
+                const filePath = `${path}/${fileName}`;
+
+                const command = new PutObjectCommand({
+                    Bucket: process.env.S3_BUCKET_NAME!,
+                    Key: filePath,
+                    Body: file.buffer,
+                    ContentType: file.mimetype,
+                    ACL: 'public-read'
+                });
+
+                await s3Client.send(command);
+                return {
+                    url: process.env.S3_DOMAIN + filePath
+                };
+            })
+        );
+    }
+
+    // 從 S3 刪除檔案
+    private async deleteFromS3(fileUrl: string) {
+        const key = fileUrl.replace(process.env.S3_DOMAIN!, '');
+        const command = new DeleteObjectCommand({
+            Bucket: process.env.S3_BUCKET_NAME!,
+            Key: key
+        });
+        await s3Client.send(command);
+    }
+
+    // 上傳飯店照片
+    async uploadHotelImages(hotelId: string, files: Express.Multer.File[], token: string) {
+        const { data: { user }, error: authError } = await this.supabase.auth.getUser(token);
+        
+        if (authError || !user) {
+            throw new HotelServiceError('未授權的存取', 401);
+        }
+
+        const hotel = await db
+            .select({ images: hotels.images })
+            .from(hotels)
+            .where(eq(hotels.id, hotelId))
+            .then(rows => rows[0]);
+
+        if (!hotel) {
+            throw new HotelServiceError('飯店不存在', 404);
+        }
+
+        const uploadResults = await this.uploadImages(files, `hotels/${hotelId}`);
+        const newImages = [...(hotel.images || []), ...uploadResults];
+
+        await db
+            .update(hotels)
+            .set({
+                images: newImages,
+                updatedAt: new Date()
+            })
+            .where(eq(hotels.id, hotelId));
+
+        return uploadResults;
+    }
+
+    // 刪除飯店照片
+    async deleteHotelImages(hotelId: string, imageUrls: string[], token: string) {
+        const { data: { user }, error: authError } = await this.supabase.auth.getUser(token);
+        
+        if (authError || !user) {
+            throw new HotelServiceError('未授權的存取', 401);
+        }
+
+        const hotel = await db
+            .select()
+            .from(hotels)
+            .where(eq(hotels.id, hotelId))
+            .then(rows => rows[0]);
+
+        if (!hotel) {
+            throw new HotelServiceError('飯店不存在', 404);
+        }
+
+        if (hotel.ownerId !== user.id) {
+            throw new HotelServiceError('無權限刪除照片', 403);
+        }
+
+        // 過濾出要保留的照片
+        const updatedImages = (hotel.images || []).filter(
+            (img: { url: string }) => !imageUrls.includes(img.url)
+        );
+
+        // 更新資料庫
+        await db
+            .update(hotels)
+            .set({
+                images: updatedImages,
+                updatedAt: new Date()
+            })
+            .where(eq(hotels.id, hotelId));
+
+        // 從 S3 刪除檔案
+        await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
+    }
+
+    // 上傳房型照片
+    async uploadRoomTypeImages(roomTypeId: string, files: Express.Multer.File[], token: string) {
+        const { data: { user }, error: authError } = await this.supabase.auth.getUser(token);
+        
+        if (authError || !user) {
+            throw new HotelServiceError('未授權的存取', 401);
+        }
+
+        const roomType = await db
+            .select()
+            .from(roomTypes)
+            .where(eq(roomTypes.id, roomTypeId))
+            .then(rows => rows[0]);
+
+        if (!roomType) {
+            throw new HotelServiceError('房型不存在', 404);
+        }
+
+        const uploadResults = await this.uploadImages(files, `room-types/${roomTypeId}`);
+        const newImages = [...(roomType.images || []), ...uploadResults];
+
+        await db
+            .update(roomTypes)
+            .set({
+                images: newImages,
+                updatedAt: new Date()
+            })
+            .where(eq(roomTypes.id, roomTypeId));
+
+        return uploadResults;
+    }
+
+    // 刪除房型照片
+    async deleteRoomTypeImages(roomTypeId: string, imageUrls: string[], token: string) {
+        const { data: { user }, error: authError } = await this.supabase.auth.getUser(token);
+        
+        if (authError || !user) {
+            throw new HotelServiceError('未授權的存取', 401);
+        }
+
+        const roomType = await db
+            .select()
+            .from(roomTypes)
+            .where(eq(roomTypes.id, roomTypeId))
+            .then(rows => rows[0]);
+
+        if (!roomType) {
+            throw new HotelServiceError('房型不存在', 404);
+        }
+
+        if (roomType.createdBy !== user.id) {
+            throw new HotelServiceError('無權限刪除照片', 403);
+        }
+
+        // 過濾出要保留的照片
+        const updatedImages = (roomType.images || []).filter(
+            (img: { url: string }) => !imageUrls.includes(img.url)
+        );
+
+        // 更新資料庫
+        await db
+            .update(roomTypes)
+            .set({
+                images: updatedImages,
+                updatedAt: new Date()
+            })
+            .where(eq(roomTypes.id, roomTypeId));
+
+        // 從 S3 刪除檔案
+        await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
     }
 }
 

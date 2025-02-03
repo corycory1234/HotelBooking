@@ -44,8 +44,22 @@ router.post(
 router.post(
     '/:hotelId/images',
     authMiddleware,
-    upload.array('images', 10), // 最多一次上傳 10 張
+    upload.array('images', 5), // 最多一次上傳 5 張
     asyncHandler(hotelController.uploadHotelImages)
+);
+
+// 刪除飯店照片
+router.delete(
+    '/:hotelId/images',
+    authMiddleware,
+    asyncHandler(hotelController.deleteHotelImages)
+);
+
+// 刪除房型照片
+router.delete(
+    '/room-types/:roomTypeId/images',
+    authMiddleware,
+    asyncHandler(hotelController.deleteRoomTypeImages)
 );
 
 export default router;
