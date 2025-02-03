@@ -15,8 +15,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./users"), exports);
-// export * from './hotels';
-// export * from './rooms';
+__exportStar(require("./hotels"), exports);
+__exportStar(require("./rooms"), exports);
 // export * from './bookings';
 // export * from './reviews';
 // export * from './favorites';

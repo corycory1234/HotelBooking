@@ -36,17 +36,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.db = exports.supabase = void 0;
+exports.db = void 0;
 const postgres_js_1 = require("drizzle-orm/postgres-js");
 const postgres_1 = __importDefault(require("postgres"));
-const supabase_js_1 = require("@supabase/supabase-js");
 const schema = __importStar(require("./schema"));
 if (!process.env.DATABASE_URL) {
     throw new Error('DATABASE_URL is required');
 }
-// 創建 Supabase 客戶端
-exports.supabase = (0, supabase_js_1.createClient)(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-// 創建 Postgres 連線
+// 資料庫相關設定
 const queryClient = (0, postgres_1.default)(process.env.DATABASE_URL);
-// 創建 Drizzle 實例
 exports.db = (0, postgres_js_1.drizzle)(queryClient, { schema });
