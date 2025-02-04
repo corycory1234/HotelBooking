@@ -1,11 +1,11 @@
 'use client';
 import { useRouter, useParams, useSearchParams } from "next/navigation";
-import hotel_List from "@/fakeData/hotel_List.json";
+// import hotel_List from "@/fakeData/hotel_List.json";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { useState, useEffect } from "react";
 import Modal from "@/components/modal/modal";
-import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
+// import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
 import Hotel_Detail_Card from "@/components/hotel_Card/hotel_Detail_Card";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";

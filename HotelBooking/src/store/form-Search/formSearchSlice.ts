@@ -2,11 +2,31 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { DateValueType } from "react-tailwindcss-datepicker";
 import { Form_Search_Interface } from "@/types/form_Search";
 
+// 1.「今天」初始值
+const getToday = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = ("0" + (now.getMonth() + 1)).slice(-2);
+  const day = ("0" + now.getDate()).slice(-2);
+  return `${year}-${month}-${day}`; // "YYYY-MM-DD"
+};
+
+// 2.「明天」初始值
+const getTomorrow = () => {
+  const now = new Date();
+  // 2.1 加一天
+  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  const year = tomorrow.getFullYear();
+  const month = ("0" + (tomorrow.getMonth() + 1)).slice(-2);
+  const day = ("0" + tomorrow.getDate()).slice(-2);
+  return `${year}-${month}-${day}`;
+};
+
 const initialState: Form_Search_Interface = {
   keyword: "",
-  dateRange: null,
-  start_Date:  null,
-  end_Date:  null,
+  dateRange: `${getToday()} to ${getTomorrow()}`,
+  start_Date:  getToday(),
+  end_Date:  getTomorrow(),
   room: 1,
   adult: 1,
   child: 0,

@@ -617,8 +617,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 取消政策 */}
         <div className="flex flex-col gap-2">
           <p className="font-semibold">Cancellation Policy</p>
-          {the_Hotel?.cancellation_Policy?.split(".").map((item) => {
-            return <div className="flex flex-col gap-2" key={item}>
+          {the_Hotel?.cancellation_Policy?.split(".").map((item, index) => {
+            return <div className="flex flex-col gap-2" key={index}>
                 <p>{item}</p>
             </div>
           })}
@@ -628,8 +628,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 推薦景點 */}
         <div className="flex flex-col gap-2">
           <p className="font-semibold">Top Recommendations</p>
-          {the_Hotel?.recommendation?.split(", ").map((recommendation) => {
-            return <div className="flex" key={recommendation}> {recommendation}</div>
+          {the_Hotel?.recommendation?.split(", ").map((recommendation, index) => {
+            return <div className="flex" key={index}> {recommendation}</div>
           })}
         </div>
         {/** 推薦景點 */}
@@ -661,14 +661,13 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           ${is_Scrolled === true ? 'fixed top-[136px] z-20 w-full left-0 px-20' : ''}`}>
             
             {tab_List.map((tab) => {
-              return <>
-              <li key={tab.id}>
+              return <li key={tab.id}>
                 <a href={`#${tab.id}`} className={`cursor-pointer font-semibold text-sm
                   ${tab.id === activeSection ? 'text-primary' : ''}`}>
                   {tab.label}
                 </a>
               </li>
-              </>
+
             })}
           </ul>
         {/** Tab標籤 - Anchor錨點滑動 */}
@@ -779,9 +778,9 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           
 
           <div className="flex flex-col gap-2">
-              {the_Hotel?.roomType_List.map((item, index) => {
-                return <div className="flex gap-2">
-                  <div className="basis-1/4 flex flex-col" key={index}>
+              {the_Hotel?.roomType_List.map((item) => {
+                return <div className="flex gap-2" key={item.roomType_Id}>
+                  <div className="basis-1/4 flex flex-col">
                     <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1)} [{item.bed_Type}] {item.smoke === "false" ? '[No Smoking]' : '[Smoking Room]'}</p>
 
                     {/** 左邊卡片資訊 */}
@@ -864,7 +863,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                             <p className="font-semibold">Room Amenities</p>
                             <div className="flex gap-2 flex-wrap">
                               {item.amenity_List?.map((amenity) => {
-                                return <div className="flex gap-2">
+                                return <div className="flex gap-2" key={amenity}>
                                     <OtherSVG name={amenity} className="w-4 h-auto"></OtherSVG>
                                     <p>{amenity}</p>
                                   </div>
@@ -1005,8 +1004,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                 </select>
               </div>
               {review_List_Render.map((review) => {
-                return <>
-                  <div className="flex flex-col gap-2 border border-softGray rounded p-4" key={review.travelerId}>
+                return <div className="flex flex-col gap-2 border border-softGray rounded p-4" key={review.travelerId}>
                     <div className="flex justify-between">
                       <div className="flex gap-0.5">
                         <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
@@ -1032,7 +1030,6 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                       </div>
                     {/** 旅客留言、飯店回覆 */}
                   </div>
-                </>
               })}
             </div>
           {/** 右邊留言 */}
@@ -1137,7 +1134,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           <div className="flex flex-col gap-2 border border-softGray rounded p-2">
             {the_Hotel?.cancellation_Policy?.split(".").map((cancel, index) => {
               return cancel !== "" &&
-              <div className="flex gap-2" key={cancel}>
+              <div className="flex gap-2" key={index}>
                   <OtherSVG name="policy" className="w-4 h-auto"></OtherSVG>
                   <p>{cancel}</p>
               </div>  
@@ -1150,8 +1147,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <div className="flex flex-col gap-2 scroll-m-28" >
           <h2 className="font-semibold text-2xl">Recommended Spots</h2>
           <div className="flex flex-col gap-2">
-            {the_Hotel?.recommendation?.split(",").map((spot) => {
-              return <div className="flex gap-2">
+            {the_Hotel?.recommendation?.split(",").map((spot, index) => {
+              return <div className="flex gap-2" key={index}>
                 <OtherSVG name="spot" className="w-4 h-auto"></OtherSVG>
                 <p>{spot}</p>
               </div>

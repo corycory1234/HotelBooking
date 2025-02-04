@@ -45,21 +45,21 @@ export default function HotelList () {
   // },[timestamp])
 
   // 3. Skeleton動畫 - 佔位符
-  const Placeholder_Card = () => {
-    return <div className="flex flex-col gap-2 lg:hidden">
-      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
-      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
-      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+  // const Placeholder_Card = () => {
+  //   return <div className="flex flex-col gap-2 lg:hidden">
+  //     <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+  //     <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+  //     <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
 
-      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
-      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
-      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+  //     <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+  //     <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+  //     <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
 
-      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
-      <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
-      <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
-    </div>
-  }
+  //     <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+  //     <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
+  //     <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
+  //   </div>
+  // }
 
   // 5. Redux - 飯店列表
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List)

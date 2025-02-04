@@ -78,7 +78,7 @@ export default function DateRangePicker () {
     // 測試入住日 退房日
     const start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
     const end_Date = useSelector((state: RootState) => state.formSearch.end_Date);
-    console.log(start_Date, end_Date, "測試中");
+    console.log(start_Date, end_Date, storedDateRange, "查看Redux 儲存日期");
 
     return (
       // 1. 原始寫法
