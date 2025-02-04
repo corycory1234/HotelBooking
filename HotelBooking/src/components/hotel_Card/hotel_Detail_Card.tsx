@@ -63,40 +63,67 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
     set_Show_Hotel_Detail_Card(false);
     const timer = setTimeout(() => {
       set_Show_Hotel_Detail_Card(true);
-    },2000);
+    }, 2000);
     return () => clearTimeout(timer);
   },[searchParams.get('timestamp')])
 
   // 6. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
-    return <div className="flex flex-col gap-2 p-2">
-      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
-      <h3 className="animate-pulse bg-softGray w-full h-6 rounded"></h3>
-      <div className="flex gap-2">
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-      </div>
+    return <>
+        <div className="flex flex-col gap-2 p-2 lg:hidden">
+          <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+          <h3 className="animate-pulse bg-softGray w-full h-6 rounded"></h3>
+          <div className="flex gap-2">
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+          </div>
 
-      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
-      <h3 className="animate-pulse bg-softGray w-full h-6 rounded"></h3>
-      <div className="flex gap-2">
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-      </div>
+          <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+          <h3 className="animate-pulse bg-softGray w-full h-6 rounded"></h3>
+          <div className="flex gap-2">
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+          </div>
 
-      <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
-      <h3 className="animate-pulse bg-softGray w-full h-6 rounded"></h3>
-      <div className="flex gap-2">
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
-        <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+          <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
+          <h3 className="animate-pulse bg-softGray w-full h-6 rounded"></h3>
+          <div className="flex gap-2">
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+            <h3 className="animate-pulse bg-softGray w-1/4 h-6 rounded"></h3>
+          </div>
+        </div>
+
+      {/** 桌機 - Skeleton動畫 */}
+      <div className="hidden lg:flex flex-col gap-4 px-20 py-4">
+        {/** 照片牆 */}
+        <div className="grid grid-cols-5 gap-2 w-full mt-[136px] h-[300px]">
+          <div className="col-span-2 bg-softGray w-full h-full rounded animate-pulse"></div>
+          <div className="grid grid-rows-2 gap-2">
+            <div className="bg-softGray w-full h-full rounded animate-pulse"></div>
+            <div className="bg-softGray w-full h-full rounded animate-pulse"></div>
+          </div>
+          <div className="grid grid-rows-2 gap-2 ">
+            <div className="bg-softGray w-full h-full rounded animate-pulse"></div>
+            <div className="bg-softGray w-full h-full rounded animate-pulse"></div>
+          </div>
+          <div className="grid grid-rows-2 gap-2">
+            <div className="bg-softGray w-full h-full rounded animate-pulse"></div>
+            <div className="bg-softGray w-full h-full rounded animate-pulse"></div>
+          </div>
+        </div>
+        {/** 照片牆 */}
+
+        <div className="flex bg-softGray w-full h-7 rounded animate-pulse"></div>
+        <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
       </div>
-    </div>
+      {/** 桌機 - Skeleton動畫 */}
+    </>
   };
 
   // 7. 透過Swiper, 打開「飯店照片彈窗」
@@ -214,7 +241,50 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
     // 18.1 組件卸載, 離開頁面, 清理回收機制, 防止內存外洩
     return ()=> window.removeEventListener('scroll', scroll_Tab);  
   })
-  
+
+  // 19. 滑動至<section>高度區域, 皆會高亮
+  const tab_List = [
+    { label: "Overview", id: "overview" },
+    { label: "Rooms", id: "rooms" },
+    { label: "Reviews", id: "reviews" },
+    { label: "Map", id: "map" },
+    { label: "Cancellation", id: "cancellation" },
+    // { label: "Spots", id: "spots" },
+  ]
+  // 19.1 預設 overview 高亮
+  const [activeSection, set_ActiveSection] = useState<string>("overview");
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+
+    const observer_Options = {
+      root: null,
+      rootMargin: '0px',
+      // 當 50% 的區塊進入 viewport 時就觸發回呼
+      threshold: 0.5,
+    };
+
+    const observer_Callback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting) {
+          set_ActiveSection(entry.target.id)
+        }
+      })
+    };
+
+    const observer = new IntersectionObserver(observer_Callback, observer_Options);
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    // 清除監聽
+    return () => {
+      sections.forEach((section) => {
+        observer.unobserve(section)
+      })
+    };
+  },[show_Hotel_Detail_Card])
+
+
 
   return <>
   {!show_Hotel_Detail_Card ? <Placeholder_Card></Placeholder_Card> 
@@ -587,15 +657,20 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       <div className="hidden lg:flex flex-col px-20 gap-4 py-4">
 
         {/** Tab標籤 - Anchor錨點滑動 */}
-          <div className={`border border-softGray rounded p-2 flex gap-2 bg-white
-            ${is_Scrolled === true ? 'sticky top-[136px] z-20' : ''}`}>
-            <a href="#overview" className="cursor-pointer font-semibold text-sm">Overview</a>
-            <a href="#rooms" className="cursor-pointer font-semibold text-sm">Rooms</a>
-            <a href="#reviews" className="cursor-pointer font-semibold text-sm">Reviews</a>
-            <a href="#map" className="cursor-pointer font-semibold text-sm">Map</a>
-            <a href="#cancellation" className="cursor-pointer font-semibold text-sm">Cancellation</a>
-            <a href="#spots" className="cursor-pointer font-semibold text-sm">Spots</a>
-          </div>
+          <ul className={`border border-softGray rounded p-2 flex gap-4 bg-white
+          ${is_Scrolled === true ? 'fixed top-[136px] z-20 w-full left-0 px-20' : ''}`}>
+            
+            {tab_List.map((tab) => {
+              return <>
+              <li key={tab.id}>
+                <a href={`#${tab.id}`} className={`cursor-pointer font-semibold text-sm
+                  ${tab.id === activeSection ? 'text-primary' : ''}`}>
+                  {tab.label}
+                </a>
+              </li>
+              </>
+            })}
+          </ul>
         {/** Tab標籤 - Anchor錨點滑動 */}
 
         {/** 我的收藏 - 愛心 */}
@@ -1072,7 +1147,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 桌機PC - 取消政策 */}
 
 
-        <section className="flex flex-col gap-2 scroll-m-28" id="spots">
+        <div className="flex flex-col gap-2 scroll-m-28" >
           <h2 className="font-semibold text-2xl">Recommended Spots</h2>
           <div className="flex flex-col gap-2">
             {the_Hotel?.recommendation?.split(",").map((spot) => {
@@ -1082,7 +1157,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               </div>
             })}
           </div>
-        </section>
+        </div>
         
       </div>
     {/** 桌機CP - 房型 */}
