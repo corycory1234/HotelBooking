@@ -24,7 +24,7 @@ export default function Room_Info () {
   return <>
   
   {/** 總平均評價、飯店名、飯店地址、入住退房、幾間房、幾晚、住幾人 */}
-      <div className="flex flex-col pb-4 border border-softGray rounded p-4 gap-4">
+      <div className="flex flex-col pb-4 border border-softGray rounded p-4 gap-4 lg:hidden">
         <div className="flex justify-between flex-wrap">
           <p className="font-bold text-xl">{redux_Hotel_Detail.hotel_Name}</p>
           <div className="flex items-center gap-x-1">

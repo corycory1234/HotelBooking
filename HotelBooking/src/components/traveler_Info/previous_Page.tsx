@@ -5,7 +5,7 @@ const router = useRouter();
 
   return <>
     {/* 返回上頁按鈕 */}
-    <div className="bg-primary relative">
+    <div className="bg-primary relative lg:hidden">
     <div className="flex flex-col py-2">
       <p className="text-center text-white">Payment</p>
     </div>

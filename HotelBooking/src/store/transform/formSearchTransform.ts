@@ -120,7 +120,7 @@ const formSearch_Transform = createTransform(
       room: parseNumberField(outboundState.room),
       adult: parseNumberField(outboundState.adult),
       child: parseNumberField(outboundState.child),
-      // rangeSlider: parseNumberField(outboundState.rangeSlider),
+      rangeSlider: parseNumberField(outboundState.rangeSlider),
       rating: parseNumberArray(outboundState.rating),
       bedType: parseStringArray(outboundState.bedType),
       facility: parseStringArray(outboundState.facility),

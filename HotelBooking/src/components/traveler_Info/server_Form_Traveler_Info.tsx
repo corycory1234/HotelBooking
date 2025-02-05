@@ -94,7 +94,7 @@ export default function Server_Form_Traveler_Info() {
 
   return <>
   <Toaster></Toaster>
-  <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-2 p-4">
+  <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-2 p-4 lg:hidden">
     <div className="flex flex-col mb-32">
 
     <label htmlFor="name" className="text-gray">Name</label>
