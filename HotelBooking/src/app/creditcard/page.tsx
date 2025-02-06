@@ -12,6 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import StarRating from "@/components/starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
+import Offer_List_Json from "@/fakeData/offer_List.json";
 
 
 // 0. 三家信用卡
@@ -140,6 +141,9 @@ export default function CreditCard() {
   const name = sessionStorage.getItem("name")
   const surname = sessionStorage.getItem("surname");
   const email = sessionStorage.getItem("email");
+
+  // 12 匹配優惠代碼
+  const offer = Offer_List_Json.find((item) => item.offer_Id === redux_The_Hotel.offer_Id);
 
   return <div>
     {/** 回上一頁 */}
@@ -381,13 +385,13 @@ export default function CreditCard() {
                 <p className="font-bold">{"+" + Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0))}</p>
               </div>
               <div className="flex justify-between">
-                <p className="text-sm font-semibold">Black Friday Offer</p>
-                <p className="font-bold">-$500</p>
+                <p className="text-sm font-semibold">{offer?.offer_Name} Offer</p>
+                <p className="font-bold">{offer?.offer_Price as number * 100}% OFF</p>
               </div>
               <div className="border-b-2 border-dashed border-softGray"></div>
               <div className="flex justify-between">
                 <p className="text-sm font-semibold">Total Amount</p>
-                <p className="font-bold text-customRed">{redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)) - 500) }</p>
+                <p className="font-bold text-customRed">{(redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }</p>
               </div>
             </div>
             {/* 所有金額統計 */}

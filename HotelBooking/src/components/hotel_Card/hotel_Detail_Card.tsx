@@ -184,7 +184,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
   // 13. 旅客平均評價 - reduce累加, 再除旅客留言列表.length
   const [review_Average_Rating, set_Review_Average_Rating] = useState<number>(0);
-  const average_Rating = the_Hotel ? (the_Hotel.review_List.reduce((accu, curr) => accu + (curr.traveler_Rating as number), 0) / the_Hotel.review_List.length).toFixed(1) : 0;
+  const average_Rating = the_Hotel?.review_List ? (the_Hotel.review_List.reduce((accu, curr) => accu + (curr.traveler_Rating as number), 0) / the_Hotel.review_List.length).toFixed(1) : 0;
   useEffect(() => {
     set_Review_Average_Rating(+ average_Rating)
   },[])

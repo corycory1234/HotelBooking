@@ -190,12 +190,21 @@ export default function Traveler_Info () {
                     </label>
                 </div>
 
-                <label className="flex flex-col justify-center text-gray">
-                  Email Address
-                  <input type="text" id="email" name="email" className="rounded border border-softGray p-1"
-                    value={email} onChange={(event) => handle_Change(event)}/>
-                  <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
-                </label>
+                <div className="flex justify-center items-center gap-2">
+                  <label className="basis-1/2 flex flex-col justify-center text-gray">
+                    Email Address
+                    <input type="text" id="email" name="email" className="rounded border border-softGray p-1"
+                      value={email} onChange={(event) => handle_Change(event)}/>
+                    <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
+                  </label>
+
+                  <label className="basis-1/2 flex flex-col justify-center text-gray">
+                    Offer Code
+                    <input type="text" id="offer" name="offer" className="rounded border border-softGray p-1"
+                      value={email} onChange={(event) => handle_Change(event)}/>
+                    {/* <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p> */}
+                  </label>
+                </div>
               </div>
 
               <div className="border-t border-softGray"></div>
