@@ -6,7 +6,7 @@ import Swiper_Hotel_Detail from "@/components/swiper_Hotel_Detail/swiper_Hotel_D
 import Previous_Page from "./previous_Page";
 import Room_Info from "./room_Info";
 import Server_Form_Traveler_Info from "@/components/traveler_Info/server_Form_Traveler_Info";
-import { z } from "zod";
+import { set, z } from "zod";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { sleep } from "@/utils/sleep";
@@ -61,6 +61,22 @@ export default function Traveler_Info () {
 
   // 6. 拿取Redux - 預定房型之數據
   // const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room)
+  const [name, set_Name] = useState<string>("");
+  const [surname, set_Surname] = useState<string>("");
+  const [email, set_Email] = useState<string>("");
+  const handle_Change = ((event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.id, event.target.value);
+    if(event.target.id === "name") {
+      set_Name(event.target.value);
+      sessionStorage.setItem("name", event.target.value);
+    } else if (event.target.id === "surname") {
+      set_Surname(event.target.value);
+      sessionStorage.setItem("surname", event.target.value);
+    } else {
+      set_Email(event.target.value);
+      sessionStorage.setItem("email", event.target.value);
+    }
+  })
 
   // 7. 送出旅客<form>數據 
   const submit_Traveler_Info = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -140,19 +156,20 @@ export default function Traveler_Info () {
 
             <Toaster></Toaster>
             <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-4 p-4 border border-softGray rounded">
-              <p className="font-semibold text-sm">Pleasae Type Your Information</p>
+              <p className="font-semibold">Please Type Your Information</p>
               <div className="border-b border-softGray"></div>
               <div className="flex flex-col gap-4">
 
                 <div className="flex justify-center items-center gap-2">
                   <label className="basis-1/2 flex flex-col text-gray">
                     Name
-                    <input type="text" id="name" name="name" className="rounded border border-softGray p-1"/>
+                    <input type="text" id="name" name="name" className="rounded border border-softGray p-1" value={name} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
                   </label>
                   <label className="basis-1/2 flex flex-col text-gray">
                     Surname
-                    <input type="text" id="surname" name="surname" className="rounded border border-softGray p-1"/>
+                    <input type="text" id="surname" name="surname" className="rounded border border-softGray p-1"
+                      value={surname} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.surnameError}</p>
                   </label>
                 </div>
@@ -175,7 +192,8 @@ export default function Traveler_Info () {
 
                 <label className="flex flex-col justify-center text-gray">
                   Email Address
-                  <input type="text" id="email" name="email" className="rounded border border-softGray p-1"/>
+                  <input type="text" id="email" name="email" className="rounded border border-softGray p-1"
+                    value={email} onChange={(event) => handle_Change(event)}/>
                   <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
                 </label>
               </div>
@@ -231,7 +249,7 @@ export default function Traveler_Info () {
           
           
           {/** 右邊訂房資訊 */}
-          <div className="basis-1/3 flex flex-col gap-2">
+          <div className="basis-1/3 flex flex-col gap-2 sticky h-fit top-[70px]">
             {/** 房型圖片、總平均評價 */}
             <div className="flex gap-2">
               <img className="w-1/3 object-cover rounded" src={redux_Booked_Room.roomType_Image_List[0].url} alt={redux_Booked_Room.roomType_Image_List[0].description}/>

@@ -216,7 +216,7 @@ export default function Form_Search_Pc () {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2 lg:top-2 right-2 text-primary">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
         </svg>
-        <button className="w-full py-2 px-4 lg:pt-1 rounded outline-none border border-gray text-left bg-white lg:h-[44px]"
+        <button className="w-full py-2 px-4 lg:pt-1 lg:flex lg:gap-2 rounded outline-none border border-gray text-left bg-white lg:h-[44px]"
           onClick={toggle_ShowDropDown}
           type="button">
           <p className="lg:hidden">
@@ -224,7 +224,7 @@ export default function Form_Search_Pc () {
           </p>
 
           <div className="hidden lg:flex lg:flex-col lg:text-[13px]">
-            <div className="lg:flex lg:gap-2">
+            <div className="lg:flex lg:gap-1">
               <p>{adult} Adult,</p>
               <p>{child} Child</p>
             </div>
@@ -302,7 +302,7 @@ export default function Form_Search_Pc () {
 
 {/** Submit 搜尋送出按鈕 */}
     <div className="lg:basis-1/12">
-      <button className="bg-primary text-white rounded w-full py-2 px-4 lg:mx-auto lg:h-[44px]">Search</button>
+      <button className="bg-primary text-white rounded w-full py-1 px-4 lg:mx-auto lg:h-[44px]">Search</button>
     </div>
 {/** Submit 搜尋送出按鈕 */}
 

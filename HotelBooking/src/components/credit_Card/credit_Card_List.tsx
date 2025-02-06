@@ -9,7 +9,7 @@ export default function Credit_Card_List () {
   // 2. 各家信用卡 number, 對照 信用卡陣列之索引值, 以便高亮 
   const [card_Index, set_Card_Index] = useState(0);
 
-  return <div className="flex flex-col p-4 gap-4 customized-bg-gradient">
+  return <div className="flex flex-col p-4 gap-4 customized-bg-gradient lg:hidden">
     <h2 className="font-semibold">Select Payment Method</h2>
 
     <div className="flex gap-4 items-center">

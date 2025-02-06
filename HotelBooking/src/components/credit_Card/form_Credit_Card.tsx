@@ -131,8 +131,8 @@ export default function Form_Credit_Card () {
   
   }
 
-  return <div className="bg-primary rounded-t-3xl p-4">
-          <Toaster></Toaster>
+  return <div className="bg-primary rounded-t-3xl p-4 lg:hidden">
+    <Toaster></Toaster>
     
     <form onSubmit={(event) => pay(event)} className="flex flex-col gap-6">
     {/** 信用卡所有<input> */}
@@ -191,14 +191,11 @@ export default function Form_Credit_Card () {
         <p className="text-sm text-gray">Tax</p>
         <p className="font-bold">{"+" + Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0))}</p>
       </div>
-
       <div className="flex justify-between">
         <p className="text-sm text-gray">Black Friday Offer</p>
         <p className="font-bold">-$500</p>
       </div>
-
       <div className="border-b border-dashed border-[#D6E1EF]"></div>
-
       <div className="flex justify-between">
         <p className="text-sm text-gray">Total Amount</p>
         <p className="font-bold text-primary">{redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)) - 500) }</p>
