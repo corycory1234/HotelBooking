@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
+import Offer_List_Json from "@/fakeData/offer_List.json";
 
 // 0. Zod 錯誤訊息初始值
 // const initialState = "";
@@ -128,8 +129,13 @@ export default function Form_Credit_Card () {
     } finally {
       set_Is_Loading(false)
     }
-  
   }
+
+  // 11. 匹配優惠代碼
+  const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
+  const offer = Offer_List_Json.find((item) => item.offer_Id === redux_The_Hotel.offer_Id);
+
+
 
   return <div className="bg-primary rounded-t-3xl p-4 lg:hidden">
     <Toaster></Toaster>
@@ -192,25 +198,27 @@ export default function Form_Credit_Card () {
         <p className="font-bold">{"+" + Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0))}</p>
       </div>
       <div className="flex justify-between">
-        <p className="text-sm text-gray">Black Friday Offer</p>
-        <p className="font-bold">-$500</p>
+        <p className="text-sm text-gray">{offer?.offer_Name} Offer</p>
+        <p className="font-bold">{offer?.offer_Price as number * 100}% OFF</p>
       </div>
       <div className="border-b border-dashed border-[#D6E1EF]"></div>
       <div className="flex justify-between">
         <p className="text-sm text-gray">Total Amount</p>
-        <p className="font-bold text-primary">{redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)) - 500) }</p>
+        <p className="font-bold text-primary">
+          {(redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+        </p>
       </div>
     </div>
     {/* 所有金額統計 */}
 
 
     {!is_Loading ? 
-      <button type="submit" className="bg-secondary text-white text-center font-semibold py-4 rounded-lg">
+      <button type="submit" className="bg-secondary text-white text-center font-semibold py-2 rounded-lg">
         Proceed
       </button>
     :
       <button type="submit"
-      className="flex justify-center items-center gap-2 bg-softGray text-white text-center font-semibold py-4 rounded-lg" disabled>
+      className="flex justify-center items-center gap-2 bg-softGray text-white text-center font-semibold py-2 rounded-lg" disabled>
       <OtherSVG name="spin" className="animate-spin w-5 h-auto"></OtherSVG>
       Processing...
       </button>

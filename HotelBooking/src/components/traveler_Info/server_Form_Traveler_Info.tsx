@@ -92,10 +92,13 @@ export default function Server_Form_Traveler_Info() {
     }
   }
 
+  // 8. Redux - 指定飯店明細
+  const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
+
   return <>
   <Toaster></Toaster>
   <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-2 p-4 lg:hidden">
-    <div className="flex flex-col mb-32">
+    <div className="flex flex-col mb-36">
 
     <label htmlFor="name" className="text-gray">Name</label>
     <input type="text" id="name" name="name" className="rounded-lg border-2 border-softGray p-2"/>
@@ -125,14 +128,24 @@ export default function Server_Form_Traveler_Info() {
     {/** formAction 寫在<button>上*/}
     <div className="flex flex-col fixed bottom-0 right-0 p-4 customized-bg-gradient  w-full border-t border-softGray">
       <div className="flex justify-between">
-        <p className="font-bold">Total Price</p>
-        <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
+        <p className="font-semibold">Tax</p>
+        <p className="font-semibold">$ {Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number))}</p>
+      </div>
+      <div className="flex justify-between">
+        <p className="font-semibold">Room Price</p>
+        <p className="font-semibold">$ {redux_Booked_Room.room_Price}</p>
+      </div>
+      <div className="flex justify-between">
+        <p className="font-semibold">Total Price</p>
+        <p className="font-semibold">
+          $ {Math.round(redux_Booked_Room.room_Price as number + ((redux_The_Hotel.tax as number)) * (redux_Booked_Room?.room_Price as number))}
+        </p>
       </div>
 
       {!is_Loading ?
-        <button className="bg-primary text-white rounded-xl py-4 mt-4"> Proceed to Pay</button>
+        <button className="bg-primary text-white rounded-xl py-2"> Proceed to Pay</button>
       :
-        <button className="flex justify-center items-center gap-2 bg-softGray text-white rounded-xl py-4 mt-4" disabled>
+        <button className="flex justify-center items-center gap-2 bg-softGray text-white rounded-xl py-2" disabled>
           <OtherSVG name="spin" className="w-5 h-auto animate-spin"></OtherSVG>
             Processing...
         </button>

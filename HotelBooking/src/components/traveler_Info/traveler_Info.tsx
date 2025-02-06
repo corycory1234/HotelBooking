@@ -163,12 +163,13 @@ export default function Traveler_Info () {
                 <div className="flex justify-center items-center gap-2">
                   <label className="basis-1/2 flex flex-col text-gray">
                     Name
-                    <input type="text" id="name" name="name" className="rounded border border-softGray p-1" value={name} onChange={(event) => handle_Change(event)}/>
+                    <input type="text" id="name" name="name" className="rounded border border-softGray p-1 text-black" 
+                      value={name} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
                   </label>
                   <label className="basis-1/2 flex flex-col text-gray">
                     Surname
-                    <input type="text" id="surname" name="surname" className="rounded border border-softGray p-1"
+                    <input type="text" id="surname" name="surname" className="rounded border border-softGray p-1 text-black"
                       value={surname} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.surnameError}</p>
                   </label>
@@ -177,7 +178,7 @@ export default function Traveler_Info () {
                 <div className="flex justify-center items-center gap-2">
                     <label className="basis-1/2 flex flex-col text-gray">
                       Country
-                      <select name="country" id="country" className="rounded border border-softGray py-1.5 px-1 h-[42px]">
+                      <select name="country" id="country" className="rounded border border-softGray py-1.5 px-1 h-[42px] text-black">
                         <option value="taiwan">Taiwan</option>
                         <option value="china">China</option>
                         <option value="united states">United States</option>
@@ -185,7 +186,7 @@ export default function Traveler_Info () {
                     </label>
                     <label className="basis-1/2 flex flex-col text-gray">
                       Phone Number
-                      <input type="text" id="phone" name="phone" className="rounded border border-softGray p-1"/>
+                      <input type="text" id="phone" name="phone" className="rounded border border-softGray p-1 text-black"/>
                       <p aria-live="polite" className="text-customRed">{zod_Response?.phoneError}</p>
                     </label>
                 </div>
@@ -193,15 +194,14 @@ export default function Traveler_Info () {
                 <div className="flex justify-center items-center gap-2">
                   <label className="basis-1/2 flex flex-col justify-center text-gray">
                     Email Address
-                    <input type="text" id="email" name="email" className="rounded border border-softGray p-1"
+                    <input type="text" id="email" name="email" className="rounded border border-softGray p-1 text-black"
                       value={email} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
                   </label>
 
                   <label className="basis-1/2 flex flex-col justify-center text-gray">
                     Offer Code
-                    <input type="text" id="offer" name="offer" className="rounded border border-softGray p-1"
-                      value={email} onChange={(event) => handle_Change(event)}/>
+                    <input type="text" id="offer" name="offer" className="rounded border border-softGray p-1 text-black"/>
                     {/* <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p> */}
                   </label>
                 </div>
@@ -229,7 +229,7 @@ export default function Traveler_Info () {
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex justify-between">
                   <p className="font-semibold">Tax</p>
-                  <p className="font-semibold">$ {(redux_The_Hotel.tax as number) * 100}</p>
+                  <p className="font-semibold">$ {Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number))}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">Room Price</p>
@@ -237,7 +237,9 @@ export default function Traveler_Info () {
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">Total Price</p>
-                  <p className="font-semibold">$ {redux_Booked_Room.room_Price as number + ((redux_The_Hotel.tax as number) * 100)}</p>
+                  <p className="font-semibold">$ 
+                    {(redux_Booked_Room.room_Price as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price ?? 0)))) }
+                  </p>
                 </div>
 
                 {!is_Loading ?

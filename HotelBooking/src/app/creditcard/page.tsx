@@ -171,8 +171,14 @@ export default function CreditCard() {
           <div className="border border-softGray rounded flex flex-col gap-2 p-4">
             <p className="font-semibold">Your Detail Information</p>
             <div className="border-b border-softGray"></div>
-            <p>Name: {name + " " + surname}</p>
-            <p>Confirmation Mail To: {email}</p>
+            <div className="flex gap-2">
+              <p className="font-semibold text-sm">Name: </p>
+              <p className="text-sm">{name + " " + surname}</p>
+            </div>
+            <div className="flex gap-2">
+              <p className="font-semibold text-sm">Confirmation Mail To: </p>
+              <p className="text-sm">{email}</p>
+            </div>
           </div>
           {/** 姓名、電子郵件 */}
 
@@ -391,7 +397,9 @@ export default function CreditCard() {
               <div className="border-b-2 border-dashed border-softGray"></div>
               <div className="flex justify-between">
                 <p className="text-sm font-semibold">Total Amount</p>
-                <p className="font-bold text-customRed">{(redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }</p>
+                <p className="font-bold text-customRed">
+                  {(redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+                </p>
               </div>
             </div>
             {/* 所有金額統計 */}
