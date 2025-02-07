@@ -35,6 +35,11 @@ body {
 .my-bg-gradient {
   @apply bg-gradient-to-b from-[#F9F9F9] to-slate-50 rounded-t-3xl;
 }
+@media (min-width: 1024px) {
+  .my-bg-gradient {
+    @apply bg-none
+  }
+}
 .customized-bg-gradient {
   @apply bg-gradient-to-b from-[#F9F9F9] to-slate-50;
 }
@@ -116,7 +121,7 @@ input[type="radio"]:checked {
   }
 }
 
-/*9. */
+/*9. 錨點滾動方式*/
 html {
   scroll-behavior: smooth
 }

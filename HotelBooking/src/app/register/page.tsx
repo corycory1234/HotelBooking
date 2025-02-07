@@ -9,8 +9,8 @@ export default function Register() {
 
   return <>
 
-    <div className="bg-primary h-screen relative">
-      <p className="text-white text-center p-4">Sign In</p>
+    <div className="bg-primary h-screen relative lg:hidden">
+      <p className="text-white text-center p-4">Register</p>
       <div className="h-[56px] absolute top-4 left-4">
         <button type="button" className="">
           <Link href={referer}>
@@ -24,6 +24,12 @@ export default function Register() {
       {/* Register 註冊表單 */}
       <Client_Form_Register></Client_Form_Register>
       {/* Register 註冊表單 */}
+    </div>
+
+    <div className="hidden lg:flex justify-center bg-[#F3F3F3] py-4">
+      {/* Login表單 */}
+      <Client_Form_Register></Client_Form_Register>
+      {/* Login表單 */}
     </div>
   </>
 }

@@ -109,11 +109,12 @@ export default function Client_Form_Register () {
 
 
   return <>
-  <div className="relative">
-      <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20" alt="" /> 
-    </div>
       
-    <div className="my-bg-gradient min-h-full flex flex-col mt-10">
+    <div className="my-bg-gradient h-screen flex flex-col mt-10 lg:bg-white lg:shadow-lg lg:rounded lg:h-full lg:mt-20 lg:mx-auto">
+      <div className="relative">
+        <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-5" alt="" /> 
+      </div>
+
       {/** 電子郵件 SVG */}
       <div className="relative">
         <img src="/account/Email.svg" alt="" className="absolute top-[6.85rem] left-8"/>
@@ -154,10 +155,10 @@ export default function Client_Form_Register () {
         
       </form>
       
-      <div className="pt-4 flex flex-col justify-center items-center gap-4">
+      <div className="pt-4 flex flex-col justify-center items-center gap-4 my-bg-gradient lg:bg-white py-2 rounded">
         <p className="text-gray">Already have account? <Link href={'/auth'} className="text-primary font-semibold">Sign In</Link></p>
         <p className="text-center text-sm">Or Sign in With</p>
-        <button className="bg-white rounded-lg py-3 px-6" type="button">
+        <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>

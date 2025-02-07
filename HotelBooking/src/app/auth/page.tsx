@@ -9,7 +9,7 @@ export default function Login () {
   console.log(referer);
 
   return <>
-    <div className="bg-primary h-screen relative flex flex-col gap-10">
+    <div className="bg-primary h-screen relative flex flex-col gap-10 lg:hidden">
       <p className="text-white text-center p-4">Sign In</p>
       <div className="absolute top-4 left-4 h-[56px]">
           <button type="button" className="">
@@ -20,6 +20,13 @@ export default function Login () {
             </Link>
           </button>
       </div>
+
+      {/* Login表單 */}
+      <Server_Form_Login></Server_Form_Login>
+      {/* Login表單 */}
+    </div>
+
+    <div className="hidden lg:flex bg-[#F3F3F3] py-4">
 
       {/* Login表單 */}
       <Server_Form_Login></Server_Form_Login>

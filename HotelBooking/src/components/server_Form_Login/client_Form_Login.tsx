@@ -147,7 +147,7 @@ export default function Server_Form_Login () {
   }
 
 
-  return <div className="flex flex-col h-screen my-bg-gradient">
+  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-full lg:mt-20 lg:mx-auto lg:py-4 lg:rounded lg:shadow-lg">
     <div className="relative">
       <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-10" alt="" /> 
     </div>
@@ -183,13 +183,13 @@ export default function Server_Form_Login () {
         }
       </form>
       
-      <div className="pt-4 flex flex-col justify-center items-center gap-4">
+      <div className="pt-4 flex flex-col justify-center items-center gap-4 my-bg-gradient lg:bg-white py-2">
         <p className="text-gray">Don't have an account? <Link href={'/register'} className="text-primary font-semibold">Register</Link></p>
         <Link href={'/forgetpassword'} className="text-primary font-semibold">
           <p className="text-gray hover:border-b-2 border-gray">Forget Password? </p>
         </Link>
         <p className="text-center text-sm">Or Sign in With</p>
-        <button className="bg-white rounded-lg py-3 px-6" type="button">
+        <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>
