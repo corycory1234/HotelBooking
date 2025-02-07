@@ -43,7 +43,7 @@ export default function My_Collection () {
 
 
   return <div className={`customized-bg-gradient min-h-screen ${redux_Collection_List.length >0 ? 'pb-20' : ''} 
-    lg:mt-[70px] lg:p-4`}>
+    lg:mt-[70px] lg:p-4 lg:bg-none`}>
     <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
 
     {redux_Collection_List.length >0 &&<p className="hidden lg:flex font-semibold">Collection List</p>}

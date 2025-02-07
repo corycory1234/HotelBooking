@@ -76,11 +76,12 @@ export default function My_Review () {
   };
 
   
-  return <div className="">
+  return <div className="lg:min-h-[75vh] lg:mt-[70px] lg:p-4">
     <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
+    <p className="hidden lg:block font-semibold">My Reviews</p>
 
     
-      <div className="flex flex-col p-4 gap-2 pb-20">
+      <div className="flex flex-col p-4 gap-2 pb-20 lg:grid lg:grid-cols-2 lg:pb-0 lg:px-0">
       {booking_List_Completed.map((item, index) => {
         return <div className="flex flex-col border border-softGray rounded" key={index}>
         
