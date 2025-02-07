@@ -9,7 +9,7 @@ export default function Register() {
 
   return <>
 
-    <div className="bg-primary h-screen relative lg:hidden">
+    <div className="bg-primary h-full relative lg:flex lg:justify-center lg:bg-[#F3F3F3] lg:py-4">
       <p className="text-white text-center p-4">Register</p>
       <div className="h-[56px] absolute top-4 left-4">
         <button type="button" className="">
@@ -26,10 +26,5 @@ export default function Register() {
       {/* Register 註冊表單 */}
     </div>
 
-    <div className="hidden lg:flex justify-center bg-[#F3F3F3] py-4">
-      {/* Login表單 */}
-      <Client_Form_Register></Client_Form_Register>
-      {/* Login表單 */}
-    </div>
   </>
 }
