@@ -100,7 +100,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         </div>
 
       {/** 桌機 - Skeleton動畫 */}
-      <div className="hidden lg:flex flex-col gap-4 px-20 py-4">
+      <div className="hidden lg:flex flex-col gap-4 px-20 py-6">
         {/** 照片牆 */}
         <div className="grid grid-cols-5 gap-2 w-full mt-[136px] h-[300px]">
           <div className="col-span-2 bg-softGray w-full h-full rounded animate-pulse"></div>
@@ -290,7 +290,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   {!show_Hotel_Detail_Card ? <Placeholder_Card></Placeholder_Card> 
   
   :
-  <div className="relative lg:py-4">
+  <div className="relative lg:py-6">
     <div className="relative flex flex-col gap-2 lg:hidden">
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
         <div className="">
@@ -657,8 +657,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       <div className="hidden lg:flex flex-col px-20 gap-4 py-4">
 
         {/** Tab標籤 - Anchor錨點滑動 */}
-          <ul className={`border border-softGray rounded p-2 flex gap-4 bg-white
-          ${is_Scrolled === true ? 'fixed top-[136px] z-20 w-full left-0 px-20' : ''}`}>
+          <ul className={`border-y border-softGray p-2 flex gap-4 bg-white
+          ${is_Scrolled === true ? 'fixed top-[144px] z-20 w-full left-0 px-20' : ''}`}>
             
             {tab_List.map((tab) => {
               return <li key={tab.id}>

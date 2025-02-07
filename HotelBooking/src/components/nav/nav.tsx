@@ -33,11 +33,12 @@ return <>
 
   <div className={`hidden ${is_Scrolled ? 'lg:bg-white' : 'lg:bg-softGray/20'} 
     lg:flex lg:justify-between lg:items-center lg:w-full
-    lg:px-4 lg:py-2 lg:fixed lg:top-0 lg:z-50
+    lg:px-4 lg:py-3.5 lg:fixed lg:top-0 lg:z-50
     ${pathName !== "/" && 'lg:bg-white'}`}>
     
     <Link href={"/"}>
-      <img src="/Logo.svg" alt="gotour" className="hidden lg:block w-10 h-auto"/>
+      {/* <img src="/Logo.svg" alt="gotour" className="hidden lg:block w-10 h-auto"/> */}
+      <OtherSVG name="logo" className="w-[170%] h-auto"></OtherSVG>
     </Link>
 
 

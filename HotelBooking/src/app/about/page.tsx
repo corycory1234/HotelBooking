@@ -6,14 +6,14 @@ export default function About () {
   const current_Page_Name = "About US";
 
 
-  return <div className="pb-20">
+  return <div className="pb-20 lg:pb-0">
     <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
       <div className="flex justify-center">
         
       </div>
 
     <div className="flex flex-col items-center gap-4 customized-bg-gradient p-4">
-    <img src="/Logo.svg" alt=""  className="w-1/2"/>
+      <OtherSVG name="logo" className="w-1/2 h-auto py-2 lg:py-10"></OtherSVG>
 
 
       <div className="flex flex-col gap-2 bg-white rounded p-4">
