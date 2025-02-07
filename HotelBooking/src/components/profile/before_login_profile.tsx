@@ -327,7 +327,7 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 訂閱電子報  */}
-    <div className="flex justify-between cursor-pointer" onClick={() => set_modal_Subscription(true)}>
+    <div className="flex justify-between cursor-pointer lg:hidden" onClick={() => set_modal_Subscription(true)}>
       <div className="flex gap-2">
         <ProfileSVG name={"subscribe"} className="w-5 h-auto"></ProfileSVG>
         <p>Subscribe</p>
@@ -335,7 +335,7 @@ export default function Before_Login_Profile () {
       <p className="lg:hidden">{">"}</p>
     </div>
     <Modal isOpen={modal_Subscription} onClose={() => set_modal_Subscription(false)}>
-      <div className="flex flex-col gap-2 p-4">
+      <div className="flex flex-col gap-2 p-4 py-10">
           <h2 className="text-xl font-semibold">Subscription</h2>
           <div className="flex flex-col gap-2 p-4 border border-softGray rounded">
             <div className="flex justify-between">
@@ -350,9 +350,21 @@ export default function Before_Login_Profile () {
               </label>
             </div>
             <p className="text-sm"> Receive specials from Our site</p>
+
+            <label>
+              <p>Email</p>
+              <input type="text" className="border rounded px-2" id="email" name="email"/>
+            </label>
           </div>
         </div>
     </Modal>
+    <div className="hidden lg:flex justify-between cursor-pointer" onClick={() => router.push("/subscribe")}>
+      <div className="flex gap-2">
+        <ProfileSVG name={"subscribe"} className="w-5 h-auto"></ProfileSVG>
+        <p>Subscribe</p>
+      </div>
+      <p className="lg:hidden">{">"}</p>
+    </div>
     {/** 訂閱電子報  */}
 
 
