@@ -83,7 +83,7 @@ export default function Server_Form_Search () {
       <Client_Input_Keyword></Client_Input_Keyword>
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>
-      <button className="bg-primary rounded w-full py-2 px-4 lg:w-1/2 lg:mx-auto">
+      <button className="bg-primary text-white rounded w-full py-2 px-4 lg:w-1/2 lg:mx-auto">
         Search
       </button>
     </form>

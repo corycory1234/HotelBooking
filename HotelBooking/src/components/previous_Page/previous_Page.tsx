@@ -6,7 +6,7 @@ export default function Previous_Page ({current_Page_Name}: {current_Page_Name: 
   
   return <>
     {/* 返回上頁按鈕 */}
-    <div className="bg-primary relative">
+    <div className="bg-primary relative lg:hidden">
       <p className="text-center text-white py-2">{current_Page_Name}</p>
 
       <div className="absolute top-2 left-4 z-10 h-[56px] cursor-pointer" onClick={() => router.back()}>
