@@ -74,9 +74,9 @@ export default function Forget_Password() {
 
   return <>
 
-    <div className="bg-primary h-screen relative">
-      <p className="text-white text-center p-4">Forget Password</p>
-      <div className="absolute top-4 left-4 h-[56px]">
+    <div className="flex flex-col bg-primary h-screen relative lg:bg-[#F3F3F3] lg:h-full lg:mx-auto lg:mt-20 lg:py-4">
+      <p className="text-white text-center p-4 lg:hidden">Forget Password</p>
+      <div className="absolute top-4 left-4 h-[56px] lg:hidden">
         <button type="button" className="" onClick={()=> router.back()}>
           {/* <Link href={referer}> */}
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-white">
@@ -94,7 +94,7 @@ export default function Forget_Password() {
       <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20" alt="" /> 
     </div>
       
-    <div className="my-bg-gradient min-h-full flex flex-col mt-10">
+    <div className="my-bg-gradient min-h-full flex flex-col mt-10 lg:bg-white lg:mx-auto lg:py-4 lg:rounded">
       {/** 電子郵件 SVG */}
       <div className="relative">
         <img src="/account/Email.svg" alt="" className="absolute top-[6.85rem] left-8"/>
@@ -129,7 +129,7 @@ export default function Forget_Password() {
         <p className="text-gray">Don't have an account? <Link href={'/register'} className="text-primary font-semibold">Register</Link></p>
 
         <p className="text-center text-sm">Or Sign in With</p>
-        <button className="bg-white rounded-lg py-3 px-6" type="button">
+        <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>
