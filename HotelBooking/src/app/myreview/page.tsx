@@ -16,8 +16,11 @@ export default function My_Review () {
   const [booking_List_Completed, set_Booking_List_Completed] = useState<Booking_Detail_Interface[]>([]);
   useEffect(() => {
     // 2.1 篩出 訂單狀態 - "completed", 才可以「看留言 或 留留言」
-    const filter_Booking_Status_Completed = Booking_List_Json.filter((item) => item.booking_Status === "completed");
-    set_Booking_List_Completed(filter_Booking_Status_Completed);
+    if(Booking_List_Json.length >0 ) {
+      const filter_Booking_Status_Completed = Booking_List_Json.filter((item: Booking_Detail_Interface) => item.booking_Status === "completed");
+      set_Booking_List_Completed(filter_Booking_Status_Completed);
+
+    }
   },[])
 
   // 3. Modal留言視窗 - 本地State開關
@@ -78,119 +81,129 @@ export default function My_Review () {
   
   return <div className="lg:min-h-[75vh] lg:mt-[70px] lg:p-4">
     <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
-    <p className="hidden lg:block font-semibold">My Reviews</p>
-
+    {booking_List_Completed.length === 0 ? <div className="flex flex-col justify-center items-center gap-2 min-h-[50vh]">
+      <OtherSVG name="review" className="w-10 h-auto"></OtherSVG>
+      <p className="font-semibold">You have NO Review</p>
+      </div>
     
+    :
+    <>
+      <p className="hidden lg:block font-semibold">My Reviews</p>
+
       <div className="flex flex-col p-4 gap-2 pb-20 lg:grid lg:grid-cols-2 lg:pb-0 lg:px-0">
-      {booking_List_Completed.map((item, index) => {
-        return <div className="flex flex-col border border-softGray rounded" key={index}>
-        
-        {/* 卡片上方 */}
-        <div className="flex gap-2 border-b border-softGray" >
-            <img src={item.booking_Img} alt="" className="w-1/4 rounded"/>
-            <div className="flex flex-col">
-              <p>{item.hotel_Name}</p>
-              <div className="flex gap-2">
-                <OtherSVG name="marker" className="w-4 h-auto"></OtherSVG>
-                <p>{item.city + ", " + item.country }</p>
-              </div>
-              
-              <div className="flex gap-2">
-                <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
-                <p>{item.room_Type}</p>
-              </div>
-            </div>
-          </div>
+        {booking_List_Completed.map((item, index) => {
+          return <div className="flex flex-col border border-softGray rounded" key={index}>
+          
           {/* 卡片上方 */}
-
-
-          {/* 卡片中間 */}
-          <div className="flex p-2 gap-2">
+          <div className="flex gap-2 border-b border-softGray" >
+              <img src={item.booking_Img} alt="" className="w-1/4 rounded"/>
               <div className="flex flex-col">
-                <p className="text-gray text-[14px]">Check-In</p>
-                <p className="text-[14px] font-semibold">{item.start_Date}</p>
-              </div>
-              <p className="text-gray text-[14px]">→</p>
-              <div className="flex flex-col">
-                <p className="text-gray text-[14px]">Check-Out</p>
-                <p className="text-[14px] font-semibold">{item.end_Date}</p>
-              </div>
-              <div className="border-r border-x-softGray"></div>
-
-              <div className="flex flex-col">
-                <p className="text-gray text-[14px]">Nights</p>
-                <p className="text-[14px] font-semibold">{how_Many_Nights(item.start_Date, item.end_Date)}</p>
-              </div>
-
-              <div className="border-r border-x-softGray"></div>
-
-              <div className="flex flex-col">
-                <p className="text-gray text-[14px]">Rooms</p>
-                <p className="text-[14px] font-semibold">{item.room}</p>
-              </div>
-          </div>
-          {/* 卡片中間 */}
-
-
-          {/** 卡片下方 */}
-          <div className="flex items-center gap-2 p-2">
-            <div className="relative">
-              <OtherSVG name="star" className="w-8 h-auto"></OtherSVG>
-              <p className="absolute top-2 left-3 text-sm">{item.star_Rating}</p>
-            </div>
-            <p>{item.review}</p>
-
-            {/** 尚未留言, 才可以點擊按鈕 >> 彈跳視窗 >> 進行留言 */}
-            {item.review === "" ? <>
-              <button className="bg-secondary rounded text-white w-full py-2" onClick={() => open_Review_Modal(item.booking_Id)}>
-                Review Your Stay
-              </button> 
-              
-              <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
-                <div className="flex flex-col gap-4 px-4 pt-20">
-                  <p className="font-semibold">Hotel: {booking_Detail?.hotel_Name}</p>
-                  <p>Name: {booking_Detail?.traveler_Name}</p>
-
-
-                  <div className="flex gap-2" >
-                  {[1,2,3,4,5].map((star: number) => {
-                    return <FiveStarSVG name={"emptystar"} 
-                      className="w-5 h-auto hover:fill-[#ffdd00]" key={star}
-                      fill={star <= hover_Star ? '#ffdd00' : 'white'}
-                      onMouseEnter={() => set_Hover_Star(star)}
-                      >
-                    </FiveStarSVG>
-                    })}
-                  </div>
-
-
-                  <form onSubmit={(event) => submit_Review(event, booking_Detail?.booking_Id as string)} className="flex flex-col gap-2">
-                    <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
-                      placeholder="Leave comment for what you experience from this Hotel"
-                      value={booking_Detail?.review ?? ""}
-                      onChange={(event) => handle_Change(event)}>
-                    </textarea>
-                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"
-                      >Submit
-                    </button>
-
-                  </form>
-
-
+                <p>{item.hotel_Name}</p>
+                <div className="flex gap-2">
+                  <OtherSVG name="marker" className="w-4 h-auto"></OtherSVG>
+                  <p>{item.city + ", " + item.country }</p>
                 </div>
-              </Modal>
+                
+                <div className="flex gap-2">
+                  <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
+                  <p>{item.room_Type}</p>
+                </div>
+              </div>
+            </div>
+            {/* 卡片上方 */}
 
 
-              </>
-              : <></>
-            }
-            {/** 尚未留言, 才可以點擊按鈕 >> 彈跳視窗 >> 進行留言 */}
+            {/* 卡片中間 */}
+            <div className="flex p-2 gap-2">
+                <div className="flex flex-col">
+                  <p className="text-gray text-[14px]">Check-In</p>
+                  <p className="text-[14px] font-semibold">{item.start_Date}</p>
+                </div>
+                <p className="text-gray text-[14px]">→</p>
+                <div className="flex flex-col">
+                  <p className="text-gray text-[14px]">Check-Out</p>
+                  <p className="text-[14px] font-semibold">{item.end_Date}</p>
+                </div>
+                <div className="border-r border-x-softGray"></div>
+
+                <div className="flex flex-col">
+                  <p className="text-gray text-[14px]">Nights</p>
+                  <p className="text-[14px] font-semibold">{how_Many_Nights(item.start_Date, item.end_Date)}</p>
+                </div>
+
+                <div className="border-r border-x-softGray"></div>
+
+                <div className="flex flex-col">
+                  <p className="text-gray text-[14px]">Rooms</p>
+                  <p className="text-[14px] font-semibold">{item.room}</p>
+                </div>
+            </div>
+            {/* 卡片中間 */}
+
+
+            {/** 卡片下方 */}
+            <div className="flex items-center gap-2 p-2">
+              <div className="relative">
+                <OtherSVG name="star" className="w-8 h-auto"></OtherSVG>
+                <p className="absolute top-2 left-3 text-sm">{item.star_Rating}</p>
+              </div>
+              <p>{item.review}</p>
+
+              {/** 尚未留言, 才可以點擊按鈕 >> 彈跳視窗 >> 進行留言 */}
+              {item.review === "" ? <>
+                <button className="bg-secondary rounded text-white w-full py-2" onClick={() => open_Review_Modal(item.booking_Id)}>
+                  Review Your Stay
+                </button> 
+                
+                <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
+                  <div className="flex flex-col gap-4 px-4 pt-20">
+                    <p className="font-semibold">Hotel: {booking_Detail?.hotel_Name}</p>
+                    <p>Name: {booking_Detail?.traveler_Name}</p>
+
+
+                    <div className="flex gap-2" >
+                    {[1,2,3,4,5].map((star: number) => {
+                      return <FiveStarSVG name={"emptystar"} 
+                        className="w-5 h-auto hover:fill-[#ffdd00]" key={star}
+                        fill={star <= hover_Star ? '#ffdd00' : 'white'}
+                        onMouseEnter={() => set_Hover_Star(star)}
+                        >
+                      </FiveStarSVG>
+                      })}
+                    </div>
+
+
+                    <form onSubmit={(event) => submit_Review(event, booking_Detail?.booking_Id as string)} className="flex flex-col gap-2">
+                      <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
+                        placeholder="Leave comment for what you experience from this Hotel"
+                        value={booking_Detail?.review ?? ""}
+                        onChange={(event) => handle_Change(event)}>
+                      </textarea>
+                      <button className="bg-primary rounded text-white self-center w-1/2 py-2"
+                        >Submit
+                      </button>
+
+                    </form>
+
+
+                  </div>
+                </Modal>
+
+
+                </>
+                : <></>
+              }
+              {/** 尚未留言, 才可以點擊按鈕 >> 彈跳視窗 >> 進行留言 */}
+            </div>
+            {/** 卡片下方 */}
+
+
           </div>
-          {/** 卡片下方 */}
+        })}
+      </div>
+    </>
+    
+    }
 
-
-        </div>
-      })}
-    </div>
   </div>
 }
