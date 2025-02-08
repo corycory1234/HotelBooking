@@ -64,7 +64,7 @@ export default function Trip_List () {
 
   // 8. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
-    return <div className="flex flex-col gap-2 p-4">
+    return <div className="flex flex-col gap-2 p-4 lg:px-20 lg:mt-[70px]">
       <div className="w-full h-[200px] object-cover object-top rounded animate-pulse bg-softGray"></div>
       <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
       <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
@@ -83,7 +83,7 @@ export default function Trip_List () {
 
 
 
-  return <div className={`flex flex-col ${booking_List.length >0 ? 'pb-20' : ''}`}>
+  return <div className={`flex flex-col ${booking_List.length >0 ? 'pb-20' : ''} lg:pb-0`}>
 
   {/** 返回上一頁 */}
   <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
@@ -91,10 +91,10 @@ export default function Trip_List () {
 
   {/** Tab 切換訂單按鈕 */}
   {show_Booking_List && 
-    <div className="flex gap-2 py-1 px-4 flex-wrap">
+    <div className="flex gap-2 py-1 px-4 flex-wrap lg:mt-[70px] lg:justify-center">
       {booking_Buttons.map((item, index) => {
         return <button key={index}
-          className={`text-softGray text-sm p-2 border border-gray rounded
+          className={`text-softGray text-sm p-2 border border-softGray rounded
           ${tab === item ? 'bg-primary text-white' : ''}`}
           onClick={() => select_Booking_Status(item)}> {item}
         </button>
@@ -108,30 +108,52 @@ export default function Trip_List () {
   {!show_Booking_List ? <Placeholder_Card></Placeholder_Card>
 
   :
-  <div className={`flex flex-col p-4 gap-4  ${booking_List.length >0 ? 'customized-bg-gradient' : ''} `}>
+  <div className={`flex flex-col p-4 gap-4  ${booking_List.length >0 ? 'customized-bg-gradient' : ''} lg:px-20 lg:bg-none`}>
 
     { 
       booking_List.length === 0 ? <Not_Found you_Have_No_Bookings="You Have No Bookings"></Not_Found> // 找不到訂單SVG
       :
       booking_List.map((item) => {
-        return <div className="flex flex-col gap-4 bg-white rounded-lg px-2 py-4" key={item.booking_Id}>
+        return <div className="flex flex-col gap-4 bg-white rounded-lg px-2 py-4 lg:border border-softGray" key={item.booking_Id}>
             {/** 訂單照片、飯店名、房型名、確認|未確認|取消 */}
             <div className="flex gap-2">
               <img src={item.booking_Img} alt="" className="w-1/3 rounded"/>
-              <div className="flex flex-col basis-1/2">
+              <div className="flex flex-col basis-1/2 gap-2">
                 <p className="font-semibold">{item.hotel_Name}</p>
                 <p className="text-sm">{item.room_Type}</p>
                 <span className={`rounded p-2 w-fit 
                   ${item.booking_Status === 'cancelled' ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
                 >{item.booking_Status}</span>
+
+                {/** PC桌機 - 入住日、退房日 */}
+                <div className="hidden w-1/2 lg:flex flex-col">
+                  <p className="text-gray">Check-In</p>
+                  <p className="font-semibold">{item.start_Date}</p>
+                </div>
+                <div className="hidden w-1/2 lg:flex flex-col">
+                  <p className="text-gray">Check-Out</p>
+                  <p className="font-semibold">{item.end_Date}</p>
+                </div>
               </div>
+              {/** PC桌機 - 入住日、退房日 */}
+              
+              {/** PC桌機 - 訂單ID、查看訂單明細 */}
+              <div className="self-end w-1/3 flex flex-col gap-4">
+                <div className="flex justify-between">
+                  <p className="text-gray">Booking ID: #{item.booking_Id}</p>
+                  <p className="font-semibold">${item.price}</p>
+                </div>
+                <button className="bg-primary text-white rounded py-2"
+                  onClick={() => view_Booking(item.booking_Id)}>View Details</button>
+              </div>
+              {/** PC桌機 - 訂單ID、查看訂單明細 */}
             </div>
             {/** 訂單照片、飯店名、房型名、確認|未確認|取消 */}
 
-            <div className="border-b border-softGray"></div>
+            <div className="border-b border-softGray lg:hidden"></div>
 
             {/** 入住、退房時間 */}
-            <div className="flex">
+            <div className="flex lg:hidden">
               <div className="w-1/2 flex flex-col">
                 <p className="text-gray">Check-In</p>
                 <p className="font-semibold">{item.start_Date}</p>
@@ -143,11 +165,11 @@ export default function Trip_List () {
             </div>
             {/** 入住、退房時間 */}
 
-            <div className="border-b border-softGray"></div>
+            <div className="border-b border-softGray lg:hidden"></div>
 
 
             {/** 訂單號碼、價錢、查看訂單 */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 lg:hidden">
               <div className="flex justify-between">
                 <p className="text-gray">Booking ID: #{item.booking_Id}</p>
                 <p className="font-semibold">${item.price}</p>

@@ -102,7 +102,7 @@ export default function Booking_Detail () {
       {/** 返回上一頁 */}
 
       {/** 房型圖片 */}
-      {show_Booking_Detail && <img src={booking_Detail.booking_Img} alt="" />}
+      {/* {show_Booking_Detail && <img src={booking_Detail.booking_Img} alt="" />} */}
       {/** 房型圖片 */}
     
 
@@ -110,9 +110,12 @@ export default function Booking_Detail () {
     :
     
     <div className="flex flex-col p-4 gap-2">
+      {/** 房型圖片 */}
+      <img src={booking_Detail.booking_Img} alt="" className="rounded lg:hidden"/>
+      {/** 房型圖片 */}
 
       {/** 留言評價 or 查看評價 */}
-        {<div className="bg-white flex flex-col rounded-lg">
+        {<div className="bg-white flex flex-col rounded-lg lg:hidden">
           <p className="text-center">Booking ID {booking_Detail?.booking_Id}</p>
             {/** 打開留言 Modal - 訂單狀態 completed 才有Modal按鈕 */}
             {booking_Detail.booking_Status === "completed" && 
@@ -128,7 +131,7 @@ export default function Booking_Detail () {
 
         {/** 留言彈跳視窗 */}
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
-            <div className="flex flex-col gap-4 px-4 pt-20 z-[999]">
+            <div className="flex flex-col gap-4 px-4 pt-20 z-[999] lg:hidden">
               <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p>
               <p>Name: {booking_Detail.traveler_Name}</p>
 
@@ -196,7 +199,7 @@ export default function Booking_Detail () {
 
       
       {/** 飯店名、訂單狀態、房型名稱 */}
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:hidden">
           <div className="flex justify-between items-center">
             <p className="font-semibold">{booking_Detail?.hotel_Name}</p>
             <span className={`rounded-full py-1 px-2 w-fit 
@@ -210,10 +213,10 @@ export default function Booking_Detail () {
       {/** 飯店名、訂單狀態、房型名稱 */}
 
 
-        <div className="bg-white flex flex-col rounded-lg p-2 gap-2">
+        <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
           <p className="font-semibold text-sm">Stay Details</p>
           {/** 入住、退房時間 */}
-          <div className="flex">
+          <div className="flex lg:hidden">
             <div className="w-1/2 flex flex-col">
               <p className="text-sm text-gray">Check-In</p>
               <p>{booking_Detail.start_Date}</p>
@@ -227,18 +230,18 @@ export default function Booking_Detail () {
           </div>
           {/** 入住、退房時間 */}
 
-          <div className="border-b border-softGray"></div>
+          <div className="border-b border-softGray lg:hidden"></div>
           
           {/** 住幾晚、住幾個人 */}
-          <div className="flex justify-between">
+          <div className="flex justify-between lg:hidden">
             <p className="text-sm text-gray">Duration</p>
             <p>{`${nights} nigths`}</p>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between lg:hidden">
             <p className="text-sm text-gray">Lead Guest</p>
             <p>{booking_Detail.traveler_Name}</p>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between lg:hidden">
             <p className="text-sm text-gray">Guest</p>
             <p>{`${booking_Detail?.adults} adults 
               ${booking_Detail.childs >0  ? ','+ booking_Detail.childs + ' childs' : ''}`} 
@@ -249,7 +252,7 @@ export default function Booking_Detail () {
 
 
         {/** 房型內部設施 */}
-        <div className="bg-white flex flex-col rounded-lg p-2 gap-2">
+        <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
           <p className="text-sm font-semibold">Room Details</p>
             <div className="flex flex-wrap">
               {booking_Detail.facility.map((facility, index) => {
@@ -264,7 +267,7 @@ export default function Booking_Detail () {
         
 
         {/** 費用、稅率 */}
-        <div className="bg-white flex flex-col rounded-lg p-2 gap-2">
+        <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
           <p className="text-sm font-semibold">Price Details</p>
           <div className="flex justify-between">
             <p className="text-sm text-gray">{`Room Price (${nights} nights)`}</p>
@@ -283,7 +286,7 @@ export default function Booking_Detail () {
         {/** 費用、稅率 */}
         
         {/** 地圖 */}
-        <div className="bg-white flex flex-col rounded-lg p-2 gap-2">
+        <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
           <p className="text-sm font-semibold">Location</p>
           {/* <img src="/triplist/location.png" alt="" /> */}
 
@@ -307,9 +310,215 @@ export default function Booking_Detail () {
           <button type="button" className="bg-primary text-white rounded py-2">Get Directions</button>
         </div>
         {/** 地圖 */}
-  
+      
+
+
+
+      {/** PC桌機 */}
+        <div className="hidden lg:flex lg:p-2 lg:gap-2 lg:bg-white lg:rounded">
+          {/** 房型圖片 */}
+          <div className="basis-1/3">
+            <img src={booking_Detail.booking_Img} alt="" className="rounded"/>
+          </div>
+          {/** 房型圖片 */}
+          
+          {/** 飯店名、訂單狀態、房型名稱 */}
+          <div className="basis-1/3 flex flex-col justify-between">
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <p className="font-semibold">{booking_Detail?.hotel_Name}</p>
+                <span className={`rounded-full py-1 px-2 w-fit 
+                  ${booking_Detail.booking_Status === "cancelled" ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
+                >
+                  {booking_Detail.booking_Status}
+                </span>
+              </div>
+              <p className="text-gray">{booking_Detail.room_Type}</p>
+            </div>
+
+              {/** 入住、退房時間 */}
+              <div className="flex">
+                <div className="w-1/2 flex flex-col">
+                  <p className="text-sm text-gray">Check-In</p>
+                  <p>{booking_Detail.start_Date}</p>
+                  <p className="text-sm text-gray">{`From: ${booking_Detail.checkin}`}</p>
+                </div>
+                <div className="w-1/2 flex flex-col">
+                  <p className="text-sm text-gray">Check-Out</p>
+                  <p>{booking_Detail.end_Date}</p>
+                  <p className="text-sm text-gray">{`Until: ${booking_Detail.checkout}`}</p>
+                </div>
+              </div>
+              {/** 入住、退房時間 */}
+
+
+            </div>
+          {/** 飯店名、訂單狀態、房型名稱 */}
+          
+
+          {/** 住幾晚、住幾個人 */}
+          <div className="basis-1/4 self-end">
+            <div className="flex gap-1 items-end">
+              <p className="text-sm text-gray">Duration:</p>
+              <p>{`${nights} nigths`}</p>
+            </div>
+            <div className="flex gap-1 items-end">
+              <p className="text-sm text-gray">Lead Guest:</p>
+              <p>{booking_Detail.traveler_Name}</p>
+            </div>
+            <div className="flex gap-1 items-end">
+              <p className="text-sm text-gray">Guest:</p>
+              <p>{`${booking_Detail?.adults} adults 
+                ${booking_Detail.childs >0  ? ','+ booking_Detail.childs + ' childs' : ''}`} 
+              </p>
+            </div>
+          </div>
+          {/** 住幾晚、住幾個人 */}
+
+
+      {/** 留言評價 or 查看評價 */}
+        <div className="basis-1/4 self-end flex flex-col">
+          <p className="text-sm">Booking ID {booking_Detail?.booking_Id}</p>
+            {/** 打開留言 Modal - 訂單狀態 completed 才有Modal按鈕 */}
+            {booking_Detail.booking_Status === "completed" && 
+            <button type="button" className="bg-secondary rounded text-white w-full p-1"
+              onClick={open_Review_Modal}>
+              {booking_Detail.booking_Status === "completed" && booking_Detail.review === "" ? 'Review Your Stay' : 'See Review'}
+            </button>
+            }
+            {/** 打開留言 Modal - 訂單狀態 Completed 才有Modal按鈕 */}
+
+        </div>
+
+        {/** 留言彈跳視窗 */}
+          <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
+            <div className="flex flex-col gap-4 px-4 pt-20 z-[999]">
+              <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p>
+              <p>Name: {booking_Detail.traveler_Name}</p>
+
+                {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
+                {booking_Detail.booking_Status === "completed" && booking_Detail.review === "" && <>
+                  <div className="flex gap-2" >
+                  {[1,2,3,4,5].map((star: number) => {
+                    return <FiveStarSVG name={"emptystar"} 
+                      className="w-5 h-auto hover:fill-[#ffdd00]" key={star}
+                      fill={star <= hover_Star ? '#ffdd00' : 'white'}
+                      onMouseEnter={() => set_Hover_Star(star)}
+                      >
+                    </FiveStarSVG>
+                    })}
+                  </div>
+                  <form onSubmit={submit_Review} className="flex flex-col gap-2">
+                    <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
+                      placeholder="Leave comment for what you experience from this Hotel"
+                      value={review}
+                      onChange={(event) => handle_Change(event)}>
+                    </textarea>
+                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"
+                      >Submit
+                    </button>
+
+                  </form>
+                </>
+              }
+              {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
+
+
+              {/* 訂單狀態 completed, 但已留言, 僅能查看 */}
+              {booking_Detail.booking_Status === "completed" && booking_Detail.review !== "" && <>
+                <div className="flex gap-2" >
+                {Array.from({length: booking_Detail.star_Rating ?? 0}, () => booking_Detail.star_Rating ?? 0).map((star: number, index) => {
+                  return <OtherSVG name={"star"} 
+                    className="w-5 h-auto hover:fill-[#ffdd00]" key={index}
+                    // fill={star <= hover_Star ? '#ffdd00' : 'white'}
+                    // onMouseEnter={() => set_Hover_Star(star)}
+                    >
+                  </OtherSVG>
+                  })}
+                </div>
+                <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
+                placeholder="Leave comment for what you experience from this Hotel"
+                value={review} readOnly>
+                </textarea>
+              </>
+              }
+               {/* 訂單狀態 completed, 但已留言, 僅能查看 */}
+              {/** 5星評價 */}
+              {/** 5星評價 */}
+              
+            </div>
+          </Modal>
+        {/** 留言彈跳視窗 */}
+      {/** 留言評價 or 查看評價 */}
+      </div>
+
+
+      {/** 房型內部設施 */}
+      <div className="hidden bg-white lg:flex justify-between rounded-lg p-2 gap-2">
+        <div className="flex flex-col gap-2">
+          <p className="text-sm font-semibold">Room Details</p>
+            {/* <div className="flex flex-wrap"> */}
+              <div className="basis-1/3 grid grid-cols-2 items-center gap-2">
+                {booking_Detail.facility.map((facility, index) => {
+                  return <div className="col-span-1 flex gap-1" key={index}>
+                      <FacilitySVG name={facility} className="w-4 h-auto"></FacilitySVG>
+                      <p>{facility.charAt(0).toUpperCase() + facility.slice(1)}</p>
+                    </div>
+                })}
+              </div>
+            {/* </div> */}
+        </div>
+
+
+
+       {/** 費用、稅率 */}
+        <div className="hidden basis-1/2 lg:flex flex-col rounded-lg gap-2">
+            <p className="text-sm font-semibold">Price Details</p>
+            <div className="flex justify-between">
+              <p className="text-sm text-gray">{`Room Price (${nights} nights)`}</p>
+              <p>{`$ ${booking_Detail.price}`}</p>
+            </div>
+            <div className="flex justify-between">
+              <p className="text-sm text-gray">Taxes and Fees</p>
+              <p>{booking_Detail.price * booking_Detail.tax }</p>
+            </div>
+
+            <div className="flex justify-between">
+              <p className="text-sm font-semibold">Total Charge</p>
+              <p>{`$ ${booking_Detail.price + (booking_Detail.price * booking_Detail.tax)}`}</p>
+            </div>
+          </div>
+        {/** 費用、稅率 */}
+      </div>
+      {/** 房型內部設施 */}
+
+
+        {/** 地圖 */}
+        <div className="hidden bg-white lg:flex flex-col rounded-lg p-2 gap-2">
+          <p className="text-sm font-semibold">Location</p>
+          {/* <img src="/triplist/location.png" alt="" /> */}
+          <MapContainer
+            center={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]} // 台北 101 位置
+            zoom={13}
+            style={{width: "100%", height: "20rem", borderRadius: "20px", zIndex: 0}}
+            className="h-full">
+            <TileLayer
+            // 這裡使用 OpenStreetMap 免費圖資
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+            <Marker position={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]}>
+              <Tooltip permanent className="leaflet-tooltip ">{booking_Detail?.hotel_Name}</Tooltip>
+            </Marker>
+          </MapContainer>
+          <p className="text-sm text-gray">{booking_Detail.address}</p>
+          <button type="button" className="bg-primary text-white rounded py-2">Get Directions</button>
+        </div>
+        {/** 地圖 */}
+    {/** PC桌機 */}
+
+
+
+
     </div>
-    
     
     }
   </div>
