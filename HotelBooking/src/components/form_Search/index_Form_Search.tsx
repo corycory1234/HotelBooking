@@ -98,8 +98,8 @@ export default function Index_Form_Search () {
   <Toaster_Notify></Toaster_Notify>
 
     <form onSubmit={submit_Search} className="flex flex-col lg:flex-row lg:flex-wrap p-4 gap-4 
-    lg:shadow-lg lg:rounded-lg
-    items-center">
+      lg:shadow-lg lg:rounded-lg
+      items-center">
       <Client_Input_Keyword></Client_Input_Keyword>
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>

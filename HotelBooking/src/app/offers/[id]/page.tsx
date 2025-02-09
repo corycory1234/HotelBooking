@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { useRouter } from "next/navigation";
 import Form_Search_Pc from "@/components/form_Search/form_Search_Pc";
+import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
 
 const initail_Offer = {
   offer_Id: '',
@@ -64,9 +65,9 @@ export default function Offer () {
   }
 
   // 5. 點擊Tab, 取得不同國家, 但擁有同樣優惠之飯店列表
-  const click_Tab = async (country: string , index: number) => {
-    console.log(country, index, "傳參");
-    const the_New_Hotel_List = hotel_List.filter((item) => country === item.country);
+  const click_Tab = async (country: string , index: number,) => {
+    // console.log(country, index, "傳參");
+    const the_New_Hotel_List = hotel_List.filter((item) => country === item.country && params.id === item.offer_Id);
     set_Country_Hotel_List(the_New_Hotel_List);
     set_Country_Tab(index)
   }
@@ -93,6 +94,7 @@ export default function Offer () {
 
   // 7. Redux - FormSearch 數據
   const redux_Form_Search = useSelector((state: RootState) => state.formSearch)
+  const dispatch: AppDispatch = useDispatch();
 
   // 8. Redux - 相關初始值
   const redux_Destination = useSelector((state: RootState) => state.formSearch.keyword);
@@ -108,12 +110,18 @@ export default function Offer () {
   const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
   const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
+  const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
 
   // 9. 查看「指定飯店所有房型」，ID匹配，router跳轉
   const router = useRouter()
   const check_Hotel_RoomType_List = (hotel_Id: string) => {
-    const result = redux_Hotel_List.find((item) => item.hotel_Id === hotel_Id);
-
+    const result = country_Hotel_List.find((item: add_Hotel_Detail_Interface) => item.hotel_Id === hotel_Id);
+    if (result) {
+      dispatch(update_Hotel_Detail(result));
+    } else {
+      console.error("沒拉到指定飯店明細");
+    }
+    console.log(hotel_Id, result);
     
     const query = new URLSearchParams({
       destination: redux_Destination,
@@ -194,8 +202,8 @@ export default function Offer () {
       {/** 飯店列表  - 卡片 */}
       <div className="grid grid-cols-1 gap-4 px-4 lg:grid-cols-3 lg:px-20">
 
-        {country_Hotel_List.map((item) => {
-          return <div key={item.hotel_Id} className="rounded flex flex-col gap-2">
+        {country_Hotel_List.map((item, index) => {
+          return <div key={index} className="rounded flex flex-col gap-2">
             
           {/* Swiper 飯店圖片 */}
           <div className="">
@@ -205,8 +213,8 @@ export default function Offer () {
             pagination={{ clickable: true }} 
             modules={[Pagination]}>
               
-              {item.hotel_Image_List.map((img) => {
-                return <SwiperSlide key={img.description}>
+              {item.hotel_Image_List.map((img, index) => {
+                return <SwiperSlide key={index}>
                   <img src={img.url} alt={img.description} 
                   className="w-full h-[200px] object-cover rounded" />
                 </SwiperSlide>

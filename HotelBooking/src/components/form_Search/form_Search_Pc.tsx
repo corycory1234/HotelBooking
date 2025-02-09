@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateKeyword } from "../../store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import Datepicker from "react-tailwindcss-datepicker";// 1. 從 "react-tailwindcss-datepicker" 拉出 { DateValueType }, 做為 TS型別, 以免跳警告 
-import type { DateValueType } from "react-tailwindcss-datepicker";
-// import { updateDateRange } from "@/store/form-Search/formSearchSlice";
 import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
 import Click_Outside from "../clickOutside";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
@@ -126,7 +124,7 @@ export default function Form_Search_Pc () {
       console.log("設施", facility);
       console.log("最小最大房錢", rangeslider);
   
-      // 16. 吐司訊息, 防止沒輸入數據
+      // 15.1 吐司訊息, 防止沒輸入數據
       if(!destination || destination.trim() === ""){
         toast.error("Please Type Your Destination");
         return;
@@ -138,7 +136,7 @@ export default function Form_Search_Pc () {
         
         
       
-      // 17. URL參數, 轉字串
+      // 15.2 URL參數, 轉字串
       const timestamp = +new Date();
       const query = new URLSearchParams({
         destination,
@@ -156,7 +154,7 @@ export default function Form_Search_Pc () {
       }).toString()
   
       const new_Hotel_List = hotel_List_Json.filter((hotel: add_Hotel_Detail_Interface) => {
-        // 3.1 飯店名、飯店城市、飯店國家，一同匹配
+        // 15.3 飯店名、飯店城市、飯店國家，一同匹配
         return (
           hotel.hotel_Name?.toLowerCase().includes(destination.toLowerCase()) ||
           hotel.city?.toLowerCase().includes(destination.toLowerCase()) ||
@@ -165,7 +163,7 @@ export default function Form_Search_Pc () {
       });
       dispatch(update_Hotel_List(new_Hotel_List));
           
-      // 18 跳轉「飯店列表」
+      // 15.4 跳轉「飯店列表」
       router.push(`/hotellist?${query}`);
       
     } catch (error) {
@@ -223,30 +221,6 @@ export default function Form_Search_Pc () {
       
   },[router, dispatch])
 
-  // 16.
-  // useEffect(() => {
-  //   submit_Search(event: React.FormEvent<HTMLFormElement>)
-  // },[])
-
-  // 19.
-  // const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
-  // const [hotel_List, set_Hotel_List] = useState<add_Hotel_Detail_Interface[]>([]);
-  // const debounce_Search = (keyword: string) => {
-  //   // dispatch(updateKeyword(event.target.value))
-  //   const new_Hotel_List = hotel_List_Json.filter((hotel: add_Hotel_Detail_Interface) => hotel.city?.toLowerCase() === keyword.toLowerCase());
-  //   set_Hotel_List(new_Hotel_List)
-  //   dispatch(update_Hotel_List(new_Hotel_List));
-  // }
-  // useEffect(() => {
-  //   if(keyword.trim() !== "") {
-  //     debounce_Search(keyword);
-  //   } else {
-  //     set_Hotel_List([])
-  //   }
-  // },[keyword])
-  // useEffect(() => {
-  //   console.log(redux_Hotel_List, "Redux 飯店陣列");
-  // }, [redux_Hotel_List])
 
 
   return <>
@@ -269,12 +243,6 @@ export default function Form_Search_Pc () {
       value={keyword}
       name="destination"/>
 
-      {/* {redux_Hotel_List.length >0 && redux_Hotel_List.map((hotel) => {
-        return <div key={hotel.hotel_Id}>
-          <p>{hotel.hotel_Name}</p>
-          <p>{hotel.hotel_Id}</p>
-        </div>
-      })} */}
     </div>
 
 

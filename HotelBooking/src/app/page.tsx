@@ -1,6 +1,6 @@
 // 'use client';
 // import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../store/store";
+// import { RootState, AppDispatch } from "../store/store";
 import Carousel_Popular_Destination from "../components/home/carousel_Popular_Destination";
 import Carousel_Near from "../components/home/client-Carousel-Near";
 import Carousel_Offer from "@/components/home/carousel_Offers";
