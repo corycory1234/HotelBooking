@@ -7,7 +7,7 @@ import Datepicker from "react-tailwindcss-datepicker";// 1. 從 "react-tailwindc
 import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
 import Click_Outside from "../clickOutside";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Toaster_Notify from "../toaster/toaster";
 import hotel_List_Json from "@/fakeData/hotel_List.json";
@@ -171,13 +171,16 @@ export default function Form_Search_Pc () {
     }
   }
 
-  // 16. F5刷新 - 重新搜尋
+  // 16. F5刷新 - 重新搜尋(飯店列表)
   const searchParams = useSearchParams();
+  const pathName= usePathname();
   useEffect(() => {
     // 16.1 抓取當前 URL 上的搜尋參數
     const current_Search_Params = new URLSearchParams(window.location.search);
+    console.log(current_Search_Params, "看看參數");
     // 16.2 檢查必要參數是否存在
     if (
+      pathName === "/hotellist" &&
       current_Search_Params.get("destination") && 
       current_Search_Params.get("dateRange") && 
       current_Search_Params.get("date_Start") && 

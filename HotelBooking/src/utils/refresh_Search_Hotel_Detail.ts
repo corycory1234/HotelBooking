@@ -14,7 +14,7 @@ export interface Search_Params_Interface {
 };
 
 // 2. F5刷新 - 搜尋函式(飯店列表)
-export const Refresh_Search_Hotel_List = (params: Search_Params_Interface) => {
+export const Refresh_Search_Hotel_Detail = (params: Search_Params_Interface) => {
   const timestamp = + new Date();
   return new URLSearchParams({
     destination: params.destination,

@@ -1,6 +1,5 @@
 'use client';
-import { useRouter, useParams, useSearchParams } from "next/navigation";
-// import hotel_List from "@/fakeData/hotel_List.json";
+import { useRouter, useParams, useSearchParams, usePathname } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { useState, useEffect } from "react";
@@ -14,12 +13,14 @@ import DateRangePicker from "@/components/form_Search/dateRangePicker";
 import Client_Input_Traveler from "@/components/form_Search/client-Input-Traveler";
 import Client_Input_Keyword from "@/components/form_Search/client-Input-Keyword";
 import { updateKeyword } from "@/store/form-Search/formSearchSlice";
+import { Refresh_Search_Hotel_Detail, Search_Params_Interface } from "@/utils/refresh_Search_Hotel_Detail";
 
 
 export default function Hotel_Detail () {
   // 0.
   const searchParams = useSearchParams();
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
+  const redux_Form_Search = useSelector((state: RootState) => state.formSearch)
 
   // 1. 返回上一頁
   const router = useRouter();
@@ -80,11 +81,58 @@ export default function Hotel_Detail () {
       timestamp: String(timestamp)
     }).toString();
 
-
-
     set_Toggle(false);
     router.push(`/hotellist/${params.id}?${query}`)
   }
+
+  // 11. F5刷新 - 重新搜尋(飯店列表)
+  const pathName= usePathname();
+  useEffect(() => {
+    // 11.1 抓取當前 URL 上的搜尋參數
+    const current_Search_Params = new URLSearchParams(window.location.search);
+    console.log(current_Search_Params, "看看參數");
+    // 11.2 檢查必要參數是否存在, 必須是飯店明細 /hotellist/${id}, 才給刷新
+    if (
+      pathName === `/hotellist/${params.id}` &&
+      current_Search_Params.get("destination") && 
+      current_Search_Params.get("dateRange") && 
+      current_Search_Params.get("date_Start") && 
+      current_Search_Params.get("date_End")
+    ) {
+      // 11.3 轉換成符合 Search_Params_Interface 的物件
+      const search_Params: Search_Params_Interface = {
+        // destination: current_Search_Params.get("destination") as string,
+        destination: redux_Form_Search.keyword,
+        dateRange: current_Search_Params.get("dateRange") as string,
+        date_Start: current_Search_Params.get("date_Start") as string,
+        date_End: current_Search_Params.get("date_End") as string,
+        room: current_Search_Params.get("room") || "",
+        adult: current_Search_Params.get("adult") || "",
+        child: current_Search_Params.get("child") || "",
+        rangeslider: current_Search_Params.get("rangeslider") || "",
+        rating: current_Search_Params.get("rating") || "",
+        bedType: current_Search_Params.get("bedtype")
+          ? (current_Search_Params.get("bedtype") as string).split(",")
+          : [],
+        facility: current_Search_Params.get("facility")
+          ? (current_Search_Params.get("facility") as string).split(",")
+          : [],
+      };
+      // 11.4 呼叫 Refresh_Search_Hotel_List, 取得包含最新的 timestamp
+      const new_Query_String = Refresh_Search_Hotel_Detail(search_Params)
+      // 11.5 使用 router.replace 更新 URL（避免新增瀏覽歷史紀錄）
+      router.replace(`/hotellist/${params.id}?${new_Query_String}`);
+
+      // 11.6 更新 Redux - 指定飯店明細
+      if(the_Found_Hotel) {
+        dispatch(update_Hotel_Detail(the_Found_Hotel));
+        // 11.7 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
+        dispatch(updateKeyword(the_Found_Hotel?.hotel_Name as string))
+      }
+    };
+      
+  },[router, dispatch])
+
 
   return <>
   
