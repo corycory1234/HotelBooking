@@ -12,6 +12,9 @@ import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from 
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Toaster_Notify from "../toaster/toaster";
+import hotel_List_Json from "@/fakeData/hotel_List.json";
+import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
+import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 
 // 1. startDate - 高亮「今天」
 const START_FROM = new Date();
@@ -149,11 +152,35 @@ export default function Form_Search_Pc () {
       rating: String(rating),
       facility: String(facility),
     }).toString()
-    
-    
+        
     // 18 跳轉「飯店列表」
     router.push(`/hotellist?${query}`);
   }
+
+  // 16.
+  // useEffect(() => {
+  //   submit_Search(event: React.FormEvent<HTMLFormElement>)
+  // },[])
+
+  // 19.
+  // const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
+  // const [hotel_List, set_Hotel_List] = useState<add_Hotel_Detail_Interface[]>([]);
+  // const debounce_Search = (keyword: string) => {
+  //   // dispatch(updateKeyword(event.target.value))
+  //   const new_Hotel_List = hotel_List_Json.filter((hotel: add_Hotel_Detail_Interface) => hotel.city?.toLowerCase() === keyword.toLowerCase());
+  //   set_Hotel_List(new_Hotel_List)
+  //   dispatch(update_Hotel_List(new_Hotel_List));
+  // }
+  // useEffect(() => {
+  //   if(keyword.trim() !== "") {
+  //     debounce_Search(keyword);
+  //   } else {
+  //     set_Hotel_List([])
+  //   }
+  // },[keyword])
+  // useEffect(() => {
+  //   console.log(redux_Hotel_List, "Redux 飯店陣列");
+  // }, [redux_Hotel_List])
 
 
   return <>
@@ -168,9 +195,20 @@ export default function Form_Search_Pc () {
       </svg>
       <input type="text" placeholder="Where are you going?" 
       className="w-full py-2 px-4 rounded outline-none border border-gray bg-white lg:h-[44px]"
-      onChange={(event) => dispatch(updateKeyword(event.target.value))}
+      onChange={(event) => {
+        // debounce_Search(event);
+        dispatch(updateKeyword(event.target.value))
+        }
+      }
       value={keyword}
       name="destination"/>
+
+      {/* {redux_Hotel_List.length >0 && redux_Hotel_List.map((hotel) => {
+        return <div key={hotel.hotel_Id}>
+          <p>{hotel.hotel_Name}</p>
+          <p>{hotel.hotel_Id}</p>
+        </div>
+      })} */}
     </div>
 
 

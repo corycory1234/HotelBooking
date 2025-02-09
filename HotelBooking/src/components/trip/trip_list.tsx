@@ -21,19 +21,19 @@ export default function Trip_List () {
   // 4. 點選訂單狀態分類, 取得 Upcoming 訂單狀態陣列
   const select_Booking_Status = (tab_Text: string) => {
     if(tab_Text === "Upcoming") {
-      const pending_Booking = Booking_List_Json.filter((item) => {
+      const pending_Booking = Booking_List_Json.filter((item: Booking_Detail_Interface) => {
         return item.booking_Status === "pending"
       })
       set_Upcoming_Booking_List(pending_Booking);
       set_Tab(tab_Text)
     } else if (tab_Text === "Completed") {
-      const complted_Booking = Booking_List_Json.filter((item) => {
+      const complted_Booking = Booking_List_Json.filter((item: Booking_Detail_Interface) => {
         return item.booking_Status === "completed";
       });
       set_Upcoming_Booking_List(complted_Booking);
       set_Tab(tab_Text)
     } else if (tab_Text === "Cancelled") {
-      const cancelled_Booking = Booking_List_Json.filter((item) => {
+      const cancelled_Booking = Booking_List_Json.filter((item: Booking_Detail_Interface) => {
         return item.booking_Status === "cancelled";
       });
       set_Upcoming_Booking_List(cancelled_Booking);
@@ -80,18 +80,22 @@ export default function Trip_List () {
   }
 
 
-
-
-
   return <div className={`flex flex-col ${booking_List.length >0 ? 'pb-20' : ''} lg:pb-0`}>
 
   {/** 返回上一頁 */}
   <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
   {/** 返回上一頁 */}
 
+
+  {/** 訂單卡片 */}
+  {!show_Booking_List ? <Placeholder_Card></Placeholder_Card>
+
+  :
+  <div className={`flex flex-col p-4 gap-4  ${booking_List.length >0 ? 'customized-bg-gradient' : ''} lg:px-20 lg:bg-none lg:mt-[70px]`}>
+
   {/** Tab 切換訂單按鈕 */}
-  {show_Booking_List && 
-    <div className="flex gap-2 py-1 px-4 flex-wrap lg:mt-[70px] lg:justify-center">
+  {booking_List.length >0 && 
+    <div className="flex gap-2 py-1 px-4 flex-wrap lg:justify-center">
       {booking_Buttons.map((item, index) => {
         return <button key={index}
           className={`text-softGray text-sm p-2 border border-softGray rounded
@@ -103,13 +107,7 @@ export default function Trip_List () {
   }
   {/** Tab 切換訂單按鈕 */}
 
-
-  {/** 訂單卡片 */}
-  {!show_Booking_List ? <Placeholder_Card></Placeholder_Card>
-
-  :
-  <div className={`flex flex-col p-4 gap-4  ${booking_List.length >0 ? 'customized-bg-gradient' : ''} lg:px-20 lg:bg-none`}>
-
+    
     { 
       booking_List.length === 0 ? <Not_Found you_Have_No_Bookings="You Have No Bookings"></Not_Found> // 找不到訂單SVG
       :

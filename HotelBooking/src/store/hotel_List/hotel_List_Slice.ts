@@ -7,7 +7,7 @@ interface Hotel_List_Interface {
 };
 
 const initialState: Hotel_List_Interface = {
-  hotel_List: hotel_List_Json
+  hotel_List: []
 };
 
 const hotel_List_Slice = createSlice({
