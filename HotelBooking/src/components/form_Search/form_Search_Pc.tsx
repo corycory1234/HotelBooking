@@ -9,12 +9,13 @@ import type { DateValueType } from "react-tailwindcss-datepicker";
 import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
 import Click_Outside from "../clickOutside";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Toaster_Notify from "../toaster/toaster";
 import hotel_List_Json from "@/fakeData/hotel_List.json";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
+import { Refresh_Search_Hotel_List, Search_Params_Interface } from "@/utils/refresh_Search_Hotel_List";
 
 // 1. startDate - 高亮「今天」
 const START_FROM = new Date();
@@ -105,57 +106,122 @@ export default function Form_Search_Pc () {
   // 15. 尚未接 後端API
   const submit_Search = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-    const formData = new FormData(event?.currentTarget);
-
-    const destination = formData.get("destination") as string;
-    const dateRange = formData.get("datepicker") as string;
-    const room = formData.get("room");
-    const adult = formData.get("adult");
-    const child = formData.get("child");
-    const rangeslider = formData.getAll("rangeSlider");
-    const rating = formData.getAll("rating");
-    const bedType = formData.getAll("bedType") as string [];
-    const facility = formData.getAll("facility") as string [];
-    console.log(destination);
-    console.log(dateRange);
-    console.log(room, adult, child);
-    console.log(rating, "星級");
-    console.log("床型", bedType);
-    console.log("設施", facility);
-    console.log("最小最大房錢", rangeslider);
-
-    // 16. 吐司訊息, 防止沒輸入數據
-    if(!destination || destination.trim() === ""){
-      toast.error("Please Type Your Destination");
-      return;
-    };
-    if(!dateRange || dateRange.trim() === "") {
-      toast.error("Please Select DateRange");
-      return;
-    };
-      
-      
-    
-    // 17. URL參數, 轉字串
-    const timestamp = +new Date();
-    const query = new URLSearchParams({
-      destination,
-      dateRange,
-      date_Start: redux_Start_Date as string,
-      date_End: redux_Start_Date as string,
-      room: String(room),
-      adult: String(adult),
-      child: String(child),
-      rangeslider: String(rangeslider),
-      timestamp: String(timestamp),
-      bedtype: String(bedType),
-      rating: String(rating),
-      facility: String(facility),
-    }).toString()
+    try {
+      const formData = new FormData(event?.currentTarget);
+  
+      const destination = formData.get("destination") as string;
+      const dateRange = formData.get("datepicker") as string;
+      const room = formData.get("room");
+      const adult = formData.get("adult");
+      const child = formData.get("child");
+      const rangeslider = formData.getAll("rangeSlider");
+      const rating = formData.getAll("rating");
+      const bedType = formData.getAll("bedType") as string [];
+      const facility = formData.getAll("facility") as string [];
+      console.log(destination);
+      console.log(dateRange);
+      console.log(room, adult, child);
+      console.log(rating, "星級");
+      console.log("床型", bedType);
+      console.log("設施", facility);
+      console.log("最小最大房錢", rangeslider);
+  
+      // 16. 吐司訊息, 防止沒輸入數據
+      if(!destination || destination.trim() === ""){
+        toast.error("Please Type Your Destination");
+        return;
+      };
+      if(!dateRange || dateRange.trim() === "") {
+        toast.error("Please Select DateRange");
+        return;
+      };
         
-    // 18 跳轉「飯店列表」
-    router.push(`/hotellist?${query}`);
+        
+      
+      // 17. URL參數, 轉字串
+      const timestamp = +new Date();
+      const query = new URLSearchParams({
+        destination,
+        dateRange,
+        date_Start: redux_Start_Date as string,
+        date_End: redux_Start_Date as string,
+        room: String(room),
+        adult: String(adult),
+        child: String(child),
+        rangeslider: String(rangeslider),
+        timestamp: String(timestamp),
+        bedtype: String(bedType),
+        rating: String(rating),
+        facility: String(facility),
+      }).toString()
+  
+      const new_Hotel_List = hotel_List_Json.filter((hotel: add_Hotel_Detail_Interface) => {
+        // 3.1 飯店名、飯店城市、飯店國家，一同匹配
+        return (
+          hotel.hotel_Name?.toLowerCase().includes(destination.toLowerCase()) ||
+          hotel.city?.toLowerCase().includes(destination.toLowerCase()) ||
+          hotel.country?.toLowerCase().includes(destination.toLowerCase())
+        )
+      });
+      dispatch(update_Hotel_List(new_Hotel_List));
+          
+      // 18 跳轉「飯店列表」
+      router.push(`/hotellist?${query}`);
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  // 16. F5刷新 - 重新搜尋
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    // 16.1 抓取當前 URL 上的搜尋參數
+    const current_Search_Params = new URLSearchParams(window.location.search);
+    // 16.2 檢查必要參數是否存在
+    if (
+      current_Search_Params.get("destination") && 
+      current_Search_Params.get("dateRange") && 
+      current_Search_Params.get("date_Start") && 
+      current_Search_Params.get("date_End")
+    ) {
+      // 16.3 轉換成符合 Search_Params_Interface 的物件
+      const params: Search_Params_Interface = {
+        destination: current_Search_Params.get("destination") as string,
+        dateRange: current_Search_Params.get("dateRange") as string,
+        date_Start: current_Search_Params.get("date_Start") as string,
+        date_End: current_Search_Params.get("date_End") as string,
+        room: current_Search_Params.get("room") || "",
+        adult: current_Search_Params.get("adult") || "",
+        child: current_Search_Params.get("child") || "",
+        rangeslider: current_Search_Params.get("rangeslider") || "",
+        rating: current_Search_Params.get("rating") || "",
+        bedType: current_Search_Params.get("bedtype")
+          ? (current_Search_Params.get("bedtype") as string).split(",")
+          : [],
+        facility: current_Search_Params.get("facility")
+          ? (current_Search_Params.get("facility") as string).split(",")
+          : [],
+      };
+      // 16.4 呼叫 Refresh_Search_Hotel_List, 取得包含最新的 timestamp
+      const new_Query_String = Refresh_Search_Hotel_List(params)
+      // 16.5 使用 router.replace 更新 URL（避免新增瀏覽歷史紀錄）
+      router.replace(`/hotellist?${new_Query_String}`);
+
+      // 16.6 匹配關鍵字, F5刷新再次搜尋
+      const new_Hotel_List = hotel_List_Json.filter((hotel) => {
+        return (
+          hotel.hotel_Name?.toLowerCase().includes(params.destination.toLowerCase()) ||
+          hotel.city?.toLowerCase().includes(params.destination.toLowerCase()) ||
+          hotel.country?.toLowerCase().includes(params.destination.toLowerCase())
+        );
+      });
+
+      // 16.7 更新 Redux - 飯店列表
+      dispatch(update_Hotel_List(new_Hotel_List))
+    };
+      
+  },[router, dispatch])
 
   // 16.
   // useEffect(() => {

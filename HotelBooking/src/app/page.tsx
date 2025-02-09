@@ -7,7 +7,8 @@ import Carousel_Offer from "@/components/home/carousel_Offers";
 import Menu from "../components/menu";
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
-import Server_Form_Search from "../components/server-Form-Search/server-Form-Search";
+// import Server_Form_Search from "../components/server-Form-Search/server-Form-Search";
+import Index_Form_Search from "../components/form_Search/index_Form_Search";
 import Link from "next/link";
 import Avatar from "@/components/avatar/avatar";
 
@@ -41,7 +42,7 @@ export default function Home() {
         <div className="min-h-screen w-full my-bg-gradient lg:bg-none lg:w-5/6 lg:mx-auto flex flex-col">
           <div className="lg:bg-white lg:rounded-lg">
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
-            <Server_Form_Search></Server_Form_Search>
+            <Index_Form_Search></Index_Form_Search>
             {/* 這個組件裡面有三個 hidden input: room, adult, child */}
           </div>
 

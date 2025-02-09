@@ -10,9 +10,9 @@ import Hotel_Detail_Card from "@/components/hotel_Card/hotel_Detail_Card";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
 import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
-import DateRangePicker from "@/components/server-Form-Search/dateRangePicker";
-import Client_Input_Traveler from "@/components/server-Form-Search/client-Input-Traveler";
-import Client_Input_Keyword from "@/components/server-Form-Search/client-Input-Keyword";
+import DateRangePicker from "@/components/form_Search/dateRangePicker";
+import Client_Input_Traveler from "@/components/form_Search/client-Input-Traveler";
+import Client_Input_Keyword from "@/components/form_Search/client-Input-Keyword";
 import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 
 

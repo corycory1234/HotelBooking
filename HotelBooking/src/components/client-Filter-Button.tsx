@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { Submit_Search } from "@/actions";
 import { useSearchParams } from "next/navigation";
-import Client_RangeSlider from "./server-Form-Search/client_RangeSlider";
-import Client_BedType from "./server-Form-Search/client_BedType";
-import Client_Rating from "./server-Form-Search/client_Rating";
-import Client_Faciliy from "./server-Form-Search/client_Facility";
+import Client_RangeSlider from "./form_Search/client_RangeSlider";
+import Client_BedType from "./form_Search/client_BedType";
+import Client_Rating from "./form_Search/client_Rating";
+import Client_Faciliy from "./form_Search/client_Facility";
 import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
 
 export default function Client_Filter_Button () {

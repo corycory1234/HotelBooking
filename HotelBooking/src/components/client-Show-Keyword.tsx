@@ -3,7 +3,8 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { useEffect, useState } from "react";
-import Server_Form_Search from "./server-Form-Search/server-Form-Search";
+// import Server_Form_Search from "./server-Form-Search/server-Form-Search";
+import Index_Form_Search from "./form_Search/index_Form_Search";
 import Modal from "./modal/modal";
 import { useSearchParams } from "next/navigation";
 
@@ -41,7 +42,7 @@ export default function Client_Show_Keyword () {
     {/* Modal彈跳視窗 */}
       <Modal isOpen={formSearch} onClose={() => setFormSearch(false)}>
         <h2 className="text-xl font-bold mb-4 p-6">Change Keyword</h2>
-        <Server_Form_Search></Server_Form_Search>
+        <Index_Form_Search></Index_Form_Search>
       </Modal>
     {/* Modal彈跳視窗 */}
   </>

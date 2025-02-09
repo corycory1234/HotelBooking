@@ -1,6 +1,7 @@
 'use client';
 import BackPage from "../../components/back-Page/backPage";
-import Server_Form_Search from "../../components/server-Form-Search/server-Form-Search";
+// import Server_Form_Search from "../../components/server-Form-Search/server-Form-Search";
+import Index_Form_Search from "../../components/form_Search/index_Form_Search";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Client_Filter_Button from "../../components/client-Filter-Button";

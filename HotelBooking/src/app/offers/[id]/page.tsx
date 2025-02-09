@@ -15,7 +15,7 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { useRouter } from "next/navigation";
-import Form_Search_Pc from "@/components/server-Form-Search/form_Search_Pc";
+import Form_Search_Pc from "@/components/form_Search/form_Search_Pc";
 
 const initail_Offer = {
   offer_Id: '',
