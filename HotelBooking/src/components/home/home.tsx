@@ -137,7 +137,10 @@ const check_Offer = (offer_Id: string) => {
 
   return <>
     <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
+    
+    {/********************* PC桌機 - Nav導覽 ******************************/}
       <Nav></Nav>
+    {/********************* PC桌機 - Nav導覽 ******************************/}
 
     {/********************* 手機版 - Avatar頭像 ******************************/}
       {redux_Verify_Session.success === true ? 
