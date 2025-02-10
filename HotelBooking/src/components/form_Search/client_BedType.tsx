@@ -22,31 +22,31 @@ export default function Client_BedType () {
   return <>
     <div className="space-y-2">          
       <label className="flex items-center gap-2">
-        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="singleBed" name="bedType"
+        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="singleBed" name="bedtype"
         checked={redux_BedType.includes("singleBed")}
         onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>
         <span>Single Bed</span>
       </label>
       <label className="flex items-center gap-2">
-        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="twinBed" name="bedType"
+        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="twinBed" name="bedtype"
         checked={redux_BedType.includes("twinBed")}
         onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
         <span>Twin Bed</span>
       </label>
       <label className="flex items-center gap-2">
-        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="doubleBed" name="bedType"
+        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="doubleBed" name="bedtype"
         checked={redux_BedType.includes("doubleBed")}
         onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
         <span>Double Bed</span>
       </label>
       <label className="flex items-center gap-2">
-        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="queenBed" name="bedType"
+        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="queenBed" name="bedtype"
         checked={redux_BedType.includes("queenBed")}
         onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
         <span>Queen Bed</span>
       </label>
       <label className="flex items-center gap-2">
-        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="kingBed" name="bedType"
+        <input type="checkbox" className="w-4 h-4 rounded border-gray" value="kingBed" name="bedtype"
         checked={redux_BedType.includes("kingBed")}
         onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
         <span>King Bed</span>

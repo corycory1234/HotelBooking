@@ -89,30 +89,30 @@ export default function Client_Input_Keyword () {
   }
 
   // 4. 重進頁面, Reddux - keyword 初始化 
-  useEffect(() => {
-    dispatch(updateKeyword(""));
-    dispatch(update_Hotel_List([]));
-    // set_Destination("")
-    // set_Debounced_Hotel([])
-    // set_Debounced_City([]);
-    return () => {
-      if(timer_Ref.current) clearTimeout(timer_Ref.current);
-    }
-  },[dispatch])
+  // useEffect(() => {
+  //   dispatch(updateKeyword(""));
+  //   dispatch(update_Hotel_List([]));
+  //   // set_Destination("")
+  //   // set_Debounced_Hotel([])
+  //   // set_Debounced_City([]);
+  //   return () => {
+  //     if(timer_Ref.current) clearTimeout(timer_Ref.current);
+  //   }
+  // },[dispatch])
 
   // 5. Reddux - keyword 有變動, 執行「防抖搜尋」
-  useEffect(() => {
-    if(keyword.trim() !== "") {
-      dispatch(updateKeyword(keyword))
-      debounce_Search(keyword);
-      return
-    } else {
-      dispatch(update_Hotel_List([]));
-      // set_Destination("")
-      // set_Debounced_Hotel([])
-      // set_Debounced_City([]);
-    }
-  },[keyword])
+  // useEffect(() => {
+  //   if(keyword.trim() !== "") {
+  //     dispatch(updateKeyword(keyword))
+  //     debounce_Search(keyword);
+  //     return
+  //   } else {
+  //     dispatch(update_Hotel_List([]));
+  //     // set_Destination("")
+  //     // set_Debounced_Hotel([])
+  //     // set_Debounced_City([]);
+  //   }
+  // },[keyword])
 
   // 6. 檢查 Redux - 飯店陣列 之變化
   // useEffect(() => {

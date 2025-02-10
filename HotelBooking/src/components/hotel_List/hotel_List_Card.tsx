@@ -35,7 +35,7 @@ export default function Hotel_List_Card() {
   const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
   const redux_Child = useSelector((state: RootState) => state.formSearch.child);
   const redux_RangeSlider = useSelector((state: RootState) => state.formSearch.rangeSlider);
-  const timeStamp = + new Date();
+  // const timeStamp = + new Date();
   const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
   const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
   const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
@@ -56,7 +56,7 @@ export default function Hotel_List_Card() {
       adult: String(redux_Adult),
       child: String(redux_Child),
       rangeslider: String(redux_RangeSlider),
-      timestamp: String(timeStamp),
+      timestamp: String(timestamp),
       bedType: String(redux_BedType),
       rating: String(redux_Rating),
       facility: String(redux_Facility)
@@ -169,21 +169,35 @@ export default function Hotel_List_Card() {
   // 11. Sort 傳遞<input type="radio"> 之 Value 與 傳遞函式 set_Sort_Value (手機版)
   const [sort_Value_Mobile, set_Sort_Value_Mobile] = useState("");
 
-  // 12. 這支不知道是甚麼, 感覺是防抖debounce在用的? 當初寫錯地方? 應該是要寫在首頁?
-  // useEffect(() => {
-  //   const hotel_List = hotel_List_Json.filter((hotel: add_Hotel_Detail_Interface) => {
-  //     // 3.1 飯店名、飯店城市、飯店國家，一同匹配
-  //     return (
-  //       hotel.hotel_Name?.toLowerCase().includes((destination as string).toLowerCase()) ||
-  //       hotel.city?.toLowerCase().includes((destination as string).toLowerCase()) ||
-  //       hotel.country?.toLowerCase().includes((destination as string).toLowerCase())
-  //     )
-  //   })
-  //   dispatch(update_Hotel_List(hotel_List))
-  // },[])
-  // useEffect(() => {
-  //   console.log(redux_Hotel_List, "Redux有撈到飯店嘛");
-  // },[redux_Hotel_List])
+  // 12. 飯店列表 API
+  const fetch_Hotel_List = async () => {
+    try {
+      const response = await fetch("/api/hotel_List", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          destination: redux_Destination,
+          dateRange: redux_DateRange,
+          date_Start: redux_Date_Start,
+          date_End: redux_Date_End,
+          rangeslider: redux_RangeSlider,
+          rating: redux_Rating,
+          bedType: redux_BedType,
+          facility: redux_Facility
+        })
+      });
+      if(!response.ok) {
+        throw new Error(`Server error: ${response.status}`)
+      };
+      const result = await response.json();
+      dispatch(update_Hotel_List(result.data));
+    } catch (error) {
+      console.log(error, "飯店列表API失敗");
+    }
+  };
+  useEffect(() => {
+    fetch_Hotel_List();
+  },[])
   
 
   return <>

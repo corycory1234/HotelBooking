@@ -3,25 +3,30 @@ import Modal from "./modal/modal";
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
-import { Submit_Search } from "@/actions";
+import { Submit_Search } from "@/actions/hotel_List";
 import { useSearchParams } from "next/navigation";
 import Client_RangeSlider from "./form_Search/client_RangeSlider";
 import Client_BedType from "./form_Search/client_BedType";
 import Client_Rating from "./form_Search/client_Rating";
 import Client_Faciliy from "./form_Search/client_Facility";
 import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
+import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
+import { useRouter } from "next/navigation";
 
 export default function Client_Filter_Button () {
 
   // 0. 取 Redux - Action「搜尋相關函式」
   const dispatch: AppDispatch = useDispatch();
+  const router = useRouter();
 
   // 1.  取 Redux「搜尋相關數據」
   const destination = useSelector((state: RootState) => state.formSearch.keyword);
-  const storedDateRange = useSelector((state: RootState) => state.formSearch.dateRange);
-  const room = useSelector((state: RootState) => state.formSearch.room);
-  const adult = useSelector((state: RootState) => state.formSearch.adult);
-  const child = useSelector((state: RootState) => state.formSearch.child);
+  const redux_DateRange = useSelector((state: RootState) => state.formSearch.dateRange);
+  const redux_Date_Start = useSelector((state: RootState) => state.formSearch.start_Date);
+  const redux_Date_End = useSelector((state: RootState) => state.formSearch.end_Date);
+  const redux_Room = useSelector((state: RootState) => state.formSearch.room);
+  const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
+  const redux_Child = useSelector((state: RootState) => state.formSearch.child);
 
   // 2. 需要 timeStamp 時間戳, 來偵測「Apply」當下幾毫秒, 若有變, 
   // 2. 就關掉Modal(關掉前會送出 Server Action - Submit_Search函式) 
@@ -46,24 +51,54 @@ export default function Client_Filter_Button () {
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
   }
-
- // 6. 送出<form>按鈕
-  const handleSubmit = () => {
-  if (formRef.current) {
-    formRef.current.requestSubmit(); // 觸發表單的 onSubmit 事件
-  }
-};
-
-  // 7. 取 <form>表單之 ref
-  const formRef = useRef<HTMLFormElement>(null);
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // 阻止默認的表單提交行為
-    handleSubmit();      // 更新 Redux 狀態
   
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      Submit_Search(formData);
-    }
+  // 8. 進階搜尋 - 飯店列表 API
+  const advanced_Search = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // 阻止默認的表單提交行為
+    const formData = new FormData(event.currentTarget);
+    const range_Slider = formData.getAll("rangeslider");
+    const bed_Type = formData.getAll("bedtype");
+    const rating = formData.getAll("rating");
+    const facility = formData.getAll("facility");
+      
+    const response = await fetch("/api/hotel_List", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        destination: destination,
+        dateRange: redux_DateRange,
+        date_Start: redux_Date_Start,
+        date_End: redux_Date_End,
+        room: redux_Room,
+        adult: redux_Adult,
+        child: redux_Child,
+        rangeslider: range_Slider,
+        rating: rating,
+        bedType: bed_Type,
+        facility: facility
+      })
+    });
+    if(!response.ok){throw new Error(`Server error: ${response.status}`)};
+    const result = await response.json();
+    dispatch(update_Hotel_List(result.data));
+
+    // 8.1 路由必須更新, 尤其是timestamp, 其變動, 才會有Skeleton動畫
+    const timestamp = + new Date();
+    const search_Params = new URLSearchParams({
+      destination: destination as string,
+      dateRange: redux_DateRange as string,
+      date_Start: redux_Date_Start as string,
+      date_End: redux_Date_End as string,
+      room: String(redux_Room),
+      adult: String(redux_Adult),
+      child: String(redux_Child),
+      rangeslider: String(range_Slider),
+      timestamp: String(timestamp),
+      bedtype: String(bed_Type),
+      rating: String(rating),
+      facility: String(facility),
+    }).toString();
+    router.push(`/hotellist?${search_Params}`)
   };
 
 
@@ -90,13 +125,13 @@ export default function Client_Filter_Button () {
       <title>Filter Modal</title>
 
 
-      <form ref={formRef} onSubmit={handleFormSubmit} className="mx-auto flex flex-col">
+      <form onSubmit={advanced_Search} className="mx-auto flex flex-col">
         {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
-          <input type="hidden" name="destination" value={destination} />
+          {/* <input type="hidden" name="destination" value={destination} />
           <input type="hidden" name="datepicker" value={storedDateRange || ""} />
           <input type="hidden" name="room" value={room} />
           <input type="hidden" name="adult" value={adult} />
-          <input type="hidden" name="child" value={child} />
+          <input type="hidden" name="child" value={child} /> */}
         {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
 
         <div className="flex justify-between items-center p-4 border-b border-gray">

@@ -19,7 +19,7 @@ export default function Client_RangeSlider () {
   
     <div className="flex flex-col gap-2 w-full h-full items-start justify-center">
       <Slider
-        name="rangeSlider"
+        name="rangeslider"
         className=""
         formatOptions={{style: "currency", currency: "USD"}}
         label=" "
