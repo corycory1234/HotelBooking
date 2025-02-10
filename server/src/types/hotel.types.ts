@@ -1,53 +1,70 @@
 export interface HotelImage {
-  url: string;
-  path?: string;
-  description?: string;
+    url: string;
+    description: string;
 }
 
-export interface HotelReview {
-  id: string;
-  name: string;
-  date: string;
-  rating: number;
-  comment: string;
+export interface Review {
+    travelerId: string;
+    travelerName: string;
+    date: string;
+    travelerRating: number;
+    comment: string;
+    reply: string;
 }
 
 export interface RoomType {
-  roomType: string;
-  price: number;
-  images: HotelImage[];
-  availability: number;
-  smoke: boolean;
-  amenity: string[];
-  roomSize: number;
-  maxOccupancy: number;
+    roomTypeId: string;
+    roomType: string;
+    roomPrice: number;
+    roomTypeImageList: HotelImage[];
+    roomAvailability: number;
+    smoke: boolean;
+    amenityList: string[];
+    roomSize: number;
+    maxPeople: number;
+    view?: string;
+    bedType?: string;
 }
 
 export interface CreateHotelDTO {
-  name: string;
-  address: string;
-  country: string;
-  city: string;
-  rating: number;
-  facilities: string[];
-  price: number;
-  hotelPhone: string;
-  hotelEmail: string;
-  checkin: string;
-  checkout: string;
-  images: HotelImage[];
-  roomTypes: RoomType[];
+    hotelId: string;
+    hotelName: string;
+    hotelImageList: HotelImage[];
+    distance?: string;
+    totalRating: number;
+    facilityList: string[];
+    price: number;
+    hotelIntro?: string;
+    reviewList: Review[];
+    address: string;
+    country: string;
+    city: string;
+    tax?: number;
+    checkin: string;
+    checkout: string;
+    latitude?: number;
+    longitude?: number;
+    isOpen?: boolean;
+    hotelPhone: string;
+    hotelEmail: string;
+    cancellationPolicy?: string;
+    transportation?: string;
+    recommendation?: string;
+    isCollected?: boolean;
+    offerId?: string;
+    roomTypeList: RoomType[];
 }
 
 export interface Hotel {
-  images: HotelImage[];
-  reviews: HotelReview[];
+    images: HotelImage[];
+    reviews: Review[];
 }
 
 export interface SearchHotelsParams {
-    page: number;          // 改為必填
-    limit: number;         // 改為必填
+    page: number;
+    limit: number;
     city?: string;
+    country?: string;
     minPrice?: number;
     maxPrice?: number;
     rating?: number;

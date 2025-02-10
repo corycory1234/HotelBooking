@@ -12,17 +12,17 @@ class HotelController {
         try {
             // 驗證必填參數
             const page = parseInt(req.query.page as string);
-            const limit = parseInt(req.query.limit as string);
 
-            if (!page || !limit || isNaN(page) || isNaN(limit)) {
+            if (!page || isNaN(page)) {
                 return res.status(400).json(
-                    ApiResponse.error("頁碼(page)和筆數(limit)為必填參數")
+                    ApiResponse.error("頁碼(page)為必填參數")
                 );
             }
 
             const searchParams: SearchHotelsParams = {
                 page,
-                limit,
+                limit: 10, // 固定為 10 筆
+                country: req.query.country as string || undefined,
                 city: req.query.city as string || undefined,
                 minPrice: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
                 maxPrice: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
@@ -62,7 +62,7 @@ class HotelController {
     // 新增飯店
     async createHotel(req: Request, res: Response) {
         try {
-            const token = req.cookies?.access_token;  // 改回使用 cookies
+            const token = req.cookies?.access_token;
             const hotelData: CreateHotelDTO = req.body;
 
             const validation = hotelService.validateHotelData(hotelData);

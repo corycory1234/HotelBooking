@@ -22,6 +22,13 @@
       "when": 1738316462294,
       "tag": "0002_mature_stick",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1739202378849,
+      "tag": "0003_light_next_avengers",
+      "breakpoints": true
     }
   ]
 }
