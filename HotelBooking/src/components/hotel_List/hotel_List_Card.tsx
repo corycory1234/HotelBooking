@@ -182,6 +182,9 @@ export default function Hotel_List_Card() {
           dateRange: redux_DateRange,
           date_Start: redux_Date_Start,
           date_End: redux_Date_End,
+          room: redux_Room,
+          adult: redux_Adult,
+          child: redux_Child,
           rangeslider: redux_RangeSlider,
           rating: redux_Rating,
           bedType: redux_BedType,
@@ -200,8 +203,8 @@ export default function Hotel_List_Card() {
 
 
 
-      // 3. URL參數, 轉字串
-      const timestamp = +new Date();
+      // 12.1 URL參數, 轉字串
+      // const timestamp = +new Date();
       const search_Params = new URLSearchParams({
         destination: redux_Destination,
         dateRange: redux_DateRange as string,
@@ -218,21 +221,16 @@ export default function Hotel_List_Card() {
         page: String(result.currentPage)
       }).toString()
 
-      
-
-      // 6. 跳轉「飯店列表」
+      // 12.2 跳轉「飯店列表」
       router.push(`/hotellist?${search_Params}`);
 
-
-
-      
     } catch (error) {
       console.log(error, "飯店列表API失敗");
     }
   };
   useEffect(() => {
     fetch_Hotel_List(Number(current_Page_Params));
-  },[])
+  },[timestamp])
 
   // 13. Pagination 分頁
   const [current_Page, set_Current_Page] = useState<number>(1);
@@ -255,10 +253,10 @@ export default function Hotel_List_Card() {
   // 15. 下一頁
   const next_Page = () => {
     set_Current_Page((prevPage: number) => {
-      if(prevPage === redux_Hotel_List.length) {
+      if(prevPage === total_Pages) {
         return prevPage;
       } else {
-        const newPage =  prevPage < redux_Hotel_List.length ? prevPage + 1 : redux_Hotel_List.length;
+        const newPage =  prevPage < total_Pages ? prevPage + 1 : prevPage;
         fetch_Hotel_List(newPage);
         return newPage;
       }
@@ -473,7 +471,7 @@ export default function Hotel_List_Card() {
         })}
         
       {/**********  Pagination 分頁 **********/}
-        <ul className="flex justify-center items-center gap-2">
+        <ul className="flex justify-center items-center gap-2 py-4 lg:py-0">
           <li className={`${current_Page === 1 ? 'disabled text-softGray' : 'hover:bg-primary hover:rounded hover:text-white'} p-2 cursor-pointer`}
             onClick={previous_Page}>{"＜"}</li>
           {Array.from({length: total_Pages}).map((_, index) => {
@@ -483,7 +481,7 @@ export default function Hotel_List_Card() {
             }
             }>{index +1}</li>
           })}
-          <li className={`${current_Page === redux_Hotel_List.length ? 'disabled text-softGray' : 'hover:bg-primary hover:rounded hover:text-white'} p-2 cursor-pointer`}
+          <li className={`${current_Page === total_Pages ? 'disabled text-softGray' : 'hover:bg-primary hover:rounded hover:text-white'} p-2 cursor-pointer`}
             onClick={next_Page}>{"＞"}</li>
         </ul>
       {/**********  Pagination 分頁 **********/}

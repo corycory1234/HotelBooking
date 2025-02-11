@@ -21,7 +21,7 @@ export default function Client_Show_Keyword () {
   // 2. 監聽URL路徑
   const searchParams = useSearchParams();
   const destination = searchParams.get("destination");
-  // const dateRange = searchParams.get("dateRange");
+  const dateRange_Params = searchParams.get("dateRange");
   const room = searchParams.get("room");
   const adult = searchParams.get("adult");
   const child = searchParams.get("child");
@@ -30,7 +30,7 @@ export default function Client_Show_Keyword () {
   // 3. URL參數一有變, 就關掉Modal
   useEffect(() => {
     setFormSearch(false)
-  },[destination, room, adult, child, timestamp])
+  },[destination, room, adult, child, timestamp, dateRange_Params])
 
   return <>
     <div className="flex flex-col items-center text-white cursor-pointer" 

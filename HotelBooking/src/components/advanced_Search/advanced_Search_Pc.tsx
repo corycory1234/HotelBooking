@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { Submit_Search } from "@/actions/hotel_List";
@@ -9,12 +9,13 @@ import Client_Rating from "../form_Search/client_Rating";
 import Client_Faciliy from "../form_Search/client_Facility";
 import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Advanced_Search_Pc () {
   // 0. 取 Redux - Action「搜尋相關函式」
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
+  const params = useSearchParams();
 
   // 1.  取 Redux「搜尋相關數據」
   const destination = useSelector((state: RootState) => state.formSearch.keyword);
@@ -49,26 +50,27 @@ export default function Advanced_Search_Pc () {
       const rating = formData.getAll("rating");
       const facility = formData.getAll("facility");
       
-      const response = await fetch("/api/hotel_List", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          destination: destination,
-          dateRange: redux_DateRange,
-          date_Start: redux_Date_Start,
-          date_End: redux_Date_End,
-          room: redux_Room,
-          adult: redux_Adult,
-          child: redux_Child,
-          rangeslider: range_Slider,
-          rating: rating,
-          bedType: bed_Type,
-          facility: facility
-        })
-      });
-      if(!response.ok){throw new Error(`Server error: ${response.status}`)};
-      const result = await response.json();
-      dispatch(update_Hotel_List(result.data));
+      // const response = await fetch("/api/hotel_List", {
+      //   method: "POST",
+      //   headers: {"Content-Type": "application/json"},
+      //   body: JSON.stringify({
+      //     destination: destination,
+      //     dateRange: redux_DateRange,
+      //     date_Start: redux_Date_Start,
+      //     date_End: redux_Date_End,
+      //     room: redux_Room,
+      //     adult: redux_Adult,
+      //     child: redux_Child,
+      //     rangeslider: range_Slider,
+      //     rating: rating,
+      //     bedType: bed_Type,
+      //     facility: facility,
+      //     page: Number(params.get("page"))
+      //   })
+      // });
+      // if(!response.ok){throw new Error(`Server error: ${response.status}`)};
+      // const result = await response.json();
+      // dispatch(update_Hotel_List(result.data));
 
       // 8.1 路由必須更新, 尤其是timestamp, 其變動, 才會有Skeleton動畫
       const timestamp = + new Date();
@@ -85,6 +87,7 @@ export default function Advanced_Search_Pc () {
         bedtype: String(bed_Type),
         rating: String(rating),
         facility: String(facility),
+        page: String(params.get("page"))
       }).toString();
       router.push(`/hotellist?${search_Params}`)
 
@@ -98,14 +101,13 @@ export default function Advanced_Search_Pc () {
       // }
     };
 
-  // 5. 初始化所有篩選條件 
+  // 9. 初始化所有篩選條件 
   const reset = () => {
     dispatch(updateRangeSlider([0,9999]));
     dispatch(updateBedType([]));
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
   }
-
 
 
   return <>

@@ -4,14 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { Submit_Search } from "@/actions/hotel_List";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Client_RangeSlider from "./form_Search/client_RangeSlider";
 import Client_BedType from "./form_Search/client_BedType";
 import Client_Rating from "./form_Search/client_Rating";
 import Client_Faciliy from "./form_Search/client_Facility";
 import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
-import { useRouter } from "next/navigation";
 
 export default function Client_Filter_Button () {
 
@@ -51,7 +50,7 @@ export default function Client_Filter_Button () {
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
   }
-  
+
   // 8. 進階搜尋 - 飯店列表 API
   const advanced_Search = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // 阻止默認的表單提交行為
@@ -61,26 +60,27 @@ export default function Client_Filter_Button () {
     const rating = formData.getAll("rating");
     const facility = formData.getAll("facility");
       
-    const response = await fetch("/api/hotel_List", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        destination: destination,
-        dateRange: redux_DateRange,
-        date_Start: redux_Date_Start,
-        date_End: redux_Date_End,
-        room: redux_Room,
-        adult: redux_Adult,
-        child: redux_Child,
-        rangeslider: range_Slider,
-        rating: rating,
-        bedType: bed_Type,
-        facility: facility
-      })
-    });
-    if(!response.ok){throw new Error(`Server error: ${response.status}`)};
-    const result = await response.json();
-    dispatch(update_Hotel_List(result.data));
+    // const response = await fetch("/api/hotel_List", {
+    //   method: "POST",
+    //   headers: {"Content-Type": "application/json"},
+    //   body: JSON.stringify({
+    //     destination: destination,
+    //     dateRange: redux_DateRange,
+    //     date_Start: redux_Date_Start,
+    //     date_End: redux_Date_End,
+    //     room: redux_Room,
+    //     adult: redux_Adult,
+    //     child: redux_Child,
+    //     rangeslider: range_Slider,
+    //     rating: rating,
+    //     bedType: bed_Type,
+    //     facility: facility,
+    //     page: Number(searchParams.get("page"))
+    //   })
+    // });
+    // if(!response.ok){throw new Error(`Server error: ${response.status}`)};
+    // const result = await response.json();
+    // dispatch(update_Hotel_List(result.data));
 
     // 8.1 路由必須更新, 尤其是timestamp, 其變動, 才會有Skeleton動畫
     const timestamp = + new Date();
@@ -97,10 +97,10 @@ export default function Client_Filter_Button () {
       bedtype: String(bed_Type),
       rating: String(rating),
       facility: String(facility),
+      page: String(searchParams.get("page"))
     }).toString();
     router.push(`/hotellist?${search_Params}`)
   };
-
 
 
   return <>

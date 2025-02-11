@@ -135,24 +135,28 @@ export default function Form_Search_Pc () {
       };
       
       // 15.2 飯店列表 API
-      const response = await fetch("/api/hotel_List", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          destination: destination,
-          dateRange: dateRange,
-          date_Start: redux_Start_Date,
-          date_End: redux_End_Date,
-          rangeslider: rangeslider,
-          rating: rating,
-          bedType: bedType,
-          facility: facility
-        })
-      });
-      if(!response.ok) {throw new Error(`Server error: ${response.status}`)};
-      const result = await response.json();
-      // 15.3 更新 Redux - 飯店列表
-      dispatch(update_Hotel_List(result.data))
+      // const response = await fetch("/api/hotel_List", {
+      //   method: "POST",
+      //   headers: {"Content-Type": "application/json"},
+      //   body: JSON.stringify({
+      //     destination: destination,
+      //     dateRange: dateRange,
+      //     date_Start: redux_Start_Date,
+      //     date_End: redux_End_Date,
+      //     room: room,
+      //     adult: adult,
+      //     child: child,
+      //     rangeslider: rangeslider,
+      //     rating: rating,
+      //     bedType: bedType,
+      //     facility: facility,
+      //     page: Number(searchParams.get("page"))
+      //   })
+      // });
+      // if(!response.ok) {throw new Error(`Server error: ${response.status}`)};
+      // const result = await response.json();
+      // // 15.3 更新 Redux - 飯店列表
+      // dispatch(update_Hotel_List(result.data))
         
       // 15.4 URL參數, 轉字串
       const timestamp = +new Date();
@@ -169,6 +173,8 @@ export default function Form_Search_Pc () {
         bedtype: String(bedType),
         rating: String(rating),
         facility: String(facility),
+        // page: String(result.currentPage)
+        page: "1"
       }).toString()
   
           
