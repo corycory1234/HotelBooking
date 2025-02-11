@@ -1,24 +1,22 @@
 import express from 'express';
+import { BookingController } from '../../controllers/booking.controller';
+import { authMiddleware } from '../../middlewares/auth.middleware';
+
 const router = express.Router();
 
-// 建立訂單
-router.post('/', async (req, res) => {
-  // TODO: 實作建立訂單邏輯
-});
+// 建立新訂單
+router.post('/', authMiddleware, BookingController.createBooking);
 
-// 獲取訂單列表
-router.get('/', async (req, res) => {
-  // TODO: 實作訂單列表邏輯
-});
+// 獲取當前用戶的所有訂單
+router.get('/my-bookings', authMiddleware, BookingController.getUserBookings);
 
-// 獲取訂單詳情
-router.get('/:id', async (req, res) => {
-  // TODO: 實作訂單詳情邏輯
-});
+// 獲取特定飯店的所有訂單
+router.get('/hotel/:hotelId', authMiddleware, BookingController.getHotelBookings);
 
-// 取消訂單
-router.delete('/:id', async (req, res) => {
-  // TODO: 實作取消訂單邏輯
-});
+// 獲取單一訂單詳細資訊
+router.get('/:id', authMiddleware, BookingController.getBookingById);
+
+// 更新訂單狀態
+router.patch('/:id/status', authMiddleware, BookingController.updateBookingStatus);
 
 export default router;

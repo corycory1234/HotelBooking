@@ -1,46 +1,61 @@
 // src/middlewares/auth.middleware.ts
 import { Request, Response, NextFunction } from "express";
-import { User } from "@supabase/supabase-js";
-import { authService } from "../services/auth.service";
+import { supabase } from '../utils/supabase';
+import { db } from '../db';
+import { users } from '../db/schema/users';
+import { eq } from 'drizzle-orm';
+import { User, UserType } from '../types/user.types';
 
-interface AuthenticatedRequest extends Request {
-    user?: Partial<User>;
+// 修改 Request 擴展方式
+declare global {
+    namespace Express {
+        interface Request {
+            user?: User;
+        }
+    }
 }
 
 export const authMiddleware = async (
-    req: AuthenticatedRequest,
+    req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> => {
     try {
-        const accessToken = req.cookies?.access_token;
-
-        if (!accessToken) {
-            res.status(401).json({
-                success: false,
-                message: "未登入",
-            });
+        const token = req.headers.authorization?.split(' ')[1];
+        
+        if (!token) {
+            res.status(401).json({ message: '未提供認證令牌' });
             return;
         }
 
-        const { data, error } = await authService.verifySession(accessToken);
+        const { data: { user }, error } = await supabase.auth.getUser(token);
 
-        if (error || !data.user) {
-            res.status(401).json({
-                success: false,
-                message: error?.message || "無效的 session",
-            });
+        if (error || !user) {
+            res.status(403).json({ message: '無效的認證令牌' });
             return;
         }
 
-        req.user = data.user;
+        const dbUser = await db.query.users.findFirst({
+            where: eq(users.id, user.id)
+        });
+
+        if (!dbUser) {
+            res.status(403).json({ message: '用戶不存在' });
+            return;
+        }
+
+        // 設置完整的用戶資訊
+        req.user = {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: user.email ?? undefined,
+            userType: dbUser.userType as UserType,
+            createdAt: dbUser.createdAt,
+            updatedAt: dbUser.updatedAt
+        };
 
         next();
     } catch (error: any) {
-        res.status(401).json({
-            success: false,
-            message: "請重新登入",
-        });
-        return;
+        res.status(401).json({ message: '驗證失敗' });
     }
 };
