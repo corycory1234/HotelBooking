@@ -19,7 +19,7 @@ import { FacilitySVG } from "../client_Svg/client_Svg";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import { useSearchParams } from "next/navigation";
 import Not_Found from "../not_Found/not_Found";
-import Client_Filter_Button from "../client-Filter-Button";
+import Filter_Button from "../filter_Button";
 import Half_Modal from "../modal/half-modal";
 
 export default function Hotel_List_Card() {
@@ -271,7 +271,7 @@ export default function Hotel_List_Card() {
     <>
     {/************ 手機版 - Filter、熱門搜尋條件 ************/}
       <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray lg:hidden">
-        <Client_Filter_Button></Client_Filter_Button>
+        <Filter_Button></Filter_Button>
       </div>
     {/************ 手機版 - Filter、熱門搜尋條件 ************/}
       
@@ -301,12 +301,12 @@ export default function Hotel_List_Card() {
   {/************ PC桌機版 - 以下大多屬於PC桌機 ************/}
     <div className="lg:flex lg:justify-between lg:mt-[167px] lg:px-16">
 
-      {/** Filter過濾條件 - PC */}
+      {/********** PC桌機版 - Filter過濾條件 **********/}
       <div className={`hidden lg:block lg:w-1/4 border border-softGray rounded
         lg:sticky lg:top-[184px] self-start`}>
         <Advanced_Search_Pc></Advanced_Search_Pc>
       </div>
-      {/** Filter過濾條件 - PC */}
+      {/********** PC桌機版 - Filter過濾條件 **********/}
 
 
       {/** 飯店列表卡片 */}
