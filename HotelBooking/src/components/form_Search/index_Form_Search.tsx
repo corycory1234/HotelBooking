@@ -71,6 +71,7 @@ export default function Index_Form_Search () {
         bedtype: String(bedType),
         rating: String(rating),
         facility: String(facility),
+        page: "1"
       }).toString()
 
       // 4. 飯店名、飯店城市、飯店國家，一同匹配

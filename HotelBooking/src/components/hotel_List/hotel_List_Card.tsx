@@ -117,6 +117,8 @@ export default function Hotel_List_Card() {
   const searchParams = useSearchParams();
   const destination = searchParams.get("destination");
   const timestamp = searchParams.get("timestamp");
+  const current_Page_Params = searchParams.get("page");
+
 
   useEffect(() => {
     set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
@@ -124,7 +126,7 @@ export default function Hotel_List_Card() {
       set_Show_Hotel_List(true);
     }, 1500);
     return () => clearTimeout(timer);
-  },[timestamp])
+  },[searchParams])
 
   // 9. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
@@ -170,7 +172,7 @@ export default function Hotel_List_Card() {
   const [sort_Value_Mobile, set_Sort_Value_Mobile] = useState("");
 
   // 12. 飯店列表 API
-  const fetch_Hotel_List = async () => {
+  const fetch_Hotel_List = async (page: number) => {
     try {
       const response = await fetch("/api/hotel_List", {
         method: "POST",
@@ -183,7 +185,8 @@ export default function Hotel_List_Card() {
           rangeslider: redux_RangeSlider,
           rating: redux_Rating,
           bedType: redux_BedType,
-          facility: redux_Facility
+          facility: redux_Facility,
+          page: page
         })
       });
       if(!response.ok) {
@@ -191,18 +194,80 @@ export default function Hotel_List_Card() {
       };
       const result = await response.json();
       dispatch(update_Hotel_List(result.data));
+      set_Current_Page(result.currentPage);
+      set_Total_Hotel(result.total);
+      set_Total_Pages(result.totalPages)
+
+
+
+      // 3. URL參數, 轉字串
+      const timestamp = +new Date();
+      const search_Params = new URLSearchParams({
+        destination: redux_Destination,
+        dateRange: redux_DateRange as string,
+        date_Start: redux_Date_Start as string,
+        date_End: redux_Date_End as string,
+        room: String(redux_Room),
+        adult: String(redux_Adult),
+        child: String(redux_Child),
+        rangeslider: String(redux_RangeSlider),
+        timestamp: String(timestamp),
+        bedtype: String(redux_BedType),
+        rating: String(redux_Rating),
+        facility: String(redux_Facility),
+        page: String(result.currentPage)
+      }).toString()
+
+      
+
+      // 6. 跳轉「飯店列表」
+      router.push(`/hotellist?${search_Params}`);
+
+
+
+      
     } catch (error) {
       console.log(error, "飯店列表API失敗");
     }
   };
   useEffect(() => {
-    fetch_Hotel_List();
+    fetch_Hotel_List(Number(current_Page_Params));
   },[])
+
+  // 13. Pagination 分頁
+  const [current_Page, set_Current_Page] = useState<number>(1);
+  const [total_Hotel, set_Total_Hotel] = useState<number>(0);
+  const [total_Pages, set_Total_Pages] = useState<number>(1);
   
+  // 14. 上一頁
+  const previous_Page = () => {
+    set_Current_Page((prevPage: number) => {
+      if(prevPage === 1) {
+        return prevPage;
+      } else {
+        const newPage =  prevPage > 1 ? prevPage - 1 : 1;
+        fetch_Hotel_List(newPage);
+        return newPage;
+      }
+    });
+  };
+
+  // 15. 下一頁
+  const next_Page = () => {
+    set_Current_Page((prevPage: number) => {
+      if(prevPage === redux_Hotel_List.length) {
+        return prevPage;
+      } else {
+        const newPage =  prevPage < redux_Hotel_List.length ? prevPage + 1 : redux_Hotel_List.length;
+        fetch_Hotel_List(newPage);
+        return newPage;
+      }
+    });
+  };
 
   return <>
   {/************ 手機版|PC桌機 - 沒找到, 就<Not_Found> ************/}
-    {redux_Hotel_List.length <=0 ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>
+    {redux_Hotel_List?.length <=0 ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>
     
     :
     <>
@@ -217,7 +282,7 @@ export default function Hotel_List_Card() {
     <main className="p-4">
 
       <div className="flex items-center justify-between pb-4 lg:hidden">
-        <p className="text-sm">{redux_Hotel_List.length} hotels</p>
+        <p className="text-sm">{redux_Hotel_List?.length} hotels</p>
       {/************ 手機版 - ↑↓Sort排序 ************/}
         <div className="flex items-center gap-1 border border-gray rounded px-2 py-1 cursor-pointer" onClick={()=> setFormSort_Mobile(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" >
@@ -294,10 +359,10 @@ export default function Hotel_List_Card() {
         {/** Sort排序 - PC */}
         
         {/** 總共OO間飯店 - PC */}
-        <p className="hidden lg:block lg:border-b lg:border-softGray lg:py-2">{redux_Hotel_List.length} Hotels</p>
+        <p className="hidden lg:block lg:border-b lg:border-softGray lg:py-2">{redux_Hotel_List?.length} Hotels</p>
         {/** 總共OO間飯店 - PC*/}
         
-        {redux_Hotel_List.map((item) => {
+        {redux_Hotel_List?.map((item) => {
         return <div key={item.hotel_Id} className="space-y-4">
           <article className="bg-white rounded-lg overflow-hidden shadow-sm lg:rounded-none lg:border-b lg:border-softGray
           lg:flex lg:gap-4 lg:relative">
@@ -406,6 +471,23 @@ export default function Hotel_List_Card() {
           </article>
         </div>
         })}
+        
+      {/**********  Pagination 分頁 **********/}
+        <ul className="flex justify-center items-center gap-2">
+          <li className={`${current_Page === 1 ? 'disabled text-softGray' : 'hover:bg-primary hover:rounded hover:text-white'} p-2 cursor-pointer`}
+            onClick={previous_Page}>{"＜"}</li>
+          {Array.from({length: total_Pages}).map((_, index) => {
+            return <li key={index+1} className={`${current_Page === index+1 ? 'bg-primary rounded text-white' : ''} py-2 px-3 font-semibold cursor-pointer`}
+              onClick={() => {set_Current_Page(index+1),
+              fetch_Hotel_List(index+1)
+            }
+            }>{index +1}</li>
+          })}
+          <li className={`${current_Page === redux_Hotel_List.length ? 'disabled text-softGray' : 'hover:bg-primary hover:rounded hover:text-white'} p-2 cursor-pointer`}
+            onClick={next_Page}>{"＞"}</li>
+        </ul>
+      {/**********  Pagination 分頁 **********/}
+
         
         </>
 
