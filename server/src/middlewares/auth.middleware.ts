@@ -21,7 +21,13 @@ export const authMiddleware = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const token = req.headers.authorization?.split(' ')[1];
+        // 優先從 cookies 中獲取 token
+        let token = req.cookies.access_token;
+        
+        // 如果 cookies 中沒有，則嘗試從 Authorization header 中獲取
+        if (!token) {
+            token = req.headers.authorization?.split(' ')[1];
+        }
         
         if (!token) {
             res.status(401).json({ message: '未提供認證令牌' });

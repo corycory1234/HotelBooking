@@ -13,7 +13,6 @@ import { users } from "./users";
 
 export const hotels = pgTable("hotels", {
     id: uuid("id").defaultRandom().primaryKey(),
-    hotelId: varchar("hotel_id", { length: 255 }).notNull(),
     hotelName: varchar("hotel_name", { length: 255 }).notNull(),
     hotelImageList: jsonb("hotel_image_list")
         .$type<

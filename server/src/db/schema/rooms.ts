@@ -13,7 +13,6 @@ import { users } from "./users";
 
 export const roomTypes = pgTable("room_types", {
     id: uuid("id").defaultRandom().primaryKey(),
-    roomTypeId: varchar("room_type_id", { length: 255 }).notNull(),
     roomType: varchar("room_type", { length: 50 }).notNull(),
     roomPrice: numeric("room_price").notNull(),
     roomTypeImageList: jsonb("room_type_image_list")

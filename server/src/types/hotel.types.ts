@@ -13,7 +13,6 @@ export interface Review {
 }
 
 export interface RoomType {
-    roomTypeId: string;
     roomType: string;
     roomPrice: number;
     roomTypeImageList: HotelImage[];
@@ -27,7 +26,6 @@ export interface RoomType {
 }
 
 export interface CreateHotelDTO {
-    hotelId: string;
     hotelName: string;
     hotelImageList: HotelImage[];
     distance?: string;

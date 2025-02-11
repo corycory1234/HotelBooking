@@ -3,6 +3,7 @@ import { bookings } from '../db/schema/bookings';
 import { hotels } from '../db/schema/hotels';
 import { roomTypes } from '../db/schema/rooms';
 import { eq, and, or, gte, lte, desc } from 'drizzle-orm';
+import { RoomType } from '../types/room.types';  // 請確保已建立此型別
 
 interface CreateBookingData {
     userId: string;
@@ -50,17 +51,23 @@ export class BookingService extends BaseService {
             throw new Error('找不到指定房間');
         }
 
+        // 使用 roomAvailability 替代 totalRooms
+        const availableRooms = room.roomAvailability;
+
+        const checkInStr = checkInDate.toISOString().split('T')[0];
+        const checkOutStr = checkOutDate.toISOString().split('T')[0];
+
         const existingBookings = await this.db.query.bookings.findMany({
             where: and(
                 eq(bookings.roomId, roomId),
                 or(
                     and(
-                        gte(bookings.checkInDate, checkInDate),
-                        lte(bookings.checkInDate, checkOutDate)
+                        gte(bookings.checkInDate, checkInStr),
+                        lte(bookings.checkInDate, checkOutStr)
                     ),
                     and(
-                        gte(bookings.checkOutDate, checkInDate),
-                        lte(bookings.checkOutDate, checkOutDate)
+                        gte(bookings.checkOutDate, checkInStr),
+                        lte(bookings.checkOutDate, checkOutStr)
                     )
                 )
             )
@@ -71,7 +78,7 @@ export class BookingService extends BaseService {
             0
         );
 
-        if (totalBookedRooms + requestedCount > room.totalRooms) {
+        if (totalBookedRooms + requestedCount > availableRooms) {
             throw new Error('所選日期區間房間數量不足');
         }
 
@@ -107,21 +114,36 @@ export class BookingService extends BaseService {
                 (1000 * 60 * 60 * 24)
             );
 
-            const subtotal = room.price * data.roomCount * nights;
-            const tax = hotel.tax || 0;
-            const totalPrice = subtotal * (1 + tax);
+            const roomPrice = parseFloat(room.roomPrice);
+            const subtotal = roomPrice * data.roomCount * nights;
+            const taxRate = hotel.tax?.toString() ? parseFloat(hotel.tax.toString()) : 0;
+            const totalPrice = subtotal * (1 + taxRate);
+
+            // 轉換日期為 ISO 日期字符串
+            const checkInStr = data.checkInDate.toISOString().split('T')[0];
+            const checkOutStr = data.checkOutDate.toISOString().split('T')[0];
 
             // 建立訂單
             const [newBooking] = await this.db.insert(bookings)
                 .values({
-                    ...data,
-                    price: room.price,
-                    tax,
-                    totalPrice,
-                    checkinTime: hotel.checkin,
-                    checkoutTime: hotel.checkout,
+                    userId: data.userId,
+                    hotelId: data.hotelId,
+                    roomId: data.roomId,
+                    travelerName: data.travelerName,
+                    customerEmail: data.customerEmail,
+                    customerPhone: data.customerPhone,
+                    checkInDate: checkInStr,  // 使用字符串格式
+                    checkOutDate: checkOutStr,  // 使用字符串格式
+                    adults: data.adults,
+                    children: data.children || 0,
+                    roomCount: data.roomCount,
+                    price: roomPrice.toString(),
+                    tax: taxRate.toString(),
+                    totalPrice: totalPrice.toString(),
                     status: 'pending',
                     paymentStatus: 'pending',
+                    checkinTime: hotel.checkin,
+                    checkoutTime: hotel.checkout,
                     address: hotel.address,
                     city: hotel.city,
                     country: hotel.country,

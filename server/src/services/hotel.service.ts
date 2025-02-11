@@ -33,7 +33,6 @@ export class HotelService extends BaseService {
                 try {
                     // 新增飯店 - 確保資料型別正確
                     const [newHotel] = await tx.insert(hotels).values({
-                        hotelId: hotelData.hotelId,
                         hotelName: hotelData.hotelName,
                         hotelImageList: hotelData.hotelImageList || [],
                         distance: hotelData.distance,
@@ -64,7 +63,6 @@ export class HotelService extends BaseService {
                     // 新增房型 - 確保資料型別正確
                     const roomPromises = hotelData.roomTypeList.map(room => 
                         tx.insert(roomTypes).values({
-                            roomTypeId: room.roomTypeId,
                             roomType: room.roomType,
                             roomPrice: room.roomPrice.toString(),
                             roomTypeImageList: room.roomTypeImageList || [],

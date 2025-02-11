@@ -26,9 +26,9 @@ router.get('/', asyncHandler(hotelController.getHotels));
 router.get('/:id', asyncHandler(hotelController.getHotel));
 
 // 獲取飯店房型
-router.get('/:id/rooms', async (req, res) => {
-  // TODO: 實作房型列表邏輯
-});
+// router.get('/:id/rooms', async (req, res) => {
+//   // TODO: 實作房型列表邏輯
+// });
 
 // 新增飯店
 router.post('/', authMiddleware, asyncHandler(hotelController.createHotel));
