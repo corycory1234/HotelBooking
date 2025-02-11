@@ -10,35 +10,48 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
-const auth_service_1 = require("../services/auth.service");
+const supabase_1 = require("../utils/supabase");
+const db_1 = require("../db");
+const users_1 = require("../db/schema/users");
+const drizzle_orm_1 = require("drizzle-orm");
 const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     try {
-        const accessToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
-        if (!accessToken) {
-            res.status(401).json({
-                success: false,
-                message: "未登入",
-            });
+        // 優先從 cookies 中獲取 token
+        let token = req.cookies.access_token;
+        // 如果 cookies 中沒有，則嘗試從 Authorization header 中獲取
+        if (!token) {
+            token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
+        }
+        if (!token) {
+            res.status(401).json({ message: '未提供認證令牌' });
             return;
         }
-        const { data, error } = yield auth_service_1.authService.verifySession(accessToken);
-        if (error || !data.user) {
-            res.status(401).json({
-                success: false,
-                message: (error === null || error === void 0 ? void 0 : error.message) || "無效的 session",
-            });
+        const { data: { user }, error } = yield supabase_1.supabase.auth.getUser(token);
+        if (error || !user) {
+            res.status(403).json({ message: '無效的認證令牌' });
             return;
         }
-        req.user = data.user;
+        const dbUser = yield db_1.db.query.users.findFirst({
+            where: (0, drizzle_orm_1.eq)(users_1.users.id, user.id)
+        });
+        if (!dbUser) {
+            res.status(403).json({ message: '用戶不存在' });
+            return;
+        }
+        // 設置完整的用戶資訊
+        req.user = {
+            id: dbUser.id,
+            name: dbUser.name,
+            email: (_b = user.email) !== null && _b !== void 0 ? _b : undefined,
+            userType: dbUser.userType,
+            createdAt: dbUser.createdAt,
+            updatedAt: dbUser.updatedAt
+        };
         next();
     }
     catch (error) {
-        res.status(401).json({
-            success: false,
-            message: "請重新登入",
-        });
-        return;
+        res.status(401).json({ message: '驗證失敗' });
     }
 });
 exports.authMiddleware = authMiddleware;

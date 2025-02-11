@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,14 +19,15 @@ const upload = (0, multer_1.default)({
         fileSize: 5 * 1024 * 1024, // 限制 5MB
     },
 });
-// 搜尋飯店列表
+// 搜尋飯店列表 (每頁固定回傳 10 筆)
+// GET /?page=1&country=台灣&city=台北&minPrice=1000&maxPrice=5000&rating=4&q=關鍵字
 router.get('/', asyncHandler(hotel_controller_1.hotelController.getHotels));
 // 獲取飯店詳情
 router.get('/:id', asyncHandler(hotel_controller_1.hotelController.getHotel));
 // 獲取飯店房型
-router.get('/:id/rooms', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // TODO: 實作房型列表邏輯
-}));
+// router.get('/:id/rooms', async (req, res) => {
+//   // TODO: 實作房型列表邏輯
+// });
 // 新增飯店
 router.post('/', auth_middleware_1.authMiddleware, asyncHandler(hotel_controller_1.hotelController.createHotel));
 // 上傳房型照片

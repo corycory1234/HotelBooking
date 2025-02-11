@@ -19,13 +19,13 @@ class HotelController {
             try {
                 // 驗證必填參數
                 const page = parseInt(req.query.page);
-                const limit = parseInt(req.query.limit);
-                if (!page || !limit || isNaN(page) || isNaN(limit)) {
-                    return res.status(400).json(response_1.ApiResponse.error("頁碼(page)和筆數(limit)為必填參數"));
+                if (!page || isNaN(page)) {
+                    return res.status(400).json(response_1.ApiResponse.error("頁碼(page)為必填參數"));
                 }
                 const searchParams = {
                     page,
-                    limit,
+                    limit: 10, // 固定為 10 筆
+                    country: req.query.country || undefined,
                     city: req.query.city || undefined,
                     minPrice: req.query.minPrice ? parseInt(req.query.minPrice) : undefined,
                     maxPrice: req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined,
@@ -63,7 +63,7 @@ class HotelController {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token; // 改回使用 cookies
+                const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
                 const hotelData = req.body;
                 const validation = hotel_service_1.hotelService.validateHotelData(hotelData);
                 if (!validation.isValid) {
