@@ -23,4 +23,5 @@ export interface Booking_Detail_Interface {
   city: string,
   country: string,
   room: number
+  offer_Id: string
 }

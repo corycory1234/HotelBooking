@@ -1,7 +1,7 @@
 [
   {"offer_Id": "1111", 
     "offer_Name": "Black Friday", 
-    "offer_Price": 500, 
+    "offer_Price": 0.5, 
     "offer_Description": "The Best Discount On Friday !",
     "offer_Url": "/offers/blackfriday.webp"
   },

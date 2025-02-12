@@ -118,8 +118,6 @@ export default function Hotel_List_Card() {
   const destination = searchParams.get("destination");
   const timestamp = searchParams.get("timestamp");
   const current_Page_Params = searchParams.get("page");
-
-
   useEffect(() => {
     set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
     const timer = setTimeout(() => {
@@ -162,7 +160,6 @@ export default function Hotel_List_Card() {
       </div>
     </div>
   }
-
 
 
   // 10. Sort 彈跳Modal開關 (手機版)
@@ -228,16 +225,19 @@ export default function Hotel_List_Card() {
       console.log(error, "飯店列表API失敗");
     }
   };
+
+  // 13.  只要timeStamp(URL字串, 並非 + new Date())有變, 
+  // 13.1 就重打 飯店列表API (用於一般搜尋、進階搜尋, 跳轉/hotellist)
   useEffect(() => {
     fetch_Hotel_List(Number(current_Page_Params));
   },[timestamp])
 
-  // 13. Pagination 分頁
+  // 14. Pagination 分頁
   const [current_Page, set_Current_Page] = useState<number>(1);
   const [total_Hotel, set_Total_Hotel] = useState<number>(0);
   const [total_Pages, set_Total_Pages] = useState<number>(1);
   
-  // 14. 上一頁
+  // 15. 上一頁
   const previous_Page = () => {
     set_Current_Page((prevPage: number) => {
       if(prevPage === 1) {
@@ -250,7 +250,7 @@ export default function Hotel_List_Card() {
     });
   };
 
-  // 15. 下一頁
+  // 16. 下一頁
   const next_Page = () => {
     set_Current_Page((prevPage: number) => {
       if(prevPage === total_Pages) {
@@ -265,7 +265,7 @@ export default function Hotel_List_Card() {
 
   return <>
   {/************ 手機版|PC桌機 - 沒找到, 就<Not_Found> ************/}
-    {redux_Hotel_List?.length <=0 ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>
+    {(redux_Hotel_List?.length <=0 && show_Hotel_List === true) ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>
     
     :
     <>

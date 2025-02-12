@@ -22,7 +22,8 @@
     "address": "100 Ocean Drive, Miami Beach, FL 33139, United States",
     "city": "Miami",
     "country": "United States",
-    "room": 1
+    "room": 1,
+    "offer_Id": "1111"
   },
   {
     "booking_Id": "2",
@@ -47,7 +48,8 @@
     "address": "100 Ellen Street, Bangkok, Thailand",
     "city": "Bangkok",
     "country": "Thailand",
-    "room": 2
+    "room": 2,
+    "offer_Id": "2222"
   },
   {
     "booking_Id": "3",
@@ -72,7 +74,8 @@
     "address": "55 Oxford Street, Brisbane, Australia",
     "city": "Brisbane",
     "country": "Australia",
-    "room": 3
+    "room": 3,
+    "offer_Id": "3333"
   },
   {
     "booking_Id": "4",
@@ -97,7 +100,8 @@
     "address": "66 Market Street, Sydney, Australia",
     "city": "Sydney",
     "country": "Australia",
-    "room": 4
+    "room": 4,
+    "offer_Id": "4444"
   },
   {
     "booking_Id": "5",
@@ -122,7 +126,8 @@
     "address": "2 George Street, Guandong, China",
     "city": "Guandong",
     "country": "China",
-    "room": 2
+    "room": 2,
+    "offer_Id": "5555"
   },
   {
     "booking_Id": "6",
@@ -147,7 +152,8 @@
     "address": "12 Nanjing Street, Taipei, Taiwan",
     "city": "Taipei",
     "country": "Taiwan",
-    "room": 2
+    "room": 2,
+    "offer_Id": "5555"
   },
   {
     "booking_Id": "7",
@@ -172,6 +178,7 @@
     "address": "100 Main Street, Kaohsiung, Taiwan",
     "city": "Kaohsiung",
     "country": "Taiwan",
-    "room": 1
+    "room": 1,
+    "offer_Id": "4444"
   }
 ]

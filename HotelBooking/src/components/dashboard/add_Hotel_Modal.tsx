@@ -10,7 +10,7 @@ import { RootState, AppDispatch } from "@/store/store";
 
 
 // 2. 各種房型初始值
-const roomType_List = ["singleRoom", "doubleRoom", "twinRoom", "queenRoom", "kingRoom"];
+const roomType_List = ["singleroom", "doubleroom", "twinroom", "queenroom", "kingoom"];
 
 // 3. 房型內設施初始值
 const amenity = ["shower", "bathtub", "breakfast", "tv", ];
@@ -81,7 +81,7 @@ export default function Add_Hotel_Modal() {
   }
   
   // 8. 提交 <form> 函式
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event?.currentTarget);
 
@@ -106,11 +106,16 @@ export default function Add_Hotel_Modal() {
     const intro = formData.get("intro") as string | null;
     const transportation = formData.get("transportation") as string | null;
     const recommendation = formData.get("recommendation") as string | null;
-    const hotelimFiles = formData.getAll("hotelimages") as File[];
-    const hotel_Image_List = hotelimFiles.map((item) => ({
+    const hotel_Image_Files = formData.getAll("hotelimages") as File[];
+    // 9.1 待Daniel 修正完 上傳圖片API, 這可以拿掉 ↓
+    const hotel_Image_List = hotel_Image_Files.map((item) => ({
       url: URL.createObjectURL(item),
       description: "",
     }))
+    // 9.2 建立新的 FormData 用來上傳圖片, 上傳圖片API 修正完要用的變數↓
+    const hotel_Image_List_Form_Data = new FormData();
+    hotel_Image_Files.forEach((file) => {hotel_Image_List_Form_Data.append("images", file)});
+    
     const travelername = formData.get("travelername") as string | null;
     const date = formData.get("date") as string | null;
     const traveler_Rating = formData.get("rating") as string | null;
@@ -217,6 +222,33 @@ export default function Add_Hotel_Modal() {
       isCollected: false,
       offer_Id: offer,
     };
+
+
+    // 15. 創建飯店 API
+    const create_Hotel_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/hotels";
+    try {
+      const response = await fetch(create_Hotel_Url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(new_Hotel),
+        credentials: "include" // 同源政策 CORS 需要
+      });
+      const data = await response.json();
+      console.log(data, "查看創建飯店API", data.data.hotel.id);
+      const hotelId = data.data.hotel.id;
+      // 16. 上傳飯店照片 API
+      const upload_Hotel_Image_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/${hotelId}/images`
+      const hotel_Image_Lits_Response = await fetch(upload_Hotel_Image_List_Url, {
+        method: "POST",
+        body: hotel_Image_List_Form_Data,
+        credentials: "include"
+      });
+      const data2 = await hotel_Image_Lits_Response.json();
+      console.log(data2, "查看上傳房店照片API回應");
+    }
+    catch (error) {
+      console.log(error);
+    }
 
 
     // 14. 最後，更新 hotel_List 最新狀態

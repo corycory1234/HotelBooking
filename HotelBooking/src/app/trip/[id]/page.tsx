@@ -1,6 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import Booking_List_Json from "@/fakeData/trip_List.json";
+import Offer_List_Json from "@/fakeData/offer_List.json";
 import Previous_Page from "@/components/previous_Page/previous_Page";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import { FacilitySVG } from "@/components/client_Svg/client_Svg";
@@ -94,6 +95,10 @@ export default function Booking_Detail () {
     iconUrl: "/leaflet/marker-icon.png",
     shadowUrl: "/leaflet/marker-shadow.png",
   })
+
+  // 11. 優惠券
+  const offer = Offer_List_Json.find((item) => item.offer_Id === booking_Detail.offer_Id);
+  const offer_Discount = 1 - (offer?.offer_Price as number);
   
 
   return <div className="flex flex-col">
@@ -273,6 +278,12 @@ export default function Booking_Detail () {
             <p className="text-sm text-gray">{`Room Price (${nights} nights)`}</p>
             <p>{`$ ${booking_Detail.price}`}</p>
           </div>
+
+          <div className="flex justify-between">
+            <p className="text-sm text-gray">Offer Discount</p>
+            <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
+          </div>
+
           <div className="flex justify-between">
             <p className="text-sm text-gray">Taxes and Fees</p>
             <p>{booking_Detail.price * booking_Detail.tax }</p>
@@ -280,7 +291,7 @@ export default function Booking_Detail () {
 
           <div className="flex justify-between">
             <p className="text-sm font-semibold">Total Charge</p>
-            <p>{`$ ${booking_Detail.price + (booking_Detail.price * booking_Detail.tax)}`}</p>
+            <p>{`$ ${(booking_Detail.price + (booking_Detail.price * booking_Detail.tax)) * offer_Discount}`}</p>
           </div>
         </div>
         {/** 費用、稅率 */}
@@ -478,6 +489,12 @@ export default function Booking_Detail () {
               <p className="text-sm text-gray">{`Room Price (${nights} nights)`}</p>
               <p>{`$ ${booking_Detail.price}`}</p>
             </div>
+
+            <div className="flex justify-between">
+              <p className="text-sm text-gray">Offer Discount</p>
+              <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
+            </div>
+
             <div className="flex justify-between">
               <p className="text-sm text-gray">Taxes and Fees</p>
               <p>{booking_Detail.price * booking_Detail.tax }</p>
@@ -485,7 +502,7 @@ export default function Booking_Detail () {
 
             <div className="flex justify-between">
               <p className="text-sm font-semibold">Total Charge</p>
-              <p>{`$ ${booking_Detail.price + (booking_Detail.price * booking_Detail.tax)}`}</p>
+              <p>{`$ ${(booking_Detail.price + (booking_Detail.price * booking_Detail.tax)) * offer_Discount}`}</p>
             </div>
           </div>
         {/** 費用、稅率 */}
