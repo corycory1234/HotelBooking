@@ -340,9 +340,11 @@ class HotelService extends base_service_1.BaseService {
                     ${schema_1.hotels.address} ILIKE ${`%${params.search_Query.trim()}%`}
                 )`);
                 }
-                // 加入設施條件
+                // 加入設施條件 - 修改這部分
                 if (params.facilities && params.facilities.length > 0) {
-                    conditions.push((0, drizzle_orm_1.sql) `${schema_1.hotels.facility_List} ?& ${params.facilities}`);
+                    // 將設施列表轉換為 PostgreSQL 陣列格式
+                    const facilitiesArray = `{${params.facilities.join(',')}}`;
+                    conditions.push((0, drizzle_orm_1.sql) `${schema_1.hotels.facility_List} ?& ${facilitiesArray}`);
                 }
                 // 加入搜尋條件
                 if (conditions.length > 0) {

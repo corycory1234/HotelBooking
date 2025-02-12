@@ -19,8 +19,10 @@ class HotelController {
                 );
             }
 
+            // 處理設施參數，確保它是有效的陣列
             const facilities = req.query.facilities ? 
-                (req.query.facilities as string).split(',') : undefined;
+                (req.query.facilities as string).split(',').filter(f => f.trim()) : 
+                undefined;
 
             const searchParams: SearchHotelsParams = {
                 page,
@@ -31,7 +33,7 @@ class HotelController {
                 max_Price: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
                 rating: req.query.rating ? parseInt(req.query.rating as string) : undefined,
                 search_Query: req.query.q as string || undefined,
-                facilities: facilities // 新增設施參數
+                facilities: facilities // 清理過的設施陣列
             };
 
             const results = await hotelService.searchHotels(searchParams);

@@ -376,9 +376,11 @@ export class HotelService extends BaseService {
                 )`);
             }
 
-            // 加入設施條件
+            // 加入設施條件 - 修改這部分
             if (params.facilities && params.facilities.length > 0) {
-                conditions.push(sql`${hotels.facility_List} ?& ${params.facilities}`);
+                // 將設施列表轉換為 PostgreSQL 陣列格式
+                const facilitiesArray = `{${params.facilities.join(',')}}`;
+                conditions.push(sql`${hotels.facility_List} ?& ${facilitiesArray}`);
             }
 
             // 加入搜尋條件
