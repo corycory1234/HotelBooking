@@ -13,6 +13,7 @@ import { sleep } from "@/utils/sleep";
 import StarRating from "@/components/starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import Offer_List_Json from "@/fakeData/offer_List.json";
+import Payment_Progress_Bar from "@/components/payment_Progress_Bar/payment_Progress_Bar";
 
 
 // 0. 三家信用卡
@@ -152,6 +153,10 @@ export default function CreditCard() {
     </div>
     {/** 回上一頁 */}
     
+    <div className="customized-bg-gradient py-4 lg:hidden">
+      <Payment_Progress_Bar></Payment_Progress_Bar>
+    </div>
+
     {/** 選信用卡 */}
     <Credit_Card_List></Credit_Card_List>
     {/** 選信用卡 */}
@@ -162,7 +167,7 @@ export default function CreditCard() {
     
 
     {/** PC桌機 - 信用卡表單 */}
-    <div className="hidden lg:flex flex-col p-4 mt-[70px]">
+    <div className="hidden lg:flex flex-col p-4 pt-16">
       <div className="flex gap-2">
 
         {/** 左邊 1/2 */}

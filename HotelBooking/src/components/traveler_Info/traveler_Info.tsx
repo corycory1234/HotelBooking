@@ -15,6 +15,7 @@ import toast, {Toaster} from "react-hot-toast";
 import StarRating from "../starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import Payment_Step from "../payment_Step/payment_Step";
+import Payment_Progress_Bar from "../payment_Progress_Bar/payment_Progress_Bar";
 
 interface Zod_Response_Interface {
   success: boolean,
@@ -128,7 +129,10 @@ export default function Traveler_Info () {
 
     {/** 外層背景 */}
     <div className="flex flex-col gap-3">
-      
+      <div className="lg:hidden pt-4">
+        <Payment_Progress_Bar></Payment_Progress_Bar>
+      </div>
+
       {/** Swiper 飯店圖片 */}
       <Swiper_Hotel_Detail redux_Booked_Room={redux_Booked_Room}></Swiper_Hotel_Detail>
       {/** Swiper 飯店圖片 */}
@@ -145,7 +149,7 @@ export default function Traveler_Info () {
 
 
       {/** PC桌機 */}
-      <div className="hidden lg:flex flex-col p-4 mt-[70px]">
+      <div className="hidden lg:flex flex-col p-4 pt-16">
         {/** 付款步驟 */}
         {/* <Payment_Step></Payment_Step> */}
         {/** 付款步驟 */}
