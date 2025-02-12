@@ -44,7 +44,7 @@ export class BookingService extends BaseService {
 
     private async checkRoomAvailability(roomId: string, checkInDate: Date, checkOutDate: Date, requestedCount: number) {
         const room = await this.db.query.roomTypes.findFirst({
-            where: eq(roomTypes.id, roomId)
+            where: eq(roomTypes.roomType_Id, roomId)
         });
 
         if (!room) {
@@ -52,7 +52,7 @@ export class BookingService extends BaseService {
         }
 
         // 使用 roomAvailability 替代 totalRooms
-        const availableRooms = room.roomAvailability;
+        const availableRooms = room.room_Availability;
 
         const checkInStr = checkInDate.toISOString().split('T')[0];
         const checkOutStr = checkOutDate.toISOString().split('T')[0];
@@ -101,7 +101,7 @@ export class BookingService extends BaseService {
 
             // 獲取飯店資訊
             const hotel = await this.db.query.hotels.findFirst({
-                where: eq(hotels.id, data.hotelId)
+                where: eq(hotels.hotel_Id, data.hotelId)
             });
 
             if (!hotel) {
@@ -114,7 +114,7 @@ export class BookingService extends BaseService {
                 (1000 * 60 * 60 * 24)
             );
 
-            const roomPrice = parseFloat(room.roomPrice);
+            const roomPrice = parseFloat(room.room_Price);
             const subtotal = roomPrice * data.roomCount * nights;
             const taxRate = hotel.tax?.toString() ? parseFloat(hotel.tax.toString()) : 0;
             const totalPrice = subtotal * (1 + taxRate);
@@ -149,7 +149,7 @@ export class BookingService extends BaseService {
                     country: hotel.country,
                     latitude: hotel.latitude,
                     longitude: hotel.longitude,
-                    facilities: hotel.facilityList
+                    facilities: hotel.facility_List
                 })
                 .returning();
 
@@ -177,8 +177,8 @@ export class BookingService extends BaseService {
             // 驗證使用者是否為飯店擁有者
             const hotel = await this.db.query.hotels.findFirst({
                 where: and(
-                    eq(hotels.id, hotelId),
-                    eq(hotels.ownerId, userId)
+                    eq(hotels.hotel_Id, hotelId),
+                    eq(hotels.owner_Id, userId)
                 )
             });
 
@@ -208,10 +208,10 @@ export class BookingService extends BaseService {
 
             // 檢查權限
             const hotel = await this.db.query.hotels.findFirst({
-                where: eq(hotels.id, booking.hotelId)
+                where: eq(hotels.hotel_Id, booking.hotelId)
             });
 
-            if (booking.userId !== userId && hotel?.ownerId !== userId) {
+            if (booking.userId !== userId && hotel?.owner_Id !== userId) {
                 throw new Error('未授權的操作');
             }
 

@@ -12,10 +12,10 @@ import { hotels } from "./hotels";
 import { users } from "./users";
 
 export const roomTypes = pgTable("room_types", {
-    id: uuid("id").defaultRandom().primaryKey(),
-    roomType: varchar("room_type", { length: 50 }).notNull(),
-    roomPrice: numeric("room_price").notNull(),
-    roomTypeImageList: jsonb("room_type_image_list")
+    roomType_Id: uuid("id").defaultRandom().primaryKey(),
+    room_Type: varchar("room_type", { length: 50 }).notNull(),
+    room_Price: numeric("room_price").notNull(),
+    roomType_Image_List: jsonb("room_type_image_list")
         .$type<
             {
                 url: string;
@@ -23,15 +23,15 @@ export const roomTypes = pgTable("room_types", {
             }[]
         >()
         .default([]),
-    roomAvailability: integer("room_availability").notNull(),
+    room_Availability: integer("room_availability").notNull(),
     smoke: boolean("smoke").default(false),
-    amenityList: jsonb("amenity_list").$type<string[]>().default([]),
-    roomSize: numeric("room_size").notNull(),
-    maxPeople: integer("max_people").notNull(),
+    amenity_List: jsonb("amenity_list").$type<string[]>().default([]),
+    room_Size: numeric("room_size").notNull(),
+    max_People: integer("max_people").notNull(),
     view: varchar("view", { length: 255 }),
-    bedType: varchar("bed_type", { length: 255 }),
+    bed_Type: varchar("bed_type", { length: 255 }),
     hotelId: uuid("hotel_id")
-        .references(() => hotels.id, {
+        .references(() => hotels.hotel_Id, {
             onDelete: "cascade",
         })
         .notNull(),

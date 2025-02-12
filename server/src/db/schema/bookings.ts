@@ -18,10 +18,10 @@ export const bookings = pgTable("bookings", {
     userId: uuid("user_id").references(() => users.id, {
         onDelete: "cascade",
     }).notNull(),
-    hotelId: uuid("hotel_id").references(() => hotels.id, {
+    hotelId: uuid("hotel_id").references(() => hotels.hotel_Id, {
         onDelete: "cascade",
     }).notNull(),
-    roomId: uuid("room_id").references(() => roomTypes.id, {
+    roomId: uuid("room_id").references(() => roomTypes.roomType_Id, {
         onDelete: "cascade",
     }).notNull(),
     bookingImage: varchar("booking_image", { length: 255 }),

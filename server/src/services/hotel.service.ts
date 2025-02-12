@@ -33,14 +33,21 @@ export class HotelService extends BaseService {
                 try {
                     // 新增飯店 - 確保資料型別正確
                     const [newHotel] = await tx.insert(hotels).values({
-                        hotelName: hotelData.hotelName,
-                        hotelImageList: hotelData.hotelImageList || [],
+                        hotel_Name: hotelData.hotel_Name,
+                        hotel_Image_List: hotelData.hotel_Image_List || [],
                         distance: hotelData.distance,
                         totalRating: hotelData.totalRating.toString(),
-                        facilityList: hotelData.facilityList || [],
+                        facility_List: hotelData.facility_List || [],
                         price: hotelData.price.toString(),
-                        hotelIntro: hotelData.hotelIntro,
-                        reviewList: hotelData.reviewList || [],
+                        hotel_Intro: hotelData.hotel_Intro,
+                        review_List: (hotelData.review_List || []).map(review => ({
+                            traveler_Id: review.traveler_Id,
+                            traveler_Name: review.traveler_Name,
+                            date: review.date,
+                            traveler_Rating: review.traveler_Rating,
+                            comment: review.comment,
+                            reply: review.reply
+                        })),
                         address: hotelData.address,
                         country: hotelData.country,
                         city: hotelData.city,
@@ -49,31 +56,31 @@ export class HotelService extends BaseService {
                         checkout: hotelData.checkout,
                         latitude: hotelData.latitude?.toString(),
                         longitude: hotelData.longitude?.toString(),
-                        isOpen: hotelData.isOpen ?? true,
-                        hotelPhone: hotelData.hotelPhone,
-                        hotelEmail: hotelData.hotelEmail,
-                        cancellationPolicy: hotelData.cancellationPolicy,
+                        is_Open: hotelData.is_Open ?? true,
+                        hotel_Phone: hotelData.hotel_Phone,
+                        hotel_Email: hotelData.hotel_Email,
+                        cancellation_Policy: hotelData.cancellation_Policy,
                         transportation: hotelData.transportation,
                         recommendation: hotelData.recommendation,
                         isCollected: hotelData.isCollected ?? false,
-                        offerId: hotelData.offerId,
-                        ownerId: user.id
+                        offer_Id: hotelData.offer_Id,
+                        owner_Id: user.id
                     }).returning();
 
                     // 新增房型 - 確保資料型別正確
-                    const roomPromises = hotelData.roomTypeList.map(room => 
+                    const roomPromises = hotelData.roomType_List.map(room => 
                         tx.insert(roomTypes).values({
-                            roomType: room.roomType,
-                            roomPrice: room.roomPrice.toString(),
-                            roomTypeImageList: room.roomTypeImageList || [],
-                            roomAvailability: room.roomAvailability,
+                            room_Type: room.room_Type,
+                            room_Price: room.room_Price.toString(),
+                            roomType_Image_List: room.roomType_Image_List || [],
+                            room_Availability: room.room_Availability,
                             smoke: room.smoke,
-                            amenityList: room.amenityList || [],
-                            roomSize: room.roomSize.toString(),
-                            maxPeople: room.maxPeople,
+                            amenity_List: room.amenity_List || [],
+                            room_Size: room.room_Size.toString(),
+                            max_People: room.max_People,
                             view: room.view,
-                            bedType: room.bedType,
-                            hotelId: newHotel.id,
+                            bed_Type: room.bed_Type,
+                            hotelId: newHotel.hotel_Id,
                             createdBy: user.id
                         }).returning()
                     );
@@ -102,7 +109,7 @@ export class HotelService extends BaseService {
     }
 
     validateHotelData(data: CreateHotelDTO): { isValid: boolean; error?: string } {
-        if (!data.hotelName) {
+        if (!data.hotel_Name) {
             return { isValid: false, error: "飯店名稱為必填" };
         }
         if (!data.address) {
@@ -111,7 +118,7 @@ export class HotelService extends BaseService {
         if (!data.country || !data.city) {
             return { isValid: false, error: "國家和城市為必填" };
         }
-        if (!data.hotelPhone || !data.hotelEmail) {
+        if (!data.hotel_Phone || !data.hotel_Email) {
             return { isValid: false, error: "聯絡資訊為必填" };
         }
         if (data.totalRating < 0 || data.totalRating > 5) {
@@ -120,25 +127,25 @@ export class HotelService extends BaseService {
         if (data.price <= 0) {
             return { isValid: false, error: "價格必須大於 0" };
         }
-        if (!data.roomTypeList?.length) {
+        if (!data.roomType_List?.length) {
             return { isValid: false, error: "至少需要一個房型" };
         }
 
         // 驗證每個房型
-        for (const room of data.roomTypeList) {
-            if (!room.roomType) {
+        for (const room of data.roomType_List) {
+            if (!room.room_Type) {
                 return { isValid: false, error: "房型名稱為必填" };
             }
-            if (room.roomPrice <= 0) {
+            if (room.room_Price <= 0) {
                 return { isValid: false, error: "房型價格必須大於 0" };
             }
-            if (room.roomAvailability <= 0) {
+            if (room.room_Availability <= 0) {
                 return { isValid: false, error: "房間數量必須大於 0" };
             }
-            if (room.roomSize <= 0) {
+            if (room.room_Size <= 0) {
                 return { isValid: false, error: "房間大小必須大於 0" };
             }
-            if (room.maxPeople <= 0) {
+            if (room.max_People <= 0) {
                 return { isValid: false, error: "最大入住人數必須大於 0" };
             }
         }
@@ -199,28 +206,23 @@ export class HotelService extends BaseService {
         }
 
         const hotel = await db
-            .select({ hotelImageList: hotels.hotelImageList })
+            .select({ hotel_Image_List: hotels.hotel_Image_List })
             .from(hotels)
-            .where(eq(hotels.id, hotelId))
-            .then(rows => rows[0]);
-
-        if (!hotel) {
-            throw new HotelServiceError('飯店不存在', 404);
-        }
+            .where(eq(hotels.hotel_Id, hotelId))
 
         const uploadResults = await this.uploadImages(files, `hotels/${hotelId}`);
         const newImages = [
-            ...(hotel.hotelImageList || []),
+            ...(hotel[0].hotel_Image_List || []),
             ...uploadResults.map(image => ({ ...image, description: '' }))
         ];
 
         await db
             .update(hotels)
             .set({
-                hotelImageList: newImages,
+                hotel_Image_List: newImages,
                 updatedAt: new Date()
             })
-            .where(eq(hotels.id, hotelId));
+            .where(eq(hotels.hotel_Id, hotelId));
 
         return uploadResults;
     }
@@ -236,19 +238,19 @@ export class HotelService extends BaseService {
         const hotel = await db
             .select()
             .from(hotels)
-            .where(eq(hotels.id, hotelId))
+            .where(eq(hotels.hotel_Id, hotelId))
             .then(rows => rows[0]);
 
         if (!hotel) {
             throw new HotelServiceError('飯店不存在', 404);
         }
 
-        if (hotel.ownerId !== user.id) {
+        if (hotel.owner_Id!== user.id) {
             throw new HotelServiceError('無權限刪除照片', 403);
         }
 
         // 過濾出要保留的照片
-        const updatedImages = (hotel.hotelImageList || []).filter(
+        const updatedImages = (hotel.hotel_Image_List || []).filter(
             (img: { url: string }) => !imageUrls.includes(img.url)
         );
 
@@ -256,10 +258,10 @@ export class HotelService extends BaseService {
         await db
             .update(hotels)
             .set({
-                hotelImageList: updatedImages,
+                hotel_Image_List: updatedImages,
                 updatedAt: new Date()
             })
-            .where(eq(hotels.id, hotelId));
+            .where(eq(hotels.hotel_Id, hotelId));
 
         // 從 S3 刪除檔案
         await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
@@ -276,7 +278,7 @@ export class HotelService extends BaseService {
         const roomType = await db
             .select()
             .from(roomTypes)
-            .where(eq(roomTypes.id, roomTypeId))
+            .where(eq(roomTypes.roomType_Id, roomTypeId))
             .then(rows => rows[0]);
 
         if (!roomType) {
@@ -285,17 +287,17 @@ export class HotelService extends BaseService {
 
         const uploadResults = await this.uploadImages(files, `room-types/${roomTypeId}`);
         const newImages = [
-            ...(roomType.roomTypeImageList || []),
+            ...(roomType.roomType_Image_List || []),
             ...uploadResults.map(image => ({ ...image, description: '' }))
         ];
 
         await db
             .update(roomTypes)
             .set({
-                roomTypeImageList: newImages,
+                roomType_Image_List: newImages,
                 updatedAt: new Date()
             })
-            .where(eq(roomTypes.id, roomTypeId));
+            .where(eq(roomTypes.roomType_Id, roomTypeId));
 
         return uploadResults;
     }
@@ -311,7 +313,7 @@ export class HotelService extends BaseService {
         const roomType = await db
             .select()
             .from(roomTypes)
-            .where(eq(roomTypes.id, roomTypeId))
+            .where(eq(roomTypes.roomType_Id, roomTypeId))
             .then(rows => rows[0]);
 
         if (!roomType) {
@@ -323,7 +325,7 @@ export class HotelService extends BaseService {
         }
 
         // 過濾出要保留的照片
-        const updatedImages = (roomType.roomTypeImageList || []).filter(
+        const updatedImages = (roomType.roomType_Image_List || []).filter(
             (img: { url: string }) => !imageUrls.includes(img.url)
         );
 
@@ -331,10 +333,10 @@ export class HotelService extends BaseService {
         await db
             .update(roomTypes)
             .set({
-                roomTypeImageList: updatedImages,
+                roomType_Image_List: updatedImages,
                 updatedAt: new Date()
             })
-            .where(eq(roomTypes.id, roomTypeId));
+            .where(eq(roomTypes.roomType_Id, roomTypeId));
 
         // 從 S3 刪除檔案
         await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
@@ -355,22 +357,22 @@ export class HotelService extends BaseService {
                 conditions.push(sql`${hotels.city} ILIKE ${`%${params.city.trim()}%`}`);
             }
 
-            if (params.minPrice && params.minPrice > 0) {
-                conditions.push(sql`CAST(${hotels.price} AS DECIMAL) >= ${params.minPrice}`);
+            if (params.min_Price && params.min_Price > 0) {
+                conditions.push(sql`CAST(${hotels.price} AS DECIMAL) >= ${params.min_Price}`);
             }
 
-            if (params.maxPrice && params.maxPrice > 0) {
-                conditions.push(sql`CAST(${hotels.price} AS DECIMAL) <= ${params.maxPrice}`);
+            if (params.max_Price && params.max_Price > 0) {
+                conditions.push(sql`CAST(${hotels.price} AS DECIMAL) <= ${params.max_Price}`);
             }
 
             if (params.rating && params.rating > 0) {
                 conditions.push(sql`CAST(${hotels.totalRating} AS DECIMAL) >= ${params.rating}`);
             }
 
-            if (params.searchQuery?.trim()) {
+            if (params.search_Query?.trim()) {
                 conditions.push(sql`(
-                    ${hotels.hotelName} ILIKE ${`%${params.searchQuery.trim()}%`} OR 
-                    ${hotels.address} ILIKE ${`%${params.searchQuery.trim()}%`}
+                    ${hotels.hotel_Name} ILIKE ${`%${params.search_Query.trim()}%`} OR 
+                    ${hotels.address} ILIKE ${`%${params.search_Query.trim()}%`}
                 )`);
             }
 
@@ -409,21 +411,19 @@ export class HotelService extends BaseService {
 
     async getHotelDetails(hotelId: string) {
         try {
-            // 獲取飯店基本資訊和房型
             const hotel = await db
                 .select({
                     hotel: hotels,
                     rooms: roomTypes
                 })
                 .from(hotels)
-                .leftJoin(roomTypes, eq(hotels.id, roomTypes.hotelId))
-                .where(eq(hotels.id, hotelId))
+                .leftJoin(roomTypes, eq(hotels.hotel_Id, roomTypes.hotelId))
+                .where(eq(hotels.hotel_Id, hotelId))
                 .then(rows => {
                     if (rows.length === 0) {
                         throw new HotelServiceError('飯店不存在', 404);
                     }
 
-                    // 整理資料結構
                     const hotelInfo = rows[0].hotel;
                     const roomsList = rows
                         .filter(row => row.rooms !== null)
@@ -431,7 +431,7 @@ export class HotelService extends BaseService {
 
                     return {
                         ...hotelInfo,
-                        roomTypes: roomsList
+                        roomType_List: roomsList
                     };
                 });
 

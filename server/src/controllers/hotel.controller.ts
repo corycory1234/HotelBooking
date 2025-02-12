@@ -24,10 +24,10 @@ class HotelController {
                 limit: 10, // 固定為 10 筆
                 country: req.query.country as string || undefined,
                 city: req.query.city as string || undefined,
-                minPrice: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
-                maxPrice: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
+                min_Price: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
+                max_Price: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
                 rating: req.query.rating ? parseInt(req.query.rating as string) : undefined,
-                searchQuery: req.query.q as string || undefined
+                search_Query: req.query.q as string || undefined
             };
 
             const results = await hotelService.searchHotels(searchParams);

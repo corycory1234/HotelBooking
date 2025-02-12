@@ -1,39 +1,39 @@
-export interface HotelImage {
+export interface Hotel_Image {
     url: string;
     description: string;
 }
 
-export interface Review {
-    travelerId: string;
-    travelerName: string;
+export interface Hotel_Review {
+    traveler_Id: string;
+    traveler_Name: string;
     date: string;
-    travelerRating: number;
+    traveler_Rating: number;
     comment: string;
     reply: string;
 }
 
-export interface RoomType {
-    roomType: string;
-    roomPrice: number;
-    roomTypeImageList: HotelImage[];
-    roomAvailability: number;
+export interface Room_Type {
+    room_Type: string;
+    room_Price: number;
+    roomType_Image_List: Hotel_Image[];
+    room_Availability: number;
     smoke: boolean;
-    amenityList: string[];
-    roomSize: number;
-    maxPeople: number;
+    amenity_List: string[];
+    room_Size: number;
+    max_People: number;
     view?: string;
-    bedType?: string;
+    bed_Type?: string;
 }
 
 export interface CreateHotelDTO {
-    hotelName: string;
-    hotelImageList: HotelImage[];
+    hotel_Name: string;
+    hotel_Image_List: Hotel_Image[];
     distance?: string;
     totalRating: number;
-    facilityList: string[];
+    facility_List: string[];
     price: number;
-    hotelIntro?: string;
-    reviewList: Review[];
+    hotel_Intro?: string;
+    review_List: Hotel_Review[];
     address: string;
     country: string;
     city: string;
@@ -42,20 +42,20 @@ export interface CreateHotelDTO {
     checkout: string;
     latitude?: number;
     longitude?: number;
-    isOpen?: boolean;
-    hotelPhone: string;
-    hotelEmail: string;
-    cancellationPolicy?: string;
+    is_Open?: boolean;
+    hotel_Phone: string;
+    hotel_Email: string;
+    cancellation_Policy?: string;
     transportation?: string;
     recommendation?: string;
     isCollected?: boolean;
-    offerId?: string;
-    roomTypeList: RoomType[];
+    offer_Id?: string;
+    roomType_List: Room_Type[];
 }
 
 export interface Hotel {
-    images: HotelImage[];
-    reviews: Review[];
+    images: Hotel_Image[];
+    reviews: Hotel_Review[];
 }
 
 export interface SearchHotelsParams {
@@ -63,10 +63,10 @@ export interface SearchHotelsParams {
     limit: number;
     city?: string;
     country?: string;
-    minPrice?: number;
-    maxPrice?: number;
+    min_Price?: number;
+    max_Price?: number;
     rating?: number;
-    searchQuery?: string;
+    search_Query?: string;
 }
 
 export interface PaginatedResponse<T> {

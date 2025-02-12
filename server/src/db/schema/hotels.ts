@@ -12,9 +12,9 @@ import {
 import { users } from "./users";
 
 export const hotels = pgTable("hotels", {
-    id: uuid("id").defaultRandom().primaryKey(),
-    hotelName: varchar("hotel_name", { length: 255 }).notNull(),
-    hotelImageList: jsonb("hotel_image_list")
+    hotel_Id: uuid("id").defaultRandom().primaryKey(),
+    hotel_Name: varchar("hotel_name", { length: 255 }).notNull(),
+    hotel_Image_List: jsonb("hotel_image_list")
         .$type<
             {
                 url: string;
@@ -24,16 +24,16 @@ export const hotels = pgTable("hotels", {
         .default([]),
     distance: varchar("distance", { length: 255 }),
     totalRating: numeric("total_rating", { precision: 3, scale: 1 }).notNull(),
-    facilityList: jsonb("facility_list").$type<string[]>().default([]),
+    facility_List: jsonb("facility_list").$type<string[]>().default([]),
     price: numeric("price").notNull(),
-    hotelIntro: text("hotel_intro"),
-    reviewList: jsonb("review_list")
+    hotel_Intro: text("hotel_intro"),
+    review_List: jsonb("review_list")
         .$type<
             {
-                travelerId: string;
-                travelerName: string;
+                traveler_Id: string;
+                traveler_Name: string;
                 date: string;
-                travelerRating: number;
+                traveler_Rating: number;
                 comment: string;
                 reply: string;
             }[]
@@ -47,15 +47,15 @@ export const hotels = pgTable("hotels", {
     checkout: time("checkout").notNull(),
     latitude: numeric("latitude", { precision: 10, scale: 8 }),
     longitude: numeric("longitude", { precision: 11, scale: 8 }),
-    isOpen: boolean("is_open").default(true),
-    hotelPhone: varchar("hotel_phone", { length: 20 }).notNull(),
-    hotelEmail: varchar("hotel_email", { length: 255 }).notNull(),
-    cancellationPolicy: text("cancellation_policy"),
+    is_Open: boolean("is_open").default(true),
+    hotel_Phone: varchar("hotel_phone", { length: 20 }).notNull(),
+    hotel_Email: varchar("hotel_email", { length: 255 }).notNull(),
+    cancellation_Policy: text("cancellation_policy"),
     transportation: text("transportation"),
     recommendation: text("recommendation"),
     isCollected: boolean("is_collected").default(false),
-    offerId: varchar("offer_id", { length: 255 }),
-    ownerId: uuid("owner_id")
+    offer_Id: varchar("offer_id", { length: 255 }),
+    owner_Id: uuid("owner_id")
         .references(() => users.id, {
             onDelete: "cascade",
         })
