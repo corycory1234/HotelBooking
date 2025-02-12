@@ -19,7 +19,7 @@ const upload = multer({
 });
 
 // 搜尋飯店列表 (每頁固定回傳 10 筆)
-// GET /?page=1&country=台灣&city=台北&minPrice=1000&maxPrice=5000&rating=4&q=關鍵字
+// GET /?page=1&country=台灣&city=台北&minPrice=1000&maxPrice=5000&rating=4&q=關鍵字&facilities=pool,wifi
 router.get('/', asyncHandler(hotelController.getHotels));
 
 // 獲取飯店詳情

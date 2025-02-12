@@ -22,15 +22,18 @@ class HotelController {
                 if (!page || isNaN(page)) {
                     return res.status(400).json(response_1.ApiResponse.error("頁碼(page)為必填參數"));
                 }
+                const facilities = req.query.facilities ?
+                    req.query.facilities.split(',') : undefined;
                 const searchParams = {
                     page,
                     limit: 10, // 固定為 10 筆
                     country: req.query.country || undefined,
                     city: req.query.city || undefined,
-                    minPrice: req.query.minPrice ? parseInt(req.query.minPrice) : undefined,
-                    maxPrice: req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined,
+                    min_Price: req.query.minPrice ? parseInt(req.query.minPrice) : undefined,
+                    max_Price: req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined,
                     rating: req.query.rating ? parseInt(req.query.rating) : undefined,
-                    searchQuery: req.query.q || undefined
+                    search_Query: req.query.q || undefined,
+                    facilities: facilities // 新增設施參數
                 };
                 const results = yield hotel_service_1.hotelService.searchHotels(searchParams);
                 res.json(response_1.ApiResponse.success(results));

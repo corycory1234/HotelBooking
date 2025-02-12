@@ -10,10 +10,10 @@ exports.bookings = (0, pg_core_1.pgTable)("bookings", {
     userId: (0, pg_core_1.uuid)("user_id").references(() => users_1.users.id, {
         onDelete: "cascade",
     }).notNull(),
-    hotelId: (0, pg_core_1.uuid)("hotel_id").references(() => hotels_1.hotels.id, {
+    hotelId: (0, pg_core_1.uuid)("hotel_id").references(() => hotels_1.hotels.hotel_Id, {
         onDelete: "cascade",
     }).notNull(),
-    roomId: (0, pg_core_1.uuid)("room_id").references(() => rooms_1.roomTypes.id, {
+    roomId: (0, pg_core_1.uuid)("room_id").references(() => rooms_1.roomTypes.roomType_Id, {
         onDelete: "cascade",
     }).notNull(),
     bookingImage: (0, pg_core_1.varchar)("booking_image", { length: 255 }),

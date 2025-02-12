@@ -19,6 +19,9 @@ class HotelController {
                 );
             }
 
+            const facilities = req.query.facilities ? 
+                (req.query.facilities as string).split(',') : undefined;
+
             const searchParams: SearchHotelsParams = {
                 page,
                 limit: 10, // 固定為 10 筆
@@ -27,7 +30,8 @@ class HotelController {
                 min_Price: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
                 max_Price: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
                 rating: req.query.rating ? parseInt(req.query.rating as string) : undefined,
-                search_Query: req.query.q as string || undefined
+                search_Query: req.query.q as string || undefined,
+                facilities: facilities // 新增設施參數
             };
 
             const results = await hotelService.searchHotels(searchParams);

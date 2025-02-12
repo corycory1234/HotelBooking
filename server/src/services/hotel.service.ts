@@ -376,6 +376,11 @@ export class HotelService extends BaseService {
                 )`);
             }
 
+            // 加入設施條件
+            if (params.facilities && params.facilities.length > 0) {
+                conditions.push(sql`${hotels.facility_List} ?& ${params.facilities}`);
+            }
+
             // 加入搜尋條件
             if (conditions.length > 0) {
                 query = (query as any).where(sql`${and(...conditions)}`);

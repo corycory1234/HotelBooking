@@ -58,16 +58,30 @@ export interface Hotel {
     reviews: Hotel_Review[];
 }
 
-export interface SearchHotelsParams {
+export type SearchHotelsParams = {
     page: number;
     limit: number;
-    city?: string;
     country?: string;
+    city?: string;
     min_Price?: number;
     max_Price?: number;
     rating?: number;
     search_Query?: string;
-}
+    facilities?: string[]; // 新增設施參數
+};
+
+export const FACILITIES = [
+    "pool",
+    "balcony",
+    "24H Check-In",
+    "gym",
+    "parking",
+    "bathtub",
+    "kitchen",
+    "wifi",
+] as const;
+
+export type Facility = typeof FACILITIES[number];
 
 export interface PaginatedResponse<T> {
     data: T[];

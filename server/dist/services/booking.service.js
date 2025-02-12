@@ -36,13 +36,13 @@ class BookingService extends base_service_1.BaseService {
     checkRoomAvailability(roomId, checkInDate, checkOutDate, requestedCount) {
         return __awaiter(this, void 0, void 0, function* () {
             const room = yield this.db.query.roomTypes.findFirst({
-                where: (0, drizzle_orm_1.eq)(rooms_1.roomTypes.id, roomId)
+                where: (0, drizzle_orm_1.eq)(rooms_1.roomTypes.roomType_Id, roomId)
             });
             if (!room) {
                 throw new Error('找不到指定房間');
             }
             // 使用 roomAvailability 替代 totalRooms
-            const availableRooms = room.roomAvailability;
+            const availableRooms = room.room_Availability;
             const checkInStr = checkInDate.toISOString().split('T')[0];
             const checkOutStr = checkOutDate.toISOString().split('T')[0];
             const existingBookings = yield this.db.query.bookings.findMany({
@@ -66,7 +66,7 @@ class BookingService extends base_service_1.BaseService {
                 const room = yield this.checkRoomAvailability(data.roomId, data.checkInDate, data.checkOutDate, data.roomCount);
                 // 獲取飯店資訊
                 const hotel = yield this.db.query.hotels.findFirst({
-                    where: (0, drizzle_orm_1.eq)(hotels_1.hotels.id, data.hotelId)
+                    where: (0, drizzle_orm_1.eq)(hotels_1.hotels.hotel_Id, data.hotelId)
                 });
                 if (!hotel) {
                     throw new Error('找不到指定飯店');
@@ -74,7 +74,7 @@ class BookingService extends base_service_1.BaseService {
                 // 計算價格
                 const nights = Math.ceil((data.checkOutDate.getTime() - data.checkInDate.getTime()) /
                     (1000 * 60 * 60 * 24));
-                const roomPrice = parseFloat(room.roomPrice);
+                const roomPrice = parseFloat(room.room_Price);
                 const subtotal = roomPrice * data.roomCount * nights;
                 const taxRate = ((_a = hotel.tax) === null || _a === void 0 ? void 0 : _a.toString()) ? parseFloat(hotel.tax.toString()) : 0;
                 const totalPrice = subtotal * (1 + taxRate);
@@ -107,7 +107,7 @@ class BookingService extends base_service_1.BaseService {
                     country: hotel.country,
                     latitude: hotel.latitude,
                     longitude: hotel.longitude,
-                    facilities: hotel.facilityList
+                    facilities: hotel.facility_List
                 })
                     .returning();
                 return newBooking;
@@ -137,7 +137,7 @@ class BookingService extends base_service_1.BaseService {
             try {
                 // 驗證使用者是否為飯店擁有者
                 const hotel = yield this.db.query.hotels.findFirst({
-                    where: (0, drizzle_orm_1.and)((0, drizzle_orm_1.eq)(hotels_1.hotels.id, hotelId), (0, drizzle_orm_1.eq)(hotels_1.hotels.ownerId, userId))
+                    where: (0, drizzle_orm_1.and)((0, drizzle_orm_1.eq)(hotels_1.hotels.hotel_Id, hotelId), (0, drizzle_orm_1.eq)(hotels_1.hotels.owner_Id, userId))
                 });
                 if (!hotel) {
                     throw new Error('未授權的操作');
@@ -164,9 +164,9 @@ class BookingService extends base_service_1.BaseService {
                 }
                 // 檢查權限
                 const hotel = yield this.db.query.hotels.findFirst({
-                    where: (0, drizzle_orm_1.eq)(hotels_1.hotels.id, booking.hotelId)
+                    where: (0, drizzle_orm_1.eq)(hotels_1.hotels.hotel_Id, booking.hotelId)
                 });
-                if (booking.userId !== userId && (hotel === null || hotel === void 0 ? void 0 : hotel.ownerId) !== userId) {
+                if (booking.userId !== userId && (hotel === null || hotel === void 0 ? void 0 : hotel.owner_Id) !== userId) {
                     throw new Error('未授權的操作');
                 }
                 return booking;
