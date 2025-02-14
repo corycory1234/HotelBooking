@@ -127,7 +127,8 @@ export default function CreditCard() {
         toast.success("You will now be redirected to our secure payment gateway.", 
           {icon: '💳', duration: 6000, style:{display: 'flex', gap: '1rem'} }
         );
-        router.push("/") // 這邊應該是導向金流
+        // router.push("/") // 這邊應該是導向金流
+        router.push("/bookingcompleted");
         // redirect("/")
       }
     } catch (error) {

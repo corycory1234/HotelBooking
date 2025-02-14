@@ -168,7 +168,7 @@ export default function Hotel_List_Card() {
   // 11. Sort 傳遞<input type="radio"> 之 Value 與 傳遞函式 set_Sort_Value (手機版)
   const [sort_Value_Mobile, set_Sort_Value_Mobile] = useState("");
 
-  // 12. 飯店列表 API
+  // 12. 前端 - 飯店列表 API
   const fetch_Hotel_List = async (page: number) => {
     try {
       const response = await fetch("/api/hotel_List", {
@@ -231,6 +231,39 @@ export default function Hotel_List_Card() {
   useEffect(() => {
     fetch_Hotel_List(Number(current_Page_Params));
   },[timestamp])
+
+  // 14. 後端 - 飯店列表API
+  const fetch_Hotel_List2 = async (page: number) => {
+    try {
+      const query_Params = new URLSearchParams({
+        page: String(page),
+        city: redux_Destination,
+        country: "",
+        minPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[0]) : String(redux_RangeSlider),
+        maxPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[1]) : String(redux_RangeSlider),
+        rating: String(redux_Rating),
+        q: redux_Destination,
+        facilities: String(redux_Facility)
+      }).toString();
+      const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
+      const response = await fetch(hotel_List_Url, {
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+      });
+      if(!response.ok) {throw new Error(`伺服器錯誤`)};
+      const result = await response.json();
+      console.log(result, "飯店列表API - 返回數據");
+
+      dispatch(update_Hotel_List(result.data));
+      set_Current_Page(result.currentPage);
+      set_Total_Hotel(result.total);
+      set_Total_Pages(result.totalPages);
+
+      router.push(`/hotellist?${query_Params}`);
+    } catch (error) {
+      console.log(error, "飯店列表API失敗");
+    }
+  }
 
   // 14. Pagination 分頁
   const [current_Page, set_Current_Page] = useState<number>(1);

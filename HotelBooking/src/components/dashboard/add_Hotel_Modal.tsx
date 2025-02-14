@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import { add_Hotel_Detail_Interface, add_Review_Type_Interface, add_Hotel_Room_Type_Interface } from "@/types/add_Hotel_Detail";
+import { create_Hotel_Interface, create_Review_Interface, create_Hotel_Room_Type_Interface } from "@/types/create_Hotel";
 import { v4 as uuidv4 } from 'uuid';
 import Add_Hotel_Basic_Info from "./add_Hotel_Basic_Info"; 
 import Add_Hotel_Review from "./add_Hotel_Review";
@@ -27,23 +28,11 @@ export default function Add_Hotel_Modal() {
   console.log(redux_Hotel_List, "Redux - 飯店列表");
   
   // 1. 所有飯店列表
-  const [hotel_List, set_Hotel_List] = useState<add_Hotel_Detail_Interface[]>([]);
+  const [hotel_List, set_Hotel_List] = useState<create_Hotel_Interface[]>([]);
 
 
   // 3. 指定飯店 - 所有房型列表
-  const [roomTypes, set_RoomTypes] = useState<add_Hotel_Room_Type_Interface[]>([
-    // {
-    //   room_Type: "",
-    //   roomType_Id: uuidv4(),
-    //   room_Price: null,
-    //   room_Availability: null,
-    //   smoke: null,
-    //   amenity_List: [],
-    //   room_Size: null,
-    //   max_People: null,
-    //   roomType_Image_List: [],
-    // }
-  ])
+  const [roomTypes, set_RoomTypes] = useState<create_Hotel_Room_Type_Interface[]>([])
 
   // 4. 再新增一個房型 - 函式
   const add_Room_Type = () => {
@@ -73,7 +62,7 @@ export default function Add_Hotel_Modal() {
   };
 
   // 7. 處理房型表單變更
-  const handle_Room_Type_Change = (index: number, field: keyof add_Hotel_Room_Type_Interface, value: any) => {
+  const handle_Room_Type_Change = (index: number, field: keyof create_Hotel_Room_Type_Interface, value: any) => {
     const updateRoomTypes = roomTypes.map((room, i) => 
       i === index ? {...room, [field]: value} : room
     );
@@ -107,14 +96,17 @@ export default function Add_Hotel_Modal() {
     const transportation = formData.get("transportation") as string | null;
     const recommendation = formData.get("recommendation") as string | null;
     const hotel_Image_Files = formData.getAll("hotelimages") as File[];
+    const room_Type_Image_Files = formData.getAll("roomtypeimages") as File[];
     // 9.1 待Daniel 修正完 上傳圖片API, 這可以拿掉 ↓
-    const hotel_Image_List = hotel_Image_Files.map((item) => ({
-      url: URL.createObjectURL(item),
-      description: "",
-    }))
+    // const hotel_Image_List = hotel_Image_Files.map((item) => ({
+    //   url: URL.createObjectURL(item),
+    //   description: "",
+    // }))
     // 9.2 建立新的 FormData 用來上傳圖片, 上傳圖片API 修正完要用的變數↓
     const hotel_Image_List_Form_Data = new FormData();
+    const room_Type_Image_List_Form_Data = new FormData();
     hotel_Image_Files.forEach((file) => {hotel_Image_List_Form_Data.append("images", file)});
+    room_Type_Image_Files.forEach((file) => {room_Type_Image_List_Form_Data.append("images", file)});
     
     const travelername = formData.get("travelername") as string | null;
     const date = formData.get("date") as string | null;
@@ -128,11 +120,11 @@ export default function Add_Hotel_Modal() {
     const amenity_List = formData.getAll("amenity") as string[] | null;;
     const room_Size = formData.get("roomsize") as number | null;;
     const max_People = formData.get("maxpeople") as number | null;;
-    const roomTypeFiles = formData.getAll("roomtypeimages") as File[];
-    const roomType_Image_List = roomTypeFiles.map((item) => ({
-      url: URL.createObjectURL(item),
-      description: "",
-    }));
+    // const roomTypeFiles = formData.getAll("roomtypeimages") as File[];
+    // const roomType_Image_List = roomTypeFiles.map((item) => ({
+    //   url: URL.createObjectURL(item),
+    //   description: "",
+    // }));
     const distance = formData.get("distance") as string;
     // 9.1 offer 送出, 必須是物件, 因此若有拿到value, 先斷言是string, 記得先小括號包起來, 外層再Parse; 
     // 9.2 沒拿到就返回null, 這樣可解決 TS報null的問題
@@ -143,7 +135,7 @@ export default function Add_Hotel_Modal() {
   // 10.1 在酒店列表中，每個酒店項目下添加一個評論表單，當用戶提交評論時，
   // 10.2 調用 addReview 函數來更新特定酒店的 reviews
   const addReview = (hotelId: string, travelerName: string, date: string, traveler_Rating: number, comment: string, reply: string) => {
-    const newReview: add_Review_Type_Interface = {
+    const newReview: create_Review_Interface = {
       travelerId: uuidv4(), // 使用 UUID 生成唯一 ID
       travelerName,
       date,
@@ -162,7 +154,7 @@ export default function Add_Hotel_Modal() {
   };
 
     // 11. 評論表單Array & 單一旅客評論 - 初始值
-    let initialReviews_List: add_Review_Type_Interface[] = [];
+    let initialReviews_List: create_Review_Interface[] = [];
     if (travelername && date && traveler_Rating && comment) {
     initialReviews_List.push({
         travelerId: uuidv4(),
@@ -193,8 +185,17 @@ export default function Add_Hotel_Modal() {
     // 12. 眾多房型Array & 單一房型 - 初始值
     const initialRoomType_List = roomTypes
 
+    // 13. 不要丟「房型圖片」, 抑或是給他空陣列, 不然資料庫會有空物件...
+    const roomTypesForCreation = roomTypes.map(room => {
+      const { roomType_Image_List, ...rest } = room; // 排除 roomType_Image_List
+      return {
+        ...rest,
+        roomType_Image_List: [] // 或者可以完全省略這個欄位，視後端需求而定
+      }
+    });
+
     // 13. 創建新的飯店物件
-    const new_Hotel: add_Hotel_Detail_Interface = {
+    const new_Hotel = {
       hotel_Id: hotel_Id,
       hotel_Name: hotel_Name,
       address: address,
@@ -215,14 +216,16 @@ export default function Add_Hotel_Modal() {
       hotel_Intro: intro,
       transportation: transportation,
       recommendation: recommendation,
-      hotel_Image_List: hotel_Image_List,
+      // hotel_Image_List: hotel_Image_List,
       review_List: initialReviews_List,
-      roomType_List: initialRoomType_List,
+      // roomType_List: initialRoomType_List,
+      roomType_List: roomTypesForCreation,
       distance: distance,
       isCollected: false,
       offer_Id: offer,
     };
 
+    console.log(new_Hotel, "檢查傳出去數據");
 
     // 15. 創建飯店 API
     const create_Hotel_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/hotels";
@@ -234,10 +237,12 @@ export default function Add_Hotel_Modal() {
         credentials: "include" // 同源政策 CORS 需要
       });
       const data = await response.json();
-      console.log(data, "查看創建飯店API", data.data.hotel.id);
-      const hotelId = data.data.hotel.id;
+      console.log(data, "查看創建飯店API", data.data.hotel.hotel_Id, "查看飯店ID");
+      const hotel_Id = data.data.hotel.hotel_Id;
+      const room_Type_List = data.data.rooms;
+
       // 16. 上傳飯店照片 API
-      const upload_Hotel_Image_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/${hotelId}/images`
+      const upload_Hotel_Image_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/${hotel_Id}/images`
       const hotel_Image_Lits_Response = await fetch(upload_Hotel_Image_List_Url, {
         method: "POST",
         body: hotel_Image_List_Form_Data,
@@ -245,6 +250,30 @@ export default function Add_Hotel_Modal() {
       });
       const data2 = await hotel_Image_Lits_Response.json();
       console.log(data2, "查看上傳房店照片API回應");
+
+      // 17. 上傳房型照片 API
+      room_Type_List.forEach(async (item: any, index: number) => {
+        const roomType_Id = item.roomType_Id
+        const upload_Room_Type_Image_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/room-types/${roomType_Id}/images`;
+          // 從 state 中針對每個房型取得上傳的檔案
+          // 注意：這邊要確保 roomTypes[index].roomType_Image_List 是 File[] 而非預覽用的 blob URL
+        const files = roomTypes[index].roomType_Image_List as File[];
+
+        if (files && files.length > 0) {
+          const room_Type_Image_List_Form_Data = new FormData();
+          files.forEach((file) => {
+            room_Type_Image_List_Form_Data.append("images", file);
+          });
+        
+        const room_Type_Image_List_Response = await fetch(upload_Room_Type_Image_List_Url, {
+          method: "POST",
+          body: room_Type_Image_List_Form_Data,
+          credentials: "include"
+        });
+      const data3 = await room_Type_Image_List_Response.json()
+      console.log(data3, "查看上傳房型照片 API回應");
+      }
+      })
     }
     catch (error) {
       console.log(error);
@@ -254,8 +283,8 @@ export default function Add_Hotel_Modal() {
     // 14. 最後，更新 hotel_List 最新狀態
     // set_Hotel_List((prevState) => [...prevState, new_Hotel]);
     // console.log(hotel_List);
-    dispatch(add_One_Hotel(new_Hotel));
-    console.log("Redux - 飯店列表", redux_Hotel_List);
+    // dispatch(add_One_Hotel(new_Hotel));
+    // console.log("Redux - 飯店列表", redux_Hotel_List);
   }
 
   
@@ -412,22 +441,29 @@ export default function Add_Hotel_Modal() {
         {/** 上傳房型輪播圖 */}
         <div className="flex flex-col gap-2">
           <label htmlFor={`roomtypeimages_${roomType.roomType_Id}`} className="font-semibold text-primary">Upload Images</label>
-          <input type="file"  id={`roomtypeimages_${roomType.roomType_Id}`}  name={`roomTypes[${index}].room_Image_List`} accept="images/*"
+          <input type="file"  id={`roomtypeimages_${roomType.roomType_Id}`}  name={`roomtypeimages_${roomType.roomType_Id}`} accept="images/*"
           multiple className="border rounded" 
-          onChange={(e) => {
-            if (e.target.files) {
-              const files = Array.from(e.target.files);
-              const imageList = files.map((file) => ({
-                url: URL.createObjectURL(file),
-                description: "",
-              }));
-              handle_Room_Type_Change(
-                index,
-                "roomType_Image_List",
-                imageList
-              );
+          // onChange={(e) => {
+          //   if (e.target.files) {
+          //     const files = Array.from(e.target.files);
+          //     const imageList = files.map((file) => ({
+          //       url: URL.createObjectURL(file),
+          //       description: "",
+          //     }));
+          //     handle_Room_Type_Change(
+          //       index,
+          //       "roomType_Image_List",
+          //       imageList
+          //     );
+          //   }
+          // }}
+          onChange={(event) => {
+            if(event.target.files){
+              const files = Array.from(event.target.files);
+              handle_Room_Type_Change(index, "roomType_Image_List",files);
             }
-          }}/>
+          }}
+          />
         </div>
         {/** 上傳房型輪播圖 */}
 
