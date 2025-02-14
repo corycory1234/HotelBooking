@@ -118,13 +118,13 @@ export default function Hotel_List_Card() {
   const destination = searchParams.get("destination");
   const timestamp = searchParams.get("timestamp");
   const current_Page_Params = searchParams.get("page");
-  useEffect(() => {
-    set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
-    const timer = setTimeout(() => {
-      set_Show_Hotel_List(true);
-    }, 1500);
-    return () => clearTimeout(timer);
-  },[searchParams])
+  // useEffect(() => {
+  //   set_Show_Hotel_List(false) // 第2次進頁面, 從 true >> false
+  //   const timer = setTimeout(() => {
+  //     set_Show_Hotel_List(true);
+  //   }, 2500);
+  //   return () => clearTimeout(timer);
+  // },[searchParams])
 
   // 9. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
@@ -229,12 +229,16 @@ export default function Hotel_List_Card() {
   // 13.  只要timeStamp(URL字串, 並非 + new Date())有變, 
   // 13.1 就重打 飯店列表API (用於一般搜尋、進階搜尋, 跳轉/hotellist)
   useEffect(() => {
-    fetch_Hotel_List(Number(current_Page_Params));
+    fetch_Hotel_List2(Number(current_Page_Params));
   },[timestamp])
+
 
   // 14. 後端 - 飯店列表API
   const fetch_Hotel_List2 = async (page: number) => {
     try {
+      // 14.1 Skeleton動畫 - 開
+      set_Show_Hotel_List(false)
+
       const query_Params = new URLSearchParams({
         page: String(page),
         city: redux_Destination,
@@ -254,12 +258,34 @@ export default function Hotel_List_Card() {
       const result = await response.json();
       console.log(result, "飯店列表API - 返回數據");
 
-      dispatch(update_Hotel_List(result.data));
-      set_Current_Page(result.currentPage);
-      set_Total_Hotel(result.total);
-      set_Total_Pages(result.totalPages);
+      dispatch(update_Hotel_List(result.data.data));
+      set_Current_Page(result.data.page);
+      set_Total_Hotel(result.data.total);
+      set_Total_Pages(result.data.totalPages);
 
-      router.push(`/hotellist?${query_Params}`);
+
+
+      // 14.1 前端自己的URL
+      const search_Params = new URLSearchParams({
+        destination: redux_Destination,
+        dateRange: redux_DateRange as string,
+        date_Start: redux_Date_Start as string,
+        date_End: redux_Date_End as string,
+        room: String(redux_Room),
+        adult: String(redux_Adult),
+        child: String(redux_Child),
+        rangeslider: String(redux_RangeSlider),
+        timestamp: String(timestamp),
+        bedtype: String(redux_BedType),
+        rating: String(redux_Rating),
+        facility: String(redux_Facility),
+        page: String(result.data.page)
+      }).toString()
+
+      router.push(`/hotellist?${search_Params}`);
+      
+      // 14.5 Skeleton動畫 -關
+      set_Show_Hotel_List(true)
     } catch (error) {
       console.log(error, "飯店列表API失敗");
     }
@@ -277,7 +303,8 @@ export default function Hotel_List_Card() {
         return prevPage;
       } else {
         const newPage =  prevPage > 1 ? prevPage - 1 : 1;
-        fetch_Hotel_List(newPage);
+        // fetch_Hotel_List(newPage);
+        fetch_Hotel_List2(newPage);
         return newPage;
       }
     });
@@ -290,7 +317,8 @@ export default function Hotel_List_Card() {
         return prevPage;
       } else {
         const newPage =  prevPage < total_Pages ? prevPage + 1 : prevPage;
-        fetch_Hotel_List(newPage);
+        // fetch_Hotel_List(newPage);
+        fetch_Hotel_List2(newPage);
         return newPage;
       }
     });
@@ -510,7 +538,8 @@ export default function Hotel_List_Card() {
           {Array.from({length: total_Pages}).map((_, index) => {
             return <li key={index+1} className={`${current_Page === index+1 ? 'bg-primary rounded text-white' : ''} py-2 px-3 font-semibold cursor-pointer`}
               onClick={() => {set_Current_Page(index+1),
-              fetch_Hotel_List(index+1)
+              // fetch_Hotel_List(index+1)
+              fetch_Hotel_List2(index+1)
             }
             }>{index +1}</li>
           })}
