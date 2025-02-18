@@ -355,12 +355,24 @@ export class HotelService extends BaseService {
                 conditions.push(sql`${hotels.city} ILIKE ${`%${params.city.trim()}%`}`);
             }
 
-            if (params.min_Price && params.min_Price > 0) {
+            // 修改價格條件判斷
+            if (params.min_Price !== undefined && params.min_Price > 0) {
                 conditions.push(sql`CAST(${hotels.price} AS DECIMAL) >= ${params.min_Price}`);
             }
 
-            if (params.max_Price && params.max_Price > 0) {
+            if (params.max_Price !== undefined && params.max_Price > 0) {
                 conditions.push(sql`CAST(${hotels.price} AS DECIMAL) <= ${params.max_Price}`);
+            }
+
+            // 如果同時有最小和最大價格，且最大價格小於最小價格，則交換它們
+            if (params.min_Price !== undefined && 
+                params.max_Price !== undefined && 
+                params.min_Price > 0 && 
+                params.max_Price > 0 && 
+                params.min_Price > params.max_Price) {
+                const temp = params.min_Price;
+                params.min_Price = params.max_Price;
+                params.max_Price = temp;
             }
 
             if (params.rating && params.rating > 0) {

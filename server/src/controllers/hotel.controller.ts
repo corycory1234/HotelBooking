@@ -10,7 +10,6 @@ class HotelController {
     // 搜尋飯店列表
     async getHotels(req: Request, res: Response) {
         try {
-            // 驗證必填參數
             const page = parseInt(req.query.page as string);
 
             if (!page || isNaN(page)) {
@@ -19,21 +18,35 @@ class HotelController {
                 );
             }
 
-            // 處理設施參數，確保它是有效的陣列
-            const facilities = req.query.facilities ? 
-                (req.query.facilities as string).split(',').filter(f => f.trim()) : 
-                undefined;
+            // 處理價格參數
+            const minPrice = req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined;
+            const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined;
+
+            // 驗證價格參數
+            if (minPrice !== undefined && minPrice <= 0) {
+                return res.status(400).json(
+                    ApiResponse.error("最低價格必須大於 0")
+                );
+            }
+
+            if (maxPrice !== undefined && maxPrice <= 0) {
+                return res.status(400).json(
+                    ApiResponse.error("最高價格必須大於 0")
+                );
+            }
 
             const searchParams: SearchHotelsParams = {
                 page,
-                limit: 10, // 固定為 10 筆
+                limit: 10,
                 country: req.query.country as string || undefined,
                 city: req.query.city as string || undefined,
-                min_Price: req.query.minPrice ? parseInt(req.query.minPrice as string) : undefined,
-                max_Price: req.query.maxPrice ? parseInt(req.query.maxPrice as string) : undefined,
+                min_Price: minPrice,
+                max_Price: maxPrice,
                 rating: req.query.rating ? parseInt(req.query.rating as string) : undefined,
                 search_Query: req.query.q as string || undefined,
-                facilities: facilities // 清理過的設施陣列
+                facilities: req.query.facilities ? 
+                    (req.query.facilities as string).split(',').filter(f => f.trim()) : 
+                    undefined
             };
 
             const results = await hotelService.searchHotels(searchParams);
