@@ -58,7 +58,7 @@ export default function Hotel_Customer_Review() {
 
       {/** 留言、星星評價 */}
       {sorted_Review.map((item) => {
-        return <div key={item.travelerId}>
+        return <div key={item.travelerId} className="flex-1">
           <div className="flex justify-between">
             <p className="text-primary">{item.travelerName} - {item.date}</p>
             <div className="flex">

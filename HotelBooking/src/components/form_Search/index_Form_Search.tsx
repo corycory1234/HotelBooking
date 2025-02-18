@@ -11,6 +11,7 @@ import Toaster_Notify from "../toaster/toaster";
 import toast from "react-hot-toast";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
+import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
 
 export default function Index_Form_Search () {
   // 0. 路由
@@ -21,7 +22,7 @@ export default function Index_Form_Search () {
   const redux_Start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
   const redux_End_Date = useSelector((state: RootState) => state.formSearch.end_Date);
 
-  // 1. 尚未接 後端API
+  // 2. 跳轉 <hotelist>, 該頁面 useEffect, 串 飯店列表API (後端)
   const submit_Search = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     
@@ -37,15 +38,8 @@ export default function Index_Form_Search () {
       const rating = formData.getAll("rating");
       const bedType = formData.getAll("bedType") as string [];
       const facility = formData.getAll("facility") as string [];
-      // console.log(destination);
-      // console.log(dateRange);
-      // console.log(room, adult, child);
-      // console.log(rating, "星級");
-      // console.log("床型", bedType);
-      // console.log("設施", facility);
-      // console.log("最小最大房錢", rangeslider);
-  
-      // 2. 吐司訊息, 防止沒輸入數據
+
+      // 2.1 吐司訊息, 防止沒輸入數據
       if(!destination || destination.trim() === ""){
         toast.error("Please Type Your Destination");
         return;
@@ -54,9 +48,15 @@ export default function Index_Form_Search () {
         toast.error("Please Select DateRange");
         return;
       };
+
+      // 2.2 一般搜尋, 初始化「進階搜尋」
+      dispatch(updateRangeSlider([0,9999]));
+      dispatch(updateBedType([]));
+      dispatch(updateRating([]));
+      dispatch(updateFacility([]));
         
         
-      // 3. URL參數, 轉字串
+      // 2.3 URL參數, 轉字串
       const timestamp = +new Date();
       const search_Params = new URLSearchParams({
         destination,

@@ -7,12 +7,14 @@
 // export default nextConfig;
 
 
-// @ts-check
+// @ts-nocheck
+const createNextIntlPlugin = require('next-intl/plugin');
+const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-  // 1. 確保在 next.config.js 中添加後端 API 的環境變數：
+  // 2. 確保在 next.config.js 中添加後端 API 的環境變數：
   env: {
     BACKEND_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001',
   },
@@ -29,4 +31,4 @@ const nextConfig = {
   // }
 }
 
-module.exports = nextConfig
+module.exports = withNextIntl(nextConfig);

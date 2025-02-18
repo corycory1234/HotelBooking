@@ -229,12 +229,12 @@ export default function Hotel_List_Card() {
   // 13.  只要timeStamp(URL字串, 並非 + new Date())有變, 
   // 13.1 就重打 飯店列表API (用於一般搜尋、進階搜尋, 跳轉/hotellist)
   useEffect(() => {
-    fetch_Hotel_List2(Number(current_Page_Params));
+    fetch_Hotel_List_Backend(Number(current_Page_Params));
   },[timestamp])
 
 
   // 14. 後端 - 飯店列表API
-  const fetch_Hotel_List2 = async (page: number) => {
+  const fetch_Hotel_List_Backend = async (page: number) => {
     try {
       // 14.1 Skeleton動畫 - 開
       set_Show_Hotel_List(false)
@@ -304,7 +304,7 @@ export default function Hotel_List_Card() {
       } else {
         const newPage =  prevPage > 1 ? prevPage - 1 : 1;
         // fetch_Hotel_List(newPage);
-        fetch_Hotel_List2(newPage);
+        fetch_Hotel_List_Backend(newPage);
         return newPage;
       }
     });
@@ -318,7 +318,7 @@ export default function Hotel_List_Card() {
       } else {
         const newPage =  prevPage < total_Pages ? prevPage + 1 : prevPage;
         // fetch_Hotel_List(newPage);
-        fetch_Hotel_List2(newPage);
+        fetch_Hotel_List_Backend(newPage);
         return newPage;
       }
     });
@@ -331,7 +331,7 @@ export default function Hotel_List_Card() {
     :
     <>
     {/************ 手機版 - Filter、熱門搜尋條件 ************/}
-      <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray lg:hidden">
+      <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray lg:hidden lg:static">
         <Filter_Button></Filter_Button>
       </div>
     {/************ 手機版 - Filter、熱門搜尋條件 ************/}
@@ -453,10 +453,11 @@ export default function Hotel_List_Card() {
                     <StarRating ranking={item.totalRating as number}></StarRating>
                   </div>
                   <h3 className="font-semibold">{item.hotel_Name}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{item.distance}</p>
+                  {/* <p className="text-sm text-gray-500 mt-1">{item.distance}</p> */}
+                  <p className="text-sm text-gray-500">{item.city}, {item.country}</p>
                 </div>
         
-                <div className="flex flex-col gap-2 justify-center items-center lg:items-end">
+                <div className="w-1/3 flex flex-col gap-2 justify-center items-center lg:items-end">
                   <div className="flex items-center gap-1 bg-[#f3f3f3] text-custom px-2 py-1 rounded">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4 text-yellow-500">
                       <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
@@ -471,7 +472,14 @@ export default function Hotel_List_Card() {
                   {/** 飯店最低價前 - PC */}
                   
                   {/** 人數、幾間房 - PC */}
-                  <p className="hidden lg:block lg:text-sm lg:text-[#6D6D6D]">{redux_Adult + redux_Child} Guests, {how_Many_Nights(redux_Date_Start as string, redux_Date_End as string)} Nights</p>
+                  <div className="hidden lg:flex flex-col">
+                    <p className="lg:text-sm lg:text-[#6D6D6D]">  
+                      {redux_Adult + redux_Child} Guest
+                    </p>
+                    <p className="lg:text-sm lg:text-[#6D6D6D]">
+                      {how_Many_Nights(redux_Date_Start as string, redux_Date_End as string)} Nights
+                    </p>
+                  </div>
                   {/** 人數、幾間房 - PC */}
         
                   {/** 我的收藏 - 愛心 */}
@@ -539,7 +547,7 @@ export default function Hotel_List_Card() {
             return <li key={index+1} className={`${current_Page === index+1 ? 'bg-primary rounded text-white' : ''} py-2 px-3 font-semibold cursor-pointer`}
               onClick={() => {set_Current_Page(index+1),
               // fetch_Hotel_List(index+1)
-              fetch_Hotel_List2(index+1)
+              fetch_Hotel_List_Backend(index+1)
             }
             }>{index +1}</li>
           })}

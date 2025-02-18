@@ -85,8 +85,8 @@ export default function Add_Hotel_Modal() {
     const totalRating = formData.get("totalrating") ? Number(formData.get("totalrating")) : null;
     const checkin = formData.get("checkin") as string | null;
     const checkout = formData.get("checkout") as string | null;
-    const latitude = formData.get("latitude") as number | null;
-    const longtitude = formData.get("longtitude") as number | null;
+    const latitude = formData.get("latitude") as string | null;
+    const longtitude = formData.get("longtitude") as string | null;
     const is_Open = formData.get("is_Open") as string | null;
     const hotel_Phone = formData.get("hotel_Phone") as string | null;
     const hotel_Email = formData.get("hotel_Email") as string | null;

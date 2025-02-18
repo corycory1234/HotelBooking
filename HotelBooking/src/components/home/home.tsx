@@ -13,6 +13,8 @@ import 'swiper/css/navigation';
 import Offer_List_Json from "@/fakeData/offer_List.json";
 import { useRouter } from "next/navigation";
 import StarRating from "../starrating/star-Rating";
+import {useTranslations} from 'next-intl';
+import { useParams } from "next/navigation";
 
 
 const swiper_Popular_Destination = [
@@ -129,11 +131,15 @@ const redux_Verify_Session = useSelector((state: RootState) => state.verify_Sess
 
 // 2. 路由
 const router = useRouter();
+const params = useParams();
 
 // 3. 點擊輪播圖 - 傳遞 offer_Id 參數
 const check_Offer = (offer_Id: string) => {
-  router.push(`/offers/${offer_Id}`);
+  router.push(`/${params.locale}/offers/${offer_Id}`);
 };
+
+// 4.
+const t = useTranslations('HomePage');
 
   return <>
     <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
@@ -160,7 +166,7 @@ const check_Offer = (offer_Id: string) => {
   {/************************* Explore The World 文字 ***********************/}
     <div className="flex p-4 lg:px-[8.5%]">
       <div className="basis-1/2 flex flex-col">
-        <h1 className="text-[24px] text-white font-semibold">Let's Explore The World!</h1>
+        <h1 className="text-[24px] text-white font-semibold">{t ("Let's Explore The World!")}</h1>
       </div>
     </div>
   {/************************* Explore The World 文字 ***********************/}
@@ -176,7 +182,7 @@ const check_Offer = (offer_Id: string) => {
         
         <div className="flex flex-col p-4 gap-4 pb-20 lg:px-0">
         {/********************* Swiper - 熱門地點 *******************************/}
-          <h2 className="font-bold">Popular Destinations</h2>
+          <h2 className="font-bold">{t ("Popular Destinations")}</h2>
           <div className="">
             <Swiper slidesPerView={2.7} spaceBetween={20}
               modules={[Navigation]}
@@ -198,7 +204,7 @@ const check_Offer = (offer_Id: string) => {
           
 
         {/********************* Swiper - 優惠券飯店 *******************************/}
-          <h2 className="font-bold">Promotions</h2>
+          <h2 className="font-bold">{t ("Promotions")}</h2>
           <div className="">
             <Swiper slidesPerView={2.7} spaceBetween={20}
               modules={[Navigation]}
@@ -221,7 +227,7 @@ const check_Offer = (offer_Id: string) => {
 
 
         {/********************* Swiper - 附近飯店 *******************************/}
-          <h2 className="font-bold">Hotels Around You</h2>
+          <h2 className="font-bold">{t ("Hotels Around You")}</h2>
           <div className="">
             <Swiper slidesPerView={2} spaceBetween={20}
               modules={[Navigation]}

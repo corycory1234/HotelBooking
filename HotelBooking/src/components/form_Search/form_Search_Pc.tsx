@@ -14,6 +14,7 @@ import hotel_List_Json from "@/fakeData/hotel_List.json";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 import { Refresh_Search_Hotel_List, Search_Params_Interface } from "@/utils/refresh_Search_Hotel_List";
+import {updateRangeSlider, updateBedType, updateRating, updateFacility} from "@/store/form-Search/formSearchSlice";
 
 // 1. startDate - 高亮「今天」
 const START_FROM = new Date();
@@ -116,15 +117,14 @@ export default function Form_Search_Pc () {
       const rating = formData.getAll("rating");
       const bedType = formData.getAll("bedType") as string [];
       const facility = formData.getAll("facility") as string [];
-      // console.log(destination);
-      // console.log(dateRange);
-      // console.log(room, adult, child);
-      // console.log(rating, "星級");
-      // console.log("床型", bedType);
-      // console.log("設施", facility);
-      // console.log("最小最大房錢", rangeslider);
+
+      // 15.1 一般搜尋, 初始化「進階搜尋」
+      dispatch(updateRangeSlider([0,9999]));
+      dispatch(updateBedType([]));
+      dispatch(updateRating([]));
+      dispatch(updateFacility([]));
   
-      // 15.1 吐司訊息, 防止沒輸入數據
+      // 15.2 吐司訊息, 防止沒輸入數據
       if(!destination || destination.trim() === ""){
         toast.error("Please Type Your Destination");
         return;

@@ -100,12 +100,14 @@ export default function Add_Hotel_Basic_Info() {
     <div className="flex gap-2">
       <label className="flex gap-2">
         Latitude
-        <input type="number" id="latitude" name="latitude" className="border rounded no-spin max-w-20"
+        <input type="string" 
+          id="latitude" name="latitude" className="border rounded no-spin max-w-20"
         step="any"/>
       </label>
       <label className="flex gap-2">
         Longtitude
-        <input type="number" id="longtitude" name="longtitude" className="border rounded no-spin max-w-20"
+        <input type="string"
+          id="longtitude" name="longtitude" className="border rounded no-spin max-w-20"
         step="any"/>
       </label>
     </div>

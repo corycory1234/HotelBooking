@@ -31,9 +31,6 @@ export default function Before_Login_Profile () {
   const switch_Language = (new_Language: string) => {
     set_Language(new_Language)
   };
-  useEffect(() => {
-    console.log("uesEffect監聽多語系", language);
-  },[language]);
 
   // 2. 個人資料 - Modal彈窗
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);

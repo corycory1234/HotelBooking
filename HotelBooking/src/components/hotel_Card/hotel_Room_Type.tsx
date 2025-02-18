@@ -57,8 +57,8 @@ export default function Hotel_Room_Type() {
 
   return <>
     <div className="flex flex-col gap-4">
-      {redux_Hotel_Room_Type.map((room) => {
-        return <div key={room.roomType_Id} className="flex flex-col gap-2">
+      {redux_Hotel_Room_Type?.map((room, index) => {
+        return <div key={index} className="flex flex-col gap-2">
         
         {/* Swiper 飯店圖片 - <Swiper>外層一定要有<div> */}
         <div className="">
