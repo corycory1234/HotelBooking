@@ -18,7 +18,7 @@ export interface add_Hotel_Detail_Interface {
   checkin: string | null,
   checkout: string | null,
   latitude: number | null,
-  longtitude: number | null,
+  longitude: number | null,
   is_Open: string | null,
   hotel_Phone: string | null,
   hotel_Email: string | null,
