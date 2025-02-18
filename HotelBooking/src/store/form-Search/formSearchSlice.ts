@@ -30,7 +30,7 @@ const initialState: Form_Search_Interface = {
   room: 1,
   adult: 1,
   child: 0,
-  rangeSlider: [0, 9999],
+  rangeSlider: [0, 9900],
   bedType: [],
   rating: [],
   facility: [],
@@ -66,22 +66,22 @@ const formSearch_Slice = createSlice({
     // Filter 星級
     updateRating: (state, action: PayloadAction<number[] | null>) => {
       state.rating = action.payload;
-      console.log(state.rating, "Redux 飯店星級");
+      // console.log(state.rating, "Redux 飯店星級");
     },
     // Filter 床型
     updateBedType: (state, action: PayloadAction<string[] | null>) => {
       state.bedType = action.payload
-      console.log(state.bedType, "Redux 房型");
+      // console.log(state.bedType, "Redux 房型");
     },
     // Filter 設施
     updateFacility: (state, action: PayloadAction<string[] | null>) => {
       state.facility = action.payload;
-      console.log(state.facility, "Redux 設施");
+      // console.log(state.facility, "Redux 設施");
     },
     // Filter RangeSlider 最小房價-最大房價
     updateRangeSlider: (state, action: PayloadAction<number | number[]>) => {
       state.rangeSlider = action.payload
-      console.log(state.rangeSlider, "最小房價 - 最大房價");
+      // console.log(state.rangeSlider, "最小房價 - 最大房價");
     },
 
     // 更新 入住日

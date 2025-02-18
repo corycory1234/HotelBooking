@@ -50,7 +50,7 @@ export default function Index_Form_Search () {
       };
 
       // 2.2 一般搜尋, 初始化「進階搜尋」
-      dispatch(updateRangeSlider([0,9999]));
+      dispatch(updateRangeSlider([0,9900]));
       dispatch(updateBedType([]));
       dispatch(updateRating([]));
       dispatch(updateFacility([]));

@@ -106,7 +106,7 @@ export default function Advanced_Search_Pc () {
 
   // 9. 初始化所有篩選條件 
   const reset = () => {
-    dispatch(updateRangeSlider([0,9999]));
+    dispatch(updateRangeSlider([0,9900]));
     dispatch(updateBedType([]));
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
@@ -169,13 +169,12 @@ export default function Advanced_Search_Pc () {
         <div className="flex flex-col overflow-y-auto px-4 py-2 gap-6">
           
         {/********** 最小最大旅館價格 - RangeSlider **********/}
-          <div className="pb-4">        
-            <h3 className="font-medium mb-3">Price Range</h3>
-              {/* <Client_RangeSlider></Client_RangeSlider> */}
+          <div className="pt-4">        
+            <h3 className="font-semibold">Price Range</h3>
             <div className="flex flex-col gap-2 w-full h-full items-start justify-center">
               <Slider
                 name="rangeslider"
-                className=""
+                className="text-sm"
                 formatOptions={{style: "currency", currency: "USD"}}
                 label=" "
                 maxValue={9999}

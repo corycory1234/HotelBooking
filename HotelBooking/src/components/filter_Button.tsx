@@ -190,14 +190,14 @@ export default function Filter_Button () {
           
         {/********** 最小最大旅館價格 - RangeSlider **********/}
           <div className="border-b border-gray pb-4">        
-            <h3 className="font-medium mb-3">Price Range</h3>
+            <h3 className="font-semibold">Price Range</h3>
               <div className="flex flex-col gap-2 w-full h-full items-start justify-center">
                 <Slider
                   name="rangeslider"
-                  className=""
+                  className="text-sm"
                   formatOptions={{style: "currency", currency: "USD"}}
                   label=" "
-                  maxValue={9999}
+                  maxValue={9900}
                   minValue={0}
                   step={100}
                   value={redux_RangeSlider}
@@ -209,7 +209,7 @@ export default function Filter_Button () {
 
         {/**********  床型 **********/}
           <div className="border-b border-gray pb-4">
-            <h3 className="font-medium mb-3">Bed Type</h3>
+            <h3 className="font-semibold mb-3">Bed Type</h3>
             <div className="space-y-2">          
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="singlebed" name="bedtype"
@@ -247,7 +247,7 @@ export default function Filter_Button () {
 
         {/********** 飯店星級 **********/}
           <div className="border-b border-gray pb-4">
-            <h3 className="font-medium mb-3">Rating</h3>
+            <h3 className="font-semibold mb-3">Rating</h3>
             <div className="space-y-2">
               <label className="flex items-center gap-2">
                 <input type="checkbox" name="rating" className="w-4 h-4" value={5}
@@ -371,7 +371,7 @@ export default function Filter_Button () {
 
           {/** 設施 */}
           <div className="">
-            <h3 className="font-medium mb-3">Facility</h3>
+            <h3 className="font-semibold mb-3">Facility</h3>
             <div className="space-y-2">
               {facility_Arr.map((item, index) => {
                 return <div key={index}>

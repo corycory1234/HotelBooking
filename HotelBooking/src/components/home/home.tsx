@@ -4,8 +4,8 @@ import Nav from "../nav/nav";
 import Footer from "../footer/footer";
 import Index_Form_Search from "../form_Search/index_Form_Search";
 import Link from "next/link";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "@/store/store";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import 'swiper/css';
@@ -15,9 +15,16 @@ import { useRouter } from "next/navigation";
 import StarRating from "../starrating/star-Rating";
 import {useTranslations} from 'next-intl';
 import { useParams } from "next/navigation";
+import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 
 
 const swiper_Popular_Destination = [
+  {
+    url: '/home/popular_1.webp',
+    text1: 'New Year Spceial!',
+    text2: 'Get a free lunch using Coupon *GoTour*',
+    cityName: "Bangkok"
+  },
   {
     url: '/home/popular_6.webp',
     text1: 'New Year Spceial!',
@@ -138,8 +145,47 @@ const check_Offer = (offer_Id: string) => {
   router.push(`/${params.locale}/offers/${offer_Id}`);
 };
 
-// 4.
+// 4. next-intl 翻譯
 const t = useTranslations('HomePage');
+
+// 5. 查看熱門地點 (跳轉HotelList頁面)
+const dispatch: AppDispatch = useDispatch();
+const redux_Keyword = useSelector((state: RootState) => state.formSearch.keyword);
+const redux_DateRange = useSelector((state: RootState) => state.formSearch.dateRange);
+const redux_Start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
+const redux_End_Date = useSelector((state: RootState) => state.formSearch.end_Date);
+const redux_Room = useSelector((state: RootState) => state.formSearch.room);
+const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
+const redux_Child = useSelector((state: RootState) => state.formSearch.child);
+const redux_RangeSlider = useSelector((state: RootState) => state.formSearch.rangeSlider);
+const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
+const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
+const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
+const check_Popular_Destination = (popular_Destination: string) => {
+  // 5.1 更新 Redux_Keyword
+  dispatch(updateKeyword(t (popular_Destination)));
+
+  // 5.2 URL參數, 轉字串
+  const timestamp = +new Date();
+  const search_Params = new URLSearchParams({
+    destination: redux_Keyword as string,
+    dateRange: redux_DateRange as string,
+    date_Start: redux_Start_Date as string,
+    date_End: redux_End_Date as string,
+    room: String(redux_Room),
+    adult: String(redux_Adult),
+    child: String(redux_Child),
+    rangeslider: String(redux_RangeSlider),
+    timestamp: String(timestamp),
+    bedtype: String(redux_BedType),
+    rating: String(redux_Rating),
+    facility: String(redux_Facility),
+    page: "1"
+  }).toString()
+
+  // 5.3 跳轉到 hotel_List頁面, 讓hotel_List頁面自己打API
+  return router.push(`/hotellist?${search_Params}`);
+}
 
   return <>
     <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
@@ -193,8 +239,9 @@ const t = useTranslations('HomePage');
             <div className="flex">
               {swiper_Popular_Destination.map((item, index) =>
                 <SwiperSlide key={index}>
-                  <img className="w-full h-[100px] lg:h-[174.56px] object-cover rounded " src={item.url} alt="" />
-                  <p className="text-center pt-2">{item.cityName}</p>
+                  <img className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" 
+                  src={item.url} alt="" onClick={() => check_Popular_Destination(item.cityName)}/>
+                  <p className="text-center pt-2">{t (item.cityName)}</p>
                 </SwiperSlide>
               )}
             </div>

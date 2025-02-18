@@ -119,7 +119,7 @@ export default function Form_Search_Pc () {
       const facility = formData.getAll("facility") as string [];
 
       // 15.1 一般搜尋, 初始化「進階搜尋」
-      dispatch(updateRangeSlider([0,9999]));
+      dispatch(updateRangeSlider([0,9900]));
       dispatch(updateBedType([]));
       dispatch(updateRating([]));
       dispatch(updateFacility([]));
