@@ -342,13 +342,11 @@ export class HotelService extends BaseService {
         await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
     }
 
-    async searchHotels(params: SearchHotelsParams): Promise<PaginatedResponse<typeof hotels.$inferSelect>> {
+    async searchHotels(params: SearchHotelsParams) {
         try {
             const page = Math.max(1, params.page);
-            const limit = Math.min(50, Math.max(1, params.limit)); // 確保在 1-50 之間
+            const limit = Math.min(50, Math.max(1, params.limit));
             const offset = (page - 1) * limit;
-
-            let query = db.select().from(hotels);
 
             // 建立搜尋條件
             const conditions = [];
@@ -376,35 +374,84 @@ export class HotelService extends BaseService {
                 )`);
             }
 
-            // 加入設施條件 - 修改這部分
             if (params.facilities && params.facilities.length > 0) {
-                // 將設施列表轉換為 PostgreSQL 陣列格式
                 const facilitiesArray = `{${params.facilities.join(',')}}`;
                 conditions.push(sql`${hotels.facility_List} ?& ${facilitiesArray}`);
             }
 
-            // 加入搜尋條件
+            // 使用 leftJoin 查詢
+            const query = db.select({
+                hotel_Id: hotels.hotel_Id,
+                hotel_Name: hotels.hotel_Name,
+                hotel_Image_List: hotels.hotel_Image_List,
+                distance: hotels.distance,
+                totalRating: hotels.totalRating,
+                facility_List: hotels.facility_List,
+                price: hotels.price,
+                hotel_Intro: hotels.hotel_Intro,
+                review_List: hotels.review_List,
+                address: hotels.address,
+                country: hotels.country,
+                city: hotels.city,
+                tax: hotels.tax,
+                checkin: hotels.checkin,
+                checkout: hotels.checkout,
+                latitude: hotels.latitude,
+                longitude: hotels.longitude,
+                is_Open: hotels.is_Open,
+                hotel_Phone: hotels.hotel_Phone,
+                hotel_Email: hotels.hotel_Email,
+                cancellation_Policy: hotels.cancellation_Policy,
+                transportation: hotels.transportation,
+                recommendation: hotels.recommendation,
+                isCollected: hotels.isCollected,
+                offer_Id: hotels.offer_Id,
+                owner_Id: hotels.owner_Id,
+                createdAt: hotels.createdAt,
+                updatedAt: hotels.updatedAt,
+                rooms: roomTypes
+            })
+            .from(hotels)
+            .leftJoin(roomTypes, eq(hotels.hotel_Id, roomTypes.hotelId));
+
+            // 加入條件
             if (conditions.length > 0) {
-                query = (query as any).where(sql`${and(...conditions)}`);
+                query.where(and(...conditions));
             }
 
-            // 計算總數
-            const totalQuery = db.select({ count: sql<number>`count(*)` }).from(hotels);
-            if (conditions.length > 0) {
-                totalQuery.where(sql`${and(...conditions)}`);
-            }
-            const [{ count }] = await totalQuery;
+            // 執行查詢
+            const [rawResults, [{ count }]] = await Promise.all([
+                query
+                    .orderBy(hotels.createdAt)
+                    .limit(limit)
+                    .offset(offset),
+                db.select({
+                    count: sql<number>`count(DISTINCT ${hotels.hotel_Id})`
+                })
+                .from(hotels)
+                .where(conditions.length > 0 ? and(...conditions) : undefined)
+            ]);
 
-            // 加入分頁並執行查詢
-            const results = await query
-                .orderBy(hotels.createdAt)
-                .limit(limit)
-                .offset(offset);
+            // 重組資料，將房型整合到飯店資料中
+            const results = rawResults.reduce((acc, row) => {
+                const hotelId = row.hotel_Id;
+                if (!acc[hotelId]) {
+                    acc[hotelId] = {
+                        ...row,
+                        roomType_List: []
+                    };
+                    delete acc[hotelId].rooms;
+                }
+                if (row.rooms) {
+                    acc[hotelId].roomType_List.push(row.rooms);
+                }
+                return acc;
+            }, {} as Record<string, any>);
 
             const totalPages = Math.ceil(count / limit);
 
             return {
-                data: results,
+                data: Object.values(results),
                 total: count,
                 page,
                 totalPages,
