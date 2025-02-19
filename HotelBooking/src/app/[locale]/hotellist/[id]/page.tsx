@@ -20,7 +20,19 @@ export default function Hotel_Detail () {
   // 0.
   const searchParams = useSearchParams();
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
-  const redux_Form_Search = useSelector((state: RootState) => state.formSearch)
+  const redux_Form_Search = useSelector((state: RootState) => state.formSearch);
+  const redux_Destination = useSelector((state: RootState) => state.formSearch.keyword);
+  const reduxDateRange = useSelector((state: RootState) => state.formSearch.dateRange);
+  const redux_Date_Start = useSelector((state: RootState) => state.formSearch.start_Date);
+  const redux_Date_End = useSelector((state: RootState) => state.formSearch.end_Date);
+  const redux_Room = useSelector((state: RootState) => state.formSearch.room);
+  const redux_Adult = useSelector((state: RootState) => state.formSearch.adult);
+  const redux_Child = useSelector((state: RootState) => state.formSearch.child);
+  const redux_RangeSlider = useSelector((state: RootState) => state.formSearch.rangeSlider);
+  // const timeStamp = + new Date();
+  const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
+  const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
+  const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
 
   // 1. 返回上一頁
   const router = useRouter();
@@ -33,11 +45,11 @@ export default function Hotel_Detail () {
 
   // 4. 撈 JSON 當中的指定飯店 - JSON 假資料要吃 TS型別, 不然會報錯
   // const hotel_List_Typed: Hotel_Detail_Interface[] = hotel_List as Hotel_Detail_Interface[];
-  const hotel_List_Typed: add_Hotel_Detail_Interface[] = redux_Hotel_List;
+  // const hotel_List_Typed: add_Hotel_Detail_Interface[] = redux_Hotel_List;
   // const the_Found_Hotel = hotel_List_Typed.find((item) => params.id === item.id);
-  const the_Found_Hotel = hotel_List_Typed.find((item) => item.hotel_Id === params.id);
+  // const the_Found_Hotel = hotel_List_Typed.find((item) => item.hotel_Id === params.id);
 
-  // 4. 
+  // 4. 飯店明細API
   const fetch_Hotel_Detail = async () => {
     try {
       const hotel_Detail_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/${params.id}`;
@@ -47,6 +59,7 @@ export default function Hotel_Detail () {
       });
       if(!response) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();
+      dispatch(update_Hotel_Detail(result.data));
       console.log(result, "查看後端API - 飯店明細之回應");
     } catch (error) {
       console.log(error);
@@ -57,16 +70,16 @@ export default function Hotel_Detail () {
   // 5.1 也可寫在 useEffect 中，只在 id 變動時重新 dispatch
   useEffect(() => {
     fetch_Hotel_Detail();
-    if(the_Found_Hotel) {
-      dispatch(update_Hotel_Detail(the_Found_Hotel));
-       // 5.2 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
-      // dispatch(updateKeyword(the_Found_Hotel.hotel_Name as string))
-    }
-  },[params.id]);
+    // if(the_Found_Hotel) {
+    //   dispatch(update_Hotel_Detail(the_Found_Hotel));
+    //    // 5.2 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
+    //   // dispatch(updateKeyword(the_Found_Hotel.hotel_Name as string))
+    // }
+  },[]);
 
   // 6. Redux - 指定飯店明細
   const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
-  console.log("Redux 指定飯店", redux_Hotel_Detail);
+  // console.log("Redux 指定飯店", redux_Hotel_Detail);
   
 
   // 7. Redux - 入住退房日; replace搭配正則，把"202X -"拿掉
@@ -140,11 +153,11 @@ export default function Hotel_Detail () {
       router.replace(`/hotellist/${params.id}?${new_Query_String}`);
 
       // 11.6 更新 Redux - 指定飯店明細
-      if(the_Found_Hotel) {
-        dispatch(update_Hotel_Detail(the_Found_Hotel));
-        // 11.7 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
-        // dispatch(updateKeyword(the_Found_Hotel?.hotel_Name as string))
-      }
+      // if(the_Found_Hotel) {
+      //   dispatch(update_Hotel_Detail(the_Found_Hotel));
+      //   // 11.7 於 hotel_Detail頁面, 將 關鍵字 更新成 >> 飯店名
+      //   // dispatch(updateKeyword(the_Found_Hotel?.hotel_Name as string))
+      // }
     };
       
   },[router, dispatch])

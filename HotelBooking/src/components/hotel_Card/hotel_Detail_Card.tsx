@@ -51,7 +51,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 2. 父元件 HotelList props 指定飯店 之數據
   console.log(the_Hotel, "props傳遞");
   Number(the_Hotel?.latitude);
-  Number(the_Hotel?.longtitude);
+  Number(the_Hotel?.longitude);
 
   // 4. Tab - 數字對應 tab陣列索引值 之高亮切換
   const [selected_Tab, set_Selected_Tab] = useState(0);
@@ -461,14 +461,14 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       {/** React - leaflet 地圖 */}
         <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
           <MapContainer
-            center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+            center={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]} // 台北 101 位置
             zoom={13}
             style={{width: "100%" }}
             className="h-full">
             <TileLayer
             // 這裡使用 OpenStreetMap 免費圖資
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-            <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+            <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]}>
               <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
             </Marker>
           </MapContainer>
@@ -542,7 +542,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 飯店經緯度 - GoogleMap */}
           <div className="flex items-center gap-2">
             <OtherSVG name="marker" className="w-10 h-auto"></OtherSVG>
-            <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longtitude}`}
+            <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longitude}`}
               rel="noopener noreferrer" className="customized-underline text-primary">
               {the_Hotel?.address}
             </a>
@@ -556,13 +556,13 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
           {/** React-leaflet 地圖 */}
             <MapContainer
-              center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+              center={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]} // 台北 101 位置
               zoom={15}
               style={{width: "100%", height: "20rem", borderRadius: "20px", zIndex: 0}}>
               <TileLayer
               // 這裡使用 OpenStreetMap 免費圖資
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]}>
                 <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
               </Marker>
               </MapContainer>
@@ -711,14 +711,14 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** React - leaflet 地圖 */}
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <MapContainer
-              center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+              center={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]} // 台北 101 位置
               zoom={13}
               style={{width: "100%", borderRadius:"10px" }}
               className="h-full">
               <TileLayer
               // 這裡使用 OpenStreetMap 免費圖資
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]}>
                 <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
               </Marker>
             </MapContainer>
@@ -1005,8 +1005,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                   <option value="ratingLow">Rating Low</option>
                 </select>
               </div>
-              {review_List_Render.map((review) => {
-                return <div className="flex flex-col gap-2 border border-softGray rounded p-4" key={review.travelerId}>
+              {review_List_Render.map((review, index) => {
+                return <div className="flex flex-col gap-2 border border-softGray rounded p-4" key={index}>
                     <div className="flex justify-between">
                       <div className="flex gap-0.5">
                         <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
@@ -1045,13 +1045,13 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           <h2 className="font-semibold text-2xl">Property Information</h2>
           {/** React-leaflet 地圖 */}
           <MapContainer
-              center={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]} // 台北 101 位置
+              center={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]} // 台北 101 位置
               zoom={15}
               style={{width: "100%", height: "30rem", borderRadius: "20px", zIndex: 0}}>
               <TileLayer
               // 這裡使用 OpenStreetMap 免費圖資
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longtitude as number]}>
+              <Marker position={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]}>
                 <Tooltip permanent className="leaflet-tooltip ">{the_Hotel?.hotel_Name}</Tooltip>
               </Marker>
           </MapContainer>
@@ -1108,7 +1108,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               {/** 飯店經緯度 - GoogleMap */}
               <div className="flex items-center gap-2">
                 <OtherSVG name="marker" className="w-8 h-auto"></OtherSVG>
-                <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longtitude}`}
+                <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longitude}`}
                   rel="noopener noreferrer" className="customized-underline text-primary">
                   {the_Hotel?.address}
                 </a>

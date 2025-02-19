@@ -86,7 +86,7 @@ export default function Add_Hotel_Modal() {
     const checkin = formData.get("checkin") as string | null;
     const checkout = formData.get("checkout") as string | null;
     const latitude = formData.get("latitude") as string | null;
-    const longtitude = formData.get("longtitude") as string | null;
+    const longitude = formData.get("longitude") as string | null;
     const is_Open = formData.get("is_Open") as string | null;
     const hotel_Phone = formData.get("hotel_Phone") as string | null;
     const hotel_Email = formData.get("hotel_Email") as string | null;
@@ -207,7 +207,7 @@ export default function Add_Hotel_Modal() {
       checkin: checkin,
       checkout: checkout,
       latitude: latitude,
-      longtitude: longtitude,
+      longitude: longitude,
       is_Open: is_Open,
       hotel_Phone: hotel_Phone,
       hotel_Email: hotel_Email,

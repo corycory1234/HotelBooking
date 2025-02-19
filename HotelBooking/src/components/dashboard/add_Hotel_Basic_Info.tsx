@@ -105,9 +105,9 @@ export default function Add_Hotel_Basic_Info() {
         step="any"/>
       </label>
       <label className="flex gap-2">
-        Longtitude
+        longitude
         <input type="string"
-          id="longtitude" name="longtitude" className="border rounded no-spin max-w-20"
+          id="longitude" name="longitude" className="border rounded no-spin max-w-20"
         step="any"/>
       </label>
     </div>

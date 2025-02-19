@@ -326,10 +326,10 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
         onChange={handle_Change}/>
       </label>
       <label className="flex gap-2">
-        Longtitude
-        <input type="number" id="longtitude" name="longtitude" className="border rounded no-spin max-w-20"
+        longitude
+        <input type="number" id="longitude" name="longitude" className="border rounded no-spin max-w-20"
         step="any"
-        value={formData.longtitude ?? 0}
+        value={formData.longitude ?? 0}
         onChange={handle_Change}/>
       </label>
     </div>

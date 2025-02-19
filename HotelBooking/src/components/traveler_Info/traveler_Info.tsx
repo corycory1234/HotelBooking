@@ -14,7 +14,6 @@ import { OtherSVG, ProfileSVG } from "../client_Svg/client_Svg";
 import toast, {Toaster} from "react-hot-toast";
 import StarRating from "../starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
-import Payment_Step from "../payment_Step/payment_Step";
 import Payment_Progress_Bar from "../payment_Progress_Bar/payment_Progress_Bar";
 
 interface Zod_Response_Interface {
@@ -150,9 +149,6 @@ export default function Traveler_Info () {
 
       {/** PC桌機 */}
       <div className="hidden lg:flex flex-col p-4 pt-16">
-        {/** 付款步驟 */}
-        {/* <Payment_Step></Payment_Step> */}
-        {/** 付款步驟 */}
 
         <div className="lg:flex justify-between gap-2">
           {/** 左邊 <form> 表單 */}

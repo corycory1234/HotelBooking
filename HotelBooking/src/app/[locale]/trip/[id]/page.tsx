@@ -303,14 +303,14 @@ export default function Booking_Detail () {
 
 
           <MapContainer
-            center={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]} // 台北 101 位置
+            center={[booking_Detail?.latitude as number, booking_Detail?.longitude as number]} // 台北 101 位置
             zoom={13}
             style={{width: "100%", height: "20rem", borderRadius: "20px", zIndex: 0}}
             className="h-full">
             <TileLayer
             // 這裡使用 OpenStreetMap 免費圖資
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-            <Marker position={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]}>
+            <Marker position={[booking_Detail?.latitude as number, booking_Detail?.longitude as number]}>
               <Tooltip permanent className="leaflet-tooltip ">{booking_Detail?.hotel_Name}</Tooltip>
             </Marker>
           </MapContainer>
@@ -515,14 +515,14 @@ export default function Booking_Detail () {
           <p className="text-sm font-semibold">Location</p>
           {/* <img src="/triplist/location.png" alt="" /> */}
           <MapContainer
-            center={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]} // 台北 101 位置
+            center={[booking_Detail?.latitude as number, booking_Detail?.longitude as number]} // 台北 101 位置
             zoom={13}
             style={{width: "100%", height: "20rem", borderRadius: "20px", zIndex: 0}}
             className="h-full">
             <TileLayer
             // 這裡使用 OpenStreetMap 免費圖資
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
-            <Marker position={[booking_Detail?.latitude as number, booking_Detail?.longtitude as number]}>
+            <Marker position={[booking_Detail?.latitude as number, booking_Detail?.longitude as number]}>
               <Tooltip permanent className="leaflet-tooltip ">{booking_Detail?.hotel_Name}</Tooltip>
             </Marker>
           </MapContainer>

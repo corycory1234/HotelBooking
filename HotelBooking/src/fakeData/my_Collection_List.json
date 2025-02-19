@@ -82,7 +82,7 @@
       }
     ],
     "latitude": 34.69834782428365, 
-    "longtitude": 135.49251778695498,
+    "longitude": 135.49251778695498,
     "is_Open": "true",
     "hotel_Phone": "77668877",
     "hotel_Email": "riztcarlton@gmail.com",
@@ -175,7 +175,7 @@
       }
     ],
     "latitude": 13.711908798064055,
-    "longtitude": 100.51066786010331,
+    "longitude": 100.51066786010331,
     "is_Open": "true",
     "hotel_Phone": "65334789",
     "hotel_Email": "fourseasons@gmail.com",
@@ -268,7 +268,7 @@
       }
     ],
     "latitude": 25.055804951867287, 
-    "longtitude": 121.54816392837483,
+    "longitude": 121.54816392837483,
     "is_Open": "true",
     "hotel_Phone": "823345673",
     "hotel_Email": "mandarin@gmail.com",

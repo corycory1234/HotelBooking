@@ -20,7 +20,7 @@ export interface create_Hotel_Interface {
   checkin: string | null,
   checkout: string | null,
   latitude: number | null,
-  longtitude: number | null,
+  longitude: number | null,
   is_Open: string | null,
   hotel_Phone: string | null,
   hotel_Email: string | null,

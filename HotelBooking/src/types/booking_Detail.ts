@@ -17,7 +17,7 @@ export interface Booking_Detail_Interface {
   review: string | null,
   star_Rating: number | null,
   traveler_Name: string | null,
-  longtitude: number,
+  longitude: number,
   latitude: number,
   address: string,
   city: string,

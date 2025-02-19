@@ -26,7 +26,7 @@ const initialState: add_Hotel_Detail_Interface = {
   checkout: "",
   roomType_List: [], // 初始設為空陣列
   latitude: null,
-  longtitude: null,
+  longitude: null,
   is_Open: "true",
   hotel_Phone: "",
   hotel_Email: "",
