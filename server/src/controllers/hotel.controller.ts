@@ -46,6 +46,9 @@ class HotelController {
                 search_Query: req.query.q as string || undefined,
                 facilities: req.query.facilities ? 
                     (req.query.facilities as string).split(',').filter(f => f.trim()) : 
+                    undefined,
+                bed_Types: req.query.bedTypes ? 
+                    (req.query.bedTypes as string).split(',').filter(b => b.trim()) : 
                     undefined
             };
 

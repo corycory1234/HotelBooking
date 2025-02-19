@@ -391,6 +391,15 @@ export class HotelService extends BaseService {
                 conditions.push(sql`${hotels.facility_List} ?& ${facilitiesArray}`);
             }
 
+            // 修改 bed_Types 條件的寫法
+            if (params.bed_Types && params.bed_Types.length > 0) {
+                conditions.push(sql`EXISTS (
+                    SELECT 1 FROM ${roomTypes}
+                    WHERE ${roomTypes.hotelId} = ${hotels.hotel_Id}
+                    AND ${roomTypes.bed_Type} IN (${sql.join(params.bed_Types, sql`, `)})
+                )`);
+            }
+
             // 使用 leftJoin 查詢
             const query = db.select({
                 hotel_Id: hotels.hotel_Id,

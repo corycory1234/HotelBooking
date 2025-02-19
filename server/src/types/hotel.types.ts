@@ -67,7 +67,8 @@ export type SearchHotelsParams = {
     max_Price?: number;
     rating?: number;
     search_Query?: string;
-    facilities?: string[]; // 新增設施參數
+    facilities?: string[];
+    bed_Types?: string[];
 };
 
 export const FACILITIES = [
@@ -81,7 +82,16 @@ export const FACILITIES = [
     "wifi",
 ] as const;
 
-export type Facility = typeof FACILITIES[number];
+export const BED_TYPES = [
+    "單人床",
+    "雙人床",
+    "大床",
+    "特大床",
+    "兩張單人床",
+    "兩張雙人床",
+] as const;
+
+export type BedType = typeof BED_TYPES[number];
 
 export interface PaginatedResponse<T> {
     data: T[];
