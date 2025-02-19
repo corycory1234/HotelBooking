@@ -4,6 +4,7 @@ import Click_Outside from "../clickOutside";
 import { useDispatch, useSelector } from "react-redux";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
+import { useTranslations } from 'next-intl';
 
 export default function Client_Input_Traveler () {
   // 1. 提取Redux - formSearch 表單 Room房間量、Adult成人、Child小孩
@@ -25,6 +26,10 @@ export default function Client_Input_Traveler () {
   // 2. 點外層, 隱藏 房間人數下拉選單
   Click_Outside(dropDownRef, () => setShowDropDown(false))
 
+  // 3. next-intl i18n翻譯
+  const t = useTranslations("FormSearch");
+
+
   return <>
     {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
       <input type="hidden" name="room" value={room} />
@@ -45,10 +50,10 @@ export default function Client_Input_Traveler () {
 
         <div className="hidden lg:flex lg:flex-col lg:text-sm">
           <div className="lg:flex lg:gap-2">
-            <p>{adult} Adult,</p>
-            <p>{child} Child</p>
+            <p>{adult} {t ("Adult")},</p>
+            <p>{child} {t ("Child")}</p>
           </div>
-          <p className="text-xs text-gray">{room} Room</p>
+          <p className="text-xs text-gray">{room} {t ("Room")}</p>
         </div>
       </button>
 
@@ -57,7 +62,7 @@ export default function Client_Input_Traveler () {
         <div className="absolute top-full w-full bg-white z-10 flex flex-col gap-2 pl-4 pr-2 py-2 rounded lg:border lg:border-gray lg: mt-2">
           {/* 房間 */}
           <div className="flex justify-between items-center py-2 border-b border-gray">
-            <p>{room} Room</p>
+            <p>{room} {t ("Room")}</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusRoom())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${room<=1 ? 'text-gray' : 'text-primary'}`}>
@@ -76,7 +81,7 @@ export default function Client_Input_Traveler () {
 
           {/* 成人 */}
           <div className="flex justify-between items-center py-2 border-b border-gray">
-            <p>{adult} Adult</p>
+            <p>{adult} {t ("Adult")}</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusAdult())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${adult<=1 ? 'text-gray' : 'text-primary'}`}>
@@ -95,7 +100,7 @@ export default function Client_Input_Traveler () {
 
           {/* 小孩 */}
           <div className="flex justify-between items-center py-2 border-b border-gray">
-            <p>{child} Child</p>
+            <p>{child} {t ("Child")}</p>
             <div className="flex gap-4">
               <button onClick={() => dispatch(minusChild())} type="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${child<=0 ? 'text-gray' : 'text-primary'}`}>

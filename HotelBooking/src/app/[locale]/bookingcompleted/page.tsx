@@ -105,7 +105,7 @@ export default function Booking_Completed () {
           </div>
           <div className="flex justify-between">
             <p>Tax</p>
-            <p>$ {redux_Hotel_Detail.tax as number * (redux_The_Booked_Room.room_Price as number)}</p>
+            <p>$ {Math.round(redux_Hotel_Detail.tax as number * (redux_The_Booked_Room.room_Price as number))}</p>
           </div>
           <div className="flex justify-between">
             <p>{the_Offer?.offer_Name} Offer</p>
@@ -116,9 +116,9 @@ export default function Booking_Completed () {
           
           <div className="flex justify-between">
             <p>Total</p>
-            <p>$ { ((redux_The_Booked_Room.room_Price as number + 
-              (redux_Hotel_Detail.tax as number * (redux_The_Booked_Room.room_Price as number))) *
-              (1 - (the_Offer?.offer_Price as number))).toFixed(2)
+            <p>$ { ((Number(redux_The_Booked_Room.room_Price as number) + 
+              (Math.round(redux_Hotel_Detail.tax as number * (redux_The_Booked_Room.room_Price as number)))) *
+              (1 - (the_Offer?.offer_Price as number)))
               }
             </p>
           </div>

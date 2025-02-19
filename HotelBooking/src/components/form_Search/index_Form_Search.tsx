@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
+import { useTranslations } from 'next-intl';
 
 export default function Index_Form_Search () {
   // 0. 路由
@@ -87,13 +88,16 @@ export default function Index_Form_Search () {
       // dispatch(update_Hotel_List(new_Hotel_List));
       
       
-      // 6. 跳轉「飯店列表」
+      // 2.4 跳轉「飯店列表」
       router.push(`/hotellist?${search_Params}`);
       
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  // 3. i18n 翻譯
+  const t = useTranslations('FormSearch');
 
 
   return <>
@@ -106,7 +110,7 @@ export default function Index_Form_Search () {
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>
       <button className="bg-primary text-white rounded w-full py-2 px-4 lg:w-1/2 lg:mx-auto">
-        Search
+        {t ("Search")}
       </button>
     </form>
   </>

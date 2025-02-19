@@ -237,8 +237,7 @@ export default function Traveler_Info () {
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">Total Price</p>
-                  <p className="font-semibold">$ 
-                    {(redux_Booked_Room.room_Price as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price ?? 0)))) }
+                  <p className="font-semibold">$ {(Number(redux_Booked_Room.room_Price) as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number)))) }
                   </p>
                 </div>
 

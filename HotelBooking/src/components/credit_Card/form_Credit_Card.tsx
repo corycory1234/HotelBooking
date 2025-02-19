@@ -206,7 +206,7 @@ export default function Form_Credit_Card () {
       <div className="flex justify-between">
         <p className="text-sm text-gray">Total Amount</p>
         <p className="font-bold text-primary">
-          {(redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+          {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
         </p>
       </div>
     </div>

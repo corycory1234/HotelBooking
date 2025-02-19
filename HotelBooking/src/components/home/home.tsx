@@ -147,6 +147,7 @@ const check_Offer = (offer_Id: string) => {
 
 // 4. next-intl 翻譯
 const t = useTranslations('HomePage');
+const t_Offer = useTranslations("OfferList");
 
 // 5. 查看熱門地點 (跳轉HotelList頁面)
 const dispatch: AppDispatch = useDispatch();
@@ -228,7 +229,7 @@ const check_Popular_Destination = (popular_Destination: string) => {
         
         <div className="flex flex-col p-4 gap-4 pb-20 lg:px-0">
         {/********************* Swiper - 熱門地點 *******************************/}
-          <h2 className="font-bold">{t ("Popular Destinations")}</h2>
+          <h2 className="font-bold text-lg">{t ("Popular Destinations")}</h2>
           <div className="">
             <Swiper slidesPerView={2.7} spaceBetween={20}
               modules={[Navigation]}
@@ -241,7 +242,7 @@ const check_Popular_Destination = (popular_Destination: string) => {
                 <SwiperSlide key={index}>
                   <img className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" 
                   src={item.url} alt="" onClick={() => check_Popular_Destination(item.cityName)}/>
-                  <p className="text-center pt-2">{t (item.cityName)}</p>
+                  <p className="text-xs text-center pt-2 font-semibold lg:text-base">{t (item.cityName)}</p>
                 </SwiperSlide>
               )}
             </div>
@@ -251,7 +252,7 @@ const check_Popular_Destination = (popular_Destination: string) => {
           
 
         {/********************* Swiper - 優惠券飯店 *******************************/}
-          <h2 className="font-bold">{t ("Promotions")}</h2>
+          <h2 className="font-bold text-lg">{t ("Promotions")}</h2>
           <div className="">
             <Swiper slidesPerView={2.7} spaceBetween={20}
               modules={[Navigation]}
@@ -264,7 +265,7 @@ const check_Popular_Destination = (popular_Destination: string) => {
                 <SwiperSlide key={index}>
                   <img className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" src={item.offer_Url} alt={item.offer_Description} 
                   onClick={() => check_Offer(item.offer_Id)}/>
-                  <p className="text-center pt-2">{item.offer_Description}</p>
+                  <p className="text-xs text-center pt-2 font-semibold lg:text-base">{t_Offer (item.offer_Description)}</p>
                 </SwiperSlide>
               )}
             </div>

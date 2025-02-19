@@ -17,5 +17,18 @@
   "Nav": {
     "en": "英文",
     "zh-TW": "繁體中文"
+  },
+  "FormSearch": {
+    "Adult": "大人",
+    "Child": "小孩",
+    "Room": "房間",
+    "Search": "搜尋"
+  },
+  "OfferList": {
+    "The Best Discount On Friday !": "黑色星期五折扣",
+    "Save Your Budget during CNY !": "新年省錢包",
+    "The Gift from Santa Claus !": "聖誕老人的禮物",
+    "Promotion for Romance": "情人節浪漫優惠",
+    "Get 15% off with 3 People !": "3人行，85折！"
   }
 }

@@ -404,7 +404,7 @@ export default function CreditCard() {
               <div className="flex justify-between">
                 <p className="text-sm font-semibold">Total Amount</p>
                 <p className="font-bold text-customRed">
-                  {(redux_Booked_Room.room_Price as number + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+                  {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
                 </p>
               </div>
             </div>

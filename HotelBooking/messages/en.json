@@ -17,5 +17,18 @@
   "Nav": {
     "en": "English",
     "zh-TW": "Traditional Chinese"
+  },
+  "FormSearch": {
+    "Adult": "Adult",
+    "Child": "Child",
+    "Room": "Room",
+    "Search": "Search"
+  },
+  "OfferList": {
+    "The Best Discount On Friday !": "The Best Discount On Friday !",
+    "Save Your Budget during CNY !": "Save Your Budget during CNY !",
+    "The Gift from Santa Claus !": "The Gift from Santa Claus !",
+    "Promotion for Romance": "Promotion for Romance",
+    "Get 15% off with 3 People !": "Get 15% off with 3 People !"
   }
 }

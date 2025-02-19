@@ -891,11 +891,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                     <div className="border-b border-softGray"></div>
                     
                     <div className="flex justify-between">
-                      <div className="flex flex-col gap-2">
+                      <div className="w-2/3 flex flex-col gap-2">
                         {/** 旅客幾人、住幾晚、幾間房 */}
                         <div className="flex justify-between">
                           <div className="flex gap-2">
-                            <div className="flex">
+                            <div className="flex gap-1">
                               <OtherSVG name="night" className="w-4 h-auto"></OtherSVG>
                               <p>{how_Many_Nights(redux_Start_Date as string, redux_End_Date as string)} Nights</p>
                             </div>
@@ -948,11 +948,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                       </div>
 
                       {/** Book Now 按鈕 */}
-                      <div className="flex gap-2">
+                      <div className="flex-grow-0 flex gap-2">
                         <div className="flex items-center gap-2">
                           <div className="flex flex-col">
                             <p className="font-semibold">${item.room_Price}</p>
-                            <p className="text-sm">Tax Included</p>
+                            {/* <p className="text-sm">Tax Included</p> */}
                           </div>
                           {/** 剩幾間房 */}
                           {/* {(item.room_Availability as number <=3) && <div className="flex justify-end">
@@ -962,7 +962,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                             </div>
                           } */}
                           {/** 剩幾間房 */}
-                          <button className="bg-primary text-white rounded px-4 py-2" onClick={() => book_Room(item.roomType_Id)}>Book Now</button>
+                          <button className="bg-primary text-white rounded px-3 py-2" onClick={() => book_Room(item.roomType_Id)}>Book Now</button>
                         </div>
                       </div>
                       {/** Book Now 按鈕 */}

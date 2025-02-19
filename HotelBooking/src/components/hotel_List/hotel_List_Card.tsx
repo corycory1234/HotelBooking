@@ -504,7 +504,7 @@ export default function Hotel_List_Card() {
               </div>
         
               {/** 飯店設施 */}
-              <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-hidden lg:grid lg:grid-cols-5 lg:mt-0">
+              <div className="flex gap-2 mt-3 overflow-x-auto scrollbar-hidden lg:grid lg:grid-cols-6 lg:mt-0">
                 {item.facility_List?.map((facility, index) => {
                   return <div className="lg:flex lg:gap-1" key={index}>
                       {index <6 && <>
