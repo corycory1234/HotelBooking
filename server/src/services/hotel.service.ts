@@ -54,8 +54,8 @@ export class HotelService extends BaseService {
                         tax: hotelData.tax?.toString(),
                         checkin: hotelData.checkin,
                         checkout: hotelData.checkout,
-                        latitude: hotelData.latitude?.toString(),
-                        longitude: hotelData.longitude?.toString(),
+                        latitude: hotelData.latitude || null, // 移除 toString()
+                        longitude: hotelData.longitude || null, // 移除 toString()
                         is_Open: hotelData.is_Open ?? true,
                         hotel_Phone: hotelData.hotel_Phone,
                         hotel_Email: hotelData.hotel_Email,

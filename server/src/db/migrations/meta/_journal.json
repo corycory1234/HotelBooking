@@ -43,6 +43,13 @@
       "when": 1739298498540,
       "tag": "0005_glamorous_warbound",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1739989198064,
+      "tag": "0006_free_husk",
+      "breakpoints": true
     }
   ]
 }

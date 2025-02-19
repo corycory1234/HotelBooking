@@ -40,8 +40,8 @@ export interface CreateHotelDTO {
     tax?: number;
     checkin: string;
     checkout: string;
-    latitude?: number;
-    longitude?: number;
+    latitude?: string;
+    longitude?: string;
     is_Open?: boolean;
     hotel_Phone: string;
     hotel_Email: string;
