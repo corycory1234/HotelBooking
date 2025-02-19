@@ -20,7 +20,7 @@ const upload = (0, multer_1.default)({
     },
 });
 // 搜尋飯店列表 (每頁固定回傳 10 筆)
-// GET /?page=1&country=台灣&city=台北&minPrice=1000&maxPrice=5000&rating=4&q=關鍵字&facilities=pool,wifi
+// GET /?page=1&country=台灣&city=台北&minPrice=1000&maxPrice=5000&ratings=4,5&q=關鍵字&facilities=pool,wifi&bedTypes=單人床,雙人床
 router.get('/', asyncHandler(hotel_controller_1.hotelController.getHotels));
 // 獲取飯店詳情
 router.get('/:id', asyncHandler(hotel_controller_1.hotelController.getHotel));
@@ -31,13 +31,13 @@ router.get('/:id', asyncHandler(hotel_controller_1.hotelController.getHotel));
 // 新增飯店
 router.post('/', auth_middleware_1.authMiddleware, asyncHandler(hotel_controller_1.hotelController.createHotel));
 // 上傳房型照片
-router.post('/room-types/:roomTypeId/images', auth_middleware_1.authMiddleware, upload.array('images', 5), // 最多一次上傳 5 張
-asyncHandler(hotel_controller_1.hotelController.uploadRoomTypeImages));
+router.post('/room-types/:roomTypeId/images', auth_middleware_1.authMiddleware, upload.array('images', 10), asyncHandler(hotel_controller_1.hotelController.uploadRoomTypeImages));
 // 上傳飯店照片
-router.post('/:hotelId/images', auth_middleware_1.authMiddleware, upload.array('images', 5), // 最多一次上傳 5 張
-asyncHandler(hotel_controller_1.hotelController.uploadHotelImages));
+router.post('/:hotelId/images', auth_middleware_1.authMiddleware, upload.array('images', 10), asyncHandler(hotel_controller_1.hotelController.uploadHotelImages));
 // 刪除飯店照片
 router.delete('/:hotelId/images', auth_middleware_1.authMiddleware, asyncHandler(hotel_controller_1.hotelController.deleteHotelImages));
 // 刪除房型照片
 router.delete('/room-types/:roomTypeId/images', auth_middleware_1.authMiddleware, asyncHandler(hotel_controller_1.hotelController.deleteRoomTypeImages));
+// 刪除房型
+router.delete('/room-types/:roomTypeId', auth_middleware_1.authMiddleware, asyncHandler(hotel_controller_1.hotelController.deleteRoomType));
 exports.default = router;

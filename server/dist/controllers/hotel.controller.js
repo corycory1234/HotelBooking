@@ -17,25 +17,37 @@ class HotelController {
     getHotels(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // 驗證必填參數
                 const page = parseInt(req.query.page);
                 if (!page || isNaN(page)) {
                     return res.status(400).json(response_1.ApiResponse.error("頁碼(page)為必填參數"));
                 }
-                // 處理設施參數，確保它是有效的陣列
-                const facilities = req.query.facilities ?
-                    req.query.facilities.split(',').filter(f => f.trim()) :
-                    undefined;
+                // 處理價格參數
+                const minPrice = req.query.minPrice ? parseInt(req.query.minPrice) : undefined;
+                const maxPrice = req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined;
+                // 驗證價格參數
+                if (minPrice !== undefined && minPrice <= 0) {
+                    return res.status(400).json(response_1.ApiResponse.error("最低價格必須大於 0"));
+                }
+                if (maxPrice !== undefined && maxPrice <= 0) {
+                    return res.status(400).json(response_1.ApiResponse.error("最高價格必須大於 0"));
+                }
                 const searchParams = {
                     page,
-                    limit: 10, // 固定為 10 筆
+                    limit: 10,
                     country: req.query.country || undefined,
                     city: req.query.city || undefined,
-                    min_Price: req.query.minPrice ? parseInt(req.query.minPrice) : undefined,
-                    max_Price: req.query.maxPrice ? parseInt(req.query.maxPrice) : undefined,
-                    rating: req.query.rating ? parseInt(req.query.rating) : undefined,
+                    min_Price: minPrice,
+                    max_Price: maxPrice,
+                    ratings: req.query.ratings ?
+                        req.query.ratings.split(',').map(r => parseFloat(r)).filter(r => !isNaN(r)) :
+                        undefined,
                     search_Query: req.query.q || undefined,
-                    facilities: facilities // 清理過的設施陣列
+                    facilities: req.query.facilities ?
+                        req.query.facilities.split(',').filter(f => f.trim()) :
+                        undefined,
+                    bed_Types: req.query.bedTypes ?
+                        req.query.bedTypes.split(',').filter(b => b.trim()) :
+                        undefined
                 };
                 const results = yield hotel_service_1.hotelService.searchHotels(searchParams);
                 res.json(response_1.ApiResponse.success(results));
@@ -140,6 +152,25 @@ class HotelController {
             catch (error) {
                 console.error('Delete images error:', error);
                 res.status(500).json(response_1.ApiResponse.error(error instanceof Error ? error.message : "刪除照片失敗"));
+            }
+        });
+    }
+    // 刪除房型
+    deleteRoomType(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            try {
+                const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
+                const { roomTypeId } = req.params;
+                const result = yield hotel_service_1.hotelService.deleteRoomType(roomTypeId, token);
+                res.json(response_1.ApiResponse.success(result));
+            }
+            catch (error) {
+                console.error('Delete room type error:', error);
+                if (error instanceof Error && 'code' in error) {
+                    return res.status(error.code).json(response_1.ApiResponse.error(error.message));
+                }
+                res.status(500).json(response_1.ApiResponse.error(error instanceof Error ? error.message : '刪除房型失敗'));
             }
         });
     }
