@@ -167,6 +167,27 @@ class HotelController {
         }
     }
 
+    // 刪除房型
+    async deleteRoomType(req: Request, res: Response) {
+        try {
+            const token = req.cookies?.access_token;
+            const { roomTypeId } = req.params;
+
+            const result = await hotelService.deleteRoomType(roomTypeId, token);
+            res.json(ApiResponse.success(result));
+        } catch (error) {
+            console.error('Delete room type error:', error);
+            if (error instanceof Error && 'code' in error) {
+                return res.status((error as any).code).json(
+                    ApiResponse.error(error.message)
+                );
+            }
+            res.status(500).json(ApiResponse.error(
+                error instanceof Error ? error.message : '刪除房型失敗'
+            ));
+        }
+    }
+
     // 清理檔案名稱
     private static cleanFileName(fileName: string): string {
         return fileName

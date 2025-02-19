@@ -63,4 +63,11 @@ router.delete(
     asyncHandler(hotelController.deleteRoomTypeImages)
 );
 
+// 刪除房型
+router.delete(
+    '/room-types/:roomTypeId',
+    authMiddleware,
+    asyncHandler(hotelController.deleteRoomType)
+);
+
 export default router;

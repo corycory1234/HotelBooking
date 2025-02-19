@@ -342,6 +342,55 @@ export class HotelService extends BaseService {
         await Promise.all(imageUrls.map(url => this.deleteFromS3(url)));
     }
 
+    async deleteRoomType(roomTypeId: string, token: string) {
+        try {
+            const { data: { user }, error: authError } = await this.supabase.auth.getUser(token);
+            
+            if (authError || !user) {
+                throw new HotelServiceError('未授權的存取', 401);
+            }
+
+            const roomType = await db
+                .select()
+                .from(roomTypes)
+                .where(eq(roomTypes.roomType_Id, roomTypeId))
+                .then(rows => rows[0]);
+
+            if (!roomType) {
+                throw new HotelServiceError('房型不存在', 404);
+            }
+
+            if (roomType.createdBy !== user.id) {
+                throw new HotelServiceError('無權限刪除房型', 403);
+            }
+
+            // 如果有圖片，先從 S3 刪除
+            if (roomType.roomType_Image_List && roomType.roomType_Image_List.length > 0) {
+                await Promise.all(
+                    roomType.roomType_Image_List.map((img: { url: string }) => 
+                        this.deleteFromS3(img.url)
+                    )
+                );
+            }
+
+            // 從資料庫刪除房型
+            await db
+                .delete(roomTypes)
+                .where(eq(roomTypes.roomType_Id, roomTypeId));
+
+            return { message: '房型已成功刪除' };
+        } catch (error) {
+            console.error('Delete room type error:', error);
+            if (error instanceof HotelServiceError) {
+                throw error;
+            }
+            throw new HotelServiceError(
+                error instanceof Error ? error.message : '刪除房型失敗',
+                500
+            );
+        }
+    }
+
     async searchHotels(params: SearchHotelsParams) {
         try {
             const page = Math.max(1, params.page);
