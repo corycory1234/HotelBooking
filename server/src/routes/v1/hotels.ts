@@ -37,7 +37,7 @@ router.post('/', authMiddleware, asyncHandler(hotelController.createHotel));
 router.post(
     '/room-types/:roomTypeId/images',
     authMiddleware,
-    upload.array('images', 5), // 最多一次上傳 5 張
+    upload.array('images', 10),
     asyncHandler(hotelController.uploadRoomTypeImages)
 );
 
@@ -45,7 +45,7 @@ router.post(
 router.post(
     '/:hotelId/images',
     authMiddleware,
-    upload.array('images', 5), // 最多一次上傳 5 張
+    upload.array('images', 10),
     asyncHandler(hotelController.uploadHotelImages)
 );
 
