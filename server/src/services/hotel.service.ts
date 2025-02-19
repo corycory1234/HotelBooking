@@ -375,8 +375,9 @@ export class HotelService extends BaseService {
                 params.max_Price = temp;
             }
 
-            if (params.rating && params.rating > 0) {
-                conditions.push(sql`CAST(${hotels.totalRating} AS DECIMAL) >= ${params.rating}`);
+            // 修改評分搜尋條件
+            if (params.ratings && params.ratings.length > 0) {
+                conditions.push(sql`CAST(${hotels.totalRating} AS DECIMAL) IN (${sql.join(params.ratings, sql`, `)})`);
             }
 
             if (params.search_Query?.trim()) {

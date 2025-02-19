@@ -65,7 +65,7 @@ export type SearchHotelsParams = {
     city?: string;
     min_Price?: number;
     max_Price?: number;
-    rating?: number;
+    ratings?: number[]; // 改為陣列
     search_Query?: string;
     facilities?: string[];
     bed_Types?: string[];

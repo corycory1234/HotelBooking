@@ -42,7 +42,9 @@ class HotelController {
                 city: req.query.city as string || undefined,
                 min_Price: minPrice,
                 max_Price: maxPrice,
-                rating: req.query.rating ? parseInt(req.query.rating as string) : undefined,
+                ratings: req.query.ratings ? 
+                    (req.query.ratings as string).split(',').map(r => parseFloat(r)).filter(r => !isNaN(r)) : 
+                    undefined,
                 search_Query: req.query.q as string || undefined,
                 facilities: req.query.facilities ? 
                     (req.query.facilities as string).split(',').filter(f => f.trim()) : 
