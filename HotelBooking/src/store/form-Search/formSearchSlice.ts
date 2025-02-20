@@ -30,7 +30,7 @@ const initialState: Form_Search_Interface = {
   room: 1,
   adult: 1,
   child: 0,
-  rangeSlider: [0, 9900],
+  rangeSlider: [100, 9900],
   bedType: [],
   rating: [],
   facility: [],

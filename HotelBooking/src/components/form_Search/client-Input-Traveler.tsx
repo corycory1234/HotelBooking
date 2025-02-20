@@ -45,7 +45,7 @@ export default function Client_Input_Traveler () {
         onClick={toggle_ShowDropDown}
         type="button">
         <p className="lg:hidden">
-          {`${room} Room – ${adult} Adult, ${child} Child`}
+          {`${room} ${t ("Room")} – ${adult} ${t ("Adult")}, ${child} ${t ("Child")}`}
         </p>
 
         <div className="hidden lg:flex lg:flex-col lg:text-sm">

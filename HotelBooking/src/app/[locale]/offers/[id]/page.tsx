@@ -17,6 +17,7 @@ import { RootState, AppDispatch } from "@/store/store";
 import { useRouter } from "next/navigation";
 import Form_Search_Pc from "@/components/form_Search/form_Search_Pc";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
+import { useTranslations } from "next-intl";
 
 const initail_Offer = {
   offer_Id: '',
@@ -146,6 +147,10 @@ export default function Offer () {
     }
   }
 
+  // 10. next-intl i18n翻譯
+  const t = useTranslations("OfferList");
+  const t_FormSearch = useTranslations("FormSearch");
+
 
   return <>
 
@@ -158,7 +163,7 @@ export default function Offer () {
           className="object-cover w-full lg:h-[320px]" priority={true}/>
           <p className="absolute bottom-[10%] left-1/2 -translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 
             font-bold lg:text-3xl text-white">
-            {the_Offer.offer_Description}
+            {t (the_Offer.offer_Description)}
           </p>
         </div>
       }
@@ -167,24 +172,24 @@ export default function Offer () {
 
       {/** 虛線折價券 */}
       <div className="flex flex-col justify-center items-center gap-2 px-4 lg:px-0">
-        <h2 className="text-lg lg:p-0 lg:text-3xl font-semibold">Use Promo Code below, Get Discounts</h2>
+        <h2 className="text-lg lg:p-0 lg:text-3xl font-semibold">{t ("Use Promo Code below, Get Discounts")}</h2>
         <div className="border border-dashed rounded w-full h-auto px-4 py-2 lg:px-0 lg:w-52 lg:h-24 lg:self-center flex flex-col justify-center lg:items-center gap-2">
-          <p className="text-customRed text-xl font-semibold">Discount: {the_Offer.offer_Price *100} %</p>
-          <p className="text-sm font-semibold">Coupon Code: {the_Offer.offer_Id}</p>
+          <p className="text-customRed text-xl font-semibold">{t ("Discount")}: {the_Offer.offer_Price *100} %</p>
+          <p className="text-sm font-semibold">{t ("Coupon Code")}: {the_Offer.offer_Id}</p>
         </div>
       </div>
       {/** 虛線折價券 */}
 
 
       {/** <form> 搜尋 */}
-      <h2 className="text-center text-lg lg:p-0 lg:text-3xl font-semibold">Search for hotels by destination</h2>
+      <h2 className="text-center text-lg lg:p-0 lg:text-3xl font-semibold">{t ("Search for hotels by destination")}</h2>
       <Form_Search_Pc></Form_Search_Pc>
       {/** <form> 搜尋 */}
 
       
       <div className="p-4 lg:p-0 flex flex-col items-center gap-2">
-        <h2 className="text-lg lg:text-3xl font-semibold">Recommendation</h2>
-        <p className="lg:text-center">Search for applicable hotels from popular countries</p>
+        <h2 className="text-lg lg:text-3xl font-semibold">{t ("Recommendation")}</h2>
+        <p className="lg:text-center">{t ("Search for applicable hotels from popular countries")}</p>
       </div>
 
       {/** Tab 國家切換標籤 */}
@@ -245,15 +250,15 @@ export default function Offer () {
               <p className="lg:text-xs">Tax Included</p>
             </div>
             <div className="flex justify-end">
-            <p className="text-xs">{`${redux_Form_Search.room} Room ${redux_Form_Search.adult + redux_Form_Search.child} Guests 
-                ${how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)} Nights`}</p>
+            <p className="text-xs">{`${redux_Form_Search.room} ${t_FormSearch ("Room")} ${redux_Form_Search.adult + redux_Form_Search.child} ${t_FormSearch ("Guests")} 
+                ${how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)} ${t_FormSearch ("Nights")}`}</p>
             </div>
             {/** 飯店總評論、住幾人幾晚 */}
             
             {/** 跳轉至指定飯店 */}
             <div className="flex justify-end">
               <button type="button" className="bg-primary rounded text-white px-4 py-2"
-              onClick={() => check_Hotel_RoomType_List(item.hotel_Id as string)}>Book Now</button>
+              onClick={() => check_Hotel_RoomType_List(item.hotel_Id as string)}>{t ("Book Now")}</button>
             </div>
             {/** 跳轉至指定飯店 */}
             

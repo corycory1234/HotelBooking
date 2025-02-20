@@ -241,14 +241,15 @@ export default function Hotel_List_Card() {
 
       const query_Params = new URLSearchParams({
         page: String(page),
-        city: redux_Destination,
+        city: "",
         country: "",
         minPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[0]) : String(redux_RangeSlider),
         maxPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[1]) : String(redux_RangeSlider),
         rating: String(redux_Rating),
         q: redux_Destination,
-        facilities: String(redux_Facility)
+        facilities: String(redux_Facility?.join())
       }).toString();
+
       const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
       const response = await fetch(hotel_List_Url, {
         method: "GET",

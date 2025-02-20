@@ -390,7 +390,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       <div className="col-span-2">
         {the_Hotel?.hotel_Image_List.slice(0,1).map((item, index) => {
           return <img src={item.url} alt={item.description} key={index}
-          className="object-cover w-full h-full rounded cursor-pointer"
+          className="object-cover w-full h-[310px] rounded cursor-pointer"
           onClick={() => set_Modal_Boolean_Swiper(true)}/>
         })}
       </div>
@@ -400,7 +400,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <div className="grid grid-rows-2 gap-2">
           {the_Hotel?.hotel_Image_List.slice(1,3).map((item, index) => {
             return <img src={item.url} alt={item.description} key={index}
-            className="object-cover w-full h-full rounded cursor-pointer"
+            className="object-cover w-full h-[150px] rounded cursor-pointer"
             onClick={() => set_Modal_Boolean_Swiper(true)}/>
           })}
         </div>
@@ -408,9 +408,9 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/* 右邊小圖們 */}
         <div className="grid grid-rows-2 gap-2">
-          {the_Hotel?.hotel_Image_List.slice(4,6).map((item, index) => {
+          {the_Hotel?.hotel_Image_List.slice(3,5).map((item, index) => {
             return <img src={item.url} alt={item.description} key={index}
-            className="object-cover w-full h-full rounded cursor-pointer"
+            className="object-cover w-full h-[150px] rounded cursor-pointer"
             onClick={() => set_Modal_Boolean_Swiper(true)}/>
           })}
         </div>
@@ -418,15 +418,15 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
           {/* 右邊小圖們 */}
           <div className="grid grid-rows-2 gap-2 relative">
-          {the_Hotel?.hotel_Image_List.slice(7,9).map((item, index) => {
+          {the_Hotel?.hotel_Image_List.slice(5,7).map((item, index) => {
             return <img src={item.url} alt={item.description} key={index}
-            className="object-cover w-full h-full rounded cursor-pointer"
+            className="object-cover w-full h-[150px] rounded cursor-pointer"
             onClick={() => set_Modal_Boolean_Swiper(true)}/>
           })}
 
           {/** 第7張 - 做遮罩 與 絕對定位 */}
-          {the_Hotel?.hotel_Image_List[6] &&
-            <div className="absolute rounded bg-black/50 top-1/2 w-full h-1/2 z-[1] text-white cursor-pointer"
+          {the_Hotel?.hotel_Image_List[7] &&
+            <div className="absolute rounded bg-black/50 top-1/2 w-full h-[150px] my-[5px] z-[1] text-white cursor-pointer"
               onClick={() => set_Modal_Boolean_Swiper(true)}>
               <div className="flex justify-center items-center w-full gap-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-white">
@@ -452,7 +452,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       {selected_Tab === 0 && <div className="flex flex-col justify-between gap-2 min-h-[50svh]">
         <div className="flex gap-1">
           <OtherSVG name={"location"} className="w-5 h-auto"></OtherSVG>
-          <p>{the_Hotel?.city + ", " + the_Hotel?.country}</p>
+          {/* <p>{the_Hotel?.city + ", " + the_Hotel?.country}</p> */}
+          <p>{the_Hotel?.address}</p>
         </div>
 
 
@@ -704,8 +705,9 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 桌機PC - 飯店都市、飯店地圖 */}
         <div className="flex gap-2">
           <OtherSVG name="location" className="w-4 h-auto"></OtherSVG>
-          <p className="font-semibold">{the_Hotel?.city}, </p>
-          <p className="font-semibold">{the_Hotel?.country}</p>
+          {/* <p className="font-semibold">{the_Hotel?.city}, </p> */}
+          {/* <p className="font-semibold">{the_Hotel?.country}</p> */}
+          <p className="font-semibold">{the_Hotel?.address}</p>
           <p>–</p>
           <p className="font-semibold cursor-pointer text-primary" onClick={() => set_Modal_Boolean(true)}>Shown on Map</p>
           {/** React - leaflet 地圖 */}
@@ -726,7 +728,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** React - leaflet 地圖 */}
         </div>
         {/** 桌機PC - 飯店都市、飯店地圖 */}
-
+        
+        <p>{the_Hotel?.hotel_Intro}</p>
         <p>{the_Hotel?.distance}</p>
         
         {/** 桌機PC - 3長卡片[評分、交通、飯店設施] */}
@@ -745,11 +748,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 離車站幾分鐘 */}
             <div className="basis-1/3 flex flex-col gap-2 border border-softGray rounded px-4 py-4">
               <p className="font-semibold">Access</p>
-              <div className="flex justify-between items-center gap-2">
+              <div className="flex items-center gap-2">
                 <OtherSVG name="transportation" className="w-4 h-auto"></OtherSVG>
                 <p>{the_Hotel?.transportation?.split(",")[0]}</p>
               </div>
-              <div className="flex justify-between items-center gap-2">
+              <div className="flex items-center gap-2">
                 <OtherSVG name="transportation" className="w-4 h-auto"></OtherSVG>
                 <p>{the_Hotel?.transportation?.split(",")[1]}</p>
               </div>
@@ -779,7 +782,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           <p>{the_Hotel?.roomType_List?.length} Room Types</p>
           
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-8">
               {the_Hotel?.roomType_List?.map((item) => {
                 return <div className="flex gap-2" key={item.roomType_Id}>
                   <div className="basis-1/4 flex flex-col">
@@ -792,7 +795,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         {item?.roomType_Image_List.map((room_Pic, index) => {
                           return index === 0 &&
                           <img src={room_Pic.url} alt={room_Pic.description} key={index}
-                          className="object-cover w-full h-full rounded cursor-pointer"
+                          className="object-cover w-full h-[200px] rounded cursor-pointer"
                           onClick={() => show_The_Room_Type_Pic(index, item.roomType_Id)}/>
                         })}
                         <div className="flex items-center gap-2 absolute bottom-2 right-2 px-2 py-1 text-white bg-gray/80 rounded">
@@ -805,11 +808,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                       {/** 上方房型大圖 */}
                       
                       {/** 下方2房型小圖 */}
-                      <div className="flex gap-2">
+                      <div className="flex gap-1">
                       {item?.roomType_Image_List.map((room_Pic, index) => {
                           return (index >0 && index <3) &&
                           <img src={room_Pic.url} alt={room_Pic.description} key={index}
-                          className="object-cover w-1/2 h-1/2 rounded cursor-pointer"
+                          className="object-cover w-1/2 h-[100px] rounded cursor-pointer"
                           onClick={() => show_The_Room_Type_Pic(index, item.roomType_Id)}/>
                         })}
                       </div>
@@ -853,7 +856,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                     <div className="flex justify-between">
                       <div className="basis-4/5 h-1/2 flex gap-2">
                         <img src={the_Hotel.hotel_Image_List[0].url} alt={the_Hotel.hotel_Image_List[0].description} 
-                          className="rounded w-1/3"/>
+                          className="rounded w-1/3 h-[200px]"/>
 
                         <div className="flex flex-col gap-2">
                           <div className="flex gap-2">
@@ -1010,7 +1013,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                     <div className="flex justify-between">
                       <div className="flex gap-0.5">
                         <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
-                        <p className="min-w-16">{review.travelerName}</p>
+                        <p className="min-w-16">{review.traveler_Name}</p>
                         <p>｜</p>
                         <OtherSVG name="calendar" className="w-4 h-auto"></OtherSVG>
                         <p>{review.date}</p>
@@ -1107,7 +1110,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
             <div className="basis-1/2 flex flex-col gap-2">
               {/** 飯店經緯度 - GoogleMap */}
               <div className="flex items-center gap-2">
-                <OtherSVG name="marker" className="w-8 h-auto"></OtherSVG>
+                <OtherSVG name="marker" className="w-6 h-auto"></OtherSVG>
                 <a target="_blank" href={`https://www.google.com/maps?q=${the_Hotel?.latitude},${the_Hotel?.longitude}`}
                   rel="noopener noreferrer" className="customized-underline text-primary">
                   {the_Hotel?.address}
@@ -1116,11 +1119,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               {/** 飯店經緯度 - GoogleMap */}
 
               <div className="flex gap-2">
-                <OtherSVG name="phone" className="w-4 h-auto"></OtherSVG>
+                <OtherSVG name="phone" className="w-6 h-auto"></OtherSVG>
                 <p>{the_Hotel?.hotel_Phone}</p>
               </div>
               <div className="flex gap-2">
-                <OtherSVG name="email" className="w-4 h-auto"></OtherSVG>
+                <OtherSVG name="email" className="w-6 h-auto"></OtherSVG>
                 <p>{the_Hotel?.hotel_Email}</p>
               </div>
             </div>

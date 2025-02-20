@@ -35,8 +35,8 @@ export interface create_Hotel_Interface {
 
 // 2. 旅客評論
 export interface create_Review_Interface {
-  travelerId: string,
-  travelerName: string,
+  traveler_Id: string,
+  traveler_Name: string,
   date: string,
   traveler_Rating: number | null,
   comment: string,

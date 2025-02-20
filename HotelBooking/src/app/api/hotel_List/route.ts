@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
     
     // 1.1 當前頁, 不是1 就是2以上
     const currentPage = page ? parseInt(page, 10) : 1
-    // 1.2 一頁5卡片
-    const pageSize = 5;
+    // 1.2 一頁 10卡片
+    const pageSize = 10;
 
     // 1.3 針對搜條件, 篩選飯店列表
     let new_Hotel_List = [...hotel_List_Json];

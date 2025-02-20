@@ -15,6 +15,7 @@ import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 import { Refresh_Search_Hotel_List, Search_Params_Interface } from "@/utils/refresh_Search_Hotel_List";
 import {updateRangeSlider, updateBedType, updateRating, updateFacility} from "@/store/form-Search/formSearchSlice";
+import { useTranslations } from "next-intl";
 
 // 1. startDate - 高亮「今天」
 const START_FROM = new Date();
@@ -119,7 +120,7 @@ export default function Form_Search_Pc () {
       const facility = formData.getAll("facility") as string [];
 
       // 15.1 一般搜尋, 初始化「進階搜尋」
-      dispatch(updateRangeSlider([0,9900]));
+      dispatch(updateRangeSlider([100,9900]));
       dispatch(updateBedType([]));
       dispatch(updateRating([]));
       dispatch(updateFacility([]));
@@ -239,6 +240,9 @@ export default function Form_Search_Pc () {
       
   // },[router, dispatch])
 
+  // 17. next-intl i18n 翻譯
+  const t = useTranslations("FormSearch");
+
 
 
   return <>
@@ -251,7 +255,7 @@ export default function Form_Search_Pc () {
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
       </svg>
-      <input type="text" placeholder="Where are you going?" 
+      <input type="text" placeholder={t ("Where are you going?")} 
       className="w-full py-2 px-4 rounded outline-none border border-gray bg-white lg:h-[44px]"
       onChange={(event) => {
         // debounce_Search(event);
@@ -310,15 +314,15 @@ export default function Form_Search_Pc () {
           onClick={toggle_ShowDropDown}
           type="button">
           <p className="lg:hidden">
-            {`${room} Room – ${adult} Adult, ${child} Child`}
+            {`${room} ${t ("Room")} – ${adult} ${t ("Adult")}, ${child} ${t ("Child")}`}
           </p>
 
           <div className="hidden lg:flex lg:flex-col lg:text-[13px]">
             <div className="lg:flex lg:gap-1">
-              <p>{adult} Adult,</p>
-              <p>{child} Child</p>
+              <p>{adult} {t ("Adult")},</p>
+              <p>{child} {t ("Child")}</p>
             </div>
-            <p className="text-xs lg:text-[13px] text-gray">{room} Room</p>
+            <p className="text-xs lg:text-[13px] text-gray">{room} {t ("Room")}</p>
           </div>
         </button>
 
@@ -327,7 +331,7 @@ export default function Form_Search_Pc () {
           <div className="absolute top-full w-full bg-white z-10 flex flex-col gap-2 pl-4 pr-2 py-2 rounded border border-gray mt-2">
             {/* 房間 */}
             <div className="flex justify-between items-center py-2 border-b border-gray">
-              <p>{room} Room</p>
+              <p>{room} {t ("Room")}</p>
               <div className="flex gap-4">
                 <button onClick={() => dispatch(minusRoom())} type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${room<=1 ? 'text-gray' : 'text-primary'}`}>
@@ -346,7 +350,7 @@ export default function Form_Search_Pc () {
 
             {/* 成人 */}
             <div className="flex justify-between items-center py-2 border-b border-gray">
-              <p>{adult} Adult</p>
+              <p>{adult} {t ("Adult")}</p>
               <div className="flex gap-4">
                 <button onClick={() => dispatch(minusAdult())} type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${adult<=1 ? 'text-gray' : 'text-primary'}`}>
@@ -365,7 +369,7 @@ export default function Form_Search_Pc () {
 
             {/* 小孩 */}
             <div className="flex justify-between items-center py-2 border-b border-gray">
-              <p>{child} Child</p>
+              <p>{child} {t ("Child")}</p>
               <div className="flex gap-4">
                 <button onClick={() => dispatch(minusChild())} type="button">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 ${child<=0 ? 'text-gray' : 'text-primary'}`}>
@@ -392,7 +396,7 @@ export default function Form_Search_Pc () {
 
 {/** Submit 搜尋送出按鈕 */}
     <div className="lg:basis-1/12">
-      <button className="bg-primary text-white rounded w-full py-1 px-4 lg:mx-auto lg:h-[44px]">Search</button>
+      <button className="bg-primary text-white rounded w-full py-1 px-2 lg:mx-auto lg:h-[44px]">{t ("Search")}</button>
     </div>
 {/** Submit 搜尋送出按鈕 */}
 

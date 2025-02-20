@@ -52,7 +52,7 @@ export default function Filter_Button () {
 
   // 5. 初始化所有篩選條件 
   const reset = () => {
-    dispatch(updateRangeSlider([0,9999]));
+    dispatch(updateRangeSlider([100,9900]));
     dispatch(updateBedType([]));
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
@@ -198,7 +198,7 @@ export default function Filter_Button () {
                   formatOptions={{style: "currency", currency: "USD"}}
                   label=" "
                   maxValue={9900}
-                  minValue={0}
+                  minValue={100}
                   step={100}
                   value={redux_RangeSlider}
                   onChange={handle_RangeSlider}

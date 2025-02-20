@@ -12,7 +12,8 @@
     "Korea": "南韓",
     "Taiwan": "台灣",
     "United States": "美國",
-    "Bangkok": "曼谷"
+    "Bangkok": "曼谷",
+    "China": "中國"
   },
   "Nav": {
     "en": "英文",
@@ -22,13 +23,23 @@
     "Adult": "大人",
     "Child": "小孩",
     "Room": "房間",
-    "Search": "搜尋"
+    "Search": "搜尋",
+    "Guests": "旅客",
+    "Nights": "晚",
+    "Where are you going?": "要去哪裡?"
   },
   "OfferList": {
     "The Best Discount On Friday !": "黑色星期五折扣",
     "Save Your Budget during CNY !": "新年省錢包",
     "The Gift from Santa Claus !": "聖誕老人的禮物",
     "Promotion for Romance": "情人節浪漫優惠",
-    "Get 15% off with 3 People !": "3人行，85折！"
+    "Get 15% off with 3 People !": "3人行，85折！",
+    "Use Promo Code below, Get Discounts": "使用以下優惠碼，享受折扣",
+    "Discount": "折扣",
+    "Coupon Code": "優惠券代碼",
+    "Search for hotels by destination": "輸入目的地找尋您要的飯店",
+    "Recommendation": "好評推薦",
+    "Search for applicable hotels from popular countries": "從熱門國家尋找絕佳的飯店",
+    "Book Now": "馬上預訂"
   }
 }

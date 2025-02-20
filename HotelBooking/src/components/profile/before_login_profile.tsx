@@ -8,12 +8,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 import { User_Data_Interface } from "@/types/user_Info";
 import { z } from "zod";
 import { zod_Email_Response_Interface } from "@/types/zod_Error_Response";
 import Image from "next/image";
+import {useLocale, useTranslations} from 'next-intl';
+import { usePathname as i18n_usePathname, useRouter as i18n_useRouter } from "@/i18n/routing";
 
 
 const language_List = ["zh-TW", "en-US"];
@@ -136,6 +138,31 @@ export default function Before_Login_Profile () {
     }
   };
 
+  // 13. next-intl 切換語系
+  const locale = useLocale();
+  const [toggle_i18n, set_Toggle_i18n] = useState<boolean>(false);
+  const i18n_PathName = i18n_usePathname();
+  const next_PathName = usePathname();
+  const i18n_Router = i18n_useRouter();
+  const searchParams = useSearchParams();
+  // 13.1 獲取當前查詢參數
+  const currentParams = new URLSearchParams(searchParams.toString());
+  // 13.2 i18n 切換語系
+  const switch_i18n = (language: string) => {
+    const new_Locale = language;
+    // 5.2 建立全新URL路徑, 包含searchParams (不然中 -> 英, 會丟失hotellist「?所有搜尋參數」)
+    const new_Path = `${i18n_PathName}?${currentParams.toString()}`;
+    // 移除當前語言前綴（假設路徑格式為 /[lang]/path）
+    const pathWithoutLocale = i18n_PathName.replace(/^\/[a-z-]+/, '') || '/';
+    // 構建新路徑並保留參數
+    // const new_Path = `${pathWithoutLocale}?${searchParams.toString()}`;
+    i18n_Router.replace(new_Path, {locale: new_Locale});
+    // router.replace(i18n_PathName, {locale: new_Locale});
+  }
+
+  // 14. next-intl i18n翻譯
+  const t = useTranslations("Nav");
+
   
 
 
@@ -197,10 +224,10 @@ export default function Before_Login_Profile () {
         <ProfileSVG name={"language"} className="w-5 h-auto" ></ProfileSVG>
         <p>Languages</p>
       </div>
-      <select name="language" id="language" value={language} className="border rounded px-1 py-1" 
-        onChange={(event) => switch_Language(event.target.value)}>
-        <option value="zh-TW">繁體中文</option>
-        <option value="en-US">English</option>
+      <select name="language" id="language" value={locale} className="border rounded px-1 py-1" 
+        onChange={(event) => switch_i18n(event.target.value)}>
+        <option value="zh-TW">{t ("zh-TW")}</option>
+        <option value="en">{t ("en")}</option>
       </select>
     </div>
     {/** 多國語系切換 */}

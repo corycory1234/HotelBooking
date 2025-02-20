@@ -12,7 +12,8 @@
     "Korea": "Korea",
     "Taiwan": "Taiwan",
     "United States": "United States",
-    "Bangkok": "Bangkok"
+    "Bangkok": "Bangkok",
+    "China": "China"
   },
   "Nav": {
     "en": "English",
@@ -22,13 +23,23 @@
     "Adult": "Adult",
     "Child": "Child",
     "Room": "Room",
-    "Search": "Search"
+    "Search": "Search",
+    "Guests": "Guests",
+    "Nights": "Nights",
+    "Where are you going?": "Where are you going?"
   },
   "OfferList": {
     "The Best Discount On Friday !": "The Best Discount On Friday !",
     "Save Your Budget during CNY !": "Save Your Budget during CNY !",
     "The Gift from Santa Claus !": "The Gift from Santa Claus !",
     "Promotion for Romance": "Promotion for Romance",
-    "Get 15% off with 3 People !": "Get 15% off with 3 People !"
+    "Get 15% off with 3 People !": "Get 15% off with 3 People !",
+    "Use Promo Code below, Get Discounts": "Use Promo Code below, Get Discounts",
+    "Discount": "Discount",
+    "Coupon Code": "Coupon Code",
+    "Search for hotels by destination": "Search for hotels by destination",
+    "Recommendation": "Recommendation",
+    "Search for applicable hotels from popular countries": "Search for applicable hotels from popular countries",
+    "Book Now": "Book Now"
   }
 }

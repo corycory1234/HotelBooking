@@ -26,6 +26,12 @@ const swiper_Popular_Destination = [
     cityName: "Bangkok"
   },
   {
+    url: '/home/popular_2.webp',
+    text1: 'New Year Spceial!',
+    text2: 'Get a free lunch using Coupon *GoTour*',
+    cityName: "China"
+  },
+  {
     url: '/home/popular_6.webp',
     text1: 'New Year Spceial!',
     text2: 'Get a free lunch using Coupon *GoTour*',
@@ -135,22 +141,6 @@ const swiper_Hotel_Around = [
 export default function Index() {
 // 1. Redux - 查看是否登入
 const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
-
-// 2. 路由
-const router = useRouter();
-const params = useParams();
-
-// 3. 點擊輪播圖 - 傳遞 offer_Id 參數
-const check_Offer = (offer_Id: string) => {
-  router.push(`/${params.locale}/offers/${offer_Id}`);
-};
-
-// 4. next-intl 翻譯
-const t = useTranslations('HomePage');
-const t_Offer = useTranslations("OfferList");
-
-// 5. 查看熱門地點 (跳轉HotelList頁面)
-const dispatch: AppDispatch = useDispatch();
 const redux_Keyword = useSelector((state: RootState) => state.formSearch.keyword);
 const redux_DateRange = useSelector((state: RootState) => state.formSearch.dateRange);
 const redux_Start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
@@ -162,6 +152,22 @@ const redux_RangeSlider = useSelector((state: RootState) => state.formSearch.ran
 const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
 const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
 const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
+const dispatch: AppDispatch = useDispatch();
+
+// 2. 路由
+const router = useRouter();
+const params = useParams();
+
+// 3. 查看優惠飯店 - 傳遞 offer_Id 參數
+const check_Offer = (offer_Id: string) => {
+  router.push(`/${params.locale}/offers/${offer_Id}`);
+};
+
+// 4. next-intl 翻譯
+const t = useTranslations('HomePage');
+const t_Offer = useTranslations("OfferList");
+
+// 5. 查看熱門地點 (跳轉HotelList頁面)
 const check_Popular_Destination = (popular_Destination: string) => {
   // 5.1 更新 Redux_Keyword
   dispatch(updateKeyword(t (popular_Destination)));
@@ -227,7 +233,7 @@ const check_Popular_Destination = (popular_Destination: string) => {
         </div>
 
         
-        <div className="flex flex-col p-4 gap-4 pb-20 lg:px-0">
+        <div className="flex flex-col p-4 gap-4 pb-20 lg:px-0 lg:py-8">
         {/********************* Swiper - 熱門地點 *******************************/}
           <h2 className="font-bold text-lg">{t ("Popular Destinations")}</h2>
           <div className="">
@@ -309,8 +315,11 @@ const check_Popular_Destination = (popular_Destination: string) => {
 
         </div>
 
-        <Footer></Footer>
 
+      </div>
+
+      <div className="px-4">
+        <Footer></Footer>
       </div>
 
     </div>

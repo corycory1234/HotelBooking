@@ -7,6 +7,7 @@ import hotel_List_Json from "@/fakeData/hotel_List.json";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List, } from "@/store/hotel_List/hotel_List_Slice";
 import { OtherSVG } from "../client_Svg/client_Svg";
+import { useTranslations } from "next-intl";
 
 interface Debounced_Hotel_Interface {
   hotel_Id: string,
@@ -123,6 +124,9 @@ export default function Client_Input_Keyword () {
   //   console.log(debounced_City, "debounced_City 飯店陣列");
   // }, [debounced_City])
 
+  // 4. 
+  const t = useTranslations("FormSearch");
+
   
   return <>
   <div className="relative w-full ">
@@ -132,7 +136,7 @@ export default function Client_Input_Keyword () {
     </svg>
 
 
-    <input type="text" placeholder="Where are you going?" 
+    <input type="text" placeholder={t ("Where are you going?")} 
     className="w-full py-2 px-4 rounded outline-none lg:border lg:border-gray bg-white"
     onChange={(event) => dispatch(updateKeyword(event.target.value))}
     value={keyword}

@@ -20,7 +20,7 @@ const amenity = ["shower", "bathtub", "breakfast", "tv", ];
 const room_View_List = ["sea view", "forest view", "city view", "lake view", "street view", "mountain view"]
 
 // 5. 床型
-const bed_Type_List = ["single bed", "double bed", "queen bed", "king bed" ,"twin beds", "tatami"]
+const bed_Type_List = ["singlebed", "doublebed", "queenbed", "kingbed" ,"twinbed",]
 
 export default function Add_Hotel_Modal() {
   const dispatch: AppDispatch = useDispatch();
@@ -134,10 +134,10 @@ export default function Add_Hotel_Modal() {
   // 10. 添加評論函數 (這函式要UI去按按鈕才會觸發)
   // 10.1 在酒店列表中，每個酒店項目下添加一個評論表單，當用戶提交評論時，
   // 10.2 調用 addReview 函數來更新特定酒店的 reviews
-  const addReview = (hotelId: string, travelerName: string, date: string, traveler_Rating: number, comment: string, reply: string) => {
+  const addReview = (hotelId: string, traveler_Name: string, date: string, traveler_Rating: number, comment: string, reply: string) => {
     const newReview: create_Review_Interface = {
-      travelerId: uuidv4(), // 使用 UUID 生成唯一 ID
-      travelerName,
+      traveler_Id: uuidv4(), // 使用 UUID 生成唯一 ID
+      traveler_Name,
       date,
       traveler_Rating,
       comment,
@@ -157,8 +157,8 @@ export default function Add_Hotel_Modal() {
     let initialReviews_List: create_Review_Interface[] = [];
     if (travelername && date && traveler_Rating && comment) {
     initialReviews_List.push({
-        travelerId: uuidv4(),
-        travelerName: travelername,
+        traveler_Id: uuidv4(),
+        traveler_Name: travelername,
         date: date,
         traveler_Rating: + traveler_Rating,
         comment: comment,
@@ -217,7 +217,8 @@ export default function Add_Hotel_Modal() {
       transportation: transportation,
       recommendation: recommendation,
       // hotel_Image_List: hotel_Image_List,
-      review_List: initialReviews_List,
+      // review_List: initialReviews_List,
+      review_List: review_List,
       // roomType_List: initialRoomType_List,
       roomType_List: roomTypesForCreation,
       distance: distance,
@@ -287,6 +288,38 @@ export default function Add_Hotel_Modal() {
     // console.log("Redux - 飯店列表", redux_Hotel_List);
   }
 
+  // 15. 旅客評論 & 飯店回覆
+  const [review_List, set_Review_List] = useState<create_Review_Interface[]>([]);
+  const add_Review = (event?: any) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    set_Review_List([...review_List, {
+      traveler_Id: uuidv4(), // 使用 UUID 生成唯一 ID
+      traveler_Name: "",
+      date: "",
+      traveler_Rating: 5,
+      comment: "",
+      reply: "",
+    }])
+  };
+
+  useEffect(() => {
+    add_Review();
+  },[]);
+  useEffect(() => {
+    console.log(review_List, "查看評論陣列");
+  },[review_List]);
+  
+  // 16. 旅客評論&飯店回覆 onChange 變更
+  const handle_Review_List_Change = (index: number, field: keyof create_Review_Interface, value: any) => {
+    const update_Review_List = review_List.map((item, i) => 
+      i === index ? {...item, [field]: value} : item
+    );
+    set_Review_List(update_Review_List)
+  }
+
   
   return <div className="flex flex-col p-4 gap-4 bg-lightGray">
     <p className="text-lg font-bold">Add New Hotel</p>
@@ -301,7 +334,46 @@ export default function Add_Hotel_Modal() {
         {/** 基本飯店資訊 */}
         
         {/** 旅客留言、評價 */}
-        <Add_Hotel_Review></Add_Hotel_Review>
+        {/* <Add_Hotel_Review></Add_Hotel_Review> */}
+
+
+    {/** 旅客留言、評價 */}
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold text-primary">Comment</p>
+        <button onClick={(event) => add_Review(event)} className="bg-primary rounded">再新增一個評論</button>
+        {review_List.map((item, index) => {
+          return <div key={index}>
+          
+            <div className="flex gap-2">
+              <label htmlFor="travelername">Name</label>
+              <input type="text" id={`${index}travelername`} name={`${index}travelername`} className="border rounded" 
+                onChange={(event) => handle_Review_List_Change(index, "traveler_Name", event.target.value)} value={item.traveler_Name}/>
+              <label htmlFor="date">Date</label>
+              <input type="date" id={`${index}date`} name={`${index}date`} className="border rounded" value={item.date}
+                onChange={(event) => handle_Review_List_Change(index, "date", event.target.value)}/>
+              <label htmlFor="rating">Rating</label>
+              <select name={`${index}rating`} id={`${index}rating`} className="border rounded" value={item.traveler_Rating as number}
+                onChange={(event) => handle_Review_List_Change(index, "traveler_Rating", event.target.value)}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+                <option value={5}>5</option>
+              </select>
+            </div>
+            <textarea name={`${index}comment`} id={`${index}comment`} className="border rounded w-full" rows={4} value={item.comment}
+              onChange={(event) => handle_Review_List_Change(index, "comment", event.target.value)}></textarea>
+            
+            <label className="font-semibold text-primary">Reply</label>
+            <textarea name={`${index}reply`} id={`${index}reply`}className="border rounded w-full" rows={4} value={item.reply as string}
+              onChange={(event) => handle_Review_List_Change(index, "reply", event.target.value)}></textarea>
+          </div>
+        })}
+      </div>
+      {/** 旅客留言、評價 */}
+
+
+
         {/** 旅客留言、評價 */}
       </div>
       

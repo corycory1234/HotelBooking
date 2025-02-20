@@ -106,7 +106,7 @@ export default function Advanced_Search_Pc () {
 
   // 9. 初始化所有篩選條件 
   const reset = () => {
-    dispatch(updateRangeSlider([0,9900]));
+    dispatch(updateRangeSlider([100,9900]));
     dispatch(updateBedType([]));
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
@@ -177,8 +177,8 @@ export default function Advanced_Search_Pc () {
                 className="text-sm"
                 formatOptions={{style: "currency", currency: "USD"}}
                 label=" "
-                maxValue={9999}
-                minValue={0}
+                maxValue={9900}
+                minValue={100}
                 step={100}
                 value={redux_RangeSlider}
                 onChange={handle_RangeSlider}
