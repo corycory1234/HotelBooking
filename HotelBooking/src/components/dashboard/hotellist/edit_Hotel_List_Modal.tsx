@@ -132,7 +132,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
     // 13.1 準備一個預設的 review 物件
     const new_Review: add_Review_Type_Interface = {
       travelerId: uuidv4(),
-      travelerName: "",
+      traveler_Name: "",
       date: "",
       traveler_Rating: null,
       comment: "",
@@ -488,9 +488,9 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
                   {formData.review_List.map((item, index) => {
                     return <div key={item.travelerId}>
                     <div className="flex gap-2" >
-                      <label htmlFor="travelerName">Name</label>
-                      <input type="text" id="travelerName" name="travelerName" className="border rounded"
-                        value={item.travelerName} onChange={(event) => handle_Review_List_Change(event, index)}/>
+                      <label htmlFor="traveler_Name">Name</label>
+                      <input type="text" id="traveler_Name" name="traveler_Name" className="border rounded"
+                        value={item.traveler_Name} onChange={(event) => handle_Review_List_Change(event, index)}/>
                       <label htmlFor="date">Date</label>
                       <input type="text" id="date" name="date" className="border rounded" 
                       value={item.date} onChange={(event) => handle_Review_List_Change(event, index)}/>
