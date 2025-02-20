@@ -60,7 +60,7 @@ export default function Hotel_Customer_Review() {
       {sorted_Review.map((item) => {
         return <div key={item.travelerId} className="flex-1">
           <div className="flex justify-between">
-            <p className="text-primary">{item.travelerName} - {item.date}</p>
+            <p className="text-primary">{item.traveler_Name} - {item.date}</p>
             <div className="flex">
               <Customer_Rating rating={item.traveler_Rating as number} className="w-4 h-auto"></Customer_Rating>
             </div>
