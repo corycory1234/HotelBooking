@@ -41,5 +41,29 @@
     "Recommendation": "好評推薦",
     "Search for applicable hotels from popular countries": "從熱門國家尋找絕佳的飯店",
     "Book Now": "馬上預訂"
+  },
+  "AdvancedSearch": {
+    "Advanced Search": "進階搜尋",
+    "Price Range": "每晚預算",
+    "Bed Type": "床型",
+    "Single Bed": "單人床",
+    "Twin Bed": "兩床",
+    "Double Bed": "雙人床",
+    "Queen Bed": "特大雙人床",
+    "King Bed": "加大雙人床",
+    "Rating": "星級",
+    "Facility": "飯店設施",
+    "Pool": "游泳池",
+    "Balcony": "陽台",
+    "24H Check-In": "24小時入住",
+    "Gym": "健身房",
+    "Parking": "停車場",
+    "Bathtub": "浴缸",
+    "Kitchen": "廚房",
+    "Wifi": "無線網路",
+    "Show All": "顯示全部",
+    "Hide": "隱藏",
+    "Reset": "重置",
+    "Apply": "篩選條件"
   }
 }

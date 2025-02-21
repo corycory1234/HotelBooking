@@ -11,6 +11,7 @@ import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Slider } from "@nextui-org/slider";
+import { useTranslations } from "next-intl";
 
 // 0. 所有設施 Arr
 const facility_Arr = ["pool", "balcony", "24H Check-In", "gym", "parking", "bathtub", "kitchen", "wifi",]
@@ -148,7 +149,10 @@ export default function Advanced_Search_Pc () {
   const [toggle_Boo, set_Toggle_Boo] = useState(false);
   const toggle_Facility = () => {
     set_Toggle_Boo(!toggle_Boo);
-  }
+  };
+
+  // 5. next-intle i18n 翻譯
+  const t = useTranslations("AdvancedSearch");
 
 
 
@@ -163,14 +167,14 @@ export default function Advanced_Search_Pc () {
         {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
 
         <div className="flex justify-between items-center p-4 border-b border-softGray">
-          <h2 className="text-lg font-semibold">Advanced Search</h2>
+          <h2 className="text-lg font-semibold">{t ("Advanced Search")}</h2>
         </div>
 
         <div className="flex flex-col overflow-y-auto px-4 py-2 gap-6">
           
         {/********** 最小最大旅館價格 - RangeSlider **********/}
           <div className="pt-4">        
-            <h3 className="font-semibold">Price Range</h3>
+            <h3 className="font-semibold">{t ("Price Range")}</h3>
             <div className="flex flex-col gap-2 w-full h-full items-start justify-center">
               <Slider
                 name="rangeslider"
@@ -190,38 +194,38 @@ export default function Advanced_Search_Pc () {
 
         {/**********  床型 **********/}
           <div className="border-b border-softGray pb-4">
-            <h3 className="font-medium mb-3">Bed Type</h3>
+            <h3 className="font-medium mb-3">{t ("Bed Type")}</h3>
             {/* <Client_BedType></Client_BedType> */}
             <div className="space-y-2">          
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="singlebed" name="bedtype"
                 checked={redux_BedType.includes("singlebed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>
-                <span>Single Bed</span>
+                <span>{t ("Single Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="twinbed" name="bedtype"
                 checked={redux_BedType.includes("twinbed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>Twin Bed</span>
+                <span>{t ("Twin Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="doublebed" name="bedtype"
                 checked={redux_BedType.includes("doublebed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>Double Bed</span>
+                <span>{t ("Double Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="queenbed" name="bedtype"
                 checked={redux_BedType.includes("queenbed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>Queen Bed</span>
+                <span>{t ("Queen Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="kingbed" name="bedtype"
                 checked={redux_BedType.includes("kingbed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>King Bed</span>
+                <span>{t ("King Bed")}</span>
               </label>
             </div>
           </div>
@@ -229,7 +233,7 @@ export default function Advanced_Search_Pc () {
 
         {/********** 飯店星級 **********/}
           <div className="border-b border-softGray pb-4">
-            <h3 className="font-medium mb-3">Rating</h3>
+            <h3 className="font-medium mb-3">{t ("Rating")}</h3>
             {/* <Client_Rating></Client_Rating> */}
             <div className="space-y-2">
               <label className="flex items-center gap-2">
@@ -354,7 +358,7 @@ export default function Advanced_Search_Pc () {
 
         {/********** 設施 **********/}
           <div className="">
-          <h3 className="font-medium mb-3">Facility</h3>
+          <h3 className="font-medium mb-3">{t ("Facility")}</h3>
           {/* <Client_Faciliy></Client_Faciliy> */}
             <div className="space-y-2">
               {facility_Arr.map((item, index) => {
@@ -365,12 +369,12 @@ export default function Advanced_Search_Pc () {
                     <input type="checkbox" className="w-4 h-4 rounded border-gray" name="facility" value={item}
                     onChange={(event) => handel_Facility(event.target.value, event.target.checked)}
                     checked={redux_Facility.includes(item)}/>            
-                    <span>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
+                    <span>{t (item.charAt(0).toUpperCase() + item.slice(1))}</span>
                   </label>
                 }
                 </div>
               })}
-              <span onClick={toggle_Facility} className="text-primary cursor-pointer">{toggle_Boo ? "Hide" : "Show All"}</span>
+              <span onClick={toggle_Facility} className="text-primary cursor-pointer">{toggle_Boo ? t("Hide") : t("Show All") }</span>
             </div>
           </div>
         {/********** 設施 **********/}
@@ -379,8 +383,8 @@ export default function Advanced_Search_Pc () {
 
         {/** 重置 & 確定 按鈕 */}
         <div className="flex border-t border-softGray p-4 gap-4 justify-between items-center">      
-          <button className="basis-1/2 py-2 border border-gray rounded" type="button" onClick={reset}>Reset</button>
-          <button className="basis-1/2 py-2 rounded bg-primary text-white">Apply</button>
+          <button className="basis-1/2 py-2 border border-gray rounded" type="button" onClick={reset}>{t ("Reset")}</button>
+          <button className="basis-1/2 py-2 rounded bg-primary text-white">{t ("Apply")}</button>
         </div>
         {/** 重置 & 確定 按鈕 */}
       </form>

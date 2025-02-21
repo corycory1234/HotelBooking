@@ -15,7 +15,8 @@ import { useRouter } from "next/navigation";
 import StarRating from "../starrating/star-Rating";
 import {useTranslations} from 'next-intl';
 import { useParams } from "next/navigation";
-import { updateKeyword } from "@/store/form-Search/formSearchSlice";
+import { updateBedType, updateFacility, updateKeyword, updateRangeSlider, updateRating } from "@/store/form-Search/formSearchSlice";
+import { useEffect } from "react";
 
 
 const swiper_Popular_Destination = [
@@ -193,6 +194,15 @@ const check_Popular_Destination = (popular_Destination: string) => {
   // 5.3 跳轉到 hotel_List頁面, 讓hotel_List頁面自己打API
   return router.push(`/hotellist?${search_Params}`);
 }
+
+  // 6. 一進首頁, 關鍵字、進階搜尋初始化
+  useEffect(() => {
+    dispatch(updateKeyword(""));
+    dispatch(updateRangeSlider([100, 9900]))
+    dispatch(updateBedType([]));
+    dispatch(updateRating([]));
+    dispatch(updateFacility([]));
+  },[])
 
   return <>
     <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">

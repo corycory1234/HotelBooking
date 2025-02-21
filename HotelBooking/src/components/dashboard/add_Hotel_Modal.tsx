@@ -311,7 +311,7 @@ export default function Add_Hotel_Modal() {
   useEffect(() => {
     console.log(review_List, "查看評論陣列");
   },[review_List]);
-  
+
   // 16. 旅客評論&飯店回覆 onChange 變更
   const handle_Review_List_Change = (index: number, field: keyof create_Review_Interface, value: any) => {
     const update_Review_List = review_List.map((item, i) => 
@@ -371,9 +371,6 @@ export default function Add_Hotel_Modal() {
         })}
       </div>
       {/** 旅客留言、評價 */}
-
-
-
         {/** 旅客留言、評價 */}
       </div>
       

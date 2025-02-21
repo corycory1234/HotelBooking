@@ -41,5 +41,29 @@
     "Recommendation": "Recommendation",
     "Search for applicable hotels from popular countries": "Search for applicable hotels from popular countries",
     "Book Now": "Book Now"
+  },
+  "AdvancedSearch": {
+    "Advanced Search": "Advanced Search",
+    "Price Range": "PriceR ange",
+    "Bed Type": "Bed Type",
+    "Single Bed": "Single Bed",
+    "Twin Bed": "Twin Bed",
+    "Double Bed": "Double Bed",
+    "Queen Bed": "Queen Bed",
+    "King Bed": "King Bed",
+    "Rating": "Rating",
+    "Facility": "Facility",
+    "Pool": "Pool",
+    "Balcony": "Balcony",
+    "24H Check-In": "24H Check-In",
+    "Gym": "Gym",
+    "Parking": "Parking",
+    "Bathtub": "Bathtub",
+    "Kitchen": "Kitchen",
+    "Wifi": "Wifi",
+    "Show All": "Show All",
+    "Hide": "Hide",
+    "Reset": "Reset",
+    "Apply": "Apply"
   }
 }

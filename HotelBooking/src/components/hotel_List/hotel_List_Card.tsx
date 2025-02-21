@@ -86,7 +86,7 @@ export default function Hotel_List_Card() {
   const [formSort, set_FormSort] = useState<boolean>(false);
 
   // 6. sort排序 - <input tpye="radio" value="本地數據">
-  const [sort_Value, set_Sort_Value] = useState<string>("priceLow")
+  const [sort_Value, set_Sort_Value] = useState<string>("")
 
   // 7. 排序 - Switch Case 綜合函式
   let sorted_Hotel_List: add_Hotel_Detail_Interface[] = [] 
@@ -245,9 +245,10 @@ export default function Hotel_List_Card() {
         country: "",
         minPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[0]) : String(redux_RangeSlider),
         maxPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[1]) : String(redux_RangeSlider),
-        rating: String(redux_Rating),
+        ratings: String(redux_Rating),
         q: redux_Destination,
-        facilities: String(redux_Facility?.join())
+        facilities: String(redux_Facility?.join()),
+        bedTypes: String(redux_BedType),
       }).toString();
 
       const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
