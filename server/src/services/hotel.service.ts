@@ -430,9 +430,10 @@ export class HotelService extends BaseService {
             }
 
             if (params.search_Query?.trim()) {
+                const searchTerm = `%${params.search_Query.trim()}%`;
                 conditions.push(sql`(
-                    ${hotels.hotel_Name} ILIKE ${`%${params.search_Query.trim()}%`} OR 
-                    ${hotels.address} ILIKE ${`%${params.search_Query.trim()}%`}
+                    ${hotels.hotel_Name} ILIKE ${searchTerm} OR 
+                    ${hotels.address} ILIKE ${searchTerm}
                 )`);
             }
 
@@ -441,13 +442,14 @@ export class HotelService extends BaseService {
                 conditions.push(sql`${hotels.facility_List} ?& ${facilitiesArray}`);
             }
 
-            // 修改 bed_Types 條件的寫法
             if (params.bed_Types && params.bed_Types.length > 0) {
-                conditions.push(sql`EXISTS (
-                    SELECT 1 FROM ${roomTypes}
-                    WHERE ${roomTypes.hotelId} = ${hotels.hotel_Id}
-                    AND ${roomTypes.bed_Type} IN (${sql.join(params.bed_Types, sql`, `)})
-                )`);
+                params.bed_Types.forEach(bedType => {
+                    conditions.push(sql`EXISTS (
+                        SELECT 1 FROM ${roomTypes}
+                        WHERE ${roomTypes.hotelId} = ${hotels.hotel_Id}
+                        AND ${roomTypes.bed_Type} = ${bedType}
+                    )`);
+                });
             }
 
             // 先查詢分頁後的飯店 ID
