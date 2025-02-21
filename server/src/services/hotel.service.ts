@@ -2,7 +2,7 @@ import { BaseService } from "./base.service";
 import { db } from '../db';
 import { hotels, roomTypes } from '../db/schema';
 import { CreateHotelDTO, PaginatedResponse, SearchHotelsParams } from '../types/hotel.types';
-import { and, eq, sql } from 'drizzle-orm';
+import { and, eq, inArray, sql } from 'drizzle-orm';
 import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "../utils/s3";
 
@@ -450,52 +450,65 @@ export class HotelService extends BaseService {
                 )`);
             }
 
-            // 使用 leftJoin 查詢
-            const query = db.select({
-                hotel_Id: hotels.hotel_Id,
-                hotel_Name: hotels.hotel_Name,
-                hotel_Image_List: hotels.hotel_Image_List,
-                distance: hotels.distance,
-                totalRating: hotels.totalRating,
-                facility_List: hotels.facility_List,
-                price: hotels.price,
-                hotel_Intro: hotels.hotel_Intro,
-                review_List: hotels.review_List,
-                address: hotels.address,
-                country: hotels.country,
-                city: hotels.city,
-                tax: hotels.tax,
-                checkin: hotels.checkin,
-                checkout: hotels.checkout,
-                latitude: hotels.latitude,
-                longitude: hotels.longitude,
-                is_Open: hotels.is_Open,
-                hotel_Phone: hotels.hotel_Phone,
-                hotel_Email: hotels.hotel_Email,
-                cancellation_Policy: hotels.cancellation_Policy,
-                transportation: hotels.transportation,
-                recommendation: hotels.recommendation,
-                isCollected: hotels.isCollected,
-                offer_Id: hotels.offer_Id,
-                owner_Id: hotels.owner_Id,
-                createdAt: hotels.createdAt,
-                updatedAt: hotels.updatedAt,
-                rooms: roomTypes
-            })
-            .from(hotels)
-            .leftJoin(roomTypes, eq(hotels.hotel_Id, roomTypes.hotelId));
+            // 先查詢分頁後的飯店 ID
+            const paginatedHotelsQuery = db
+                .select({
+                    hotel_Id: hotels.hotel_Id
+                })
+                .from(hotels)
+                .where(conditions.length > 0 ? and(...conditions) : undefined)
+                .orderBy(hotels.createdAt)
+                .limit(limit)
+                .offset(offset);
 
-            // 加入條件
-            if (conditions.length > 0) {
-                query.where(and(...conditions));
-            }
+            // 使用子查詢獲取完整的飯店資訊和房型
+            const query = db
+                .select({
+                    hotel_Id: hotels.hotel_Id,
+                    hotel_Name: hotels.hotel_Name,
+                    hotel_Image_List: hotels.hotel_Image_List,
+                    distance: hotels.distance,
+                    totalRating: hotels.totalRating,
+                    facility_List: hotels.facility_List,
+                    price: hotels.price,
+                    hotel_Intro: hotels.hotel_Intro,
+                    review_List: hotels.review_List,
+                    address: hotels.address,
+                    country: hotels.country,
+                    city: hotels.city,
+                    tax: hotels.tax,
+                    checkin: hotels.checkin,
+                    checkout: hotels.checkout,
+                    latitude: hotels.latitude,
+                    longitude: hotels.longitude,
+                    is_Open: hotels.is_Open,
+                    hotel_Phone: hotels.hotel_Phone,
+                    hotel_Email: hotels.hotel_Email,
+                    cancellation_Policy: hotels.cancellation_Policy,
+                    transportation: hotels.transportation,
+                    recommendation: hotels.recommendation,
+                    isCollected: hotels.isCollected,
+                    offer_Id: hotels.offer_Id,
+                    owner_Id: hotels.owner_Id,
+                    createdAt: hotels.createdAt,
+                    updatedAt: hotels.updatedAt,
+                    rooms: roomTypes
+                })
+                .from(hotels)
+                .leftJoin(roomTypes, eq(hotels.hotel_Id, roomTypes.hotelId))
+                .where(
+                    and(
+                        inArray(
+                            hotels.hotel_Id,
+                            paginatedHotelsQuery
+                        ),
+                        conditions.length > 0 ? and(...conditions) : undefined
+                    )
+                );
 
             // 執行查詢
             const [rawResults, [{ count }]] = await Promise.all([
-                query
-                    .orderBy(hotels.createdAt)
-                    .limit(limit)
-                    .offset(offset),
+                query,
                 db.select({
                     count: sql<number>`count(DISTINCT ${hotels.hotel_Id})`
                 })
