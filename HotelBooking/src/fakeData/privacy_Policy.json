@@ -2,7 +2,7 @@
   "title": "Go Tour Privacy Policy",
   "effectiveDate": "2025-01-30",
   "introduction": "歡迎使用我們的飯店訂房服務。我們非常重視您的隱私，並致力於保護您的個人資料。本隱私政策解釋了我們如何收集、使用、保護以及分享您的個人資料。",
-  "introduction_en": "Welcome to our hotel booking service. We value your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, protect, and share your personal information.",
+  "introduction_en": "Welcome to our hotel booking service We value your privacy and are committed to protecting your personal data This privacy policy explains how we collect, use, protect, and share your personal information",
   "sections": [
     {
       "title": "1. 資料收集",
@@ -31,28 +31,28 @@
   ],
   "sections_en": [
     {
-      "title": "1. Data Collection",
-      "content": "We may collect the following types of personal data: name, email address, phone number, payment information, check-in date, and check-out date."
+      "title": "Data Collection",
+      "content": "We may collect the following types of personal data: name, email address, phone number, payment information, check-in date, and check-out date"
     },
     {
-      "title": "2. Data Usage",
-      "content": "We use your personal data to process bookings, provide customer service, improve our services, and send promotional information (if you consent)."
+      "title": "Data Usage",
+      "content": "We use your personal data to process bookings, provide customer service, improve our services, and send promotional information (if you consent)"
     },
     {
-      "title": "3. Data Sharing",
-      "content": "We do not sell your personal data to third parties. We may share data with partners to provide services, such as payment processing and customer support."
+      "title": "Data Sharing",
+      "content": "We do not sell your personal data to third parties We may share data with partners to provide services, such as payment processing and customer support"
     },
     {
-      "title": "4. Data Protection",
-      "content": "We take appropriate security measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction."
+      "title": "Data Protection",
+      "content": "We take appropriate security measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction"
     },
     {
-      "title": "5. Your Rights",
-      "content": "You have the right to access, correct, or delete your personal data. If you have any questions or need assistance, please contact us."
+      "title": "Your Rights",
+      "content": "You have the right to access, correct, or delete your personal data If you have any questions or need assistance, please contact us"
     },
     {
-      "title": "6. Changes to Privacy Policy",
-      "content": "We may update this privacy policy from time to time. Any changes will be posted on this page and will take effect on the effective date."
+      "title": "Changes to Privacy Policy",
+      "content": "We may update this privacy policy from time to time Any changes will be posted on this page and will take effect on the effective date"
     }
   ],
   "contact": {

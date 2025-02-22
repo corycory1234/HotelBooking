@@ -72,5 +72,42 @@
     "Price (High ~ Low)": "Price (High ~ Low)",
     "Rating (High ~ Low)": "Rating (High ~ Low)",
     "Rating (Low ~ High)": "Rating (Low ~ High)"
+  },
+  "Privacy": {
+    "Go Tour Privacy Policy": "Go Tour Privacy Policy",
+    "Published": "Published",
+    "Introduction": "Introduction",
+    "Welcome to our hotel booking service We value your privacy and are committed to protecting your personal data This privacy policy explains how we collect, use, protect, and share your personal information": "Welcome to our hotel booking service. We value your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, protect, and share your personal information.",
+    "Data Collection": "Data Collection",
+    "Data Usage": "Data Usage",
+    "Data Sharing": "Data Sharing",
+    "Data Protection": "Data Protection",
+    "Your Rights": "Your Rights",
+    "Changes to Privacy Policy": "Changes to Privacy Policy",
+    "We may collect the following types of personal data: name, email address, phone number, payment information, check-in date, and check-out date": "We may collect the following types of personal data: name, email address, phone number, payment information, check-in date, and check-out date.",
+    "We use your personal data to process bookings, provide customer service, improve our services, and send promotional information (if you consent)": "We use your personal data to process bookings, provide customer service, improve our services, and send promotional information (if you consent).",
+    "We do not sell your personal data to third parties We may share data with partners to provide services, such as payment processing and customer support": "We do not sell your personal data to third parties. We may share data with partners to provide services, such as payment processing and customer support.",
+    "We take appropriate security measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction": "We take appropriate security measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction.",
+    "You have the right to access, correct, or delete your personal data If you have any questions or need assistance, please contact us": "You have the right to access, correct, or delete your personal data. If you have any questions or need assistance, please contact us.",
+    "We may update this privacy policy from time to time Any changes will be posted on this page and will take effect on the effective date": "We may update this privacy policy from time to time. Any changes will be posted on this page and will take effect on the effective date."
+  },
+  "CookiePolicy": {
+    "Cookie Policy": "Cookie Policy",
+    "Introduction": "Introduction",
+    "Effective Date": "Effective Date",
+    "This Cookie Policy explains how we use cookies and similar technologies to recognize you when you visit our website It explains what these technologies are and why we use them, as well as your rights to control our use of them": "This Cookie Policy explains how we use cookies and similar technologies to recognize you when you visit our website. It explains what these technologies are and why we use them, as well as your rights to control our use of them.",
+    "What Are Cookies?": "What Are Cookies?",
+    "Why Do We Use Cookies?": "Why Do We Use Cookies?",
+    "Types of Cookies We Use": "Types of Cookies We Use",
+    "Your Choices Regarding Cookies": "Your Choices Regarding Cookies",
+    "Changes to This Policy": "Changes to This Policy",
+    "Cookies are small data files that are placed on your computer or mobile device when you visit a website Cookies are widely used by website owners to make their websites work, or to work more efficiently, as well as to provide reporting information": "Cookies are small data files that are placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners to make their websites work, or to work more efficiently, as well as to provide reporting information.",
+    "We use cookies for several reasons Some cookies are required for technical reasons in order for our website to operate, and we refer to these as 'essential' or 'strictly necessary' cookies Other cookies enable us to track and target the interests of our users to enhance the experience on our website": "We use cookies for several reasons. Some cookies are required for technical reasons in order for our website to operate, and we refer to these as 'essential' or 'strictly necessary' cookies. Other cookies enable us to track and target the interests of our users to enhance the experience on our website.",
+    "We use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your device for a set period of time or until you delete them)": "We use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your device for a set period of time or until you delete them).",
+    "If you prefer to avoid the use of cookies, you can change your browser settings to refuse cookies However, if you do so, some parts of our website may not function properly": "If you prefer to avoid the use of cookies, you can change your browser settings to refuse cookies However, if you do so, some parts of our website may not function properly.",
+    "We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons":  "We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons.",
+    "Contact Us": "Contact Us",
+    "Email": "Email",
+    "Phone": "Phone"
   }
 }

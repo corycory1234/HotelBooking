@@ -320,7 +320,7 @@ export default function Add_Hotel_Modal() {
     set_Review_List(update_Review_List)
   };
 
-  // 17.
+  // 17. 抽菸房 | 禁菸房 - 布林狀態
   const [is_Smoking, set_Is_Smoking] = useState<boolean>(false);
 
   

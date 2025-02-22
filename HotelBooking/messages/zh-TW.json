@@ -72,5 +72,42 @@
     "Price (High ~ Low)": "價格(高)",
     "Rating (High ~ Low)": "星級(高)",
     "Rating (Low ~ High)": "星級(低)"
+  },
+  "Privacy": {
+    "Go Tour Privacy Policy": "Go Tour 隱私權政策",
+    "Published": "更新於",
+    "Introduction": "詳細內容",
+    "Welcome to our hotel booking service We value your privacy and are committed to protecting your personal data This privacy policy explains how we collect, use, protect, and share your personal information": "歡迎使用我們的飯店預訂服務。我們重視您的隱私，並承諾保護您的個人資料。本隱私權政策說明我們如何收集、使用、保護及分享您的個人資訊。",
+    "Data Collection": "資料收集",
+    "Data Usage": "資料使用",
+    "Data Sharing": "資料共享",
+    "Data Protection": "資料保護",
+    "Your Rights": "您的權利",
+    "Changes to Privacy Policy": "隱私權政策變更",
+    "We may collect the following types of personal data: name, email address, phone number, payment information, check-in date, and check-out date": "我們可能會收集以下類型的個人資料：姓名、電子郵件地址、電話號碼、付款資訊、入住日期和退房日期。",
+    "We use your personal data to process bookings, provide customer service, improve our services, and send promotional information (if you consent)": "我們使用您的個人資料來處理預訂、提供客戶服務、改善我們的服務，並在您同意的情況下發送促銷資訊。",
+    "We do not sell your personal data to third parties We may share data with partners to provide services, such as payment processing and customer support": "我們不會將您的個人資料出售給第三方。我們可能會與合作夥伴共享資料，以提供服務，例如付款處理和客戶支援。",
+    "We take appropriate security measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction": "我們採取適當的安全措施來保護您的個人資料，防止未經授權的存取、披露、更改或銷毀。",
+    "You have the right to access, correct, or delete your personal data If you have any questions or need assistance, please contact us": "您有權存取、更正或刪除您的個人資料。如有任何問題或需要協助，請聯絡我們。",
+    "We may update this privacy policy from time to time Any changes will be posted on this page and will take effect on the effective date": "我們可能會不時更新本隱私權政策。任何變更將發布在本頁面，並自生效日期起生效。"
+  },
+  "CookiePolicy": {
+    "Cookie Policy": "Cookie 政策",
+    "Introduction": "Cookie介紹",
+    "Effective Date": "更新於",
+    "This Cookie Policy explains how we use cookies and similar technologies to recognize you when you visit our website It explains what these technologies are and why we use them, as well as your rights to control our use of them": "本 Cookie 政策說明我們如何使用 Cookie 及類似技術來識別您在訪問我們網站時的身份。它解釋了這些技術的作用、我們使用它們的原因，以及您控制我們使用這些技術的權利。",
+    "What Are Cookies?": "什麼是 Cookie？",
+    "Why Do We Use Cookies?": "我們為何使用 Cookie？",
+    "Types of Cookies We Use": "我們使用的 Cookie 類型",
+    "Your Choices Regarding Cookies": "您對 Cookie 的選擇",
+    "Changes to This Policy": "本政策的變更",
+    "Cookies are small data files that are placed on your computer or mobile device when you visit a website Cookies are widely used by website owners to make their websites work, or to work more efficiently, as well as to provide reporting information": "當您訪問網站時，Cookie 是存放在您的電腦或行動裝置上的小型數據文件。網站所有者廣泛使用 Cookie 來確保網站正常運作或提高運行效率，並提供報告資訊。",
+    "We use cookies for several reasons Some cookies are required for technical reasons in order for our website to operate, and we refer to these as 'essential' or 'strictly necessary' cookies Other cookies enable us to track and target the interests of our users to enhance the experience on our website": "我們使用 Cookie 的原因有多種。其中，一些 Cookie 出於技術原因是網站運行所必需的，我們稱這些為「必要」或「嚴格必要」的 Cookie。其他 Cookie 則幫助我們追蹤和分析用戶的興趣，以提升網站體驗。",
+    "We use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your device for a set period of time or until you delete them)": "我們使用會話型 Cookie（當您關閉瀏覽器時即失效）和持久型 Cookie（這些 Cookie 會在您的設備上保留一段時間，或直到您手動刪除）。",
+    "If you prefer to avoid the use of cookies, you can change your browser settings to refuse cookies However, if you do so, some parts of our website may not function properly": "如果您希望避免使用 Cookie，您可以更改瀏覽器設定來拒絕 Cookie。然而，如果您這樣做，我們網站的某些功能可能無法正常運作。",
+    "We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons": "我們可能會不時更新本 Cookie 政策，以反映我們的業務變更，或因運營、法律或監管要求進行調整。",
+    "Contact Us": "聯繫我們",
+    "Email": "電子郵件",
+    "Phone": "電話"
   }
 }
