@@ -64,6 +64,13 @@
     "Show All": "Show All",
     "Hide": "Hide",
     "Reset": "Reset",
-    "Apply": "Apply"
+    "Apply": "Apply",
+    "Filter": "Filter",
+    "Sort": "Sort",
+    "Sort By": "Sort By",
+    "Price (Low ~ High)": "Price (Low ~ High)",
+    "Price (High ~ Low)": "Price (High ~ Low)",
+    "Rating (High ~ Low)": "Rating (High ~ Low)",
+    "Rating (Low ~ High)": "Rating (Low ~ High)"
   }
 }

@@ -64,6 +64,13 @@
     "Show All": "顯示全部",
     "Hide": "隱藏",
     "Reset": "重置",
-    "Apply": "篩選條件"
+    "Apply": "篩選條件",
+    "Filter": "篩選條件",
+    "Sort": "排序",
+    "Sort By": "排序條件",
+    "Price (Low ~ High)": "價格(低)",
+    "Price (High ~ Low)": "價格(高)",
+    "Rating (High ~ Low)": "星級(高)",
+    "Rating (Low ~ High)": "星級(低)"
   }
 }

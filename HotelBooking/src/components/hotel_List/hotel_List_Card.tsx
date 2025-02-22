@@ -21,6 +21,7 @@ import { useSearchParams } from "next/navigation";
 import Not_Found from "../not_Found/not_Found";
 import Filter_Button from "../filter_Button";
 import Half_Modal from "../modal/half-modal";
+import { useTranslations } from "next-intl";
 
 export default function Hotel_List_Card() {
   // 0. 呼叫 Redux - Action 函式
@@ -87,30 +88,6 @@ export default function Hotel_List_Card() {
 
   // 6. sort排序 - <input tpye="radio" value="本地數據">
   const [sort_Value, set_Sort_Value] = useState<string>("")
-
-  // 7. 排序 - Switch Case 綜合函式
-  let sorted_Hotel_List: add_Hotel_Detail_Interface[] = [] 
-  const sortHotels = (sort_Option: string) => {
-    switch(sort_Option) {
-      case "priceLow":
-        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (a.price as number) - (b.price as number)); // 2. 排序 - 最低價 >> 最高價
-        break;
-      case "priceHigh":
-        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (b.price as number) - (a.price as number)); // 3. 排序 - 最高價  >> 最低價
-        break;
-      case "ratingHigh":
-        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (b.totalRating as number) - (a.totalRating as number)); // 4. 排序 - 最低評價 >> 最高評價
-        break;
-      case "ratingLow":
-        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (a.totalRating as number) - (b.totalRating as number)); // 5. 排序 - 最高評價 >> 最低評價
-        break;
-    };
-    set_Sort_Value(sort_Option); // <input type="radio"> 高亮
-    console.log(sort_Value, 123);
-    dispatch(update_Hotel_List(sorted_Hotel_List));
-    set_FormSort(false) // 選完 <input type="radio">, 關 modal彈跳
-  };
-
 
   // 8. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
   const [show_Hotel_List, set_Show_Hotel_List] = useState<boolean>(false);
@@ -326,6 +303,40 @@ export default function Hotel_List_Card() {
     });
   };
 
+  // 17. next-intl i18n翻譯
+  const t = useTranslations("AdvancedSearch");
+
+
+  // 18. 被 sorted 飯店列表, 不可拿 redux_Hotel_List 去排序, 因為沒有寫 Redux - Action。 
+  // 18.1 再者, 這種偏簡單的排序, 直接寫在前端元件就好, 沒必要再回去更新 Redux, 減少 Redux boilerplate
+  // 18.2 先忽略2點與2.1點 ↑ 這邊切太多元件, 設計沒做好。
+  // 18.3 最後, 再將重新排序後的飯店列表, dispatch傳數據給 Redux 飯店列表...這邊設計沒做好, 暫時只好去變動最原始的Redux - 飯店列表
+  let sorted_Hotel_List: add_Hotel_Detail_Interface[] = [] 
+
+
+  // 19. 排序 - Switch Case 綜合函式
+  const sortHotels = (sort_Option: string) => {
+    switch(sort_Option) {
+      case "priceLow":
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (a.price as number) - (b.price as number)); // 2. 排序 - 最低價 >> 最高價
+        break;
+      case "priceHigh":
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (b.price as number) - (a.price as number)); // 3. 排序 - 最高價  >> 最低價
+        break;
+      case "ratingHigh":
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (b.totalRating as number) - (a.totalRating as number)); // 4. 排序 - 最低評價 >> 最高評價
+        break;
+      case "ratingLow":
+        sorted_Hotel_List = [...redux_Hotel_List].sort((a, b) => (a.totalRating as number) - (b.totalRating as number)); // 5. 排序 - 最高評價 >> 最低評價
+        break;
+    };
+    set_Sort_Value(sort_Option); // <input type="radio"> 高亮
+    console.log(sort_Value, 123);
+    dispatch(update_Hotel_List(sorted_Hotel_List));
+    setFormSort_Mobile(false);
+    set_FormSort(false);
+  };
+
   return <>
   {/************ 手機版|PC桌機 - 沒找到, 就<Not_Found> ************/}
     {(redux_Hotel_List?.length <=0 && show_Hotel_List === true) ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>
@@ -349,12 +360,43 @@ export default function Hotel_List_Card() {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" >
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
           </svg>
-          <span>Sort</span>
+          <span>{t ("Sort")}</span>
         </div>
         {/* ↑↓Sort 排序 - 彈跳Modal  */}
         <Half_Modal isOpen={formSort_Mobile} onClose={() => setFormSort_Mobile(false)} 
           sort_Value={sort_Value_Mobile} 
           set_Sort_Value={set_Sort_Value_Mobile}>
+
+        {/* ↑↓Sort 排序 - 彈跳Modal  */}
+        <div className="flex flex-col pt-12">
+          <p className="px-4 pb-4 text-lg font-bold">{t ("Sort By")}</p>
+          <form action="" className="flex flex-col justify-between gap-4">
+
+              <div className="flex justify-between px-4">
+                <label htmlFor="priceLow">{t (`Price (Low ~ High)`)}</label>
+                <input type="radio" name="sort" id="priceLow" value="priceLow" onChange={() => sortHotels("priceLow")}
+                checked={sort_Value === "priceLow"}/>
+              </div>
+              <div className="flex justify-between px-4">
+                <label htmlFor="priceHigh">{t (`Price (High ~ Low)`)}</label>
+                <input type="radio" name="sort" id="priceHigh" value="priceHigh" onChange={() => sortHotels("priceHigh")}
+                checked={sort_Value === "priceHigh"}/>
+              </div>
+              <div className="flex justify-between px-4">
+                <label htmlFor="ratingHigh">{t (`Rating (High ~ Low)`)}</label>
+                <input type="radio" name="sort" id="ratingHigh" value="ratingHigh" onChange={() => sortHotels("ratingHigh")}
+                checked={sort_Value === "ratingHigh"}/>
+              </div>
+              <div className="flex justify-between px-4">
+                <label htmlFor="ratingLow">{t (`Rating (Low ~ High)`)}</label>
+                <input type="radio" name="sort" id="ratingLow" value="ratingLow" onChange={() => sortHotels("ratingLow")}
+                checked={sort_Value === "ratingLow"}/>
+              </div>
+
+          </form>
+        </div>
+        {/* ↑↓Sort 排序 - 彈跳Modal  */}
+
         </Half_Modal>
         {/* ↑↓Sort 排序 - 彈跳Modal  */}
       {/************ 手機版 - ↑↓Sort排序 ************/}
@@ -384,7 +426,7 @@ export default function Hotel_List_Card() {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5 text-primary" >
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
           </svg>
-          <span className="text-primary">Sort</span>
+          <span className="text-primary">{t ("Sort")}</span>
         </div>
         
         {/** Sort排序 - 絕對定位<form> - PC */}
@@ -393,22 +435,22 @@ export default function Hotel_List_Card() {
               <form className="absolute top-10 z-20 border rounded border-softGray bg-white flex flex-col gap-2 p-4 w-[40%]">
         
                   <div className="flex justify-between items-center ">
-                    <label htmlFor="priceLow">{`Price (Low ~ High)`}</label>
+                    <label htmlFor="priceLow">{t (`Price (Low ~ High)`)}</label>
                     <input type="radio" name="sort" id="priceLow" value="priceLow" onChange={() => sortHotels("priceLow")}
                     checked={sort_Value === "priceLow"}/>
                   </div>
                   <div className="flex justify-between items-center ">
-                    <label htmlFor="priceHigh">{`Price (High ~ Low)`}</label>
+                    <label htmlFor="priceHigh">{t (`Price (High ~ Low)`)}</label>
                     <input type="radio" name="sort" id="priceHigh" value="priceHigh" onChange={() => sortHotels("priceHigh")}
                     checked={sort_Value === "priceHigh"}/>
                   </div>
                   <div className="flex justify-between items-center ">
-                    <label htmlFor="ratingHigh">{`Rating (High ~ Low)`}</label>
+                    <label htmlFor="ratingHigh">{t (`Rating (High ~ Low)`)}</label>
                     <input type="radio" name="sort" id="ratingHigh" value="ratingHigh" onChange={() => sortHotels("ratingHigh")}
                     checked={sort_Value === "ratingHigh"}/>
                   </div>
                   <div className="flex justify-between items-center ">
-                    <label htmlFor="ratingLow">{`Rating (Low ~ High)`}</label>
+                    <label htmlFor="ratingLow">{t (`Rating (Low ~ High)`)}</label>
                     <input type="radio" name="sort" id="ratingLow" value="ratingLow" onChange={() => sortHotels("ratingLow")}
                     checked={sort_Value === "ratingLow"}/>
                   </div>

@@ -12,6 +12,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { updateRangeSlider, updateBedType, updateRating, updateFacility } from "@/store/form-Search/formSearchSlice";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
 import { Slider } from "@nextui-org/slider";
+import { useTranslations } from "next-intl";
 
 // 0. 所有設施 Arr
 const facility_Arr = ["pool", "balcony", "24H Check-In", "gym", "parking", "bathtub", "kitchen", "wifi",]
@@ -58,7 +59,7 @@ export default function Filter_Button () {
     dispatch(updateFacility([]));
   }
 
-  // 8. 進階搜尋 - 飯店列表 API
+  // 6. 進階搜尋 - 飯店列表 API
   const advanced_Search = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // 阻止默認的表單提交行為
     const formData = new FormData(event.currentTarget);
@@ -89,7 +90,7 @@ export default function Filter_Button () {
     // const result = await response.json();
     // dispatch(update_Hotel_List(result.data));
 
-    // 8.1 路由必須更新, 尤其是timestamp, 其變動, 才會有Skeleton動畫
+    // 6.1 路由必須更新, 尤其是timestamp, 其變動, 才會有Skeleton動畫
     const timestamp = + new Date();
     const search_Params = new URLSearchParams({
       destination: destination as string,
@@ -109,15 +110,15 @@ export default function Filter_Button () {
     router.push(`/hotellist?${search_Params}`)
   };
 
-  // 3. 最小價錢 與 最大價錢陣列 - Range Slider
+  // 7. 最小價錢 與 最大價錢陣列 - Range Slider
   const handle_RangeSlider = (newValue: number | number[]) => {
     dispatch(updateRangeSlider(newValue))
   };
 
-  // 2. Redudx 取 rangeSlider 初始值
+  // 8. Redudx 取 rangeSlider 初始值
   const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType) || [];
 
-  // 3. Redux 床型 Checkbox 打勾/取消 函式
+  // 9. Redux 床型 Checkbox 打勾/取消 函式
   const handel_BedType = (bed: string, isChecked: boolean) => {
     if(isChecked){
       dispatch(updateBedType([...redux_BedType, bed]));
@@ -126,7 +127,7 @@ export default function Filter_Button () {
     }
   };
 
-  // 3. Redux 飯店星級 Checkbox 打勾/取消 函式
+  // 10. Redux 飯店星級 Checkbox 打勾/取消 函式
   const handel_Rating = (rating: number, isChecked: boolean) => {
     if (isChecked) {
       dispatch(updateRating([...redux_Rating, rating]));
@@ -135,7 +136,7 @@ export default function Filter_Button () {
     }
   };
 
-  // 3. Redux 設施 Checkbox 打勾/取消 函式
+  // 11. Redux 設施 Checkbox 打勾/取消 函式
   const handel_Facility = (facility: string, isChecked: boolean) => {
     if(isChecked) {
       dispatch(updateFacility([...redux_Facility, facility]));
@@ -144,11 +145,14 @@ export default function Filter_Button () {
     }
   }
 
-  // 4. 開|關 所有設施 checkbox
+  // 12. 開|關 所有設施 checkbox
   const [toggle_Boo, set_Toggle_Boo] = useState(false);
   const toggle_Facility = () => {
     set_Toggle_Boo(!toggle_Boo);
-  }
+  };
+
+  // 13. next-intl i18n 翻譯
+  const t = useTranslations("AdvancedSearch");
 
 
   return <>
@@ -158,12 +162,12 @@ export default function Filter_Button () {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
         </svg>
-        Filters
+        {t ("Filter")}
       </button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">5 Star</button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Pool</button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Spa</button>
-      <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Beach</button>
+      {/* <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">5 Star</button> */}
+      {/* <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Pool</button> */}
+      {/* <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Spa</button> */}
+      {/* <button className="whitespace-nowrap px-3 py-1.5 border border-gray rounded text-sm">Beach</button> */}
     </div>
     {/* Filter 與 熱門搜尋條件 */}
 
@@ -183,14 +187,14 @@ export default function Filter_Button () {
         {/* 讓<Client_Form_Search>表單可以拿到這三個值 */}
 
         <div className="flex justify-between items-center p-4 border-b border-gray">
-          <h2 className="text-lg font-semibold">Filter</h2>
+          <h2 className="text-lg font-semibold">{t ("Filter")}</h2>
         </div>
 
         <div className="flex flex-col overflow-y-auto px-4 py-2 gap-6">
           
         {/********** 最小最大旅館價格 - RangeSlider **********/}
           <div className="border-b border-gray pb-4">        
-            <h3 className="font-semibold">Price Range</h3>
+            <h3 className="font-semibold">{t ("Price Range")}</h3>
               <div className="flex flex-col gap-2 w-full h-full items-start justify-center">
                 <Slider
                   name="rangeslider"
@@ -209,37 +213,37 @@ export default function Filter_Button () {
 
         {/**********  床型 **********/}
           <div className="border-b border-gray pb-4">
-            <h3 className="font-semibold mb-3">Bed Type</h3>
+            <h3 className="font-semibold mb-3">{t ("Bed Type")}</h3>
             <div className="space-y-2">          
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="singlebed" name="bedtype"
                 checked={redux_BedType.includes("singlebed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>
-                <span>Single Bed</span>
+                <span>{t ("Single Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="twinbed" name="bedtype"
                 checked={redux_BedType.includes("twinbed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>Twin Bed</span>
+                <span>{t ("Twin Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="doublebed" name="bedtype"
                 checked={redux_BedType.includes("doublebed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>Double Bed</span>
+                <span>{t ("Double Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="queenbed" name="bedtype"
                 checked={redux_BedType.includes("queenbed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>Queen Bed</span>
+                <span>{t ("Queen Bed")}</span>
               </label>
               <label className="flex items-center gap-2">
                 <input type="checkbox" className="w-4 h-4 rounded border-gray" value="kingbed" name="bedtype"
                 checked={redux_BedType.includes("kingbed")}
                 onChange={(event) => handel_BedType(event.target.value, event.target.checked)}/>            
-                <span>King Bed</span>
+                <span>{t ("King Bed")}</span>
               </label>
             </div>
           </div>
@@ -247,7 +251,7 @@ export default function Filter_Button () {
 
         {/********** 飯店星級 **********/}
           <div className="border-b border-gray pb-4">
-            <h3 className="font-semibold mb-3">Rating</h3>
+            <h3 className="font-semibold mb-3">{t ("Rating")}</h3>
             <div className="space-y-2">
               <label className="flex items-center gap-2">
                 <input type="checkbox" name="rating" className="w-4 h-4" value={5}
@@ -371,7 +375,7 @@ export default function Filter_Button () {
 
           {/** 設施 */}
           <div className="">
-            <h3 className="font-semibold mb-3">Facility</h3>
+            <h3 className="font-semibold mb-3">{t ("Facility")}</h3>
             <div className="space-y-2">
               {facility_Arr.map((item, index) => {
                 return <div key={index}>
@@ -381,12 +385,12 @@ export default function Filter_Button () {
                     <input type="checkbox" className="w-4 h-4 rounded border-gray" name="facility" value={item}
                     onChange={(event) => handel_Facility(event.target.value, event.target.checked)}
                     checked={redux_Facility.includes(item)}/>            
-                    <span>{item.charAt(0).toUpperCase() + item.slice(1)}</span>
+                    <span>{t (item.charAt(0).toUpperCase() + item.slice(1))}</span>
                   </label>
                 }
                 </div>
               })}
-              <span onClick={toggle_Facility} className="text-primary cursor-pointer">{toggle_Boo ? "Hide" : "Show All"}</span>
+              <span onClick={toggle_Facility} className="text-primary cursor-pointer">{toggle_Boo ? t ("Hide") : t ("Show All")}</span>
             </div>
           </div>
           {/** 設施 */}
@@ -395,8 +399,8 @@ export default function Filter_Button () {
 
         {/** 重置 & 確定 按鈕 */}
         <div className="flex border-t border-gray p-4 gap-4 justify-between items-center">      
-          <button className="basis-1/2 py-2 border border-gray rounded" type="button" onClick={reset}>Reset</button>
-          <button className="basis-1/2 py-2 rounded bg-primary">Apply</button>
+          <button className="basis-1/2 py-2 border border-gray rounded" type="button" onClick={reset}>{t ("Reset")}</button>
+          <button className="basis-1/2 py-2 rounded bg-primary">{t ("Apply")}</button>
         </div>
         {/** 重置 & 確定 按鈕 */}
       </form>
