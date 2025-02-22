@@ -39,7 +39,7 @@ export default function Room_Info () {
         <div className="flex gap-2">
           <p className="text-lg font-semibold">{redux_Booked_Room.room_Type.charAt(0).toUpperCase() + redux_Booked_Room.room_Type.slice(1)}</p>
             {/** 吸菸|禁菸 */}
-            {redux_Booked_Room.smoke ? 
+            {redux_Booked_Room.smoke === true ? 
             <div className="flex gap-2 bg-softGray p-1 rounded text-sm">
               <OtherSVG name={"smoking"} className="w-4 h-auto"></OtherSVG> 
               Smoking Room

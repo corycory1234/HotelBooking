@@ -51,7 +51,7 @@ export interface create_Hotel_Room_Type_Interface {
   room_Price: number | null,
   roomType_Image_List: File[],
   room_Availability: number | null,
-  smoke: string | null,
+  smoke: boolean,
   amenity_List: string[] | null,
   room_Size: number | null,
   max_People: number | null,

@@ -43,7 +43,7 @@ export default function Add_Hotel_Modal() {
       bed_Type: "single bed",
       room_Price: null,
       room_Availability: null,
-      smoke: null,
+      smoke: false,
       amenity_List: [],
       room_Size: null,
       max_People: null,
@@ -116,7 +116,7 @@ export default function Add_Hotel_Modal() {
     const room_Type = formData.get("roomtype") as string | null;;
     const room_Price = formData.get("roomprice") as number | null;
     const room_Availability = formData.get("availability") as number | null;;
-    const smoke = formData.get("smoke") as string | null; // 打勾是"on" 或者 沒勾是 null
+    const smoke = formData.get("smoke") as boolean | null; // 打勾是"on" 或者 沒勾是 null
     const amenity_List = formData.getAll("amenity") as string[] | null;;
     const room_Size = formData.get("roomsize") as number | null;;
     const max_People = formData.get("maxpeople") as number | null;;
@@ -318,7 +318,10 @@ export default function Add_Hotel_Modal() {
       i === index ? {...item, [field]: value} : item
     );
     set_Review_List(update_Review_List)
-  }
+  };
+
+  // 17.
+  const [is_Smoking, set_Is_Smoking] = useState<boolean>(false);
 
   
   return <div className="flex flex-col p-4 gap-4 bg-lightGray">
@@ -444,8 +447,9 @@ export default function Add_Hotel_Modal() {
           </div>
           <div className="flex gap-2">
             <input type="checkbox" id={`smoke_${roomType.roomType_Id}`} name={`roomTypes[${index}].smoke`}
-            checked={roomType.smoke === "smokingroom"} value={"smokingroom"}
-            onChange={(event) => handle_Room_Type_Change(index, "smoke", event.target.checked ? "smokingroom" : "non-smoking")}/>
+            checked={roomType.smoke === true} 
+            // value={is_Smoking}
+            onChange={(event) => handle_Room_Type_Change(index, "smoke", event.target.checked ? true : false)}/>
             <label htmlFor={`smoke_${roomType.roomType_Id}`}>Smoking Room</label>
           </div>
         </div>

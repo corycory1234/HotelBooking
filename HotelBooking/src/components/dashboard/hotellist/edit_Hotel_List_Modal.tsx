@@ -155,7 +155,7 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
       bed_Type: "single bed",
       room_Price: null,
       room_Availability: null,
-      smoke: null,
+      smoke: false,
       amenity_List: [],
       room_Size: null,
       max_People: null,
@@ -595,8 +595,9 @@ export default function Edit_Hotel_List_Modal ({the_Editing_Hotel, onClose}: Edi
           </div>
           <div className="flex gap-2">
             <input type="checkbox" id={`smoke_${roomType.roomType_Id}`} name={`roomTypes[${index}].smoke`}
-            checked={roomType.smoke === "smokingroom"} value={"smokingroom"}
-            onChange={(event) => handle_Room_Type_Change(index, "smoke", event.target.checked ? "smokingroom" : "non-smoking")}/>
+            checked={roomType.smoke === true} 
+            // value={"smokingroom"}
+            onChange={(event) => handle_Room_Type_Change(index, "smoke", event.target.checked ? true : false)}/>
             <label htmlFor={`smoke_${roomType.roomType_Id}`}>Smoking Room</label>
           </div>
         </div>

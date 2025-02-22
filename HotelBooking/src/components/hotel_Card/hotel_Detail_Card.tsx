@@ -786,7 +786,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               {the_Hotel?.roomType_List?.map((item) => {
                 return <div className="flex gap-2" key={item.roomType_Id}>
                   <div className="basis-1/4 flex flex-col">
-                    <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1)} [{item.bed_Type}] {item.smoke === "false" ? '[No Smoking]' : '[Smoking Room]'}</p>
+                    <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1)} [{item.bed_Type}] {item.smoke === false ? '[No Smoking]' : '[Smoking Room]'}</p>
 
                     {/** 左邊卡片資訊 */}
                     <div className="flex flex-col gap-2">
@@ -924,7 +924,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         
                         {/** 抽菸、吸菸 */}
                         <div className="flex gap-2">
-                          {item.smoke === "false" ? <div className="flex gap-2 border border-black rounded px-2">
+                          {item.smoke === false ? <div className="flex gap-2 border border-black rounded px-2">
                               <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG><p>No-Smoking Room</p>
                             </div>
                             :

@@ -324,7 +324,7 @@ export default function Traveler_Info () {
                 <div className="flex flex-col gap-2">
                   <p className="font-semibold">{redux_Booked_Room.room_Type.slice(0,1).toUpperCase() + redux_Booked_Room.room_Type.slice(1)}</p>
                   <div className="flex gap-2">
-                    {redux_Booked_Room.smoke === "true" ? <>
+                    {redux_Booked_Room.smoke === true ? <>
                       <OtherSVG name="smoking" className="w-4 h-auto"></OtherSVG>
                       <p>Smoking</p>
                     </>

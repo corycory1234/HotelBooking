@@ -81,7 +81,7 @@ export default function Booking_Completed () {
               </div>
               
               <div className="flex gap-2 px-2 bg-[#DCFCE7] rounded w-7/12 lg:w-8/12">
-                {redux_The_Booked_Room.smoke === "false" ? <>
+                {redux_The_Booked_Room.smoke === false ? <>
                   <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG> <p className="text-[#166534]">No Smoking</p>
                 </>
                 : <>

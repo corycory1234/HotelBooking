@@ -153,7 +153,7 @@ export default function Hotel_Room_Type() {
           {/** 房間裡的SVG */}
           <div className="flex gap-2 flex-wrap">
             {/** 禁菸房 | 吸菸房 */}
-            {room.smoke ? 
+            {room.smoke === true ? 
             <div className="flex gap-1 bg-softGray rounded p-1">
               <OtherSVG name={"smoking"} className="w-4 h-auto"/>
               <span className="text-xs">Smoking Room</span>
