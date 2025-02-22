@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useTranslations } from "next-intl";
 
 const menu = [
   {name: 'Home', svgIcon: 
@@ -45,6 +46,9 @@ export default function Menu () {
   // 1. Redux - 查看是否登入
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
+  // 2. next-intl i18n 翻譯
+  const t = useTranslations("Menu")
+
   return <>
     <div className="bg-white flex items-center p-4  
       fixed bottom-0 left-0 right-0 z-50 lg:hidden">
@@ -61,7 +65,7 @@ export default function Menu () {
             <div className={`${item.url === pathName ? 'text-primary' : ''}`}>
               {item.svgIcon}
             </div>
-            <p className={`text-xs ${item.url === pathName ? 'text-primary' : ''}`}>{item.name}</p>
+            <p className={`text-xs ${item.url === pathName ? 'text-primary' : ''}`}>{t (item.name)}</p>
           </Link>
         )}
       </div>

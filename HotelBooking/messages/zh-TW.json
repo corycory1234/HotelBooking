@@ -109,5 +109,30 @@
     "Contact Us": "聯繫我們",
     "Email": "電子郵件",
     "Phone": "電話"
+  },
+  "About Us": "關於我們",
+  "Go Tour is your trusted travel companion since 2018 We're dedicated to making travel planning seamless and enjoyable Our platform connects travelers with exceptional experiences, curated deals, and personalized service to create unforgettable journeys": "Go Tour 自 2018 年以來一直是您值得信賴的旅遊夥伴。我們致力於讓旅遊規劃變得順暢且愉快。我們的平台將旅客與精選體驗、專屬優惠和個人化服務相連結，打造難忘的旅程。",
+  "Years of Service": "服務年數",
+  "Happy Travelers": "滿意旅客",
+  "Destinations": "目的地",
+  "Partners": "合作夥伴",
+  "Our Services": "我們的服務",
+  "Tour Planning": "行程規劃",
+  "Instant Booking": "即時預訂",
+  "Special Deals": "特別優惠",
+  "7/24 Support": "7/24 全天候支援",
+  "Contact Us": "聯繫我們",
+
+  "Footer": {
+    "Privacy": "隱私政策",
+    "Cookie Policy": "Cookie 政策",
+    "About": "關於我們"
+  },
+  "Menu": {
+    "Home": "首頁",
+    "dashboard": "後台",
+    "Trip": "我的訂單",
+    "Collection": "我的收藏",
+    "Profile": "個人資料"
   }
 }

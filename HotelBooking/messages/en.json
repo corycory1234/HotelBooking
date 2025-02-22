@@ -109,5 +109,32 @@
     "Contact Us": "Contact Us",
     "Email": "Email",
     "Phone": "Phone"
+  },
+
+  "About Us": "About Us",
+  "Go Tour is your trusted travel companion since 2018 We're dedicated to making travel planning seamless and enjoyable Our platform connects travelers with exceptional experiences, curated deals, and personalized service to create unforgettable journeys": "Go Tour is your trusted travel companion since 2018. We're dedicated to making travel planning seamless and enjoyable. Our platform connects travelers with exceptional experiences, curated deals, and personalized service to create unforgettable journeys.",
+  "Years of Service": "Years of Service",
+  "Happy Travelers": "Happy Travelers",
+  "Destinations": "Destinations",
+  "Partners": "Partners",
+  "Our Services": "Our Services",
+  "Tour Planning": "Tour Planning",
+  "Instant Booking": "Instant Booking",
+  "Special Deals": "Special Deals",
+  "7/24 Support": "7/24 Support",
+  "Contact Us": "Contact Us",
+
+  "Footer": {
+    "Privacy": "Privacy",
+    "Cookie Policy": "Cookie Policy",
+    "About": "About"
+  },
+  "Menu": {
+    "Home": "Home",
+    "dashboard": "dashboard",
+    "Trip": "Trip",
+    "Collection": "Collection",
+    "Profile": "Profile"
   }
+  
 }
