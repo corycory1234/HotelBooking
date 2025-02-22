@@ -17,7 +17,26 @@
   },
   "Nav": {
     "en": "English",
-    "zh-TW": "Traditional Chinese"
+    "zh-TW": "Traditional Chinese",
+    "Languages": "Languages",
+    "Personal Details": "Personal Details",
+    "My Trip": "My Trip",
+    "My Collection": "My Collection",
+    "My Reviews": "My Reviews",
+    "Subscribe": "Subscribe",
+    "About Go Tour": "About Go Tour",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Sign in to see deals and manage your trip": "Sign in to see deals and manage your trip",
+    "Welcome": "Welcome",
+    "Processing": "Processing",
+    "Personal Info": "Personal Info",
+    "Name": "Name",
+    "Email": "Email",
+    "Submit": "Submit",
+    "Subscription": "Subscription",
+    "Latest News": "Latest News",
+    "Receive specials from Our site": "Receive specials from Our site"
   },
   "FormSearch": {
     "Adult": "Adult",
@@ -136,5 +155,4 @@
     "Collection": "Collection",
     "Profile": "Profile"
   }
-  
 }

@@ -17,7 +17,26 @@
   },
   "Nav": {
     "en": "英文",
-    "zh-TW": "繁體中文"
+    "zh-TW": "繁體中文",
+    "Languages": "語言",
+    "Personal Details": "個人資料",
+    "My Trip": "我的訂單",
+    "My Collection": "我的收藏",
+    "My Reviews": "我的評價",
+    "Subscribe": "訂閱",
+    "About Go Tour": "關於Go Tour",
+    "Login": "登入",
+    "Logout": "登出",
+    "Sign in to see deals and manage your trip": "登入以查看優惠並管理您的行程",
+    "Welcome": "歡迎",
+    "Processing": "處理中",
+    "Personal Info": "個人資料",
+    "Name": "姓名",
+    "Email": "電子郵件",
+    "Submit": "送出",
+    "Subscription": "訂閱",
+    "Latest News": "最新消息",
+    "Receive specials from Our site": "接收本站優惠訊息"
   },
   "FormSearch": {
     "Adult": "大人",

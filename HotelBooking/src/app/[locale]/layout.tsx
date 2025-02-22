@@ -9,7 +9,7 @@ import {routing} from '@/i18n/routing';
 
 
 export const metadata: Metadata = {
-  title: "HotelBooking",
+  title: "Go Tour",
   description: "Get special price here!",
   icons: { icon: '/gotour.svg' }
 }

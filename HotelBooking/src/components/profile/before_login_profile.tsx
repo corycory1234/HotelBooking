@@ -185,9 +185,9 @@ export default function Before_Login_Profile () {
       
       {redux_Verify_Session.success === false ? <>
         {/** 登入 */}
-        <p className="text-white">Sign in to see deals and manage your trip</p>
+        <p className="text-white">{t ("Sign in to see deals and manage your trip")}</p>
         <Link href={"/auth"}>
-          <button type="button" className="bg-green-700 text-white rounded p-2">Sing In</button>
+          <button type="button" className="bg-green-700 text-white rounded p-2">{t ("Login")}</button>
         </Link>
         {/** 登入 */}
       </>
@@ -195,18 +195,18 @@ export default function Before_Login_Profile () {
       <>
        {/** 登出 */}
       <div className="flex flex-col gap-2">
-        <p className="text-white">Welcome</p>
+        <p className="text-white">{t ("Welcome")}</p>
         <p className="text-white">{redux_Verify_Session.data.user.name}</p>
       </div>
 
       {loading_Boolean === false ? 
         <button type="button" className="bg-green-700 text-white rounded p-2"
-          onClick={log_Out}>Log Out
+          onClick={log_Out}>{t ("Logout")}
         </button>
         : 
         <button type="button" className="bg-softGray flex justify-center items-center rounded-lg p-3 gap-2" disabled>
           <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
-            Processing...
+            {t ("Processing")}...
         </button>
       }
       {/** 登出 */}
@@ -220,9 +220,9 @@ export default function Before_Login_Profile () {
 
     {/** 多國語系切換 */}
     <div className="flex justify-between">
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         <ProfileSVG name={"language"} className="w-5 h-auto" ></ProfileSVG>
-        <p>Languages</p>
+        <p>{t ("Languages")}</p>
       </div>
       <select name="language" id="language" value={locale} className="border rounded px-1 py-1" 
         onChange={(event) => switch_i18n(event.target.value)}>
@@ -239,14 +239,14 @@ export default function Before_Login_Profile () {
         onClick={() => redux_Verify_Session.success === true ? open_User_Info_Modal() : please_Login()}>
         <div className="flex gap-2">
           <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
-          <p>Personal Details</p>
+          <p>{t ("Personal Details")}</p>
         </div>
         <p className="lg:hidden">{">"}</p>
       </div>
 
       <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
         <div className="flex flex-col gap-2 p-4 max-h-[90vh]">
-          <h2 className="text-xl font-semibold">Personal Info</h2>
+          <h2 className="text-xl font-semibold">{t ("Personal Info")}</h2>
         {
         !user_Info ? 
         <div className="flex justify-center items-center py-52">
@@ -255,16 +255,16 @@ export default function Before_Login_Profile () {
 
         :
           <form className="flex flex-col gap-2" onSubmit={submit}>
-            <label className="flex flex-col gap-1">Name
+            <label className="flex flex-col gap-1">{t ("Name")}
               <input type="text" className="border rounded p-2" name="name" id="name"
               value={user_Info?.name} onChange={(event) => handle_Change(event)}/>
             </label>
-            <label className="flex flex-col gap-1">Email
+            <label className="flex flex-col gap-1">{t ("Email")}
               <input type="text" className="border rounded p-2" name="email" id="email"
               value={user_Info?.email} onChange={(event) => handle_Change(event)}/>
             </label>
             <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
-            <button type="submit" className="mt-auto bg-primary p-2 rounded"> Submit </button>
+            <button type="submit" className="mt-auto bg-primary p-2 rounded"> {t ("Submit")} </button>
           </form>
         }
         </div>
@@ -280,7 +280,7 @@ export default function Before_Login_Profile () {
         <div className="flex justify-between">
           <div className="flex gap-2">
             <ProfileSVG name={"trip"} className="w-5 h-auto"></ProfileSVG>
-            <p>My Trip</p>
+            <p>{t ("My Trip")}</p>
           </div>
           <p className="lg:hidden">{">"}</p>
         </div>
@@ -290,7 +290,7 @@ export default function Before_Login_Profile () {
         <div className="flex justify-between">
           <div className="flex gap-2">
             <ProfileSVG name={"trip"} className="w-5 h-auto"></ProfileSVG>
-            <p>My Trip</p>
+            <p>{t ("My Trip")}</p>
           </div>
           <p className="lg:hidden">{">"}</p>
         </div>
@@ -317,7 +317,7 @@ export default function Before_Login_Profile () {
       <div className="flex justify-between">
         <div className="flex gap-2">
           <ProfileSVG name={"collection"} className="w-5 h-auto"></ProfileSVG>
-          <p>My Collection</p>
+          <p>{t ("My Collection")}</p>
         </div>
         <p className="lg:hidden">{">"}</p>
       </div>
@@ -331,7 +331,7 @@ export default function Before_Login_Profile () {
         <div className="flex justify-between cursor-pointer" onClick={please_Login}>
           <div className="flex gap-2">
             <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
-            <p>My Reviews</p>
+            <p>{t ("My Reviews")}</p>
           </div>
           <p className="lg:hidden">{">"}</p>
         </div>
@@ -340,7 +340,7 @@ export default function Before_Login_Profile () {
           <div className="flex justify-between">
             <div className="flex gap-2">
               <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
-              <p>My Reviews</p>
+              <p>{t ("My Reviews")}</p>
             </div>
             <p className="lg:hidden">{">"}</p>
           </div>
@@ -354,16 +354,16 @@ export default function Before_Login_Profile () {
     <div className="flex justify-between cursor-pointer lg:hidden" onClick={() => set_modal_Subscription(true)}>
       <div className="flex gap-2">
         <ProfileSVG name={"subscribe"} className="w-5 h-auto"></ProfileSVG>
-        <p>Subscribe</p>
+        <p>{t ("Subscribe")}</p>
       </div>
       <p className="lg:hidden">{">"}</p>
     </div>
     <Modal isOpen={modal_Subscription} onClose={() => set_modal_Subscription(false)}>
       <div className="flex flex-col gap-2 p-4 py-10">
-          <h2 className="text-xl font-semibold">Subscription</h2>
+          <h2 className="text-xl font-semibold">{t ("Subscription")}</h2>
           <div className="flex flex-col gap-2 p-4 border border-softGray rounded">
             <div className="flex justify-between">
-              <p>Latest News</p>
+              <p>{t ("Latest News")}</p>
               <label className="relative inline-block w-10 h-6">
                 <input type="checkbox" className="opacity-0 w-0 h-0"
                 checked={switch_Boolean}
@@ -373,10 +373,10 @@ export default function Before_Login_Profile () {
                 <span className={`${switch_Boolean === false && 'bg-white absolute right-1 top-1 w-4 h-4  rounded-full transition-transform duration-300'}`}></span>
               </label>
             </div>
-            <p className="text-sm"> Receive specials from Our site</p>
+            <p className="text-sm"> {t ("Receive specials from Our site")}</p>
 
             <label>
-              <p>Email</p>
+              <p>{t ("Email")}</p>
               <input type="text" className="border rounded px-2" id="email" name="email"/>
             </label>
           </div>
@@ -385,7 +385,7 @@ export default function Before_Login_Profile () {
     <div className="hidden lg:flex justify-between cursor-pointer" onClick={() => router.push("/subscribe")}>
       <div className="flex gap-2">
         <ProfileSVG name={"subscribe"} className="w-5 h-auto"></ProfileSVG>
-        <p>Subscribe</p>
+        <p>{t ("Subscribe")}</p>
       </div>
       <p className="lg:hidden">{">"}</p>
     </div>
@@ -400,7 +400,7 @@ export default function Before_Login_Profile () {
       <div className="flex justify-between">
         <div className="flex gap-2">
           <ProfileSVG name={"about"} className="w-5 h-auto"></ProfileSVG>
-          <p>About Go Tour</p>
+          <p>{t ("About Go Tour")}</p>
         </div>
         <p className="lg:hidden">{">"}</p>
       </div>
@@ -423,7 +423,7 @@ export default function Before_Login_Profile () {
           <div className="flex justify-between">
             <div className="flex gap-2">
               <ProfileSVG name={"login"} className="w-5 h-auto"></ProfileSVG>
-              <p>Login</p>
+              <p>{t ("Login")}</p>
             </div>
             <p className="lg:hidden">{">"}</p>
           </div>
@@ -433,7 +433,7 @@ export default function Before_Login_Profile () {
         <div>
           <div className="flex gap-2">
             <ProfileSVG name={"logout"} className="w-5 h-auto"></ProfileSVG>
-            <button onClick={log_Out}>Logout</button>
+            <button onClick={log_Out}>{t ("Logout")}</button>
           </div>
           <p className="lg:hidden">{">"}</p>
         </div>
