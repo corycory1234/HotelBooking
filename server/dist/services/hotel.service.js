@@ -383,25 +383,38 @@ class HotelService extends base_service_1.BaseService {
                     conditions.push((0, drizzle_orm_1.sql) `CAST(${schema_1.hotels.totalRating} AS DECIMAL) IN (${drizzle_orm_1.sql.join(params.ratings, (0, drizzle_orm_1.sql) `, `)})`);
                 }
                 if ((_b = params.search_Query) === null || _b === void 0 ? void 0 : _b.trim()) {
+                    const searchTerm = `%${params.search_Query.trim()}%`;
                     conditions.push((0, drizzle_orm_1.sql) `(
-                    ${schema_1.hotels.hotel_Name} ILIKE ${`%${params.search_Query.trim()}%`} OR 
-                    ${schema_1.hotels.address} ILIKE ${`%${params.search_Query.trim()}%`}
+                    ${schema_1.hotels.hotel_Name} ILIKE ${searchTerm} OR 
+                    ${schema_1.hotels.address} ILIKE ${searchTerm}
                 )`);
                 }
                 if (params.facilities && params.facilities.length > 0) {
                     const facilitiesArray = `{${params.facilities.join(',')}}`;
                     conditions.push((0, drizzle_orm_1.sql) `${schema_1.hotels.facility_List} ?& ${facilitiesArray}`);
                 }
-                // 修改 bed_Types 條件的寫法
                 if (params.bed_Types && params.bed_Types.length > 0) {
-                    conditions.push((0, drizzle_orm_1.sql) `EXISTS (
-                    SELECT 1 FROM ${schema_1.roomTypes}
-                    WHERE ${schema_1.roomTypes.hotelId} = ${schema_1.hotels.hotel_Id}
-                    AND ${schema_1.roomTypes.bed_Type} IN (${drizzle_orm_1.sql.join(params.bed_Types, (0, drizzle_orm_1.sql) `, `)})
-                )`);
+                    params.bed_Types.forEach(bedType => {
+                        conditions.push((0, drizzle_orm_1.sql) `EXISTS (
+                        SELECT 1 FROM ${schema_1.roomTypes}
+                        WHERE ${schema_1.roomTypes.hotelId} = ${schema_1.hotels.hotel_Id}
+                        AND ${schema_1.roomTypes.bed_Type} = ${bedType}
+                    )`);
+                    });
                 }
-                // 使用 leftJoin 查詢
-                const query = db_1.db.select({
+                // 先查詢分頁後的飯店 ID
+                const paginatedHotelsQuery = db_1.db
+                    .select({
+                    hotel_Id: schema_1.hotels.hotel_Id
+                })
+                    .from(schema_1.hotels)
+                    .where(conditions.length > 0 ? (0, drizzle_orm_1.and)(...conditions) : undefined)
+                    .orderBy(schema_1.hotels.createdAt)
+                    .limit(limit)
+                    .offset(offset);
+                // 使用子查詢獲取完整的飯店資訊和房型
+                const query = db_1.db
+                    .select({
                     hotel_Id: schema_1.hotels.hotel_Id,
                     hotel_Name: schema_1.hotels.hotel_Name,
                     hotel_Image_List: schema_1.hotels.hotel_Image_List,
@@ -433,17 +446,11 @@ class HotelService extends base_service_1.BaseService {
                     rooms: schema_1.roomTypes
                 })
                     .from(schema_1.hotels)
-                    .leftJoin(schema_1.roomTypes, (0, drizzle_orm_1.eq)(schema_1.hotels.hotel_Id, schema_1.roomTypes.hotelId));
-                // 加入條件
-                if (conditions.length > 0) {
-                    query.where((0, drizzle_orm_1.and)(...conditions));
-                }
+                    .leftJoin(schema_1.roomTypes, (0, drizzle_orm_1.eq)(schema_1.hotels.hotel_Id, schema_1.roomTypes.hotelId))
+                    .where((0, drizzle_orm_1.and)((0, drizzle_orm_1.inArray)(schema_1.hotels.hotel_Id, paginatedHotelsQuery), conditions.length > 0 ? (0, drizzle_orm_1.and)(...conditions) : undefined));
                 // 執行查詢
                 const [rawResults, [{ count }]] = yield Promise.all([
-                    query
-                        .orderBy(schema_1.hotels.createdAt)
-                        .limit(limit)
-                        .offset(offset),
+                    query,
                     db_1.db.select({
                         count: (0, drizzle_orm_1.sql) `count(DISTINCT ${schema_1.hotels.hotel_Id})`
                     })

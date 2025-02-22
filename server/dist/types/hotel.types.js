@@ -12,9 +12,10 @@ exports.FACILITIES = [
     "wifi",
 ];
 exports.BED_TYPES = [
-    "singlebed",
-    "twinbed",
-    "doublebed",
-    "queenbed",
-    "kingbed",
+    "單人床",
+    "雙人床",
+    "大床",
+    "特大床",
+    "兩張單人床",
+    "兩張雙人床",
 ];
