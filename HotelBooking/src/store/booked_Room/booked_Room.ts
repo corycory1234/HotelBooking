@@ -8,7 +8,7 @@ const initialState: add_Hotel_Room_Type_Interface = {
     room_Price: null,
     roomType_Image_List: [],
     room_Availability: 0,
-    smoke: null,
+    smoke: false,
     amenity_List: [],
     room_Size: null,
     max_People: null,
