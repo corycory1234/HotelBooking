@@ -1,21 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bookings = void 0;
+exports.bookingsRelations = exports.bookings = void 0;
 const pg_core_1 = require("drizzle-orm/pg-core");
 const rooms_1 = require("./rooms");
 const users_1 = require("./users");
 const hotels_1 = require("./hotels");
+const drizzle_orm_1 = require("drizzle-orm");
 exports.bookings = (0, pg_core_1.pgTable)("bookings", {
     id: (0, pg_core_1.uuid)("id").primaryKey().defaultRandom(),
-    userId: (0, pg_core_1.uuid)("user_id").references(() => users_1.users.id, {
+    userId: (0, pg_core_1.uuid)("user_id")
+        .references(() => users_1.users.id, {
         onDelete: "cascade",
-    }).notNull(),
-    hotelId: (0, pg_core_1.uuid)("hotel_id").references(() => hotels_1.hotels.hotel_Id, {
+    })
+        .notNull(),
+    hotelId: (0, pg_core_1.uuid)("hotel_id")
+        .references(() => hotels_1.hotels.hotel_Id, {
         onDelete: "cascade",
-    }).notNull(),
-    roomId: (0, pg_core_1.uuid)("room_id").references(() => rooms_1.roomTypes.roomType_Id, {
+    })
+        .notNull(),
+    roomId: (0, pg_core_1.uuid)("room_id")
+        .references(() => rooms_1.roomTypes.roomType_Id, {
         onDelete: "cascade",
-    }).notNull(),
+    })
+        .notNull(),
+    offer_Id: (0, pg_core_1.varchar)("offer_id", { length: 255 }),
     bookingImage: (0, pg_core_1.varchar)("booking_image", { length: 255 }),
     travelerName: (0, pg_core_1.varchar)("traveler_name", { length: 255 }).notNull(),
     customerEmail: (0, pg_core_1.varchar)("customer_email", { length: 255 }).notNull(),
@@ -45,3 +53,10 @@ exports.bookings = (0, pg_core_1.pgTable)("bookings", {
     createdAt: (0, pg_core_1.timestamp)("created_at").defaultNow(),
     updatedAt: (0, pg_core_1.timestamp)("updated_at").defaultNow(),
 });
+// 添加關聯關係定義
+exports.bookingsRelations = (0, drizzle_orm_1.relations)(exports.bookings, ({ one }) => ({
+    roomTypes: one(rooms_1.roomTypes, {
+        fields: [exports.bookings.roomId],
+        references: [rooms_1.roomTypes.roomType_Id],
+    }),
+}));

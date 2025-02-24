@@ -12,18 +12,26 @@ import {
 import { roomTypes } from "./rooms";
 import { users } from "./users";
 import { hotels } from "./hotels";
+import { relations } from "drizzle-orm";
 
 export const bookings = pgTable("bookings", {
     id: uuid("id").primaryKey().defaultRandom(),
-    userId: uuid("user_id").references(() => users.id, {
-        onDelete: "cascade",
-    }).notNull(),
-    hotelId: uuid("hotel_id").references(() => hotels.hotel_Id, {
-        onDelete: "cascade",
-    }).notNull(),
-    roomId: uuid("room_id").references(() => roomTypes.roomType_Id, {
-        onDelete: "cascade",
-    }).notNull(),
+    userId: uuid("user_id")
+        .references(() => users.id, {
+            onDelete: "cascade",
+        })
+        .notNull(),
+    hotelId: uuid("hotel_id")
+        .references(() => hotels.hotel_Id, {
+            onDelete: "cascade",
+        })
+        .notNull(),
+    roomId: uuid("room_id")
+        .references(() => roomTypes.roomType_Id, {
+            onDelete: "cascade",
+        })
+        .notNull(),
+    offer_Id: varchar("offer_id", { length: 255 }),
     bookingImage: varchar("booking_image", { length: 255 }),
     travelerName: varchar("traveler_name", { length: 255 }).notNull(),
     customerEmail: varchar("customer_email", { length: 255 }).notNull(),
@@ -53,3 +61,11 @@ export const bookings = pgTable("bookings", {
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+// 添加關聯關係定義
+export const bookingsRelations = relations(bookings, ({ one }) => ({
+    roomTypes: one(roomTypes, {
+        fields: [bookings.roomId],
+        references: [roomTypes.roomType_Id],
+    }),
+}));

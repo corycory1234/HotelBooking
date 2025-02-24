@@ -57,6 +57,13 @@
       "when": 1740150318843,
       "tag": "0007_brown_eternity",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1740408729991,
+      "tag": "0008_modern_ironclad",
+      "breakpoints": true
     }
   ]
 }
