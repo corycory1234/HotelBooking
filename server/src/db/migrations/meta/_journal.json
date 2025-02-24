@@ -64,6 +64,13 @@
       "when": 1740408729991,
       "tag": "0008_modern_ironclad",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1740413339394,
+      "tag": "0009_sour_sentinels",
+      "breakpoints": true
     }
   ]
 }

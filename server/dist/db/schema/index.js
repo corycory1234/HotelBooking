@@ -18,5 +18,5 @@ __exportStar(require("./users"), exports);
 __exportStar(require("./hotels"), exports);
 __exportStar(require("./rooms"), exports);
 __exportStar(require("./bookings"), exports);
+__exportStar(require("./favorites"), exports);
 // export * from './reviews';
-// export * from './favorites';
