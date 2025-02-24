@@ -1,4 +1,4 @@
-import { HomeSVG } from "../client_Svg/client_Svg";
+import { HomeSVG, OtherSVG, ProfileSVG } from "../client_Svg/client_Svg";
 import { useState, useEffect } from "react";
 import { Review_Type_Interface } from "@/types/hotel_Detail";
 import { add_Review_Type_Interface } from "@/types/add_Hotel_Detail";
@@ -57,16 +57,29 @@ export default function Hotel_Customer_Review() {
       {/** 總平均評價 */}
 
       {/** 留言、星星評價 */}
-      {sorted_Review.map((item) => {
-        return <div key={item.travelerId} className="flex-1">
-          <div className="flex justify-between">
-            <p className="text-primary">{item.traveler_Name} - {item.date}</p>
+      {sorted_Review.map((item, index) => {
+        return <div key={index} className="flex-1">
+          <div className="flex justify-between items-center">
+            <div className="flex gap-1 items-center">
+              <ProfileSVG name="user" className="w-5 h-auto"></ProfileSVG>
+              <p className="text-primary">{item.traveler_Name}</p>
+            </div>
+            <p className="text-primary"> {item.date}</p>
             <div className="flex">
               <Customer_Rating rating={item.traveler_Rating as number} className="w-4 h-auto"></Customer_Rating>
             </div>
           </div>
           <p className="py-2">{item.comment}</p>
 
+          {item.reply !== "" && 
+            <div className="flex flex-col border border-black rounded p-2">
+              <div className="flex gap-2">
+                <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
+                <p>Reply from {redux_Hotel_Detail?.hotel_Name}</p>
+              </div>
+              <p className="text-xs leading-7">{item.reply}</p>
+            </div>
+          }
         </div>
       })}
       {/** 留言、星星評價 */}

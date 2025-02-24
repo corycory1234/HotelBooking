@@ -154,5 +154,8 @@
     "Trip": "Trip",
     "Collection": "Collection",
     "Profile": "Profile"
+  },
+  "MyTrip": {
+    "MyTrip": "MyTrip"
   }
 }

@@ -1,9 +1,9 @@
 'use client';
 import { useState } from "react";
-import { useFormState } from "react-dom";
+// import { useFormState } from "react-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { Pay } from "@/actions/pay";
+// import { Pay } from "@/actions/pay";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -60,6 +60,7 @@ export default function Form_Credit_Card () {
   
   // 5. 拿取 Redux 預定房型之數據
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
+  const redux_Form_Search = useSelector((state: RootState) => state.formSearch);
 
   // 6. 拿取 Redux 指定飯店 Tax 數據
   const redux_Hotel_Tax = useSelector((state: RootState) => state.hotel_Detail.tax);
@@ -117,6 +118,29 @@ export default function Form_Credit_Card () {
       } else {
         // 10.2 暫時校驗成功, 返回首頁
         set_Is_Loading(true);
+
+        // 10.3 建立新訂單 API
+        const booking_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/bookings";
+        const response = await fetch(booking_Url, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          credentials: 'include',
+          body: JSON.stringify({
+            hotelId: redux_The_Hotel.hotel_Id,
+            roomId: redux_Booked_Room.roomType_Id,
+            travelerName: traveler_Name as string + traveler_Surname as string,
+            customerEmail: traveler_Email,
+            customerPhone: traveler_Phone,
+            checkInDate: redux_Form_Search.start_Date,
+            checkOutDate: redux_Form_Search.end_Date,
+            adults: redux_Form_Search.adult,
+            children: redux_Form_Search.child,
+            roomCount: redux_Form_Search.room
+          })
+        });
+        const data = await response.json();
+        console.log(data, "查看訂單送出之API回應");
+
         await sleep(3000);
         toast.success("You will now be redirected to our secure payment gateway.", 
           {icon: '💳', duration: 6000, style:{display: 'flex', gap: '1rem'} }
@@ -135,6 +159,13 @@ export default function Form_Credit_Card () {
   // 11. 匹配優惠代碼
   const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
   const offer = Offer_List_Json.find((item) => item.offer_Id === redux_The_Hotel.offer_Id);
+
+  // 11. sessionStorage 拿名字、電子郵件
+  const traveler_Name = sessionStorage.getItem("name");
+  const traveler_Surname = sessionStorage.getItem("surname");
+  const traveler_Email = sessionStorage.getItem("email") as string;
+  const traveler_Country = sessionStorage.getItem("country") as string;
+  const traveler_Phone = sessionStorage.getItem("phone") as string;
 
 
 

@@ -1,7 +1,7 @@
 // 這 client 是為了 <Previous_Page>子元件有用 useRouter, 父願見一定要用 'use client'
 'use client'; 
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/store";
+import { RootState, AppDispatch } from "@/store/store";
 import Swiper_Hotel_Detail from "@/components/swiper_Hotel_Detail/swiper_Hotel_Detail";
 import Previous_Page from "./previous_Page";
 import Room_Info from "./room_Info";
@@ -31,12 +31,13 @@ export default function Traveler_Info () {
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
   const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
   const redux_Form_Search = useSelector((state: RootState) => state.formSearch)
-  console.log(redux_Booked_Room, "Redux - 被預訂之房型");
+  // console.log(redux_Booked_Room, "Redux - 被預訂之房型");
 
   const router = useRouter();
 
   // 1. Redux - 查看是否登入
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+  const redux_Traveler_Name = useSelector((state: RootState) => state.traveler_Info.name);
 
   // 2. zod 校驗規則
   const schema = z.object({
@@ -64,7 +65,11 @@ export default function Traveler_Info () {
   const [name, set_Name] = useState<string>("");
   const [surname, set_Surname] = useState<string>("");
   const [email, set_Email] = useState<string>("");
-  const handle_Change = ((event: React.ChangeEvent<HTMLInputElement>) => {
+  const [country, set_Country] = useState<string>("taiwan");
+  const [phone, set_Phone] = useState<string>("");
+
+  // 7. 旅客表單數據<form>, 存session Storage
+  const handle_Change = ((event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     console.log(event.target.id, event.target.value);
     if(event.target.id === "name") {
       set_Name(event.target.value);
@@ -72,13 +77,19 @@ export default function Traveler_Info () {
     } else if (event.target.id === "surname") {
       set_Surname(event.target.value);
       sessionStorage.setItem("surname", event.target.value);
-    } else {
+    } else if(event.target.id === "email") {
       set_Email(event.target.value);
       sessionStorage.setItem("email", event.target.value);
+    } else if(event.target.id === "country") {
+      set_Country(event.target.value);
+      sessionStorage.setItem("country", event.target.value);
+    } else if(event.target.id === "phone") {
+      set_Phone(event.target.value);
+      sessionStorage.setItem("phone", event.target.value);
     }
   })
 
-  // 7. 送出旅客<form>數據 
+  // 8. 送出旅客<form>數據 
   const submit_Traveler_Info = async (event: React.FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
@@ -178,7 +189,8 @@ export default function Traveler_Info () {
                 <div className="flex justify-center items-center gap-2">
                     <label className="basis-1/2 flex flex-col text-gray">
                       Country
-                      <select name="country" id="country" className="rounded border border-softGray py-1.5 px-1 h-[42px] text-black">
+                      <select name="country" id="country" className="rounded border border-softGray py-1.5 px-1 h-[42px] text-black"
+                        defaultValue={country} onChange={(event)=> handle_Change(event)}>
                         <option value="taiwan">Taiwan</option>
                         <option value="china">China</option>
                         <option value="united states">United States</option>
@@ -186,7 +198,8 @@ export default function Traveler_Info () {
                     </label>
                     <label className="basis-1/2 flex flex-col text-gray">
                       Phone Number
-                      <input type="text" id="phone" name="phone" className="rounded border border-softGray p-1 text-black"/>
+                      <input type="text" id="phone" name="phone" className="rounded border border-softGray p-1 text-black"
+                      value={phone} onChange={(event) => handle_Change(event)}/>
                       <p aria-live="polite" className="text-customRed">{zod_Response?.phoneError}</p>
                     </label>
                 </div>

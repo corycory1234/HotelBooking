@@ -231,7 +231,8 @@ export default function Hotel_List_Card() {
       const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
       const response = await fetch(hotel_List_Url, {
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {"Content-Type": "application/json"},
+        credentials: 'include'
       });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();

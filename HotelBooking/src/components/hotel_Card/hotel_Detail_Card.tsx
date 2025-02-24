@@ -1026,13 +1026,16 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
                     {/** 旅客留言、飯店回覆 */}
                       <p className="bg-[#F5F5F5] rounded p-2 text-xs leading-7">{review.comment}</p>
-                      <div className="flex flex-col border border-black rounded p-2">
-                        <div className="flex gap-2">
-                          <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
-                          <p>Reply from {the_Hotel?.hotel_Name}</p>
+
+                      {review.reply !== "" && 
+                        <div className="flex flex-col border border-black rounded p-2">
+                          <div className="flex gap-2">
+                            <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
+                            <p>Reply from {the_Hotel?.hotel_Name}</p>
+                          </div>
+                          <p className="text-xs leading-7">{review.reply}</p>
                         </div>
-                        <p className="text-xs leading-7">{review.reply}</p>
-                      </div>
+                      }
                     {/** 旅客留言、飯店回覆 */}
                   </div>
               })}

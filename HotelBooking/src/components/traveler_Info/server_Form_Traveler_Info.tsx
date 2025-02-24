@@ -1,6 +1,6 @@
 'use client';
-import { useFormState } from "react-dom";
-import { Submit_Traveler_Info } from "@/actions/traveler_Info";
+// import { useFormState } from "react-dom";
+// import { Submit_Traveler_Info } from "@/actions/traveler_Info";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { z } from "zod";
@@ -49,7 +49,38 @@ export default function Server_Form_Traveler_Info() {
   const [is_Loading, set_Is_Loading] = useState<boolean>(false);
 
   // 6. 拿取Redux - 預定房型之數據
-  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room)
+  const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
+
+  // 7. Redux - 指定飯店明細
+  const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
+
+  // 8. 旅客資訊, sessionStorage 初始值
+  const [name, set_Name] = useState<string>("");
+  const [surname, set_Surname] = useState<string>("");
+  const [email, set_Email] = useState<string>("");
+  const [country, set_Country] = useState<string>("taiwan");
+  const [phone, set_Phone] = useState<string>("");
+
+  // 9. 旅客表單數據<form>, 存session Storage
+  const handle_Change = ((event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    console.log(event.target.id, event.target.value);
+    if(event.target.id === "name") {
+      set_Name(event.target.value);
+      sessionStorage.setItem("name", event.target.value);
+    } else if (event.target.id === "surname") {
+      set_Surname(event.target.value);
+      sessionStorage.setItem("surname", event.target.value);
+    } else if(event.target.id === "email") {
+      set_Email(event.target.value);
+      sessionStorage.setItem("email", event.target.value);
+    } else if(event.target.id === "country") {
+      set_Country(event.target.value);
+      sessionStorage.setItem("country", event.target.value);
+    } else if(event.target.id === "phone") {
+      set_Phone(event.target.value);
+      sessionStorage.setItem("phone", event.target.value);
+    }
+  })
 
   // 7. 送出旅客<form>數據 
   const submit_Traveler_Info = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -92,8 +123,7 @@ export default function Server_Form_Traveler_Info() {
     }
   }
 
-  // 8. Redux - 指定飯店明細
-  const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
+
 
   return <>
   <Toaster></Toaster>
@@ -101,19 +131,23 @@ export default function Server_Form_Traveler_Info() {
     <div className="flex flex-col mb-36">
 
     <label htmlFor="name" className="text-gray">Name</label>
-    <input type="text" id="name" name="name" className="rounded-lg border-2 border-softGray p-2"/>
+    <input type="text" id="name" name="name" className="rounded-lg border-2 border-softGray p-2"
+      value={name} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
 
     <label htmlFor="surname" className="text-gray">Surname</label>
-    <input type="text" id="surname" name="surname" className="rounded-lg border-2 border-softGray p-2"/>
+    <input type="text" id="surname" name="surname" className="rounded-lg border-2 border-softGray p-2"
+      value={surname} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.surnameError}</p>
 
     <label htmlFor="email" className="text-gray">Email Address</label>
-    <input type="text" id="email" name="email" className="rounded-lg border-2 border-softGray p-2"/>
+    <input type="text" id="email" name="email" className="rounded-lg border-2 border-softGray p-2"
+      value={email} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
 
     <label htmlFor="country" className="text-gray">Country</label>
-    <select name="country" id="country" className="rounded-lg border-2 border-softGray p-2">
+    <select name="country" id="country" className="rounded-lg border-2 border-softGray p-2"
+      defaultValue={country} onChange={(event) => handle_Change(event)}>
       <option value="taiwan">Taiwan</option>
       <option value="china">China</option>
       <option value="united states">United States</option>
@@ -121,7 +155,8 @@ export default function Server_Form_Traveler_Info() {
     
 
     <label htmlFor="phone" className="text-gray">Phone Number</label>
-    <input type="text" id="phone" name="phone" className="rounded-lg border-2 border-softGray p-2"/>
+    <input type="text" id="phone" name="phone" className="rounded-lg border-2 border-softGray p-2"
+      value={phone} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.phoneError}</p>
     </div>
 

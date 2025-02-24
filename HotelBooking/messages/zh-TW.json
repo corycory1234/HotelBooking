@@ -153,5 +153,8 @@
     "Trip": "我的訂單",
     "Collection": "我的收藏",
     "Profile": "個人資料"
+  },
+  "MyTrip": {
+    "MyTrip": "我的訂單"
   }
 }
