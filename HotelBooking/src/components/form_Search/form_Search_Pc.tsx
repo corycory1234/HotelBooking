@@ -10,12 +10,13 @@ import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Toaster_Notify from "../toaster/toaster";
-import hotel_List_Json from "@/fakeData/hotel_List.json";
+// import hotel_List_Json from "@/fakeData/hotel_List.json";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
-import { Refresh_Search_Hotel_List, Search_Params_Interface } from "@/utils/refresh_Search_Hotel_List";
+import { Debounced_Hotel_List_Interface } from "@/types/debounced_Hotel_List";
 import {updateRangeSlider, updateBedType, updateRating, updateFacility} from "@/store/form-Search/formSearchSlice";
 import { useTranslations } from "next-intl";
+import { OtherSVG } from "../client_Svg/client_Svg";
 
 // 1. startDate - 高亮「今天」
 const START_FROM = new Date();
@@ -103,7 +104,7 @@ export default function Form_Search_Pc () {
   // 14. 路由
   const router = useRouter();
   
-  // 15. 尚未接 後端API
+  // 15. 一般搜尋, 跳轉 /hotellist?搜尋參數
   const submit_Search = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     try {
@@ -243,14 +244,73 @@ export default function Form_Search_Pc () {
   // 17. next-intl i18n 翻譯
   const t = useTranslations("FormSearch");
 
+  // 18. Redux - 進階搜尋數據
+  const redux_RangeSlider = useSelector((state: RootState) => state.formSearch.rangeSlider);
+  const redux_Rating = useSelector((state: RootState) => state.formSearch.rating);
+  const redux_Facility = useSelector((state: RootState) => state.formSearch.rating);
+  const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
+
+  // 18. 防抖搜尋 - 本地陣列狀態
+  const timer_Ref = useRef<NodeJS.Timeout | null>(null);
+  const [debounced_Hotel, set_Debounced_Hotel] = useState<Debounced_Hotel_List_Interface[]>([]);
+
+  // 19. 防抖搜尋 -函式
+  const debounce_Search = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(timer_Ref.current) clearTimeout(timer_Ref.current);
+
+    timer_Ref.current = setTimeout(async () => {
+      const keyword = event.target.value.trim();
+      if(!keyword) {
+        set_Debounced_Hotel([]); 
+        return;
+      }
+
+      try {
+        const query_Params = new URLSearchParams({
+          page: "1",
+          city: "",
+          country: "",
+          minPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[0]) : String(redux_RangeSlider),
+          maxPrice: Array.isArray(redux_RangeSlider) ? String(redux_RangeSlider[1]) : String(redux_RangeSlider),
+          ratings: String(redux_Rating),
+          q: String(event.target.value),
+          facilities: String(redux_Facility?.join()),
+          bedTypes: String(redux_BedType),
+        }).toString();
+        const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
+        const response = await fetch(hotel_List_Url, {
+          "method": "GET",
+          headers: {"Content-Type": "application/json"},
+          credentials: "include"
+        });
+        if(!response.ok) {throw new Error(`伺服器錯誤`)};
+        const result = await response.json();
+
+        set_Debounced_Hotel(result.data.data);
+        set_Debounced_Boolean(true)
+
+      } catch (error) {
+        console.log(error);
+      }
+    },500)
+  };
+
+  // 20. 防抖搜尋 - 布林開關
+  const [debounced_Boolean, set_Debounced_Boolean] = useState<boolean>(true);
+  const debounced_Ref = useRef<HTMLDivElement>(null);
+  const hidden_Debounced_Hotel_List = (keyword: string) => {
+    dispatch(updateKeyword(keyword));
+    set_Debounced_Boolean(false);
+  };
+  Click_Outside(debounced_Ref, () => set_Debounced_Boolean(false));
 
 
   return <>
   <Toaster_Notify></Toaster_Notify>
 
-  <form onSubmit={submit_Search} className="flex flex-col px-4 lg:flex-row lg:justify-center lg:items-center lg:bg-[#f3f3f3] gap-2 lg:px-20 lg:py-4">
+  <form onSubmit={submit_Search} className="flex flex-col px-4 lg:flex-row lg:justify-center lg:items-center lg:bg-[#f3f3f3] gap-2 lg:px-20 lg:py-4 lg:relative">
     
-    <div className="relative lg:basis-1/3">
+    <div className="relative lg:basis-1/3 flex flex-col">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-1.5 right-2 text-primary">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
@@ -258,13 +318,26 @@ export default function Form_Search_Pc () {
       <input type="text" placeholder={t ("Where are you going?")} 
       className="w-full py-2 px-4 rounded outline-none border border-gray bg-white lg:h-[44px]"
       onChange={(event) => {
-        // debounce_Search(event);
         dispatch(updateKeyword(event.target.value))
+        debounce_Search(event);
         }
       }
       value={keyword}
       name="destination"/>
 
+    </div>
+
+    <div className="flex flex-col absolute top-full left-[100px] w-1/2 rounded bg-white shadow-lg" ref={debounced_Ref}>
+      {(debounced_Hotel.length >0 && debounced_Boolean === true) ? debounced_Hotel.map((hotel, index) => {
+        return index <5 && <div className="flex gap-2 p-2 border-b border-softGray hover:bg-[#f3f3f3] cursor-pointer" 
+        key={index}
+        onClick={() => hidden_Debounced_Hotel_List(hotel.hotel_Name as string)}>
+            <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
+            <p>{hotel.hotel_Name}, {hotel.city}, {hotel.country}</p>
+          </div>
+        })
+      : <></>
+      }
     </div>
 
 

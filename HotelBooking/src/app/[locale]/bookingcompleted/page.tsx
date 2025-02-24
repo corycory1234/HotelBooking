@@ -136,7 +136,7 @@ export default function Booking_Completed () {
     
   {/********** 返回首頁、查定訂單 **********/}
     <div className="flex justify-center items-center gap-2">
-      <button className="bg-primary text-white rounded p-2">Check Booking</button>
+      <Link href="/trip" className="bg-primary text-white rounded p-2">Check Booking</Link>
       <Link href="/" className="bg-primary text-white rounded p-2">Back to Home</Link>
     </div>
   {/********** 返回首頁、查定訂單 **********/}
