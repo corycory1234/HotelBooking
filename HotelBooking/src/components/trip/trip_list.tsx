@@ -120,11 +120,11 @@ export default function Trip_List () {
       filtered_Bookings?.map((item, index) => {
         return <div className="flex flex-col gap-4 bg-white rounded-lg px-2 py-4 lg:border border-softGray" key={index}>
             {/** 訂單照片、飯店名、房型名、確認|未確認|取消 */}
-            <div className="flex flex-col lg:flex-row gap-2">
-              <img src="/collection/collection_3.webp" alt="" className="w-full lg:w-1/3 rounded"/>
+            <div className="flex flex-col lg:flex-row gap-2 lg:h-full">
+              <img src={item.bookingImage} alt="" className="w-full h-[200px] lg:w-1/3 lg:h-[265px] rounded"/>
               <div className="flex flex-col basis-1/2 gap-2">
                 <p className="font-semibold">還沒拿到飯店名</p>
-                <p className="text-sm">還沒拿到床型</p>
+                <p className="text-sm">{item.roomTypes.room_Type}</p>
                 <div className="flex justify-between items-center">
                   <span className={`rounded p-2 w-fit 
                     ${item.status === 'cancelled' ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
@@ -147,7 +147,7 @@ export default function Trip_List () {
               {/** PC桌機 - 訂單ID、查看訂單明細 */}
               <div className="self-end w-1/3 flex flex-col gap-4">
                 <p className="hidden lg:block text-gray">Booking ID: #{item.id}</p>
-                <p className="hidden lg:block font-semibold text-right">${(+ item.price).toFixed()}</p>
+                <p className="hidden lg:block font-semibold text-right">${(+ item.totalPrice).toFixed()}</p>
                 <button className="hidden lg:block bg-primary text-white rounded py-2"
                   onClick={() => view_Booking(item.id)}>View Details</button>
               </div>

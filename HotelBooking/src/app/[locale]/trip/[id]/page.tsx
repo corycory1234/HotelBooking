@@ -151,7 +151,7 @@ export default function Booking_Detail () {
     
     <div className="flex flex-col p-4 gap-2">
       {/** 房型圖片 */}
-      <img src="/collection/collection_3.webp" alt="" className="rounded lg:hidden"/>
+      <img src={the_Booking_Detail.bookingImage} alt="" className="rounded lg:hidden"/>
       {/** 房型圖片 */}
 
       {/** 留言評價 or 查看評價 */}
@@ -251,7 +251,7 @@ export default function Booking_Detail () {
             </span>
           </div>
           {/* <p className="text-gray">{booking_Detail.room_Type}</p> */}
-          <p className="text-gray">還沒拿到房型</p>
+          <p className="text-gray">{the_Booking_Detail.roomTypes.room_Type}</p>
         </div>
       {/** 飯店名、訂單狀態、房型名稱 */}
 
@@ -372,7 +372,7 @@ export default function Booking_Detail () {
           {/** 房型圖片 */}
           <div className="basis-1/3">
             {/* <img src={booking_Detail.booking_Img} alt="" className="rounded"/> */}
-            <img src="/collection/collection_3.webp" alt="" className="rounded"/>
+            <img src={the_Booking_Detail.bookingImage} alt="" className="rounded w-full h-[200px]"/>
           </div>
           {/** 房型圖片 */}
           
@@ -389,7 +389,7 @@ export default function Booking_Detail () {
                 </span>
               </div>
               {/* <p className="text-gray">{booking_Detail.room_Type}</p> */}
-              <p className="text-gray">還沒拿到房型</p>
+              <p className="text-gray">{the_Booking_Detail.roomTypes.room_Type}</p>
             </div>
 
               {/** 入住、退房時間 */}

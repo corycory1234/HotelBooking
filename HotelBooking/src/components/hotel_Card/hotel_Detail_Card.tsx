@@ -28,6 +28,7 @@ import { update_Hotel_Detail, to_Full_Heart_Hotel_Detail, to_Empty_Heart_Hotel_D
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import { update_Booked_Room } from "@/store/booked_Room/booked_Room";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -162,19 +163,73 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   }
 
 
-  // 10. Redux - RoomType 新增收藏飯店 - 
+  // 10.  Redux - RoomType 新增收藏飯店 - 
+  // const add_Collection = (hotel: add_Hotel_Detail_Interface) => {
+  //   dispatch(to_Full_Heart(hotel));
+  //   dispatch(add_My_Collection(hotel));
+  //   dispatch(to_Full_Heart_Hotel_Detail(hotel));
+  // };
   const dispatch = useDispatch();
-  const add_Collection = (hotel: add_Hotel_Detail_Interface) => {
-    dispatch(to_Full_Heart(hotel));
-    dispatch(add_My_Collection(hotel));
-    dispatch(to_Full_Heart_Hotel_Detail(hotel));
+  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+  const redux_Collection_List = useSelector((state: RootState) => state.my_Collection.collection_List);
+  // 10.1 Redux - 收藏飯店陣列, 與 Redux - 指定飯店物件匹配, 找出"已"加入到我的最愛
+  const the_Collection = redux_Collection_List.find((collection) => collection.hotel_Id === the_Hotel?.hotel_Id);
+  const is_Collected = the_Collection ? the_Collection.isCollected : false;
+  const add_Collection = async (item: add_Hotel_Detail_Interface) => {
+    // 10.2 沒登入, 不給收藏
+    if(redux_Verify_Session.success === false) { 
+      toast.error("Please Login First", {icon: "⚠️", duration: 2000});
+      return;
+    };
+    const add_Collection_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/favorites/${item.hotel_Id}`;
+    try {
+      // 10.3 暫時 先切換愛心 優先 打API
+      dispatch(add_My_Collection({hotel_Id: item.hotel_Id as string, isCollected: item.isCollected}));
+      const response = await fetch(add_Collection_Url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        credentials: "include",
+        body: JSON.stringify({
+          hotelId: item.hotel_Id
+        }),
+      });
+      if(!response.ok) {throw new Error("SERVER ERROR~~!")};
+    } catch (error) {
+      console.log(error);
+    }
+
+    // dispatch(to_Full_Heart(hotel));
+    // dispatch(add_My_Collection(hotel));
   }
 
   // 11. Redux - RoomType 刪除收藏飯店
-  const delete_Collection = (hotel: add_Hotel_Detail_Interface) => {
-    dispatch(to_Empty_Heart(hotel));
-    dispatch(delete_My_Collection(hotel));
-    dispatch(to_Empty_Heart_Hotel_Detail(hotel))
+  // const delete_Collection = (hotel: add_Hotel_Detail_Interface) => {
+  //   dispatch(to_Empty_Heart(hotel));
+  //   dispatch(delete_My_Collection(hotel));
+  //   dispatch(to_Empty_Heart_Hotel_Detail(hotel))
+  // }
+  const delete_Collection = async (item: add_Hotel_Detail_Interface) => {
+    // 4.1 沒登入, 不給收藏
+    if(redux_Verify_Session.success === false) { 
+      toast.error("Please Login First", {icon: "⚠️", duration: 2000})
+      return;
+    };
+    const delete_Collectiono_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/favorites/${item.hotel_Id}`;
+    try {
+      // 4.2 暫時 先切換愛心 優先 打API
+      dispatch(delete_My_Collection({hotel_Id: item.hotel_Id as string, isCollected:item.isCollected}));
+      const response = await fetch(delete_Collectiono_Url, {
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        credentials: "include",
+        body: JSON.stringify({
+          hotelId: item.hotel_Id
+        })
+      });
+      if(!response.ok) {throw new Error("SERVER ERROR~~!")};
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // 12. Redux - <form>搜尋數據
@@ -303,6 +358,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           >
 
           {the_Hotel?.hotel_Image_List.map((img, index) => {
+
             return <SwiperSlide key={index} className="cursor-pointer" onClick={() => set_Modal_Boolean_Swiper(true)}>
               <div className="relative">
                 <img src={img.url} alt={img.description} className="w-full h-[230px] object-cover object-top"/>
@@ -680,10 +736,10 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           <div className="flex">
             <StarRating ranking={the_Hotel?.totalRating as number}></StarRating>
           </div>
-          {the_Hotel?.isCollected === false ? <>
+          {is_Collected === false ? <>
             <div className="cursor-pointer">
               <OtherSVG name="emptyheart" className="w-5 h-auto"
-              onClick={() => add_Collection(the_Hotel)}></OtherSVG>
+              onClick={() => the_Hotel && add_Collection(the_Hotel)}></OtherSVG>
             </div>
           </>
           : 
