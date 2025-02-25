@@ -46,7 +46,7 @@ export default function Client_Form_Register () {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const name = "tester"; // 後端額外需要之欄位
-  const userType = "hotelier"; // 後端額外需要之欄位
+  const userType = "guest"; // 後端額外需要之欄位
 
   // 4. 接 Zod 錯誤訊息之 response
   const [zod_Response, set_Zod_Response] = useState<zod_Response_Interface>(); // API返回 Zod錯誤訊息狀態
