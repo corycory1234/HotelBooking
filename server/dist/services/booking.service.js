@@ -72,6 +72,9 @@ class BookingService extends base_service_1.BaseService {
                 if (!hotel) {
                     throw new Error("找不到指定飯店");
                 }
+                if (!hotel.offer_Id) {
+                    throw new Error("飯店尚未設置 offer_Id");
+                }
                 // 取得飯店的第一張照片的 URL
                 const hotelImage = hotel.hotel_Image_List && hotel.hotel_Image_List.length > 0
                     ? hotel.hotel_Image_List[0].url
@@ -95,6 +98,7 @@ class BookingService extends base_service_1.BaseService {
                     userId: data.userId,
                     hotelId: data.hotelId,
                     roomId: data.roomId,
+                    offer_Id: hotel.offer_Id, // 加入 offer_Id
                     bookingImage: hotelImage,
                     travelerName: data.travelerName,
                     customerEmail: data.customerEmail,
@@ -158,9 +162,20 @@ class BookingService extends base_service_1.BaseService {
                 if (!hotel) {
                     throw new Error("未授權的操作");
                 }
-                return yield this.db.query.bookings.findMany({
-                    where: (0, drizzle_orm_1.eq)(bookings_1.bookings.hotelId, hotelId),
-                    orderBy: [(0, drizzle_orm_1.desc)(bookings_1.bookings.createdAt)],
+                const results = yield this.db
+                    .select({
+                    booking: bookings_1.bookings,
+                    hotel: {
+                        hotel_Name: hotels_1.hotels.hotel_Name,
+                    },
+                })
+                    .from(bookings_1.bookings)
+                    .leftJoin(hotels_1.hotels, (0, drizzle_orm_1.eq)(bookings_1.bookings.hotelId, hotels_1.hotels.hotel_Id))
+                    .where((0, drizzle_orm_1.eq)(bookings_1.bookings.hotelId, hotelId))
+                    .orderBy((0, drizzle_orm_1.desc)(bookings_1.bookings.createdAt));
+                return results.map(({ booking, hotel }) => {
+                    var _a;
+                    return (Object.assign(Object.assign({}, booking), { hotel_Name: (_a = hotel === null || hotel === void 0 ? void 0 : hotel.hotel_Name) !== null && _a !== void 0 ? _a : "未知飯店" }));
                 });
             }
             catch (error) {
@@ -171,28 +186,31 @@ class BookingService extends base_service_1.BaseService {
     // 獲取單一訂單詳情
     getBookingById(bookingId, userId) {
         return __awaiter(this, void 0, void 0, function* () {
+            var _a;
             try {
                 const result = yield this.db
                     .select({
                     booking: bookings_1.bookings,
                     roomType: rooms_1.roomTypes,
+                    hotel: {
+                        hotel_Name: hotels_1.hotels.hotel_Name,
+                        owner_Id: hotels_1.hotels.owner_Id,
+                    },
                 })
                     .from(bookings_1.bookings)
                     .leftJoin(rooms_1.roomTypes, (0, drizzle_orm_1.eq)(bookings_1.bookings.roomId, rooms_1.roomTypes.roomType_Id))
+                    .leftJoin(hotels_1.hotels, (0, drizzle_orm_1.eq)(bookings_1.bookings.hotelId, hotels_1.hotels.hotel_Id))
                     .where((0, drizzle_orm_1.eq)(bookings_1.bookings.id, bookingId))
                     .limit(1);
                 if (!result[0]) {
                     throw new Error("訂單不存在");
                 }
-                const { booking, roomType } = result[0];
+                const { booking, roomType, hotel } = result[0];
                 // 檢查權限
-                const hotel = yield this.db.query.hotels.findFirst({
-                    where: (0, drizzle_orm_1.eq)(hotels_1.hotels.hotel_Id, booking.hotelId),
-                });
                 if (booking.userId !== userId && (hotel === null || hotel === void 0 ? void 0 : hotel.owner_Id) !== userId) {
                     throw new Error("未授權的操作");
                 }
-                return Object.assign(Object.assign({}, booking), { roomTypes: roomType });
+                return Object.assign(Object.assign({}, booking), { roomTypes: roomType, hotel_Name: (_a = hotel === null || hotel === void 0 ? void 0 : hotel.hotel_Name) !== null && _a !== void 0 ? _a : "未知飯店" });
             }
             catch (error) {
                 throw new Error("獲取訂單詳情失敗");

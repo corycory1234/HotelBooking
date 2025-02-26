@@ -117,6 +117,10 @@ export class BookingService extends BaseService {
                 throw new Error("找不到指定飯店");
             }
 
+            if (!hotel.offer_Id) {
+                throw new Error("飯店尚未設置 offer_Id");
+            }
+
             // 取得飯店的第一張照片的 URL
             const hotelImage =
                 hotel.hotel_Image_List && hotel.hotel_Image_List.length > 0
@@ -147,6 +151,7 @@ export class BookingService extends BaseService {
                     userId: data.userId,
                     hotelId: data.hotelId,
                     roomId: data.roomId,
+                    offer_Id: hotel.offer_Id, // 加入 offer_Id
                     bookingImage: hotelImage,
                     travelerName: data.travelerName,
                     customerEmail: data.customerEmail,
@@ -216,10 +221,22 @@ export class BookingService extends BaseService {
                 throw new Error("未授權的操作");
             }
 
-            return await this.db.query.bookings.findMany({
-                where: eq(bookings.hotelId, hotelId),
-                orderBy: [desc(bookings.createdAt)],
-            });
+            const results = await this.db
+                .select({
+                    booking: bookings,
+                    hotel: {
+                        hotel_Name: hotels.hotel_Name,
+                    },
+                })
+                .from(bookings)
+                .leftJoin(hotels, eq(bookings.hotelId, hotels.hotel_Id))
+                .where(eq(bookings.hotelId, hotelId))
+                .orderBy(desc(bookings.createdAt));
+
+            return results.map(({ booking, hotel }) => ({
+                ...booking,
+                hotel_Name: hotel?.hotel_Name ?? "未知飯店",
+            }));
         } catch (error) {
             throw new Error("獲取訂單列表失敗");
         }
@@ -232,9 +249,14 @@ export class BookingService extends BaseService {
                 .select({
                     booking: bookings,
                     roomType: roomTypes,
+                    hotel: {
+                        hotel_Name: hotels.hotel_Name,
+                        owner_Id: hotels.owner_Id,
+                    },
                 })
                 .from(bookings)
                 .leftJoin(roomTypes, eq(bookings.roomId, roomTypes.roomType_Id))
+                .leftJoin(hotels, eq(bookings.hotelId, hotels.hotel_Id))
                 .where(eq(bookings.id, bookingId))
                 .limit(1);
 
@@ -242,13 +264,9 @@ export class BookingService extends BaseService {
                 throw new Error("訂單不存在");
             }
 
-            const { booking, roomType } = result[0];
+            const { booking, roomType, hotel } = result[0];
 
             // 檢查權限
-            const hotel = await this.db.query.hotels.findFirst({
-                where: eq(hotels.hotel_Id, booking.hotelId),
-            });
-
             if (booking.userId !== userId && hotel?.owner_Id !== userId) {
                 throw new Error("未授權的操作");
             }
@@ -256,6 +274,7 @@ export class BookingService extends BaseService {
             return {
                 ...booking,
                 roomTypes: roomType,
+                hotel_Name: hotel?.hotel_Name ?? "未知飯店",
             };
         } catch (error) {
             throw new Error("獲取訂單詳情失敗");
