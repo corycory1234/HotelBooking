@@ -1,0 +1,80 @@
+{
+  "zh_TW": [
+    {
+      "hotel_Id": "22ce3f17-ea0e-47a3-9618-7624ef16d43a",
+      "hotel_Name": "曼谷威斯汀大飯店-素坤逸21號",
+      "url": "/collection/collection_6.webp",
+      "total_Rating": 5,
+      "price": 5000
+    },
+    {
+      "hotel_Id": "c2457e8b-71d1-4b49-abf2-3659bbcc8dc2",
+      "hotel_Name": "UHG四分之一沙拉登飯店",
+      "url": "/collection/collection_3.webp",
+      "total_Rating": 4,
+      "price": 2000
+    },
+    {
+      "hotel_Id": "c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235",
+      "hotel_Name": "曼谷夜間飯店 - 素坤逸路 15 巷",
+      "url": "/collection/collection_2.webp",
+      "total_Rating": 4,
+      "price": 2200
+    },
+    {
+      "hotel_Id": "bc573023-2184-4088-84c5-81eab739eb0f",
+      "hotel_Name": "曼谷41套房旅館",
+      "url": "/collection/collection_1.webp",
+      "total_Rating": 3,
+      "price": 100
+    },
+    {
+      "hotel_Id": "6938966c-ae92-4204-a8ea-db03e8b23179",
+      "hotel_Name": "素坤逸路39號瑟琳飯店",
+      "url": "/collection/collection_7.webp",
+      "total_Rating": 4,
+      "price": 110
+    }
+  ],
+  
+
+  
+  "en": [
+    {
+      "hotel_Id": "df40c06c-f88f-4c49-81c2-5b0c4f3df821",
+      "hotel_Name": "The Westin Grande Sukhumvit, Bangkok",
+      "url": "/collection/collection_6.webp",
+      "total_Rating": 5,
+      "price": 5000
+    },
+    {
+      "hotel_Id": "bf2bf0be-9514-460f-bda7-6c389e59297d",
+      "hotel_Name": "The Quarter Saladaeng by UHG",
+      "url": "/collection/collection_3.webp",
+      "total_Rating": 4,
+      "price": 2000
+    },
+    {
+      "hotel_Id": "e9c95803-e8ac-494f-b448-4396d6cc4861",
+      "hotel_Name": "Night Hotel Bangkok - Sukhumvit 15",
+      "url": "/collection/collection_2.webp",
+      "total_Rating": 4,
+      "price": 2200
+    },
+    {
+      "hotel_Id": "ebf1d16a-b5cb-4032-8008-5d1977a54fc3",
+      "hotel_Name": "41 Suite Bangkok Hotel",
+      "url": "/collection/collection_1.webp",
+      "total_Rating": 3,
+      "price": 100
+    },
+    {
+      "hotel_Id": "cff62c5b-5622-4238-977f-04cc50f9fa3a",
+      "hotel_Name": "Sereine Sukhumvit 39 Hotel",
+      "url": "/collection/collection_7.webp",
+      "total_Rating": 4,
+      "price": 110
+    }
+  ] 
+  
+}

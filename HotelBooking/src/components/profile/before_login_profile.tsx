@@ -431,9 +431,9 @@ export default function Before_Login_Profile () {
       :
 
         <div>
-          <div className="flex gap-2">
+          <div className="flex gap-2" onClick={log_Out}>
             <ProfileSVG name={"logout"} className="w-5 h-auto"></ProfileSVG>
-            <button onClick={log_Out}>{t ("Logout")}</button>
+            <button >{t ("Logout")}</button>
           </div>
           <p className="lg:hidden">{">"}</p>
         </div>

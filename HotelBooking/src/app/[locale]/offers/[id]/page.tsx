@@ -1,6 +1,7 @@
 'use client';
 import Offer_List_Json from "@/fakeData/offer_List.json";
 import Hotel_List_Json from "@/fakeData/hotel_List.json";
+import Hotel_List_Json_For_Offer from "@/fakeData/hotel_List_For_Offer.json";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { Offer_Interface } from "@/types/offer";
@@ -31,10 +32,10 @@ export default function Offer () {
   // 1. 優惠列表、飯店列表 - 本地狀態
   const [offer_Id_List, set_Offer_Id_List] = useState(Offer_List_Json);
   const [the_Offer, set_The_Offer] = useState<Offer_Interface>(initail_Offer);
-  const [hotel_List, set_Hotel_List] = useState(Hotel_List_Json);
+  const [hotel_List, set_Hotel_List] = useState<any>(Hotel_List_Json_For_Offer);
   const [country_List, set_Country_List] = useState<string[]>([]);
   const [country_Tab, set_Country_Tab] = useState<number>(0);
-  const [country_Hotel_List, set_Country_Hotel_List] = useState<add_Hotel_Detail_Interface[]>([])
+  const [country_Hotel_List, set_Country_Hotel_List] = useState<any[]>([])
 
   // 2. offer_Id - URL參數
   const params = useParams();
@@ -49,26 +50,37 @@ export default function Offer () {
     };
 
     // 3.2 拉出匹配 Offer_Id 優惠ID 之 飯店列表
-    const new_Hotel_List = hotel_List.filter((item) => params.id === item.offer_Id);
-    set_Hotel_List(new_Hotel_List);
-    return new_Hotel_List;
+    if(params.locale === "zh-TW") {
+      const new_Hotel_List = hotel_List.zhTW.filter((item: any) => params.id === item.offer_Id);
+      set_Hotel_List(new_Hotel_List);
+      return new_Hotel_List;
+    } else {
+      const new_Hotel_List = hotel_List.en.filter((item: any) => params.id === item.offer_Id);
+      set_Hotel_List(new_Hotel_List);
+      return new_Hotel_List;
+    }
   };
+  useEffect(() => {
+    console.log(hotel_List, "看看看");
+  },[hotel_List])
 
   // 4. 拉出匹配 offer_Id 的飯店列表, 並再拉出這些飯店的「國家」, 以便 Tab 點擊陣列使用
-  const get_Country_List = async (target_Hotels: typeof Hotel_List_Json) => {
-    const new_Country_List = target_Hotels.map((item) => item.country);
-    // 4.1 只要唯一國家 (Set 去重複)
+  const get_Country_List = async (target_Hotels: any) => {
+    // 4.1 還不是陣列時(hotel_List_Json_For_Offer, 初始值最一開始是物件{zh-TW:[...], en:[...],} ) 就return
+    if(!Array.isArray(target_Hotels)) return;
+    const new_Country_List: string[] = target_Hotels.map((item: any) => item.country);
+    // 4.2 只要唯一國家 (Set 去重複)
     const unique_Countries = Array.from(new Set(new_Country_List));
     set_Country_List(unique_Countries);
 
-    // 4.2 一進畫面, 抓第一筆國家擁有此優惠之所有飯店
+    // 4.3 一進畫面, 抓第一筆國家擁有此優惠之所有飯店
     click_Tab(unique_Countries[0], 0)
   }
 
   // 5. 點擊Tab, 取得不同國家, 但擁有同樣優惠之飯店列表
   const click_Tab = async (country: string , index: number,) => {
     // console.log(country, index, "傳參");
-    const the_New_Hotel_List = hotel_List.filter((item) => country === item.country && params.id === item.offer_Id);
+    const the_New_Hotel_List = hotel_List.filter((item: any) => country === item.country && params.id === item.offer_Id);
     set_Country_Hotel_List(the_New_Hotel_List);
     set_Country_Tab(index)
   }
@@ -80,7 +92,7 @@ export default function Offer () {
         // 5.1 非同步 await 拉到符合此優惠券之飯店, 再返回這包陣列給變數 matched_Hotels
         const matched_Hotels = await get_Offer_Id_List();
         // 5.2 非同步 await, 再把上述返回的陣列, 丟到國家列表判斷, 會返回 ["Thailand", "China", "United States"...] 等等
-        await get_Country_List(matched_Hotels);
+        // await get_Country_List(matched_Hotels);
       } catch (error) {
         console.log(error);
       }
@@ -92,6 +104,11 @@ export default function Offer () {
   useEffect(() => {
     console.log(country_Hotel_List, "看一下飯店列表");
   },[country_Hotel_List])
+
+  // 7. 一進畫面, hotel_List有變動, 抓最新的飯店列表(優惠券)
+  useEffect(() => {
+    get_Country_List(hotel_List);
+  },[hotel_List])
 
   // 7. Redux - FormSearch 數據
   const redux_Form_Search = useSelector((state: RootState) => state.formSearch)
@@ -218,7 +235,7 @@ export default function Offer () {
             pagination={{ clickable: true }} 
             modules={[Pagination]}>
               
-              {item.hotel_Image_List.map((img, index) => {
+              {item.hotel_Image_List.map((img: any, index: number) => {
                 return <SwiperSlide key={index}>
                   <img src={img.url} alt={img.description} 
                   className="w-full h-[200px] object-cover rounded" />

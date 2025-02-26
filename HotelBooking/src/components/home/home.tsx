@@ -17,6 +17,7 @@ import {useTranslations} from 'next-intl';
 import { useParams } from "next/navigation";
 import { updateBedType, updateFacility, updateKeyword, updateRangeSlider, updateRating } from "@/store/form-Search/formSearchSlice";
 import { useEffect } from "react";
+import Swiper_Hotel_Around_Json from "@/fakeData/swiper_Hotel_Around.json"
 
 
 const swiper_Popular_Destination = [
@@ -82,62 +83,62 @@ const swiper_Popular_Destination = [
   },
 ];
 
-const swiper_Hotel_Around = [
-  {
-    url: '/home/near_1.webp',
-    hotelName: 'Pan Pacific Hotel',
-    price: 1200,
-    ranking: 5,
-  },
-  {
-    url: '/home/near_2.webp',
-    hotelName: 'Prestige Proga Inn',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_3.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_4.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_5.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_6.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_7.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_8.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-  {
-    url: '/home/near_9.webp',
-    hotelName: 'Bangkok Hotel',
-    price: 1200,
-    ranking: 3,
-  },
-]
+// const swiper_Hotel_Around = [
+//   {
+//     url: '/home/near_1.webp',
+//     hotelName: 'Pan Pacific Hotel',
+//     price: 1200,
+//     ranking: 5,
+//   },
+//   {
+//     url: '/home/near_2.webp',
+//     hotelName: 'Prestige Proga Inn',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_3.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_4.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_5.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_6.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_7.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_8.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+//   {
+//     url: '/home/near_9.webp',
+//     hotelName: 'Bangkok Hotel',
+//     price: 1200,
+//     ranking: 3,
+//   },
+// ]
 
 export default function Index() {
 // 1. Redux - 查看是否登入
@@ -203,6 +204,12 @@ const check_Popular_Destination = (popular_Destination: string) => {
     dispatch(updateRating([]));
     dispatch(updateFacility([]));
   },[])
+
+  // 7. 附近飯店 >> 跳轉/hotellist/${hotel_Id}
+  const fetch_Hotel_Detail = (hotel_Id: string, hotel_Name: string) => {
+    dispatch(updateKeyword(hotel_Name))
+    router.push(`/${params.locale}/hotellist/${hotel_Id}`)
+  }
 
   return <>
     <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
@@ -293,31 +300,57 @@ const check_Popular_Destination = (popular_Destination: string) => {
         {/********************* Swiper - 附近飯店 *******************************/}
           <h2 className="font-bold">{t ("Hotels Around You")}</h2>
           <div className="">
-            <Swiper slidesPerView={2} spaceBetween={20}
+            <Swiper slidesPerView={2.2} spaceBetween={20}
               modules={[Navigation]}
               navigation={true}
               breakpoints={{
-                1024: {slidesPerView: 5.2}
+                1024: {slidesPerView: 4.2}
               }}>
                 <div className="flex">
-                {swiper_Hotel_Around.map((item, index) =>
-                  <SwiperSlide key={index} className="flex-col">
-                    <img className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
-                    <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
-                      <img className="" src="/home/Bookmark.svg" alt="" />
-                    </div>
-                    <div className="flex flex-col gap-1 p-2">
-                      <h2 className="text-xs">{item.hotelName}</h2>
-                      <div className="flex justify-between">
-                        <StarRating ranking={item.ranking}></StarRating>
-                        <p className="text-xs text-primary font-semibold">
-                          {'$' + item.price + '/'} 
-                          <span className="text-xs text-soft-gray">night</span>
-                          </p>
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                )}
+                  {params.locale === "zh-TW" ? <>
+                    {Swiper_Hotel_Around_Json.zh_TW.map((item, index) =>
+                      <SwiperSlide key={index} className="flex-col cursor-pointer" onClick={() => fetch_Hotel_Detail(item.hotel_Id, item.hotel_Name)}>
+                        <img className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
+                        {/* <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
+                          <img className="" src="/home/Bookmark.svg" alt="" />
+                        </div> */}
+                        <div className="flex flex-col gap-1 p-2">
+                          <h2 className="text-xs h-10 lg:h-auto">{item.hotel_Name}</h2>
+                          <div className="flex flex-col gap-1 lg:flex-row lg:justify-between">
+                            <StarRating ranking={item.total_Rating}></StarRating>
+                            <p className="text-xs text-primary font-semibold">
+                              {'$' + item.price + '/'} 
+                              <span className="text-xs text-soft-gray">night</span>
+                              </p>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    )}
+                  
+                  </>
+                  : 
+                  <>
+                    {Swiper_Hotel_Around_Json.en.map((item, index) =>
+                      <SwiperSlide key={index} className="flex-col cursor-pointer" onClick={() => fetch_Hotel_Detail(item.hotel_Id, item.hotel_Name)}>
+                        <img className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
+                        {/* <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
+                          <img className="" src="/home/Bookmark.svg" alt="" />
+                        </div> */}
+                        <div className="flex flex-col gap-1 p-2">
+                          <h2 className="text-xs">{item.hotel_Name}</h2>
+                          <div className="flex justify-between">
+                            <StarRating ranking={item.total_Rating}></StarRating>
+                            <p className="text-xs text-primary font-semibold">
+                              {'$' + item.price + '/'} 
+                              <span className="text-xs text-soft-gray">night</span>
+                              </p>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    )}
+                  </>
+                
+                }
                 </div>
             </Swiper>
           </div>
