@@ -5,6 +5,7 @@ import Booking_List_Json from "@/fakeData/trip_List.json";
 import { useRouter } from "next/navigation";
 import { Booking_Detail_Interface } from "@/types/booking_Detail";
 import Not_Found from "@/components/not_Found/not_Found";
+import Refresh_Token from "@/utils/refresh_Token";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
 
@@ -50,6 +51,7 @@ export default function Trip_List () {
   const get_My_Booking = async () => {
     try {
       set_Show_Booking_List(false);
+      // await Refresh_Token();
       const response = await fetch(my_Bookings_Url, {
         method: "GET",
         headers: {"Content-Type": "application/json"},
@@ -121,15 +123,17 @@ export default function Trip_List () {
         return <div className="flex flex-col gap-4 bg-white rounded-lg px-2 py-4 lg:border border-softGray" key={index}>
             {/** 訂單照片、飯店名、房型名、確認|未確認|取消 */}
             <div className="flex flex-col lg:flex-row gap-2 lg:h-full">
-              <img src={item.bookingImage} alt="" className="w-full h-[200px] lg:w-1/3 lg:h-[265px] rounded"/>
+              <div className="object-cover">
+                <img src={item.bookingImage} alt="" className="w-full h-[200px] lg:w-[330px] lg:h-[265px] rounded"/>
+              </div>
               <div className="flex flex-col basis-1/2 gap-2">
                 <p className="font-semibold">還沒拿到飯店名</p>
-                <p className="text-sm">{item.roomTypes.room_Type}</p>
+                <p className="text-sm">{item.roomTypes.room_Type.slice(0,1).toUpperCase() + item.roomTypes.room_Type.slice(1)}</p>
                 <div className="flex justify-between items-center">
                   <span className={`rounded p-2 w-fit 
                     ${item.status === 'cancelled' ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
                   >{item.status}</span>
-                  <p className="font-semibold text-right lg:hidden">${(+ item.price).toFixed()}</p>
+                  <p className="font-semibold text-right lg:hidden">Total Price: ${(+ item.totalPrice).toFixed()}</p>
                 </div>
 
                 {/** PC桌機 - 入住日、退房日 */}

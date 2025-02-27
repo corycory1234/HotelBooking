@@ -28,6 +28,12 @@ const swiper_Popular_Destination = [
     cityName: "Bangkok"
   },
   {
+    url: '/home/popular_5.webp',
+    text1: 'Eid-ul-Fitr Special!',
+    text2: '50% discount on Maldives International Flights.',
+    cityName: "Japan"
+  },
+  {
     url: '/home/popular_2.webp',
     text1: 'New Year Spceial!',
     text2: 'Get a free lunch using Coupon *GoTour*',
@@ -38,12 +44,6 @@ const swiper_Popular_Destination = [
     text1: 'New Year Spceial!',
     text2: 'Get a free lunch using Coupon *GoTour*',
     cityName: "Paris"
-  },
-  {
-    url: '/home/popular_5.webp',
-    text1: 'Eid-ul-Fitr Special!',
-    text2: '50% discount on Maldives International Flights.',
-    cityName: "Tokyo"
   },
   {
     url: '/home/popular_8.webp',

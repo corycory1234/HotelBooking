@@ -66,6 +66,30 @@ export default function Booking_Detail () {
     // set_Review(""); // 留言完, 清空
   };
 
+  // 7. 給 飯店星級、評價API
+  const fetch_Review = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const send_Review_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/reviews/${the_Booking_Detail.id}`
+      const response = await fetch(send_Review_Url, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          rating: hover_Star,
+          comment: review
+        }),
+        credentials: "include"
+      });
+      if(!response.ok) {throw new Error("SERVER ERROR~~!")};
+      const result = await response.json();
+      console.log(result, "查看送出評價後之API返回");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set_Modal_Boolean(false);
+    }
+  }
+
 
  // 8. Skeleton動畫 - 延遲2秒 (這邊待API寫好, 於useEffect)
   const [show_Booking_Detail, set_Show_Booking_Detail] = useState<boolean>(false);
@@ -95,8 +119,8 @@ export default function Booking_Detail () {
   })
 
   // 11. 優惠券
-  // const offer = Offer_List_Json.find((item) => item.offer_Id === booking_Detail.offer_Id);
-  // const offer_Discount = 1 - (offer?.offer_Price as number);
+  const offer = Offer_List_Json.find((item) => item.offer_Id === the_Booking_Detail.offer_Id);
+  const offer_Discount = 1 - (offer?.offer_Price as number);
 
   // 12. 指定訂單 API
   const the_Booking_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/bookings/${params.id}`;
@@ -173,7 +197,7 @@ export default function Booking_Detail () {
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <div className="flex flex-col gap-4 px-4 pt-20 z-[999] lg:hidden">
               {/* <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p> */}
-              <p className="font-semibold">Hotel: 還沒拿到飯店名</p>
+              <p className="font-semibold">Hotel: {the_Booking_Detail.hotel_Name}</p>
               <p>Name: {the_Booking_Detail.travelerName}</p>
 
                 {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
@@ -188,19 +212,21 @@ export default function Booking_Detail () {
                     </FiveStarSVG>
                     })}
                   </div>
-                  <form onSubmit={submit_Review} className="flex flex-col gap-2">
+                  <form onSubmit={fetch_Review} className="flex flex-col gap-2">
                     <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
                       placeholder="Leave comment for what you experience from this Hotel"
                       value={review}
-                      onChange={(event) => handle_Change(event)}>
+                      onChange={(event) => handle_Change(event)}
+                      readOnly={the_Booking_Detail.review !== null}>
                     </textarea>
-                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"
-                      >Submit
-                    </button>
 
+                    {the_Booking_Detail.review  === null && 
+                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"> 
+                      Submit</button>
+                    }
                   </form>
                 </>
-              }
+                }
               {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
 
 
@@ -218,7 +244,7 @@ export default function Booking_Detail () {
                 </div>
                 <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
                 placeholder="Leave comment for what you experience from this Hotel"
-                value={review} readOnly>
+                value={the_Booking_Detail?.review} readOnly>
                 </textarea>
               </>
               }
@@ -243,7 +269,7 @@ export default function Booking_Detail () {
         <div className="flex flex-col lg:hidden">
           <div className="flex justify-between items-center">
             {/* <p className="font-semibold">{booking_Detail?.hotel_Name}</p> */}
-            <p className="font-semibold">還沒拿到飯店名</p>
+            <p className="font-semibold">{the_Booking_Detail.hotel_Name}</p>
             <span className={`rounded-full py-1 px-2 w-fit 
               ${the_Booking_Detail.status === "cancelled" ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
             >
@@ -319,7 +345,7 @@ export default function Booking_Detail () {
 
           <div className="flex justify-between">
             <p className="text-sm text-gray">Offer Discount</p>
-            {/* <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p> */}
+            <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
           </div>
 
           <div className="flex justify-between">
@@ -329,8 +355,7 @@ export default function Booking_Detail () {
 
           <div className="flex justify-between">
             <p className="text-sm font-semibold">Total Charge</p>
-            {/* <p>{`$ ${(booking_Detail.price + (booking_Detail.price * booking_Detail.tax)) * offer_Discount}`}</p> */}
-            <p>$ {(+ the_Booking_Detail.totalPrice).toFixed(0)}</p>
+            <p>$ {(+ the_Booking_Detail.totalPrice * offer_Discount ).toFixed(0)}</p>
           </div>
         </div>
         {/** 費用、稅率 */}
@@ -351,7 +376,7 @@ export default function Booking_Detail () {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
             <Marker position={[the_Booking_Detail?.latitude as number, the_Booking_Detail?.longitude as number]}>
               {/* <Tooltip permanent className="leaflet-tooltip ">{booking_Detail?.hotel_Name}</Tooltip> */}
-              <Tooltip permanent className="leaflet-tooltip ">還沒拿到飯店名</Tooltip>
+              <Tooltip permanent className="leaflet-tooltip ">{the_Booking_Detail.hotel_Name}</Tooltip>
             </Marker>
           </MapContainer>
 
@@ -359,8 +384,8 @@ export default function Booking_Detail () {
 
           <p className="text-sm text-gray">{the_Booking_Detail.address}</p>
           <button type="button" className="bg-primary text-white rounded py-2"
-            onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, "還沒拿到飯店名")}>
-              Check 還沒拿到飯店名之Detail</button>
+            onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, the_Booking_Detail.hotel_Name)}>
+              Check {the_Booking_Detail.hotel_Name}</button>
         </div>
         {/** 地圖 */}
       
@@ -381,7 +406,7 @@ export default function Booking_Detail () {
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 {/* <p className="font-semibold">{booking_Detail?.hotel_Name}</p> */}
-                <p className="font-semibold">還沒拿到飯店名</p>
+                <p className="font-semibold">{the_Booking_Detail.hotel_Name}</p>
                 <span className={`rounded-full py-1 px-2 w-fit 
                   ${the_Booking_Detail.status === "cancelled" ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
                 >
@@ -450,7 +475,7 @@ export default function Booking_Detail () {
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <div className="flex flex-col gap-4 px-4 pt-20 z-[999]">
               {/* <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p> */}
-              <p className="font-semibold">Hotel: 還沒拿到飯店名</p>
+              <p className="font-semibold">Hotel: {the_Booking_Detail.hotel_Name}</p>
               <p>Name: {the_Booking_Detail.travelerName}</p>
 
                 {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
@@ -465,15 +490,18 @@ export default function Booking_Detail () {
                     </FiveStarSVG>
                     })}
                   </div>
-                  <form onSubmit={submit_Review} className="flex flex-col gap-2">
+                  <form onSubmit={fetch_Review} className="flex flex-col gap-2">
                     <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
                       placeholder="Leave comment for what you experience from this Hotel"
                       value={review}
-                      onChange={(event) => handle_Change(event)}>
+                      onChange={(event) => handle_Change(event)}
+                      readOnly={the_Booking_Detail.review !== null}>
                     </textarea>
-                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"
-                      >Submit
-                    </button>
+
+                    {the_Booking_Detail.review  === null && 
+                    <button className="bg-primary rounded text-white self-center w-1/2 py-2"> 
+                      Submit</button>
+                    }
 
                   </form>
                 </>
@@ -482,7 +510,7 @@ export default function Booking_Detail () {
 
 
               {/* 訂單狀態 completed, 但已留言, 僅能查看 */}
-              {the_Booking_Detail.statys === "confirmed" && the_Booking_Detail.review !== null && <>
+              {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review !== null && <>
                 <div className="flex gap-2" >
                 {Array.from({length: the_Booking_Detail.starRating ?? 0}, () => the_Booking_Detail.starRating ?? 0).map((star: number, index) => {
                   return <OtherSVG name={"star"} 
@@ -495,7 +523,7 @@ export default function Booking_Detail () {
                 </div>
                 <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
                 placeholder="Leave comment for what you experience from this Hotel"
-                value={review} readOnly>
+                value={the_Booking_Detail.review} readOnly>
                 </textarea>
               </>
               }
@@ -538,7 +566,7 @@ export default function Booking_Detail () {
 
             <div className="flex justify-between">
               <p className="text-sm text-gray">Offer Discount</p>
-              {/* <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p> */}
+              <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
             </div>
 
             <div className="flex justify-between">
@@ -548,8 +576,7 @@ export default function Booking_Detail () {
 
             <div className="flex justify-between">
               <p className="text-sm font-semibold">Total Charge</p>
-              {/* <p>{`$ ${(booking_Detail.price + (booking_Detail.price * booking_Detail.tax)) * offer_Discount}`}</p> */}
-              <p>$ {(+(the_Booking_Detail.totalPrice)).toFixed(0)}</p>
+              <p>$ {((+ the_Booking_Detail.totalPrice) * offer_Discount).toFixed(0)}</p>
             </div>
           </div>
         {/** 費用、稅率 */}
@@ -570,12 +597,12 @@ export default function Booking_Detail () {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
             <Marker position={[the_Booking_Detail?.latitude as number, the_Booking_Detail?.longitude as number]}>
               {/* <Tooltip permanent className="leaflet-tooltip ">{booking_Detail?.hotel_Name}</Tooltip> */}
-              <Tooltip permanent className="leaflet-tooltip ">還沒拿到飯店名</Tooltip>
+              <Tooltip permanent className="leaflet-tooltip ">{the_Booking_Detail.hotel_Name}</Tooltip>
             </Marker>
           </MapContainer>
           <p className="text-sm text-gray">{the_Booking_Detail.address}</p>
           <button type="button" className="bg-primary text-white rounded py-2 w-1/3 self-center"
-            onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, "還沒拿到飯店名")}>Check 還沒拿到飯店名之Detail</button>
+            onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, the_Booking_Detail.hotel_Name)}>Check {the_Booking_Detail.hotel_Name}</button>
         </div>
         {/** 地圖 */}
     {/** PC桌機 */}

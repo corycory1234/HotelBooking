@@ -1072,7 +1072,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         <p className="min-w-16">{review.traveler_Name}</p>
                         <p>｜</p>
                         <OtherSVG name="calendar" className="w-4 h-auto"></OtherSVG>
-                        <p>{review.date}</p>
+                        <p>{review.date.replaceAll("/","-").split('T')[0]}</p>
                       </div>
 
                       {/** 旅客評價幾星 */}

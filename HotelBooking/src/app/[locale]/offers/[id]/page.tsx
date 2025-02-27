@@ -60,9 +60,9 @@ export default function Offer () {
       return new_Hotel_List;
     }
   };
-  useEffect(() => {
-    console.log(hotel_List, "看看看");
-  },[hotel_List])
+  // useEffect(() => {
+  //   console.log(hotel_List, "看看看");
+  // },[hotel_List])
 
   // 4. 拉出匹配 offer_Id 的飯店列表, 並再拉出這些飯店的「國家」, 以便 Tab 點擊陣列使用
   const get_Country_List = async (target_Hotels: any) => {
@@ -79,7 +79,6 @@ export default function Offer () {
 
   // 5. 點擊Tab, 取得不同國家, 但擁有同樣優惠之飯店列表
   const click_Tab = async (country: string , index: number,) => {
-    // console.log(country, index, "傳參");
     const the_New_Hotel_List = hotel_List.filter((item: any) => country === item.country && params.id === item.offer_Id);
     set_Country_Hotel_List(the_New_Hotel_List);
     set_Country_Tab(index)
@@ -98,23 +97,24 @@ export default function Offer () {
       }
     };
 
-
     fetch_Data();
   },[params.id])
   useEffect(() => {
     console.log(country_Hotel_List, "看一下飯店列表");
   },[country_Hotel_List])
 
-  // 7. 一進畫面, hotel_List有變動, 抓最新的飯店列表(優惠券)
+  // 7. hotel_List有變動, 抓最新的飯店列表(優惠券)
   useEffect(() => {
+    // 7.1 第一次渲染, hotel_List仍然還是物件, 必須等fetch_Data函式跑完, hotel_List才變成陣列
+    if(!Array.isArray(hotel_List)) return;
     get_Country_List(hotel_List);
   },[hotel_List])
 
-  // 7. Redux - FormSearch 數據
+  // 8. Redux - FormSearch 數據
   const redux_Form_Search = useSelector((state: RootState) => state.formSearch)
   const dispatch: AppDispatch = useDispatch();
 
-  // 8. Redux - 相關初始值
+  // 9. Redux - 相關初始值
   const redux_Destination = useSelector((state: RootState) => state.formSearch.keyword);
   const redux_DateRange = useSelector((state: RootState) => state.formSearch.dateRange);
   const redux_Date_Start = useSelector((state: RootState) => state.formSearch.start_Date);
@@ -130,7 +130,7 @@ export default function Offer () {
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
   const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
 
-  // 9. 查看「指定飯店所有房型」，ID匹配，router跳轉
+  // 10. 查看「指定飯店所有房型」，ID匹配，router跳轉
   const router = useRouter()
   const check_Hotel_RoomType_List = (hotel_Id: string) => {
     const result = country_Hotel_List.find((item: add_Hotel_Detail_Interface) => item.hotel_Id === hotel_Id);
@@ -159,12 +159,10 @@ export default function Offer () {
     if(result) {
       console.log(result, "指定飯店 - 所有房型");
       router.push(`/hotellist/${hotel_Id}?${query}`)
-    } else {
-      alert("沒找到指定飯店 - 所有房型")
-    }
+    };
   }
 
-  // 10. next-intl i18n翻譯
+  // 11. next-intl i18n翻譯
   const t = useTranslations("OfferList");
   const t_FormSearch = useTranslations("FormSearch");
 

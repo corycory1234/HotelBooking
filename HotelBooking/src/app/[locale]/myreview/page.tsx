@@ -159,7 +159,9 @@ export default function My_Review () {
             
             {/* 卡片上方 */}
             <div className="flex gap-2 border-b border-softGray" >
-                <img src={item.bookingImage} alt="" className="w-1/4 rounded"/>
+                <div className="w-1/3 lg:w-1/4">
+                  <img src={item.bookingImage} alt="" className="w-[170px] h-[170px] rounded object-cover"/>
+                </div>
                 <div className="flex flex-col">
                   {/* <p>{item.hotel_Name}</p> */}
                   <p>還沒拿到飯店名</p>
