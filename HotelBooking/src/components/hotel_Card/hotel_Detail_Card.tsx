@@ -1129,7 +1129,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                   <p className="font-semibold text-sm">Check-in time:</p>
                   <div className="flex gap-2">
                     <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
-                    <p className="font-semibold text-lg">After {the_Hotel?.checkin}</p>
+                    <p className="font-semibold text-lg">After {(the_Hotel?.checkin as string).slice(0,5)}</p>
                   </div>
                 </div>
                 <div className="border-r border-softGray"></div>
@@ -1137,7 +1137,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                   <p className="font-semibold text-sm">Check-out time:</p>
                   <div className="flex gap-2">
                     <ProfileSVG name="logout" className="w-4 h-auto"></ProfileSVG>
-                    <p className="font-semibold text-lg">Before {the_Hotel?.checkout}</p>
+                    <p className="font-semibold text-lg">Before {(the_Hotel?.checkout as string).slice(0,5)}</p>
                   </div>
                 </div>
               </div>
