@@ -293,24 +293,23 @@ export default function Hotel_List_Card() {
 
 
 
-      // 14.1 前端自己的URL
-      const search_Params = new URLSearchParams({
-        destination: redux_Destination,
-        dateRange: redux_DateRange as string,
-        date_Start: redux_Date_Start as string,
-        date_End: redux_Date_End as string,
-        room: String(redux_Room),
-        adult: String(redux_Adult),
-        child: String(redux_Child),
-        rangeslider: String(redux_RangeSlider),
-        timestamp: String(timestamp),
-        bedtype: String(redux_BedType),
-        rating: String(redux_Rating),
-        facility: String(redux_Facility),
-        page: String(result.data.page)
-      }).toString()
-
-      router.push(`/hotellist?${search_Params}`);
+      // 14.1 前端自己的URL (這會造成再一次路由導向, 導致i18n會從 zh-TW >> en >> 又切回 zh-TW )
+      // const search_Params = new URLSearchParams({
+      //   destination: redux_Destination,
+      //   dateRange: redux_DateRange as string,
+      //   date_Start: redux_Date_Start as string,
+      //   date_End: redux_Date_End as string,
+      //   room: String(redux_Room),
+      //   adult: String(redux_Adult),
+      //   child: String(redux_Child),
+      //   rangeslider: String(redux_RangeSlider),
+      //   timestamp: String(timestamp),
+      //   bedtype: String(redux_BedType),
+      //   rating: String(redux_Rating),
+      //   facility: String(redux_Facility),
+      //   page: String(result.data.page)
+      // }).toString()
+      // router.push(`/hotellist?${search_Params}`);
       
       // 14.5 Skeleton動畫 -關
       set_Show_Hotel_List(true)

@@ -140,10 +140,11 @@ export default function My_Review () {
   
   return <div className="lg:min-h-[75vh] lg:mt-[70px] lg:p-4">
     <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
+    <p className="hidden lg:block font-semibold">My Reviews</p>
 
     {show_Review_List === false && <Placeholder_Card></Placeholder_Card>}
 
-    {booking_List_Completed.length === 0 && <div className="flex flex-col justify-center items-center gap-2 min-h-[50vh]">
+    {review_List.length === 0 && <div className="flex flex-col justify-center items-center gap-2 min-h-[50vh]">
       <OtherSVG name="review" className="w-10 h-auto"></OtherSVG>
       <p className="font-semibold">You have NO Review</p>
       </div>
@@ -151,8 +152,6 @@ export default function My_Review () {
     
     {show_Review_List === true && 
       <>
-        <p className="hidden lg:block font-semibold">My Reviews</p>
-
         <div className="flex flex-col p-4 gap-2 pb-20 lg:grid lg:grid-cols-2 lg:pb-0 lg:px-0">
           {review_List.map((item, index) => {
             return <div className="flex flex-col border border-softGray rounded" key={index}>

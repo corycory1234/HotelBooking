@@ -284,6 +284,67 @@
       "country": "泰國",
       "city": "曼谷",
       "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "c08d5a81-7fc3-4d38-8920-4389c07cc6b0",
+      "hotel_Name": "廣州人和雅閣澳斯特酒店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266213-akazuo-ota-kvyUh-jTpP4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-akazuo-ota-QPj1dinkrA4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-erick-palacio-tJXkQ3Borlc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-guzman-barquin-2QDuAqs2K9A-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-johannes-w-IQKuHc2lils-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-mateusz-zatorski-X-0byZrQWI0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-thought-catalog-wyEinDRV88I-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-zac-ong-RpZxHPikR6A-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 100,
+      "review_List": [
+        {
+          "date": "2023-09-14",
+          "reply": "Thank you, sir",
+          "comment": "Love staying here because of friendly price.",
+          "traveler_Id": "84b64e80-873c-4692-ae9c-ab67f8ae8526",
+          "traveler_Name": "Matt",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-01-18",
+          "reply": "",
+          "comment": "Do not like stay here. The surrounding is not clean. There are many insects at night...",
+          "traveler_Id": "e276b3b1-0722-459c-9961-a671dca174e5",
+          "traveler_Name": "Hellen",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "中國",
+      "city": "廣州",
+      "offer_Id": "1111"
     }
   ],
   
@@ -572,6 +633,67 @@
       "country": "Thailand",
       "city": "Bangkok",
       "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "39497990-5f4b-46d5-9b44-ea2b3289b86d",
+      "hotel_Name": "AUSOTEL by Argyle Guangzhou Baiyun",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266213-akazuo-ota-kvyUh-jTpP4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-akazuo-ota-QPj1dinkrA4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-erick-palacio-tJXkQ3Borlc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-guzman-barquin-2QDuAqs2K9A-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-johannes-w-IQKuHc2lils-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-mateusz-zatorski-X-0byZrQWI0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-thought-catalog-wyEinDRV88I-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-zac-ong-RpZxHPikR6A-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 100,
+      "review_List": [
+        {
+          "date": "2023-09-14",
+          "reply": "Thank you, sir",
+          "comment": "Love staying here because of friendly price.",
+          "traveler_Id": "84b64e80-873c-4692-ae9c-ab67f8ae8526",
+          "traveler_Name": "Matt",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-01-18",
+          "reply": "",
+          "comment": "Do not like stay here. The surrounding is not clean. There are many insects at night...",
+          "traveler_Id": "e276b3b1-0722-459c-9961-a671dca174e5",
+          "traveler_Name": "Hellen",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "China",
+      "city": "Guanzhou",
+      "offer_Id": "1111"
     }
   ]
     
