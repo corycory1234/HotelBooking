@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useTranslations } from "next-intl";
+import { usePathname as i18n_usePathname } from "@/i18n/routing";
 
 const menu = [
   {name: 'Home', svgIcon: 
@@ -48,6 +49,9 @@ export default function Menu () {
   // 2. next-intl i18n 翻譯
   const t = useTranslations("Menu")
 
+  // 3. i18n 的 Pathname
+  const i18n_PathName = i18n_usePathname()
+
   return <>
     <div className="bg-white flex items-center p-4  
       fixed bottom-0 left-0 right-0 z-50 lg:hidden">
@@ -57,20 +61,20 @@ export default function Menu () {
           <Link href={`${redux_Verify_Session.success === false && 
             item.name === 'Trip' ? '/auth' : item.url}`} 
             className="flex flex-col items-center gap-2" key={index}>
-            <div className={`${item.url === pathName ? 'text-primary' : ''}`}>
+            <div className={`${item.url === i18n_PathName ? 'text-primary' : ''}`}>
               {item.svgIcon}
             </div>
-            <p className={`text-xs ${item.url === pathName ? 'text-primary' : ''}`}>{t (item.name)}</p>
+            <p className={`text-xs ${item.url === i18n_PathName ? 'text-primary' : ''}`}>{t (item.name)}</p>
           </Link>
         )}
 
       {/** 僅有hotelier才可進後台頁面 */}
         {redux_Verify_Session.data.user.userType === "hotelier" && 
         <Link href={`${dashboard.url}`} className="flex flex-col items-center gap-2">         
-          <div className={`${dashboard.url === pathName ? 'text-primary' : ''}`}>
+          <div className={`${dashboard.url === i18n_PathName ? 'text-primary' : ''}`}>
             {dashboard.svgIcon}
           </div>
-          <p className={`text-xs ${dashboard.url === pathName ? 'text-primary' : ''}`}>{t (dashboard.name)}</p>
+          <p className={`text-xs ${dashboard.url === i18n_PathName ? 'text-primary' : ''}`}>{t (dashboard.name)}</p>
         </Link>
         }
       {/** 僅有hotelier才可進後台頁面 */}
