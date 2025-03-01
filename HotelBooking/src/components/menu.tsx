@@ -47,10 +47,10 @@ export default function Menu () {
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
 
   // 2. next-intl i18n 翻譯
-  const t = useTranslations("Menu")
+  const t = useTranslations("Menu");
 
   // 3. i18n 的 Pathname
-  const i18n_PathName = i18n_usePathname()
+  const i18n_PathName = i18n_usePathname();
 
   return <>
     <div className="bg-white flex items-center p-4  
