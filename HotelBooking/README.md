@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+# 🚀 Go Tour
+![專案 Logo](https://your-logo-url.com/logo.png)
+<div className="flex gap-1">
+  <img src="/HotelBooking/public/readme/mobile.webp"> 
+  <img  src="/HotelBooking/public/readme/pc.webp">
+</div>  
