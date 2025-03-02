@@ -37,9 +37,19 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
+<style>
+  .container {
+   display: flex;
+  };
+  .rounded {
+   border-radius: "10px" 
+  }
+
+</style>
+
 # 🚀 Go Tour
 ![專案 Logo](https://your-logo-url.com/logo.png)
-<div className="flex gap-1">
-  <img src="/HotelBooking/public/readme/mobile.webp" className="rounded"> 
-  <img  src="/HotelBooking/public/readme/pc.webp">
+<div class="container">
+  <img src="/HotelBooking/public/readme/mobile.webp" class="rounded"> 
+  <img src="/HotelBooking/public/readme/pc.webp" class="rounded">
 </div>  
