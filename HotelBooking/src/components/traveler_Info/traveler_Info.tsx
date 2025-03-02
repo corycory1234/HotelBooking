@@ -15,6 +15,8 @@ import toast, {Toaster} from "react-hot-toast";
 import StarRating from "../starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import Payment_Progress_Bar from "../payment_Progress_Bar/payment_Progress_Bar";
+import { useTranslations } from "next-intl";
+
 
 interface Zod_Response_Interface {
   success: boolean,
@@ -128,7 +130,10 @@ export default function Traveler_Info () {
     } finally {
       set_Is_Loading(false);
     }
-  }
+  };
+
+  // 8. next-intl i18n-翻譯
+  const t = useTranslations("TravelerInfo")
 
   
   return <>
@@ -167,19 +172,19 @@ export default function Traveler_Info () {
 
             <Toaster></Toaster>
             <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-4 p-4 border border-softGray rounded">
-              <p className="font-semibold">Please Type Your Information</p>
+              <p className="font-semibold">{t ("Please Type Your Information")}</p>
               <div className="border-b border-softGray"></div>
               <div className="flex flex-col gap-4">
 
                 <div className="flex justify-center items-center gap-2">
                   <label className="basis-1/2 flex flex-col text-gray">
-                    Name
+                    {t ("Name")}
                     <input type="text" id="name" name="name" className="rounded border border-softGray p-1 text-black" 
                       value={name} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
                   </label>
                   <label className="basis-1/2 flex flex-col text-gray">
-                    Surname
+                    {t ("Surname")}
                     <input type="text" id="surname" name="surname" className="rounded border border-softGray p-1 text-black"
                       value={surname} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.surnameError}</p>
@@ -188,7 +193,7 @@ export default function Traveler_Info () {
 
                 <div className="flex justify-center items-center gap-2">
                     <label className="basis-1/2 flex flex-col text-gray">
-                      Country
+                      {t ("Country")}
                       <select name="country" id="country" className="rounded border border-softGray py-1.5 px-1 h-[42px] text-black"
                         defaultValue={country} onChange={(event)=> handle_Change(event)}>
                         <option value="taiwan">Taiwan</option>
@@ -197,7 +202,7 @@ export default function Traveler_Info () {
                       </select>
                     </label>
                     <label className="basis-1/2 flex flex-col text-gray">
-                      Phone Number
+                      {t ("Phone Number")}
                       <input type="text" id="phone" name="phone" className="rounded border border-softGray p-1 text-black"
                       value={phone} onChange={(event) => handle_Change(event)}/>
                       <p aria-live="polite" className="text-customRed">{zod_Response?.phoneError}</p>
@@ -206,14 +211,14 @@ export default function Traveler_Info () {
 
                 <div className="flex justify-center items-center gap-2">
                   <label className="basis-1/2 flex flex-col justify-center text-gray">
-                    Email Address
+                    {t ("Email Address")}
                     <input type="text" id="email" name="email" className="rounded border border-softGray p-1 text-black"
                       value={email} onChange={(event) => handle_Change(event)}/>
                     <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
                   </label>
 
                   <label className="basis-1/2 flex flex-col justify-center text-gray">
-                    Offer Code
+                    {t ("Offer Code")}
                     <input type="text" id="offer" name="offer" className="rounded border border-softGray p-1 text-black"/>
                     {/* <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p> */}
                   </label>
@@ -224,7 +229,7 @@ export default function Traveler_Info () {
 
               {/** 取消政策 */}
               <div className="flex flex-col">
-                <p className="font-semibold">Cancellation Policy</p>
+                <p className="font-semibold">{t ("Cancellation Policy")}</p>
                 <ul className="flex flex-col gap-2">
                   {redux_The_Hotel.cancellation_Policy?.split(".").map((cancel, index) => {
                     return index < 6 && <li key={index} className="flex items-center gap-2">
@@ -241,25 +246,25 @@ export default function Traveler_Info () {
               {/** formAction 寫在<button>上*/}
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex justify-between">
-                  <p className="font-semibold">Tax</p>
+                  <p className="font-semibold">{t ("Tax")}</p>
                   <p className="font-semibold">$ {Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number))}</p>
                 </div>
                 <div className="flex justify-between">
-                  <p className="font-semibold">Room Price</p>
+                  <p className="font-semibold">{t ("Room Price")}</p>
                   <p className="font-semibold">$ {redux_Booked_Room.room_Price}</p>
                 </div>
                 <div className="flex justify-between">
-                  <p className="font-semibold">Total Price</p>
+                  <p className="font-semibold">{t ("Total Price")}</p>
                   <p className="font-semibold">$ {(Number(redux_Booked_Room.room_Price) as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number)))) }
                   </p>
                 </div>
 
                 {!is_Loading ?
-                  <button className="bg-primary text-white rounded py-2"> Proceed to Pay</button>
+                  <button className="bg-primary text-white rounded py-2"> {t ("Proceed to Pay")}</button>
                 :
                   <button className="flex justify-center items-center gap-2 bg-softGray text-white rounded py-2" disabled>
                     <OtherSVG name="spin" className="w-5 h-auto animate-spin"></OtherSVG>
-                      Processing...
+                      {t ("Processing") + "..."}
                   </button>
                 }
 
@@ -282,8 +287,8 @@ export default function Traveler_Info () {
                 <div className="flex gap-2">
                   <p className="bg-blue rounded text-white px-3 py-2">{redux_The_Hotel.totalRating}</p>
                   <div className="flex flex-col justify-between">
-                    <p className="text-blue font-semibold">{(redux_The_Hotel.totalRating as number) <4 ? 'Terrible' : 'Excellent'}</p>
-                    <p className="text-gray text-sm">{redux_The_Hotel.review_List.length} Reviews</p>
+                    <p className="text-blue font-semibold">{(redux_The_Hotel.totalRating as number) <=3 ? t ('Terrible') : t ('Excellent')}</p>
+                    <p className="text-gray text-sm">{redux_The_Hotel.review_List.length} {t ("Reviews")}</p>
                   </div>
                 </div>
                 <p className="text-xs">{redux_The_Hotel.address}</p>
@@ -294,13 +299,13 @@ export default function Traveler_Info () {
 
             {/** 訂單明細: 入住日、退房日、住幾晚、住幾人 */}
             <div className="flex flex-col gap-2">
-              <p className="font-semibold text-sm">Order Detail</p>
+              <p className="font-semibold text-sm">{t ("Order Detail")}</p>
 
               <div className="flex bg-[#f3f3f3] rounded gap-2 p-2">
                 <div className="basis-1/2 flex flex-col gap-2">
                   <div className="flex gap-2">
                     <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
-                    <p>Check In:</p>
+                    <p>{t ("Check In")}:</p>
                   </div>
                   <p>{redux_Form_Search.start_Date as string}</p>
                 </div>
@@ -310,7 +315,7 @@ export default function Traveler_Info () {
                 <div className="basis-1/2 flex flex-col gap-2">
                   <div className="flex gap-2">
                     <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
-                    <p>Check Out:</p>
+                    <p>{t ("Check Out")}:</p>
                   </div>
                   <p>{redux_Form_Search.end_Date as string}</p>
                 </div>
@@ -318,11 +323,11 @@ export default function Traveler_Info () {
               
               <div className="flex gap-2">
                 <OtherSVG name="night" className="w-4 h-auto"></OtherSVG>
-                <p>Length of Stay: {how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)} Nights</p>
+                <p>{t ("Length of Stay")}: {how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)} {t ("Nights")}</p>
               </div>
               <div className="flex gap-2">
                 <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
-                <p>Number of Rooms: {redux_Form_Search.room} Rooms</p>
+                <p>{t ("Number of Rooms")}: {redux_Form_Search.room} {t ("Rooms")}</p>
               </div>
 
               <div className="border-b-2 border-dashed border-softGray"></div>
@@ -335,26 +340,26 @@ export default function Traveler_Info () {
               <div className="flex gap-2">
                 <img className="rounded w-1/3" src={redux_The_Hotel.hotel_Image_List[0].url} alt={redux_The_Hotel.hotel_Image_List[0].description} />
                 <div className="flex flex-col gap-2">
-                  <p className="font-semibold">{redux_Booked_Room.room_Type.slice(0,1).toUpperCase() + redux_Booked_Room.room_Type.slice(1)}</p>
+                  <p className="font-semibold">{t (redux_Booked_Room.room_Type)}</p>
                   <div className="flex gap-2">
                     {redux_Booked_Room.smoke === true ? <>
                       <OtherSVG name="smoking" className="w-4 h-auto"></OtherSVG>
-                      <p>Smoking</p>
+                      <p>{t ("Smoking")}</p>
                     </>
                     : <>
                         <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG>
-                        <p>No-Smoking</p>
+                        <p>{t ("No-Smoking")}</p>
                     </>
                     }
                   </div>
                   <div className="flex gap-2">
                     <OtherSVG name="roomsize" className="w-4 h-auto"></OtherSVG>
-                    <p className="text-sm text-gray">{redux_Booked_Room.room_Size} m²</p>
+                    <p className="text-sm text-gray">{redux_Booked_Room.room_Size} {t ("m²")}</p>
                   </div>
-                  <p className="text-sm text-gray">Max People: {redux_Booked_Room.max_People} Adults</p>
+                  <p className="text-sm text-gray">{t ("Max People")}: {redux_Booked_Room.max_People} {t ("Adults")}</p>
                   <div className="flex gap-2">
-                    <p>{redux_Form_Search.adult} Adults</p>
-                    {redux_Form_Search.child >0 && <p>{redux_Form_Search.child} Childs</p>}
+                    <p>{redux_Form_Search.adult} {t ("Adults")}</p>
+                    {redux_Form_Search.child >0 && <p>{redux_Form_Search.child} {t ("Childs")}</p>}
                   </div>
                 </div>
               </div>

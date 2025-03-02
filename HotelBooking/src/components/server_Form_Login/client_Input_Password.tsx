@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface Client_Input_Password_Interface {
   password: string;
@@ -7,12 +8,14 @@ interface Client_Input_Password_Interface {
 }
 
 export default function Client_Input_Password ({password, setPassword}: Client_Input_Password_Interface) {
+  // 1. 眼睛開關 - 看密碼布林值
   const [password_Boolean, set_Password_Boolean] = useState(false);
-  // const [password, setPassword] = useState("");
   const show_Password = () => {
     set_Password_Boolean(!password_Boolean);
   }
 
+  // 2. next-intl i18n-翻譯
+  const t = useTranslations("Auth");
 
   return <>
   {/* 眼睛開關SVG */}
@@ -33,7 +36,7 @@ export default function Client_Input_Password ({password, setPassword}: Client_I
   {/* 眼睛開關 */}
 
 
-  <label htmlFor="password" className="text-gray">Password</label>
+  <label htmlFor="password" className="text-gray">{t ("Password")}</label>
   <input type={password_Boolean ? 'text' : 'password'} id="password" name="password" className="rounded border-2 border-softGray py-2 px-10"
     value={password} onChange={(event) => setPassword(event.target.value)}/>
   

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import { z } from 'zod';
+import { useTranslations } from "next-intl";
 
 // 1. zod 校驗錯誤之訊息
 const schema = z.object({
@@ -68,14 +69,16 @@ export default function Forget_Password() {
     finally {
       set_Loading_Boolean(false);
     }
-  }
+  };
 
+  // 8. next-intl i18n-翻譯
+  const t = useTranslations("Auth");
 
 
   return <>
 
     <div className="flex flex-col bg-primary h-screen relative lg:bg-[#F3F3F3] lg:h-full lg:mx-auto lg:mt-20 lg:py-4">
-      <p className="text-white text-center p-4 lg:hidden">Forget Password</p>
+      <p className="text-white text-center p-4 lg:hidden">{t ("Forget Password")}</p>
       <div className="absolute top-4 left-4 h-[56px] lg:hidden">
         <button type="button" className="" onClick={()=> router.back()}>
           {/* <Link href={referer}> */}
@@ -104,7 +107,7 @@ export default function Forget_Password() {
       <form onSubmit={handle_Foget_Password} className="flex flex-col px-4 pt-14 gap-4">
 
         {/** 電子郵件 */}
-        <label htmlFor="email" className="text-gray">Enter Email</label>
+        <label htmlFor="email" className="text-gray">{t ("Enter Email")}</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"
           value={email} onChange={(event) => setEmail(event.target.value)}/>
         <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
@@ -118,17 +121,17 @@ export default function Forget_Password() {
         {loading_Boolean ?
           <button type="button" className="bg-softGray flex justify-center items-center rounded-lg py-3 gap-2" disabled>
             <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
-            Processing...
+            {t ("Processing") + "..."}
           </button>
           :
-          <button className="bg-primary rounded-lg py-3 text-white">Sent</button>
+          <button className="bg-primary rounded-lg py-3 text-white">{t ("Sent")}</button>
         }
       </form>
       
       <div className="pt-4 flex flex-col justify-center items-center gap-4">
-        <p className="text-gray">Don't have an account? <Link href={'/register'} className="text-primary font-semibold">Register</Link></p>
+        <p className="text-gray">{t ("Don't have an account?")} <Link href={'/register'} className="text-primary font-semibold">{t ("Register")}</Link></p>
 
-        <p className="text-center text-sm">Or Sign in With</p>
+        <p className="text-center text-sm">{t ("Or Sign in With")}</p>
         <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
           <img src="/account/Google.svg" alt="" />
         </button>

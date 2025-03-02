@@ -29,6 +29,7 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import { update_Booked_Room } from "@/store/booked_Room/booked_Room";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 // 1. props傳遞之 介面型別
 interface Hotel_Card_Interface {
@@ -36,7 +37,7 @@ interface Hotel_Card_Interface {
 };
 
 // 2. Tab - 詳細、設施、評價陣列
-const tab = ["Overview", "Rooms", "Review", "Information"];
+const tab = ["Overview", "Rooms", "Reviews", "Map"];
 
 // 3. leaflet 打開地圖彈窗, 所需要的大頭針之圖檔
 L.Icon.Default.mergeOptions({
@@ -50,7 +51,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   const searchParams = useSearchParams();
 
   // 2. 父元件 HotelList props 指定飯店 之數據
-  console.log(the_Hotel, "props傳遞");
+  // console.log(the_Hotel, "props傳遞");
   Number(the_Hotel?.latitude);
   Number(the_Hotel?.longitude);
 
@@ -339,7 +340,10 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         observer.unobserve(section)
       })
     };
-  },[show_Hotel_Detail_Card])
+  },[show_Hotel_Detail_Card]);
+
+  // 20. next-intl i18n 翻譯
+  const t = useTranslations("HotelCard");
 
 
 
@@ -431,7 +435,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <ul className="flex gap-2 border-b border-softGray overflow-x-auto scrollbar-hidden bg-white sticky top-6 z-10 px-4 py-1">
           {tab.map((item, index) => {
             return <li key={index} onClick={() => set_Selected_Tab(index)} className="w-1/4  flex-shrink-0 flex flex-col items-center cursor-pointer">
-              <span className={`${selected_Tab === index ? 'text-primary' : ''} `}>{item}</span>
+              <span className={`${selected_Tab === index ? 'text-primary' : ''} `}>{t (item)}</span>
               {selected_Tab === index && <span className="text-primary mt-[-6px]">●</span>}
             </li>
           })}
@@ -488,7 +492,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-white">
                   <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.69l-2.22-2.219a.75.75 0 0 0-1.06 0l-1.91 1.909.47.47a.75.75 0 1 1-1.06 1.06L6.53 8.091a.75.75 0 0 0-1.06 0l-2.97 2.97ZM12 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clipRule="evenodd" />
                 </svg>
-                <p>View All {the_Hotel.hotel_Image_List.length}</p>
+                <p>{t ("View All")}</p>
               </div>
             </div>
           }
@@ -513,7 +517,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         </div>
 
 
-        <p className="text-primary font-semibold cursor-pointer" onClick={() => set_Modal_Boolean(true)}>Shown on Map</p>
+        <p className="text-primary font-semibold cursor-pointer" onClick={() => set_Modal_Boolean(true)}>{t ("Shown on Map")}</p>
         
       {/** React - leaflet 地圖 */}
         <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
@@ -536,7 +540,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <div className="flex gap-1">
           <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
           <p className="bg-blue text-white font-semibold rounded px-2">{the_Hotel?.totalRating}</p>
-          <p className="text-primary font-semibold">{"Reviews：" + the_Hotel?.review_List.length}</p>
+          <p className="text-primary font-semibold">{t ("Reviews") + "：" + the_Hotel?.review_List.length}</p>
         </div>
         {/* {the_Hotel?.intro.map((details, index) => {
           return <p key={index}> {the_Hotel.hotel_Intro} </p>
@@ -548,7 +552,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 跳轉房型按鈕 */}
           <div className="bg-white py-2 rounded border-t border-softGray sticky bottom-0 z-10">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
-              onClick={() =>　set_Selected_Tab(1)}>Book Now
+              onClick={() =>　set_Selected_Tab(1)}>{t ("Book Now")}
             </button>
           </div>
           {/** 跳轉房型按鈕 */}
@@ -582,7 +586,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 跳轉房型按鈕 */}
           <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
-              onClick={() =>　set_Selected_Tab(1)}>Book Now
+              onClick={() =>　set_Selected_Tab(1)}>{t ("Book Now")}
             </button>
           </div>
           {/** 跳轉房型按鈕 */}
@@ -595,7 +599,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       {/** 基本資訊 */}
         {selected_Tab === 3 && 
         <div className="flex flex-col gap-4">
-          <p className="font-semibold">Address／Transportation</p>
+          <p className="font-semibold">{t ("Address／Transportation")}</p>
           {/** 飯店經緯度 - GoogleMap */}
           <div className="flex items-center gap-2">
             <OtherSVG name="marker" className="w-10 h-auto"></OtherSVG>
@@ -627,20 +631,20 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** 住宿資訊 */}
         <div className="flex flex-col gap-2">
-          <p className="font-semibold">Accommodation Info</p>
+          <p className="font-semibold">{t ("Accommodation Info")}</p>
           <div className="flex">
             <div className="w-1/2 flex flex-col">
-              <p>Check-In</p>
-              <p className="font-semibold">{the_Hotel?.checkin}</p>
+              <p>{t ("Check-In")}</p>
+              <p className="font-semibold">{the_Hotel?.checkin?.slice(0,5)}</p>
             </div>
             <div className="w-1/2 flex flex-col">
-              <p>Check-Out</p>
-              <p className="font-semibold">{the_Hotel?.checkout}</p>
+              <p>{t ("Check-Out")}</p>
+              <p className="font-semibold">{the_Hotel?.checkout?.slice(0,5)}</p>
             </div>
           </div>
 
           {/** 付款資訊 */}
-          <p className="text-sm font-semibold">Payment</p>
+          <p className="text-sm font-semibold">{t ("Payment")}</p>
           <div className="flex flex-wrap">
             <div className="basis-1/2 flex gap-2">
               <OtherSVG name="master" className="w-4 h-auto"></OtherSVG>
@@ -660,11 +664,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 電話、郵件 */}
           <div className="flex flex-col">
             <div className="flex">
-              <p className="basis-1/2">TEL</p>
+              <p className="basis-1/2">{t ("TEL")}</p>
               <p className="basis-1/2">{the_Hotel?.hotel_Phone}</p>
             </div>
             <div className="flex">
-              <p className="basis-1/2">Email</p>
+              <p className="basis-1/2">{t ("Email")}</p>
               <p className="basis-1/2">{the_Hotel?.hotel_Email}</p>
             </div>
           </div>
@@ -675,7 +679,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** 取消政策 */}
         <div className="flex flex-col gap-2">
-          <p className="font-semibold">Cancellation Policy</p>
+          <p className="font-semibold">{t ("Cancellation Policy")}</p>
           {the_Hotel?.cancellation_Policy?.split(".").map((item, index) => {
             return <div className="flex flex-col gap-2" key={index}>
                 <p>{item}</p>
@@ -686,7 +690,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** 推薦景點 */}
         <div className="flex flex-col gap-2">
-          <p className="font-semibold">Top Recommendations</p>
+          <p className="font-semibold">{t ("Top Recommendations")}</p>
           {the_Hotel?.recommendation?.split(", ").map((recommendation, index) => {
             return <div className="flex" key={index}> {recommendation}</div>
           })}
@@ -697,7 +701,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 跳轉房型按鈕 */}
           <div className="bg-white rounded py-2 border-t border-softGray sticky bottom-0">
             <button className="bg-primary text-white rounded-lg py-2 w-full" 
-              onClick={() =>　set_Selected_Tab(1)}>Book Now
+              onClick={() =>　set_Selected_Tab(1)}>{t ("Book Now")}
             </button>
           </div>
           {/** 跳轉房型按鈕 */}
@@ -723,7 +727,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               return <li key={tab.id}>
                 <a href={`#${tab.id}`} className={`cursor-pointer font-semibold text-sm
                   ${tab.id === activeSection ? 'text-primary' : ''}`}>
-                  {tab.label}
+                  {t (tab.label)}
                 </a>
               </li>
 
@@ -765,7 +769,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/* <p className="font-semibold">{the_Hotel?.country}</p> */}
           <p className="font-semibold">{the_Hotel?.address}</p>
           <p>–</p>
-          <p className="font-semibold cursor-pointer text-primary" onClick={() => set_Modal_Boolean(true)}>Shown on Map</p>
+          <p className="font-semibold cursor-pointer text-primary" onClick={() => set_Modal_Boolean(true)}>{t ("Shown on Map")}</p>
           {/** React - leaflet 地圖 */}
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <MapContainer
@@ -793,9 +797,9 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           {/** 住客評分 */}
           <div className="basis-1/3 flex justify-between border border-softGray rounded px-4 py-4">
             <div className="flex flex-col gap-2">
-              <p className="font-semibold">Guest review score</p>
-              <p className="text-lg font-semibold">{the_Hotel?.totalRating as number > 4 ? 'Excellent' : 'Terrible'}</p>
-              <p className="text-xs font-semibold text-primary">Reviews: {the_Hotel?.review_List.length}</p>
+              <p className="font-semibold">{t ("Guest review score")}</p>
+              <p className="text-lg font-semibold">{the_Hotel?.totalRating as number > 3 ? t ('Excellent') : t ('Terrible')}</p>
+              <p className="text-xs font-semibold text-primary">{t ("All Reviews")}: {the_Hotel?.review_List.length}</p>
             </div>
             <p className="text-white bg-blue rounded py-1 px-4 self-center">{the_Hotel?.totalRating}</p>
           </div>
@@ -803,7 +807,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
           {/** 離車站幾分鐘 */}
             <div className="basis-1/3 flex flex-col gap-2 border border-softGray rounded px-4 py-4">
-              <p className="font-semibold">Access</p>
+              <p className="font-semibold">{t ("Access")}</p>
               <div className="flex items-center gap-2">
                 <OtherSVG name="transportation" className="w-4 h-auto"></OtherSVG>
                 <p>{the_Hotel?.transportation?.split(",")[0]}</p>
@@ -817,7 +821,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
           {/** 飯店設施 */}
           <div className="basis-1/3 flex flex-col gap-2 border border-softGray rounded px-4 py-4">
-            <p className="font-semibold">Hotel Facilities</p>
+            <p className="font-semibold">{t ("Hotel Facilities")}</p>
             <div className="grid grid-cols-2 gap-2">
               {the_Hotel?.facility_List?.map((item, index) => index <6 &&
                 <div className="flex gap-2" key={index}>
@@ -834,15 +838,15 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** 桌機PC - 房型照片、各種房型資訊 */}
         <section className="flex flex-col gap-2 scroll-m-28" id="rooms">
-          <h2 className="font-semibold text-2xl">Explore Our Rooms</h2>
-          <p>{the_Hotel?.roomType_List?.length} Room Types</p>
+          <h2 className="font-semibold text-2xl">{t ("Explore Our Rooms")}</h2>
+          <p>{the_Hotel?.roomType_List?.length} {t ("Room Types")}</p>
           
 
           <div className="flex flex-col gap-8">
               {the_Hotel?.roomType_List?.map((item) => {
                 return <div className="flex gap-2" key={item.roomType_Id}>
                   <div className="basis-1/4 flex flex-col">
-                    <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1)} [{item.bed_Type}] {item.smoke === false ? '[No Smoking]' : '[Smoking Room]'}</p>
+                    <p className="font-semibold">{t (item.room_Type)} [{t (item.bed_Type)}] {item.smoke === false ? `[${t ('No Smoking')}]` : `[${t ('Smoking Room')}]`}</p>
 
                     {/** 左邊卡片資訊 */}
                     <div className="flex flex-col gap-2">
@@ -916,17 +920,17 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
                         <div className="flex flex-col gap-2">
                           <div className="flex gap-2">
-                            <p className="font-semibold">{item.room_Type.slice(0,1).toUpperCase() + item.room_Type.slice(1) }</p>
-                            <p className="border bg-[#007CB5] rounded px-2 text-white">{item.view?.slice(0,1).toUpperCase() as string + item.view?.slice(1)}</p>
+                            <p className="font-semibold">{t (item.room_Type) }</p>
+                            <p className="border bg-[#007CB5] rounded px-2 text-white">{t (item.view?.slice(0,1).toUpperCase() as string + item.view?.slice(1))}</p>
                           </div>
                           
                           <div className="flex flex-col">
-                            <p className="font-semibold">Room Amenities</p>
+                            <p className="font-semibold">{t ("Room Amenities")}</p>
                             <div className="flex gap-2 flex-wrap">
                               {item.amenity_List?.map((amenity) => {
                                 return <div className="flex gap-2" key={amenity}>
                                     <OtherSVG name={amenity} className="w-4 h-auto"></OtherSVG>
-                                    <p>{amenity}</p>
+                                    <p>{t (amenity)}</p>
                                   </div>
                               })}
                             </div>
@@ -956,15 +960,15 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                           <div className="flex gap-2">
                             <div className="flex gap-1">
                               <OtherSVG name="night" className="w-4 h-auto"></OtherSVG>
-                              <p>{how_Many_Nights(redux_Start_Date as string, redux_End_Date as string)} Nights</p>
+                              <p>{how_Many_Nights(redux_Start_Date as string, redux_End_Date as string)} {t ("Nights")}</p>
                             </div>
-                            <div className="flex">
+                            <div className="flex gap-1">
                               <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
-                              <p>{redux_Room} Rooms</p>
+                              <p>{redux_Room} {t ("Room")}</p>
                             </div>
-                            <div className="flex">
+                            <div className="flex gap-1">
                               <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
-                              <p>{redux_Adult + redux_Child} Guests</p>
+                              <p>{redux_Adult + redux_Child} {t ("Guests")}</p>
                             </div>
                           </div>
 
@@ -981,11 +985,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         {/** 抽菸、吸菸 */}
                         <div className="flex gap-2">
                           {item.smoke === false ? <div className="flex gap-2 border border-black rounded px-2">
-                              <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG><p>No-Smoking Room</p>
+                              <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG><p>{t ("No Smoking")}</p>
                             </div>
                             :
                             <div className="flex gap-2 border border-black rounded px-2">
-                              <OtherSVG name="smoking" className="w-4 h-auto"></OtherSVG><p>Smoking Room</p>
+                              <OtherSVG name="smoking" className="w-4 h-auto"></OtherSVG><p>{t ("Smoking Room")}</p>
                             </div>
                           }
                         </div>
@@ -995,11 +999,11 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         <div className="flex gap-2">
                           <div className="flex gap-1">
                             <OtherSVG name="roomsize" className="w-4 h-auto"></OtherSVG>
-                            <p>{item.room_Size} m²</p>
+                            <p>{item.room_Size} {t ("m²")}</p>
                           </div>
                           <div className="flex gap-1">
                             <OtherSVG name="user" className="w-4 h-auto"></OtherSVG>
-                            <p>Max {item.max_People} Adults</p>
+                            <p>{t ("Max")} {item.max_People} {t ("Adults")}</p>
                           </div>
                         </div>
                         {/** 房型大小、可住幾人 */}
@@ -1021,7 +1025,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                             </div>
                           } */}
                           {/** 剩幾間房 */}
-                          <button className="bg-primary text-white rounded px-3 py-2" onClick={() => book_Room(item.roomType_Id)}>Book Now</button>
+                          <button className="bg-primary text-white rounded px-3 py-2" onClick={() => book_Room(item.roomType_Id)}>{t ("Book Now")}</button>
                         </div>
                       </div>
                       {/** Book Now 按鈕 */}
@@ -1044,12 +1048,12 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
           {/** 左邊平均評價星星 */}
           <div className="basis-1/4 flex flex-col gap-2">
-            <h2 className="font-semibold text-2xl">Rating and Reviews</h2>
+            <h2 className="font-semibold text-2xl">{t ("Rating and Reviews")}</h2>
             <div className="flex items-center gap-2">
               <p className="bg-blue rounded px-4 py-1.5 text-white">{the_Hotel?.totalRating}</p>
               <div className="flex flex-col justify-center">
-                <p className="font-semibold">{(the_Hotel?.totalRating as number) <=4 ? 'Terrible' : 'Excellent'}</p>
-                <p className="text-gray text-sm">{the_Hotel?.review_List.length} reviews from guests</p>
+                <p className="font-semibold">{(the_Hotel?.totalRating as number) <=3 ? t ('Terrible') : t ('Excellent')}</p>
+                <p className="text-gray text-sm">{the_Hotel?.review_List.length} {t ("reviews from guests")}</p>
               </div>
             </div>
           </div>
@@ -1060,8 +1064,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               <div className="">
                 <select className="border border-primary rounded p-2 text-primary" 
                   value={select_Value} onChange={change_Select_Review_Rating}>
-                  <option value="ratingHigh">Rating High</option>
-                  <option value="ratingLow">Rating Low</option>
+                  <option value="ratingHigh">{t ("Rating High")}</option>
+                  <option value="ratingLow">{t ("Rating Low")}</option>
                 </select>
               </div>
               {review_List_Render.map((review, index) => {
@@ -1087,7 +1091,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         <div className="flex flex-col border border-black rounded p-2">
                           <div className="flex gap-2">
                             <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
-                            <p>Reply from {the_Hotel?.hotel_Name}</p>
+                            <p>{t ("Reply from")}: {the_Hotel?.hotel_Name}</p>
                           </div>
                           <p className="text-xs leading-7">{review.reply}</p>
                         </div>
@@ -1104,7 +1108,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** PC桌機 - 地圖、check-In、Check-Out、付款方式、電話、地址 */}
         <section className="flex flex-col gap-2 scroll-m-28" id="map">
-          <h2 className="font-semibold text-2xl">Property Information</h2>
+          <h2 className="font-semibold text-2xl">{t ("Hotel Location")}</h2>
           {/** React-leaflet 地圖 */}
           <MapContainer
               center={[the_Hotel?.latitude as number, the_Hotel?.longitude as number]} // 台北 101 位置
@@ -1126,18 +1130,18 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
             {/** 上方 Checkin、Checkout */}
               <div className="flex gap-4 border-b border-softGray p-4">
                 <div className="flex flex-col">
-                  <p className="font-semibold text-sm">Check-in time:</p>
+                  <p className="font-semibold text-sm">{t ("Check-in time")}:</p>
                   <div className="flex gap-2">
                     <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
-                    <p className="font-semibold text-lg">After {(the_Hotel?.checkin as string).slice(0,5)}</p>
+                    <p className="font-semibold text-lg">{t ("After")} {(the_Hotel?.checkin as string).slice(0,5)}</p>
                   </div>
                 </div>
                 <div className="border-r border-softGray"></div>
                 <div className="flex flex-col">
-                  <p className="font-semibold text-sm">Check-out time:</p>
+                  <p className="font-semibold text-sm">{t ("Check-out time")}:</p>
                   <div className="flex gap-2">
                     <ProfileSVG name="logout" className="w-4 h-auto"></ProfileSVG>
-                    <p className="font-semibold text-lg">Before {(the_Hotel?.checkout as string).slice(0,5)}</p>
+                    <p className="font-semibold text-lg">{t ("Before")} {(the_Hotel?.checkout as string).slice(0,5)}</p>
                   </div>
                 </div>
               </div>
@@ -1145,7 +1149,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
               
               {/** 付款方式 */}
               <div className="flex flex-col gap-2 p-4">
-                <p className="font-semibold text-sm">Payment Methods</p>
+                <p className="font-semibold text-sm">{t ("Payment Methods")}</p>
                 <div className="flex flex-wrap gap-y-2">
                   <div className="basis-1/2 flex gap-2">
                     <OtherSVG name="master" className="w-5 h-auto"></OtherSVG>
@@ -1194,7 +1198,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** 桌機PC - 取消政策 */}
         <section className="flex flex-col gap-2 scroll-m-28" id="cancellation">
-          <h2 className="font-semibold text-2xl">Cancellation Policy</h2>
+          <h2 className="font-semibold text-2xl">{t ("Cancellation Policy")}</h2>
           <div className="flex flex-col gap-2 border border-softGray rounded p-2">
             {the_Hotel?.cancellation_Policy?.split(".").map((cancel, index) => {
               return cancel !== "" &&
@@ -1209,7 +1213,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
         <div className="flex flex-col gap-2 scroll-m-28" >
-          <h2 className="font-semibold text-2xl">Recommended Spots</h2>
+          <h2 className="font-semibold text-2xl">{t ("Recommended Spots")}</h2>
           <div className="flex flex-col gap-2">
             {the_Hotel?.recommendation?.split(",").map((spot, index) => {
               return <div className="flex gap-2" key={index}>

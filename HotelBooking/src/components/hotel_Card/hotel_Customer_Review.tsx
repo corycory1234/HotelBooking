@@ -5,6 +5,7 @@ import { add_Review_Type_Interface } from "@/types/add_Hotel_Detail";
 import { Customer_Rating } from "../starrating/customer_Rating";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store/store";
+import { useTranslations } from "next-intl";
 
 
 export default function Hotel_Customer_Review() {
@@ -34,8 +35,10 @@ export default function Hotel_Customer_Review() {
         sorted = [...redux_Hotel_Detail?.review_List]
     }
     set_Sorted_Review(sorted as [])
-  }
+  };
 
+  // 4. next-intl i18n翻譯
+  const t = useTranslations("HotelCard");
 
 
   return <>
@@ -45,12 +48,12 @@ export default function Hotel_Customer_Review() {
         <div className="flex gap-2 items-center">
           <HomeSVG name={"Star"} className="w-6 h-auto"></HomeSVG>
           <p>{redux_Hotel_Detail?.totalRating}</p>
-          <p>{redux_Hotel_Detail?.review_List.length + " Reviews"}</p>
+          <p>{t ("All Reviews") + ": " + redux_Hotel_Detail?.review_List.length}</p>
         </div>
         {/** 排序評價 */}
         <select name="" id="" className="border-2 border-softGray p-1 rounded" onChange={(event) => select_Rating(event.target.value)}>
-          <option value="hightRating">High</option>
-          <option value="lowRating">Low</option>
+          <option value="hightRating">{t ("High")}</option>
+          <option value="lowRating">{t ("Low")}</option>
         </select>
         {/** 排序評價 */}
       </div>
@@ -64,7 +67,7 @@ export default function Hotel_Customer_Review() {
               <ProfileSVG name="user" className="w-5 h-auto"></ProfileSVG>
               <p className="text-primary">{item.traveler_Name}</p>
             </div>
-            <p className="text-primary"> {item.date}</p>
+            <p className="text-primary"> {item.date.replaceAll("/","-").split('T')[0]}</p>
             <div className="flex">
               <Customer_Rating rating={item.traveler_Rating as number} className="w-4 h-auto"></Customer_Rating>
             </div>
@@ -75,7 +78,7 @@ export default function Hotel_Customer_Review() {
             <div className="flex flex-col border border-black rounded p-2">
               <div className="flex gap-2">
                 <OtherSVG name="hotel" className="w-5 h-auto"></OtherSVG>
-                <p>Reply from {redux_Hotel_Detail?.hotel_Name}</p>
+                <p>{t ("Reply from") + ":"} {redux_Hotel_Detail?.hotel_Name}</p>
               </div>
               <p className="text-xs leading-7">{item.reply}</p>
             </div>

@@ -10,6 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Offer_List_Json from "@/fakeData/offer_List.json";
+import { useTranslations } from "next-intl";
 
 // 0. Zod 錯誤訊息初始值
 // const initialState = "";
@@ -25,7 +26,7 @@ interface Zod_Response_Interface {
 
 
 export default function Form_Credit_Card () {
-  const router = useRouter()
+  const router = useRouter();
 
   // 2. 透過 useFormState 套用 Server Actino函式 以及 zod錯誤訊息
   // const [state, formAction] = useFormState(Pay, initialState)
@@ -160,12 +161,15 @@ export default function Form_Credit_Card () {
   const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
   const offer = Offer_List_Json.find((item) => item.offer_Id === redux_The_Hotel.offer_Id);
 
-  // 11. sessionStorage 拿名字、電子郵件
+  // 12. sessionStorage 拿名字、電子郵件
   const traveler_Name = sessionStorage.getItem("name");
   const traveler_Surname = sessionStorage.getItem("surname");
   const traveler_Email = sessionStorage.getItem("email") as string;
   const traveler_Country = sessionStorage.getItem("country") as string;
   const traveler_Phone = sessionStorage.getItem("phone") as string;
+
+  // 13. next-intl i18n-翻譯
+  const t = useTranslations("CreditCard")
 
 
 
@@ -177,14 +181,14 @@ export default function Form_Credit_Card () {
       <div className="bg-white flex flex-col gap-2 rounded-lg p-4">
 
         {/** 信用卡持有人姓名 */}
-        <label htmlFor="name" className="text-sm text-gray">Card Holder Name</label>
+        <label htmlFor="name" className="text-sm text-gray">{t ("Card Holder Name")}</label>
         <input type="text" id="name" name="name" className="border-b border-strokeGray p-1" placeholder="Your Name">
         </input>
         <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
         {/** 信用卡持有人姓名 */}
         
         {/** 信用卡卡號 */}
-        <label htmlFor="cardnumber" className="text-sm text-gray">Card Number</label>
+        <label htmlFor="cardnumber" className="text-sm text-gray">{t ("Card Number")}</label>
         <input type="text" id="cardnumber" name="cardnumber" value={cardNumber}
         className="border-b border-strokeGray p-1"
         onChange={handle_CardNumber_Change} maxLength={19} placeholder="0000 0000 0000 0000">
@@ -195,7 +199,7 @@ export default function Form_Credit_Card () {
         <div className="flex justify-between gap-2">
           {/** 到期日 */}
           <div className="w-1/2 flex flex-col gap-2">
-            <label htmlFor="expireddate" className="text-sm text-gray">Expired Date</label>
+            <label htmlFor="expireddate" className="text-sm text-gray">{t ("Expired Date")}</label>
             <input type="text" id="expireddate" name="expireddate" className="border-b border-strokeGray p-1"
             onChange={handle_ExpiredDate_Change} maxLength={5} placeholder="MM/YY" value={expired_Date}>
             </input>
@@ -219,23 +223,23 @@ export default function Form_Credit_Card () {
     {/* 所有金額統計 */}
     <div className="bg-white flex flex-col gap-2 rounded-lg p-4">
       <div className="flex justify-between">
-        <p className="text-sm text-gray">Hotel Price</p>
+        <p className="text-sm text-gray">{t ("Room Price")}</p>
         {/** 房間價格 */}
         <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
         {/** 房間價格 */}
       </div>
       
       <div className="flex justify-between">
-        <p className="text-sm text-gray">Tax</p>
+        <p className="text-sm text-gray">{t ("Tax")}</p>
         <p className="font-bold">{"+" + Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0))}</p>
       </div>
       <div className="flex justify-between">
-        <p className="text-sm text-gray">{offer?.offer_Name} Offer</p>
+        <p className="text-sm text-gray">{t (offer?.offer_Name)} {t ("Offer")}</p>
         <p className="font-bold">{offer?.offer_Price as number * 100}% OFF</p>
       </div>
       <div className="border-b border-dashed border-[#D6E1EF]"></div>
       <div className="flex justify-between">
-        <p className="text-sm text-gray">Total Amount</p>
+        <p className="text-sm text-gray">{t ("Total Amount")}</p>
         <p className="font-bold text-primary">
           {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
         </p>
@@ -246,13 +250,13 @@ export default function Form_Credit_Card () {
 
     {!is_Loading ? 
       <button type="submit" className="bg-secondary text-white text-center font-semibold py-2 rounded-lg">
-        Proceed
+        {t ("Proceed")}
       </button>
     :
       <button type="submit"
       className="flex justify-center items-center gap-2 bg-softGray text-white text-center font-semibold py-2 rounded-lg" disabled>
       <OtherSVG name="spin" className="animate-spin w-5 h-auto"></OtherSVG>
-      Processing...
+      {t ("Processing")}...
       </button>
     }
 

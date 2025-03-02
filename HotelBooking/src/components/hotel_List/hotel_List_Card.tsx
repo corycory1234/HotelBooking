@@ -353,6 +353,7 @@ export default function Hotel_List_Card() {
 
   // 17. next-intl i18n翻譯
   const t = useTranslations("AdvancedSearch");
+  const t_HotelCard = useTranslations("HotelCard");
 
 
   // 18. 被 sorted 飯店列表, 不可拿 redux_Hotel_List 去排序, 因為沒有寫 Redux - Action。 
@@ -384,6 +385,8 @@ export default function Hotel_List_Card() {
     setFormSort_Mobile(false);
     set_FormSort(false);
   };
+
+
 
   return <>
   {/************ 手機版|PC桌機 - 沒找到, 就<Not_Found> ************/}
@@ -571,10 +574,10 @@ export default function Hotel_List_Card() {
                   {/** 人數、幾間房 - PC */}
                   <div className="hidden lg:flex flex-col">
                     <p className="lg:text-sm lg:text-[#6D6D6D]">  
-                      {redux_Adult + redux_Child} Guest
+                      {redux_Adult + redux_Child} {t_HotelCard ("Guest")}
                     </p>
                     <p className="lg:text-sm lg:text-[#6D6D6D]">
-                      {how_Many_Nights(redux_Date_Start as string, redux_Date_End as string)} Nights
+                      {how_Many_Nights(redux_Date_Start as string, redux_Date_End as string)} {t_HotelCard ("Nights")}
                     </p>
                   </div>
                   {/** 人數、幾間房 - PC */}
@@ -620,12 +623,12 @@ export default function Hotel_List_Card() {
               <div className="flex items-center justify-between mt-4 lg:mt-0 lg:justify-end lg:pb-2">
                 <div className="lg:hidden">
                   <span className="text-xl font-semibold">$ {item.price}</span>
-                  <span className="text-sm text-gray-500">/night</span>
+                  <span className="text-sm text-gray-500">{t_HotelCard ("/night")}</span>
                 </div>
                 {/* <Link href={`/hotellist/${item.id}`}> */}
                 <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium"
                   onClick={() => check_Hotel_RoomType_List(item.hotel_Id as string)}>
-                  Book Now
+                  {t_HotelCard ("Book Now")}
                 </button>
                 {/* </Link> */}
               </div>

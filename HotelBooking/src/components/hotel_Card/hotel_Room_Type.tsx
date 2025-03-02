@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Modal from "../modal/modal";
 import Full_Modal from "../modal/full-modal";
+import { useTranslations } from "next-intl";
 
 export default function Hotel_Room_Type() {
   // 1. Redux - 飯店明細
@@ -42,16 +43,19 @@ export default function Hotel_Room_Type() {
     }
   };
 
-  // 9. 透過Swoper, 打開「房型照片彈窗」
+  // 4. 透過Swiper, 打開「房型照片彈窗」
   const [modal_Boolean_Swiper_RoomType, set_Modal_Boolean_Swiper_RoomType] = useState<boolean>(false);
 
-  // 8. 打開滿版彈窗
+  // 5. 打開滿版彈窗
   const [full_Modal_Boolean, set_Full_Modal_Boolean] = useState<boolean>(false);
   const [the_Slide, set_The_Silde] = useState<number>(0);
   const show_The_Full_Slide = (index: number) =>{
     set_The_Silde(index);
     set_Full_Modal_Boolean(true);
-  }
+  };
+
+  // 6. next-intl i18n翻譯
+  const t = useTranslations("HotelCard");
   
 
 
@@ -137,12 +141,15 @@ export default function Hotel_Room_Type() {
 
         
         {/** 房型名稱、房間大小、最多幾人住 */}
-        <p className="font-bold">{room.room_Type.charAt(0).toUpperCase() + room.room_Type.slice(1)}</p>
+        <div className="flex gap-1">
+          <p className="font-bold">{t (room.room_Type)}</p>
+          <p className="font-bold">- {t (room.bed_Type)}</p>
+        </div>
         <div className="flex gap-1">
           <OtherSVG name={"roomsize"} className="w-4 h-auto"></OtherSVG>
-          <p>{room.room_Size + "㎡"}</p>
+          <p>{room.room_Size + t ("m²")}</p>
           <OtherSVG name={"maxoccupancy"} className="w-4 h-auto"></OtherSVG>
-          <p>{"Max " + room.max_People + " People"}</p>
+          <p>{t ("Max") + room.max_People + t ("Adults")}</p>
         </div>
         {/** 房型名稱、房間大小、最多幾人住 */}
 
@@ -156,12 +163,12 @@ export default function Hotel_Room_Type() {
             {room.smoke === true ? 
             <div className="flex gap-1 bg-softGray rounded p-1">
               <OtherSVG name={"smoking"} className="w-4 h-auto"/>
-              <span className="text-xs">Smoking Room</span>
+              <span className="text-xs">{t ("Smoking Room")}</span>
             </div>
             : 
             <div className="flex gap-1 bg-softGray rounded p-1">
               <OtherSVG name={"nosmoking"} className="w-4 h-auto"></OtherSVG>
-              <span className="text-xs">No-Smoking Room</span>
+              <span className="text-xs">{t ("No Smoking")}</span>
             </div>
             }
             {/** 禁菸房 | 吸菸房 */}
@@ -170,7 +177,7 @@ export default function Hotel_Room_Type() {
             {room.amenity_List?.map((item, index) => {
               return <div className="flex gap-1 bg-softGray rounded p-1" key={index}>
                 <OtherSVG name={item} className="w-4 h-auto"/> 
-                <span className="text-xs">{item}</span>
+                <span className="text-xs">{t (item)}</span>
               </div>
             })}
             {/** 房間裡的設施 */}
@@ -187,7 +194,7 @@ export default function Hotel_Room_Type() {
             <div className="flex flex-col">
               <p className="font-bold text-lg">{room.room_Price}</p>
               <p className="text-gray text-sm">
-                {nights + " Nights"} | {redux_Fomr_Search.adult + redux_Fomr_Search.child + " Travelers"} 
+                {nights + t ("Nights")} | {redux_Fomr_Search.adult + redux_Fomr_Search.child + t("Guests")} 
                 {/* {redux_Fomr_Search.child ? "|" + redux_Fomr_Search.child + " Childs" : ""} */}
                 </p>
             </div>
@@ -196,7 +203,7 @@ export default function Hotel_Room_Type() {
             {/** 跳轉 Payment */}
             {/* <Link href={"/payment"}> */}
               <button className="bg-primary p-2 rounded text-white"
-                onClick={() => book_Room(room.roomType_Id)}>Book Now</button>
+                onClick={() => book_Room(room.roomType_Id)}>{t ("Book Now")}</button>
             {/* </Link> */}
             {/** 跳轉 Payment */}
           </div>

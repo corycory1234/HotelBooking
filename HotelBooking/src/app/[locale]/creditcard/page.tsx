@@ -14,6 +14,7 @@ import StarRating from "@/components/starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import Offer_List_Json from "@/fakeData/offer_List.json";
 import Payment_Progress_Bar from "@/components/payment_Progress_Bar/payment_Progress_Bar";
+import { useTranslations } from "next-intl";
 
 
 // 0. 三家信用卡
@@ -172,6 +173,9 @@ export default function CreditCard() {
   // 12 匹配優惠代碼
   const offer = Offer_List_Json.find((item) => item.offer_Id === redux_The_Hotel.offer_Id);
 
+  // 13. next-intl i18n-翻譯
+  const t = useTranslations("CreditCard")
+
   return <div>
     {/** 回上一頁 */}
     <div className="lg:hidden">
@@ -200,14 +204,14 @@ export default function CreditCard() {
         <div className="flex basis-1/2 flex-col  gap-4">
           {/** 姓名、電子郵件 */}
           <div className="border border-softGray rounded flex flex-col gap-2 p-4">
-            <p className="font-semibold">Your Detail Information</p>
+            <p className="font-semibold">{t ("Your Detail Information")}</p>
             <div className="border-b border-softGray"></div>
             <div className="flex gap-2">
-              <p className="font-semibold text-sm">Name: </p>
+              <p className="font-semibold text-sm">{t ("Name")}: </p>
               <p className="text-sm">{traveler_Name + " " + traveler_Surname}</p>
             </div>
             <div className="flex gap-2">
-              <p className="font-semibold text-sm">Confirmation Mail To: </p>
+              <p className="font-semibold text-sm">{t ("Confirmation Mail To")}: </p>
               <p className="text-sm">{traveler_Email}</p>
             </div>
           </div>
@@ -215,7 +219,7 @@ export default function CreditCard() {
 
           {/** 取消政策 */}
           <div className="flex flex-col border border-softGray rounded gap-2 p-4">
-            <p className="font-semibold">Cancellation Policy</p>
+            <p className="font-semibold">{t ("Cancellation Policy")}</p>
             <div className="border-b border-softGray"></div>
             <ul className="flex flex-col gap-2">
               {redux_The_Hotel.cancellation_Policy?.split(".").map((cancel, index) => {
@@ -234,7 +238,7 @@ export default function CreditCard() {
         <form onSubmit={(event) => pay(event)} className="flex flex-col gap-2 border border-softGray rounded p-4">
 
           {/** 信用卡付3選1 */}
-            <p className="font-semibold">Select Payment Method</p>
+            <p className="font-semibold">{t ("Select Payment Method")}</p>
             <div className="flex gap-4 items-center">
               {creditCard.map((item, index) => {
                 return  <div 
@@ -251,21 +255,21 @@ export default function CreditCard() {
             </div>
           {/** 信用卡付3選1 */}
 
-          <p className="font-semibold">Payment</p>
+          <p className="font-semibold">{t ("Payment")}</p>
           <div className="border-b border-softGray"></div>
           
         {/** 信用卡所有<input> */}
           <div className="bg-[#f3f3f3] flex flex-col gap-2 rounded-lg p-4">
 
             {/** 信用卡持有人姓名 */}
-            <label htmlFor="name" className="text-sm font-semibold">Card Holder Name</label>
+            <label htmlFor="name" className="text-sm font-semibold">{t ("Card Holder Name")}</label>
             <input type="text" id="name" name="name" className="border-b border-strokeGray p-1 rounded" placeholder="Your Name">
             </input>
             <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
             {/** 信用卡持有人姓名 */}
             
             {/** 信用卡卡號 */}
-            <label htmlFor="cardnumber" className="text-sm font-semibold">Card Number</label>
+            <label htmlFor="cardnumber" className="text-sm font-semibold">{t ("Card Number")}</label>
             <input type="text" id="cardnumber" name="cardnumber" value={cardNumber}
             className="border-b border-strokeGray p-1 rounded"
             onChange={handle_CardNumber_Change} maxLength={19} placeholder="0000 0000 0000 0000">
@@ -276,7 +280,7 @@ export default function CreditCard() {
             <div className="flex justify-between gap-2">
               {/** 到期日 */}
               <div className="w-1/2 flex flex-col gap-2">
-                <label htmlFor="expireddate" className="text-sm font-semibold">Expired Date</label>
+                <label htmlFor="expireddate" className="text-sm font-semibold">{t ("Expired Date")}</label>
                 <input type="text" id="expireddate" name="expireddate" className="border-b border-strokeGray p-1 rounded"
                 onChange={handle_ExpiredDate_Change} maxLength={5} placeholder="MM/YY" value={expired_Date}>
                 </input>
@@ -300,13 +304,13 @@ export default function CreditCard() {
 
         {!is_Loading ? 
           <button type="submit" className="bg-primary text-white text-center font-semibold py-2 rounded">
-            Proceed
+            {t ("Proceed")}
           </button>
         :
           <button type="submit"
           className="flex justify-center items-center gap-2 bg-softGray text-white text-center font-semibold py-2 rounded" disabled>
           <OtherSVG name="spin" className="animate-spin w-5 h-auto"></OtherSVG>
-          Processing...
+          {t ("Processing")}...
           </button>
         }
         </form>
@@ -327,8 +331,8 @@ export default function CreditCard() {
                   <div className="flex gap-2">
                     <p className="bg-blue rounded text-white px-3 py-2">{redux_The_Hotel.totalRating}</p>
                     <div className="flex flex-col justify-between">
-                      <p className="text-blue font-semibold">{(redux_The_Hotel.totalRating as number) <4 ? 'Terrible' : 'Excellent'}</p>
-                      <p className="text-gray text-sm">{redux_The_Hotel.review_List.length} Reviews</p>
+                      <p className="text-blue font-semibold">{(redux_The_Hotel.totalRating as number) <=3 ? t ('Terrible') : t ('Excellent')}</p>
+                      <p className="text-gray text-sm">{redux_The_Hotel.review_List.length} {t ("Reviews")}</p>
                     </div>
                   </div>
                   <p className="text-xs">{redux_The_Hotel.address}</p>
@@ -339,13 +343,13 @@ export default function CreditCard() {
 
               {/** 訂單明細: 入住日、退房日、住幾晚、住幾人 */}
               <div className="flex flex-col gap-2">
-                <p className="font-semibold text-sm">Order Detail</p>
+                <p className="font-semibold text-sm">{t ("Order Detail")}</p>
 
                 <div className="flex bg-[#f3f3f3] rounded gap-2 p-2">
                   <div className="basis-1/2 flex flex-col gap-2">
                     <div className="flex gap-2">
                       <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
-                      <p>Check In:</p>
+                      <p>{t ("Check In")}:</p>
                     </div>
                     <p>{redux_Form_Search.start_Date as string}</p>
                   </div>
@@ -355,7 +359,7 @@ export default function CreditCard() {
                   <div className="basis-1/2 flex flex-col gap-2">
                     <div className="flex gap-2">
                       <ProfileSVG name="login" className="w-4 h-auto"></ProfileSVG>
-                      <p>Check Out:</p>
+                      <p>{t ("Check Out")}:</p>
                     </div>
                     <p>{redux_Form_Search.end_Date as string}</p>
                   </div>
@@ -363,11 +367,11 @@ export default function CreditCard() {
                 
                 <div className="flex gap-2">
                   <OtherSVG name="night" className="w-4 h-auto"></OtherSVG>
-                  <p>Length of Stay: {how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)} Nights</p>
+                  <p>{t ("Length of Stay")}: {how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)} {t ("Nights")}</p>
                 </div>
                 <div className="flex gap-2">
                   <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
-                  <p>Number of Rooms: {redux_Form_Search.room} Rooms</p>
+                  <p>{t ("Number of Rooms")}: {redux_Form_Search.room} {t ("Rooms")}</p>
                 </div>
 
                 <div className="border-b-2 border-dashed border-softGray"></div>
@@ -384,22 +388,22 @@ export default function CreditCard() {
                     <div className="flex gap-2">
                       {redux_Booked_Room.smoke === true ? <>
                         <OtherSVG name="smoking" className="w-4 h-auto"></OtherSVG>
-                        <p>Smoking</p>
+                        <p>{t ("Smoking")}</p>
                       </>
                       : <>
                           <OtherSVG name="nosmoking" className="w-4 h-auto"></OtherSVG>
-                          <p>No-Smoking</p>
+                          <p>{t ("No-Smoking")}</p>
                       </>
                       }
                     </div>
                     <div className="flex gap-2">
                       <OtherSVG name="roomsize" className="w-4 h-auto"></OtherSVG>
-                      <p className="text-sm text-gray">{redux_Booked_Room.room_Size} m²</p>
+                      <p className="text-sm text-gray">{redux_Booked_Room.room_Size} {t ("m²")}</p>
                     </div>
-                    <p className="text-sm text-gray">Max People: {redux_Booked_Room.max_People} Adults</p>
+                    <p className="text-sm text-gray">{t ("Max People")}: {redux_Booked_Room.max_People} {t ("Adults")}</p>
                     <div className="flex gap-2">
-                      <p>{redux_Form_Search.adult} Adults</p>
-                      {redux_Form_Search.child >0 && <p>{redux_Form_Search.child} Childs</p>}
+                      <p>{redux_Form_Search.adult} {t ("Adults")}</p>
+                      {redux_Form_Search.child >0 && <p>{redux_Form_Search.child} {t ("Childs")}</p>}
                     </div>
                   </div>
                 </div>
@@ -411,23 +415,23 @@ export default function CreditCard() {
             {/* 所有金額統計 */}
             <div className="bg-[#f3f3f3] flex flex-col gap-2 rounded p-4">
               <div className="flex justify-between">
-                <p className="text-sm font-semibold">Room Price</p>
+                <p className="text-sm font-semibold">{t ("Room Price")}</p>
                 {/** 房間價格 */}
                 <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
                 {/** 房間價格 */}
               </div>
               
               <div className="flex justify-between">
-                <p className="text-sm font-semibold">Tax</p>
+                <p className="text-sm font-semibold">{t ("Tax")}</p>
                 <p className="font-bold">{"+" + Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0))}</p>
               </div>
               <div className="flex justify-between">
-                <p className="text-sm font-semibold">{offer?.offer_Name} Offer</p>
+                <p className="text-sm font-semibold">{t (offer?.offer_Name)} {t ("Offer")}</p>
                 <p className="font-bold">{offer?.offer_Price as number * 100}% OFF</p>
               </div>
               <div className="border-b-2 border-dashed border-softGray"></div>
               <div className="flex justify-between">
-                <p className="text-sm font-semibold">Total Amount</p>
+                <p className="text-sm font-semibold">{t ("Total Amount")}</p>
                 <p className="font-bold text-customRed">
                   {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
                 </p>

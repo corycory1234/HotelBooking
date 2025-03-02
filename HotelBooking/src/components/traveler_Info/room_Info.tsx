@@ -3,6 +3,7 @@ import { RootState } from "@/store/store";
 import { HomeSVG } from "@/components/client_Svg/client_Svg";
 import { OtherSVG } from "@/components/client_Svg/client_Svg";
 import how_Many_Nights from "@/utils/how_Many_Nights";
+import { useTranslations } from "next-intl";
 
 
 export default function Room_Info () {
@@ -14,11 +15,14 @@ export default function Room_Info () {
 
   // 4. 住幾個晚上
   const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10), redux_Fomr_Search.dateRange?.slice(13))
-  console.log("幾晚", nights);
+  // console.log("幾晚", nights);
 
   // 5. Redux - 被預訂飯店之之數據
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
   console.log(redux_Booked_Room, "Redux - 被預訂之房型");
+
+  // 6. next-intl i18n-翻譯
+  const t = useTranslations("TravelerInfo");
 
 
   return <>
@@ -37,16 +41,16 @@ export default function Room_Info () {
 
         {/** 房型 */}
         <div className="flex gap-2">
-          <p className="text-lg font-semibold">{redux_Booked_Room.room_Type.charAt(0).toUpperCase() + redux_Booked_Room.room_Type.slice(1)}</p>
+          <p className="text-lg font-semibold">{t (redux_Booked_Room.room_Type)}</p>
             {/** 吸菸|禁菸 */}
             {redux_Booked_Room.smoke === true ? 
             <div className="flex gap-2 bg-softGray p-1 rounded text-sm">
               <OtherSVG name={"smoking"} className="w-4 h-auto"></OtherSVG> 
-              Smoking Room
+              {t ("Smoking Room")}
             </div> 
             : <div className="flex gap-2 bg-softGray p-1 rounded text-sm">
               <OtherSVG name={"nosmoking"} className="w-4 h-auto"></OtherSVG> 
-              No-Smoking
+              {t ("No-Smoking")}
             </div>}
             {/** 吸菸|禁菸 */}
         </div>
@@ -56,9 +60,9 @@ export default function Room_Info () {
         <div className="flex flex-col">
           <div className="flex gap-2 items-center">
             <OtherSVG name={"time"} className="w-4 h-auto"></OtherSVG>
-            <p>Chekc In</p>
+            <p>{t ("Check In")}</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(0,10) + ` After ${redux_Hotel_Detail.checkin}`}</p>
+          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(0,10) + ` ${t ("After")} ${redux_Hotel_Detail.checkin?.slice(0,5)}`}</p>
         </div>
         {/** 入住時間 */}
         
@@ -66,9 +70,9 @@ export default function Room_Info () {
         <div className="flex flex-col">
           <div className="flex gap-2 items-center">
             <OtherSVG name={"time"} className="w-4 h-auto"></OtherSVG>
-            <p>Chekc Out</p>
+            <p>{t ("Check Out")}</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(13) + ` Before ${redux_Hotel_Detail.checkout}`} </p>
+          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.dateRange?.slice(13) + ` ${t ("Before")} ${redux_Hotel_Detail.checkout?.slice(0,5)}`} </p>
         </div>
         {/** 退房時間 */}
         
@@ -76,9 +80,9 @@ export default function Room_Info () {
         <div className="flex flex-col">
           <div className="flex gap-2">
             <OtherSVG name={"bed"} className="w-4 h-auto"></OtherSVG>
-            <p>Number of Roooms</p>
+            <p>{t ("Number of Rooms")}</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.room + " Room(s)"}</p>
+          <p className="text-sm font-semibold pl-[28px]">{redux_Fomr_Search.room + t ("Rooms")}</p>
         </div>
         {/** 幾間房 */}
 
@@ -86,9 +90,9 @@ export default function Room_Info () {
         <div className="flex flex-col">
           <div className="flex gap-2">
             <OtherSVG name={"night"} className="w-4 h-auto"></OtherSVG>
-            <p>Number of Nights</p>
+            <p>{t ("Number of Nights")}</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{nights + " Night(s)"}</p>
+          <p className="text-sm font-semibold pl-[28px]">{nights + t ("Nights")}</p>
         </div>
         {/** 住幾晚 */}
 
@@ -96,9 +100,9 @@ export default function Room_Info () {
         <div className="flex flex-col">
           <div className="flex gap-2">
             <OtherSVG name={"user"} className="w-4 h-auto"></OtherSVG>
-            <p>Number of People</p>
+            <p>{t ("Number of People")}</p>
           </div>
-          <p className="text-sm font-semibold pl-[28px]">{`${redux_Fomr_Search.adult}  Adult(s)`} {`${redux_Fomr_Search.child >0 ? redux_Fomr_Search.child + ' Child(s)'  : ''}`}</p>
+          <p className="text-sm font-semibold pl-[28px]">{`${redux_Fomr_Search.adult}  ${t ("Adults")}`} {`${redux_Fomr_Search.child >0 ? redux_Fomr_Search.child + t('Childs')  : ''}`}</p>
         </div>
         {/** 住幾人 */}
         

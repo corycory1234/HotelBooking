@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import { sleep } from "@/utils/sleep";
 import { z } from "zod";
+import { useTranslations } from "next-intl";
 
 // const initialState = { message: ""};
 
@@ -107,6 +108,8 @@ export default function Client_Form_Register () {
     }
   };
 
+  // 9. next-intl i18n-翻譯
+  const t = useTranslations("Auth");
 
   return <>
       
@@ -124,7 +127,7 @@ export default function Client_Form_Register () {
       <form onSubmit={handle_Register} className="flex flex-col px-4 pt-14 gap-4">
 
         {/** 電子郵件 */}
-        <label htmlFor="email" className="text-gray">Enter Email</label>
+        <label htmlFor="email" className="text-gray">{t ("Enter Email")}</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"
           value={email} onChange={(event) => setEmail(event.target.value)}/>
         <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
@@ -148,7 +151,7 @@ export default function Client_Form_Register () {
           </button>
           )
           : (
-            <button className="bg-primary rounded-lg py-3 text-white">Register</button>
+            <button className="bg-primary rounded-lg py-3 text-white">{t ("Register")}</button>
           )
         }
         {/** 註冊按鈕、loading按鈕切換 */}
@@ -156,8 +159,8 @@ export default function Client_Form_Register () {
       </form>
       
       <div className="pt-4 flex flex-col justify-center items-center gap-4 my-bg-gradient lg:bg-white py-2 rounded">
-        <p className="text-gray">Already have account? <Link href={'/auth'} className="text-primary font-semibold">Sign In</Link></p>
-        <p className="text-center text-sm">Or Sign in With</p>
+        <p className="text-gray">{t ("Already have account?")} <Link href={'/auth'} className="text-primary font-semibold">{t ("Sign In")}</Link></p>
+        <p className="text-center text-sm">{t ("Or Sign in With")}</p>
         <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
           <img src="/account/Google.svg" alt="" />
         </button>

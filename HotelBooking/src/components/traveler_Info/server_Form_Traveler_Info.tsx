@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import toast, {Toaster} from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 interface Zod_Response_Interface {
   success: boolean,
@@ -121,8 +122,10 @@ export default function Server_Form_Traveler_Info() {
     } finally {
       set_Is_Loading(false);
     }
-  }
+  };
 
+  // 8. next-intl i18n-翻譯
+  const t = useTranslations("TravelerInfo");
 
 
   return <>
@@ -130,22 +133,22 @@ export default function Server_Form_Traveler_Info() {
   <form onSubmit={(event) => submit_Traveler_Info(event)} className="flex flex-col gap-2 p-4 lg:hidden">
     <div className="flex flex-col mb-36">
 
-    <label htmlFor="name" className="text-gray">Name</label>
+    <label htmlFor="name" className="text-gray">{t ("Name")}</label>
     <input type="text" id="name" name="name" className="rounded-lg border-2 border-softGray p-2"
       value={name} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.nameError}</p>
 
-    <label htmlFor="surname" className="text-gray">Surname</label>
+    <label htmlFor="surname" className="text-gray">{t ("Surname")}</label>
     <input type="text" id="surname" name="surname" className="rounded-lg border-2 border-softGray p-2"
       value={surname} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.surnameError}</p>
 
-    <label htmlFor="email" className="text-gray">Email Address</label>
+    <label htmlFor="email" className="text-gray">{t ("Email Address")}</label>
     <input type="text" id="email" name="email" className="rounded-lg border-2 border-softGray p-2"
       value={email} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.emailError}</p>
 
-    <label htmlFor="country" className="text-gray">Country</label>
+    <label htmlFor="country" className="text-gray">{t ("Country")}</label>
     <select name="country" id="country" className="rounded-lg border-2 border-softGray p-2"
       defaultValue={country} onChange={(event) => handle_Change(event)}>
       <option value="taiwan">Taiwan</option>
@@ -154,7 +157,7 @@ export default function Server_Form_Traveler_Info() {
     </select>
     
 
-    <label htmlFor="phone" className="text-gray">Phone Number</label>
+    <label htmlFor="phone" className="text-gray">{t ("Phone Number")}</label>
     <input type="text" id="phone" name="phone" className="rounded-lg border-2 border-softGray p-2"
       value={phone} onChange={(event) => handle_Change(event)}/>
     <p aria-live="polite" className="text-customRed">{zod_Response?.phoneError}</p>
@@ -163,26 +166,26 @@ export default function Server_Form_Traveler_Info() {
     {/** formAction 寫在<button>上*/}
     <div className="flex flex-col fixed bottom-0 right-0 p-4 customized-bg-gradient  w-full border-t border-softGray">
       <div className="flex justify-between">
-        <p className="font-semibold">Tax</p>
+        <p className="font-semibold">{t ("Tax")}</p>
         <p className="font-semibold">$ {Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number))}</p>
       </div>
       <div className="flex justify-between">
-        <p className="font-semibold">Room Price</p>
+        <p className="font-semibold">{t ("Room Price")}</p>
         <p className="font-semibold">$ {redux_Booked_Room.room_Price}</p>
       </div>
       <div className="flex justify-between">
-        <p className="font-semibold">Total Price</p>
+        <p className="font-semibold">{t ("Total Price")}</p>
         <p className="font-semibold">
           $ {Math.round(Number(redux_Booked_Room.room_Price as number) + ((redux_The_Hotel.tax as number)) * (redux_Booked_Room?.room_Price as number))}
         </p>
       </div>
 
       {!is_Loading ?
-        <button className="bg-primary text-white rounded-xl py-2"> Proceed to Pay</button>
+        <button className="bg-primary text-white rounded-xl py-2"> {t ("Proceed to Pay")}</button>
       :
         <button className="flex justify-center items-center gap-2 bg-softGray text-white rounded-xl py-2" disabled>
           <OtherSVG name="spin" className="w-5 h-auto animate-spin"></OtherSVG>
-            Processing...
+            {t ("Processing")}...
         </button>
       }
 

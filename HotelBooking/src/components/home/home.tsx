@@ -17,7 +17,7 @@ import {useTranslations} from 'next-intl';
 import { useParams } from "next/navigation";
 import { updateBedType, updateFacility, updateKeyword, updateRangeSlider, updateRating } from "@/store/form-Search/formSearchSlice";
 import { useEffect } from "react";
-import Swiper_Hotel_Around_Json from "@/fakeData/swiper_Hotel_Around.json"
+import Swiper_Hotel_Around_Json from "@/fakeData/swiper_Hotel_Around.json";
 
 
 const swiper_Popular_Destination = [

@@ -6,8 +6,11 @@ import {useLocale, useTranslations} from 'next-intl';
 export default function Payment_Progress_Bar () {
   const pathname = usePathname();
 
-  // 1. next-intl: i18n翻譯
+  // 1. next-intl 語系前綴
   const locale = useLocale();
+
+  // 2. next-intl i18n翻譯
+  const t = useTranslations("PaymentProgress");
 
   return <div className="flex flex-col gap-1">
   <div className="flex justify-center items-center gap-2 lg:mt-[70px]">
@@ -41,12 +44,12 @@ export default function Payment_Progress_Bar () {
     
   </div>
   
-  <div className="hidden lg:flex justify-center items-center gap-2">
-    <p className="font-semibold text-sm">Guest Information</p>
-    <p className="border border-r border-transparent w-1/12"></p>
-    <p className="font-semibold text-sm">Credit Card Info</p>
-    <p className="border border-r border-transparent w-1/12"></p>
-    <p className="font-semibold text-sm">Booking Confirmed</p>
+  <div className="hidden lg:flex justify-center items-center gap-40">
+    <p className="font-semibold text-sm">{t ("Guest Info")}</p>
+    {/* <p className="border border-r border-transparent w-1/12"></p> */}
+    <p className="font-semibold text-sm">{t ("CreditCard")}</p>
+    {/* <p className="border border-r border-transparent w-1/12"></p> */}
+    <p className="font-semibold text-sm">{t ("Confirmed")}</p>
   </div>
   
   </div>

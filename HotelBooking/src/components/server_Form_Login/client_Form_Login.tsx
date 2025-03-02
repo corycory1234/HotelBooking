@@ -13,7 +13,8 @@ import { z } from "zod";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
-
+import { supabase } from "@/lib/supabase_Client";
+import { useTranslations } from "next-intl";
 // const initialState = { message: ""};
 
 
@@ -144,7 +145,20 @@ export default function Server_Form_Login () {
     catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  // 11. Google 第三方登入(先暫時關掉)
+  const google_Login = async () => {
+    const response = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: redirect_Url
+      }
+    });
+  };
+
+  // 12. next-intl i18n-翻譯
+  const t = useTranslations("Auth");
 
 
   return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-full lg:mt-20 lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
@@ -162,7 +176,7 @@ export default function Server_Form_Login () {
       <form onSubmit={handle_Login} className="flex flex-col px-4 gap-4">
 
         {/** 電子郵件 */}
-        <label htmlFor="email" className="text-gray">Enter Email</label>
+        <label htmlFor="email" className="text-gray">{t ("Enter Email")}</label>
         <input type="text" id="email" name="email" className="rounded border-2 border-softGray py-2 px-10" placeholder="example@gmail.com"
           value={email} onChange={(event) => setEmail(event.target.value)}/>
         <p aria-live="polite" className="text-lg text-customRed">{zod_Response?.emailError}</p>
@@ -176,20 +190,21 @@ export default function Server_Form_Login () {
         {loading_Boolean ?
           <button type="button" className="bg-softGray flex justify-center items-center rounded-lg py-3 gap-2" disabled>
             <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
-            Processing...
+            {t ("Processing...")}
           </button>
           :
-          <button className="bg-primary rounded-lg py-3 text-white">Sign In</button>
+          <button className="bg-primary rounded-lg py-3 text-white">{t ("Sign In")}</button>
         }
       </form>
       
       <div className="pt-4 flex flex-col justify-center items-center gap-4 my-bg-gradient lg:bg-white lg:rounded py-2">
-        <p className="text-gray">Don't have an account? <Link href={'/register'} className="text-primary font-semibold">Register</Link></p>
+        <p className="text-gray">{t ("Don't have an account?")} <Link href={'/register'} className="text-primary font-semibold">{t ("Register")}</Link></p>
         <Link href={'/forgetpassword'} className="text-primary font-semibold">
-          <p className="text-gray hover:border-b-2 border-gray">Forget Password? </p>
+          <p className="text-gray hover:border-b-2 border-gray">{t ("Forget Password?")}</p>
         </Link>
-        <p className="text-center text-sm">Or Sign in With</p>
-        <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
+        <p className="text-center text-sm">{t ("Or Sign in With")}</p>
+        <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button"
+          onClick={google_Login}>
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>
