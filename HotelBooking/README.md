@@ -40,7 +40,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 <style>
   .container {
    display: flex;
-  };
+   flex-direction: flex-row;
+  }
   .rounded {
    border-radius: "10px" 
   }
