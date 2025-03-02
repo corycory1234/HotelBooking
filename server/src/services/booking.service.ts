@@ -190,15 +190,20 @@ export class BookingService extends BaseService {
                 .select({
                     booking: bookings,
                     roomType: roomTypes,
+                    hotel: {
+                        hotel_Name: hotels.hotel_Name,
+                    },
                 })
                 .from(bookings)
                 .leftJoin(roomTypes, eq(bookings.roomId, roomTypes.roomType_Id))
+                .leftJoin(hotels, eq(bookings.hotelId, hotels.hotel_Id))
                 .where(eq(bookings.userId, userId))
                 .orderBy(desc(bookings.createdAt));
 
-            return results.map(({ booking, roomType }) => ({
+            return results.map(({ booking, roomType, hotel }) => ({
                 ...booking,
                 roomTypes: roomType,
+                hotel_Name: hotel?.hotel_Name ?? "未知飯店",
             }));
         } catch (error) {
             console.error("獲取訂單列表失敗:", error);

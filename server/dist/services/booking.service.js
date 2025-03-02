@@ -138,12 +138,19 @@ class BookingService extends base_service_1.BaseService {
                     .select({
                     booking: bookings_1.bookings,
                     roomType: rooms_1.roomTypes,
+                    hotel: {
+                        hotel_Name: hotels_1.hotels.hotel_Name,
+                    },
                 })
                     .from(bookings_1.bookings)
                     .leftJoin(rooms_1.roomTypes, (0, drizzle_orm_1.eq)(bookings_1.bookings.roomId, rooms_1.roomTypes.roomType_Id))
+                    .leftJoin(hotels_1.hotels, (0, drizzle_orm_1.eq)(bookings_1.bookings.hotelId, hotels_1.hotels.hotel_Id))
                     .where((0, drizzle_orm_1.eq)(bookings_1.bookings.userId, userId))
                     .orderBy((0, drizzle_orm_1.desc)(bookings_1.bookings.createdAt));
-                return results.map(({ booking, roomType }) => (Object.assign(Object.assign({}, booking), { roomTypes: roomType })));
+                return results.map(({ booking, roomType, hotel }) => {
+                    var _a;
+                    return (Object.assign(Object.assign({}, booking), { roomTypes: roomType, hotel_Name: (_a = hotel === null || hotel === void 0 ? void 0 : hotel.hotel_Name) !== null && _a !== void 0 ? _a : "未知飯店" }));
+                });
             }
             catch (error) {
                 console.error("獲取訂單列表失敗:", error);
