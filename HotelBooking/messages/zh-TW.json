@@ -419,5 +419,25 @@
     "Total Charge": "總金額",
     "Location": "飯店位置",
     "Check": "查看"
+  },
+  "MyReview": {
+    "My Reviews": "我的評價",
+    "You have NO Review": "你尚未有評價內容",
+    "singleroom": "單人房",
+    "singleRoom": "單人房",
+    "doubleroom": "雙人房",
+    "twinroom": "雙床房",
+    "queenroom": "特大雙人房",
+    "kingroom": "加大雙人房",
+    "kingoom": "加大雙人房",
+    "Check-In": "入住時間",
+    "Check-Out": "退房時間",
+    "Nights": "入住天數",
+    "Rooms": "客房"
+  },
+  "MyCollection": {
+    "Collection List": "我的收藏",
+    "You have No Collection": "沒有收藏飯店",
+    "Reviews": "則留言"
   }
 }

@@ -7,6 +7,7 @@ import { OtherSVG } from "@/components/client_Svg/client_Svg";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import Modal from "@/components/modal/modal";
 import { FiveStarSVG } from "@/components/client_Svg/client_Svg";
+import { useTranslations } from "next-intl";
 
 export default function My_Review () {
   // 1. 當前頁面
@@ -137,16 +138,19 @@ export default function My_Review () {
     console.log(review_List, "我的評論, 篩選後之數據");
   },[review_List]);
 
+  // 15. next-intl i18n-翻譯
+  const t = useTranslations("MyReview");
+
   
   return <div className="lg:min-h-[75vh] lg:mt-[70px] lg:p-4">
     <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
-    <p className="hidden lg:block font-semibold">My Reviews</p>
+    <p className="hidden lg:block font-semibold">{t ("My Reviews")}</p>
 
     {show_Review_List === false && <Placeholder_Card></Placeholder_Card>}
 
     {review_List.length === 0 && <div className="flex flex-col justify-center items-center gap-2 min-h-[50vh]">
       <OtherSVG name="review" className="w-10 h-auto"></OtherSVG>
-      <p className="font-semibold">You have NO Review</p>
+      <p className="font-semibold">{t ("You have NO Review")}</p>
       </div>
     }
     
@@ -171,7 +175,7 @@ export default function My_Review () {
                   
                   <div className="flex gap-2">
                     <OtherSVG name="bed" className="w-4 h-auto"></OtherSVG>
-                    <p>{item.roomTypes.room_Type.slice(0,1).toUpperCase() + item.roomTypes.room_Type.slice(1)}</p>
+                    <p>{t (item.roomTypes.room_Type)}</p>
                   </div>
                 </div>
               </div>
@@ -181,25 +185,25 @@ export default function My_Review () {
               {/* 卡片中間 */}
               <div className="flex p-2 gap-2">
                   <div className="flex flex-col">
-                    <p className="text-gray text-[14px]">Check-In</p>
+                    <p className="text-gray text-[14px]">{t ("Check-In")}</p>
                     <p className="text-[14px] font-semibold">{item.checkInDate}</p>
                   </div>
                   <p className="text-gray text-[14px]">→</p>
                   <div className="flex flex-col">
-                    <p className="text-gray text-[14px]">Check-Out</p>
+                    <p className="text-gray text-[14px]">{t ("Check-Out")}</p>
                     <p className="text-[14px] font-semibold">{item.checkOutDate}</p>
                   </div>
                   <div className="border-r border-x-softGray"></div>
 
                   <div className="flex flex-col">
-                    <p className="text-gray text-[14px]">Nights</p>
+                    <p className="text-gray text-[14px]">{t ("Nights")}</p>
                     <p className="text-[14px] font-semibold">{how_Many_Nights(item.checkInDate, item.checkOutDate)}</p>
                   </div>
 
                   <div className="border-r border-x-softGray"></div>
 
                   <div className="flex flex-col">
-                    <p className="text-gray text-[14px]">Rooms</p>
+                    <p className="text-gray text-[14px]">{t ("Rooms")}</p>
                     <p className="text-[14px] font-semibold">{item.roomCount}</p>
                   </div>
               </div>

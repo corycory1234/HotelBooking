@@ -12,6 +12,7 @@ import { to_Empty_Heart } from "@/store/hotel_List/hotel_List_Slice";
 import StarRating from "@/components/starrating/star-Rating";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export default function My_Collection () {
 
@@ -114,7 +115,10 @@ export default function My_Collection () {
       <h3 className="animate-pulse bg-softGray w-3/4 h-6 rounded"></h3>
       <h3 className="animate-pulse bg-softGray w-1/2 h-6 rounded"></h3>
     </div>
-  }
+  };
+
+  // 7. next-intl i18n-翻譯
+  const t = useTranslations("MyCollection");
 
   return <div className={`customized-bg-gradient min-h-screen ${collection_List.length >0 ? 'pb-20' : ''} 
     lg:mt-[70px] lg:p-4 lg:bg-none`}>
@@ -123,14 +127,14 @@ export default function My_Collection () {
 
       :
       <>
-      {collection_List.length >0 &&<p className="hidden lg:flex font-semibold">Collection List</p>}
+      {collection_List.length >0 &&<p className="hidden lg:flex font-semibold">{t ("Collection List")}</p>}
       
       <div className="flex-1 flex flex-col gap-4 p-4 lg:grid lg:grid-cols-3 lg:px-0">
 
         {/** 沒有我的最愛.SVG */}
         {collection_List.length <=0 ? <div className="flex-1 flex flex-col justify-center items-center gap-4 lg:col-span-3 lg:row-span-1 min-h-[50vh]">
             <OtherSVG name="collection" className="w-10 h-auto"></OtherSVG>
-            <p className="text-gray">You have No Collection</p>
+            <p className="text-gray">{t ("You have No Collection")}</p>
           </div>
         
         
@@ -156,7 +160,7 @@ export default function My_Collection () {
             <div className="hidden lg:flex gap-2 text-xs">
               <StarRating ranking={item.hotel.totalRating as number}></StarRating>
               <p>{item.hotel.totalRating}</p>
-              <p>({item.hotel.review_List.length} Reviews)</p>
+              <p>({item.hotel.review_List.length} {t ("Reviews")})</p>
             </div>
           </div>
         })}

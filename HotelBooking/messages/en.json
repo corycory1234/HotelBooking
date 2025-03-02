@@ -419,5 +419,25 @@
     "Total Charge": "Total Charge",
     "Location": "Location",
     "Check": "Check"
+  },
+  "MyReview": {
+    "My Reviews": "My Reviews",
+    "You have NO Review": "You have NO Review",
+    "singleroom": "Singleroom",
+    "singleRoom": "Singleroom",
+    "doubleroom": "Doubleroom",
+    "twinroom": "Twinroom",
+    "queenroom": "Queenroom",
+    "kingroom": "Kingroom",
+    "kingoom": "Kingroom",
+    "Check-In": "Check-In",
+    "Check-Out": "heck-Out",
+    "Nights": "Nights",
+    "Rooms": "Rooms"
+  },
+  "MyCollection": {
+    "Collection List": "Collection List",
+    "You have No Collection": "You have No Collection",
+    "Reviews": "Reviews"
   }
 }
