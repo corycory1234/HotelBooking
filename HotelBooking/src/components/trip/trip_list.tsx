@@ -131,7 +131,7 @@ export default function Trip_List () {
                 <img src={item.bookingImage} alt="" className="w-full h-[200px] lg:w-[330px] lg:h-[265px] rounded"/>
               </div>
               <div className="flex flex-col basis-1/2 gap-2">
-                <p className="font-semibold">還沒拿到飯店名</p>
+                <p className="font-semibold">{item.hotel_Name}</p>
                 <p className="text-sm">{t (item.roomTypes.room_Type)}</p>
                 <div className="flex justify-between items-center">
                   <span className={`rounded p-2 w-fit 

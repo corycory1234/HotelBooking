@@ -166,8 +166,7 @@ export default function My_Review () {
                   <img src={item.bookingImage} alt="" className="w-[170px] h-[170px] rounded object-cover"/>
                 </div>
                 <div className="flex flex-col">
-                  {/* <p>{item.hotel_Name}</p> */}
-                  <p>還沒拿到飯店名</p>
+                  <p>{item.hotel_Name}</p>
                   <div className="flex gap-2">
                     <OtherSVG name="marker" className="w-4 h-auto"></OtherSVG>
                     <p>{item.city + ", " + item.country }</p>
