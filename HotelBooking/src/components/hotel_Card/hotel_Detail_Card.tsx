@@ -921,7 +921,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                         <div className="flex flex-col gap-2">
                           <div className="flex gap-2">
                             <p className="font-semibold">{t (item.room_Type) }</p>
-                            <p className="border bg-[#007CB5] rounded px-2 text-white">{t (item.view?.slice(0,1).toUpperCase() as string + item.view?.slice(1))}</p>
+                            <p className="border bg-[#007CB5] rounded px-2 text-white">{t (item.view)}</p>
                           </div>
                           
                           <div className="flex flex-col">
