@@ -40,6 +40,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 # 🚀 Go Tour
 ![專案 Logo](https://your-logo-url.com/logo.png)
 <div className="flex gap-1">
-  <img src="/HotelBooking/public/readme/mobile.webp"> 
+  <img src="/HotelBooking/public/readme/mobile.webp" className="rounded"> 
   <img  src="/HotelBooking/public/readme/pc.webp">
 </div>  
