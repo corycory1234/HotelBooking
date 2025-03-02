@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
@@ -33,25 +33,27 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details. -->
 
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-# ("/HotelBooking/public/Logo.svg") Go Tour
+# <img src="/HotelBooking/public/gotour.svg"> Go Tour
 
-<img src="/HotelBooking/public/readme/merged_image.webp"> 
+<img src="/HotelBooking/public/readme/merged_image.webp">
 
-## 🌟 特色功能 (Features)
-- ✅ **響應式設計**：使用 Tailwind CSS 進行 UI 開發
-- ⚡ **高效狀態管理**：整合 Redux-Toolkit & Redux-Persist
-- 🛠 **後端支援**：Node.js + Supabase
-- 🎯 **表單驗證**：使用 Zod 確保數據正確性
+<h2>Explore The World by our website! We have cooperative hotels which provides travelers with cozy stay!
+</h2> 
 
-## 📦 技術棧 (Tech Stack)
-- **前端**：Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS
-- **狀態管理**：Redux-Toolkit, Redux-Persist
-- **後端**：Node.js, Supabase
-- **表單驗證**：Zod
+## 🌟 Features
+- ✅ **Resopnsive Design**：Tailwind CSS for Layout
+- ⚡ **State Management**：Integrate Redux-Toolkit & Redux-Persist
+- 🛠 **Backend**：Node.js + Supabase
+- 🎯 **Form Validation**：Using Zod to ensure correct value
+
+## 📦 Tech Stack
+- **FrontEnd**：Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS
+- **State Management**：Redux-Toolkit, Redux-Persist
+- **Backend**：Node.js, Supabase
+- **Form Validation**：Zod
 
 ## 🔧 安裝與運行 (Installation & Setup)
 **1️⃣ 克隆專案**
