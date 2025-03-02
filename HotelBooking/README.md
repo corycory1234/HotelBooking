@@ -35,6 +35,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
 # ("/HotelBooking/public/Logo.svg") Go Tour
 
@@ -75,4 +76,4 @@ cd your-repo
 🚀 部署 (Deployment)
 
 npm run build
-vercel deploy
+vercel deploy 
