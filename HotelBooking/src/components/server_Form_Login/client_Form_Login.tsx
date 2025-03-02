@@ -13,7 +13,7 @@ import { z } from "zod";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
-import { supabase } from "@/lib/supabase_Client";
+// import { supabase } from "@/lib/supabase_Client";
 import { useTranslations } from "next-intl";
 // const initialState = { message: ""};
 
@@ -148,14 +148,14 @@ export default function Server_Form_Login () {
   };
 
   // 11. Google 第三方登入(先暫時關掉)
-  const google_Login = async () => {
-    const response = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: redirect_Url
-      }
-    });
-  };
+  // const google_Login = async () => {
+  //   const response = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: redirect_Url
+  //     }
+  //   });
+  // };
 
   // 12. next-intl i18n-翻譯
   const t = useTranslations("Auth");
@@ -190,7 +190,7 @@ export default function Server_Form_Login () {
         {loading_Boolean ?
           <button type="button" className="bg-softGray flex justify-center items-center rounded-lg py-3 gap-2" disabled>
             <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
-            {t ("Processing...")}
+            {t ("Processing") + "..."}
           </button>
           :
           <button className="bg-primary rounded-lg py-3 text-white">{t ("Sign In")}</button>
@@ -204,7 +204,8 @@ export default function Server_Form_Login () {
         </Link>
         <p className="text-center text-sm">{t ("Or Sign in With")}</p>
         <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button"
-          onClick={google_Login}>
+          // onClick={google_Login}
+          >
           <img src="/account/Google.svg" alt="" />
         </button>
       </div>

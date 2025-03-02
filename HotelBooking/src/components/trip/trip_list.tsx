@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Booking_Detail_Interface } from "@/types/booking_Detail";
 import Not_Found from "@/components/not_Found/not_Found";
 import Refresh_Token from "@/utils/refresh_Token";
+import { useTranslations } from "next-intl";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
 
@@ -85,7 +86,10 @@ export default function Trip_List () {
     } else if (tab === "Cancelled") {
       return my_Booking_List.filter((item: any) => item.status === "cancelled");
     }
-  },[tab, my_Booking_List])
+  },[tab, my_Booking_List]);
+
+  // 10. next-intl i18n-翻譯
+  const t = useTranslations("TripList");
 
 
   return <div className={`flex flex-col ${my_Booking_List.length >0 ? 'pb-20' : ''} lg:pb-0`}>
@@ -108,7 +112,7 @@ export default function Trip_List () {
         return <button key={index}
           className={`text-softGray text-sm p-2 border border-softGray rounded
           ${tab === item ? 'bg-primary text-white' : ''}`}
-          onClick={() => set_Tab(item)}> {item}
+          onClick={() => set_Tab(item)}> {t (item)}
         </button>
       })}
     </div>
@@ -128,21 +132,21 @@ export default function Trip_List () {
               </div>
               <div className="flex flex-col basis-1/2 gap-2">
                 <p className="font-semibold">還沒拿到飯店名</p>
-                <p className="text-sm">{item.roomTypes.room_Type.slice(0,1).toUpperCase() + item.roomTypes.room_Type.slice(1)}</p>
+                <p className="text-sm">{t (item.roomTypes.room_Type)}</p>
                 <div className="flex justify-between items-center">
                   <span className={`rounded p-2 w-fit 
                     ${item.status === 'cancelled' ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
-                  >{item.status}</span>
-                  <p className="font-semibold text-right lg:hidden">Total Price: ${(+ item.totalPrice).toFixed()}</p>
+                  >{t (item.status)}</span>
+                  <p className="font-semibold text-right lg:hidden">{t ("Total Price")}: ${(+ item.totalPrice).toFixed()}</p>
                 </div>
 
                 {/** PC桌機 - 入住日、退房日 */}
                 <div className="hidden w-1/2 lg:flex flex-col">
-                  <p className="text-gray">Check-In</p>
+                  <p className="text-gray">{t ("Check-In")}</p>
                   <p className="font-semibold">{item.checkInDate}</p>
                 </div>
                 <div className="hidden w-1/2 lg:flex flex-col">
-                  <p className="text-gray">Check-Out</p>
+                  <p className="text-gray">{t ("Check-Out")}</p>
                   <p className="font-semibold">{item.checkOutDate}</p>
                 </div>
               </div>
@@ -150,10 +154,10 @@ export default function Trip_List () {
               
               {/** PC桌機 - 訂單ID、查看訂單明細 */}
               <div className="self-end w-1/3 flex flex-col gap-4">
-                <p className="hidden lg:block text-gray">Booking ID: #{item.id}</p>
+                <p className="hidden lg:block text-gray">{t ("Booking ID")}: #{item.id}</p>
                 <p className="hidden lg:block font-semibold text-right">${(+ item.totalPrice).toFixed()}</p>
                 <button className="hidden lg:block bg-primary text-white rounded py-2"
-                  onClick={() => view_Booking(item.id)}>View Details</button>
+                  onClick={() => view_Booking(item.id)}>{t ("View Details")}</button>
               </div>
               {/** PC桌機 - 訂單ID、查看訂單明細 */}
             </div>
@@ -164,11 +168,11 @@ export default function Trip_List () {
             {/** 入住、退房時間 */}
             <div className="flex lg:hidden">
               <div className="w-1/2 flex flex-col">
-                <p className="text-gray">Check-In</p>
+                <p className="text-gray">{t ("Check-In")}</p>
                 <p className="font-semibold">{item.checkInDate}</p>
               </div>
               <div className="w-1/2 flex flex-col">
-                <p className="text-gray">Check-Out</p>
+                <p className="text-gray">{t ("Check-Out")}</p>
                 <p className="font-semibold">{item.checkOutDate}</p>
               </div>
             </div>
@@ -179,12 +183,12 @@ export default function Trip_List () {
 
             {/** 訂單號碼、價錢、查看訂單 */}
             <div className="flex flex-col gap-4 lg:hidden">
-              <p className="text-gray">Booking ID: #{item.id}</p>
+              <p className="text-gray">{t ("Booking ID")}: #{item.id}</p>
               {/* <div className="flex justify-between">
               </div> */}
                 {/* <p className="font-semibold">${item.totalPrice}</p> */}
               <button className="bg-primary text-white rounded py-2"
-                onClick={() => view_Booking(item.id)}>View Details</button>
+                onClick={() => view_Booking(item.id)}>{t ("View Details")}</button>
             </div>
             {/** 訂單號碼、價錢、查看訂單 */}
           </div>        

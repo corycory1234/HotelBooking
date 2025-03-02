@@ -46,7 +46,7 @@ export default function Room_Info () {
             {redux_Booked_Room.smoke === true ? 
             <div className="flex gap-2 bg-softGray p-1 rounded text-sm">
               <OtherSVG name={"smoking"} className="w-4 h-auto"></OtherSVG> 
-              {t ("Smoking Room")}
+              {t ("Smoking")}
             </div> 
             : <div className="flex gap-2 bg-softGray p-1 rounded text-sm">
               <OtherSVG name={"nosmoking"} className="w-4 h-auto"></OtherSVG> 

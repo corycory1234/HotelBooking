@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { updateKeyword } from "@/store/form-Search/formSearchSlice";
+import { useTranslations } from "next-intl";
 
 export default function Booking_Detail () {
 
@@ -157,7 +158,10 @@ export default function Booking_Detail () {
   const check_Hotel_Detail = (hotel_Id: string, hotel_Name: string) => {
     dispatch(updateKeyword(hotel_Name));
     return router.push(`/hotellist/${hotel_Id}`)
-  }
+  };
+
+  // 15. next-intl i18n-翻譯
+  const t = useTranslations("TripList");
   
 
   return <div className="flex flex-col">
@@ -180,13 +184,13 @@ export default function Booking_Detail () {
 
       {/** 留言評價 or 查看評價 */}
         {<div className="bg-white flex flex-col rounded-lg lg:hidden">
-          <p className="text-center">Booking ID# {the_Booking_Detail?.id}</p>
+          <p className="text-center">{t ("Booking ID")}# {the_Booking_Detail?.id}</p>
             {/** 打開留言 Modal - 訂單狀態 completed 才有Modal按鈕 */}
             {the_Booking_Detail.status === "confirmed" && 
               <div className="p-2">
               <button type="button" className="bg-secondary rounded text-white w-full py-2"
                 onClick={open_Review_Modal}>
-                {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review === null ? 'Review Your Stay' : 'See Review'}
+                {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review === null ? t ('Review Your Stay') : t ('See Review')}
               </button>
               </div>
             }
@@ -197,8 +201,8 @@ export default function Booking_Detail () {
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <div className="flex flex-col gap-4 px-4 pt-20 z-[999] lg:hidden">
               {/* <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p> */}
-              <p className="font-semibold">Hotel: {the_Booking_Detail.hotel_Name}</p>
-              <p>Name: {the_Booking_Detail.travelerName}</p>
+              <p className="font-semibold">{t ("Hotel")}: {the_Booking_Detail.hotel_Name}</p>
+              <p>{t ("Name")}: {the_Booking_Detail.travelerName}</p>
 
                 {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
                 {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review === null && <>
@@ -222,7 +226,7 @@ export default function Booking_Detail () {
 
                     {the_Booking_Detail.review  === null && 
                     <button className="bg-primary rounded text-white self-center w-1/2 py-2"> 
-                      Submit</button>
+                      {t ("Submit")}</button>
                     }
                   </form>
                 </>
@@ -273,28 +277,28 @@ export default function Booking_Detail () {
             <span className={`rounded-full py-1 px-2 w-fit 
               ${the_Booking_Detail.status === "cancelled" ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
             >
-              {the_Booking_Detail.status}
+              {t (the_Booking_Detail.status)}
             </span>
           </div>
           {/* <p className="text-gray">{booking_Detail.room_Type}</p> */}
-          <p className="text-gray">{the_Booking_Detail.roomTypes.room_Type}</p>
+          <p className="text-gray">{t (the_Booking_Detail.roomTypes.room_Type)}</p>
         </div>
       {/** 飯店名、訂單狀態、房型名稱 */}
 
 
         <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
-          <p className="font-semibold text-sm">Stay Details</p>
+          <p className="font-semibold text-sm">{t ("Stay Details")}</p>
           {/** 入住、退房時間 */}
           <div className="flex lg:hidden">
             <div className="w-1/2 flex flex-col">
-              <p className="text-sm text-gray">Check-In</p>
+              <p className="text-sm text-gray">{t ("Check-In")}</p>
               <p>{the_Booking_Detail.checkInDate}</p>
-              <p className="text-sm text-gray">{`From: ${(the_Booking_Detail.checkinTime).slice(0,5)}`}</p>
+              <p className="text-sm text-gray">{`${t ("From")}: ${(the_Booking_Detail.checkinTime).slice(0,5)}`}</p>
             </div>
             <div className="w-1/2 flex flex-col">
-              <p className="text-sm text-gray">Check-Out</p>
+              <p className="text-sm text-gray">{t ("Check-Out")}</p>
               <p>{the_Booking_Detail.checkOutDate}</p>
-              <p className="text-sm text-gray">{`Until: ${(the_Booking_Detail.checkoutTime.slice(0,5))}`}</p>
+              <p className="text-sm text-gray">{`${t ("Until")}: ${(the_Booking_Detail.checkoutTime.slice(0,5))}`}</p>
             </div>
           </div>
           {/** 入住、退房時間 */}
@@ -303,17 +307,17 @@ export default function Booking_Detail () {
           
           {/** 住幾晚、住幾個人 */}
           <div className="flex justify-between lg:hidden">
-            <p className="text-sm text-gray">Duration</p>
-            <p>{`${nights} nigths`}</p>
+            <p className="text-sm text-gray">{t ("Duration")}</p>
+            <p>{`${nights} ${t ("nights")}`}</p>
           </div>
           <div className="flex justify-between lg:hidden">
-            <p className="text-sm text-gray">Lead Guest</p>
+            <p className="text-sm text-gray">{t ("Lead Guest")}</p>
             <p>{the_Booking_Detail.travelerName}</p>
           </div>
           <div className="flex justify-between lg:hidden">
-            <p className="text-sm text-gray">Guest</p>
-            <p>{`${the_Booking_Detail?.adults} adults 
-              ${the_Booking_Detail.children >0  ? ','+ the_Booking_Detail.children + ' childs' : ''}`} 
+            <p className="text-sm text-gray">{t ("Guest")}</p>
+            <p>{`${the_Booking_Detail?.adults} ${t ("adults")} 
+              ${the_Booking_Detail.children >0  ? ','+ the_Booking_Detail.children + t ('childs') : ''}`} 
             </p>
           </div>
           {/** 住幾晚、住幾個人 */}
@@ -322,7 +326,7 @@ export default function Booking_Detail () {
 
         {/** 房型內部設施 */}
         <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
-          <p className="text-sm font-semibold">Room Details</p>
+          <p className="text-sm font-semibold">{t ("Room Details")}</p>
             <div className="flex flex-wrap">
               {the_Booking_Detail.facilities?.map((facility: string, index: number) => {
                 return <div className="w-1/2 flex gap-2" key={index}>
@@ -337,24 +341,24 @@ export default function Booking_Detail () {
 
         {/** 費用、稅率 */}
         <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
-          <p className="text-sm font-semibold">Price Details</p>
+          <p className="text-sm font-semibold">{t ("Price Details")}</p>
           <div className="flex justify-between">
-            <p className="text-sm text-gray">{`Room Price (${nights} nights)`}</p>
+            <p className="text-sm text-gray">{`${t("Room Price")} (${nights} ${t ("nights")})`}</p>
             <p>{`$ ${(+ the_Booking_Detail.price).toFixed(0)}`}</p>
           </div>
 
           <div className="flex justify-between">
-            <p className="text-sm text-gray">Offer Discount</p>
+            <p className="text-sm text-gray">{t ("Offer Discount")}</p>
             <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
           </div>
 
           <div className="flex justify-between">
-            <p className="text-sm text-gray">Taxes and Fees</p>
+            <p className="text-sm text-gray">{t ("Taxes and Fees")}</p>
             <p>$ {the_Booking_Detail.price * the_Booking_Detail.tax }</p>
           </div>
 
           <div className="flex justify-between">
-            <p className="text-sm font-semibold">Total Charge</p>
+            <p className="text-sm font-semibold">{t ("Total Charge")}</p>
             <p>$ {(+ the_Booking_Detail.totalPrice * offer_Discount ).toFixed(0)}</p>
           </div>
         </div>
@@ -362,7 +366,7 @@ export default function Booking_Detail () {
         
         {/** 地圖 */}
         <div className="bg-white flex flex-col rounded-lg p-2 gap-2 lg:hidden">
-          <p className="text-sm font-semibold">Location</p>
+          <p className="text-sm font-semibold">{t ("Location")}</p>
           {/* <img src="/triplist/location.png" alt="" /> */}
 
 
@@ -385,7 +389,7 @@ export default function Booking_Detail () {
           <p className="text-sm text-gray">{the_Booking_Detail.address}</p>
           <button type="button" className="bg-primary text-white rounded py-2"
             onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, the_Booking_Detail.hotel_Name)}>
-              Check {the_Booking_Detail.hotel_Name}</button>
+              {t ("Check")} {the_Booking_Detail.hotel_Name}</button>
         </div>
         {/** 地圖 */}
       
@@ -410,24 +414,24 @@ export default function Booking_Detail () {
                 <span className={`rounded-full py-1 px-2 w-fit 
                   ${the_Booking_Detail.status === "cancelled" ? 'bg-red-300 text-red-700'  : 'bg-green-200 text-green-700'}`}
                 >
-                  {the_Booking_Detail.status}
+                  {t (the_Booking_Detail.status)}
                 </span>
               </div>
               {/* <p className="text-gray">{booking_Detail.room_Type}</p> */}
-              <p className="text-gray">{the_Booking_Detail.roomTypes.room_Type}</p>
+              <p className="text-gray">{t (the_Booking_Detail.roomTypes.room_Type)}</p>
             </div>
 
               {/** 入住、退房時間 */}
               <div className="flex">
                 <div className="w-1/2 flex flex-col">
-                  <p className="text-sm text-gray">Check-In</p>
+                  <p className="text-sm text-gray">{t ("Check-In")}</p>
                   <p>{the_Booking_Detail.checkInDate}</p>
-                  <p className="text-sm text-gray">{`From: ${(the_Booking_Detail.checkinTime).slice(0,5)}`}</p>
+                  <p className="text-sm text-gray">{`${t ("From")}: ${(the_Booking_Detail.checkinTime).slice(0,5)}`}</p>
                 </div>
                 <div className="w-1/2 flex flex-col">
-                  <p className="text-sm text-gray">Check-Out</p>
+                  <p className="text-sm text-gray">{t ("Check-Out")}</p>
                   <p>{the_Booking_Detail.checkOutDate}</p>
-                  <p className="text-sm text-gray">{`Until: ${(the_Booking_Detail.checkoutTime.slice(0,5))}`}</p>
+                  <p className="text-sm text-gray">{`${t ("Until")}: ${(the_Booking_Detail.checkoutTime.slice(0,5))}`}</p>
                 </div>
               </div>
               {/** 入住、退房時間 */}
@@ -440,17 +444,17 @@ export default function Booking_Detail () {
           {/** 住幾晚、住幾個人 */}
           <div className="basis-1/4 self-end">
             <div className="flex gap-1 items-end">
-              <p className="text-sm text-gray">Duration:</p>
+              <p className="text-sm text-gray">{t ("Duration")}:</p>
               <p>{`${nights} nigths`}</p>
             </div>
             <div className="flex gap-1 items-end">
-              <p className="text-sm text-gray">Lead Guest:</p>
+              <p className="text-sm text-gray">{t ("Lead Guest")}:</p>
               <p>{the_Booking_Detail.travelerName}</p>
             </div>
             <div className="flex gap-1 items-end">
-              <p className="text-sm text-gray">Guest:</p>
-              <p>{`${the_Booking_Detail?.adults} adults 
-                ${the_Booking_Detail.children >0  ? ','+ the_Booking_Detail.children + ' childs' : ''}`} 
+              <p className="text-sm text-gray">{t ("Guest")}:</p>
+              <p>{`${the_Booking_Detail?.adults} ${t ("adults")} 
+                ${the_Booking_Detail.children >0  ? ','+ the_Booking_Detail.children + t ('childs') : ''}`} 
               </p>
             </div>
           </div>
@@ -459,12 +463,12 @@ export default function Booking_Detail () {
 
       {/** 留言評價 or 查看評價 */}
         <div className="basis-1/4 self-end flex flex-col">
-          <p className="text-sm">Booking ID# {the_Booking_Detail?.id}</p>
+          <p className="text-sm">{t ("Booking ID")}# {the_Booking_Detail?.id}</p>
             {/** 打開留言 Modal - 訂單狀態 completed 才有Modal按鈕 */}
             {the_Booking_Detail.status === "confirmed" && 
             <button type="button" className="bg-secondary rounded text-white w-full p-1"
               onClick={open_Review_Modal}>
-              {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review === null ? 'Review Your Stay' : 'See Review'}
+              {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review === null ? t ('Review Your Stay') : t ('See Review')}
             </button>
             }
             {/** 打開留言 Modal - 訂單狀態 Completed 才有Modal按鈕 */}
@@ -475,8 +479,8 @@ export default function Booking_Detail () {
           <Modal isOpen={modal_Boolean} onClose={() => set_Modal_Boolean(false)}>
             <div className="flex flex-col gap-4 px-4 pt-20 z-[999]">
               {/* <p className="font-semibold">Hotel: {booking_Detail.hotel_Name}</p> */}
-              <p className="font-semibold">Hotel: {the_Booking_Detail.hotel_Name}</p>
-              <p>Name: {the_Booking_Detail.travelerName}</p>
+              <p className="font-semibold">{t ("Hotel")}: {the_Booking_Detail.hotel_Name}</p>
+              <p>{t ("Name")}: {the_Booking_Detail.travelerName}</p>
 
                 {/* 訂單狀態 completed, 且尚未留言, 才可進行留言 */}
                 {the_Booking_Detail.status === "confirmed" && the_Booking_Detail.review === null && <>
@@ -500,7 +504,7 @@ export default function Booking_Detail () {
 
                     {the_Booking_Detail.review  === null && 
                     <button className="bg-primary rounded text-white self-center w-1/2 py-2"> 
-                      Submit</button>
+                      {t ("Submit")}</button>
                     }
 
                   </form>
@@ -541,7 +545,7 @@ export default function Booking_Detail () {
       {/** 房型內部設施 */}
       <div className="hidden bg-white lg:flex justify-between rounded-lg p-2 gap-2">
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-semibold">Room Details</p>
+          <p className="text-sm font-semibold">{t ("Room Details")}</p>
             {/* <div className="flex flex-wrap"> */}
               <div className="basis-1/3 grid grid-cols-5 items-center gap-2">
                 {the_Booking_Detail.facilities?.map((facility: string, index: number) => {
@@ -558,24 +562,24 @@ export default function Booking_Detail () {
 
        {/** 費用、稅率 */}
         <div className="hidden basis-1/2 lg:flex flex-col rounded-lg gap-2">
-            <p className="text-sm font-semibold">Price Details</p>
+            <p className="text-sm font-semibold">{t ("Price Details")}</p>
             <div className="flex justify-between">
-              <p className="text-sm text-gray">{`Room Price (${nights} nights)`}</p>
+              <p className="text-sm text-gray">{`${t ("Room Price")} (${nights} ${t ("nights")})`}</p>
               <p>{`$ ${(+ the_Booking_Detail.price).toFixed(0)}`}</p>
             </div>
 
             <div className="flex justify-between">
-              <p className="text-sm text-gray">Offer Discount</p>
+              <p className="text-sm text-gray">{t ("Offer Discount")}</p>
               <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
             </div>
 
             <div className="flex justify-between">
-              <p className="text-sm text-gray">Taxes and Fees</p>
+              <p className="text-sm text-gray">{t ("Taxes and Fees")}</p>
               <p>$ {the_Booking_Detail.price * the_Booking_Detail.tax }</p>
             </div>
 
             <div className="flex justify-between">
-              <p className="text-sm font-semibold">Total Charge</p>
+              <p className="text-sm font-semibold">{t ("Total Charge")}</p>
               <p>$ {((+ the_Booking_Detail.totalPrice) * offer_Discount).toFixed(0)}</p>
             </div>
           </div>
@@ -586,7 +590,7 @@ export default function Booking_Detail () {
 
         {/** 地圖 */}
         <div className="hidden bg-white lg:flex flex-col rounded-lg p-2 gap-2">
-          <p className="text-sm font-semibold">Location</p>
+          <p className="text-sm font-semibold">{t ("Location")}</p>
           {/* <img src="/triplist/location.png" alt="" /> */}
           <MapContainer
             center={[the_Booking_Detail?.latitude as number, the_Booking_Detail?.longitude as number]} // 台北 101 位置
@@ -602,7 +606,7 @@ export default function Booking_Detail () {
           </MapContainer>
           <p className="text-sm text-gray">{the_Booking_Detail.address}</p>
           <button type="button" className="bg-primary text-white rounded py-2 w-1/3 self-center"
-            onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, the_Booking_Detail.hotel_Name)}>Check {the_Booking_Detail.hotel_Name}</button>
+            onClick={() => check_Hotel_Detail(the_Booking_Detail.hotelId, the_Booking_Detail.hotel_Name)}>{t ("Check")} {the_Booking_Detail.hotel_Name}</button>
         </div>
         {/** 地圖 */}
     {/** PC桌機 */}

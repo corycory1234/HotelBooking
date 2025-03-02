@@ -147,7 +147,7 @@ export default function Client_Form_Register () {
         {loading_Boolean ? (
           <button type="button" className="bg-softGray flex justify-center items-center rounded-lg py-3 gap-2" disabled>
             <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
-            Processing...
+            {t ("Processing")}...
           </button>
           )
           : (
