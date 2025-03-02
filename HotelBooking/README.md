@@ -35,11 +35,44 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
-# 🚀 Go Tour
-![專案 Logo](https://your-logo-url.com/logo.png)
-<div className="flex gap-1">
-  <img src="/HotelBooking/public/readme/mobile.webp"> 
-  <img  src="/HotelBooking/public/readme/pc.webp">
-</div>  
+# ("/HotelBooking/public/Logo.svg") Go Tour
+
+<img src="/HotelBooking/public/readme/merged_image.webp"> 
+
+## 🌟 特色功能 (Features)
+- ✅ **響應式設計**：使用 Tailwind CSS 進行 UI 開發
+- ⚡ **高效狀態管理**：整合 Redux-Toolkit & Redux-Persist
+- 🛠 **後端支援**：Node.js + Supabase
+- 🎯 **表單驗證**：使用 Zod 確保數據正確性
+
+## 📦 技術棧 (Tech Stack)
+- **前端**：Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS
+- **狀態管理**：Redux-Toolkit, Redux-Persist
+- **後端**：Node.js, Supabase
+- **表單驗證**：Zod
+
+## 🔧 安裝與運行 (Installation & Setup)
+**1️⃣ 克隆專案**
+```sh
+git clone https://github.com/your-repo.git
+cd your-repo
+
+📂 專案結構 (Project Structure)
+
+/src
+├── components/     # UI 組件
+├── hooks/          # 自定義 Hook
+├── pages/          # Next.js 頁面
+├── redux/          # Redux store
+├── styles/         # Tailwind CSS 全局樣式
+├── utils/          # 公用函數
+├── app/            # Next.js App Router 結構
+└── public/         # 靜態資源
+
+🖼 預覽 (Screenshots)
+
+🚀 部署 (Deployment)
+
+npm run build
+vercel deploy
