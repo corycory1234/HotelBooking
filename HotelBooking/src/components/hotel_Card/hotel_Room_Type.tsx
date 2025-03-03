@@ -25,7 +25,7 @@ export default function Hotel_Room_Type() {
   
   // 2. 住幾晚
   const redux_Fomr_Search = useSelector((state: RootState) => state.formSearch); // Redux - 搜尋參數
-  const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10), redux_Fomr_Search.dateRange?.slice(13))
+  const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10) as string, redux_Fomr_Search.dateRange?.slice(13) as string)
   
   // 3. Book Now按鈕，傳遞ID，透過find拉出房型，存入Redux
   const router = useRouter();
