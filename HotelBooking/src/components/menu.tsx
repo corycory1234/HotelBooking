@@ -69,7 +69,7 @@ export default function Menu () {
         )}
 
       {/** 僅有hotelier才可進後台頁面 */}
-        {redux_Verify_Session.data.user.userType === "hotelier" && 
+        {redux_Verify_Session?.data?.user?.userType === "hotelier" && 
         <Link href={`${dashboard.url}`} className="flex flex-col items-center gap-2">         
           <div className={`${dashboard.url === i18n_PathName ? 'text-primary' : ''}`}>
             {dashboard.svgIcon}

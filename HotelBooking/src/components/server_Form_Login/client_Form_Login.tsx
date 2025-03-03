@@ -97,8 +97,10 @@ export default function Server_Form_Login () {
         set_Response(data);
         await sleep(3000);
         router.push(redirect_Url);
-        // await verify_Token();
-        // await get_User_Info();
+        setTimeout(async () => {
+          await verify_Token();
+          await get_User_Info();
+        }, 5000)
       }
     } catch (error) {
       console.log("登入失敗", error);
