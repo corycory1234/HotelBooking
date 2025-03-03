@@ -13,21 +13,19 @@ const asyncHandler = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
 // 註冊
-router.post('/register', asyncHandler(auth_controller_1.authController.register));
+router.post("/register", asyncHandler(auth_controller_1.authController.register));
 // 登入
-router.post('/login', asyncHandler(auth_controller_1.authController.login));
+router.post("/login", asyncHandler(auth_controller_1.authController.login));
 // 登出
-router.post('/logout', asyncHandler(auth_controller_1.authController.logout));
+router.post("/logout", asyncHandler(auth_controller_1.authController.logout));
 // 忘記密碼
-router.post('/forgot-password', asyncHandler(auth_controller_1.authController.forgotPassword));
+router.post("/forgot-password", asyncHandler(auth_controller_1.authController.forgotPassword));
 // 取得當前用戶資訊
-router.get('/me', auth_middleware_1.authMiddleware, asyncHandler(auth_controller_1.authController.getCurrentUser));
+router.get("/me", auth_middleware_1.authMiddleware, asyncHandler(auth_controller_1.authController.getCurrentUser));
 // 驗證 session
-router.get('/verify-session', asyncHandler(auth_controller_1.authController.verifySession));
+router.get("/verify-session", asyncHandler(auth_controller_1.authController.verifySession));
 // 刷新 token
-router.post('/refresh-token', asyncHandler(auth_controller_1.authController.refreshToken));
+router.post("/refresh-token", asyncHandler(auth_controller_1.authController.refreshToken));
 // Google 登入
-// router.post('/google', asyncHandler(async (req, res) => {
-// TODO: 實作 Google 登入邏輯
-// }));
+router.post("/google", asyncHandler(auth_controller_1.authController.googleLogin));
 exports.default = router;

@@ -46,14 +46,14 @@ exports.authController = {
                         secure: process.env.NODE_ENV === "production",
                         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 在 production 時設為 none
                         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-                        domain: process.env.COOKIE_DOMAIN || undefined // 設定 cookie domain
+                        domain: process.env.COOKIE_DOMAIN || undefined, // 設定 cookie domain
                     });
                     res.cookie("refresh_token", result.session.refresh_token, {
                         httpOnly: true,
                         secure: process.env.NODE_ENV === "production",
                         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 在 production 時設為 none
                         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-                        domain: process.env.COOKIE_DOMAIN || undefined // 設定 cookie domain
+                        domain: process.env.COOKIE_DOMAIN || undefined, // 設定 cookie domain
                     });
                 }
                 res.json({
@@ -64,6 +64,47 @@ exports.authController = {
                             name: result.user.name,
                             userType: result.user.userType,
                             email: result.session.user.email,
+                        },
+                    },
+                });
+            }
+            catch (error) {
+                res.status(400).json({
+                    success: false,
+                    message: error.message,
+                });
+            }
+        });
+    },
+    googleLogin(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const result = yield auth_service_1.authService.googleLogin(req.body);
+                // 設置 cookies
+                if (result.session) {
+                    res.cookie("access_token", result.session.access_token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === "production",
+                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+                        maxAge: 7 * 24 * 60 * 60 * 1000,
+                        domain: process.env.COOKIE_DOMAIN || undefined,
+                    });
+                    res.cookie("refresh_token", result.session.refresh_token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV === "production",
+                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+                        maxAge: 30 * 24 * 60 * 60 * 1000,
+                        domain: process.env.COOKIE_DOMAIN || undefined,
+                    });
+                }
+                res.json({
+                    success: true,
+                    data: {
+                        user: {
+                            id: result.user.id,
+                            name: result.user.name,
+                            userType: result.user.userType,
+                            email: result.user.email,
                         },
                     },
                 });
