@@ -512,6 +512,59 @@
       "country": "新加坡",
       "city": "樟宜",
       "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "f4ce676d-a055-47e6-b4d8-1881649e9aa7",
+      "hotel_Name": "都柏林城雅樂軒酒店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183764-aapexels-mikegles-30931571.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-anna-frizen-uudEOOzuQjM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-artur-aldyrkhanov-QksucEmALuQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-collov-home-design-kSoe7EoxHIE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-sanibell-bv-yuFu0imUKMk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-smartworks-coworking-E7Tzh2TTS6c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-yoav-aziz-UQXlVumSGHE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183767-zlex-haney-CAhjZmVk5H4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-11-07",
+          "reply": "Thank you, madam. Wish you have a great journey",
+          "comment": "The room is clean and tidy. Have a nice experience of living her for 10 days",
+          "traveler_Id": "f21e2cbf-abd7-4475-99d9-8ba6f258a818",
+          "traveler_Name": "Laura",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "愛爾蘭",
+      "city": "都伯林",
+      "offer_Id": "4444"
     }
   ],
   
@@ -1028,6 +1081,59 @@
       "country": "Singapore",
       "city": "Changi",
       "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "c97717bd-6f7d-47a6-be12-555f9c5b9a47",
+      "hotel_Name": "Aloft Dublin City",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183764-aapexels-mikegles-30931571.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-anna-frizen-uudEOOzuQjM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-artur-aldyrkhanov-QksucEmALuQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-collov-home-design-kSoe7EoxHIE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-sanibell-bv-yuFu0imUKMk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-smartworks-coworking-E7Tzh2TTS6c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-yoav-aziz-UQXlVumSGHE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183767-zlex-haney-CAhjZmVk5H4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-11-07",
+          "reply": "Thank you, madam. Wish you have a great journey",
+          "comment": "The room is clean and tidy. Have a nice experience of living her for 10 days",
+          "traveler_Id": "f21e2cbf-abd7-4475-99d9-8ba6f258a818",
+          "traveler_Name": "Laura",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Ireland",
+      "city": "Dublin",
+      "offer_Id": "4444"
     }
   ]
 }

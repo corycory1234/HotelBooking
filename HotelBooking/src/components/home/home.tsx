@@ -53,10 +53,16 @@ const swiper_Popular_Destination = [
     cityName: "Singapore"
   },
   {
-    url: '/home/popular_8.webp',
-    text1: 'New Year Spceial!',
-    text2: 'Up to 25% off on local Transportation.',
-    cityName: "Dubai"
+    url: '/home/popular_6.webp',
+    text1: 'Black Friday Special!',
+    text2: 'Get a free lunch using Coupon *GoTour*',
+    cityName: "Ireland"
+  },
+  {
+    url: '/home/popular_12.webp',
+    text1: 'Black Friday Special!',
+    text2: 'Get a free lunch using Coupon *GoTour*',
+    cityName: "Taiwan"
   },
   {
     url: '/home/popular_9.webp',
@@ -75,12 +81,6 @@ const swiper_Popular_Destination = [
     text1: 'Black Friday Special!',
     text2: 'Get a free lunch using Coupon *GoTour*',
     cityName: "Korea"
-  },
-  {
-    url: '/home/popular_12.webp',
-    text1: 'Black Friday Special!',
-    text2: 'Get a free lunch using Coupon *GoTour*',
-    cityName: "Taiwan"
   },
   {
     url: '/home/popular_13.webp',
@@ -365,8 +365,8 @@ const check_Popular_Destination = (popular_Destination: string) => {
                           <img className="" src="/home/Bookmark.svg" alt="" />
                         </div> */}
                         <div className="flex flex-col gap-1 p-2">
-                          <h2 className="text-xs">{item.hotel_Name}</h2>
-                          <div className="flex justify-between">
+                          <h2 className="text-xs line-clamp-1">{item.hotel_Name}</h2>
+                          <div className="flex flex-col gap-1 lg:flex-row lg:justify-between">
                             <StarRating ranking={item.total_Rating}></StarRating>
                             <p className="text-xs text-primary font-semibold">
                               {'$' + item.price + '/'} 

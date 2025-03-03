@@ -3,7 +3,7 @@
     {
       "hotel_Id": "22ce3f17-ea0e-47a3-9618-7624ef16d43a",
       "hotel_Name": "曼谷威斯汀大飯店-素坤逸21號",
-      "url": "/collection/collection_6.webp",
+      "url": "/around/around_1.webp",
       "total_Rating": 5,
       "price": 5000
     },
@@ -22,11 +22,11 @@
       "price": 500
     },
     {
-      "hotel_Id": "bc573023-2184-4088-84c5-81eab739eb0f",
-      "hotel_Name": "曼谷41套房旅館",
-      "url": "/collection/collection_1.webp",
-      "total_Rating": 3,
-      "price": 100
+      "hotel_Id": "f4ce676d-a055-47e6-b4d8-1881649e9aa7",
+      "hotel_Name": "都柏林城雅樂軒酒店",
+      "url": "/around/around_4.webp",
+      "total_Rating": 5,
+      "price": 500
     },
     {
       "hotel_Id": "6938966c-ae92-4204-a8ea-db03e8b23179",
@@ -51,7 +51,7 @@
     {
       "hotel_Id": "df40c06c-f88f-4c49-81c2-5b0c4f3df821",
       "hotel_Name": "The Westin Grande Sukhumvit, Bangkok",
-      "url": "/collection/collection_6.webp",
+      "url": "/around/around_1.webp",
       "total_Rating": 5,
       "price": 5000
     },
@@ -70,11 +70,11 @@
       "price": 500
     },
     {
-      "hotel_Id": "ebf1d16a-b5cb-4032-8008-5d1977a54fc3",
-      "hotel_Name": "41 Suite Bangkok Hotel",
-      "url": "/collection/collection_1.webp",
-      "total_Rating": 3,
-      "price": 100
+      "hotel_Id": "c97717bd-6f7d-47a6-be12-555f9c5b9a47",
+      "hotel_Name": "Aloft Dublin City",
+      "url": "/around/around_4.webp",
+      "total_Rating": 5,
+      "price": 500
     },
     {
       "hotel_Id": "cff62c5b-5622-4238-977f-04cc50f9fa3a",
