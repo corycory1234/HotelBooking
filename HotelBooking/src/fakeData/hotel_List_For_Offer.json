@@ -345,6 +345,112 @@
       "country": "中國",
       "city": "廣州",
       "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "23be93f2-91ca-401a-ab64-597f2ceca010",
+      "hotel_Name": "兄弟大飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401027-pexels-italo-crespi-2169075-6843582.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-jimmy-liao-3615017-17374705.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-justus-menke-3490295-5213881.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-mwabonje-1714975.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-olly-3770106.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-omergulen-19367385.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-quark-studio-1159039-2506992.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-vladimirsrajber-17595515.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 600,
+      "review_List": [
+        {
+          "date": "2024-10-11",
+          "reply": "Thank you, sir! Wish you have nice itinerary in Taiwan",
+          "comment": "A nice hotel to stay. It's convenient to reach MRT station",
+          "traveler_Id": "08a47870-6d52-43c0-b432-539787f1bfc4",
+          "traveler_Name": "大雄",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "台灣",
+      "city": "台北市",
+      "offer_Id": "5555"
+    },
+    {
+      "hotel_Id": "85b13e73-044c-4e58-b3ea-ca651435e66b",
+      "hotel_Name": "西貢歌劇院飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106140-apexels-kelly-1179532-9317441.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-anastasia-nagibina-1116204043-21560333.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-dodogr8-1028379.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-donaldtong94-133920.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-fatih-turan-63325184-15551933.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-weickmann-17487164.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-yazanhija-23230833.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106142-pexels-zachtheshoota-1769577.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-08-09",
+          "reply": "Thank you, madam. Wish you have a good journey",
+          "comment": "This is my first time of visiting Vietnam! This hotel is extremely awesome to watch the scene of Opera house",
+          "traveler_Id": "89ae4958-fb25-4d2c-8f95-feb539d3ae30",
+          "traveler_Name": "Ashley",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "越南",
+      "city": "胡志明市",
+      "offer_Id": "2222"
     }
   ],
   
@@ -694,6 +800,112 @@
       "country": "China",
       "city": "Guanzhou",
       "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "3cf95266-9558-4117-ac12-35fac5426e20",
+      "hotel_Name": "Brother Hotel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401027-pexels-italo-crespi-2169075-6843582.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-jimmy-liao-3615017-17374705.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-justus-menke-3490295-5213881.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-mwabonje-1714975.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-olly-3770106.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-omergulen-19367385.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-quark-studio-1159039-2506992.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-vladimirsrajber-17595515.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 600,
+      "review_List": [
+        {
+          "date": "2024-10-11",
+          "reply": "Thank you, sir! Wish you have nice itinerary in Taiwan",
+          "comment": "A nice hotel to stay. It's convenient to reach MRT station",
+          "traveler_Id": "08a47870-6d52-43c0-b432-539787f1bfc4",
+          "traveler_Name": "大雄",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Taiwan",
+      "city": "Taipei City",
+      "offer_Id": "5555"
+    },
+    {
+      "hotel_Id": "704e6043-8c91-4a0d-b8aa-f5283310d3b5",
+      "hotel_Name": "La Opera saigon hotel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229700-apexels-kelly-1179532-9317441.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229700-pexels-anastasia-nagibina-1116204043-21560333.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229700-pexels-dodogr8-1028379.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229701-pexels-donaldtong94-133920.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229702-pexels-fatih-turan-63325184-15551933.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229702-pexels-weickmann-17487164.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229703-pexels-yazanhija-23230833.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229703-pexels-zachtheshoota-1769577.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-08-09",
+          "reply": "Thank you, madam. Wish you have a good journey",
+          "comment": "This is my first time of visiting Vietnam! This hotel is extremely awesome to watch the scene of Opera house",
+          "traveler_Id": "89ae4958-fb25-4d2c-8f95-feb539d3ae30",
+          "traveler_Name": "Ashley",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Vietnam",
+      "city": "Ho Chi Minh City",
+      "offer_Id": "2222"
     }
   ]
     

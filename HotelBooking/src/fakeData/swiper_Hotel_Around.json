@@ -8,11 +8,11 @@
       "price": 5000
     },
     {
-      "hotel_Id": "c2457e8b-71d1-4b49-abf2-3659bbcc8dc2",
-      "hotel_Name": "UHG四分之一沙拉登飯店",
-      "url": "/collection/collection_3.webp",
+      "hotel_Id": "23be93f2-91ca-401a-ab64-597f2ceca010",
+      "hotel_Name": "兄弟大飯店",
+      "url": "/around/around_2.webp",
       "total_Rating": 4,
-      "price": 2000
+      "price": 600
     },
     {
       "hotel_Id": "c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235",
@@ -34,6 +34,13 @@
       "url": "/collection/collection_7.webp",
       "total_Rating": 4,
       "price": 110
+    },
+    {
+      "hotel_Id": "85b13e73-044c-4e58-b3ea-ca651435e66b",
+      "hotel_Name": "西貢歌劇院飯店",
+      "url": "/around/around_6.webp",
+      "total_Rating": 4,
+      "price": 500
     }
   ],
   
@@ -48,11 +55,11 @@
       "price": 5000
     },
     {
-      "hotel_Id": "bf2bf0be-9514-460f-bda7-6c389e59297d",
-      "hotel_Name": "The Quarter Saladaeng by UHG",
-      "url": "/collection/collection_3.webp",
+      "hotel_Id": "3cf95266-9558-4117-ac12-35fac5426e20",
+      "hotel_Name": "Brother Hotel",
+      "url": "/around/around_2.webp",
       "total_Rating": 4,
-      "price": 2000
+      "price": 600
     },
     {
       "hotel_Id": "e9c95803-e8ac-494f-b448-4396d6cc4861",
@@ -74,6 +81,13 @@
       "url": "/collection/collection_7.webp",
       "total_Rating": 4,
       "price": 110
+    },
+    {
+      "hotel_Id": "704e6043-8c91-4a0d-b8aa-f5283310d3b5",
+      "hotel_Name": "La Opera saigon hotel",
+      "url": "/around/around_6.webp",
+      "total_Rating": 4,
+      "price": 500
     }
   ] 
   

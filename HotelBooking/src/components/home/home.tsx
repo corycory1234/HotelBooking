@@ -16,8 +16,9 @@ import StarRating from "../starrating/star-Rating";
 import {useTranslations} from 'next-intl';
 import { useParams } from "next/navigation";
 import { updateBedType, updateFacility, updateKeyword, updateRangeSlider, updateRating } from "@/store/form-Search/formSearchSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swiper_Hotel_Around_Json from "@/fakeData/swiper_Hotel_Around.json";
+// import { supabase } from "@/lib/supabase_Client";
 
 
 const swiper_Popular_Destination = [
@@ -216,7 +217,27 @@ const check_Popular_Destination = (popular_Destination: string) => {
   const fetch_Hotel_Detail = (hotel_Id: string, hotel_Name: string) => {
     dispatch(updateKeyword(hotel_Name))
     router.push(`/${params.locale}/hotellist/${hotel_Id}`)
-  }
+  };
+
+  //
+  // const [token, setToken] = useState<string | null>(null);
+  // const [userEmail, setUserEmail] = useState<string | null>(null);
+  // useEffect(() => {
+  //   async function fetchSession() {
+  //     const {data, error} = await supabase.auth.getSession();
+  //     console.log(data, "看一下data");
+  //     if(!error && data.session) {
+  //       setToken(data.session.access_token);
+  //       setUserEmail(data.session.user?.email ?? null);
+  //     }
+  //   };
+
+  //   fetchSession();
+  // },[])
+  // useEffect(() => {
+  //   console.log(token);
+  //   console.log(userEmail);
+  // },[token, userEmail])
 
   return <>
     <div className="bg-home-explore lg:bg-home-explore-desktop w-full h-52 lg:h-[20rem] bg-no-repeat bg-cover bg-center">
