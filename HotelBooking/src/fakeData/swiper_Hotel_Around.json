@@ -15,11 +15,11 @@
       "price": 600
     },
     {
-      "hotel_Id": "c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235",
-      "hotel_Name": "曼谷夜間飯店 - 素坤逸路 15 巷",
-      "url": "/collection/collection_2.webp",
+      "hotel_Id": "39df3f18-901c-468c-b8f5-c4d5b736ebb8",
+      "hotel_Name": "新加坡樟宜機場尤特艾爾飯店",
+      "url": "/around/around_3.webp",
       "total_Rating": 4,
-      "price": 2200
+      "price": 500
     },
     {
       "hotel_Id": "bc573023-2184-4088-84c5-81eab739eb0f",
@@ -42,6 +42,7 @@
       "total_Rating": 4,
       "price": 500
     }
+
   ],
   
 
@@ -62,11 +63,11 @@
       "price": 600
     },
     {
-      "hotel_Id": "e9c95803-e8ac-494f-b448-4396d6cc4861",
-      "hotel_Name": "Night Hotel Bangkok - Sukhumvit 15",
-      "url": "/collection/collection_2.webp",
+      "hotel_Id": "67fa7453-d618-45e3-ab60-ab529e6f6ce6",
+      "hotel_Name": "YOTELAIR Singapore Changi Airport at Jewel",
+      "url": "/around/around_3.webp",
       "total_Rating": 4,
-      "price": 2200
+      "price": 500
     },
     {
       "hotel_Id": "ebf1d16a-b5cb-4032-8008-5d1977a54fc3",

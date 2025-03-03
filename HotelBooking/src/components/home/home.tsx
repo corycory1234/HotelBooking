@@ -47,10 +47,10 @@ const swiper_Popular_Destination = [
     cityName: "Vietnam"
   },
   {
-    url: '/home/popular_6.webp',
+    url: '/home/popular_14.webp',
     text1: 'New Year Spceial!',
     text2: 'Get a free lunch using Coupon *GoTour*',
-    cityName: "Paris"
+    cityName: "Singapore"
   },
   {
     url: '/home/popular_8.webp',

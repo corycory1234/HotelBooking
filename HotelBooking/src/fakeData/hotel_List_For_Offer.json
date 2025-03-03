@@ -451,6 +451,67 @@
       "country": "越南",
       "city": "胡志明市",
       "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "39df3f18-901c-468c-b8f5-c4d5b736ebb8",
+      "hotel_Name": "新加坡樟宜機場尤特艾爾飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981230-apexels-ting-chang-17124378-14763001.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-bento-justin-2216976-8073284.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-enginakyurt-2771921.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1145257.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1237069.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-karlsolano-2883047.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-olly-3771087.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-sab-maga-2150105300-30953290.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 800,
+      "review_List": [
+        {
+          "date": "2024-08-20",
+          "reply": "Sir, thanks for your compliment",
+          "comment": "I have visited 1 year ago. This hotel service is well-rounded",
+          "traveler_Id": "0c4ba4f8-5e9c-4a3a-b554-6658469849f4",
+          "traveler_Name": "Volen",
+          "traveler_Rating": "4"
+        },
+        {
+          "date": "2025-02-01",
+          "reply": "",
+          "comment": "Great! During Chinese lunar new year, the staff provide us with red envelopes! It's auspicious :)",
+          "traveler_Id": "39a0c786-ea5a-4e90-bff3-77dbb7969180",
+          "traveler_Name": "Norman",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "新加坡",
+      "city": "樟宜",
+      "offer_Id": "3333"
     }
   ],
   
@@ -906,6 +967,67 @@
       "country": "Vietnam",
       "city": "Ho Chi Minh City",
       "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "67fa7453-d618-45e3-ab60-ab529e6f6ce6",
+      "hotel_Name": "YOTELAIR Singapore Changi Airport at Jewel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981230-apexels-ting-chang-17124378-14763001.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-bento-justin-2216976-8073284.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-enginakyurt-2771921.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1145257.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1237069.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-karlsolano-2883047.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-olly-3771087.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-sab-maga-2150105300-30953290.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 800,
+      "review_List": [
+        {
+          "date": "2024-08-20",
+          "reply": "Sir, thanks for your compliment",
+          "comment": "I have visited 1 year ago. This hotel service is well-rounded",
+          "traveler_Id": "0c4ba4f8-5e9c-4a3a-b554-6658469849f4",
+          "traveler_Name": "Volen",
+          "traveler_Rating": "4"
+        },
+        {
+          "date": "2025-02-01",
+          "reply": "",
+          "comment": "Great! During Chinese lunar new year, the staff provide us with red envelopes! It's auspicious :)",
+          "traveler_Id": "39a0c786-ea5a-4e90-bff3-77dbb7969180",
+          "traveler_Name": "Norman",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Singapore",
+      "city": "Changi",
+      "offer_Id": "3333"
     }
   ]
 }
