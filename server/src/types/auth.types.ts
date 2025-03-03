@@ -17,6 +17,11 @@ export interface LoginDTO {
     password: string;
 }
 
+export interface GoogleLoginDTO {
+    credential: string;
+    clientId: string;
+}
+
 export interface User {
     id: string;
     name: string;
