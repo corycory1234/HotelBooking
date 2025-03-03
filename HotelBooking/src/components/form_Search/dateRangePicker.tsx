@@ -34,6 +34,10 @@ export default function DateRangePicker () {
   })
 
   const selectDate = (newValue: {startDate: Date | null, endDate: Date | null}) => {
+    // 2.1 退房日跟入住日同一天, 強制將「退房日改成明天」
+    if(newValue.endDate === newValue.startDate) {
+      newValue.endDate = new Date((newValue.startDate as Date)?.getTime() + 24 * 60 * 60 * 1000)
+    };
     setValue(newValue);
     console.log(newValue, "手動點選後, 日歷之數據格式");
     const { startDate, endDate } = newValue;
