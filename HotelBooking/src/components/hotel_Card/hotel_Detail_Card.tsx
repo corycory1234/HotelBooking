@@ -721,7 +721,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         {/** Tab標籤 - Anchor錨點滑動 */}
           <ul className={`border-y border-softGray p-2 flex gap-4 bg-white
-          ${is_Scrolled === true ? 'fixed top-[144px] z-20 w-full left-0 px-20' : ''}`}>
+          ${is_Scrolled === true ? 'fixed top-[130px] z-20 w-full left-0 px-20' : ''}`}>
             
             {tab_List.map((tab) => {
               return <li key={tab.id}>

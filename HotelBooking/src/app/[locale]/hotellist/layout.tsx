@@ -32,7 +32,7 @@ export default function HotelList_Layout({children,}: Readonly<{children: React.
 
 
     {/************************ PC桌機版 - 搜尋<form> ************************/}
-      <div className="hidden lg:block lg:fixed lg:top-[70px] lg:w-full lg:z-10">
+      <div className="hidden lg:block lg:fixed lg:top-[56px] lg:w-full lg:z-10">
         <Form_Search_Pc></Form_Search_Pc>
       </div>
     {/************************ PC桌機版 - 搜尋<form> ************************/}
