@@ -196,7 +196,7 @@ export default function My_Review () {
 
                   <div className="flex flex-col">
                     <p className="text-gray text-[14px]">{t ("Nights")}</p>
-                    <p className="text-[14px] font-semibold">{how_Many_Nights(item.checkInDate, item.checkOutDate)}</p>
+                    <p className="text-[14px] font-semibold">{how_Many_Nights(item.checkInDate as string, item.checkOutDate as string)}</p>
                   </div>
 
                   <div className="border-r border-x-softGray"></div>

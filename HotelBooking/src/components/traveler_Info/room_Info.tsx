@@ -14,7 +14,7 @@ export default function Room_Info () {
   const redux_Fomr_Search = useSelector((state: RootState) => state.formSearch);
 
   // 4. 住幾個晚上
-  const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10), redux_Fomr_Search.dateRange?.slice(13))
+  const nights = how_Many_Nights(redux_Fomr_Search.dateRange?.slice(0,10) as string, redux_Fomr_Search.dateRange?.slice(13) as string)
   // console.log("幾晚", nights);
 
   // 5. Redux - 被預訂飯店之之數據

@@ -35,7 +35,7 @@ export default function Booking_Detail () {
   const current_Page_Name = "Booking Details"
 
   // 3. 用 day.js 計算住幾晚
-  const nights = how_Many_Nights(the_Booking_Detail.checkInDate, the_Booking_Detail.checkOutDate);
+  const nights = how_Many_Nights(the_Booking_Detail.checkInDate as string, the_Booking_Detail.checkOutDate as string);
 
   // 4. 留言彈窗
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
