@@ -166,7 +166,7 @@ export default function Before_Login_Profile () {
   
 
 
-  return <div className="pb-20 lg:pb-0">
+  return <div className="lg:pb-0">
   
     <div className="bg-primary flex flex-col items-center gap-2 p-8 lg:hidden">
 
@@ -216,7 +216,7 @@ export default function Before_Login_Profile () {
 
 
 
-  <div className="customized-bg-gradient flex flex-col gap-4 p-4 lg:p-2 lg:bg-none lg:gap-6">
+  <div className="customized-bg-gradient flex flex-col gap-4 p-4 min-h-[70vh] lg:min-h-[20vh] lg:p-2 lg:bg-none lg:gap-6">
 
     {/** 多國語系切換 */}
     <div className="flex justify-between">
