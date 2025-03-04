@@ -156,10 +156,15 @@ export class AuthService extends BaseService {
             const {
                 data: { user, session },
                 error,
-            } = await this.supabase.auth.signInWithIdToken({
+            } = await this.supabase.auth.signInWithOAuth({
                 provider: "google",
-                token: data.credential,
-                nonce: "NONCE",
+                options: {
+                    queryParams: {
+                        access_type: "offline",
+                        prompt: "consent",
+                    },
+                    redirectTo: `${process.env.FRONTEND_URL}/auth/callback`,
+                },
             });
 
             if (error) throw error;
