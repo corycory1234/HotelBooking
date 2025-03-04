@@ -44,7 +44,7 @@ export default function Payment_Progress_Bar () {
     
   </div>
   
-  <div className="hidden lg:flex justify-center items-center gap-40">
+  <div className="hidden lg:flex justify-center items-center gap-52">
     <p className="font-semibold text-sm">{t ("Guest Info")}</p>
     {/* <p className="border border-r border-transparent w-1/12"></p> */}
     <p className="font-semibold text-sm">{t ("CreditCard")}</p>

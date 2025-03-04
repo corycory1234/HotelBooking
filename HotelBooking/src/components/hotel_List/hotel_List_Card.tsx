@@ -522,9 +522,9 @@ export default function Hotel_List_Card() {
         const the_Collection = redux_Collection_List.find((collection) => collection.hotel_Id === item.hotel_Id);
         const is_Collected = the_Collection ? the_Collection.isCollected : false;
 
-        return <div key={item.hotel_Id} className="space-y-4">
-          <article className="bg-white rounded-lg overflow-hidden shadow-sm lg:rounded-none lg:border-b lg:border-softGray
-          lg:flex lg:gap-4 lg:relative">
+        return <div key={item.hotel_Id} className="py-4 lg:rounded-none lg:border-b lg:border-softGray">
+          <article className="bg-white rounded-lg overflow-hidden shadow-sm
+          lg:flex lg:gap-4 lg:relative lg:rounded-none lg:shadow-none">
         
             {/* Swiper 飯店圖片 */}
             <div className="lg:w-1/3">

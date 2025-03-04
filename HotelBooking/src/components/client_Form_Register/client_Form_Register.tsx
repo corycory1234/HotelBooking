@@ -97,9 +97,9 @@ export default function Client_Form_Register () {
         toast.error("Regisration Failed");
       } else {
         // console.log(data, "註冊成功");
-        toast.success("Regisration OK");
         await sleep(3000);
         router.push("/");
+        toast.success("Regisration OK, ✉️Verification Eamil will be sent to you", {icon: "✔️", duration: 5000});
       }
     } catch (error) {
       console.log("註冊失誤", error);

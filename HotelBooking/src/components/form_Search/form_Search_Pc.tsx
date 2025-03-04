@@ -311,7 +311,7 @@ export default function Form_Search_Pc () {
   <form onSubmit={submit_Search} className="flex flex-col px-4 lg:flex-row lg:justify-center lg:items-center lg:bg-[#f3f3f3] gap-2 lg:px-20 lg:py-4 lg:relative">
     
     <div className="relative lg:basis-1/3 flex flex-col">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-1.5 right-2 text-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-2.5 right-2 text-primary">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
       </svg>
@@ -349,7 +349,7 @@ export default function Form_Search_Pc () {
         maxDate={MAX_DATE}
         popoverDirection="down"
         containerClassName="w-full lg:inline-block lg:flex"
-        inputClassName="w-full py-2 outline-none border border-gray rounded px-4 lg:w-full lg:pb-[15px] lg:h-[44px]"
+        inputClassName="w-full py-2 outline-none border border-gray rounded px-4 lg:w-full lg:h-[44px]"
         toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[52px] lg:h-[44px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
         lg:relative lg:align-middle lg:-left-1"
         inputId="datepicker"

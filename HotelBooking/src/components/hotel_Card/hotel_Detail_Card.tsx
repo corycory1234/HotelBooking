@@ -291,7 +291,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   // 18. 滑動Tab, 固定高度
   const [is_Scrolled, set_Is_Scrolled] = useState<boolean>(false);
   const scroll_Tab = () => {
-    set_Is_Scrolled(window.scrollY > 300);
+    set_Is_Scrolled(window.scrollY > 10);
   };
   useEffect(() => {
     scroll_Tab();
@@ -736,7 +736,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** Tab標籤 - Anchor錨點滑動 */}
 
         {/** 我的收藏 - 愛心 */}
-        <section className="flex justify-between scroll-m-28" id="overview">
+        <section className="flex justify-between scroll-mt-44" id="overview">
           <div className="flex">
             <StarRating ranking={the_Hotel?.totalRating as number}></StarRating>
           </div>
@@ -837,7 +837,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         
 
         {/** 桌機PC - 房型照片、各種房型資訊 */}
-        <section className="flex flex-col gap-2 scroll-m-28" id="rooms">
+        <section className="flex flex-col gap-2 scroll-mt-44" id="rooms">
           <h2 className="font-semibold text-2xl">{t ("Explore Our Rooms")}</h2>
           <p>{the_Hotel?.roomType_List?.length} {t ("Room Types")}</p>
           
@@ -1044,7 +1044,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
         {/** 桌機PC - 旅客評價留言 */}
-        <section id="reviews" className="flex justify-between scroll-m-28">
+        <section id="reviews" className="flex justify-between scroll-mt-44">
 
           {/** 左邊平均評價星星 */}
           <div className="basis-1/4 flex flex-col gap-2">
@@ -1107,7 +1107,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         
 
         {/** PC桌機 - 地圖、check-In、Check-Out、付款方式、電話、地址 */}
-        <section className="flex flex-col gap-2 scroll-m-28" id="map">
+        <section className="flex flex-col gap-2 scroll-mt-44" id="map">
           <h2 className="font-semibold text-2xl">{t ("Hotel Location")}</h2>
           {/** React-leaflet 地圖 */}
           <MapContainer
@@ -1197,7 +1197,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
          {/** PC桌機 - 地圖、check-In、Check-Out、付款方式、電話、地址 */}
 
         {/** 桌機PC - 取消政策 */}
-        <section className="flex flex-col gap-2 scroll-m-28" id="cancellation">
+        <section className="flex flex-col gap-2 scroll-mt-44" id="cancellation">
           <h2 className="font-semibold text-2xl">{t ("Cancellation Policy")}</h2>
           <div className="flex flex-col gap-2 border border-softGray rounded p-2">
             {the_Hotel?.cancellation_Policy?.split(".").map((cancel, index) => {
@@ -1212,7 +1212,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 桌機PC - 取消政策 */}
 
 
-        <div className="flex flex-col gap-2 scroll-m-28" >
+        <div className="flex flex-col gap-2 scroll-mt-44" >
           <h2 className="font-semibold text-2xl">{t ("Recommended Spots")}</h2>
           <div className="flex flex-col gap-2">
             {the_Hotel?.recommendation?.split(",").map((spot, index) => {
