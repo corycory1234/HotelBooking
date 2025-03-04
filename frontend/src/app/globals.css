@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}body::-webkit-scrollbar {
+  /* display: none; */
+}
+
+/* 1. 隱藏捲軸但仍可滑動 */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* for IE and Edge */
+  scrollbar-width: none;    /* for Firefox */
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;            /* for Chrome, Safari, and Opera */
+}
+
+/* 2. Tailwind - 自定義漸層背景 */
+.my-bg-gradient {
+  @apply bg-gradient-to-b from-[#F9F9F9] to-slate-50 rounded-t-3xl;
+}
+@media (min-width: 1024px) {
+  .my-bg-gradient {
+    @apply bg-none
+  }
+}
+.customized-bg-gradient {
+  @apply bg-gradient-to-b from-[#F9F9F9] to-slate-50;
+}
+
+
+/* 3. Tailwind - 強制改Swiper - Pagination 顏色*/
+.swiper-pagination-bullet-active {
+  @apply bg-[#FE9900] !important
+}
+
+/* 4. Tailwind - 自定義 <input type="radio"> 圓圈顏色*/
+input[type="radio"] {
+  @apply appearance-none w-4 h-4 border-2 rounded-full cursor-pointer;
+}
+input[type="radio"]:checked::before {
+  content: "";
+  @apply block w-full h-full bg-secondary rounded-full mx-auto my-auto;
+}
+input[type="radio"]:checked {
+  @apply accent-secondary
+}
+
+/* 5. 關掉<input type="number"> 右變的上下箭頭 */
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spin {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+/* 6. leaflet地圖 - 飯店名提示加粗 */
+.leaflet-tooltip {
+  @apply font-semibold !important
+};
+
+/* 7. 房型Information, 底線超連結 - 跳轉Google Map*/
+.customized-underline {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+/* 8. Swiper - Navigation 導覽按鈕 (桌機上再套用, 手機版關掉)*/
+.swiper-button-next,
+.swiper-button-prev {
+  display: none !important;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  /* content:""; */
+  display: none !important;
+}
+@media (min-width: 1024px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: #fff;
+    border-radius: 50%;
+    opacity: .8;
+    box-shadow: 0 0 4px #6d6d6d;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px !important;    /* 新增：固定寬度 */
+    height: 30px !important;   /* 新增：固定高度 */
+    display: flex !important;
+    justify-items: center;
+    align-items: center;
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after  {
+    font-size: 12px !important;
+    color: black;
+    display: block !important;
+  }
+  /* 為了調整hotel_List 輪播圖包含 Pagination 與 Navigation, 導致Navigation無法置中 */
+  .navigation-go-center {
+    --swiper-navigation-size: 0px; /* 或是你希望的尺寸，如 0px */
+  }
+}
+
+/*9. 錨點滾動方式*/
+html {
+  scroll-behavior: smooth
+}
