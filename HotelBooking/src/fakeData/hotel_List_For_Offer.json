@@ -565,6 +565,59 @@
       "country": "愛爾蘭",
       "city": "都伯林",
       "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "df762950-4059-49b9-a47b-9ae559cf1189",
+      "hotel_Name": "都柏林市中心智選假日飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863560-apexels-navlakha-30929217.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-azpexels-ekam-juneja-61080223-13373528.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6466286.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6475035.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-davidguerrero-15811692.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-heyho-6758531.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-son-tung-tran-17375059-6460876.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863562-pexels-vaishnav-devadas-415764-2086676.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 250,
+      "review_List": [
+        {
+          "date": "2024-11-28",
+          "reply": "Thanks for your recommendation, Sir",
+          "comment": "This is a nice hotel in Ireland. It's quite closed to public transport",
+          "traveler_Id": "59ffb99e-50db-4495-a3f0-760ef0b3db55",
+          "traveler_Name": "Dylan",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "愛爾蘭",
+      "city": "都伯林",
+      "offer_Id": "1111"
     }
   ],
   
@@ -1134,6 +1187,59 @@
       "country": "Ireland",
       "city": "Dublin",
       "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "740ea5cc-0deb-4561-8b39-dcd9f12f0e3a",
+      "hotel_Name": "Holiday Inn Express Dublin City Centre",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863560-apexels-navlakha-30929217.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-azpexels-ekam-juneja-61080223-13373528.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6466286.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6475035.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-davidguerrero-15811692.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-heyho-6758531.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-son-tung-tran-17375059-6460876.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863562-pexels-vaishnav-devadas-415764-2086676.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 250,
+      "review_List": [
+        {
+          "date": "2024-11-28",
+          "reply": "Thanks for your recommendation, Sir",
+          "comment": "This is a nice hotel in Ireland. It's quite closed to public transport",
+          "traveler_Id": "59ffb99e-50db-4495-a3f0-760ef0b3db55",
+          "traveler_Name": "Dylan",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Ireland",
+      "city": "Dublin",
+      "offer_Id": "1111"
     }
   ]
 }
