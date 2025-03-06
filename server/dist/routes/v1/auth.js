@@ -27,4 +27,5 @@ router.get("/verify-session", asyncHandler(auth_controller_1.authController.veri
 // 刷新 token
 router.post("/refresh-token", asyncHandler(auth_controller_1.authController.refreshToken));
 // Google 登入
+// router.post("/google-login", asyncHandler(authController.googleLogin));
 exports.default = router;
