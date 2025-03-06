@@ -150,56 +150,6 @@ export class AuthService extends BaseService {
         }
     }
 
-    // Google 登入
-    async googleLogin(data: GoogleLoginDTO) {
-        try {
-            const {
-                data: { user, session },
-                error,
-            } = await this.supabase.auth.signInWithOAuth({
-                provider: "google",
-                options: {
-                    queryParams: {
-                        access_type: "offline",
-                        prompt: "consent",
-                    },
-                    redirectTo: `${process.env.FRONTEND_URL}/auth/callback`,
-                },
-            });
-
-            if (error) throw error;
-            if (!user || !session) throw new Error("Google 登入失敗");
-
-            // 檢查用戶是否已存在
-            let dbUser = await this.db.query.users.findFirst({
-                where: eq(users.id, user.id),
-            });
-
-            // 如果用戶不存在，建立新用戶
-            if (!dbUser) {
-                const [newUser] = await this.db
-                    .insert(users)
-                    .values({
-                        id: user.id,
-                        name: user.user_metadata.full_name || "用戶",
-                        userType: "guest", // 預設為一般用戶
-                    })
-                    .returning();
-                dbUser = newUser;
-            }
-
-            return {
-                user: {
-                    ...dbUser,
-                    email: user.email,
-                },
-                session,
-            };
-        } catch (error: any) {
-            throw new Error(error.message || "Google 登入失敗");
-        }
-    }
-
     // 登出
     async logout(refreshToken: string) {
         try {
@@ -381,7 +331,7 @@ export class AuthService extends BaseService {
                 throw new Error("刷新 session 失敗");
             }
 
-            return data;
+            return data.session;
         } catch (error: any) {
             throw error;
         }

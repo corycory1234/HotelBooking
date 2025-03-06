@@ -1,10 +1,10 @@
 // src/middlewares/auth.middleware.ts
 import { Request, Response, NextFunction } from "express";
-import { supabase } from '../utils/supabase';
-import { db } from '../db';
-import { users } from '../db/schema/users';
-import { eq } from 'drizzle-orm';
-import { User, UserType } from '../types/user.types';
+import { supabase } from "../utils/supabase";
+import { db } from "../db";
+import { users } from "../db/schema/users";
+import { eq } from "drizzle-orm";
+import { User, UserType } from "../types/user.types";
 
 // 修改 Request 擴展方式
 declare global {
@@ -21,32 +21,29 @@ export const authMiddleware = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        // 優先從 cookies 中獲取 token
-        let token = req.cookies.access_token;
-        
-        // 如果 cookies 中沒有，則嘗試從 Authorization header 中獲取
+        const token = req.headers.authorization?.split(" ")[1];
+
         if (!token) {
-            token = req.headers.authorization?.split(' ')[1];
-        }
-        
-        if (!token) {
-            res.status(401).json({ message: '未提供認證令牌' });
+            res.status(401).json({ message: "未提供認證令牌" });
             return;
         }
 
-        const { data: { user }, error } = await supabase.auth.getUser(token);
+        const {
+            data: { user },
+            error,
+        } = await supabase.auth.getUser(token);
 
         if (error || !user) {
-            res.status(403).json({ message: '無效的認證令牌' });
+            res.status(403).json({ message: "無效的認證令牌" });
             return;
         }
 
         const dbUser = await db.query.users.findFirst({
-            where: eq(users.id, user.id)
+            where: eq(users.id, user.id),
         });
 
         if (!dbUser) {
-            res.status(403).json({ message: '用戶不存在' });
+            res.status(403).json({ message: "用戶不存在" });
             return;
         }
 
@@ -57,11 +54,11 @@ export const authMiddleware = async (
             email: user.email ?? undefined,
             userType: dbUser.userType as UserType,
             createdAt: dbUser.createdAt,
-            updatedAt: dbUser.updatedAt
+            updatedAt: dbUser.updatedAt,
         };
 
         next();
     } catch (error: any) {
-        res.status(401).json({ message: '驗證失敗' });
+        res.status(401).json({ message: "驗證失敗" });
     }
 };

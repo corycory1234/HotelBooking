@@ -8,7 +8,7 @@ class ReviewController {
     async createReview(req: Request, res: Response) {
         try {
             const { bookingId } = req.params;
-            const token = req.cookies?.access_token;
+            const token = req.headers.authorization?.split(" ")[1] ?? "";
             const reviewData: CreateReviewDTO = {
                 ...req.body,
                 bookingId,
