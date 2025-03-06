@@ -39,21 +39,6 @@ exports.authController = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield auth_service_1.authService.login(req.body);
-                // 設置 cookies
-                if (result.session) {
-                    res.cookie("access_token", result.session.access_token, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === "production",
-                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 在 production 時設為 none
-                        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-                    });
-                    res.cookie("refresh_token", result.session.refresh_token, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === "production",
-                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // 在 production 時設為 none
-                        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-                    });
-                }
                 res.json({
                     success: true,
                     data: {
@@ -63,46 +48,9 @@ exports.authController = {
                             userType: result.user.userType,
                             email: result.session.user.email,
                         },
-                    },
-                });
-            }
-            catch (error) {
-                res.status(400).json({
-                    success: false,
-                    message: error.message,
-                });
-            }
-        });
-    },
-    googleLogin(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const result = yield auth_service_1.authService.googleLogin(req.body);
-                // 設置 cookies
-                if (result.session) {
-                    res.cookie("access_token", result.session.access_token, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === "production",
-                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-                        maxAge: 7 * 24 * 60 * 60 * 1000,
-                        domain: process.env.COOKIE_DOMAIN || undefined,
-                    });
-                    res.cookie("refresh_token", result.session.refresh_token, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === "production",
-                        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-                        maxAge: 30 * 24 * 60 * 60 * 1000,
-                        domain: process.env.COOKIE_DOMAIN || undefined,
-                    });
-                }
-                res.json({
-                    success: true,
-                    data: {
-                        user: {
-                            id: result.user.id,
-                            name: result.user.name,
-                            userType: result.user.userType,
-                            email: result.user.email,
+                        tokens: {
+                            access_token: result.session.access_token,
+                            refresh_token: result.session.refresh_token,
                         },
                     },
                 });
@@ -119,7 +67,7 @@ exports.authController = {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const accessToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
+                const accessToken = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
                 if (!accessToken) {
                     res.status(401).json({
                         success: false,
@@ -128,7 +76,6 @@ exports.authController = {
                     return;
                 }
                 yield auth_service_1.authService.logout(accessToken);
-                res.clearCookie("access_token");
                 res.json({
                     success: true,
                     message: "登出成功",
@@ -175,7 +122,7 @@ exports.authController = {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
+                const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
                 if (!token) {
                     res.status(401).json({
                         success: false,
@@ -208,7 +155,7 @@ exports.authController = {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const accessToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
+                const accessToken = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
                 if (!accessToken) {
                     res.status(401).json({
                         success: false,
@@ -241,7 +188,7 @@ exports.authController = {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const refreshToken = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.refresh_token;
+                const refreshToken = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
                 if (!refreshToken) {
                     res.status(401).json({
                         success: false,
@@ -250,25 +197,14 @@ exports.authController = {
                     return;
                 }
                 const result = yield auth_service_1.authService.refreshSession(refreshToken);
-                if (result.session) {
-                    // 更新 access_token
-                    res.cookie("access_token", result.session.access_token, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === "production",
-                        sameSite: "lax",
-                        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-                    });
-                    // 更新 refresh_token
-                    res.cookie("refresh_token", result.session.refresh_token, {
-                        httpOnly: true,
-                        secure: process.env.NODE_ENV === "production",
-                        sameSite: "lax",
-                        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-                    });
-                }
-                // 簡化回應內容，只需要告訴前端更新成功即可
                 res.json({
                     success: true,
+                    data: {
+                        tokens: {
+                            access_token: result.access_token,
+                            refresh_token: result.refresh_token,
+                        },
+                    },
                 });
             }
             catch (error) {

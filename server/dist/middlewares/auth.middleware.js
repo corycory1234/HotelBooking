@@ -17,26 +17,21 @@ const drizzle_orm_1 = require("drizzle-orm");
 const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     try {
-        // 優先從 cookies 中獲取 token
-        let token = req.cookies.access_token;
-        // 如果 cookies 中沒有，則嘗試從 Authorization header 中獲取
+        const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
         if (!token) {
-            token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
-        }
-        if (!token) {
-            res.status(401).json({ message: '未提供認證令牌' });
+            res.status(401).json({ message: "未提供認證令牌" });
             return;
         }
-        const { data: { user }, error } = yield supabase_1.supabase.auth.getUser(token);
+        const { data: { user }, error, } = yield supabase_1.supabase.auth.getUser(token);
         if (error || !user) {
-            res.status(403).json({ message: '無效的認證令牌' });
+            res.status(403).json({ message: "無效的認證令牌" });
             return;
         }
         const dbUser = yield db_1.db.query.users.findFirst({
-            where: (0, drizzle_orm_1.eq)(users_1.users.id, user.id)
+            where: (0, drizzle_orm_1.eq)(users_1.users.id, user.id),
         });
         if (!dbUser) {
-            res.status(403).json({ message: '用戶不存在' });
+            res.status(403).json({ message: "用戶不存在" });
             return;
         }
         // 設置完整的用戶資訊
@@ -46,12 +41,12 @@ const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
             email: (_b = user.email) !== null && _b !== void 0 ? _b : undefined,
             userType: dbUser.userType,
             createdAt: dbUser.createdAt,
-            updatedAt: dbUser.updatedAt
+            updatedAt: dbUser.updatedAt,
         };
         next();
     }
     catch (error) {
-        res.status(401).json({ message: '驗證失敗' });
+        res.status(401).json({ message: "驗證失敗" });
     }
 });
 exports.authMiddleware = authMiddleware;

@@ -137,45 +137,6 @@ class AuthService extends base_service_1.BaseService {
             }
         });
     }
-    // Google 登入
-    googleLogin(data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const { data: { user, session }, error, } = yield this.supabase.auth.signInWithIdToken({
-                    provider: "google",
-                    token: data.credential,
-                    nonce: "NONCE",
-                });
-                if (error)
-                    throw error;
-                if (!user || !session)
-                    throw new Error("Google 登入失敗");
-                // 檢查用戶是否已存在
-                let dbUser = yield this.db.query.users.findFirst({
-                    where: (0, drizzle_orm_1.eq)(schema_1.users.id, user.id),
-                });
-                // 如果用戶不存在，建立新用戶
-                if (!dbUser) {
-                    const [newUser] = yield this.db
-                        .insert(schema_1.users)
-                        .values({
-                        id: user.id,
-                        name: user.user_metadata.full_name || "用戶",
-                        userType: "guest", // 預設為一般用戶
-                    })
-                        .returning();
-                    dbUser = newUser;
-                }
-                return {
-                    user: Object.assign(Object.assign({}, dbUser), { email: user.email }),
-                    session,
-                };
-            }
-            catch (error) {
-                throw new Error(error.message || "Google 登入失敗");
-            }
-        });
-    }
     // 登出
     logout(refreshToken) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -332,7 +293,7 @@ class AuthService extends base_service_1.BaseService {
                 if (!data.session) {
                     throw new Error("刷新 session 失敗");
                 }
-                return data;
+                return data.session;
             }
             catch (error) {
                 throw error;

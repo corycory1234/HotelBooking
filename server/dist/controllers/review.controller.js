@@ -16,10 +16,10 @@ class ReviewController {
     // 新增評價
     createReview(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            var _a;
+            var _a, _b;
             try {
                 const { bookingId } = req.params;
-                const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.access_token;
+                const token = (_b = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1]) !== null && _b !== void 0 ? _b : "";
                 const reviewData = Object.assign(Object.assign({}, req.body), { bookingId });
                 const validation = review_service_1.reviewService.validateReviewData(reviewData);
                 if (!validation.isValid) {
