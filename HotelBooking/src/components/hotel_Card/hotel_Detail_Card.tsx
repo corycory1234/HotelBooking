@@ -435,7 +435,26 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
 
       {/** 飯店名，吃Sticky，滾動固定Top */}
-      <p className="font-bold px-4 bg-white sticky top-0 z-10">{the_Hotel?.hotel_Name}</p>
+      <div className="flex items-center">
+        <p className="font-bold px-4 bg-white sticky top-0 z-10">{the_Hotel?.hotel_Name}</p>
+        {/** 手機板 - 我的收藏 */}
+          {is_Collected === false ? <>
+              <div className="cursor-pointer">
+                <OtherSVG name="emptyheart" className="w-5 h-auto"
+                onClick={() => the_Hotel && add_Collection(the_Hotel)}></OtherSVG>
+              </div>
+            </>
+            : 
+            <>
+              <div className="cursor-pointer">
+                <OtherSVG name="fullheart" className="w-5 h-auto"
+                onClick={() => the_Hotel && delete_Collection(the_Hotel)}
+                ></OtherSVG>
+              </div>
+            </>
+            }
+        {/** 手機板 - 我的收藏 */}
+      </div>
       {/** 飯店名，吃Sticky，滾動固定Top */}
 
       {/* Tab 高亮切換，吃Sticky，滾動固定Top */}
