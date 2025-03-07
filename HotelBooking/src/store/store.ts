@@ -9,6 +9,7 @@ import auth_Reducer from "@/store/auth/isAuthenticated_Slice"
 import my_Collection_Reducer from "@/store/my_Collection/my_Collection_Slice";
 import hotel_List_Reducer2 from "@/store/hotel_List/hotel_List_Slice";
 import traveler_Info_Reducer from "@/store/traveler_Info/traveler_Info_Slice";
+import access_Token_Reducer from "@/store/access_Token/access_Token_Slice";
 
 
 // 引入 transform, 把 date字串 轉 date物件格式, 不然無日曆法渲染, 造成報錯
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   verify_Session: auth_Reducer,
   my_Collection: my_Collection_Reducer,
   hotel_List2: hotel_List_Reducer2,
-  traveler_Info: traveler_Info_Reducer
+  traveler_Info: traveler_Info_Reducer,
+  access_Token: access_Token_Reducer
 })
 
 
@@ -33,7 +35,16 @@ const rootReducer = combineReducers({
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
   storage,
-  whitelist: ["formSearch", "hotel_Detail", "booked_Room", "hotel_List", "verify_Session", "my_Collection", "hotel_List2", "traveler_Info"],
+  whitelist: ["formSearch", 
+    "hotel_Detail", 
+    "booked_Room", 
+    "hotel_List", 
+    "verify_Session", 
+    "my_Collection", 
+    "hotel_List2", 
+    "traveler_Info",
+    "access_Token"
+  ],
   // 2.1 你也可以只想持久化部分 slice，例如：whitelist: ["formSearch"] 或 blacklist: ["number"]
   transforms: [formSearch_Transform]
 };

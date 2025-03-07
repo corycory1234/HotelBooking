@@ -43,7 +43,7 @@ export default function Hotel_List_Card() {
   const redux_Facility = useSelector((state: RootState) => state.formSearch.facility);
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
-
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
 
   // 2. 查看「指定飯店所有房型」，ID匹配，router跳轉
   const router = useRouter()
@@ -79,7 +79,7 @@ export default function Hotel_List_Card() {
   // 3. 新增收藏飯店
   const add_Collection = async (item: add_Hotel_Detail_Interface) => {
     // 3.1 沒登入, 不給收藏
-    if(redux_Verify_Session.success === false) { 
+    if(redux_Access_Token === '') { 
       toast.error("Please Login First", {icon: "⚠️", duration: 2000});
       return;
     };
@@ -89,7 +89,10 @@ export default function Hotel_List_Card() {
       dispatch(add_My_Collection({hotel_Id: item.hotel_Id as string, isCollected: item.isCollected}));
       const response = await fetch(add_Collection_Url, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: "include",
         body: JSON.stringify({
           hotelId: item.hotel_Id
@@ -107,7 +110,7 @@ export default function Hotel_List_Card() {
   // 4. 刪除收藏飯店
   const delete_Collection = async (item: add_Hotel_Detail_Interface) => {
     // 4.1 沒登入, 不給收藏
-    if(redux_Verify_Session.success === false) { 
+    if(redux_Access_Token === '') { 
       toast.error("Please Login First", {icon: "⚠️", duration: 2000})
       return;
     };
@@ -117,7 +120,10 @@ export default function Hotel_List_Card() {
       dispatch(delete_My_Collection({hotel_Id: item.hotel_Id as string, isCollected:item.isCollected}));
       const response = await fetch(delete_Collectiono_Url, {
         method: "DELETE",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: "include",
         body: JSON.stringify({
           hotelId: item.hotel_Id

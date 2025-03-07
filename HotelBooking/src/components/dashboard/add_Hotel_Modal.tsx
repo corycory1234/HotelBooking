@@ -25,6 +25,7 @@ const bed_Type_List = ["singlebed", "doublebed", "queenbed", "kingbed" ,"twinbed
 export default function Add_Hotel_Modal() {
   const dispatch: AppDispatch = useDispatch();
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List);
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
   console.log(redux_Hotel_List, "Redux - 飯店列表");
   
   // 1. 所有飯店列表
@@ -233,7 +234,10 @@ export default function Add_Hotel_Modal() {
     try {
       const response = await fetch(create_Hotel_Url, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         body: JSON.stringify(new_Hotel),
         credentials: "include" // 同源政策 CORS 需要
       });

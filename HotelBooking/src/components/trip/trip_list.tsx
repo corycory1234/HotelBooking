@@ -7,10 +7,15 @@ import { Booking_Detail_Interface } from "@/types/booking_Detail";
 import Not_Found from "@/components/not_Found/not_Found";
 import Refresh_Token from "@/utils/refresh_Token";
 import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
 
 export default function Trip_List () {
+  // 0 . Redux - 令牌
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+
   // 1. 當前頁面 - 頂端文字，props傳遞給 <Previous_Page>
   const current_Page_Name = "My Bookings"
 
@@ -55,7 +60,10 @@ export default function Trip_List () {
       // await Refresh_Token();
       const response = await fetch(my_Bookings_Url, {
         method: "GET",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: 'include'
       });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};

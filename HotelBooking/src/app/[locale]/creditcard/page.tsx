@@ -38,6 +38,7 @@ export default function CreditCard() {
 
   // 3. Redux - 指定飯店數據
   const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
 
   const router = useRouter()
 
@@ -129,7 +130,10 @@ export default function CreditCard() {
         const booking_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/bookings";
         const response = await fetch(booking_Url, {
           method: "POST",
-          headers: {"Content-Type": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${redux_Access_Token}`
+          },
           credentials: 'include',
           body: JSON.stringify({
             hotelId: redux_The_Hotel.hotel_Id,

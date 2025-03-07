@@ -8,8 +8,13 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import Modal from "@/components/modal/modal";
 import { FiveStarSVG } from "@/components/client_Svg/client_Svg";
 import { useTranslations } from "next-intl";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export default function My_Review () {
+  // 0. Redux - 令牌
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token)
+
   // 1. 當前頁面
   const current_Page_Name = "My Review";
 
@@ -108,7 +113,10 @@ export default function My_Review () {
       set_show_Review_List(false);
       const response = await fetch(my_Bookings_Url, {
         method: "GET",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: 'include'
       });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};

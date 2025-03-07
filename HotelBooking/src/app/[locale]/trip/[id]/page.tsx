@@ -21,6 +21,8 @@ import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 import { useTranslations } from "next-intl";
 
 export default function Booking_Detail () {
+  // 0. Reddux - 令牌
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
 
   // 1. 匹配「指定訂單」
   const params = useParams();
@@ -74,7 +76,10 @@ export default function Booking_Detail () {
       const send_Review_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/reviews/${the_Booking_Detail.id}`
       const response = await fetch(send_Review_Url, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         body: JSON.stringify({
           rating: hover_Star,
           comment: review
@@ -130,7 +135,10 @@ export default function Booking_Detail () {
       set_Show_Booking_Detail(false);
       const response = await fetch(the_Booking_Url, {
         method: "GET",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: 'include'
       });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};

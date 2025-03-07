@@ -45,6 +45,8 @@ export default function Menu () {
 
   // 1. Redux - 查看是否登入
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  const redux_User_Type = useSelector((state: RootState) => state.access_Token.data.user.userType)
 
   // 2. next-intl i18n 翻譯
   const t = useTranslations("Menu");
@@ -58,7 +60,7 @@ export default function Menu () {
 
       <div className="flex-1 flex justify-between">
         {menu.map((item, index) => 
-          <Link href={`${redux_Verify_Session.success === false && 
+          <Link href={`${redux_Access_Token === '' && 
             item.name === 'Trip' ? '/auth' : item.url}`} 
             className="flex flex-col items-center gap-2" key={index}>
             <div className={`${item.url === i18n_PathName ? 'text-primary' : ''}`}>
@@ -69,7 +71,7 @@ export default function Menu () {
         )}
 
       {/** 僅有hotelier才可進後台頁面 */}
-        {redux_Verify_Session?.data?.user?.userType === "hotelier" && 
+        {redux_User_Type === "hotelier" && 
         <Link href={`${dashboard.url}`} className="flex flex-col items-center gap-2">         
           <div className={`${dashboard.url === i18n_PathName ? 'text-primary' : ''}`}>
             {dashboard.svgIcon}

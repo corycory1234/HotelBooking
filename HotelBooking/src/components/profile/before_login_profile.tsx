@@ -10,6 +10,7 @@ import { OtherSVG } from "../client_Svg/client_Svg";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
+import { update_Access_Token } from "@/store/access_Token/access_Token_Slice";
 import { User_Data_Interface } from "@/types/user_Info";
 import { z } from "zod";
 import { zod_Email_Response_Interface } from "@/types/zod_Error_Response";
@@ -46,6 +47,8 @@ export default function Before_Login_Profile () {
 
   // 5. Redux - 查看是否登入狀態
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  const redux_User_Info = useSelector((state: RootState) => state.access_Token.data.user);
 
   // 6. loading 布林值
   const [loading_Boolean, set_Loading_Boolean] = useState<boolean>(false);
@@ -57,16 +60,31 @@ export default function Before_Login_Profile () {
       const log_Out_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/logout"
       const response = await fetch(log_Out_Url, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {"Content-Type": "application/json", "Authorization": `bearer ${redux_Access_Token}`},
         credentials: 'include'
       });
       const data = await response.json();
-      console.log(data, "登出返回response");
-      // 3.1 登出後, 給Redux初始值, 這邊寫很爛, 懶得想
-      dispatch(update_Verify_Session({success: false,
+
+      // 3.1 登出後, 給Redux - Access_Token 初始值, 這邊寫很爛, 懶得想
+      // dispatch(update_Verify_Session({success: false,
+      //   data: {
+      //     user: {id: "",name: "",userType: "",createdAt: "",updatedAt: "",email: "",}
+      //   }}));
+      dispatch(update_Access_Token({
+        success: false,
         data: {
-          user: {id: "",name: "",userType: "",createdAt: "",updatedAt: "",email: "",}
-        }}));
+          user: {
+            id: '',
+            name: '',
+            userType: '',
+            email: ''
+          },
+          tokens: {
+            access_token: '',
+            refresh_token: ''
+          }
+        }
+      }))
 
       if(!response.ok) {
         toast.error(data.message)
@@ -97,7 +115,9 @@ export default function Before_Login_Profile () {
     const user_Info_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/me";
     const response = await fetch(user_Info_Url, {
       method: "GET",
-      headers: {"Content-Type": "application/json",},
+      headers: {
+        "Content-Type": "application/json", 
+        "Authorization":`bearer ${redux_Access_Token}`},
       credentials: 'include'
     })
     const {data} = await response.json();
@@ -171,7 +191,7 @@ export default function Before_Login_Profile () {
     <div className="bg-primary flex flex-col items-center gap-2 p-8 lg:hidden">
 
       {/** 頭像更換 */}
-      {redux_Verify_Session.success === false ? 
+      {redux_Access_Token === '' ? 
         <div className="rounded-full bg-softGray p-2"> 
           <ProfileSVG name={"user"} className="w-10 h-auto"></ProfileSVG>
         </div>
@@ -183,7 +203,7 @@ export default function Before_Login_Profile () {
       {/** 頭像更換 */}
       
       
-      {redux_Verify_Session.success === false ? <>
+      {redux_Access_Token === '' ? <>
         {/** 登入 */}
         <p className="text-white">{t ("Sign in to see deals and manage your trip")}</p>
         <Link href={"/auth"}>
@@ -196,7 +216,7 @@ export default function Before_Login_Profile () {
        {/** 登出 */}
       <div className="flex flex-col gap-2">
         <p className="text-white">{t ("Welcome")}</p>
-        <p className="text-white">{redux_Verify_Session.data.user.name}</p>
+        <p className="text-white">{redux_User_Info.name}</p>
       </div>
 
       {loading_Boolean === false ? 
@@ -236,7 +256,7 @@ export default function Before_Login_Profile () {
     
     {/** 個人資料 */}
       <div className="flex justify-between cursor-pointer" 
-        onClick={() => redux_Verify_Session.success === true ? open_User_Info_Modal() : please_Login()}>
+        onClick={() => redux_Access_Token !== '' ? open_User_Info_Modal() : please_Login()}>
         <div className="flex gap-2">
           <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
           <p>{t ("Personal Details")}</p>
@@ -275,7 +295,7 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 我的訂單  */}
-    {redux_Verify_Session.success === false ? 
+    {redux_Access_Token === '' ? 
       <div className="hidden lg:block" onClick={please_Login}>
         <div className="flex justify-between">
           <div className="flex gap-2">
@@ -327,7 +347,7 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 我的評論  */}
-      {redux_Verify_Session.success === false ? 
+      {redux_Access_Token === '' ? 
         <div className="flex justify-between cursor-pointer" onClick={please_Login}>
           <div className="flex gap-2">
             <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
@@ -418,7 +438,7 @@ export default function Before_Login_Profile () {
     
     {/** PC桌機 - 登入登出  */}
     <div className="hidden lg:block lg:pt-4 lg:px-2">
-      {redux_Verify_Session.success === false ? 
+      {redux_Access_Token === '' ? 
         <Link href={"/auth"} >
           <div className="flex justify-between">
             <div className="flex gap-2">

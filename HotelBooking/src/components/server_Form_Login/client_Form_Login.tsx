@@ -13,6 +13,7 @@ import { z } from "zod";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
+import { update_Access_Token } from "@/store/access_Token/access_Token_Slice";
 // import { supabase } from "@/lib/supabase_Client";
 import { useTranslations } from "next-intl";
 // const initialState = { message: ""};
@@ -54,7 +55,10 @@ export default function Server_Form_Login () {
   const [response, set_Response] = useState();
   useEffect(() => {
     console.log("API返回數據",response);
-  },[response])
+  },[response]);
+  
+  // 5.1 Redux - 令牌
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
 
 
   // 6. loading 布林開關 
@@ -95,6 +99,7 @@ export default function Server_Form_Login () {
       } else {
         toast.success("Login OK", {duration: 3000});
         set_Response(data);
+        dispatch(update_Access_Token(data));
         await sleep(3000);
         router.push(redirect_Url);
         setTimeout(async () => {
@@ -119,7 +124,10 @@ export default function Server_Form_Login () {
     try {
       const response = await fetch(verify_session_Url, {
         method: "GET",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: 'include' // 同源政策 CORS 需要
       });
 
@@ -138,7 +146,10 @@ export default function Server_Form_Login () {
       const user_Info_Url =  process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/me";
       const response = await fetch(user_Info_Url, {
         method: "GET",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: 'include' // 同源政策 CORS 需要
       });
       const data = await response.json();

@@ -173,12 +173,13 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   const dispatch = useDispatch();
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
   const redux_Collection_List = useSelector((state: RootState) => state.my_Collection.collection_List);
+  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
   // 10.1 Redux - 收藏飯店陣列, 與 Redux - 指定飯店物件匹配, 找出"已"加入到我的最愛
   const the_Collection = redux_Collection_List.find((collection) => collection.hotel_Id === the_Hotel?.hotel_Id);
   const is_Collected = the_Collection ? the_Collection.isCollected : false;
   const add_Collection = async (item: add_Hotel_Detail_Interface) => {
     // 10.2 沒登入, 不給收藏
-    if(redux_Verify_Session.success === false) { 
+    if(redux_Access_Token === '') { 
       toast.error("Please Login First", {icon: "⚠️", duration: 2000});
       return;
     };
@@ -188,7 +189,10 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       dispatch(add_My_Collection({hotel_Id: item.hotel_Id as string, isCollected: item.isCollected}));
       const response = await fetch(add_Collection_Url, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: "include",
         body: JSON.stringify({
           hotelId: item.hotel_Id
@@ -211,7 +215,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   // }
   const delete_Collection = async (item: add_Hotel_Detail_Interface) => {
     // 4.1 沒登入, 不給收藏
-    if(redux_Verify_Session.success === false) { 
+    if(redux_Access_Token === '') { 
       toast.error("Please Login First", {icon: "⚠️", duration: 2000})
       return;
     };
@@ -221,7 +225,10 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
       dispatch(delete_My_Collection({hotel_Id: item.hotel_Id as string, isCollected:item.isCollected}));
       const response = await fetch(delete_Collectiono_Url, {
         method: "DELETE",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         credentials: "include",
         body: JSON.stringify({
           hotelId: item.hotel_Id

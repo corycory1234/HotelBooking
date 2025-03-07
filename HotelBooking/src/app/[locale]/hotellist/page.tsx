@@ -1,7 +1,6 @@
 // import Server_Form_Search from "../../components/server-Form-Search/server-Form-Search";
 // import Index_Form_Search from "../../components/form_Search/index_Form_Search";
 // import { useSearchParams } from "next/navigation";
-// import { useEffect, useState } from "react";
 // import Client_Filter_Button from "../../components/client-Filter-Button";
 import Hotel_List_Card from "@/components/hotel_List/hotel_List_Card";
 // import Half_Modal from "../../components/modal/half-modal";
