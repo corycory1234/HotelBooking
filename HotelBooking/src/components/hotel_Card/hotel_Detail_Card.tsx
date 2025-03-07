@@ -687,9 +687,12 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 取消政策 */}
         <div className="flex flex-col gap-2">
           <p className="font-semibold">{t ("Cancellation Policy")}</p>
-          {the_Hotel?.cancellation_Policy?.split(".").map((item, index) => {
+          {the_Hotel?.cancellation_Policy?.split(". ").map((item, index) => {
             return <div className="flex flex-col gap-2" key={index}>
-                <p>{item}</p>
+                <div className="flex gap-1">
+                  <OtherSVG name="policy" className="w-7 h-auto"></OtherSVG>
+                  <p>{item}</p>
+                </div>
             </div>
           })}
         </div>
@@ -699,7 +702,10 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         <div className="flex flex-col gap-2">
           <p className="font-semibold">{t ("Top Recommendations")}</p>
           {the_Hotel?.recommendation?.split(", ").map((recommendation, index) => {
-            return <div className="flex" key={index}> {recommendation}</div>
+            return <div className="flex gap-2" key={index}>
+              <OtherSVG name="spot" className="w-7 h-auto"></OtherSVG>
+            {recommendation}
+            </div>
           })}
         </div>
         {/** 推薦景點 */}

@@ -250,6 +250,10 @@ export default function Add_Hotel_Modal() {
       const upload_Hotel_Image_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/${hotel_Id}/images`
       const hotel_Image_Lits_Response = await fetch(upload_Hotel_Image_List_Url, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
         body: hotel_Image_List_Form_Data,
         credentials: "include"
       });
@@ -272,6 +276,10 @@ export default function Add_Hotel_Modal() {
         
         const room_Type_Image_List_Response = await fetch(upload_Room_Type_Image_List_Url, {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${redux_Access_Token}`
+          },
           body: room_Type_Image_List_Form_Data,
           credentials: "include"
         });

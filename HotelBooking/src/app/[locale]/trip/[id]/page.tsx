@@ -19,6 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function Booking_Detail () {
   // 0. Reddux - 令牌
@@ -177,17 +178,13 @@ export default function Booking_Detail () {
       <Previous_Page current_Page_Name={current_Page_Name}></Previous_Page>
       {/** 返回上一頁 */}
 
-      {/** 房型圖片 */}
-      {/* {show_Booking_Detail && <img src={booking_Detail.booking_Img} alt="" />} */}
-      {/** 房型圖片 */}
-    
 
     {(show_Booking_Detail === false ) ? <Placeholder_Card></Placeholder_Card> 
     :
     
     <div className="flex flex-col p-4 gap-2">
       {/** 房型圖片 */}
-      <img src={the_Booking_Detail.bookingImage} alt="" className="rounded lg:hidden"/>
+      <img src={the_Booking_Detail.bookingImage} alt="" className="rounded w-full h-[190px] lg:hidden"/>
       {/** 房型圖片 */}
 
       {/** 留言評價 or 查看評價 */}

@@ -350,7 +350,7 @@ export default function Form_Search_Pc () {
         popoverDirection="down"
         containerClassName="w-full lg:inline-block lg:flex"
         inputClassName="w-full py-2 outline-none border border-gray rounded px-4 lg:w-full lg:h-[44px]"
-        toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[52px] lg:h-[44px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
+        toggleClassName="absolute bg-primary rounded-r text-white right-4 h-[42px] lg:h-[44px] px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed
         lg:relative lg:align-middle lg:-left-1"
         inputId="datepicker"
         inputName="datepicker"
@@ -469,7 +469,7 @@ export default function Form_Search_Pc () {
 
 {/** Submit 搜尋送出按鈕 */}
     <div className="lg:basis-1/12">
-      <button className="bg-primary text-white rounded w-full py-1 px-2 lg:mx-auto lg:h-[44px]">{t ("Search")}</button>
+      <button className="bg-primary text-white rounded w-full h-[42px] py-1 px-2 lg:mx-auto lg:h-[44px]">{t ("Search")}</button>
     </div>
 {/** Submit 搜尋送出按鈕 */}
 
