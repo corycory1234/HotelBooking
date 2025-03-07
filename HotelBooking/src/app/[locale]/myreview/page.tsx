@@ -1,7 +1,7 @@
 'use client';
 import Previous_Page from "@/components/previous_Page/previous_Page";
-import Booking_List_Json from "@/fakeData/trip_List.json";
-import { Booking_Detail_Interface } from "@/types/booking_Detail";
+// import Booking_List_Json from "@/fakeData/trip_List.json";
+// import { Booking_Detail_Interface } from "@/types/booking_Detail";
 import { useEffect, useState } from "react";
 import { OtherSVG } from "@/components/client_Svg/client_Svg";
 import how_Many_Nights from "@/utils/how_Many_Nights";
@@ -19,15 +19,15 @@ export default function My_Review () {
   const current_Page_Name = "My Review";
 
   // 2. 本地State - 訂單狀態
-  const [booking_List_Completed, set_Booking_List_Completed] = useState<any[]>([]);
-  useEffect(() => {
-    // 2.1 篩出 訂單狀態 - "completed", 才可以「看留言 或 留留言」
-    if(Booking_List_Json.length >0 ) {
-      const filter_Booking_Status_Completed = Booking_List_Json.filter((item: any) => item.booking_Status === "completed");
-      set_Booking_List_Completed(filter_Booking_Status_Completed);
+  // const [booking_List_Completed, set_Booking_List_Completed] = useState<any[]>([]);
+  // useEffect(() => {
+  //   // 2.1 篩出 訂單狀態 - "completed", 才可以「看留言 或 留留言」
+  //   if(Booking_List_Json.length >0 ) {
+  //     const filter_Booking_Status_Completed = Booking_List_Json.filter((item: any) => item.booking_Status === "completed");
+  //     set_Booking_List_Completed(filter_Booking_Status_Completed);
 
-    }
-  },[])
+  //   }
+  // },[])
 
   // 3. Modal留言視窗 - 本地State開關
   const [modal_Boolean, set_Modal_Boolean] = useState<boolean>(false);
@@ -83,6 +83,41 @@ export default function My_Review () {
     })
     set_Modal_Boolean(false);
   };
+  const fetch_Review = async (event:  React.FormEvent, booking_Id: string) =>{
+    event.preventDefault();
+    try {
+      const send_Review_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/reviews/${booking_Id}`
+      const response = await fetch(send_Review_Url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${redux_Access_Token}`
+        },
+        body: JSON.stringify({
+          rating: hover_Star,
+          comment: review
+        }),
+        credentials: "include"
+      });
+      if(!response.ok) {throw new Error("SERVER ERROR~~!")};
+      const result = await response.json();
+      console.log(result, "查看送出評價後之API返回");
+      set_My_Booking_List((prev_List) => {
+        return prev_List.map((item) => {
+          if(item.id === booking_Id) {
+            return {...item, review: booking_Detail?.review as string, starRating: hover_Star}
+          }
+          return item;
+        })
+      })
+      set_Modal_Boolean(false);
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set_Modal_Boolean(false);
+    }
+  }
 
   // 10. Skeleton動畫 - 佔位符
   const Placeholder_Card = () => {
@@ -249,7 +284,7 @@ export default function My_Review () {
                       </div>
 
 
-                      <form onSubmit={(event) => submit_Review(event, booking_Detail?.id as string)} className="flex flex-col gap-2">
+                      <form onSubmit={(event) => fetch_Review(event, booking_Detail?.id as string)} className="flex flex-col gap-2">
                         <textarea name="review" id="review" rows={10} cols={50} className="border px-2"
                           placeholder="Leave comment for what you experience from this Hotel"
                           value={booking_Detail?.review ?? ""}
