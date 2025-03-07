@@ -41,7 +41,7 @@ export default function Add_Hotel_Modal() {
       room_Type: "singleRoom",
       roomType_Id: uuidv4(),
       view: "sea view",
-      bed_Type: "single bed",
+      bed_Type: "singlebed",
       room_Price: null,
       room_Availability: null,
       smoke: false,
@@ -255,7 +255,7 @@ export default function Add_Hotel_Modal() {
           "Authorization": `bearer ${redux_Access_Token}`
         },
         body: hotel_Image_List_Form_Data,
-        credentials: "include"
+        // credentials: "include"
       });
       const data2 = await hotel_Image_Lits_Response.json();
       console.log(data2, "查看上傳房店照片API回應");
@@ -281,7 +281,7 @@ export default function Add_Hotel_Modal() {
             "Authorization": `bearer ${redux_Access_Token}`
           },
           body: room_Type_Image_List_Form_Data,
-          credentials: "include"
+          // credentials: "include"
         });
       const data3 = await room_Type_Image_List_Response.json()
       console.log(data3, "查看上傳房型照片 API回應");
