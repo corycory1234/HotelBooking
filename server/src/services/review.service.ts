@@ -105,7 +105,7 @@ export class ReviewService extends BaseService {
             // 計算新的平均評分
             const totalRating =
                 updatedReviews.reduce(
-                    (sum, review) => sum + review.traveler_Rating,
+                    (sum, review) => sum + Number(review.traveler_Rating),
                     0
                 ) / updatedReviews.length;
 

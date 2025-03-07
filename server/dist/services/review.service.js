@@ -92,7 +92,7 @@ class ReviewService extends base_service_1.BaseService {
                 const currentReviews = (hotel.review_List || []).map((review) => this.standardizeReview(review));
                 const updatedReviews = [...currentReviews, newReview];
                 // 計算新的平均評分
-                const totalRating = updatedReviews.reduce((sum, review) => sum + review.traveler_Rating, 0) / updatedReviews.length;
+                const totalRating = updatedReviews.reduce((sum, review) => sum + Number(review.traveler_Rating), 0) / updatedReviews.length;
                 // 更新飯店資料
                 yield db_1.db
                     .update(schema_1.hotels)
