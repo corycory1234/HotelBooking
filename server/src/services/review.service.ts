@@ -13,6 +13,18 @@ class ReviewServiceError extends Error {
 }
 
 export class ReviewService extends BaseService {
+    // 新增一個私有方法來標準化評論格式
+    private standardizeReview(review: any) {
+        return {
+            traveler_Id: review.traveler_Id || review.travelerId,
+            traveler_Name: review.traveler_Name || review.travelerName,
+            traveler_Rating: review.traveler_Rating || review.travelerRating,
+            comment: review.comment,
+            date: review.date,
+            reply: review.reply,
+        };
+    }
+
     async createReview(reviewData: CreateReviewDTO, token: string) {
         try {
             if (!token) {
@@ -85,7 +97,9 @@ export class ReviewService extends BaseService {
                 .where(eq(bookings.id, reviewData.bookingId));
 
             // 更新飯店的評價列表
-            const currentReviews = hotel.review_List || [];
+            const currentReviews = (hotel.review_List || []).map((review) =>
+                this.standardizeReview(review)
+            );
             const updatedReviews = [...currentReviews, newReview];
 
             // 計算新的平均評分

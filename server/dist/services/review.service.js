@@ -23,6 +23,17 @@ class ReviewServiceError extends Error {
     }
 }
 class ReviewService extends base_service_1.BaseService {
+    // 新增一個私有方法來標準化評論格式
+    standardizeReview(review) {
+        return {
+            traveler_Id: review.traveler_Id || review.travelerId,
+            traveler_Name: review.traveler_Name || review.travelerName,
+            traveler_Rating: review.traveler_Rating || review.travelerRating,
+            comment: review.comment,
+            date: review.date,
+            reply: review.reply,
+        };
+    }
     createReview(reviewData, token) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -78,7 +89,7 @@ class ReviewService extends base_service_1.BaseService {
                 })
                     .where((0, drizzle_orm_1.eq)(bookings_1.bookings.id, reviewData.bookingId));
                 // 更新飯店的評價列表
-                const currentReviews = hotel.review_List || [];
+                const currentReviews = (hotel.review_List || []).map((review) => this.standardizeReview(review));
                 const updatedReviews = [...currentReviews, newReview];
                 // 計算新的平均評分
                 const totalRating = updatedReviews.reduce((sum, review) => sum + review.traveler_Rating, 0) / updatedReviews.length;
