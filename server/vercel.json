@@ -1,11 +1,5 @@
 {
     "version": 2,
-    "function": {
-        "api/**/*.ts": {
-            "maxDuration": 10,
-            "memory": 1024
-        }
-    },
     "builds": [
         {
             "src": "dist/index.js",
