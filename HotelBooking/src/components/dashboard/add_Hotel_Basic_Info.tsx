@@ -180,7 +180,7 @@ export default function Add_Hotel_Basic_Info() {
     {/** 上傳飯店輪播圖 */}
     <div className="flex flex-col gap-2">
       <label htmlFor="hotelimages" className="font-semibold text-primary">Upload Images</label>
-      <input type="file" id="hotelimages" name="hotelimages" accept="images/*"
+      <input type="file" id="hotelimages" name="hotelimages" accept="image/*"
         multiple className="border rounded" />
     </div>
     {/** 上傳飯店輪播圖 */}

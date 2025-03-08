@@ -251,7 +251,7 @@ export default function Add_Hotel_Modal() {
       const hotel_Image_Lits_Response = await fetch(upload_Hotel_Image_List_Url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
           "Authorization": `bearer ${redux_Access_Token}`
         },
         body: hotel_Image_List_Form_Data,
@@ -277,7 +277,7 @@ export default function Add_Hotel_Modal() {
         const room_Type_Image_List_Response = await fetch(upload_Room_Type_Image_List_Url, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
             "Authorization": `bearer ${redux_Access_Token}`
           },
           body: room_Type_Image_List_Form_Data,
@@ -526,7 +526,7 @@ export default function Add_Hotel_Modal() {
         {/** 上傳房型輪播圖 */}
         <div className="flex flex-col gap-2">
           <label htmlFor={`roomtypeimages_${roomType.roomType_Id}`} className="font-semibold text-primary">Upload Images</label>
-          <input type="file"  id={`roomtypeimages_${roomType.roomType_Id}`}  name={`roomtypeimages_${roomType.roomType_Id}`} accept="images/*"
+          <input type="file"  id={`roomtypeimages_${roomType.roomType_Id}`}  name={`roomtypeimages_${roomType.roomType_Id}`} accept="image/*"
           multiple className="border rounded" 
           // onChange={(e) => {
           //   if (e.target.files) {
