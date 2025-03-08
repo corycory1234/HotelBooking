@@ -618,6 +618,238 @@
       "country": "愛爾蘭",
       "city": "都伯林",
       "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1",
+      "hotel_Name": "澳門皇都酒店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528348-ajoshua-michaels-hZgG8hZHRIo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528349-farhan-azam-CaiUzEB2cxU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-julia-solonina-cP2v1BiQsCE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-luca-lo-tartaro-ndUyfdqbCq4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-lycs-architecture-u4-NB9dEsH8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-peter-palmer-z638PTh6QWc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tao-su-syfZAoB6y1M-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tetiana-shevereva-bWctFveezSg-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 150,
+      "review_List": [
+        {
+          "date": "2025-01-04",
+          "reply": "Sir, please do not blame your problem on us",
+          "comment": "每次住這間飯店, 賭運就很差, 賠了好幾百萬",
+          "traveler_Id": "0b180dc7-ef17-400e-b941-8569cef81f1e",
+          "traveler_Name": "賭神",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "中國",
+      "city": "澳門",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "16ab72b9-7b07-4101-b089-7b48d1cc6810",
+      "hotel_Name": "東京帝國飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873757-aameritt-thomas-HIEZBt6XRno-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-alex-bertha-Jyg7xHRmXiU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-allphoto-bangkok-nI4aC1kaTRc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-anmol-seth-hDbCjHNdF48-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-ashley-ross-2skfGS56P5g-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873759-reisetopia-Vl5DAQxNBbM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-roberto-nickson-EeeKjwm2vDo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-thanos-pal-9OZfTe-y5T4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 4000,
+      "review_List": [
+        {
+          "date": "2023-10-20",
+          "reply": "Thanks for your long stay here, sir!",
+          "comment": "很棒的飯店, 服務很頂, 雖然價錢太貴了, 但餐點跟服務都沒話說, 一住就半年了",
+          "traveler_Id": "70f6915d-115f-40ef-b904-8532ceb7b206",
+          "traveler_Name": "小栗旬",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-11-08",
+          "reply": "Madam, thanks for your compliment. Staying here is able to relax yourself",
+          "comment": "優雅舒適, 住這邊可以忘卻煩惱, 拍戲完都來這邊睡覺",
+          "traveler_Id": "92321040-e26f-4b2d-88fb-cbc5711c4dad",
+          "traveler_Name": "長澤雅美",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "日本",
+      "city": "東京",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "915dfbd8-bc43-4a91-9cfa-06f66aa3f661",
+      "hotel_Name": "三井花園飯店京都站前",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920525-pexels-jeffrey-lau-770172754-28939970.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-kf-zhou-609625381-20676070.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-pixabay-265947.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-reneterp-2504911.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-shovyrahman-804878.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-tizzy-20282332.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-wathegony-27689958.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-zaib-809060.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 5000,
+      "review_List": [
+        {
+          "date": "2025-01-03",
+          "reply": "Dear Valued Guest,\n\nThank you for your wonderful review and for choosing Mitsui Garden Hotel Kyoto Station! We are thrilled to hear that you had a fantastic stay and enjoyed our convenient location, modern rooms, and thoughtful amenities. It is also great to know that you found our public bath relaxing and appreciated our complimentary lounge service. Our team takes pride in providing warm and professional service, and we are delighted that we could make your stay enjoyable. We truly appreciate your recommendation and look forward to welcoming you back in the future!\n\nBest regards,\nHotel Management Team\nMitsui Garden Hotel Kyoto Station",
+          "comment": "I had a fantastic stay at Mitsui Garden Hotel Kyoto Station! The hotel's location is perfect—just a short walk from Kyoto Station, making it incredibly convenient for transportation and sightseeing. The rooms are modern, stylish, and impeccably clean, with comfortable beds and well-thought-out amenities. The public bath was a wonderful way to unwind after a day of exploring the city. The staff were warm, professional, and always ready to assist. The complimentary lounge access with drinks and snacks was a nice touch. I highly recommend this hotel and would definitely stay here again!",
+          "traveler_Id": "cef89ef9-2cbe-4830-aada-d700c92249e7",
+          "traveler_Name": "Mr.Trump",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2023-06-01",
+          "reply": "",
+          "comment": "My stay at Mitsui Garden Hotel Kyoto Station was overall fine, but there were a few areas that could be improved. The location is excellent, just a short walk from Kyoto Station, making it very convenient for travel. The hotel is clean and well-maintained, and the public bath is a nice feature. However, the rooms are quite small, and there isn’t much space for luggage. The soundproofing could be better, as I could hear noise from the hallway. The staff were polite but not particularly welcoming. It’s a decent hotel, but I expected a bit more for the price.",
+          "traveler_Id": "6abaca88-5599-46f6-b3c7-59d3270c068f",
+          "traveler_Name": "Obama",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "日本",
+      "city": "京都",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "2e050050-0f3a-4366-95ed-0a7749a3c054",
+      "hotel_Name": "濟州樂天城市飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122814-Adaniil-yakovchik-NZyp8S1RTNw-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-adaniil-yakovchik-Tc7nH3LGs5c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-caleb-minear-XZ2rL0rg7D8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-eddi-aguirre-ZAVHbpOn4Jk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-rio-lecatompessy-RFnTSblabhA-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-gchsNl7qKl0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-u1kycevFVEc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-syed-hussaini-HUAUN0jDgQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-toa-heftiba-6bKpHAun4d8-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 350,
+      "review_List": [
+        {
+          "date": "2024-11-14",
+          "reply": "Thanks for your compliment, sir",
+          "comment": "每次拍完戲都來這邊躺平, 很舒服",
+          "traveler_Id": "101a8bf7-9889-4025-bb3e-9faff1b94162",
+          "traveler_Name": "金宇彬",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "韓國",
+      "city": "濟州",
+      "offer_Id": "5555"
     }
   ],
   
@@ -1240,6 +1472,238 @@
       "country": "Ireland",
       "city": "Dublin",
       "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "bcb2f89b-3bd7-4551-b1c2-efefedf40252",
+      "hotel_Name": "Hotel Royal Macau",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528348-ajoshua-michaels-hZgG8hZHRIo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528349-farhan-azam-CaiUzEB2cxU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-julia-solonina-cP2v1BiQsCE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-luca-lo-tartaro-ndUyfdqbCq4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-lycs-architecture-u4-NB9dEsH8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-peter-palmer-z638PTh6QWc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tao-su-syfZAoB6y1M-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tetiana-shevereva-bWctFveezSg-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 150,
+      "review_List": [
+        {
+          "date": "2025-01-04",
+          "reply": "Sir, please do not blame your problem on us",
+          "comment": "每次住這間飯店, 賭運就很差, 賠了好幾百萬",
+          "traveler_Id": "0b180dc7-ef17-400e-b941-8569cef81f1e",
+          "traveler_Name": "賭神",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "China",
+      "city": "Macau",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "c61ee7db-fb7f-4c29-b7a9-d78c29ea8ff1",
+      "hotel_Name": "Imperial Hotel Tokyo",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873757-aameritt-thomas-HIEZBt6XRno-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-alex-bertha-Jyg7xHRmXiU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-allphoto-bangkok-nI4aC1kaTRc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-anmol-seth-hDbCjHNdF48-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-ashley-ross-2skfGS56P5g-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873759-reisetopia-Vl5DAQxNBbM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-roberto-nickson-EeeKjwm2vDo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-thanos-pal-9OZfTe-y5T4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 4000,
+      "review_List": [
+        {
+          "date": "2023-10-20",
+          "reply": "Thanks for your long stay here, sir!",
+          "comment": "很棒的飯店, 服務很頂, 雖然價錢太貴了, 但餐點跟服務都沒話說, 一住就半年了",
+          "traveler_Id": "70f6915d-115f-40ef-b904-8532ceb7b206",
+          "traveler_Name": "小栗旬",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-11-08",
+          "reply": "Madam, thanks for your compliment. Staying here is able to relax yourself",
+          "comment": "優雅舒適, 住這邊可以忘卻煩惱, 拍戲完都來這邊睡覺",
+          "traveler_Id": "92321040-e26f-4b2d-88fb-cbc5711c4dad",
+          "traveler_Name": "長澤雅美",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Japan",
+      "city": "Tokyo",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "9504c2e6-5ba6-4848-93cb-7dd2290a5d9c",
+      "hotel_Name": "Mitsui Garden Hotel Kyoto Station",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920525-pexels-jeffrey-lau-770172754-28939970.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-kf-zhou-609625381-20676070.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-pixabay-265947.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-reneterp-2504911.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-shovyrahman-804878.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-tizzy-20282332.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-wathegony-27689958.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-zaib-809060.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 5000,
+      "review_List": [
+        {
+          "date": "2025-01-03",
+          "reply": "Dear Valued Guest,\n\nThank you for your wonderful review and for choosing Mitsui Garden Hotel Kyoto Station! We are thrilled to hear that you had a fantastic stay and enjoyed our convenient location, modern rooms, and thoughtful amenities. It is also great to know that you found our public bath relaxing and appreciated our complimentary lounge service. Our team takes pride in providing warm and professional service, and we are delighted that we could make your stay enjoyable. We truly appreciate your recommendation and look forward to welcoming you back in the future!\n\nBest regards,\nHotel Management Team\nMitsui Garden Hotel Kyoto Station",
+          "comment": "I had a fantastic stay at Mitsui Garden Hotel Kyoto Station! The hotel's location is perfect—just a short walk from Kyoto Station, making it incredibly convenient for transportation and sightseeing. The rooms are modern, stylish, and impeccably clean, with comfortable beds and well-thought-out amenities. The public bath was a wonderful way to unwind after a day of exploring the city. The staff were warm, professional, and always ready to assist. The complimentary lounge access with drinks and snacks was a nice touch. I highly recommend this hotel and would definitely stay here again!",
+          "traveler_Id": "cef89ef9-2cbe-4830-aada-d700c92249e7",
+          "traveler_Name": "Mr.Trump",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2023-06-01",
+          "reply": "",
+          "comment": "My stay at Mitsui Garden Hotel Kyoto Station was overall fine, but there were a few areas that could be improved. The location is excellent, just a short walk from Kyoto Station, making it very convenient for travel. The hotel is clean and well-maintained, and the public bath is a nice feature. However, the rooms are quite small, and there isn’t much space for luggage. The soundproofing could be better, as I could hear noise from the hallway. The staff were polite but not particularly welcoming. It’s a decent hotel, but I expected a bit more for the price.",
+          "traveler_Id": "6abaca88-5599-46f6-b3c7-59d3270c068f",
+          "traveler_Name": "Obama",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Japan",
+      "city": "Kyoto",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "e21c7c73-df01-4dc2-aada-b6a749bf9fd5",
+      "hotel_Name": "LOTTE City Hotel Jeju",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122814-Adaniil-yakovchik-NZyp8S1RTNw-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-adaniil-yakovchik-Tc7nH3LGs5c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-caleb-minear-XZ2rL0rg7D8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-eddi-aguirre-ZAVHbpOn4Jk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-rio-lecatompessy-RFnTSblabhA-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-gchsNl7qKl0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-u1kycevFVEc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-syed-hussaini-HUAUN0jDgQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-toa-heftiba-6bKpHAun4d8-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 350,
+      "review_List": [
+        {
+          "date": "2024-11-14",
+          "reply": "Thanks for your compliment, sir",
+          "comment": "每次拍完戲都來這邊躺平, 很舒服",
+          "traveler_Id": "101a8bf7-9889-4025-bb3e-9faff1b94162",
+          "traveler_Name": "金宇彬",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Korea",
+      "city": "Jeju",
+      "offer_Id": "5555"
     }
   ]
 }
