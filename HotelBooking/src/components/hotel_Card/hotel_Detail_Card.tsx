@@ -636,9 +636,15 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           </div>
           {/** 飯店經緯度 - GoogleMap */}
           
-          <div className="flex items-center gap-2">
-            <OtherSVG name="transportation" className="w-6 h-auto"></OtherSVG>
-            <p className="text-sm font-semibold">{the_Hotel?.transportation}</p>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2">
+              <OtherSVG name="transportation" className="w-6 h-auto"></OtherSVG>
+              <p className="text-sm font-semibold">{the_Hotel?.transportation?.split(",")[0]}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <OtherSVG name="transportation" className="w-6 h-auto"></OtherSVG>
+              <p className="text-sm font-semibold">{the_Hotel?.transportation?.split(",")[1]}</p>
+            </div>
           </div>
 
           {/** React-leaflet 地圖 */}
@@ -706,8 +712,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
         {/** 取消政策 */}
         <div className="flex flex-col gap-2">
           <p className="font-semibold">{t ("Cancellation Policy")}</p>
-          {the_Hotel?.cancellation_Policy?.split(". ").map((item, index) => {
-            return <div className="flex flex-col gap-2" key={index}>
+          {the_Hotel?.cancellation_Policy?.split(".").map((item, index) => {
+            return item !== "" && <div className="flex flex-col gap-2" key={index}>
                 <div className="flex gap-1">
                   <OtherSVG name="policy" className="w-7 h-auto"></OtherSVG>
                   <p>{item}</p>
