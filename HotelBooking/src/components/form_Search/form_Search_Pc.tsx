@@ -296,12 +296,14 @@ export default function Form_Search_Pc () {
   };
 
   // 20. 防抖搜尋 - 布林開關
-  const [debounced_Boolean, set_Debounced_Boolean] = useState<boolean>(true);
+  const [debounced_Boolean, set_Debounced_Boolean] = useState<boolean>(false);
   const debounced_Ref = useRef<HTMLDivElement>(null);
   const hidden_Debounced_Hotel_List = (keyword: string) => {
     dispatch(updateKeyword(keyword));
     set_Debounced_Boolean(false);
   };
+  
+  // 21. 防抖搜尋 - 布林開關 & 冒泡事件(點外層關掉) 
   Click_Outside(debounced_Ref, () => set_Debounced_Boolean(false));
 
 
@@ -327,7 +329,8 @@ export default function Form_Search_Pc () {
 
     </div>
 
-    <div className="flex flex-col absolute top-full left-[100px] w-1/2 rounded bg-white shadow-lg" ref={debounced_Ref}>
+    <div className={`${debounced_Boolean === false ? 'hidden' : ''} flex flex-col lg:absolute lg:top-full lg:left-[80px] lg:w-1/2 rounded bg-white shadow-lg`} 
+      ref={debounced_Ref}>
       {(debounced_Hotel.length >0 && debounced_Boolean === true) ? debounced_Hotel.map((hotel, index) => {
         return index <5 && <div className="flex gap-2 p-2 border-b border-softGray hover:bg-[#f3f3f3] cursor-pointer" 
         key={index}

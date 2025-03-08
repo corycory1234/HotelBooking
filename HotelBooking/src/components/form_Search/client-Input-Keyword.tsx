@@ -9,6 +9,7 @@ import { Debounced_Hotel_List_Interface } from "@/types/debounced_Hotel_List";
 import { update_Hotel_List, } from "@/store/hotel_List/hotel_List_Slice";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import { useTranslations } from "next-intl";
+import Click_Outside from "../clickOutside";
 
 interface Debounced_Hotel_Interface {
   hotel_Id: string,
@@ -141,6 +142,9 @@ export default function Client_Input_Keyword () {
   // 6. next-intl i18n 翻譯
   const t = useTranslations("FormSearch");
 
+  // 7. 防抖搜尋 - 布林開關 & 冒泡事件(點外層關掉) 
+  const debounced_Ref = useRef<HTMLDivElement>(null);
+  Click_Outside(debounced_Ref, () => set_Debounced_Boolean(false))
   
   
   return <>
@@ -163,7 +167,7 @@ export default function Client_Input_Keyword () {
     // value={destination}
     name="destination"/>
 
-  <div className="flex flex-col">
+  <div className="flex flex-col" ref={debounced_Ref}>
     {(debounced_Hotel.length >0 && debounced_Boolean === true) ? debounced_Hotel.map((hotel, index) => {
       return index <5 && <div className="flex gap-2 p-2 border-b border-softGray hover:bg-[#f3f3f3] cursor-pointer" 
       key={index}
