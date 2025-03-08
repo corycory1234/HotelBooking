@@ -614,7 +614,7 @@ export default function Hotel_List_Card() {
                 {item.facility_List?.map((facility, index) => {
                   return <div className="lg:flex lg:gap-1" key={index}>
                       {index <6 && <>
-                        <FacilitySVG name={facility} className="hidden lg:block lg:w-4 lg:h-auto"></FacilitySVG>
+                        <FacilitySVG name={facility} className="hidden lg:block lg:w-5 lg:h-auto"></FacilitySVG>
                         <span className="text-xs px-2 py-1 bg-[#f3f3f3] rounded lg:bg-transparent lg:p-0">
                           {facility.charAt(0).toUpperCase() + facility.slice(1)}
                         </span>

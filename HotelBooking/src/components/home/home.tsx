@@ -70,12 +70,12 @@ const swiper_Popular_Destination = [
     text2: 'Get a free lunch using Coupon *GoTour*',
     cityName: "Australia"
   },
-  {
-    url: '/home/popular_10.webp',
-    text1: 'Black Friday Special!',
-    text2: 'Get a free lunch using Coupon *GoTour*',
-    cityName: "UK"
-  },
+  // {
+  //   url: '/home/popular_10.webp',
+  //   text1: 'Black Friday Special!',
+  //   text2: 'Get a free lunch using Coupon *GoTour*',
+  //   cityName: "UK"
+  // },
   {
     url: '/home/popular_11.webp',
     text1: 'Black Friday Special!',

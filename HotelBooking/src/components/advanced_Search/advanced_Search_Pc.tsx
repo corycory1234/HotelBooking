@@ -14,7 +14,7 @@ import { Slider } from "@nextui-org/slider";
 import { useTranslations } from "next-intl";
 
 // 0. 所有設施 Arr
-const facility_Arr = ["pool", "balcony", "24H Check-In", "gym", "parking", "bathtub", "kitchen", "wifi",]
+const facility_Arr = ["pool", "balcony", "24hrcheckin", "gym", "parking", "bathtub", "kitchen", "wifi",]
 
 export default function Advanced_Search_Pc () {
   // 0. 取 Redux - Action「搜尋相關函式」
