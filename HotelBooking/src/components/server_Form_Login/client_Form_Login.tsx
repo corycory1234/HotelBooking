@@ -174,7 +174,7 @@ export default function Server_Form_Login () {
   const t = useTranslations("Auth");
 
 
-  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-full lg:mt-20 lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
+  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-[50vh] lg:mt-20 lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
     <div className="relative">
       <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-10" alt="" /> 
     </div>
@@ -215,12 +215,12 @@ export default function Server_Form_Login () {
         <Link href={'/forgetpassword'} className="text-primary font-semibold">
           <p className="text-gray hover:border-b-2 border-gray">{t ("Forget Password?")}</p>
         </Link>
-        <p className="text-center text-sm">{t ("Or Sign in With")}</p>
+        {/* <p className="text-center text-sm">{t ("Or Sign in With")}</p>
         <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button"
           // onClick={google_Login}
           >
           <img src="/account/Google.svg" alt="" />
-        </button>
+        </button> */}
       </div>
       
       
