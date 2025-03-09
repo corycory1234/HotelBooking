@@ -160,10 +160,10 @@ export default function Client_Form_Register () {
       
       <div className="pt-4 flex flex-col justify-center items-center gap-4 my-bg-gradient lg:bg-white py-2 rounded">
         <p className="text-gray">{t ("Already have account?")} <Link href={'/auth'} className="text-primary font-semibold">{t ("Sign In")}</Link></p>
-        <p className="text-center text-sm">{t ("Or Sign in With")}</p>
+        {/* <p className="text-center text-sm">{t ("Or Sign in With")}</p>
         <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button">
           <img src="/account/Google.svg" alt="" />
-        </button>
+        </button> */}
       </div>
       
     </div>
