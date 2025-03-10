@@ -9,7 +9,7 @@
 ## 🖥️ Quick Access
 **Live Demo Environment**
 - Guest Portal: https://hotel-booking-delta-gray.vercel.app/
-- Test Account: `testgotour@gamil.com` / `Abc123456`
+- Test Account: `testgotour@gmail.com` / `Abc123456`
 
 ## 🚀 Project Highlights
 - **SSR**: Using SSR in order to make user Rendering Pages quicker!
