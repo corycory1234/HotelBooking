@@ -1,13 +1,17 @@
 # <a href="https://hotel-booking-delta-gray.vercel.app/"> <img src="/HotelBooking/public/gotour.svg"> Go Tour </a>
-
+<h2>Explore The World by our website! We have cooperative hotels which provides travelers with cozy stay!</h2> 
 <img src="/HotelBooking/public/readme/merged_image.webp">
+<h2>Frontend: Kory</h2>
+<h2>Backend: Daniel</h2>
+<h2>Design: Kory</h2>
 
-<h2>Explore The World by our website! We have cooperative hotels which provides travelers with cozy stay!
-</h2> 
 
-## 🌟 Features
-- ✅ **Resopnsive Design**：For Mobile and PC users
-- 🚀 **SEO Optimization**：Next.js Server-Side Rendering, enhancing the raking in search
+## 🌟 System Overview
+A modern hotel room booking solution offering:
+- **Guest Portal**: User-friendly interface with real-time room availability and advanced filters
+- **Admin Console**: Comprehensive management system for reservations, room configuration, and business insights
+<!-- - ✅ **Resopnsive Design**：For Mobile and PC users -->
+<!-- - 🚀 **SEO Optimization**：Next.js Server-Side Rendering, enhancing the raking in search -->
 <!-- - ⚡ **State Management**：Integrate Redux-Toolkit & Redux-Persist
 - 🛠 **Backend**：Node.js + Supabase
 - 🎯 **Form Validation**：Using Zod to ensure correct value -->
@@ -31,6 +35,43 @@
 - **Zod** - Form Validation
 - **Swiper** - Carousel Library
 - **react-leaflet** - Map Library
+
+## 🏨 Key Features
+### Guest Experience
+- 📅 Interactive availability calendar
+- 🔍 Advanced filters (price/room type/amenities)
+- 🗺️ Map to show Where the hotel is
+- 📱 Mobile-optimized design
+<!-- - 📧 Real-time booking status updates -->
+<!-- - 🔒 PCI-compliant data protection -->
+
+### Hotel Management
+- 📊 Interactive business dashboard
+<!-- - 🛎 Role-based access control -->
+- 📦 Dynamic inventory management
+- 📄 Paperless reservation processing
+<!-- - 🖨️ Export/print functionality -->
+
+## 🖥️ Quick Access
+**Live Demo Environment**  
+Guest Portal: https://hotel-booking-delta-gray.vercel.app/
+Test Account: `testgotour@example.com` / `Abc123456`
+
+## 📘 User Guide
+### Booking Process
+1. Visit website → Select dates
+2. Decide How many ppl and rooms → People Button(SVG)
+3. Search the place You wanna go → Search Button
+4. Browse the Hotel You like → Book Now
+5. Check the Detail of that Hotel → Book Now
+6. Type in Your Info → Proceed To Pay
+7. Type in Your Credit Card Number (any, not Real) → Proceed To Pay
+8. Receive confirmation → Check Your Order (My Trip)
+
+## 📜 Copyright
+© 2025 GoTour  
+Powered Kory&Daniel Tech Solutions
+
 
 ## 🔧 Installation & Setup
 **1️⃣ Clone The Project**
@@ -58,8 +99,3 @@ cd HotelBooking
 ├── middleware.ts   # For Processing auth, logging, and so on
 
 # 🖼 (Screenshots)
-
-# 🚀 Deployment
-
-# npm run build
-# vercel deploy 
