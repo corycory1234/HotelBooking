@@ -9,9 +9,9 @@
 
 
 ## 🌟 System Overview
-- <h3>A modern hotel room booking solution offering:</h3>
+### A modern hotel room booking solution offering:
 - <h4>Guest Portal: User-friendly interface with real-time room availability and advanced filters</h4>
-- <h4>Admin Console**: Comprehensive management system for reservations, room configuration, and business insights</h4>
+- <h4>Admin Console: Comprehensive management system for reservations, room configuration, and business insights</h4>
 <!-- - ✅ **Resopnsive Design**：For Mobile and PC users -->
 <!-- - 🚀 **SEO Optimization**：Next.js Server-Side Rendering, enhancing the raking in search -->
 <!-- - ⚡ **State Management**：Integrate Redux-Toolkit & Redux-Persist
@@ -76,8 +76,8 @@
 ## 🔧 Installation & Setup
 **1️⃣ Clone The Project**
 ```sh
-git clone https://github.com/your-repo.git
-cd HotelBooking
+# git clone https://github.com/your-repo.git
+# cd HotelBooking
 
 📂 Project Structure
 /messages           # Translation
@@ -99,6 +99,7 @@ cd HotelBooking
 ├── middleware.ts   # For Processing auth, logging, and so on
 
 # 🖼 (Screenshots)
+```
 
 ## 📜 Copyright
 © 2025 GoTour  
