@@ -18,7 +18,7 @@
 ## 🧑 Our Team
 ### **Frontend Architecture & Design** (Kory)
 - Architected Next.js 14 App Router implementation with 98% TypeScript coverage
-- Engineered Redux Toolkit + Persist state management handling 50+ API endpoints
+- Engineered Redux Toolkit + Persist state management handling 20 API endpoints
 - Integrated Swiper.js animations improving user engagement by 40%
 - Developed responsive UI system with Tailwind CSS + CSS Grid
 
@@ -27,10 +27,6 @@
 - Designed Supabase schema supporting 10M+ hotel inventory records
 - Implemented Drizzle ORM with 30% faster query performance vs raw SQL
 - Created RESTful APIs serving 200+ frontend requests
-- <h3>Frontend: Kory</h3>
-- <h3>Backend: Daniel</h3>
-- <h3>Design: Kory</h3>
-
 
 ## 🌟 System Overview
 ### A modern hotel room booking solution offering:
@@ -70,7 +66,7 @@
 | State Management| Redux Toolkit, Redux Persist          |
 | Styling         | Tailwind CSS, CSS Modules             |
 | Internationalization | Next-Intl, react-i18next       |
-| Maps            | react-leaflet, Mapbox GL              |
+| Maps            | react-leaflet                         |
 
 ### **Backend**
 | Category        | Technologies                          |
