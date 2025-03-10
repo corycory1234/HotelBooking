@@ -1,13 +1,15 @@
 # <a href="https://hotel-booking-delta-gray.vercel.app/"> <img src="/HotelBooking/public/gotour.svg"> Go Tour </a>
 <h2>Explore The World by our website! We have cooperative hotels which provides travelers with cozy stay!</h2> 
 <img src="/HotelBooking/public/readme/merged_image.webp">
-<h2>Frontend: Kory</h2>
-<h2>Backend: Daniel</h2>
-<h2>Design: Kory</h2>
+
+## 🧑 Our Team
+- <h3>Frontend: Kory</h3>
+- <h3>Backend: Daniel</h3>
+- <h3>Design: Kory</h3>
 
 
 ## 🌟 System Overview
-A modern hotel room booking solution offering:
+<h3>A modern hotel room booking solution offering:</h3>
 - **Guest Portal**: User-friendly interface with real-time room availability and advanced filters
 - **Admin Console**: Comprehensive management system for reservations, room configuration, and business insights
 <!-- - ✅ **Resopnsive Design**：For Mobile and PC users -->
@@ -53,9 +55,9 @@ A modern hotel room booking solution offering:
 <!-- - 🖨️ Export/print functionality -->
 
 ## 🖥️ Quick Access
-**Live Demo Environment**  
-Guest Portal: https://hotel-booking-delta-gray.vercel.app/
-Test Account: `testgotour@example.com` / `Abc123456`
+**Live Demo Environment**
+- Guest Portal: https://hotel-booking-delta-gray.vercel.app/
+- Test Account: `testgotour@example.com` / `Abc123456`
 
 ## 📘 User Guide
 ### Booking Process
