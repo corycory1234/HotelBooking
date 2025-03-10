@@ -1,6 +1,4 @@
-# <a href="https://hotel-booking-delta-gray.vercel.app/">
-  <img src="/HotelBooking/public/gotour.svg"> Go Tour
-  </a>
+# <a href="https://hotel-booking-delta-gray.vercel.app/"> <img src="/HotelBooking/public/gotour.svg"> Go Tour </a>
 
 <img src="/HotelBooking/public/readme/merged_image.webp">
 
@@ -21,7 +19,6 @@
 - **Reduxt Toolkit & Redux Persist**: State Management
 - **Typescript** : Syntax For Types
 - **Tailwind CSS**：CSS Framework
-- **Backend**：Node.js, Supabase
 - **Form Validation**：Zod
 
 ### 🔹 Backend
@@ -39,7 +36,7 @@
 **1️⃣ Clone The Project**
 ```sh
 git clone https://github.com/your-repo.git
-cd your-repo
+cd HotelBooking
 
 📂 Project Structure
 /messages           # Translation
@@ -60,7 +57,7 @@ cd your-repo
 ├── utils/          # Utility Functions
 ├── middleware.ts   # For Processing auth, logging, and so on
 
-# 🖼 預覽 (Screenshots)
+# 🖼 (Screenshots)
 
 # 🚀 Deployment
 
