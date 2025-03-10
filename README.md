@@ -2,6 +2,10 @@
 <h2>Explore The World by our website! We have cooperative hotels which provides travelers with cozy stay!</h2> 
 <img src="/HotelBooking/public/readme/merged_image.webp">
 
+[![Live Demo](https://img.shields.io/badge/Demo-Try%20Now-brightgreen)](https://hotel-booking-delta-gray.vercel.app/)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-blue)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+
 ## 🧑 Our Team
 - <h3>Frontend: Kory</h3>
 - <h3>Backend: Daniel</h3>
