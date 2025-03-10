@@ -54,11 +54,11 @@ export default function Nav () {
     router.replace(new_Path, {locale: new_Locale});
     // router.replace(i18n_PathName, {locale: new_Locale});
   }
-  useEffect(() => {
-    console.log(next_PathName, "    Next的path名");
-    console.log(i18n_PathName, "    i18n的path名");
-    console.log(params,"    useParams名");
-  },[locale])
+  // useEffect(() => {
+  //   console.log(next_PathName, "    Next的path名");
+  //   console.log(i18n_PathName, "    i18n的path名");
+  //   console.log(params,"    useParams名");
+  // },[locale])
 
   // 6. 點外層, 關閉 i18n 絕對定位選單
   // 6.1 建立 ref 來追蹤 i18n 絕對定位選單 元素

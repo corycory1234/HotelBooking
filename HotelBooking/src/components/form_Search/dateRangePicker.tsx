@@ -2,9 +2,8 @@
 import { useState, useEffect } from "react"; 
 import Datepicker from "react-tailwindcss-datepicker";
 // 1. 從 "react-tailwindcss-datepicker" 拉出 { DateValueType }, 做為 TS型別, 以免跳警告 
-import type { DateValueType } from "react-tailwindcss-datepicker";
+// import type { DateValueType } from "react-tailwindcss-datepicker";
 import { useDispatch, useSelector } from "react-redux";
-// import { updateDateRange } from "@/store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
 
@@ -39,14 +38,9 @@ export default function DateRangePicker () {
       newValue.endDate = new Date((newValue.startDate as Date)?.getTime() + 24 * 60 * 60 * 1000)
     };
     setValue(newValue);
-    console.log(newValue, "手動點選後, 日歷之數據格式");
+    // console.log(newValue, "手動點選後, 日歷之數據格式");
     const { startDate, endDate } = newValue;
     if(startDate && endDate) {
-      // console.log(startDate, endDate, "看看日期");
-      // const formattedStart = startDate.toISOString().split("T")[0];
-      // const formattedEnd = endDate.toISOString().split("T")[0];
-      // dispatch(updateDateRange(`${formattedStart} to ${formattedEnd}`));
-
       // toLocaleString()會是"2025/1/20 上午11:11:11", 再用split(" ")照著" 空白字串", 切出陣列 - 2個元素, 並取第0個
       const formatted_Start_Date = startDate.toLocaleString().split(" ")[0];
       const formatted_End_Date = endDate.toLocaleString().split(" ")[0];
@@ -59,15 +53,6 @@ export default function DateRangePicker () {
     }
   }
 
-    // const [value, setValue] = useState<DateValueType>({ 
-    //     startDate: null, 
-    //     endDate: null
-    // });
-
-    // const selectDate = (newValue: DateValueType) => {
-    //   return setValue(newValue)
-    // }
-
     useEffect(() => {
       if(storedDateRange) {
         const [start, end] = storedDateRange.split("to");
@@ -76,13 +61,12 @@ export default function DateRangePicker () {
           endDate: new Date(end)
         })
       }
-      // console.log(value);
     },[ storedDateRange])
 
     // 測試入住日 退房日
     const start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
     const end_Date = useSelector((state: RootState) => state.formSearch.end_Date);
-    console.log(start_Date, end_Date, storedDateRange, "查看Redux 儲存日期");
+    // console.log(start_Date, end_Date, storedDateRange, "查看Redux 儲存日期");
 
     return (
       // 1. 原始寫法
