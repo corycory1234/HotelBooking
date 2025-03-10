@@ -1,0 +1,1709 @@
+{
+  "zhTW": [
+    {
+      "hotel_Id": "22ce3f17-ea0e-47a3-9618-7624ef16d43a",
+      "hotel_Name": "曼谷威斯汀大飯店-素坤逸21號",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012008-aleksey-kuprikov-T3GdOI3IJ8I-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012009-alvin-yn3tA00iHBg-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-artur-aldyrkhanov-QksucEmALuQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-duan-xiaoyu-4Ef50-zcXOM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-ph-b-bpGQjjhtfZs-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-random-institute-FDcydLvV7Io-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-ryuygbfkm-BJ7lAUFaciM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012011-saad-khan-I5c9i-hooag-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 5000,
+      "review_List": [
+        {
+          "date": "2023-06-29",
+          "reply": "Thank you sir. We wish you have nice tour in Thailand :)",
+          "comment": "The best 5-star Hotel in Bangkok! Wanna stay here next time",
+          "traveler_Id": "5924869c-c717-4a87-88ee-8b2330838bdb",
+          "traveler_Name": "Goodman",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-06-01",
+          "reply": "Thank you Sir, but we dont have free services for Grab which has to be self-paid by customers themselves!",
+          "comment": "Cannot believe the service in Westin is super awesome! They have lots of free services, including Grab !!",
+          "traveler_Id": "ab331c21-34d5-4f07-a9ae-b65f8c10294c",
+          "traveler_Name": "Sam",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "泰國",
+      "city": "曼谷",
+      "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "fc829079-f851-4634-957c-34942e919086",
+      "hotel_Name": "考塔河飯店",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678284-pexels-1.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678285-pexels-cottonbro-6474532.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678285-pexels-monkeytactics-764830.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-olly-3769710.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-quark-studio-1159039-2506990.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-raghulkuduva-322154.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-reneterp-635126.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-tima-miroshnichenko-6010421.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 3000,
+      "review_List": [
+        {
+          "date": "2024-06-14",
+          "reply": "Thanks for compliment! Sir, we are welcome for your next coming",
+          "comment": "Feel great to live here for 10 days. The reflection from river is beautiful.",
+          "traveler_Id": "136d2abb-78bd-415b-8831-efd619c8ee0a",
+          "traveler_Name": "MCcoy",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2025-01-11",
+          "reply": "",
+          "comment": "海景很美, 餐點也都很美味, 讚讚",
+          "traveler_Id": "7bdb70bb-877f-402f-aa5c-04ff4278f18b",
+          "traveler_Name": "李小姐",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "泰國",
+      "city": "曼谷",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "c2457e8b-71d1-4b49-abf2-3659bbcc8dc2",
+      "hotel_Name": "UHG四分之一沙拉登飯店",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282764-adrien-olichon-F9SuF0IIDZs-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282765-avi-richards-imKWvuBBS1o-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282765-danist-soh-w-YhAr7N0q4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282765-dmitriy-alaev-0rVjtzABZZU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-drew-coffman-KdWSqrKt4Cc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-jungwoo-hong-KZ2viQbBE8c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-oleksii-ivanov-aHISuLxgCUE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-rio-lecatompessy-RFnTSblabhA-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 2000,
+      "review_List": [
+        {
+          "date": "2024-10-11",
+          "reply": "Sir, We appreciate your comment! ",
+          "comment": "很棒的鬧區飯店, 買吃的隨處都有",
+          "traveler_Id": "773d6b29-06bf-42ef-87d7-638322908d63",
+          "traveler_Name": "Joe",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "泰國",
+      "city": "曼谷",
+      "offer_Id": "5555"
+    },
+    {
+      "hotel_Id": "c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235",
+      "hotel_Name": "曼谷夜間飯店 - 素坤逸路 15 巷",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152403-pexels-chetanvlad-2957461.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-grizzlybear-399192.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-jimmy-teoh-294331-2411759.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-julieaagaard-2351289.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-pixabay-302831.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-prime-cinematics-1005175-2057610.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-rickyrecap-2061212.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-scottwebb-998846.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-zaib-1707310.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 2200,
+      "review_List": [
+        {
+          "date": "2024-12-25",
+          "reply": "Thank you, lady. Wish you have a great holiday :)",
+          "comment": "Celebrate Christmas here with friends! The surrounding is clear and clean!",
+          "traveler_Id": "cfcf568b-d7c4-49e6-8a2e-ca1936492798",
+          "traveler_Name": "Doris",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "泰國",
+      "city": "曼谷",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "6938966c-ae92-4204-a8ea-db03e8b23179",
+      "hotel_Name": "素坤逸路39號瑟琳飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553215-pexels-ashleyelena-705773.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553216-pexels-asman-chema-91897-594077.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-binyaminmellish-186181.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-bohlemedia-2288281.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-grizzlybear-528427.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-justin-hamilton-16109-205342.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-olly-3771811.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553218-pexels-pixabay-290544.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 110,
+      "review_List": [
+        {
+          "date": "2024-12-25",
+          "reply": "Thank you, lady. Wish you have a great holiday :)",
+          "comment": "Celebrate Christmas here with friends! The surrounding is clear and clean!",
+          "traveler_Id": "cfcf568b-d7c4-49e6-8a2e-ca1936492798",
+          "traveler_Name": "Doris",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "泰國",
+      "city": "曼谷",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "c08d5a81-7fc3-4d38-8920-4389c07cc6b0",
+      "hotel_Name": "廣州人和雅閣澳斯特酒店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266213-akazuo-ota-kvyUh-jTpP4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-akazuo-ota-QPj1dinkrA4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-erick-palacio-tJXkQ3Borlc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-guzman-barquin-2QDuAqs2K9A-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-johannes-w-IQKuHc2lils-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-mateusz-zatorski-X-0byZrQWI0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-thought-catalog-wyEinDRV88I-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-zac-ong-RpZxHPikR6A-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 100,
+      "review_List": [
+        {
+          "date": "2023-09-14",
+          "reply": "Thank you, sir",
+          "comment": "Love staying here because of friendly price.",
+          "traveler_Id": "84b64e80-873c-4692-ae9c-ab67f8ae8526",
+          "traveler_Name": "Matt",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-01-18",
+          "reply": "",
+          "comment": "Do not like stay here. The surrounding is not clean. There are many insects at night...",
+          "traveler_Id": "e276b3b1-0722-459c-9961-a671dca174e5",
+          "traveler_Name": "Hellen",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "中國",
+      "city": "廣州",
+      "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "23be93f2-91ca-401a-ab64-597f2ceca010",
+      "hotel_Name": "兄弟大飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401027-pexels-italo-crespi-2169075-6843582.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-jimmy-liao-3615017-17374705.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-justus-menke-3490295-5213881.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-mwabonje-1714975.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-olly-3770106.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-omergulen-19367385.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-quark-studio-1159039-2506992.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-vladimirsrajber-17595515.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 600,
+      "review_List": [
+        {
+          "date": "2024-10-11",
+          "reply": "Thank you, sir! Wish you have nice itinerary in Taiwan",
+          "comment": "A nice hotel to stay. It's convenient to reach MRT station",
+          "traveler_Id": "08a47870-6d52-43c0-b432-539787f1bfc4",
+          "traveler_Name": "大雄",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "台灣",
+      "city": "台北市",
+      "offer_Id": "5555"
+    },
+    {
+      "hotel_Id": "85b13e73-044c-4e58-b3ea-ca651435e66b",
+      "hotel_Name": "西貢歌劇院飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106140-apexels-kelly-1179532-9317441.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-anastasia-nagibina-1116204043-21560333.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-dodogr8-1028379.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-donaldtong94-133920.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-fatih-turan-63325184-15551933.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-weickmann-17487164.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106141-pexels-yazanhija-23230833.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/85b13e73-044c-4e58-b3ea-ca651435e66b/1740768106142-pexels-zachtheshoota-1769577.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-08-09",
+          "reply": "Thank you, madam. Wish you have a good journey",
+          "comment": "This is my first time of visiting Vietnam! This hotel is extremely awesome to watch the scene of Opera house",
+          "traveler_Id": "89ae4958-fb25-4d2c-8f95-feb539d3ae30",
+          "traveler_Name": "Ashley",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "越南",
+      "city": "胡志明市",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "39df3f18-901c-468c-b8f5-c4d5b736ebb8",
+      "hotel_Name": "新加坡樟宜機場尤特艾爾飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981230-apexels-ting-chang-17124378-14763001.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-bento-justin-2216976-8073284.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-enginakyurt-2771921.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1145257.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1237069.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-karlsolano-2883047.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-olly-3771087.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-sab-maga-2150105300-30953290.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 800,
+      "review_List": [
+        {
+          "date": "2024-08-20",
+          "reply": "Sir, thanks for your compliment",
+          "comment": "I have visited 1 year ago. This hotel service is well-rounded",
+          "traveler_Id": "0c4ba4f8-5e9c-4a3a-b554-6658469849f4",
+          "traveler_Name": "Volen",
+          "traveler_Rating": "4"
+        },
+        {
+          "date": "2025-02-01",
+          "reply": "",
+          "comment": "Great! During Chinese lunar new year, the staff provide us with red envelopes! It's auspicious :)",
+          "traveler_Id": "39a0c786-ea5a-4e90-bff3-77dbb7969180",
+          "traveler_Name": "Norman",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "新加坡",
+      "city": "樟宜",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "f4ce676d-a055-47e6-b4d8-1881649e9aa7",
+      "hotel_Name": "都柏林城雅樂軒酒店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183764-aapexels-mikegles-30931571.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-anna-frizen-uudEOOzuQjM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-artur-aldyrkhanov-QksucEmALuQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-collov-home-design-kSoe7EoxHIE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-sanibell-bv-yuFu0imUKMk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-smartworks-coworking-E7Tzh2TTS6c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-yoav-aziz-UQXlVumSGHE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183767-zlex-haney-CAhjZmVk5H4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-11-07",
+          "reply": "Thank you, madam. Wish you have a great journey",
+          "comment": "The room is clean and tidy. Have a nice experience of living her for 10 days",
+          "traveler_Id": "f21e2cbf-abd7-4475-99d9-8ba6f258a818",
+          "traveler_Name": "Laura",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "愛爾蘭",
+      "city": "都伯林",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "df762950-4059-49b9-a47b-9ae559cf1189",
+      "hotel_Name": "都柏林市中心智選假日飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863560-apexels-navlakha-30929217.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-azpexels-ekam-juneja-61080223-13373528.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6466286.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6475035.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-davidguerrero-15811692.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-heyho-6758531.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-son-tung-tran-17375059-6460876.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863562-pexels-vaishnav-devadas-415764-2086676.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 250,
+      "review_List": [
+        {
+          "date": "2024-11-28",
+          "reply": "Thanks for your recommendation, Sir",
+          "comment": "This is a nice hotel in Ireland. It's quite closed to public transport",
+          "traveler_Id": "59ffb99e-50db-4495-a3f0-760ef0b3db55",
+          "traveler_Name": "Dylan",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "愛爾蘭",
+      "city": "都伯林",
+      "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1",
+      "hotel_Name": "澳門皇都酒店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528348-ajoshua-michaels-hZgG8hZHRIo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528349-farhan-azam-CaiUzEB2cxU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-julia-solonina-cP2v1BiQsCE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-luca-lo-tartaro-ndUyfdqbCq4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-lycs-architecture-u4-NB9dEsH8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-peter-palmer-z638PTh6QWc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tao-su-syfZAoB6y1M-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tetiana-shevereva-bWctFveezSg-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 150,
+      "review_List": [
+        {
+          "date": "2025-01-04",
+          "reply": "Sir, please do not blame your problem on us",
+          "comment": "每次住這間飯店, 賭運就很差, 賠了好幾百萬",
+          "traveler_Id": "0b180dc7-ef17-400e-b941-8569cef81f1e",
+          "traveler_Name": "賭神",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "中國",
+      "city": "澳門",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "16ab72b9-7b07-4101-b089-7b48d1cc6810",
+      "hotel_Name": "東京帝國飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873757-aameritt-thomas-HIEZBt6XRno-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-alex-bertha-Jyg7xHRmXiU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-allphoto-bangkok-nI4aC1kaTRc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-anmol-seth-hDbCjHNdF48-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-ashley-ross-2skfGS56P5g-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873759-reisetopia-Vl5DAQxNBbM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-roberto-nickson-EeeKjwm2vDo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-thanos-pal-9OZfTe-y5T4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 4000,
+      "review_List": [
+        {
+          "date": "2023-10-20",
+          "reply": "Thanks for your long stay here, sir!",
+          "comment": "很棒的飯店, 服務很頂, 雖然價錢太貴了, 但餐點跟服務都沒話說, 一住就半年了",
+          "traveler_Id": "70f6915d-115f-40ef-b904-8532ceb7b206",
+          "traveler_Name": "小栗旬",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-11-08",
+          "reply": "Madam, thanks for your compliment. Staying here is able to relax yourself",
+          "comment": "優雅舒適, 住這邊可以忘卻煩惱, 拍戲完都來這邊睡覺",
+          "traveler_Id": "92321040-e26f-4b2d-88fb-cbc5711c4dad",
+          "traveler_Name": "長澤雅美",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "日本",
+      "city": "東京",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "915dfbd8-bc43-4a91-9cfa-06f66aa3f661",
+      "hotel_Name": "三井花園飯店京都站前",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920525-pexels-jeffrey-lau-770172754-28939970.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-kf-zhou-609625381-20676070.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-pixabay-265947.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-reneterp-2504911.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-shovyrahman-804878.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-tizzy-20282332.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-wathegony-27689958.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-zaib-809060.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 5000,
+      "review_List": [
+        {
+          "date": "2025-01-03",
+          "reply": "Dear Valued Guest,\n\nThank you for your wonderful review and for choosing Mitsui Garden Hotel Kyoto Station! We are thrilled to hear that you had a fantastic stay and enjoyed our convenient location, modern rooms, and thoughtful amenities. It is also great to know that you found our public bath relaxing and appreciated our complimentary lounge service. Our team takes pride in providing warm and professional service, and we are delighted that we could make your stay enjoyable. We truly appreciate your recommendation and look forward to welcoming you back in the future!\n\nBest regards,\nHotel Management Team\nMitsui Garden Hotel Kyoto Station",
+          "comment": "I had a fantastic stay at Mitsui Garden Hotel Kyoto Station! The hotel's location is perfect—just a short walk from Kyoto Station, making it incredibly convenient for transportation and sightseeing. The rooms are modern, stylish, and impeccably clean, with comfortable beds and well-thought-out amenities. The public bath was a wonderful way to unwind after a day of exploring the city. The staff were warm, professional, and always ready to assist. The complimentary lounge access with drinks and snacks was a nice touch. I highly recommend this hotel and would definitely stay here again!",
+          "traveler_Id": "cef89ef9-2cbe-4830-aada-d700c92249e7",
+          "traveler_Name": "Mr.Trump",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2023-06-01",
+          "reply": "",
+          "comment": "My stay at Mitsui Garden Hotel Kyoto Station was overall fine, but there were a few areas that could be improved. The location is excellent, just a short walk from Kyoto Station, making it very convenient for travel. The hotel is clean and well-maintained, and the public bath is a nice feature. However, the rooms are quite small, and there isn’t much space for luggage. The soundproofing could be better, as I could hear noise from the hallway. The staff were polite but not particularly welcoming. It’s a decent hotel, but I expected a bit more for the price.",
+          "traveler_Id": "6abaca88-5599-46f6-b3c7-59d3270c068f",
+          "traveler_Name": "Obama",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "日本",
+      "city": "京都",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "2e050050-0f3a-4366-95ed-0a7749a3c054",
+      "hotel_Name": "濟州樂天城市飯店",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122814-Adaniil-yakovchik-NZyp8S1RTNw-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-adaniil-yakovchik-Tc7nH3LGs5c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-caleb-minear-XZ2rL0rg7D8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-eddi-aguirre-ZAVHbpOn4Jk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-rio-lecatompessy-RFnTSblabhA-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-gchsNl7qKl0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-u1kycevFVEc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-syed-hussaini-HUAUN0jDgQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-toa-heftiba-6bKpHAun4d8-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 350,
+      "review_List": [
+        {
+          "date": "2024-11-14",
+          "reply": "Thanks for your compliment, sir",
+          "comment": "每次拍完戲都來這邊躺平, 很舒服",
+          "traveler_Id": "101a8bf7-9889-4025-bb3e-9faff1b94162",
+          "traveler_Name": "金宇彬",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "韓國",
+      "city": "濟州",
+      "offer_Id": "5555"
+    }
+  ],
+  
+  "en": [
+    {
+      "hotel_Id": "df40c06c-f88f-4c49-81c2-5b0c4f3df821",
+      "hotel_Name": "The Westin Grande Sukhumvit, Bangkok",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012008-aleksey-kuprikov-T3GdOI3IJ8I-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012009-alvin-yn3tA00iHBg-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-artur-aldyrkhanov-QksucEmALuQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-duan-xiaoyu-4Ef50-zcXOM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-ph-b-bpGQjjhtfZs-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-random-institute-FDcydLvV7Io-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012010-ryuygbfkm-BJ7lAUFaciM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/22ce3f17-ea0e-47a3-9618-7624ef16d43a/1740122012011-saad-khan-I5c9i-hooag-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 5000,
+      "review_List": [
+        {
+          "date": "2023-06-29",
+          "reply": "Thank you sir. We wish you have nice tour in Thailand :)",
+          "comment": "The best 5-star Hotel in Bangkok! Wanna stay here next time",
+          "traveler_Id": "5924869c-c717-4a87-88ee-8b2330838bdb",
+          "traveler_Name": "Goodman",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-06-01",
+          "reply": "Thank you Sir, but we dont have free services for Grab which has to be self-paid by customers themselves!",
+          "comment": "Cannot believe the service in Westin is super awesome! They have lots of free services, including Grab !!",
+          "traveler_Id": "ab331c21-34d5-4f07-a9ae-b65f8c10294c",
+          "traveler_Name": "Sam",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Thailand",
+      "city": "Bangkok",
+      "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "d32a2821-8c30-468f-a93c-24b4965c67e8",
+      "hotel_Name": "KOWTHA RIVERTEL",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678284-pexels-1.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678285-pexels-cottonbro-6474532.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678285-pexels-monkeytactics-764830.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-olly-3769710.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-quark-studio-1159039-2506990.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-raghulkuduva-322154.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-reneterp-635126.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/fc829079-f851-4634-957c-34942e919086/1740124678286-pexels-tima-miroshnichenko-6010421.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 3000,
+      "review_List": [
+        {
+          "date": "2024-06-14",
+          "reply": "Thanks for compliment! Sir, we are welcome for your next coming",
+          "comment": "Feel great to live here for 10 days. The reflection from river is beautiful.",
+          "traveler_Id": "136d2abb-78bd-415b-8831-efd619c8ee0a",
+          "traveler_Name": "MCcoy",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2025-01-11",
+          "reply": "",
+          "comment": "海景很美, 餐點也都很美味, 讚讚",
+          "traveler_Id": "7bdb70bb-877f-402f-aa5c-04ff4278f18b",
+          "traveler_Name": "李小姐",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Thailand",
+      "city": "Bangkok",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "bf2bf0be-9514-460f-bda7-6c389e59297d",
+      "hotel_Name": "The Quarter Saladaeng by UHG",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282764-adrien-olichon-F9SuF0IIDZs-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282765-avi-richards-imKWvuBBS1o-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282765-danist-soh-w-YhAr7N0q4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282765-dmitriy-alaev-0rVjtzABZZU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-drew-coffman-KdWSqrKt4Cc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-jungwoo-hong-KZ2viQbBE8c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-oleksii-ivanov-aHISuLxgCUE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c2457e8b-71d1-4b49-abf2-3659bbcc8dc2/1740127282766-rio-lecatompessy-RFnTSblabhA-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 2000,
+      "review_List": [
+        {
+          "date": "2024-10-11",
+          "reply": "Sir, We appreciate your comment! ",
+          "comment": "很棒的鬧區飯店, 買吃的隨處都有",
+          "traveler_Id": "773d6b29-06bf-42ef-87d7-638322908d63",
+          "traveler_Name": "Joe",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Thailand",
+      "city": "Bangkok",
+      "offer_Id": "5555"
+    },
+    {
+      "hotel_Id": "e9c95803-e8ac-494f-b448-4396d6cc4861",
+      "hotel_Name": "Night Hotel Bangkok - Sukhumvit 15",
+      "hotel_Image_List": [
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152403-pexels-chetanvlad-2957461.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-grizzlybear-399192.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-jimmy-teoh-294331-2411759.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-julieaagaard-2351289.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152404-pexels-pixabay-302831.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-prime-cinematics-1005175-2057610.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-rickyrecap-2061212.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-scottwebb-998846.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c9bf6fca-4d0a-4d9f-ab76-d0bd30bd0235/1740130152405-pexels-zaib-1707310.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 2200,
+      "review_List": [
+        {
+          "date": "2024-12-25",
+          "reply": "Thank you, lady. Wish you have a great holiday :)",
+          "comment": "Celebrate Christmas here with friends! The surrounding is clear and clean!",
+          "traveler_Id": "cfcf568b-d7c4-49e6-8a2e-ca1936492798",
+          "traveler_Name": "Doris",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Thailand",
+      "city": "Bangkok",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "cff62c5b-5622-4238-977f-04cc50f9fa3a",
+      "hotel_Name": "Sereine Sukhumvit 39 Hotel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553215-pexels-ashleyelena-705773.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553216-pexels-asman-chema-91897-594077.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-binyaminmellish-186181.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-bohlemedia-2288281.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-grizzlybear-528427.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-justin-hamilton-16109-205342.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553217-pexels-olly-3771811.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/6938966c-ae92-4204-a8ea-db03e8b23179/1740044553218-pexels-pixabay-290544.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 110,
+      "review_List": [
+        {
+          "date": "2024-12-25",
+          "reply": "Thank you, lady. Wish you have a great holiday :)",
+          "comment": "Celebrate Christmas here with friends! The surrounding is clear and clean!",
+          "traveler_Id": "cfcf568b-d7c4-49e6-8a2e-ca1936492798",
+          "traveler_Name": "Doris",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Thailand",
+      "city": "Bangkok",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "39497990-5f4b-46d5-9b44-ea2b3289b86d",
+      "hotel_Name": "AUSOTEL by Argyle Guangzhou Baiyun",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266213-akazuo-ota-kvyUh-jTpP4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-akazuo-ota-QPj1dinkrA4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266214-erick-palacio-tJXkQ3Borlc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-guzman-barquin-2QDuAqs2K9A-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-johannes-w-IQKuHc2lils-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-mateusz-zatorski-X-0byZrQWI0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-thought-catalog-wyEinDRV88I-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/c08d5a81-7fc3-4d38-8920-4389c07cc6b0/1740750266215-zac-ong-RpZxHPikR6A-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 100,
+      "review_List": [
+        {
+          "date": "2023-09-14",
+          "reply": "Thank you, sir",
+          "comment": "Love staying here because of friendly price.",
+          "traveler_Id": "84b64e80-873c-4692-ae9c-ab67f8ae8526",
+          "traveler_Name": "Matt",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-01-18",
+          "reply": "",
+          "comment": "Do not like stay here. The surrounding is not clean. There are many insects at night...",
+          "traveler_Id": "e276b3b1-0722-459c-9961-a671dca174e5",
+          "traveler_Name": "Hellen",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "China",
+      "city": "Guanzhou",
+      "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "3cf95266-9558-4117-ac12-35fac5426e20",
+      "hotel_Name": "Brother Hotel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401027-pexels-italo-crespi-2169075-6843582.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-jimmy-liao-3615017-17374705.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401031-pexels-justus-menke-3490295-5213881.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-mwabonje-1714975.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-olly-3770106.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401032-pexels-omergulen-19367385.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-quark-studio-1159039-2506992.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/23be93f2-91ca-401a-ab64-597f2ceca010/1740975401033-pexels-vladimirsrajber-17595515.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 600,
+      "review_List": [
+        {
+          "date": "2024-10-11",
+          "reply": "Thank you, sir! Wish you have nice itinerary in Taiwan",
+          "comment": "A nice hotel to stay. It's convenient to reach MRT station",
+          "traveler_Id": "08a47870-6d52-43c0-b432-539787f1bfc4",
+          "traveler_Name": "大雄",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Taiwan",
+      "city": "Taipei City",
+      "offer_Id": "5555"
+    },
+    {
+      "hotel_Id": "704e6043-8c91-4a0d-b8aa-f5283310d3b5",
+      "hotel_Name": "La Opera saigon hotel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229700-apexels-kelly-1179532-9317441.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229700-pexels-anastasia-nagibina-1116204043-21560333.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229700-pexels-dodogr8-1028379.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229701-pexels-donaldtong94-133920.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229702-pexels-fatih-turan-63325184-15551933.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229702-pexels-weickmann-17487164.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229703-pexels-yazanhija-23230833.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/704e6043-8c91-4a0d-b8aa-f5283310d3b5/1740768229703-pexels-zachtheshoota-1769577.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-08-09",
+          "reply": "Thank you, madam. Wish you have a good journey",
+          "comment": "This is my first time of visiting Vietnam! This hotel is extremely awesome to watch the scene of Opera house",
+          "traveler_Id": "89ae4958-fb25-4d2c-8f95-feb539d3ae30",
+          "traveler_Name": "Ashley",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Vietnam",
+      "city": "Ho Chi Minh City",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "67fa7453-d618-45e3-ab60-ab529e6f6ce6",
+      "hotel_Name": "YOTELAIR Singapore Changi Airport at Jewel",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981230-apexels-ting-chang-17124378-14763001.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-bento-justin-2216976-8073284.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-enginakyurt-2771921.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1145257.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-igor-starkov-233202-1237069.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981232-pexels-karlsolano-2883047.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-olly-3771087.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/39df3f18-901c-468c-b8f5-c4d5b736ebb8/1740982981233-pexels-sab-maga-2150105300-30953290.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 800,
+      "review_List": [
+        {
+          "date": "2024-08-20",
+          "reply": "Sir, thanks for your compliment",
+          "comment": "I have visited 1 year ago. This hotel service is well-rounded",
+          "traveler_Id": "0c4ba4f8-5e9c-4a3a-b554-6658469849f4",
+          "traveler_Name": "Volen",
+          "traveler_Rating": "4"
+        },
+        {
+          "date": "2025-02-01",
+          "reply": "",
+          "comment": "Great! During Chinese lunar new year, the staff provide us with red envelopes! It's auspicious :)",
+          "traveler_Id": "39a0c786-ea5a-4e90-bff3-77dbb7969180",
+          "traveler_Name": "Norman",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Singapore",
+      "city": "Changi",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "c97717bd-6f7d-47a6-be12-555f9c5b9a47",
+      "hotel_Name": "Aloft Dublin City",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183764-aapexels-mikegles-30931571.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-anna-frizen-uudEOOzuQjM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-artur-aldyrkhanov-QksucEmALuQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-collov-home-design-kSoe7EoxHIE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-sanibell-bv-yuFu0imUKMk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-smartworks-coworking-E7Tzh2TTS6c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183766-yoav-aziz-UQXlVumSGHE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/f4ce676d-a055-47e6-b4d8-1881649e9aa7/1740999183767-zlex-haney-CAhjZmVk5H4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 500,
+      "review_List": [
+        {
+          "date": "2024-11-07",
+          "reply": "Thank you, madam. Wish you have a great journey",
+          "comment": "The room is clean and tidy. Have a nice experience of living her for 10 days",
+          "traveler_Id": "f21e2cbf-abd7-4475-99d9-8ba6f258a818",
+          "traveler_Name": "Laura",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Ireland",
+      "city": "Dublin",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "740ea5cc-0deb-4561-8b39-dcd9f12f0e3a",
+      "hotel_Name": "Holiday Inn Express Dublin City Centre",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863560-apexels-navlakha-30929217.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-azpexels-ekam-juneja-61080223-13373528.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6466286.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-cottonbro-6475035.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-davidguerrero-15811692.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-heyho-6758531.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863561-pexels-son-tung-tran-17375059-6460876.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/df762950-4059-49b9-a47b-9ae559cf1189/1741065863562-pexels-vaishnav-devadas-415764-2086676.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 250,
+      "review_List": [
+        {
+          "date": "2024-11-28",
+          "reply": "Thanks for your recommendation, Sir",
+          "comment": "This is a nice hotel in Ireland. It's quite closed to public transport",
+          "traveler_Id": "59ffb99e-50db-4495-a3f0-760ef0b3db55",
+          "traveler_Name": "Dylan",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Ireland",
+      "city": "Dublin",
+      "offer_Id": "1111"
+    },
+    {
+      "hotel_Id": "bcb2f89b-3bd7-4551-b1c2-efefedf40252",
+      "hotel_Name": "Hotel Royal Macau",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528348-ajoshua-michaels-hZgG8hZHRIo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528349-farhan-azam-CaiUzEB2cxU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-julia-solonina-cP2v1BiQsCE-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-luca-lo-tartaro-ndUyfdqbCq4-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-lycs-architecture-u4-NB9dEsH8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-peter-palmer-z638PTh6QWc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tao-su-syfZAoB6y1M-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/50e00c1c-4ca2-4ab9-9f05-ed6ce0d4f2a1/1740725528350-tetiana-shevereva-bWctFveezSg-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 1,
+      "price": 150,
+      "review_List": [
+        {
+          "date": "2025-01-04",
+          "reply": "Sir, please do not blame your problem on us",
+          "comment": "每次住這間飯店, 賭運就很差, 賠了好幾百萬",
+          "traveler_Id": "0b180dc7-ef17-400e-b941-8569cef81f1e",
+          "traveler_Name": "賭神",
+          "traveler_Rating": "1"
+        }
+      ],
+      "country": "China",
+      "city": "Macau",
+      "offer_Id": "2222"
+    },
+    {
+      "hotel_Id": "c61ee7db-fb7f-4c29-b7a9-d78c29ea8ff1",
+      "hotel_Name": "Imperial Hotel Tokyo",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873757-aameritt-thomas-HIEZBt6XRno-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-alex-bertha-Jyg7xHRmXiU-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-allphoto-bangkok-nI4aC1kaTRc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-anmol-seth-hDbCjHNdF48-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873758-ashley-ross-2skfGS56P5g-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873759-reisetopia-Vl5DAQxNBbM-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-roberto-nickson-EeeKjwm2vDo-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/16ab72b9-7b07-4101-b089-7b48d1cc6810/1740675873760-thanos-pal-9OZfTe-y5T4-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 4000,
+      "review_List": [
+        {
+          "date": "2023-10-20",
+          "reply": "Thanks for your long stay here, sir!",
+          "comment": "很棒的飯店, 服務很頂, 雖然價錢太貴了, 但餐點跟服務都沒話說, 一住就半年了",
+          "traveler_Id": "70f6915d-115f-40ef-b904-8532ceb7b206",
+          "traveler_Name": "小栗旬",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2024-11-08",
+          "reply": "Madam, thanks for your compliment. Staying here is able to relax yourself",
+          "comment": "優雅舒適, 住這邊可以忘卻煩惱, 拍戲完都來這邊睡覺",
+          "traveler_Id": "92321040-e26f-4b2d-88fb-cbc5711c4dad",
+          "traveler_Name": "長澤雅美",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Japan",
+      "city": "Tokyo",
+      "offer_Id": "3333"
+    },
+    {
+      "hotel_Id": "9504c2e6-5ba6-4848-93cb-7dd2290a5d9c",
+      "hotel_Name": "Mitsui Garden Hotel Kyoto Station",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920525-pexels-jeffrey-lau-770172754-28939970.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-kf-zhou-609625381-20676070.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920526-pexels-pixabay-265947.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-reneterp-2504911.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-shovyrahman-804878.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-tizzy-20282332.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-wathegony-27689958.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/915dfbd8-bc43-4a91-9cfa-06f66aa3f661/1740678920527-pexels-zaib-809060.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 5,
+      "price": 5000,
+      "review_List": [
+        {
+          "date": "2025-01-03",
+          "reply": "Dear Valued Guest,\n\nThank you for your wonderful review and for choosing Mitsui Garden Hotel Kyoto Station! We are thrilled to hear that you had a fantastic stay and enjoyed our convenient location, modern rooms, and thoughtful amenities. It is also great to know that you found our public bath relaxing and appreciated our complimentary lounge service. Our team takes pride in providing warm and professional service, and we are delighted that we could make your stay enjoyable. We truly appreciate your recommendation and look forward to welcoming you back in the future!\n\nBest regards,\nHotel Management Team\nMitsui Garden Hotel Kyoto Station",
+          "comment": "I had a fantastic stay at Mitsui Garden Hotel Kyoto Station! The hotel's location is perfect—just a short walk from Kyoto Station, making it incredibly convenient for transportation and sightseeing. The rooms are modern, stylish, and impeccably clean, with comfortable beds and well-thought-out amenities. The public bath was a wonderful way to unwind after a day of exploring the city. The staff were warm, professional, and always ready to assist. The complimentary lounge access with drinks and snacks was a nice touch. I highly recommend this hotel and would definitely stay here again!",
+          "traveler_Id": "cef89ef9-2cbe-4830-aada-d700c92249e7",
+          "traveler_Name": "Mr.Trump",
+          "traveler_Rating": 5
+        },
+        {
+          "date": "2023-06-01",
+          "reply": "",
+          "comment": "My stay at Mitsui Garden Hotel Kyoto Station was overall fine, but there were a few areas that could be improved. The location is excellent, just a short walk from Kyoto Station, making it very convenient for travel. The hotel is clean and well-maintained, and the public bath is a nice feature. However, the rooms are quite small, and there isn’t much space for luggage. The soundproofing could be better, as I could hear noise from the hallway. The staff were polite but not particularly welcoming. It’s a decent hotel, but I expected a bit more for the price.",
+          "traveler_Id": "6abaca88-5599-46f6-b3c7-59d3270c068f",
+          "traveler_Name": "Obama",
+          "traveler_Rating": 5
+        }
+      ],
+      "country": "Japan",
+      "city": "Kyoto",
+      "offer_Id": "4444"
+    },
+    {
+      "hotel_Id": "e21c7c73-df01-4dc2-aada-b6a749bf9fd5",
+      "hotel_Name": "LOTTE City Hotel Jeju",
+      "hotel_Image_List":[
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122814-Adaniil-yakovchik-NZyp8S1RTNw-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-adaniil-yakovchik-Tc7nH3LGs5c-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-caleb-minear-XZ2rL0rg7D8-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122815-eddi-aguirre-ZAVHbpOn4Jk-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-rio-lecatompessy-RFnTSblabhA-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-gchsNl7qKl0-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-sara-sadeghloo-u1kycevFVEc-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-syed-hussaini-HUAUN0jDgQ-unsplash.webp",
+          "description": ""
+        },
+        {
+          "url": "https://szcxaoaaxbnvmbclggyk.supabase.co/storage/v1/object/public/hotel-images/hotels/2e050050-0f3a-4366-95ed-0a7749a3c054/1741422122816-toa-heftiba-6bKpHAun4d8-unsplash.webp",
+          "description": ""
+        }
+      ],
+      "totalRating": 4,
+      "price": 350,
+      "review_List": [
+        {
+          "date": "2024-11-14",
+          "reply": "Thanks for your compliment, sir",
+          "comment": "每次拍完戲都來這邊躺平, 很舒服",
+          "traveler_Id": "101a8bf7-9889-4025-bb3e-9faff1b94162",
+          "traveler_Name": "金宇彬",
+          "traveler_Rating": "4"
+        }
+      ],
+      "country": "Korea",
+      "city": "Jeju",
+      "offer_Id": "5555"
+    }
+  ]
+}

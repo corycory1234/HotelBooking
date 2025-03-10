@@ -1,0 +1,62 @@
+{
+  "title": "Go Tour Privacy Policy",
+  "effectiveDate": "2025-01-30",
+  "introduction": "歡迎使用我們的飯店訂房服務。我們非常重視您的隱私，並致力於保護您的個人資料。本隱私政策解釋了我們如何收集、使用、保護以及分享您的個人資料。",
+  "introduction_en": "Welcome to our hotel booking service We value your privacy and are committed to protecting your personal data This privacy policy explains how we collect, use, protect, and share your personal information",
+  "sections": [
+    {
+      "title": "1. 資料收集",
+      "content": "我們可能會收集以下類型的個人資料：姓名、電子郵件地址、電話號碼、付款資訊、入住日期和退房日期等。"
+    },
+    {
+      "title": "2. 資料使用",
+      "content": "我們使用您的個人資料來處理訂房、提供客戶服務、改進我們的服務以及發送促銷資訊（如果您同意）。"
+    },
+    {
+      "title": "3. 資料分享",
+      "content": "我們不會將您的個人資料出售給第三方。我們可能會與合作夥伴分享資料以提供服務，例如付款處理和客戶支援。"
+    },
+    {
+      "title": "4. 資料保護",
+      "content": "我們採取適當的安全措施來保護您的個人資料，防止未經授權的存取、揭露、修改或破壞。"
+    },
+    {
+      "title": "5. 您的權利",
+      "content": "您有權存取、更正或刪除您的個人資料。如果您有任何問題或需要協助，請聯繫我們。"
+    },
+    {
+      "title": "6. 隱私政策的變更",
+      "content": "我們可能會不定期更新本隱私政策。任何變更將在本頁面上公布，並在生效日期後適用。"
+    }
+  ],
+  "sections_en": [
+    {
+      "title": "Data Collection",
+      "content": "We may collect the following types of personal data: name, email address, phone number, payment information, check-in date, and check-out date"
+    },
+    {
+      "title": "Data Usage",
+      "content": "We use your personal data to process bookings, provide customer service, improve our services, and send promotional information (if you consent)"
+    },
+    {
+      "title": "Data Sharing",
+      "content": "We do not sell your personal data to third parties We may share data with partners to provide services, such as payment processing and customer support"
+    },
+    {
+      "title": "Data Protection",
+      "content": "We take appropriate security measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction"
+    },
+    {
+      "title": "Your Rights",
+      "content": "You have the right to access, correct, or delete your personal data If you have any questions or need assistance, please contact us"
+    },
+    {
+      "title": "Changes to Privacy Policy",
+      "content": "We may update this privacy policy from time to time Any changes will be posted on this page and will take effect on the effective date"
+    }
+  ],
+  "contact": {
+    "email": "kory@hotelbooking.com",
+    "phone": "+123 456 7890"
+  }
+}

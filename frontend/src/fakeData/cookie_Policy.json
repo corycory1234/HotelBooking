@@ -1,0 +1,33 @@
+{
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "effectiveDate": "2025-01-30",
+    "introduction": "This Cookie Policy explains how we use cookies and similar technologies to recognize you when you visit our website It explains what these technologies are and why we use them, as well as your rights to control our use of them",
+    "sections": [
+      {
+        "title": "What Are Cookies?",
+        "content": "Cookies are small data files that are placed on your computer or mobile device when you visit a website Cookies are widely used by website owners to make their websites work, or to work more efficiently, as well as to provide reporting information"
+      },
+      {
+        "title": "Why Do We Use Cookies?",
+        "content": "We use cookies for several reasons Some cookies are required for technical reasons in order for our website to operate, and we refer to these as 'essential' or 'strictly necessary' cookies Other cookies enable us to track and target the interests of our users to enhance the experience on our website"
+      },
+      {
+        "title": "Types of Cookies We Use",
+        "content": "We use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your device for a set period of time or until you delete them)"
+      },
+      {
+        "title": "Your Choices Regarding Cookies",
+        "content": "If you prefer to avoid the use of cookies, you can change your browser settings to refuse cookies However, if you do so, some parts of our website may not function properly"
+      },
+      {
+        "title": "Changes to This Policy",
+        "content": "We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons"
+      }
+    ],
+    "contact": {
+      "email": "kory@hotelbooking.com",
+      "phone": "+123 456 7890"
+    }
+  }
+}

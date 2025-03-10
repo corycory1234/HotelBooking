@@ -1,0 +1,32 @@
+[
+  {"offer_Id": "1111", 
+    "offer_Name": "Black Friday", 
+    "offer_Price": 0.5, 
+    "offer_Description": "The Best Discount On Friday !",
+    "offer_Url": "/offers/blackfriday.webp"
+  },
+  {"offer_Id": "2222", 
+    "offer_Name": "Chinese Lunar New Year", 
+    "offer_Price": 0.2, 
+    "offer_Description": "Save Your Budget during CNY !",
+    "offer_Url": "/offers/newyear.webp"
+  },
+  {"offer_Id": "3333", 
+    "offer_Name": "Christmas", 
+    "offer_Price": 0.2, 
+    "offer_Description": "The Gift from Santa Claus !",
+    "offer_Url": "/offers/christmas.webp"
+  },
+  {"offer_Id": "4444", 
+    "offer_Name": "Valentine's Day", 
+    "offer_Price": 0.1, 
+    "offer_Description": "Promotion for Romance",
+    "offer_Url": "/offers/valentine.webp"
+  },
+  {"offer_Id": "5555", 
+    "offer_Name": "Group Specials", 
+    "offer_Price": 0.15, 
+    "offer_Description": "Get 15% off with 3 People !",
+    "offer_Url": "/offers/groupspecials.webp"
+  }
+]
