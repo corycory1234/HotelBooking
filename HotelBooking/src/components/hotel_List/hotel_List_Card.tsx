@@ -66,7 +66,7 @@ export default function Hotel_List_Card() {
     }).toString()
 
     if(result) {
-      console.log(result, "指定飯店 - 所有房型");
+      // console.log(result, "指定飯店 - 所有房型");
       router.push(`/hotellist/${hotel_Id}?${query}`)
     } else {
       alert("沒找到指定飯店 - 所有房型")
@@ -290,7 +290,7 @@ export default function Hotel_List_Card() {
       });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();
-      console.log(result, "飯店列表API - 返回數據");
+      // console.log(result, "飯店列表API - 返回數據");
 
       dispatch(update_Hotel_List(result.data.data));
       set_Current_Page(result.data.page);
@@ -386,7 +386,7 @@ export default function Hotel_List_Card() {
         break;
     };
     set_Sort_Value(sort_Option); // <input type="radio"> 高亮
-    console.log(sort_Value, 123);
+    // console.log(sort_Value, 123);
     dispatch(update_Hotel_List(sorted_Hotel_List));
     setFormSort_Mobile(false);
     set_FormSort(false);
