@@ -178,7 +178,10 @@ export default function CreditCard() {
   const offer = Offer_List_Json.find((item) => item.offer_Id === redux_The_Hotel.offer_Id);
 
   // 13. next-intl i18n-翻譯
-  const t = useTranslations("CreditCard")
+  const t = useTranslations("CreditCard");
+
+  // 14. 住幾晚
+  const nights = how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string);
 
   return <div>
     {/** 回上一頁 */}
@@ -421,7 +424,7 @@ export default function CreditCard() {
               <div className="flex justify-between">
                 <p className="text-sm font-semibold">{t ("Room Price")}</p>
                 {/** 房間價格 */}
-                <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
+                <p className="font-bold">$ {redux_Booked_Room.room_Price as number * nights}</p>
                 {/** 房間價格 */}
               </div>
               
@@ -437,7 +440,7 @@ export default function CreditCard() {
               <div className="flex justify-between">
                 <p className="text-sm font-semibold">{t ("Total Amount")}</p>
                 <p className="font-bold text-customRed">
-                  {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+                  {(Number(redux_Booked_Room.room_Price as number * nights) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
                 </p>
               </div>
             </div>

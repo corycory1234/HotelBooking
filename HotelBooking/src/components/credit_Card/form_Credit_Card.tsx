@@ -11,6 +11,7 @@ import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Offer_List_Json from "@/fakeData/offer_List.json";
 import { useTranslations } from "next-intl";
+import how_Many_Nights from "@/utils/how_Many_Nights";
 
 // 0. Zod 錯誤訊息初始值
 // const initialState = "";
@@ -171,6 +172,9 @@ export default function Form_Credit_Card () {
   // 13. next-intl i18n-翻譯
   const t = useTranslations("CreditCard")
 
+  // 14. 住幾晚
+  const nights = how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string);
+
 
 
   return <div className="bg-primary rounded-t-3xl p-4 lg:hidden">
@@ -225,7 +229,7 @@ export default function Form_Credit_Card () {
       <div className="flex justify-between">
         <p className="text-sm text-gray">{t ("Room Price")}</p>
         {/** 房間價格 */}
-        <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
+        <p className="font-bold">$ {redux_Booked_Room.room_Price as number * nights}</p>
         {/** 房間價格 */}
       </div>
       
@@ -241,7 +245,7 @@ export default function Form_Credit_Card () {
       <div className="flex justify-between">
         <p className="text-sm text-gray">{t ("Total Amount")}</p>
         <p className="font-bold text-primary">
-          {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+          {(Number(redux_Booked_Room.room_Price as number * nights) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
         </p>
       </div>
     </div>

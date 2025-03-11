@@ -163,7 +163,7 @@ export default function Trip_List () {
               {/** PC桌機 - 訂單ID、查看訂單明細 */}
               <div className="self-end w-1/3 flex flex-col gap-4">
                 <p className="hidden lg:block text-gray">{t ("Booking ID")}: #{item.id}</p>
-                <p className="hidden lg:block font-semibold text-right">${(+ item.totalPrice).toFixed()}</p>
+                <p className="hidden lg:block font-semibold text-right">${(+ item.totalPrice ).toFixed()}</p>
                 <button className="hidden lg:block bg-primary text-white rounded py-2"
                   onClick={() => view_Booking(item.id)}>{t ("View Details")}</button>
               </div>

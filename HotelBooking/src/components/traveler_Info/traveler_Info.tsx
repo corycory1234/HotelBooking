@@ -252,11 +252,11 @@ export default function Traveler_Info () {
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">{t ("Room Price")}</p>
-                  <p className="font-semibold">$ {redux_Booked_Room.room_Price}</p>
+                  <p className="font-semibold">$ {redux_Booked_Room.room_Price as number * how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">{t ("Total Price")}</p>
-                  <p className="font-semibold">$ {(Number(redux_Booked_Room.room_Price) as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number)))) }
+                  <p className="font-semibold">$ {(Number(redux_Booked_Room.room_Price as number * how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)) as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number)))) }
                   </p>
                 </div>
 

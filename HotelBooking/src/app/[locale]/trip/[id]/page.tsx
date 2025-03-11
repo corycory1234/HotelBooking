@@ -349,7 +349,7 @@ export default function Booking_Detail () {
           <p className="text-sm font-semibold">{t ("Price Details")}</p>
           <div className="flex justify-between">
             <p className="text-sm text-gray">{`${t("Room Price")} (${nights} ${t ("nights")})`}</p>
-            <p>{`$ ${(+ the_Booking_Detail.price).toFixed(0)}`}</p>
+            <p>{`$ ${(+ the_Booking_Detail.price * nights).toFixed(0)}`}</p>
           </div>
 
           <div className="flex justify-between">
@@ -570,7 +570,12 @@ export default function Booking_Detail () {
             <p className="text-sm font-semibold">{t ("Price Details")}</p>
             <div className="flex justify-between">
               <p className="text-sm text-gray">{`${t ("Room Price")} (${nights} ${t ("nights")})`}</p>
-              <p>{`$ ${(+ the_Booking_Detail.price).toFixed(0)}`}</p>
+              <p>{`$ ${(+ the_Booking_Detail.price * nights).toFixed(0)}`}</p>
+            </div>
+            
+            <div className="flex justify-between">
+              <p className="text-sm text-gray">{t ("Taxes and Fees")}</p>
+              <p>$ {(the_Booking_Detail.price * nights) * the_Booking_Detail.tax }</p>
             </div>
 
             <div className="flex justify-between">
@@ -578,10 +583,6 @@ export default function Booking_Detail () {
               <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
             </div>
 
-            <div className="flex justify-between">
-              <p className="text-sm text-gray">{t ("Taxes and Fees")}</p>
-              <p>$ {the_Booking_Detail.price * the_Booking_Detail.tax }</p>
-            </div>
 
             <div className="flex justify-between">
               <p className="text-sm font-semibold">{t ("Total Charge")}</p>
