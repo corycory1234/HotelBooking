@@ -125,6 +125,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         <div className="flex bg-softGray w-full h-7 rounded animate-pulse"></div>
         <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
+        <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
+        <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
       </div>
       {/** 桌機 - Skeleton動畫 */}
     </>
