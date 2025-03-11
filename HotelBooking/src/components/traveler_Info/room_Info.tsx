@@ -19,7 +19,7 @@ export default function Room_Info () {
 
   // 5. Redux - 被預訂飯店之之數據
   const redux_Booked_Room = useSelector((state: RootState) => state.booked_Room);
-  console.log(redux_Booked_Room, "Redux - 被預訂之房型");
+  // console.log(redux_Booked_Room, "Redux - 被預訂之房型");
 
   // 6. next-intl i18n-翻譯
   const t = useTranslations("TravelerInfo");

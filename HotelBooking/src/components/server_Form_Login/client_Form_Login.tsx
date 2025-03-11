@@ -54,7 +54,7 @@ export default function Server_Form_Login () {
   // 5. 監聽 API返回 response 之數據
   const [response, set_Response] = useState();
   useEffect(() => {
-    console.log("API返回數據",response);
+    // console.log("API返回數據",response);
   },[response]);
   
   // 5.1 Redux - 令牌
@@ -132,7 +132,7 @@ export default function Server_Form_Login () {
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       dispatch(update_Verify_Session(data));
     } catch (error) {
       console.log(error);
@@ -153,7 +153,7 @@ export default function Server_Form_Login () {
         credentials: 'include' // 同源政策 CORS 需要
       });
       const data = await response.json();
-      console.log(data, "查看個人數據");
+      // console.log(data, "查看個人數據");
     } 
     catch (error) {
       console.log(error);

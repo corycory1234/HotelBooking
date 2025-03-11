@@ -80,9 +80,9 @@ export default function Trip_List () {
   useEffect(() => {
     get_My_Booking()
   },[]);
-  useEffect(() => {
-    console.log(my_Booking_List, "我的訂單, API返回數據");
-  },[my_Booking_List]);
+  // useEffect(() => {
+  //   console.log(my_Booking_List, "我的訂單, API返回數據");
+  // },[my_Booking_List]);
 
   // 9.  點選訂單狀態分類, 一進頁面, 取得 Upcoming 訂單狀態陣列, 
   // 9.1 一定要用 useMemo 去拆分status狀態

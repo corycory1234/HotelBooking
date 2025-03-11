@@ -93,7 +93,7 @@ export default function Form_Credit_Card () {
       const formData = new FormData(event.currentTarget);
       // 將 fomrData 轉成 物件, 一次性拿 所有 <input> 的 value 跟 name
       const formValue = Object.fromEntries(formData.entries());
-      console.log(formValue, "所有<input>的 name 與 value");
+      // console.log(formValue, "所有<input>的 name 與 value");
       // const {name, cardNumber, expireddate, cvv} = formValue
       // const name = formData.get("name");
       // const cardnumber = formData.get("cardnumber");
@@ -140,7 +140,7 @@ export default function Form_Credit_Card () {
           })
         });
         const data = await response.json();
-        console.log(data, "查看訂單送出之API回應");
+        // console.log(data, "查看訂單送出之API回應");
 
         await sleep(3000);
         toast.success("You will now be redirected to our secure payment gateway.", 
