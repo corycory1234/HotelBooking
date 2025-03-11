@@ -61,7 +61,7 @@ export default function Hotel_Detail () {
       if(!response) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();
       dispatch(update_Hotel_Detail(result.data));
-      console.log(result, "查看後端API - 飯店明細之回應");
+      // console.log(result, "查看後端API - 飯店明細之回應");
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +120,7 @@ export default function Hotel_Detail () {
   useEffect(() => {
     // 11.1 抓取當前 URL 上的搜尋參數
     const current_Search_Params = new URLSearchParams(window.location.search);
-    console.log(current_Search_Params, "看看參數");
+    // console.log(current_Search_Params, "看看參數");
     // 11.2 檢查必要參數是否存在, 必須是飯店明細 /hotellist/${id}, 才給刷新
     if (
       pathName === `/hotellist/${params.id}` &&

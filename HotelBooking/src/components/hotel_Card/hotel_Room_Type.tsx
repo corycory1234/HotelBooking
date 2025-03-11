@@ -21,7 +21,7 @@ export default function Hotel_Room_Type() {
   // 1. Redux - 飯店明細
   const redux_Hotel_Detail = useSelector((state: RootState) => state.hotel_Detail);
   const redux_Hotel_Room_Type = redux_Hotel_Detail.roomType_List;
-  console.log(redux_Hotel_Room_Type, "房型數據");
+  // console.log(redux_Hotel_Room_Type, "房型數據");
   
   // 2. 住幾晚
   const redux_Fomr_Search = useSelector((state: RootState) => state.formSearch); // Redux - 搜尋參數
@@ -34,8 +34,8 @@ export default function Hotel_Room_Type() {
   const book_Room = async (id: string) => {
     const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.roomType_Id === id);
     const result = dispatch(update_Booked_Room(the_Booked_Room as add_Hotel_Room_Type_Interface))
-    console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
-    console.log(result, "結果");
+    // console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
+    // console.log(result, "結果");
     if(result) {
       router.push("/travelerinfo")
     } else {
@@ -99,7 +99,7 @@ export default function Hotel_Room_Type() {
             <p className="text-primary font-semibold text-center">Hotel Pictures</p>
             <div className="flex flex-wrap p-2  justify-between">
               {room?.roomType_Image_List?.map((item, index) => {
-                return <img src={item.url} alt={item.description} key={item.description}
+                return <img src={item.url} alt={item.description} key={index}
                   className={`${(index ===0 || index %3 === 0 ? 'w-full' : 'w-1/2')} p-1 rounded-lg object-cover cursor-pointer`}
                   onClick={() => show_The_Full_Slide(index)}/>
               })}
