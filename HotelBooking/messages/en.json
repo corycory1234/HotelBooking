@@ -382,9 +382,9 @@
     "Back to Home": "Back to Home"
   },
   "TripList": {
-    "Upcoming": "未來式",
-    "Completed": "過去式",
-    "Cancelled": "已取消",
+    "Upcoming": "Upcoming",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
     "singleroom": "SingleRoom",
     "singleRoom": "SingleRoom",
     "doubleroom": "DoubleRoom",
