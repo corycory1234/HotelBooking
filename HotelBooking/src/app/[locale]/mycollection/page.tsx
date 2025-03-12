@@ -63,11 +63,12 @@ export default function My_Collection () {
 
   // 4. 查看「指定飯店明細」
   const check_Hotel_Detail = (hotel_Id: string) => {
-    const the_Hotel = redux_Collection_List.find((item) => item.hotel_Id === hotel_Id);
+    // const the_Hotel = redux_Collection_List.find((item) => item.hotel_Id === hotel_Id);
     
-    if(the_Hotel){
-      router.push(`/hotellist/${hotel_Id}`)
-    }
+    // if(the_Hotel){
+    //   router.push(`/hotellist/${hotel_Id}`)
+    // }
+    router.push(`/hotellist/${hotel_Id}`)
   }
 
   // 5. 刪除指定收藏飯店
