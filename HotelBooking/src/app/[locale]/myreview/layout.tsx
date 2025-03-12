@@ -3,12 +3,14 @@ import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
 
 export default function MyReviewLayout({children,}: Readonly<{children: React.ReactNode;}>) {
-  return <>
+  return <div className="min-h-screen flex flex-col">
     <Nav></Nav>
-    {children}
+    <main className="flex-1">
+      {children}
+    </main>
     <Menu></Menu>
     <div className="px-4">
       <Footer></Footer>
     </div>
-  </>
+  </div>
 }

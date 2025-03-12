@@ -113,7 +113,7 @@ export default function Client_Form_Register () {
 
   return <>
       
-    <div className="my-bg-gradient h-screen flex flex-col mt-10 lg:bg-white lg:shadow-lg lg:rounded lg:h-full lg:mt-20 lg:mx-auto lg:py-4">
+    <div className="my-bg-gradient h-screen flex flex-col mt-10 lg:bg-white lg:shadow-lg lg:rounded lg:mt-20 lg:mx-auto lg:py-4 lg:min-h-[50vh]">
       <div className="relative">
         <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-10" alt="" /> 
       </div>

@@ -5,15 +5,16 @@ import Footer from "@/components/footer/footer";
 
 
 export default function Offer_List_Layout({children,}: Readonly<{children: React.ReactNode;}>) {
-  return <>
-    <div className="">
+  return <div className="min-h-screen flex flex-col">
       <Nav></Nav>
-    </div>
-    {children}
+
+    <main className="flex-1">
+      {children}
+    </main>
     <Menu></Menu>
 
     <div className="lg: pt-20 lg: px-4">
       <Footer></Footer>
     </div>
-  </>
+  </div>
 }

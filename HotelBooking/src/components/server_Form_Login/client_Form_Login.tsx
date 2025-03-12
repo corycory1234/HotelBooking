@@ -174,7 +174,7 @@ export default function Server_Form_Login () {
   const t = useTranslations("Auth");
 
 
-  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-[50vh] lg:mt-20 lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
+  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-[70vh] lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
     <div className="relative">
       <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-10" alt="" /> 
     </div>
