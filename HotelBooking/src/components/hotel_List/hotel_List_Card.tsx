@@ -23,6 +23,7 @@ import Filter_Button from "../filter_Button";
 import Half_Modal from "../modal/half-modal";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export default function Hotel_List_Card() {
   // 0. 呼叫 Redux - Action 函式
@@ -543,8 +544,15 @@ export default function Hotel_List_Card() {
                 >
                 {item.hotel_Image_List.map((img, index) => {
                   return <SwiperSlide key={index}>
-                    <img src={img.url} alt={img.description} 
-                    className="w-full h-[200px] object-cover rounded" />
+                    <div className="relative w-full h-[200px]">
+                      <Image 
+                      // width={200} height={200}
+                      fill
+                      priority={true}
+                      unoptimized
+                      src={img.url} alt={img.description} 
+                      className="object-cover rounded" />
+                    </div>
                   </SwiperSlide>
                 })}
               </Swiper>
