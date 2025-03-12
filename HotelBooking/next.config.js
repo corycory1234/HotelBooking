@@ -18,6 +18,7 @@ const nextConfig = {
   env: {
     BACKEND_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001',
   },
+  // 3. Optimize webp from Supabase by Next.js - <Image> 
   images: {
     remotePatterns: [
       {
