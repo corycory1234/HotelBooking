@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-interface metaKeywordInterface {
+interface metaHotelId_Interface {
   params: {
     id?: string; // 想拿的 飯店params.id
     // [key: string]: any;   // 其他參數也可以放這裡
@@ -7,7 +7,7 @@ interface metaKeywordInterface {
 };
 
 // 2. 透過 generateMetadata, 取得「Sever組件的 params參數」
-export async function generateMetadata({ params }: metaKeywordInterface): Promise<Metadata> {
+export async function generateMetadata({ params }: metaHotelId_Interface): Promise<Metadata> {
   // 2.1 從 URL 取得參數
   // console.log(params.id);
 

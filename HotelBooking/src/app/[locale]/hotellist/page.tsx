@@ -25,14 +25,6 @@ interface metaKeywordInterface {
 export async function generateMetadata({ searchParams }: metaKeywordInterface): Promise<Metadata> {
   // 2.1 從 URL 取得查詢參數
   const dynamicKeyword = searchParams.destination || "No Result";
-
-  // 2.2 如果想要後端 API (Supabase / Node.js) 回傳更精準的 Keyword，可在這裡 fetch
-  // const res = await fetch(`https://你的後端API/hotel-keyword?kw=${dynamicKeyword}`, {
-  //   // 也可帶上其他設定，如 { cache: "no-store" }
-  // });
-  // const data = await res.json();
-  // const finalKeyword = data?.keyword ?? dynamicKeyword;
-
   // 2.3 回傳 Metadata
   return {
     // title: `GoTour | ${finalKeyword}`,
@@ -135,52 +127,9 @@ export default function HotelList () {
 
   return <>
 
-  {/** 沒找到, 就<Not_Found> */}
-  {/* {redux_Hotel_List.length <=0 ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>  */}
-  
-  {/* :  */}
-  <>
-    {/* <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray lg:hidden"> */}
-      {/* Filter 與 熱門搜尋條件 */}
-        {/* <Client_Filter_Button></Client_Filter_Button> */}
-      {/* Filter 與 熱門搜尋條件 */}
-    {/* </div> */}
-
-  {/* <main className="p-4"> */}
-
-    {/* ↑↓Sort 排序  */}
-    {/* <div className="flex items-center justify-between pb-4 lg:hidden">
-      <p className="text-sm">{redux_Hotel_List.length} hotels</p> */}
-      
-      {/* <div className="flex items-center gap-1 border border-gray rounded px-2 py-1" onClick={()=> setFormSort(true)}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-        </svg>
-        <span>Sort</span>
-      </div> */}
-
-      {/* ↑↓Sort 排序 - 彈跳Modal  */}
-      {/* <Half_Modal isOpen={formSort} onClose={() => setFormSort(false)} 
-        sort_Value={sort_Value} 
-        set_Sort_Value={set_Sort_Value}>
-      </Half_Modal> */}
-      {/* ↑↓Sort 排序 - 彈跳Modal  */}
-
-    {/* </div> */}
-    {/* ↑↓Sort 排序  */}
-
-    
     {/** 飯店列表卡片 */}
-      {/* {!show_Hotel_List ? <Placeholder_Card></Placeholder_Card> 
-      :<Hotel_List_Card></Hotel_List_Card>} */}
-
-  <Hotel_List_Card></Hotel_List_Card>
+      <Hotel_List_Card></Hotel_List_Card>
     {/** 飯店列表卡片 */}
-
-  {/* </main> */}
-  </>
-  {/* } */}
-
 
   </>
 }

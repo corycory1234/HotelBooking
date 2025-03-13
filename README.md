@@ -13,7 +13,10 @@
 
 ## 🚀 Project Highlights
 - **SSR**: Server-Side Rendering (SSR) for rapid page load and optimal SEO.
+- **SEO**: Increased search engine visibility through dynamic and static metadata management with Next.js 14.
 - **App Router**: Next.js App Router ensures scalable and maintainable architecture.
+- **Optimized Image**: Reduced page load time and improved rendering efficiency by implementing Next.js <Image> with built-in lazy loading and preloading.
+- **Cached**: Enhanced API performance using Next.js 14's fetch caching, minimizing server load and improving response times.
 - **Global Reach**: Built-in i18n supporting English and Chinese.
 - **Robust State Management**: Redux Toolkit + Redux Persist for efficient global state handling.
 - **Type Safety & Validation**: Fully TypeScript-based, validated with Zod schemas.
