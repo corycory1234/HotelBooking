@@ -2,6 +2,11 @@ import React from "react";
 import Menu from "@/components/menu";
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Special Offer',
+}
 
 
 export default function Offer_List_Layout({children,}: Readonly<{children: React.ReactNode;}>) {
