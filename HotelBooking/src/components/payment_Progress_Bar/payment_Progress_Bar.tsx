@@ -19,7 +19,11 @@ export default function Payment_Progress_Bar () {
       <OtherSVG name="tick2" className="w-4 h-auto"></OtherSVG>
     </div>
     :
-    <p className="bg-primary rounded-full px-2 text-white">1</p>
+    <div className="flex flex-col justify-center items-center lg:pt-6 gap-2">
+      <p className="bg-primary rounded-full px-2 text-white">1</p>
+      <p className="hidden lg:block font-semibold text-sm">{t ("Guest Info")}</p>
+    </div>
+    
     }
 
     <p className={`${pathname === `/${locale}/creditcard` || pathname === `/${locale}/bookingcompleted`  ? 'border-primary' : 'border-softGray'} border border-r w-1/6`}></p>
@@ -29,7 +33,10 @@ export default function Payment_Progress_Bar () {
       <OtherSVG name="tick2" className="w-4 h-auto"></OtherSVG>
     </div>
     :
-    <p className={`${pathname === "/creditcard" ? 'bg-primary' : 'bg-softGray' } rounded-full px-2 text-white`}>2</p>
+    <div className="flex flex-col justify-center items-center lg:pt-6 gap-2">
+      <p className={`${pathname === "/creditcard" ? 'bg-primary' : 'bg-softGray' } rounded-full px-2 text-white`}>2</p>
+      <p className="hidden lg:block font-semibold text-sm">{t ("CreditCard")}</p>
+    </div>
     }
 
     <p className={`${pathname === `/${locale}/bookingcompleted`  ? 'border-primary' : 'border-softGray'} border border-r w-1/6`}></p>
@@ -39,18 +46,21 @@ export default function Payment_Progress_Bar () {
       <OtherSVG name="tick2" className="w-4 h-auto"></OtherSVG>
     </div>
     :
-    <p className={`${pathname === `/${locale}/bookingcompleted` ? 'bg-primary' : 'bg-softGray'} rounded-full px-2 text-white`}>3</p>
+    <div className="flex flex-col justify-center items-center lg:pt-6 gap-2">
+      <p className={`${pathname === `/${locale}/bookingcompleted` ? 'bg-primary' : 'bg-softGray'} rounded-full px-2 text-white`}>3</p>
+      <p className="hidden lg:block font-semibold text-sm">{t ("Confirmed")}</p>
+    </div>
     }
     
   </div>
   
-  <div className="hidden lg:flex justify-center items-center gap-52">
-    <p className="font-semibold text-sm">{t ("Guest Info")}</p>
+  {/* <div className="hidden lg:flex justify-center items-center gap-52"> */}
+    {/* <p className="font-semibold text-sm">{t ("Guest Info")}</p> */}
     {/* <p className="border border-r border-transparent w-1/12"></p> */}
-    <p className="font-semibold text-sm">{t ("CreditCard")}</p>
+    {/* <p className="font-semibold text-sm">{t ("CreditCard")}</p> */}
     {/* <p className="border border-r border-transparent w-1/12"></p> */}
-    <p className="font-semibold text-sm">{t ("Confirmed")}</p>
-  </div>
+    {/* <p className="font-semibold text-sm">{t ("Confirmed")}</p> */}
+  {/* </div> */}
   
   </div>
 }

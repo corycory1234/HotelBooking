@@ -73,7 +73,7 @@ export default function Traveler_Info () {
 
   // 7. 旅客表單數據<form>, 存session Storage
   const handle_Change = ((event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    console.log(event.target.id, event.target.value);
+    // console.log(event.target.id, event.target.value);
     if(event.target.id === "name") {
       set_Name(event.target.value);
       sessionStorage.setItem("name", event.target.value);
@@ -98,7 +98,7 @@ export default function Traveler_Info () {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const formValue = Object.fromEntries(formData.entries());
-      console.log(formValue, "看看formData一次全拉所有值");
+      // console.log(formValue, "看看formData一次全拉所有值");
       const validateFields = schema.safeParse(formValue);
 
       // 7.2 若驗證失敗, 篩選出個別錯誤訊息
@@ -252,11 +252,11 @@ export default function Traveler_Info () {
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">{t ("Room Price")}</p>
-                  <p className="font-semibold">$ {redux_Booked_Room.room_Price}</p>
+                  <p className="font-semibold">$ {redux_Booked_Room.room_Price as number * how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)}</p>
                 </div>
                 <div className="flex justify-between">
                   <p className="font-semibold">{t ("Total Price")}</p>
-                  <p className="font-semibold">$ {(Number(redux_Booked_Room.room_Price) as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number)))) }
+                  <p className="font-semibold">$ {(Number(redux_Booked_Room.room_Price as number * how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string)) as number + (Math.round((redux_The_Hotel.tax as number) * (redux_Booked_Room.room_Price as number)))) }
                   </p>
                 </div>
 

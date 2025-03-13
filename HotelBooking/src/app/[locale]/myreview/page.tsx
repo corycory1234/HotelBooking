@@ -191,7 +191,7 @@ export default function My_Review () {
 
     {show_Review_List === false && <Placeholder_Card></Placeholder_Card>}
 
-    {review_List.length === 0 && <div className="flex flex-col justify-center items-center gap-2 min-h-[50vh]">
+    {show_Review_List === true && review_List.length === 0 && <div className="flex flex-col justify-center items-center gap-2 min-h-[50vh]">
       <OtherSVG name="review" className="w-10 h-auto"></OtherSVG>
       <p className="font-semibold">{t ("You have NO Review")}</p>
       </div>

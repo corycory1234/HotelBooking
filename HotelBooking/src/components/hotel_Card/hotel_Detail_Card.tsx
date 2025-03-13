@@ -125,6 +125,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
 
         <div className="flex bg-softGray w-full h-7 rounded animate-pulse"></div>
         <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
+        <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
+        <div className="flex bg-softGray w-full h-20 rounded animate-pulse"></div>
       </div>
       {/** 桌機 - Skeleton動畫 */}
     </>
@@ -152,8 +154,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   const show_The_Room_Type_Pic = (index: number, room_Type_Id: string) => {
     const the_Room_Type = the_Hotel?.roomType_List.find((item) => item.roomType_Id === room_Type_Id);
     // const new_The_Room_Type_List = the_Hotel?.roomType_List.filter((item) => item.roomType_Id ===room_Type_Id );
-    console.log(index, "傳參索引值", room_Type_Id, "傳參房型id");
-    console.log(the_Room_Type, "有拉到房型嗎");
+    // console.log(index, "傳參索引值", room_Type_Id, "傳參房型id");
+    // console.log(the_Room_Type, "有拉到房型嗎");
     if(the_Room_Type){
       set_The_Room_Type_Slide(index);
       set_The_Room_Type_Img_List(the_Room_Type.roomType_Image_List)
@@ -286,8 +288,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
   const book_Room = async (id: string) => {
     const the_Booked_Room = redux_Hotel_Room_Type.find((item) => item.roomType_Id === id);
     const result = dispatch(update_Booked_Room(the_Booked_Room as add_Hotel_Room_Type_Interface))
-    console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
-    console.log(result, "結果");
+    // console.log(redux_Booked_Room, "Redux - 被訂房間初始值");
+    // console.log(result, "結果");
     if(result) {
       router.push("/travelerinfo")
     } else {
@@ -391,7 +393,7 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
             <p className="text-primary font-semibold text-center">Hotel Pictures</p>
             <div className="flex flex-wrap p-2  justify-between">
               {the_Hotel?.hotel_Image_List.map((item, index) => {
-                return <img src={item.url} alt={item.description} key={item.description}
+                return <img src={item.url} alt={item.description} key={index}
                   className={`${(index ===0 || index %3 === 0 ? 'w-full' : 'w-1/2')} p-1 rounded-lg object-cover cursor-pointer`}
                   onClick={() => show(index)}/>
               })}
@@ -761,8 +763,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           <ul className={`border-y border-softGray p-2 flex gap-4 bg-white
           ${is_Scrolled === true ? 'fixed top-[130px] z-20 w-full left-0 px-20' : ''}`}>
             
-            {tab_List.map((tab) => {
-              return <li key={tab.id}>
+            {tab_List.map((tab, index) => {
+              return <li key={index}>
                 <a href={`#${tab.id}`} className={`cursor-pointer font-semibold text-sm
                   ${tab.id === activeSection ? 'text-primary' : ''}`}>
                   {t (tab.label)}
@@ -881,8 +883,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
           
 
           <div className="flex flex-col gap-8">
-              {the_Hotel?.roomType_List?.map((item) => {
-                return <div className="flex gap-2" key={item.roomType_Id}>
+              {the_Hotel?.roomType_List?.map((item, index) => {
+                return <div className="flex gap-2" key={index}>
                   <div className="basis-1/4 flex flex-col">
                     <p className="font-semibold">{t (item.room_Type)} [{t (item.bed_Type)}] {item.smoke === false ? `[${t ('No Smoking')}]` : `[${t ('Smoking Room')}]`}</p>
 
@@ -965,8 +967,8 @@ export default function Hotel_Detail_Card ({the_Hotel}: Hotel_Card_Interface) {
                           <div className="flex flex-col">
                             <p className="font-semibold">{t ("Room Amenities")}</p>
                             <div className="flex gap-2 flex-wrap">
-                              {item.amenity_List?.map((amenity) => {
-                                return <div className="flex gap-2" key={amenity}>
+                              {item.amenity_List?.map((amenity, index) => {
+                                return <div className="flex gap-2" key={index}>
                                     <OtherSVG name={amenity} className="w-4 h-auto"></OtherSVG>
                                     <p>{t (amenity)}</p>
                                   </div>

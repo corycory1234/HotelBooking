@@ -77,7 +77,7 @@ export default function Forget_Password() {
 
   return <>
 
-    <div className="flex flex-col bg-primary h-screen relative lg:bg-[#F3F3F3] lg:h-[75vh] lg:mx-auto lg:mt-20 lg:py-4">
+    <div className="flex flex-col bg-primary h-screen relative lg:bg-[#F3F3F3] lg:min-h-[75vh] lg:mx-auto lg:justify-center">
       <p className="text-white text-center p-4 lg:hidden">{t ("Forget Password")}</p>
       <div className="absolute top-4 left-4 h-[56px] lg:hidden">
         <button type="button" className="" onClick={()=> router.back()}>
@@ -97,7 +97,7 @@ export default function Forget_Password() {
       <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20" alt="" /> 
     </div>
       
-    <div className="my-bg-gradient min-h-[60vh] flex flex-col mt-10 lg:bg-white lg:mx-auto lg:py-4 lg:rounded lg:shadow-lg">
+    <div className="my-bg-gradient min-h-screen flex flex-col mt-10 lg:bg-white lg:mx-auto lg:py-4 lg:rounded lg:shadow-lg lg:min-h-[60vh]">
       {/** 電子郵件 SVG */}
       <div className="relative">
         <img src="/account/Email.svg" alt="" className="absolute top-[6.85rem] left-8"/>

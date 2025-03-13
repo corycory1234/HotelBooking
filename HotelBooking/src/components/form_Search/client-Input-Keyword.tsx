@@ -73,7 +73,7 @@ export default function Client_Input_Keyword () {
         });
         if(!response.ok) {throw new Error(`伺服器錯誤`)};
         const result = await response.json();
-        console.log(result, "飯店列表API - 返回數據");
+        // console.log(result, "飯店列表API - 返回數據");
 
         // const new_Hotel_List = result.data.data.filter((hotel: add_Hotel_Detail_Interface) => {
         //   // 3.1 飯店名、飯店城市、飯店國家，一同匹配

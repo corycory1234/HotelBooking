@@ -11,6 +11,7 @@ import { sleep } from "@/utils/sleep";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import Offer_List_Json from "@/fakeData/offer_List.json";
 import { useTranslations } from "next-intl";
+import how_Many_Nights from "@/utils/how_Many_Nights";
 
 // 0. Zod 錯誤訊息初始值
 // const initialState = "";
@@ -93,7 +94,7 @@ export default function Form_Credit_Card () {
       const formData = new FormData(event.currentTarget);
       // 將 fomrData 轉成 物件, 一次性拿 所有 <input> 的 value 跟 name
       const formValue = Object.fromEntries(formData.entries());
-      console.log(formValue, "所有<input>的 name 與 value");
+      // console.log(formValue, "所有<input>的 name 與 value");
       // const {name, cardNumber, expireddate, cvv} = formValue
       // const name = formData.get("name");
       // const cardnumber = formData.get("cardnumber");
@@ -140,7 +141,7 @@ export default function Form_Credit_Card () {
           })
         });
         const data = await response.json();
-        console.log(data, "查看訂單送出之API回應");
+        // console.log(data, "查看訂單送出之API回應");
 
         await sleep(3000);
         toast.success("You will now be redirected to our secure payment gateway.", 
@@ -170,6 +171,9 @@ export default function Form_Credit_Card () {
 
   // 13. next-intl i18n-翻譯
   const t = useTranslations("CreditCard")
+
+  // 14. 住幾晚
+  const nights = how_Many_Nights(redux_Form_Search.start_Date as string, redux_Form_Search.end_Date as string);
 
 
 
@@ -225,7 +229,7 @@ export default function Form_Credit_Card () {
       <div className="flex justify-between">
         <p className="text-sm text-gray">{t ("Room Price")}</p>
         {/** 房間價格 */}
-        <p className="font-bold">$ {redux_Booked_Room.room_Price}</p>
+        <p className="font-bold">$ {redux_Booked_Room.room_Price as number * nights}</p>
         {/** 房間價格 */}
       </div>
       
@@ -241,7 +245,7 @@ export default function Form_Credit_Card () {
       <div className="flex justify-between">
         <p className="text-sm text-gray">{t ("Total Amount")}</p>
         <p className="font-bold text-primary">
-          {(Number(redux_Booked_Room.room_Price as number) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
+          {(Number(redux_Booked_Room.room_Price as number * nights) + (Math.round((redux_Hotel_Tax as number) * (redux_Booked_Room.room_Price ?? 0)))) * (1 - (offer?.offer_Price as number)) }
         </p>
       </div>
     </div>

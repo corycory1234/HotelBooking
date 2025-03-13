@@ -54,7 +54,7 @@ export default function Server_Form_Login () {
   // 5. 監聽 API返回 response 之數據
   const [response, set_Response] = useState();
   useEffect(() => {
-    console.log("API返回數據",response);
+    // console.log("API返回數據",response);
   },[response]);
   
   // 5.1 Redux - 令牌
@@ -132,7 +132,7 @@ export default function Server_Form_Login () {
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       dispatch(update_Verify_Session(data));
     } catch (error) {
       console.log(error);
@@ -153,7 +153,7 @@ export default function Server_Form_Login () {
         credentials: 'include' // 同源政策 CORS 需要
       });
       const data = await response.json();
-      console.log(data, "查看個人數據");
+      // console.log(data, "查看個人數據");
     } 
     catch (error) {
       console.log(error);
@@ -174,7 +174,7 @@ export default function Server_Form_Login () {
   const t = useTranslations("Auth");
 
 
-  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-[50vh] lg:mt-20 lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
+  return <div className="flex flex-col h-screen my-bg-gradient lg:bg-white lg:h-[70vh] lg:mx-auto lg:rounded lg:shadow-lg lg:py-4">
     <div className="relative">
       <img src="/Logo.svg" className="absolute left-[50%] -translate-x-1/2 w-20 h-20 -top-10" alt="" /> 
     </div>

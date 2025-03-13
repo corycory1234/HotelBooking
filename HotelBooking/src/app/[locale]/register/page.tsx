@@ -9,7 +9,7 @@ export default function Register() {
 
   return <>
 
-    <div className="bg-primary h-full relative lg:flex lg:justify-center lg:bg-[#f3f3f3] lg:py-4">
+    <div className="bg-primary h-full relative lg:flex lg:justify-center lg:bg-[#f3f3f3] lg:py-4 lg:min-h-screen">
       <p className="text-white text-center p-4 lg:hidden">Register</p>
       <div className="h-[56px] absolute top-4 left-4">
         <button type="button" className="">

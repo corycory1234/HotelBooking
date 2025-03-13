@@ -15,7 +15,7 @@ import { Slider } from "@nextui-org/slider";
 import { useTranslations } from "next-intl";
 
 // 0. 所有設施 Arr
-const facility_Arr = ["pool", "balcony", "24H Check-In", "gym", "parking", "bathtub", "kitchen", "wifi",]
+const facility_Arr = ["wifi", "parking", "24hrcheckin", "bathtub", "gym", "pool", "balcony", "kitchen"]
 
 export default function Filter_Button () {
 

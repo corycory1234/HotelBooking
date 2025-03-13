@@ -80,9 +80,9 @@ export default function Trip_List () {
   useEffect(() => {
     get_My_Booking()
   },[]);
-  useEffect(() => {
-    console.log(my_Booking_List, "我的訂單, API返回數據");
-  },[my_Booking_List]);
+  // useEffect(() => {
+  //   console.log(my_Booking_List, "我的訂單, API返回數據");
+  // },[my_Booking_List]);
 
   // 9.  點選訂單狀態分類, 一進頁面, 取得 Upcoming 訂單狀態陣列, 
   // 9.1 一定要用 useMemo 去拆分status狀態
@@ -163,7 +163,7 @@ export default function Trip_List () {
               {/** PC桌機 - 訂單ID、查看訂單明細 */}
               <div className="self-end w-1/3 flex flex-col gap-4">
                 <p className="hidden lg:block text-gray">{t ("Booking ID")}: #{item.id}</p>
-                <p className="hidden lg:block font-semibold text-right">${(+ item.totalPrice).toFixed()}</p>
+                <p className="hidden lg:block font-semibold text-right">${(+ item.totalPrice ).toFixed()}</p>
                 <button className="hidden lg:block bg-primary text-white rounded py-2"
                   onClick={() => view_Booking(item.id)}>{t ("View Details")}</button>
               </div>

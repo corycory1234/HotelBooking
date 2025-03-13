@@ -66,9 +66,9 @@
   },
   "AdvancedSearch": {
     "Advanced Search": "Advanced Search",
-    "Price Range": "PriceR ange",
+    "Price Range": "Price Range",
     "Bed Type": "Bed Type",
-    "Single Bed": "SingleBed",
+    "Single Bed": "Single Bed",
     "Twin Bed": "Twin Bed",
     "Double Bed": "Double Bed",
     "Queen Bed": "Queen Bed",
@@ -266,7 +266,7 @@
     "Surname": "Surname",
     "Country": "Country",
     "Phone Number": "Phone Number",
-    "Email Address": "mail Address",
+    "Email Address": "Email Address",
     "Offer Code": "Offer Code",
     "Cancellation Policy": "Cancellation Policy",
     "Tax": "Tax",
@@ -382,9 +382,9 @@
     "Back to Home": "Back to Home"
   },
   "TripList": {
-    "Upcoming": "未來式",
-    "Completed": "過去式",
-    "Cancelled": "已取消",
+    "Upcoming": "Upcoming",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
     "singleroom": "SingleRoom",
     "singleRoom": "SingleRoom",
     "doubleroom": "DoubleRoom",

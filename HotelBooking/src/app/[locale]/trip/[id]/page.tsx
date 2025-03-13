@@ -30,7 +30,7 @@ export default function Booking_Detail () {
   const booking_Detail_Json = Booking_List_Json.find((item) => item.booking_Id === params.id) as Booking_Detail_Interface;
   const [booking_Detail, set_Booking_Detail] = useState<Booking_Detail_Interface>(booking_Detail_Json);
   const [the_Booking_Detail, set_The_Booking_Detail] = useState<any>({});
-  console.log(booking_Detail, "指定訂單");
+  // console.log(booking_Detail, "指定訂單");
   // 1.1 這個if判斷最好要寫哦, 不然訂單明細很多屬性都要用「?.可選鏈 or as 斷言」, 還有一堆undefined的問題...
   // if(!booking_Detail){return <p>沒有此訂單</p>}
   
@@ -54,9 +54,9 @@ export default function Booking_Detail () {
 
   // 6. 滑動 1星~5星
   const [hover_Star, set_Hover_Star] = useState<number>(1);
-  useEffect(() => {
-    console.log("現在幾星", hover_Star);
-  },[hover_Star])
+  // useEffect(() => {
+  //   console.log("現在幾星", hover_Star);
+  // },[hover_Star])
 
   // 7. 送出 評價+留言
   const submit_Review = (event:  React.FormEvent) => {
@@ -89,7 +89,7 @@ export default function Booking_Detail () {
       });
       if(!response.ok) {throw new Error("SERVER ERROR~~!")};
       const result = await response.json();
-      console.log(result, "查看送出評價後之API返回");
+      // console.log(result, "查看送出評價後之API返回");
     } catch (error) {
       console.log(error);
     } finally {
@@ -157,7 +157,7 @@ export default function Booking_Detail () {
     fetch_The_Booking()
   },[])
   useEffect(() => {
-    console.log(the_Booking_Detail, "查看指定訂單, API返回數據");
+    // console.log(the_Booking_Detail, "查看指定訂單, API返回數據");
   },[the_Booking_Detail]);
 
   // 14. 查看指定飯店
@@ -349,7 +349,7 @@ export default function Booking_Detail () {
           <p className="text-sm font-semibold">{t ("Price Details")}</p>
           <div className="flex justify-between">
             <p className="text-sm text-gray">{`${t("Room Price")} (${nights} ${t ("nights")})`}</p>
-            <p>{`$ ${(+ the_Booking_Detail.price).toFixed(0)}`}</p>
+            <p>{`$ ${(+ the_Booking_Detail.price * nights).toFixed(0)}`}</p>
           </div>
 
           <div className="flex justify-between">
@@ -570,7 +570,12 @@ export default function Booking_Detail () {
             <p className="text-sm font-semibold">{t ("Price Details")}</p>
             <div className="flex justify-between">
               <p className="text-sm text-gray">{`${t ("Room Price")} (${nights} ${t ("nights")})`}</p>
-              <p>{`$ ${(+ the_Booking_Detail.price).toFixed(0)}`}</p>
+              <p>{`$ ${(+ the_Booking_Detail.price * nights).toFixed(0)}`}</p>
+            </div>
+            
+            <div className="flex justify-between">
+              <p className="text-sm text-gray">{t ("Taxes and Fees")}</p>
+              <p>$ {(the_Booking_Detail.price * nights) * the_Booking_Detail.tax }</p>
             </div>
 
             <div className="flex justify-between">
@@ -578,10 +583,6 @@ export default function Booking_Detail () {
               <p>{((1 - offer_Discount)*100).toFixed()}% OFF</p>
             </div>
 
-            <div className="flex justify-between">
-              <p className="text-sm text-gray">{t ("Taxes and Fees")}</p>
-              <p>$ {the_Booking_Detail.price * the_Booking_Detail.tax }</p>
-            </div>
 
             <div className="flex justify-between">
               <p className="text-sm font-semibold">{t ("Total Charge")}</p>

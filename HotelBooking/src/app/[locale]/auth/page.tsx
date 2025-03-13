@@ -9,7 +9,7 @@ export default function Login () {
   console.log(referer);
 
   return <>
-    <div className="bg-primary h-full relative flex flex-col gap-10 lg:flex lg:bg-[#F3F3F3] lg:py-4 lg:h-[85vh]">
+    <div className="bg-primary h-full relative flex flex-col gap-10 lg:flex lg:justify-center lg:bg-[#F3F3F3] lg:py-4 lg:min-h-screen">
       <p className="text-white text-center p-4 lg:hidden">Sign In</p>
       <div className="absolute top-4 left-4 h-[56px] lg:hidden">
           <button type="button" className="">

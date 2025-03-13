@@ -1,12 +1,19 @@
 import Menu from "@/components/menu";
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'About GoTour',
+}
 
 export default function AboutLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return <>
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Nav></Nav>
-      {children}
+      <main className="flex-1">
+        {children}
+      </main>
       <Menu></Menu>
       <div className="px-4">
         <Footer></Footer>

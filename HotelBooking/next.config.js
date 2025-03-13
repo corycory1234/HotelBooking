@@ -18,6 +18,17 @@ const nextConfig = {
   env: {
     BACKEND_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001',
   },
+  // 3. Optimize webp from Supabase by Next.js - <Image> 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'szcxaoaaxbnvmbclggyk.supabase.co',
+        port: '',
+        pathname: "/storage/v1/object/public/hotel-images/hotels/**"
+      }
+    ]
+  }
 
   // 2.
   // async rewrites() {

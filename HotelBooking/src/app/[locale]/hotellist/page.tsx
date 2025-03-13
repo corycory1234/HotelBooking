@@ -11,6 +11,49 @@ import Hotel_List_Card from "@/components/hotel_List/hotel_List_Card";
 // import hotel_List_Json from "@/fakeData/hotel_List.json";
 // import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 // import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
+import { Metadata } from "next";
+
+// 1. Server Component 的 searchParams 所需要的 interface
+interface metaKeywordInterface {
+  searchParams: {
+    destination?: string; // 想拿的 searchParams 參數 key
+    // [key: string]: any;   // 其他參數也可以放這裡
+  };
+};
+
+// 2. 透過 generateMetadata, 取得「Sever組件的 搜尋參數」
+export async function generateMetadata({ searchParams }: metaKeywordInterface): Promise<Metadata> {
+  // 2.1 從 URL 取得查詢參數
+  const dynamicKeyword = searchParams.destination || "No Result";
+  // 2.3 回傳 Metadata
+  return {
+    // title: `GoTour | ${finalKeyword}`,
+    title: `GoTour | Hotels in ${dynamicKeyword}`,
+    description: `The best price from GoTour「${dynamicKeyword}」!`,
+  };
+}
+
+// export async function generateMetadata(): Promise<Metadata> {
+//   // 1. 飯店列表 - API
+//     const fetch_Hotel_List_Backend = async (page: number) => {
+//       try {
+
+//         const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
+//         const response = await fetch(hotel_List_Url, {
+//           method: "GET",
+//           headers: {"Content-Type": "application/json"},
+//           credentials: 'include'
+//         });
+//         if(!response.ok) {throw new Error(`伺服器錯誤`)};
+//         const result = await response.json();
+//         // console.log(result, "飯店列表API - 返回數據");
+  
+//         // 14.5 Skeleton動畫 -關
+//       } catch (error) {
+//         console.log(error, "飯店列表API失敗");
+//       }
+//     }
+// }
 
 
 export default function HotelList () {
@@ -84,52 +127,9 @@ export default function HotelList () {
 
   return <>
 
-  {/** 沒找到, 就<Not_Found> */}
-  {/* {redux_Hotel_List.length <=0 ? <Not_Found you_Have_No_Bookings="Hotels Not Found"></Not_Found>  */}
-  
-  {/* :  */}
-  <>
-    {/* <div className="sticky top-[72px] left-0 right-0 bg-white z-40 border-b border-gray lg:hidden"> */}
-      {/* Filter 與 熱門搜尋條件 */}
-        {/* <Client_Filter_Button></Client_Filter_Button> */}
-      {/* Filter 與 熱門搜尋條件 */}
-    {/* </div> */}
-
-  {/* <main className="p-4"> */}
-
-    {/* ↑↓Sort 排序  */}
-    {/* <div className="flex items-center justify-between pb-4 lg:hidden">
-      <p className="text-sm">{redux_Hotel_List.length} hotels</p> */}
-      
-      {/* <div className="flex items-center gap-1 border border-gray rounded px-2 py-1" onClick={()=> setFormSort(true)}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5" >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
-        </svg>
-        <span>Sort</span>
-      </div> */}
-
-      {/* ↑↓Sort 排序 - 彈跳Modal  */}
-      {/* <Half_Modal isOpen={formSort} onClose={() => setFormSort(false)} 
-        sort_Value={sort_Value} 
-        set_Sort_Value={set_Sort_Value}>
-      </Half_Modal> */}
-      {/* ↑↓Sort 排序 - 彈跳Modal  */}
-
-    {/* </div> */}
-    {/* ↑↓Sort 排序  */}
-
-    
     {/** 飯店列表卡片 */}
-      {/* {!show_Hotel_List ? <Placeholder_Card></Placeholder_Card> 
-      :<Hotel_List_Card></Hotel_List_Card>} */}
-
-  <Hotel_List_Card></Hotel_List_Card>
+      <Hotel_List_Card></Hotel_List_Card>
     {/** 飯店列表卡片 */}
-
-  {/* </main> */}
-  </>
-  {/* } */}
-
 
   </>
 }

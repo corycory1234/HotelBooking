@@ -19,6 +19,7 @@ import { updateBedType, updateFacility, updateKeyword, updateRangeSlider, update
 import { useEffect, useState } from "react";
 import Swiper_Hotel_Around_Json from "@/fakeData/swiper_Hotel_Around.json";
 // import { supabase } from "@/lib/supabase_Client";
+import Image from "next/image";
 
 
 const swiper_Popular_Destination = [
@@ -90,63 +91,6 @@ const swiper_Popular_Destination = [
   },
 ];
 
-// const swiper_Hotel_Around = [
-//   {
-//     url: '/home/near_1.webp',
-//     hotelName: 'Pan Pacific Hotel',
-//     price: 1200,
-//     ranking: 5,
-//   },
-//   {
-//     url: '/home/near_2.webp',
-//     hotelName: 'Prestige Proga Inn',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_3.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_4.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_5.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_6.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_7.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_8.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-//   {
-//     url: '/home/near_9.webp',
-//     hotelName: 'Bangkok Hotel',
-//     price: 1200,
-//     ranking: 3,
-//   },
-// ]
-
 export default function Index() {
 // 1. Redux - 查看是否登入
 const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
@@ -178,11 +122,15 @@ const t_Offer = useTranslations("OfferList");
 
 // 5. 查看熱門地點 (跳轉HotelList頁面)
 const check_Popular_Destination = (popular_Destination: string) => {
+
+  // 5.1 更新 Redux_Keyword
+  dispatch(updateKeyword(t (popular_Destination)));
   
-  // 5.1 URL參數, 轉字串
+  // 5.2 URL參數, 轉字串
   const timestamp = +new Date();
   const search_Params = new URLSearchParams({
-    destination: redux_Keyword as string,
+    // destination: redux_Keyword as string,
+    destination: popular_Destination as string,
     dateRange: redux_DateRange as string,
     date_Start: redux_Start_Date as string,
     date_End: redux_End_Date as string,
@@ -197,11 +145,10 @@ const check_Popular_Destination = (popular_Destination: string) => {
     page: "1"
   }).toString()
   
-  // 5.2 跳轉到 hotel_List頁面, 讓hotel_List頁面自己打API
+  // 5.3 跳轉到 hotel_List頁面, 讓hotel_List頁面自己打API
   router.push(`/hotellist?${search_Params}`);
   
-  // 5.3 更新 Redux_Keyword
-  dispatch(updateKeyword(t (popular_Destination)));
+
 }
 
   // 6. 一進首頁, 關鍵字、進階搜尋初始化
@@ -291,8 +238,11 @@ const check_Popular_Destination = (popular_Destination: string) => {
             <div className="flex">
               {swiper_Popular_Destination.map((item, index) =>
                 <SwiperSlide key={index}>
-                  <img className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" 
-                  src={item.url} alt="" onClick={() => check_Popular_Destination(item.cityName)}/>
+                  <Image 
+                  width={200} height={200}
+                  priority={true}
+                  className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" 
+                  src={item.url} alt={item.text1} onClick={() => check_Popular_Destination(item.cityName)}/>
                   <p className="text-xs text-center pt-2 font-semibold lg:text-base">{t (item.cityName)}</p>
                 </SwiperSlide>
               )}
@@ -314,7 +264,10 @@ const check_Popular_Destination = (popular_Destination: string) => {
             <div className="flex">
               {Offer_List_Json.map((item, index) =>
                 <SwiperSlide key={index}>
-                  <img className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" src={item.offer_Url} alt={item.offer_Description} 
+                  <Image 
+                  width={200} height={200}
+                  priority={true}
+                  className="w-full h-[100px] lg:h-[174.56px] object-cover rounded cursor-pointer" src={item.offer_Url} alt={item.offer_Description} 
                   onClick={() => check_Offer(item.offer_Id)}/>
                   <p className="text-xs text-center pt-2 font-semibold lg:text-base">{t_Offer (item.offer_Description)}</p>
                 </SwiperSlide>
@@ -338,7 +291,10 @@ const check_Popular_Destination = (popular_Destination: string) => {
                   {params.locale === "zh-TW" ? <>
                     {Swiper_Hotel_Around_Json.zh_TW.map((item, index) =>
                       <SwiperSlide key={index} className="flex-col cursor-pointer" onClick={() => fetch_Hotel_Detail(item.hotel_Id, item.hotel_Name)}>
-                        <img className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
+                        <Image
+                        width={200} height={200}
+                        priority={true}
+                        className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
                         {/* <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
                           <img className="" src="/home/Bookmark.svg" alt="" />
                         </div> */}
@@ -360,7 +316,10 @@ const check_Popular_Destination = (popular_Destination: string) => {
                   <>
                     {Swiper_Hotel_Around_Json.en.map((item, index) =>
                       <SwiperSlide key={index} className="flex-col cursor-pointer" onClick={() => fetch_Hotel_Detail(item.hotel_Id, item.hotel_Name)}>
-                        <img className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
+                        <Image
+                        width={200} height={200}
+                        priority={true}
+                        className="w-full h-[100px] lg:h-[200.56px] rounded relative" src={item.url} alt="" />
                         {/* <div className="absolute top-2 right-2 w-[16px] h-[16px] bg-white rounded-full flex justify-center items-center">
                           <img className="" src="/home/Bookmark.svg" alt="" />
                         </div> */}
