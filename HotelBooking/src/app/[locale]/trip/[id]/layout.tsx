@@ -1,6 +1,11 @@
 import React from "react";
 // import ProviderRedux from "@/provider/provider";
 import Menu from "@/components/menu";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Booking Detail',
+}
 
 export default function Booking_Layout({children,}: Readonly<{children: React.ReactNode;}>) {
   return <>

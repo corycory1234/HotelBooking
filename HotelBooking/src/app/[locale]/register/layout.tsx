@@ -1,7 +1,13 @@
-'use client';
+// 'use client';
 import { Toaster } from 'react-hot-toast';
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Register',
+}
+
 export default function RegisterLayout ({children,}: Readonly<{children: React.ReactNode;}>) {
 
   return <>

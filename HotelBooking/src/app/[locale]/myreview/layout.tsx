@@ -1,6 +1,11 @@
 import Menu from "@/components/menu";
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'My Review',
+}
 
 export default function MyReviewLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return <div className="min-h-screen flex flex-col">

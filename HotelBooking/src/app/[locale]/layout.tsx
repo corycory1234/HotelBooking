@@ -10,7 +10,7 @@ import Toaster_Notify from "@/components/toaster/toaster";
 
 
 export const metadata: Metadata = {
-  title: "Go Tour",
+  title: "Go Tour | Explore The World",
   description: "Get special price here!",
   icons: { icon: '/gotour.svg' }
 }

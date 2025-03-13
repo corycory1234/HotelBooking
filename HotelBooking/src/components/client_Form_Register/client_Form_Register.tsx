@@ -54,9 +54,9 @@ export default function Client_Form_Register () {
 
   // 5. 監聽 API返回 response 之數據
   const[response, set_Response] = useState();
-  useEffect(() => {
-    console.log("API返回數據", response);
-  },[response])
+  // useEffect(() => {
+  //   console.log("API返回數據", response);
+  // },[response])
 
   // Server Action 的狀態 與 函式
   // const [state, formAction] = useFormState(Submit_Register, initialState);
@@ -102,7 +102,7 @@ export default function Client_Form_Register () {
         toast.success("Regisration OK, ✉️Verification Eamil will be sent to you", {icon: "✔️", duration: 5000});
       }
     } catch (error) {
-      console.log("註冊失誤", error);
+      // console.log("註冊失誤", error);
     } finally {
       set_Loading_Boolean(false); // loading 停止動畫
     }
