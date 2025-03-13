@@ -11,6 +11,57 @@ import Hotel_List_Card from "@/components/hotel_List/hotel_List_Card";
 // import hotel_List_Json from "@/fakeData/hotel_List.json";
 // import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 // import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
+import { Metadata } from "next";
+
+// 1. Server Component 的 searchParams 所需要的 interface
+interface metaKeywordInterface {
+  searchParams: {
+    destination?: string; // 想拿的 searchParams 參數 key
+    // [key: string]: any;   // 其他參數也可以放這裡
+  };
+};
+
+// 2. 透過 generateMetadata, 取得「Sever組件的 搜尋參數」
+export async function generateMetadata({ searchParams }: metaKeywordInterface): Promise<Metadata> {
+  // 2.1 從 URL 取得查詢參數
+  const dynamicKeyword = searchParams.destination || "No Result";
+
+  // 2.2 如果想要後端 API (Supabase / Node.js) 回傳更精準的 Keyword，可在這裡 fetch
+  // const res = await fetch(`https://你的後端API/hotel-keyword?kw=${dynamicKeyword}`, {
+  //   // 也可帶上其他設定，如 { cache: "no-store" }
+  // });
+  // const data = await res.json();
+  // const finalKeyword = data?.keyword ?? dynamicKeyword;
+
+  // 2.3 回傳 Metadata
+  return {
+    // title: `GoTour | ${finalKeyword}`,
+    title: `GoTour | Hotels in ${dynamicKeyword}`,
+    description: `The best price from GoTour「${dynamicKeyword}」!`,
+  };
+}
+
+// export async function generateMetadata(): Promise<Metadata> {
+//   // 1. 飯店列表 - API
+//     const fetch_Hotel_List_Backend = async (page: number) => {
+//       try {
+
+//         const hotel_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels?${query_Params}`;
+//         const response = await fetch(hotel_List_Url, {
+//           method: "GET",
+//           headers: {"Content-Type": "application/json"},
+//           credentials: 'include'
+//         });
+//         if(!response.ok) {throw new Error(`伺服器錯誤`)};
+//         const result = await response.json();
+//         // console.log(result, "飯店列表API - 返回數據");
+  
+//         // 14.5 Skeleton動畫 -關
+//       } catch (error) {
+//         console.log(error, "飯店列表API失敗");
+//       }
+//     }
+// }
 
 
 export default function HotelList () {

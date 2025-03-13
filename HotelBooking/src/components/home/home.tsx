@@ -122,11 +122,15 @@ const t_Offer = useTranslations("OfferList");
 
 // 5. 查看熱門地點 (跳轉HotelList頁面)
 const check_Popular_Destination = (popular_Destination: string) => {
+
+  // 5.1 更新 Redux_Keyword
+  dispatch(updateKeyword(t (popular_Destination)));
   
-  // 5.1 URL參數, 轉字串
+  // 5.2 URL參數, 轉字串
   const timestamp = +new Date();
   const search_Params = new URLSearchParams({
-    destination: redux_Keyword as string,
+    // destination: redux_Keyword as string,
+    destination: popular_Destination as string,
     dateRange: redux_DateRange as string,
     date_Start: redux_Start_Date as string,
     date_End: redux_End_Date as string,
@@ -141,11 +145,10 @@ const check_Popular_Destination = (popular_Destination: string) => {
     page: "1"
   }).toString()
   
-  // 5.2 跳轉到 hotel_List頁面, 讓hotel_List頁面自己打API
+  // 5.3 跳轉到 hotel_List頁面, 讓hotel_List頁面自己打API
   router.push(`/hotellist?${search_Params}`);
   
-  // 5.3 更新 Redux_Keyword
-  dispatch(updateKeyword(t (popular_Destination)));
+
 }
 
   // 6. 一進首頁, 關鍵字、進階搜尋初始化
