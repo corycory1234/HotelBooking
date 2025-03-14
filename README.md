@@ -10,6 +10,7 @@
 **Live Demo Environment**
 - Guest Portal: https://hotel-booking-delta-gray.vercel.app/
 - Test Account: `testgotour@gmail.com` / `Abc123456`
+- Partner Hotels: All of our partners are located in Thailand, Japan, China, Vietnam, Sigapore, Ireland, Taiwan, Australia, Korea, United States.
 
 ## 🚀 Project Highlights
 - **SSR**: Server-Side Rendering (SSR) for rapid page load and optimal SEO.
