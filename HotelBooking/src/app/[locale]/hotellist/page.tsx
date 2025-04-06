@@ -2,7 +2,7 @@
 // import Index_Form_Search from "../../components/form_Search/index_Form_Search";
 // import { useSearchParams } from "next/navigation";
 // import Client_Filter_Button from "../../components/client-Filter-Button";
-import Hotel_List_Card from "@/components/hotel_List/hotel_List_Card";
+import Hotel_List_Card from "@/components/hotelList/hotelListCard";
 // import Half_Modal from "../../components/modal/half-modal";
 // import { Submit_Search } from "@/actions";
 // import { useSelector, useDispatch } from "react-redux";
