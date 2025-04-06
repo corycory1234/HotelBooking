@@ -8,6 +8,7 @@ import Link from "next/link";
 export default function HotelList_Layout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <div className="min-h-screen flex flex-col">
+
     {/************************ PC桌機版 - 導覽頁 ************************/}
       <Nav></Nav>
     {/************************ PC桌機版 - 導覽頁 ************************/}
@@ -36,6 +37,7 @@ export default function HotelList_Layout({children,}: Readonly<{children: React.
         <Form_Search_Pc></Form_Search_Pc>
       </div>
     {/************************ PC桌機版 - 搜尋<form> ************************/}
+    
       <main className="flex-1">
         {children}
       </main>

@@ -9,7 +9,7 @@ import { Debounced_Hotel_List_Interface } from "@/types/debounced_Hotel_List";
 import { update_Hotel_List, } from "@/store/hotel_List/hotel_List_Slice";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import { useTranslations } from "next-intl";
-import Click_Outside from "../clickOutside";
+import useClikOutside from "../useClickOutside";
 
 interface Debounced_Hotel_Interface {
   hotel_Id: string,
@@ -144,7 +144,7 @@ export default function Client_Input_Keyword () {
 
   // 7. 防抖搜尋 - 布林開關 & 冒泡事件(點外層關掉) 
   const debounced_Ref = useRef<HTMLDivElement>(null);
-  Click_Outside(debounced_Ref, () => set_Debounced_Boolean(false))
+  useClikOutside(debounced_Ref, () => set_Debounced_Boolean(false))
   
   
   return <>

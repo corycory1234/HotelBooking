@@ -5,7 +5,7 @@ import { updateKeyword } from "../../store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import Datepicker from "react-tailwindcss-datepicker";// 1. 從 "react-tailwindcss-datepicker" 拉出 { DateValueType }, 做為 TS型別, 以免跳警告 
 import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
-import Click_Outside from "../clickOutside";
+import useClickOutside from "../useClickOutside";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -95,7 +95,7 @@ export default function Form_Search_Pc () {
   }
 
   // 12. 點外層, 隱藏 房間人數下拉選單
-  Click_Outside(dropDownRef, () => setShowDropDown(false))
+  useClickOutside(dropDownRef, () => setShowDropDown(false))
 
   // 13. Redux - 入住日、退房日
   const redux_Start_Date = useSelector((state: RootState) => state.formSearch.start_Date);
@@ -304,7 +304,7 @@ export default function Form_Search_Pc () {
   };
   
   // 21. 防抖搜尋 - 布林開關 & 冒泡事件(點外層關掉) 
-  Click_Outside(debounced_Ref, () => set_Debounced_Boolean(false));
+  useClickOutside(debounced_Ref, () => set_Debounced_Boolean(false));
 
 
   return <>

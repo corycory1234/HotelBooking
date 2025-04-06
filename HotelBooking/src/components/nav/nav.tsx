@@ -8,7 +8,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
 import {useLocale, useTranslations} from 'next-intl';
 import { useRouter, usePathname as i18n_usePathname } from "@/i18n/routing";
-import Click_Outside from "../clickOutside";
+import useClickOutside from "../useClickOutside";
 
 export default function Nav () {
   // 1. 滾動錨點 - 布林
@@ -63,7 +63,7 @@ export default function Nav () {
   // 6. 點外層, 關閉 i18n 絕對定位選單
   // 6.1 建立 ref 來追蹤 i18n 絕對定位選單 元素
   const i18n_Ref = useRef<HTMLDivElement>(null);
-  Click_Outside(i18n_Ref, () => set_Toggle_i18n(false))
+  useClickOutside(i18n_Ref, () => set_Toggle_i18n(false))
 
 return <>
 
