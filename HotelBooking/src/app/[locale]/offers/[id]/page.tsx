@@ -100,7 +100,7 @@ export default function Offer () {
     fetch_Data();
   },[params.id])
   useEffect(() => {
-    console.log(country_Hotel_List, "看一下飯店列表");
+    // console.log(country_Hotel_List, "看一下飯店列表");
   },[country_Hotel_List])
 
   // 7. hotel_List有變動, 抓最新的飯店列表(優惠券)
@@ -139,7 +139,7 @@ export default function Offer () {
     } else {
       console.error("沒拉到指定飯店明細");
     }
-    console.log(hotel_Id, result);
+    // console.log(hotel_Id, result);
     
     const query = new URLSearchParams({
       destination: redux_Destination,
@@ -157,7 +157,7 @@ export default function Offer () {
     }).toString()
 
     if(result) {
-      console.log(result, "指定飯店 - 所有房型");
+      // console.log(result, "指定飯店 - 所有房型");
       router.push(`/hotellist/${hotel_Id}?${query}`)
     };
   }
