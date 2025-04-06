@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 // import hotel_List_Json from "../../fakeData/hotel_List.json";
 import { OtherSVG } from "../client_Svg/client_Svg";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
@@ -24,6 +24,7 @@ import Half_Modal from "../modal/half-modal";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 import Image from "next/image";
+import useClikOutside from "../useClickOutside";
 
 export default function Hotel_List_Card() {
   // 0. 呼叫 Redux - Action 函式
@@ -45,6 +46,8 @@ export default function Hotel_List_Card() {
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List2.hotel_List);
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
   const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  const redux_Collection_List = useSelector((state: RootState) => state.my_Collection.collection_List)
+
 
   // 2. 查看「指定飯店所有房型」，ID匹配，router跳轉
   const router = useRouter()
@@ -73,9 +76,6 @@ export default function Hotel_List_Card() {
       alert("沒找到指定飯店 - 所有房型")
     }
   }
-
-  // TODO
-  const redux_Collection_List = useSelector((state: RootState) => state.my_Collection.collection_List)
 
   // 3. 新增收藏飯店
   const add_Collection = async (item: add_Hotel_Detail_Interface) => {
@@ -201,62 +201,62 @@ export default function Hotel_List_Card() {
   const [sort_Value_Mobile, set_Sort_Value_Mobile] = useState("");
 
   // 12. 前端 - 飯店列表 API
-  const fetch_Hotel_List = async (page: number) => {
-    try {
-      const response = await fetch("/api/hotel_List", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          destination: redux_Destination,
-          dateRange: redux_DateRange,
-          date_Start: redux_Date_Start,
-          date_End: redux_Date_End,
-          room: redux_Room,
-          adult: redux_Adult,
-          child: redux_Child,
-          rangeslider: redux_RangeSlider,
-          rating: redux_Rating,
-          bedType: redux_BedType,
-          facility: redux_Facility,
-          page: page
-        })
-      });
-      if(!response.ok) {
-        throw new Error(`Server error: ${response.status}`)
-      };
-      const result = await response.json();
-      dispatch(update_Hotel_List(result.data));
-      set_Current_Page(result.currentPage);
-      set_Total_Hotel(result.total);
-      set_Total_Pages(result.totalPages)
+  // const fetch_Hotel_List = async (page: number) => {
+  //   try {
+  //     const response = await fetch("/api/hotel_List", {
+  //       method: "POST",
+  //       headers: {"Content-Type": "application/json"},
+  //       body: JSON.stringify({
+  //         destination: redux_Destination,
+  //         dateRange: redux_DateRange,
+  //         date_Start: redux_Date_Start,
+  //         date_End: redux_Date_End,
+  //         room: redux_Room,
+  //         adult: redux_Adult,
+  //         child: redux_Child,
+  //         rangeslider: redux_RangeSlider,
+  //         rating: redux_Rating,
+  //         bedType: redux_BedType,
+  //         facility: redux_Facility,
+  //         page: page
+  //       })
+  //     });
+  //     if(!response.ok) {
+  //       throw new Error(`Server error: ${response.status}`)
+  //     };
+  //     const result = await response.json();
+  //     dispatch(update_Hotel_List(result.data));
+  //     set_Current_Page(result.currentPage);
+  //     set_Total_Hotel(result.total);
+  //     set_Total_Pages(result.totalPages)
 
 
 
-      // 12.1 URL參數, 轉字串
-      // const timestamp = +new Date();
-      const search_Params = new URLSearchParams({
-        destination: redux_Destination,
-        dateRange: redux_DateRange as string,
-        date_Start: redux_Date_Start as string,
-        date_End: redux_Date_End as string,
-        room: String(redux_Room),
-        adult: String(redux_Adult),
-        child: String(redux_Child),
-        rangeslider: String(redux_RangeSlider),
-        timestamp: String(timestamp),
-        bedtype: String(redux_BedType),
-        rating: String(redux_Rating),
-        facility: String(redux_Facility),
-        page: String(result.currentPage)
-      }).toString()
+  //     // 12.1 URL參數, 轉字串
+  //     // const timestamp = +new Date();
+  //     const search_Params = new URLSearchParams({
+  //       destination: redux_Destination,
+  //       dateRange: redux_DateRange as string,
+  //       date_Start: redux_Date_Start as string,
+  //       date_End: redux_Date_End as string,
+  //       room: String(redux_Room),
+  //       adult: String(redux_Adult),
+  //       child: String(redux_Child),
+  //       rangeslider: String(redux_RangeSlider),
+  //       timestamp: String(timestamp),
+  //       bedtype: String(redux_BedType),
+  //       rating: String(redux_Rating),
+  //       facility: String(redux_Facility),
+  //       page: String(result.currentPage)
+  //     }).toString()
 
-      // 12.2 跳轉「飯店列表」
-      router.push(`/hotellist?${search_Params}`);
+  //     // 12.2 跳轉「飯店列表」
+  //     router.push(`/hotellist?${search_Params}`);
 
-    } catch (error) {
-      console.log(error, "飯店列表API失敗");
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error, "飯店列表API失敗");
+  //   }
+  // };
 
   // 13.  只要timeStamp(URL字串, 並非 + new Date())有變, 
   // 13.1 就重打 飯店列表API (用於一般搜尋、進階搜尋, 跳轉/hotellist)
@@ -393,7 +393,11 @@ export default function Hotel_List_Card() {
     set_FormSort(false);
   };
 
-  // 20. Vercel架在美國, 造成<Image>渲染會比文字還慢, 用布林搭配onLoad事件, 來判斷圖片是否載入完成
+  // 20. Sort排序, 點外層, 關閉
+  const sortFormRef = useRef<HTMLFormElement>(null);
+  useClikOutside(sortFormRef, () => set_FormSort(false));
+
+  // 21. Vercel架在美國, 造成<Image>渲染會比文字還慢, 用布林搭配onLoad事件, 來判斷圖片是否載入完成
   const [isLoadingImg, setIsLoadingImg] = useState<boolean>(true);
   
 
@@ -492,7 +496,8 @@ export default function Hotel_List_Card() {
         {/** Sort排序 - 絕對定位<form> - PC */}
         <div className="hidden lg:block">
           {formSort === true && 
-              <form className="absolute top-10 z-20 border rounded border-softGray bg-white flex flex-col gap-2 p-4 w-[40%]">
+              <form className="absolute top-10 z-20 border rounded border-softGray bg-white flex flex-col gap-2 p-4 w-[40%]"
+              ref={sortFormRef}>
         
                   <div className="flex justify-between items-center ">
                     <label htmlFor="priceLow">{t (`Price (Low ~ High)`)}</label>

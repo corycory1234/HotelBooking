@@ -1,8 +1,9 @@
-// 1. 旅客下拉選單, 點擊外層, 隱藏
+// 1. useClickOiutside 自定義鉤子, 點外層, 關閉(彈跳)視窗
 'use client'
-import { useEffect } from 'react';
+import { useEffect, RefObject } from 'react';
 
-export default function Click_Outside  (ref: React.RefObject<HTMLElement | null>, callback: () => void)  {
+export default function useClickOutside  (ref: React.RefObject<HTMLElement | null>, callback: () => void) {
+  
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {

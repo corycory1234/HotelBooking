@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef } from "react";
-import Click_Outside from "../clickOutside";
+import useClickOutside from "../useClickOutside";
 import { useDispatch, useSelector } from "react-redux";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
@@ -24,7 +24,7 @@ export default function Client_Input_Traveler () {
   }
 
   // 2. 點外層, 隱藏 房間人數下拉選單
-  Click_Outside(dropDownRef, () => setShowDropDown(false))
+  useClickOutside(dropDownRef, () => setShowDropDown(false))
 
   // 3. next-intl i18n翻譯
   const t = useTranslations("FormSearch");
