@@ -24,7 +24,7 @@ import Half_Modal from "../modal/half-modal";
 import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 import Image from "next/image";
-import useClikOutside from "../useClickOutside";
+import useClickOutside from "@/hooks/useClickOutside";
 
 export default function Hotel_List_Card() {
   // 0. 呼叫 Redux - Action 函式
@@ -395,7 +395,7 @@ export default function Hotel_List_Card() {
 
   // 20. Sort排序, 點外層, 關閉
   const sortFormRef = useRef<HTMLFormElement>(null);
-  useClikOutside(sortFormRef, () => set_FormSort(false));
+  useClickOutside(sortFormRef, () => set_FormSort(false));
 
   // 21. Vercel架在美國, 造成<Image>渲染會比文字還慢, 用布林搭配onLoad事件, 來判斷圖片是否載入完成
   const [isLoadingImg, setIsLoadingImg] = useState<boolean>(true);

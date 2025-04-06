@@ -5,7 +5,7 @@ import { updateKeyword } from "../../store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import Datepicker from "react-tailwindcss-datepicker";// 1. 從 "react-tailwindcss-datepicker" 拉出 { DateValueType }, 做為 TS型別, 以免跳警告 
 import { updateDateRange, update_Start_Date, update_End_Date } from "../../store/form-Search/formSearchSlice";
-import useClickOutside from "../useClickOutside";
+import useClickOutside from "@/hooks/useClickOutside";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";

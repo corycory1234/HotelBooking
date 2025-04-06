@@ -8,7 +8,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useParams } from "next/navigation";
 import {useLocale, useTranslations} from 'next-intl';
 import { useRouter, usePathname as i18n_usePathname } from "@/i18n/routing";
-import useClickOutside from "../useClickOutside";
+import useClickOutside from "@/hooks/useClickOutside";
 
 export default function Nav () {
   // 1. 滾動錨點 - 布林
