@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef } from "react";
-import useClickOutside from "../useClickOutside";
+import useClickOutside from "@/hooks/useClickOutside";
 import { useDispatch, useSelector } from "react-redux";
 import { addRoom, minusRoom, addAdult, minusAdult, addChild, minusChild  } from "../../store/form-Search/formSearchSlice";
 import { RootState, AppDispatch } from "../../store/store";

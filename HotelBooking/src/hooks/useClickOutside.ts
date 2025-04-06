@@ -2,7 +2,7 @@
 'use client'
 import { useEffect, RefObject } from 'react';
 
-export default function useClickOutside  (ref: React.RefObject<HTMLElement | null>, callback: () => void) {
+export default function useClickOutside  (ref: RefObject<HTMLElement | null>, callback: () => void) {
   
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
