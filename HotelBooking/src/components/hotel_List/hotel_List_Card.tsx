@@ -393,7 +393,9 @@ export default function Hotel_List_Card() {
     set_FormSort(false);
   };
 
-
+  // 20. Vercel架在美國, 造成<Image>渲染會比文字還慢, 用布林搭配onLoad事件, 來判斷圖片是否載入完成
+  const [isLoadingImg, setIsLoadingImg] = useState<boolean>(true);
+  
 
   return <>
   {/************ 手機版|PC桌機 - 沒找到, 就<Not_Found> ************/}
@@ -544,6 +546,8 @@ export default function Hotel_List_Card() {
                 >
                 {item.hotel_Image_List.map((img, index) => {
                   return <SwiperSlide key={index}>
+                    {isLoadingImg && <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>}
+
                     <div className="relative w-full h-[200px]">
                       <Image 
                       // width={200} height={200}
@@ -551,7 +555,9 @@ export default function Hotel_List_Card() {
                       priority={true}
                       unoptimized
                       src={img.url} alt={img.description} 
-                      className="object-cover rounded" />
+                      className={`object-cover rounded 
+                      ${isLoadingImg ? 'animate-pulse bg-softGray w-1/2 h-6 rounded lg:block lg:w-full' : ''}`} 
+                      onLoad={() => setIsLoadingImg(false)}/>
                     </div>
                   </SwiperSlide>
                 })}
