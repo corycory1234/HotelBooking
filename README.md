@@ -20,6 +20,7 @@
 - **Cached**: Enhanced API performance using Next.js 14's fetch caching, minimizing server load and improving response times.
 - **Global Reach**: Built-in i18n supporting English and Chinese.
 - **Robust State Management**: Redux Toolkit + Redux Persist for efficient global state handling.
+- **Custom Hook**: useClickOutside to use repetitive functions.
 - **Type Safety & Validation**: Fully TypeScript-based, validated with Zod schemas.
 - **Modern UI**: Responsive design crafted with Tailwind CSS.
 - **Seamless API Integration**: Node.js backend providing fast and reliable API services.
@@ -135,6 +136,7 @@
 ├── api/            # Early development APIs
 ├── components/     # UI components
 ├── fakeData/       # Sample data for development
+├── hooks/          # Custom Hooks for reusing functions
 ├── i18n/           # Internationalization
 ├── lib/            # Supabase integration
 ├── provider/       # Redux configuration
