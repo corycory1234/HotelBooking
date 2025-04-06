@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_My_Collection, add_My_Collection, delete_My_Collection } from "@/store/my_Collection/my_Collection_Slice";
 import { update_Hotel_List, to_Full_Heart, to_Empty_Heart  } from "@/store/hotel_List/hotel_List_Slice";
-import Advanced_Search_Pc from "../advanced_Search/advanced_Search_Pc";
+import AdvancedSearchPc from "../advancedSearch/advancedSearchPc";
 import StarRating from "../starrating/star-Rating";
 import { FacilitySVG } from "../client_Svg/client_Svg";
 import how_Many_Nights from "@/utils/how_Many_Nights";
@@ -473,7 +473,7 @@ export default function Hotel_List_Card() {
       {/********** PC桌機版 - Filter過濾條件 **********/}
       <div className={`hidden lg:block lg:w-1/4 border border-softGray rounded
         lg:sticky lg:top-[184px] self-start`}>
-        <Advanced_Search_Pc></Advanced_Search_Pc>
+        <AdvancedSearchPc></AdvancedSearchPc>
       </div>
       {/********** PC桌機版 - Filter過濾條件 **********/}
 

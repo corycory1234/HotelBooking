@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 // 0. 所有設施 Arr
 const facility_Arr = ["wifi", "parking", "24hrcheckin", "bathtub", "gym", "pool", "balcony", "kitchen",]
 
-export default function Advanced_Search_Pc () {
+export default function AdvancedSearchPc () {
   // 0. 取 Redux - Action「搜尋相關函式」
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
