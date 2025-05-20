@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import Swiper_Hotel_Around_Json from "@/fakeData/swiper_Hotel_Around.json";
 // import { supabase } from "@/lib/supabase_Client";
 import Image from "next/image";
+import { TestBtn } from "../testBtn/testBtn";
 
 
 const swiper_Popular_Destination = [
@@ -342,7 +343,7 @@ const check_Popular_Destination = (popular_Destination: string) => {
             </Swiper>
           </div>
         {/********************* Swiper - 附近飯店 *******************************/}
-
+          <TestBtn></TestBtn>
         </div>
 
 

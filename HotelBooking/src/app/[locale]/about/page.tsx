@@ -1,3 +1,4 @@
+'use client';
 import Previous_Page from "@/components/previous_Page/previous_Page";
 import { OtherSVG } from "@/components/client_Svg/client_Svg";
 import { useTranslations } from "next-intl";

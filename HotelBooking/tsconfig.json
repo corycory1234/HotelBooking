@@ -23,7 +23,8 @@
       "@/*": ["*"]
       
     },
+    "types": ["vitest/globals"]  // 讓 test/expect/describes 不報錯
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.js", "vitest.config.mjs"],
   "exclude": ["node_modules"]
 }
