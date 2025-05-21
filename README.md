@@ -21,6 +21,7 @@
 - **Global Reach**: Built-in i18n supporting English and Chinese.
 - **Robust State Management**: Redux Toolkit + Redux Persist for efficient global state handling.
 - **Custom Hook**: useClickOutside to use repetitive functions.
+- **Vitest**: Vitest for engsuring login Unit Test to push to the correct route and toast message.  
 - **Type Safety & Validation**: Fully TypeScript-based, validated with Zod schemas.
 - **Modern UI**: Responsive design crafted with Tailwind CSS.
 - **Seamless API Integration**: Node.js backend providing fast and reliable API services.
@@ -42,31 +43,6 @@
 ### A comprehensive hotel booking platform including:
 - Guest Portal: User-friendly interface, real-time availability, advanced filtering, and interactive maps.
 - Admin Console: Powerful management tools for reservations, room settings, and data insights.
-<!-- - ✅ **Resopnsive Design**：For Mobile and PC users -->
-<!-- - 🚀 **SEO Optimization**：Next.js Server-Side Rendering, enhancing the raking in search -->
-<!-- - ⚡ **State Management**：Integrate Redux-Toolkit & Redux-Persist
-- 🛠 **Backend**：Node.js + Supabase
-- 🎯 **Form Validation**：Using Zod to ensure correct value -->
-
-<!-- ## 📦 Tech Stack
-### 🔹 Frontend
-- **Next.js 14**：App Router
-- **React 18** : Frontend Framework
-- **Reduxt Toolkit & Redux Persist**: State Management
-- **Typescript** : Syntax For Types
-- **Tailwind CSS**：CSS Framework
-- **Form Validation**：Zod
-
-### 🔹 Backend
-- **Node.js** - Express.js, Framework 
-- **Supabase & Drizzle** - BaaS（Verification、Database、API）
-
-### 🔹 Others
-- **Vercel** - Deployment Platform
-- **Next-Intl** - i18n for Locale Prefix & Translation
-- **Zod** - Form Validation
-- **Swiper** - Carousel Library
-- **react-leaflet** - Map Library -->
 
 ## 📦 Core Technologies
 ### **Frontend**
@@ -74,8 +50,9 @@
 |-----------------|---------------------------------------|
 | Framework       | Next.js 14 (App Router), React 18     |
 | State Management| Redux Toolkit, Redux Persist          |
+| Testing         | Vitest                                |
 | Styling         | Tailwind CSS, CSS Modules             |
-| Internationalization | Next-Intl, react-i18next       |
+| Internationalization | Next-Intl                        |
 | Maps            | react-leaflet                         |
 
 ### **Backend**
