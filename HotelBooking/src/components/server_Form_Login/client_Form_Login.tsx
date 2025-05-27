@@ -53,23 +53,18 @@ export default function Server_Form_Login () {
 
   // 5. 監聽 API返回 response 之數據
   const [response, set_Response] = useState();
-  useEffect(() => {
-    // console.log("API返回數據",response);
-  },[response]);
   
   // 5.1 Redux - 令牌
   const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
-
 
   // 6. loading 布林開關 
   const [loading_Boolean, set_Loading_Boolean] = useState(false);
 
   // 7. 登入表單提交
   const handle_Login = async (event: React.FormEvent) => {
-    event.preventDefault(); // 阻止瀏覽器默認提交
+    event.preventDefault();
     set_Loading_Boolean(true); // loading 開始動畫
     const login_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/login";
-
 
     try {
       // 8. Zod 驗證
@@ -108,7 +103,7 @@ export default function Server_Form_Login () {
         // }, 5000)
       }
     } catch (error) {
-      console.log("登入失敗", error);
+      toast.error("Login Failed")
     } finally {
       set_Loading_Boolean(false);
     }
