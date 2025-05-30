@@ -3,16 +3,8 @@ import { useRouter, useParams, useSearchParams, usePathname } from "next/navigat
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { useState, useEffect } from "react";
-import Modal from "@/components/modal/modal";
-// import Server_Form_Search from "@/components/server-Form-Search/server-Form-Search";
 import Hotel_Detail_Card from "@/components/hotel_Card/hotel_Detail_Card";
 import { update_Hotel_Detail } from "@/store/hotel_Detail/hotel_Detail";
-import { Hotel_Detail_Interface } from "@/types/hotel_Detail";
-import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
-import DateRangePicker from "@/components/form_Search/dateRangePicker";
-import Client_Input_Traveler from "@/components/form_Search/client-Input-Traveler";
-import Client_Input_Keyword from "@/components/form_Search/client-Input-Keyword";
-import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 import { Refresh_Search_Hotel_Detail, Search_Params_Interface } from "@/utils/refresh_Search_Hotel_Detail";
 
 
@@ -165,41 +157,6 @@ export default function Hotel_Detail () {
 
 
   return <>
-  
-  {/* 返回上頁按鈕、Modla 彈跳<form>搜尋視窗 */}
-  {/* <div className="bg-primary relative lg:hidden">
-    <div className="flex flex-col py-2 cursor-pointer" onClick={show_FormSearch}>
-      <p className="text-center text-white">{redux_Hotel_Detail?.hotel_Name}</p>
-      <p className="text-center text-white">{redux_DateRange}</p>
-    </div>
-
-      <div className="absolute top-4 left-4 z-10 h-[56px]">
-        <button type="button" className="" onClick={() => router.back()}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 text-white">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-          </svg>
-        </button>
-      </div>
-    </div> */}
-    {/* 返回上頁按鈕、Modla 彈跳<form>搜尋視窗 */}
-
-    {/* Modal彈跳視窗 */}
-      {/* <Modal isOpen={toggle} onClose={() => set_Toggle(false)}>
-        <h2 className="text-xl font-bold mb-4 p-6">Change Keyword</h2>
-
-
-        <form onSubmit={submit} className="flex flex-col gap-2 p-6">
-          <Client_Input_Keyword></Client_Input_Keyword>
-          <DateRangePicker></DateRangePicker>
-          <Client_Input_Traveler></Client_Input_Traveler>
-          <button type="submit" className="bg-primary rounded w-full py-2 px-4">
-            Search
-          </button>
-        </form>
-      </Modal> */}
-    {/* Modal彈跳視窗 */}
-
-
     {/** 飯店卡片 */}
     <Hotel_Detail_Card the_Hotel={redux_Hotel_Detail}></Hotel_Detail_Card>
     {/** 飯店卡片 */}
