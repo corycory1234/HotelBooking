@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "@/components/nav/nav";
 import Footer from "@/components/footer/footer";
-import Form_Search_Pc from "@/components/form_Search/form_Search_Pc";
+import Form_Search_Pc from "@/components/formSearch/form_Search_Pc";
 import Client_Show_Keyword from "@/components/client-Show-Keyword";
 import Link from "next/link";
 

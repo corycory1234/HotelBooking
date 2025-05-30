@@ -2,7 +2,7 @@
 import Menu from "../menu";
 import Nav from "../nav/nav";
 import Footer from "../footer/footer";
-import Index_Form_Search from "../form_Search/index_Form_Search";
+import Index_Form_Search from "../formSearch/index_Form_Search";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { useEffect, useState } from "react";
 // import Server_Form_Search from "./server-Form-Search/server-Form-Search";
-import Index_Form_Search from "./form_Search/index_Form_Search";
+import Index_Form_Search from "./formSearch/index_Form_Search";
 import Modal from "./modal/modal";
 import { useSearchParams } from "next/navigation";
 

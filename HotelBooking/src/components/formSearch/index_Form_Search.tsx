@@ -1,6 +1,6 @@
 'use client';
 import hotel_List_Json from "@/fakeData/hotel_List.json"
-import Client_Input_Keyword from "./client-Input-Keyword";
+import Keyword from "./keyword";
 import DateRangePicker from "./dateRangePicker";
 import Client_Input_Traveler from "./client-Input-Traveler";
 // import { Submit_Search } from "../../actions";
@@ -106,7 +106,7 @@ export default function Index_Form_Search () {
     <form onSubmit={submit_Search} className="flex flex-col lg:flex-row lg:flex-wrap p-4 gap-4 
       lg:shadow-lg lg:rounded-lg
       items-center">
-      <Client_Input_Keyword></Client_Input_Keyword>
+      <Keyword></Keyword>
       <DateRangePicker></DateRangePicker>
       <Client_Input_Traveler></Client_Input_Traveler>
       <button className="bg-primary text-white rounded w-full py-2 px-4 lg:w-1/2 lg:mx-auto">

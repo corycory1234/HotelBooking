@@ -13,7 +13,7 @@ import Toaster_Notify from "../toaster/toaster";
 // import hotel_List_Json from "@/fakeData/hotel_List.json";
 import { add_Hotel_Detail_Interface } from "@/types/add_Hotel_Detail";
 import { update_Hotel_List } from "@/store/hotel_List/hotel_List_Slice";
-import { Debounced_Hotel_List_Interface } from "@/types/debounced_Hotel_List";
+import { DebouncedHotel } from "@/types/debouncedHotel";
 import {updateRangeSlider, updateBedType, updateRating, updateFacility} from "@/store/form-Search/formSearchSlice";
 import { useTranslations } from "next-intl";
 import { OtherSVG } from "../client_Svg/client_Svg";
@@ -252,7 +252,7 @@ export default function Form_Search_Pc () {
 
   // 18. 防抖搜尋 - 本地陣列狀態
   const timer_Ref = useRef<NodeJS.Timeout | null>(null);
-  const [debounced_Hotel, set_Debounced_Hotel] = useState<Debounced_Hotel_List_Interface[]>([]);
+  const [debounced_Hotel, set_Debounced_Hotel] = useState<DebouncedHotel[]>([]);
 
   // 19. 防抖搜尋 -函式
   const debounce_Search = async (event: React.ChangeEvent<HTMLInputElement>) => {
