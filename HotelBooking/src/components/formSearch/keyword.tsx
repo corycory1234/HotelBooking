@@ -19,14 +19,17 @@ export default function Keyword () {
   const redux_BedType = useSelector((state: RootState) => state.formSearch.bedType);
 
   // 2. 防抖搜尋 - 本地陣列狀態
-  const timer_Ref = useRef<NodeJS.Timeout | null>(null);
   const [debouncedHotelList, setDebouncedHotelList] = useState<DebouncedHotel[]>([]);
   
-  // 3. 防抖搜尋 - API請求
-  const debounce_Search = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if(timer_Ref.current) clearTimeout(timer_Ref.current);
+  // 3. Debounce - 計時器ID
+  const timerId = useRef<NodeJS.Timeout | null>(null);
 
-    timer_Ref.current = setTimeout(async () => {
+  // 4. 防抖搜尋 - API請求
+  const debounceSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    // 4.1 有計時器ID(Debounce 成功返回 搜尋飯店API), 若User又多打關鍵字, 就清除掉 計時器ID
+    if(timerId.current) clearTimeout(timerId.current);
+
+    timerId.current = setTimeout(async () => {
       const keyword = event.target.value.trim();
       if(!keyword) {
         setDebouncedHotelList([]); 
@@ -54,17 +57,19 @@ export default function Keyword () {
     },300)
   }
 
-  // 5. 防抖搜尋 - 布林開關
+  // 5. 防抖搜尋 - map渲染 布林開關
   const [debouncedBoolean, setDebouncedBoolean] = useState<boolean>(true);
+
+  // 6. 點擊 debounce 出來的指定飯店, Redux_keyword就更新, 並關掉 map渲染
   const hidden_Debounced_Hotel_List = (keyword: string) => {
     dispatch(updateKeyword(keyword));
     setDebouncedBoolean(false);
   };
 
-  // 6. next-intl i18n 翻譯
+  // 7. next-intl i18n 翻譯
   const t = useTranslations("FormSearch");
 
-  // 7. 防抖搜尋 - 布林開關 & 冒泡事件(點外層關掉) 
+  // 8. 防抖搜尋 - 布林開關 & 冒泡事件(點外層關掉) 
   const debouncedRef = useRef<HTMLDivElement>(null);
   useClickOutside(debouncedRef, () => setDebouncedBoolean(false))
   
@@ -80,7 +85,7 @@ export default function Keyword () {
       className="w-full py-2 px-4 rounded outline-none lg:border lg:border-gray bg-white"
       onChange={(event) => {
         dispatch(updateKeyword(event.target.value)),
-        debounce_Search(event)
+        debounceSearch(event)
       }}
       value={redux_keyword}
       name="destination"
