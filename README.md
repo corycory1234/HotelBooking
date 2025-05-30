@@ -21,7 +21,7 @@
 - **Global Reach**: Built-in i18n supporting English and Chinese.
 - **Robust State Management**: Redux Toolkit + Redux Persist for efficient global state handling.
 - **Custom Hook**: useClickOutside to use repetitive functions.
-- **Vitest**: Vitest for engsuring login Unit Test to push to the correct route and toast message.  
+- **Vitest**: Vitest for ensuring login Unit Test to push to the correct route and toast message.  
 - **Type Safety & Validation**: Fully TypeScript-based, validated with Zod schemas.
 - **Modern UI**: Responsive design crafted with Tailwind CSS.
 - **Seamless API Integration**: Node.js backend providing fast and reliable API services.
