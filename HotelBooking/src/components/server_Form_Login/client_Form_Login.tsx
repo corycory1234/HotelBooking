@@ -160,6 +160,13 @@ export default function Server_Form_Login () {
     try {
       set_Loading_Boolean(true);
       
+      // 調試用：檢查環境變數
+      console.log('Environment check:', {
+        hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+        hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 20) + '...',
+      });
+      
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
