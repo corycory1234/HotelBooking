@@ -48,10 +48,10 @@ export default function AuthCallback() {
         // 儲存使用者資料到 Redux
         dispatch(update_Access_Token(data));
         dispatch(update_Verify_Session({
+          success: true,
           data: {
             user: data.data.user
-          },
-          error: null
+          }
         }));
 
         toast.success('Google 登入成功！', { duration: 3000 });
