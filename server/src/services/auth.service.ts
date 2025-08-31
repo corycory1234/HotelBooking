@@ -309,6 +309,54 @@ export class AuthService extends BaseService {
         }
     }
 
+    // Google 登入
+    async googleLogin(data: GoogleLoginDTO) {
+        try {
+            // 使用 Google authorization code 進行登入
+            const { data: authData, error: authError } = 
+                await this.supabase.auth.exchangeCodeForSession(data.code);
+
+            if (authError) {
+                throw new Error(authError.message || "Google 登入失敗");
+            }
+
+            if (!authData.user) {
+                throw new Error("無法獲取用戶資訊");
+            }
+
+            // 檢查用戶是否已存在於資料庫
+            let user = await this.db.query.users.findFirst({
+                where: eq(users.id, authData.user.id),
+            });
+
+            // 如果用戶不存在，創建新用戶
+            if (!user) {
+                const userName = authData.user.user_metadata?.full_name || 
+                                authData.user.user_metadata?.name || 
+                                authData.user.email?.split('@')[0] || 
+                                'Google User';
+
+                const [newUser] = await this.db
+                    .insert(users)
+                    .values({
+                        id: authData.user.id,
+                        name: userName,
+                        userType: 'guest', // 預設為訪客
+                    })
+                    .returning();
+
+                user = newUser;
+            }
+
+            return {
+                user,
+                session: authData.session,
+            };
+        } catch (error: any) {
+            throw new Error(error.message || "Google 登入失敗");
+        }
+    }
+
     // 刷新 token
     async refreshSession(refreshToken: string) {
         try {

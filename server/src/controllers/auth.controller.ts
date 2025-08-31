@@ -199,4 +199,41 @@ export const authController = {
             });
         }
     },
+
+    async googleLogin(req: Request, res: Response) {
+        try {
+            const { code } = req.body;
+
+            if (!code) {
+                res.status(400).json({
+                    success: false,
+                    message: "缺少 Google authorization code",
+                });
+                return;
+            }
+
+            const result = await authService.googleLogin({ code });
+
+            res.json({
+                success: true,
+                data: {
+                    user: {
+                        id: result.user.id,
+                        name: result.user.name,
+                        userType: result.user.userType,
+                        email: result.session.user.email,
+                    },
+                    tokens: {
+                        access_token: result.session.access_token,
+                        refresh_token: result.session.refresh_token,
+                    },
+                },
+            });
+        } catch (error: any) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    },
 };
