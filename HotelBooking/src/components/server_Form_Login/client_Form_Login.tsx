@@ -160,11 +160,6 @@ export default function Server_Form_Login () {
     try {
       set_Loading_Boolean(true);
       
-      // 檢查 Supabase 環境變數
-      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-        throw new Error('Supabase configuration is missing');
-      }
-      
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
