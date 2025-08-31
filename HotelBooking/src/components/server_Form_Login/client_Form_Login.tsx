@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 import { update_Access_Token } from "@/store/access_Token/access_Token_Slice";
-// import { supabase } from "@/lib/supabase_Client";
+import { supabase } from "@/lib/supabase_Client";
 import { useTranslations } from "next-intl";
 // const initialState = { message: ""};
 
@@ -155,15 +155,33 @@ export default function Server_Form_Login () {
     }
   };
 
-  // 11. Google 第三方登入(先暫時關掉)
-  // const google_Login = async () => {
-  //   await supabase.auth.signInWithOAuth({
-  //     provider: "google",
-  //     options: {
-  //       redirectTo: redirect_Url
-  //     }
-  //   });
-  // };
+  // 11. Google 第三方登入
+  const google_Login = async () => {
+    try {
+      set_Loading_Boolean(true);
+      
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirect_Url)}`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          }
+        }
+      });
+
+      if (error) {
+        console.error('Google OAuth error:', error);
+        toast.error("Google 登入失敗");
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+      toast.error("Google 登入失敗");
+    } finally {
+      set_Loading_Boolean(false);
+    }
+  };
 
   // 12. next-intl i18n-翻譯
   const t = useTranslations("Auth");
@@ -210,12 +228,20 @@ export default function Server_Form_Login () {
         <Link href={'/forgetpassword'} className="text-primary font-semibold">
           <p className="text-gray hover:border-b-2 border-gray">{t ("Forget Password?")}</p>
         </Link>
-        {/* <p className="text-center text-sm">{t ("Or Sign in With")}</p>
-        <button className="bg-white rounded-lg py-3 px-6 lg:shadow-lg" type="button"
-          // onClick={google_Login}
-          >
-          <img src="/account/Google.svg" alt="" />
-        </button> */}
+        <p className="text-center text-sm">{t ("Or Sign in With")}</p>
+        <button 
+          className="bg-white rounded-lg py-3 px-6 lg:shadow-lg flex justify-center items-center gap-2 hover:shadow-xl transition-shadow" 
+          type="button"
+          onClick={google_Login}
+          disabled={loading_Boolean}
+        >
+          {loading_Boolean ? (
+            <OtherSVG name={"spin"} className="animate-spin w-5 h-auto"></OtherSVG>
+          ) : (
+            <img src="/account/Google.svg" alt="" />
+          )}
+          {loading_Boolean ? "登入中..." : ""}
+        </button>
       </div>
       
       
