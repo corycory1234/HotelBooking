@@ -19,38 +19,47 @@ export default function AuthCallback() {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
-        // 從 URL 取得授權碼
-        const code = searchParams.get('code');
         const redirect = searchParams.get('redirect') || '/';
 
-        if (!code) {
-          throw new Error('未收到授權碼');
-        }
-
-        // 呼叫後端 Google OAuth API
-        const login_Url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google-login`;
+        // 使用 Supabase 處理 OAuth 回調
+        const { data, error } = await supabase.auth.getSession();
         
-        const api_Response = await fetch(login_Url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify({ code }),
-        });
-
-        const data = await api_Response.json();
-
-        if (!api_Response.ok) {
-          throw new Error(data.message || 'Google 登入失敗');
+        if (error) {
+          throw new Error(error.message || 'Google 登入失敗');
         }
 
-        // 儲存使用者資料到 Redux
-        dispatch(update_Access_Token(data));
+        if (!data.session) {
+          throw new Error('未找到登入會話');
+        }
+
+        // 取得使用者資料
+        const user = data.session.user;
+        
+        // 儲存到 Redux
+        const userData = {
+          success: true,
+          data: {
+            user: {
+              id: user.id,
+              name: user.user_metadata?.full_name || user.email || '',
+              email: user.email || '',
+              userType: 'google',
+              createdAt: user.created_at || '',
+              updatedAt: user.updated_at || ''
+            },
+            tokens: {
+              access_token: data.session.access_token,
+              refresh_token: data.session.refresh_token,
+              expires_at: data.session.expires_at
+            }
+          }
+        };
+
+        dispatch(update_Access_Token(userData));
         dispatch(update_Verify_Session({
           success: true,
           data: {
-            user: data.data.user
+            user: userData.data.user
           }
         }));
 

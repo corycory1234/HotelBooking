@@ -17,9 +17,9 @@ export const getSupabaseClient = () => {
   return supabaseInstance;
 };
 
-// 為了向後兼容，保留 supabase 導出但使用 getter
-export const supabase = {
-  get auth() {
-    return getSupabaseClient().auth;
+// 為了向後兼容，保留 supabase 導出但使用 Proxy
+export const supabase = new Proxy({} as any, {
+  get(target, prop) {
+    return getSupabaseClient()[prop];
   }
-};
+});
