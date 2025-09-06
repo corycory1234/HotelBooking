@@ -1,6 +1,25 @@
 import { createClient } from '@supabase/supabase-js';
 
-// const supabase_Url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-// const supabase_Anon_Key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
+let supabaseInstance: any = null;
 
-// export const supabase = createClient(supabase_Url, supabase_Anon_Key);
+export const getSupabaseClient = () => {
+  if (!supabaseInstance) {
+    const supabase_Url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabase_Anon_Key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabase_Url || !supabase_Anon_Key) {
+      throw new Error('Supabase configuration is missing. Please check your environment variables.');
+    }
+
+    supabaseInstance = createClient(supabase_Url, supabase_Anon_Key);
+  }
+  
+  return supabaseInstance;
+};
+
+// 為了向後兼容，保留 supabase 導出但使用 Proxy
+export const supabase = new Proxy({} as any, {
+  get(target, prop) {
+    return getSupabaseClient()[prop];
+  }
+});
