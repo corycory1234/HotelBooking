@@ -117,7 +117,7 @@ export default function AuthCallback() {
         }
         
         // 設置 auth state change 監聽器
-        const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+        const { data: authListener } = supabase.auth.onAuthStateChange((event: string, session: any) => {
           console.log('🔔 Auth state change:', { event, hasSession: !!session });
           if (event === 'SIGNED_IN' && session) {
             console.log('✅ Auth listener detected sign in with session');

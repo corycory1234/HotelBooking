@@ -234,7 +234,7 @@ export default function Before_Login_Profile () {
       {loading_Boolean === false ? 
         <button type="button" className="bg-green-700 text-white rounded p-2"
           onClick={() => {
-            alert('登出按鈕被點擊了！'); // 強制彈窗測試
+            console.log('🔴🔴🔴 LOGOUT BUTTON CLICKED 🔴🔴🔴'); // 明顯的debug標記
             log_Out();
           }}>{t ("Logout")}
         </button>
