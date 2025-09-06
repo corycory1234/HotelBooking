@@ -14,8 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 import { update_Access_Token } from "@/store/access_Token/access_Token_Slice";
-import { tokenService } from "@/lib/token-service";
-import { cleanSensitiveStorageData } from "@/lib/storage-cleaner";
+// Note: Reverted to original Redux-based token storage approach
 import { supabase } from "@/lib/supabase_Client";
 import { useTranslations } from "next-intl";
 // const initialState = { message: ""};
@@ -97,38 +96,17 @@ export default function Server_Form_Login () {
         toast.success("Login OK", {duration: 3000});
         set_Response(data);
         
-        // Store token securely in Cookie
-        try {
-          const tokenData = tokenService.createTokenDataFromLogin(data);
-          tokenService.storeToken(tokenData);
-          
-          // Store only user data in Redux, without tokens
-          const userOnlyData = {
-            success: true,
-            data: {
-              user: data.data?.user || data.user || {},
-              tokens: {
-                access_token: '', // Don't store token in Redux
-                refresh_token: ''
-              }
-            }
-          };
-          dispatch(update_Access_Token(userOnlyData));
-          
-          // Clean any sensitive data from localStorage
-          cleanSensitiveStorageData();
-          
-          await sleep(1500); // Reduced sleep time
-          
-          // Verify token and get user info
-          await verify_Token();
-          await get_User_Info();
-          
-          router.push(redirect_Url);
-        } catch (error) {
-          console.error('Token storage failed:', error);
-          toast.error("登入處理失敗");
-        }
+        // Store token data directly in Redux (revert to original approach)
+        console.log('📱 Using Redux/localStorage for traditional login');
+        dispatch(update_Access_Token(data));
+        
+        await sleep(1500);
+        
+        // Verify token and get user info
+        await verify_Token();
+        await get_User_Info();
+        
+        router.push(redirect_Url);
       }
     } catch (error) {
       toast.error("Login Failed")
@@ -145,9 +123,8 @@ export default function Server_Form_Login () {
     const verify_session_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/verify-session";
 
     try {
-      // Get token from Cookie first, fallback to Redux
-      const cookieToken = tokenService.getAccessToken();
-      const token = cookieToken || redux_Access_Token;
+      // Use Redux token
+      const token = redux_Access_Token;
       
       if (!token) {
         console.warn('No token available for verification');
@@ -175,9 +152,8 @@ export default function Server_Form_Login () {
   const [user_Info, set_User_Info] = useState();
   const get_User_Info = async () => {
     try {
-      // Get token from Cookie first, fallback to Redux
-      const cookieToken = tokenService.getAccessToken();
-      const token = cookieToken || redux_Access_Token;
+      // Use Redux token
+      const token = redux_Access_Token;
       
       if (!token) {
         console.warn('No token available for user info');
@@ -203,13 +179,44 @@ export default function Server_Form_Login () {
 
   // 11. Google 第三方登入
   const google_Login = async () => {
+    console.log('🎯 Google login button clicked!'); // 基本測試日誌
     try {
       set_Loading_Boolean(true);
+      
+      // 獲取當前語言設定
+      const currentLocale = window.location.pathname.split('/')[1] || 'zh-TW';
+      
+      // 修正重定向URL，確保不是空字符串或"."
+      let finalRedirectUrl = redirect_Url;
+      if (!finalRedirectUrl || finalRedirectUrl === '.' || finalRedirectUrl === '/') {
+        finalRedirectUrl = `/${currentLocale}`;
+      }
+      
+      // 開發環境使用production callback，確保遠端部署穩定
+      const isDevelopment = window.location.origin.includes('localhost');
+      const targetOrigin = isDevelopment 
+        ? 'https://hotel-booking-delta-gray.vercel.app'  // 開發時也用production
+        : window.location.origin;
+      
+      const callbackUrl = `${targetOrigin}/${currentLocale}/auth/callback?redirect=${encodeURIComponent(finalRedirectUrl)}`;
+      
+      console.log('🔗 Original redirect_Url:', redirect_Url);
+      console.log('🔗 Final redirect URL:', finalRedirectUrl);
+      console.log('🔗 Google OAuth callback URL:', callbackUrl);
+      console.log('🔗 Current window origin:', window.location.origin);
+      console.log('🔗 Current locale:', currentLocale);
+      
+      // 檢查是否是本地開發環境
+      if (window.location.origin.includes('localhost')) {
+        console.warn('⚠️ Using localhost - make sure Supabase has localhost:3000 in redirect URLs');
+      }
+      
+      console.log('🚀 About to call supabase.auth.signInWithOAuth...');
       
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirect_Url)}`,
+          redirectTo: callbackUrl,
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
@@ -217,9 +224,42 @@ export default function Server_Form_Login () {
         }
       });
 
+      console.log('📋 OAuth response:', { data, error });
+
       if (error) {
-        console.error('Google OAuth error:', error);
-        toast.error("Google 登入失敗");
+        console.error('🚨 Google OAuth error details:', {
+          error,
+          message: error.message,
+          code: error.status,
+          details: error
+        });
+        toast.error(`Google 登入失敗: ${error.message}`);
+      } else if (data?.url) {
+        console.log('✅ OAuth call successful, got redirect URL');
+        console.log('OAuth data:', data);
+        console.log('🔄 Manually redirecting to:', data.url);
+        
+        // 嘗試多種重定向方式以確保兼容性
+        try {
+          // 方式1: 使用 window.location.assign (比較溫和)
+          window.location.assign(data.url);
+        } catch (e) {
+          console.log('Method 1 failed, trying method 2...');
+          try {
+            // 方式2: 使用 window.location.href
+            window.location.href = data.url;
+          } catch (e2) {
+            console.log('Method 2 failed, trying method 3...');
+            // 方式3: 使用 window.open 並立即切換到該頁面
+            const newWindow = window.open(data.url, '_self');
+            if (!newWindow) {
+              console.error('All redirect methods failed. Please check popup blocker.');
+              toast.error('重定向失敗，請檢查彈窗阻擋設定');
+            }
+          }
+        }
+      } else {
+        console.warn('⚠️ OAuth successful but no URL returned', data);
       }
     } catch (error) {
       console.error('Google login error:', error);

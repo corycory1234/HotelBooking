@@ -4,7 +4,11 @@
 export * from './access_Token';
 export * from './add_Hotel_Detail';
 export * from './booking_Detail';
-export * from './create_Hotel';
+// Re-export create_Hotel types with explicit naming to avoid conflicts
+export type { 
+  Hotel_List_Type as CreateHotelListType,
+  create_Hotel_Interface as CreateHotelInterface
+} from './create_Hotel';
 export * from './debouncedHotel';
 export * from './form_Search';
 export * from './hotel_Detail';

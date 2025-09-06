@@ -77,20 +77,29 @@ export const useAuthState = (): AuthState => {
     // Initial check
     checkAllTokens();
 
-    // Check every 30 seconds for token changes
-    const interval = setInterval(checkAllTokens, 30000);
+    // Check every 5 seconds for token changes during first minute, then every 30 seconds
+    const interval = setInterval(checkAllTokens, 5000);
+    
+    // After 60 seconds, change to longer interval
+    const longInterval = setTimeout(() => {
+      clearInterval(interval);
+      setInterval(checkAllTokens, 30000);
+    }, 60000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(longInterval);
+    };
   }, []);
 
-  // Determine authentication status (prioritize: cookie > supabase > redux)  
-  const isAuthenticated = !!(cookieToken || supabaseToken || reduxToken);
-  const accessToken = cookieToken || supabaseToken || reduxToken || null;
-  
-  // Special handling: if using Google OAuth, prioritize Supabase token
-  const isGoogleUser = reduxUser?.userType === 'google';
-  const finalAccessToken = isGoogleUser && supabaseToken ? supabaseToken : accessToken;
+  // Determine authentication status (prioritize: supabase > redux > cookie)  
+  // Note: Reverted priority since we're no longer using cookies for traditional login
+  const isAuthenticated = !!(supabaseToken || reduxToken || cookieToken);
+  const finalAccessToken = supabaseToken || reduxToken || cookieToken || null;
   const userType = reduxUser?.userType || null;
+  
+  // Check if user is authenticated via Google (Supabase OAuth)
+  const isGoogleUser = !!supabaseToken;
 
   console.log('🔐 Auth state (useAuthState):', { 
     isAuthenticated, 

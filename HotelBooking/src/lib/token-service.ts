@@ -97,7 +97,7 @@ export class TokenService {
    */
   public validateToken(tokenData?: SecureTokenData): TokenValidationResult {
     if (!tokenData) {
-      tokenData = this.getToken();
+      tokenData = this.getToken() || undefined;
     }
 
     if (!tokenData) {

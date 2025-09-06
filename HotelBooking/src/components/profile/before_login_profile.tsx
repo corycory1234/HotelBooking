@@ -20,6 +20,7 @@ import { usePathname as i18n_usePathname, useRouter as i18n_useRouter } from "@/
 import { useAuthState } from "@/hooks/useAuthState";
 import { tokenService } from "@/lib/token-service";
 import { cleanSensitiveStorageData } from "@/lib/storage-cleaner";
+import { logout } from "@/lib/logout";
 
 
 const language_List = ["zh-TW", "en-US"];
@@ -58,27 +59,26 @@ export default function Before_Login_Profile () {
 
   // 7. 登出
   const log_Out = async () => {
+    console.log('🔴 Log Out button clicked! (before_login_profile)'); // 確認按鈕被點擊
+    
     try {
       set_Loading_Boolean(true); // loading動畫開始
-      const log_Out_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/logout"
-      const response = await fetch(log_Out_Url, {
-        method: "POST",
-        headers: {"Content-Type": "application/json", "Authorization": `bearer ${accessToken}`},
-        credentials: 'include'
-      });
-      const data = await response.json();
       
-      // Clear cookie token
-      tokenService.clearToken();
+      console.log('🚪 Starting logout process...');
       
-      // Clean sensitive data from localStorage
-      cleanSensitiveStorageData();
-
-      // 3.1 登出後, 給Redux - Access_Token 初始值, 這邊寫很爛, 懶得想
-      // dispatch(update_Verify_Session({success: false,
-      //   data: {
-      //     user: {id: "",name: "",userType: "",createdAt: "",updatedAt: "",email: "",}
-      //   }}));
+      // 額外檢查localStorage中的token
+      console.log('🔍 Current localStorage keys:', Object.keys(localStorage));
+      const supabaseKeys = Object.keys(localStorage).filter(key => 
+        key.startsWith('sb-') || key.includes('auth') || key.includes('supabase')
+      );
+      console.log('🔍 Supabase-related keys before logout:', supabaseKeys);
+      
+      // 使用統一的登出函數，會正確清除所有token（包括Supabase）
+      await logout();
+      
+      console.log('✅ Logout function completed');
+      
+      // 重置Redux狀態
       dispatch(update_Access_Token({
         success: false,
         data: {
@@ -93,19 +93,16 @@ export default function Before_Login_Profile () {
             refresh_token: ''
           }
         }
-      }))
-
-      if(!response.ok) {
-        toast.error(data.message)
-      }else {
-        toast.success("Log Out Successfully");
-        router.push("/")
-      }
+      }));
+      
+      toast.success("Log Out Successfully");
+      router.push("/");
 
     } catch (error) {
-      console.log(error, "錯誤");
+      console.error("登出錯誤:", error);
+      toast.error("登出失敗，請重試");
     } finally {
-      set_Loading_Boolean(false); // loading動畫開始
+      set_Loading_Boolean(false); // loading動畫結束
     }
   }
 
@@ -126,7 +123,7 @@ export default function Before_Login_Profile () {
       method: "GET",
       headers: {
         "Content-Type": "application/json", 
-        "Authorization":`bearer ${redux_Access_Token}`},
+        "Authorization":`bearer ${accessToken}`},
       credentials: 'include'
     })
     const {data} = await response.json();
@@ -236,7 +233,10 @@ export default function Before_Login_Profile () {
 
       {loading_Boolean === false ? 
         <button type="button" className="bg-green-700 text-white rounded p-2"
-          onClick={log_Out}>{t ("Logout")}
+          onClick={() => {
+            alert('登出按鈕被點擊了！'); // 強制彈窗測試
+            log_Out();
+          }}>{t ("Logout")}
         </button>
         : 
         <button type="button" className="bg-softGray flex justify-center items-center rounded-lg p-3 gap-2" disabled>

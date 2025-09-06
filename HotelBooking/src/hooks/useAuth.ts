@@ -142,17 +142,16 @@ export const useAuth = (): UseAuthReturn => {
 
   // Create user object from Redux and token data
   const user: AuthUser | null = useMemo(() => {
-    if (!hasValidToken || !reduxUser.userInfo) {
+    if (!hasValidToken || !reduxUser.data.user) {
       return null;
     }
 
     const loginType = tokenService.getLoginType();
     
     return {
-      id: reduxUser.userInfo.id || '',
-      email: reduxUser.userInfo.email || '',
-      name: reduxUser.userInfo.name || '',
-      avatar_url: reduxUser.userInfo.avatar_url,
+      id: reduxUser.data.user.id || '',
+      email: reduxUser.data.user.email || '',
+      name: reduxUser.data.user.name || '',
       login_type: loginType || 'traditional'
     };
   }, [hasValidToken, reduxUser, tokenService]);
