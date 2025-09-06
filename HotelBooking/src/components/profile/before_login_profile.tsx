@@ -17,6 +17,10 @@ import { zod_Email_Response_Interface } from "@/types/zod_Error_Response";
 import Image from "next/image";
 import {useLocale, useTranslations} from 'next-intl';
 import { usePathname as i18n_usePathname, useRouter as i18n_useRouter } from "@/i18n/routing";
+import { useAuthState } from "@/hooks/useAuthState";
+import { tokenService } from "@/lib/token-service";
+import { cleanSensitiveStorageData } from "@/lib/storage-cleaner";
+import { logout } from "@/lib/logout";
 
 
 const language_List = ["zh-TW", "en-US"];
@@ -45,9 +49,9 @@ export default function Before_Login_Profile () {
     set_Switch_Boolean(value)
   };
 
-  // 5. Redux - 查看是否登入狀態
+  // 5. 整合的認證狀態 (Cookie + Redux)
+  const { isAuthenticated, accessToken, loading } = useAuthState();
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
   const redux_User_Info = useSelector((state: RootState) => state.access_Token.data.user);
 
   // 6. loading 布林值
@@ -57,19 +61,11 @@ export default function Before_Login_Profile () {
   const log_Out = async () => {
     try {
       set_Loading_Boolean(true); // loading動畫開始
-      const log_Out_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/logout"
-      const response = await fetch(log_Out_Url, {
-        method: "POST",
-        headers: {"Content-Type": "application/json", "Authorization": `bearer ${redux_Access_Token}`},
-        credentials: 'include'
-      });
-      const data = await response.json();
-
-      // 3.1 登出後, 給Redux - Access_Token 初始值, 這邊寫很爛, 懶得想
-      // dispatch(update_Verify_Session({success: false,
-      //   data: {
-      //     user: {id: "",name: "",userType: "",createdAt: "",updatedAt: "",email: "",}
-      //   }}));
+      
+      // 使用統一的登出函數，會正確清除所有token（包括Supabase）
+      await logout();
+      
+      // 重置Redux狀態
       dispatch(update_Access_Token({
         success: false,
         data: {
@@ -84,19 +80,16 @@ export default function Before_Login_Profile () {
             refresh_token: ''
           }
         }
-      }))
-
-      if(!response.ok) {
-        toast.error(data.message)
-      }else {
-        toast.success("Log Out Successfully");
-        router.push("/")
-      }
+      }));
+      
+      toast.success("Log Out Successfully");
+      router.push("/");
 
     } catch (error) {
-      console.log(error, "錯誤");
+      console.error("登出錯誤:", error);
+      toast.error("登出失敗，請重試");
     } finally {
-      set_Loading_Boolean(false); // loading動畫開始
+      set_Loading_Boolean(false); // loading動畫結束
     }
   }
 
@@ -117,7 +110,7 @@ export default function Before_Login_Profile () {
       method: "GET",
       headers: {
         "Content-Type": "application/json", 
-        "Authorization":`bearer ${redux_Access_Token}`},
+        "Authorization":`bearer ${accessToken}`},
       credentials: 'include'
     })
     const {data} = await response.json();
@@ -191,7 +184,11 @@ export default function Before_Login_Profile () {
     <div className="bg-primary flex flex-col items-center gap-2 p-8 lg:hidden">
 
       {/** 頭像更換 */}
-      {redux_Access_Token === '' ? 
+      {loading ? (
+        <div className="rounded-full bg-softGray p-2 animate-pulse"> 
+          <ProfileSVG name={"user"} className="w-10 h-auto opacity-50"></ProfileSVG>
+        </div>
+      ) : !isAuthenticated ? 
         <div className="rounded-full bg-softGray p-2"> 
           <ProfileSVG name={"user"} className="w-10 h-auto"></ProfileSVG>
         </div>
@@ -203,7 +200,9 @@ export default function Before_Login_Profile () {
       {/** 頭像更換 */}
       
       
-      {redux_Access_Token === '' ? <>
+      {loading ? (
+        <div className="text-white animate-pulse">Loading...</div>
+      ) : !isAuthenticated ? <>
         {/** 登入 */}
         <p className="text-white">{t ("Sign in to see deals and manage your trip")}</p>
         <Link href={"/auth"}>
@@ -256,7 +255,7 @@ export default function Before_Login_Profile () {
     
     {/** 個人資料 */}
       <div className="flex justify-between cursor-pointer" 
-        onClick={() => redux_Access_Token !== '' ? open_User_Info_Modal() : please_Login()}>
+        onClick={() => isAuthenticated ? open_User_Info_Modal() : please_Login()}>
         <div className="flex gap-2">
           <ProfileSVG name={"user"} className="w-5 h-auto"></ProfileSVG>
           <p>{t ("Personal Details")}</p>
@@ -295,7 +294,7 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 我的訂單  */}
-    {redux_Access_Token === '' ? 
+    {!isAuthenticated ? 
       <div className="hidden lg:block" onClick={please_Login}>
         <div className="flex justify-between">
           <div className="flex gap-2">
@@ -347,7 +346,7 @@ export default function Before_Login_Profile () {
     <div className="border-b-2 border-softGray lg:hidden"></div>
 
     {/** 我的評論  */}
-      {redux_Access_Token === '' ? 
+      {!isAuthenticated ? 
         <div className="flex justify-between cursor-pointer" onClick={please_Login}>
           <div className="flex gap-2">
             <ProfileSVG name={"review"} className="w-5 h-auto"></ProfileSVG>
@@ -438,7 +437,12 @@ export default function Before_Login_Profile () {
     
     {/** PC桌機 - 登入登出  */}
     <div className="hidden lg:block lg:pt-4 lg:px-2">
-      {redux_Access_Token === '' ? 
+      {loading ? (
+        <div className="animate-pulse flex items-center gap-2">
+          <div className="w-4 h-4 bg-gray-300 rounded"></div>
+          <div className="w-16 h-4 bg-gray-300 rounded"></div>
+        </div>
+      ) : !isAuthenticated ? 
         <Link href={"/auth"} >
           <div className="flex justify-between">
             <div className="flex gap-2">

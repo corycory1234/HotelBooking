@@ -5,6 +5,7 @@ import { OtherSVG } from "../client_Svg/client_Svg";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { logout } from "@/lib/logout";
 
 const language_List = ["zh-TW", "en-US"];
 
@@ -27,26 +28,33 @@ export default function After_Login_Profile () {
 
   // 3. 登出
   const log_Out = async () => {
+    console.log('🔴 Log Out button clicked!'); // 確認按鈕被點擊
+    
     try {
       set_Loading_Boolean(true); // loading動畫開始
-      const log_Out_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/logout"
-      const response = await fetch(log_Out_Url, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-      });
-      const data = await response.json();
-      console.log(data, "登出返回response");
-      if(!response.ok) {
-        toast.error(data.message)
-      }else {
-        toast.success("Log Out Successfully");
-        router.push("/")
-      }
+      
+      console.log('🚪 Starting logout process...');
+      
+      // 額外檢查localStorage中的token
+      console.log('🔍 Current localStorage keys:', Object.keys(localStorage));
+      const supabaseKeys = Object.keys(localStorage).filter(key => 
+        key.startsWith('sb-') || key.includes('auth') || key.includes('supabase')
+      );
+      console.log('🔍 Supabase-related keys before logout:', supabaseKeys);
+      
+      // 使用統一的登出函數，會正確清除所有token
+      await logout();
+      
+      console.log('✅ Logout function completed');
+      
+      toast.success("Log Out Successfully");
+      router.push("/");
 
     } catch (error) {
-      console.log(error, "錯誤");
+      console.error("登出錯誤:", error);
+      toast.error("登出失敗，請重試");
     } finally {
-      set_Loading_Boolean(false); // loading動畫開始
+      set_Loading_Boolean(false); // loading動畫結束
     }
   }
   

@@ -120,6 +120,7 @@ const check_Offer = (offer_Id: string) => {
 const t = useTranslations('HomePage');
 const t_Offer = useTranslations("OfferList");
 
+
 // 5. 查看熱門地點 (跳轉HotelList頁面)
 const check_Popular_Destination = (popular_Destination: string) => {
 

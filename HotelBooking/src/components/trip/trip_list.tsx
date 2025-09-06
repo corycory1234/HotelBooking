@@ -9,12 +9,13 @@ import Refresh_Token from "@/utils/refresh_Token";
 import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useAuthState } from "@/hooks/useAuthState";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
 
 export default function Trip_List () {
-  // 0 . Redux - 令牌
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  // 0. 整合的認證狀態 (Cookie + Supabase + Redux)
+  const { accessToken } = useAuthState();
 
   // 1. 當前頁面 - 頂端文字，props傳遞給 <Previous_Page>
   const current_Page_Name = "My Bookings"
@@ -62,7 +63,7 @@ export default function Trip_List () {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
+          "Authorization": `bearer ${accessToken}`
         },
         credentials: 'include'
       });
