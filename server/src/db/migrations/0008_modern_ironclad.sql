@@ -1,0 +1,1 @@
+ALTER TABLE "bookings" ADD COLUMN "offer_id" varchar(255);
