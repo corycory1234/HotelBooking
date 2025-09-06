@@ -59,24 +59,11 @@ export default function Before_Login_Profile () {
 
   // 7. 登出
   const log_Out = async () => {
-    console.log('🔴 Log Out button clicked! (before_login_profile)'); // 確認按鈕被點擊
-    
     try {
       set_Loading_Boolean(true); // loading動畫開始
       
-      console.log('🚪 Starting logout process...');
-      
-      // 額外檢查localStorage中的token
-      console.log('🔍 Current localStorage keys:', Object.keys(localStorage));
-      const supabaseKeys = Object.keys(localStorage).filter(key => 
-        key.startsWith('sb-') || key.includes('auth') || key.includes('supabase')
-      );
-      console.log('🔍 Supabase-related keys before logout:', supabaseKeys);
-      
       // 使用統一的登出函數，會正確清除所有token（包括Supabase）
       await logout();
-      
-      console.log('✅ Logout function completed');
       
       // 重置Redux狀態
       dispatch(update_Access_Token({
@@ -233,10 +220,7 @@ export default function Before_Login_Profile () {
 
       {loading_Boolean === false ? 
         <button type="button" className="bg-green-700 text-white rounded p-2"
-          onClick={() => {
-            console.log('🔴🔴🔴 LOGOUT BUTTON CLICKED 🔴🔴🔴'); // 明顯的debug標記
-            log_Out();
-          }}>{t ("Logout")}
+          onClick={log_Out}>{t ("Logout")}
         </button>
         : 
         <button type="button" className="bg-softGray flex justify-center items-center rounded-lg p-3 gap-2" disabled>

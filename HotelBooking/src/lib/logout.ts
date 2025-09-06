@@ -23,15 +23,11 @@ export const logout = async (): Promise<void> => {
     
     // Clear any client-side storage (if any)
     if (typeof window !== 'undefined') {
-      console.log('🧹 Cleaning localStorage during logout...');
-      
       // Find and remove all Supabase auth keys
       const allKeys = Object.keys(localStorage);
       const supabaseKeys = allKeys.filter(key => 
         key.startsWith('sb-') && key.includes('auth')
       );
-      
-      console.log('🔍 Found Supabase keys to remove:', supabaseKeys);
       
       // Clear localStorage items that might contain sensitive data
       const keysToRemove = [
@@ -45,21 +41,18 @@ export const logout = async (): Promise<void> => {
         try {
           localStorage.removeItem(key);
           sessionStorage.removeItem(key);
-          console.log(`✅ Cleared storage key: ${key}`);
         } catch (error) {
           console.warn(`Failed to clear storage key ${key}:`, error);
         }
       });
       
-      // Double-check: log remaining keys after cleanup
+      // Check if any auth tokens remain (for debugging)
       const remainingKeys = Object.keys(localStorage).filter(key => 
         key.startsWith('sb-') || key.includes('auth') || key.includes('token')
       );
       
       if (remainingKeys.length > 0) {
         console.warn('⚠️ Some auth-related keys still remain:', remainingKeys);
-      } else {
-        console.log('✅ All auth tokens cleared from localStorage');
       }
     }
     
