@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useTranslations } from "next-intl";
 import { usePathname as i18n_usePathname } from "@/i18n/routing";
+import { useAuthState } from "@/hooks/useAuthState";
 
 const menu = [
   {name: 'Home', svgIcon: 
@@ -43,10 +44,8 @@ const dashboard = {
 export default function Menu () {
   const pathName = usePathname();
 
-  // 1. Redux - 查看是否登入
-  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
-  const redux_User_Type = useSelector((state: RootState) => state.access_Token.data.user.userType)
+  // 1. 整合的認證狀態 (Cookie + Redux)
+  const { isAuthenticated, accessToken, userType, loading } = useAuthState();
 
   // 2. next-intl i18n 翻譯
   const t = useTranslations("Menu");
@@ -54,13 +53,18 @@ export default function Menu () {
   // 3. i18n 的 Pathname
   const i18n_PathName = i18n_usePathname();
 
+  // 4. Show loading state if still checking authentication
+  if (loading) {
+    return null; // or a loading spinner
+  }
+
   return <>
     <div className="bg-white flex items-center p-4  
       fixed bottom-0 left-0 right-0 z-50 lg:hidden">
 
       <div className="flex-1 flex justify-between">
         {menu.map((item, index) => 
-          <Link href={`${redux_Access_Token === '' && 
+          <Link href={`${!isAuthenticated && 
             item.name === 'Trip' ? '/auth' : item.url}`} 
             className="flex flex-col items-center gap-2" key={index}>
             <div className={`${item.url === i18n_PathName ? 'text-primary' : ''}`}>
@@ -71,7 +75,7 @@ export default function Menu () {
         )}
 
       {/** 僅有hotelier才可進後台頁面 */}
-        {redux_User_Type === "hotelier" && 
+        {userType === "hotelier" && 
         <Link href={`${dashboard.url}`} className="flex flex-col items-center gap-2">         
           <div className={`${dashboard.url === i18n_PathName ? 'text-primary' : ''}`}>
             {dashboard.svgIcon}

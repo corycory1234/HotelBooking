@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/store/store';
 import { update_Access_Token } from '@/store/access_Token/access_Token_Slice';
 import { update_Verify_Session } from '@/store/auth/isAuthenticated_Slice';
+// Note: Google OAuth tokens are managed by Supabase in localStorage
+// Traditional login tokens use cookies via token-service
 
 export default function AuthCallback() {
   const router = useRouter();
@@ -21,8 +23,14 @@ export default function AuthCallback() {
       try {
         const redirect = searchParams.get('redirect') || '/';
 
-        // 使用 Supabase 處理 OAuth 回調
+        console.log('🚀 OAuth callback started');
+        
+        // 等待一下讓 Supabase 處理完 OAuth callback
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // 處理 OAuth 回調，獲取 session
         const { data, error } = await supabase.auth.getSession();
+        console.log('📋 Session check:', { hasSession: !!data.session, hasToken: !!data.session?.access_token });
         
         if (error) {
           throw new Error(error.message || 'Google 登入失敗');
@@ -55,6 +63,9 @@ export default function AuthCallback() {
           }
         };
 
+        // Store user data in Redux (without tokens - let Supabase manage tokens in localStorage)
+        console.log('📱 Using Supabase localStorage for token management');
+        
         dispatch(update_Access_Token(userData));
         dispatch(update_Verify_Session({
           success: true,

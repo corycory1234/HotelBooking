@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "@/store/store";
 import { update_Verify_Session } from "@/store/auth/isAuthenticated_Slice";
 import { update_Access_Token } from "@/store/access_Token/access_Token_Slice";
+import { tokenService } from "@/lib/token-service";
+import { cleanSensitiveStorageData } from "@/lib/storage-cleaner";
 import { supabase } from "@/lib/supabase_Client";
 import { useTranslations } from "next-intl";
 // const initialState = { message: ""};
@@ -54,7 +56,7 @@ export default function Server_Form_Login () {
   // 5. 監聽 API返回 response 之數據
   const [response, set_Response] = useState();
   
-  // 5.1 Redux - 令牌
+  // 5.1 Redux - 令牌 (fallback, prefer cookie token)
   const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
 
   // 6. loading 布林開關 
@@ -94,13 +96,39 @@ export default function Server_Form_Login () {
       } else {
         toast.success("Login OK", {duration: 3000});
         set_Response(data);
-        dispatch(update_Access_Token(data));
-        await sleep(3000);
-        router.push(redirect_Url);
-        // setTimeout(async () => {
-        //   await verify_Token();
-        //   await get_User_Info();
-        // }, 5000)
+        
+        // Store token securely in Cookie
+        try {
+          const tokenData = tokenService.createTokenDataFromLogin(data);
+          tokenService.storeToken(tokenData);
+          
+          // Store only user data in Redux, without tokens
+          const userOnlyData = {
+            success: true,
+            data: {
+              user: data.data?.user || data.user || {},
+              tokens: {
+                access_token: '', // Don't store token in Redux
+                refresh_token: ''
+              }
+            }
+          };
+          dispatch(update_Access_Token(userOnlyData));
+          
+          // Clean any sensitive data from localStorage
+          cleanSensitiveStorageData();
+          
+          await sleep(1500); // Reduced sleep time
+          
+          // Verify token and get user info
+          await verify_Token();
+          await get_User_Info();
+          
+          router.push(redirect_Url);
+        } catch (error) {
+          console.error('Token storage failed:', error);
+          toast.error("登入處理失敗");
+        }
       }
     } catch (error) {
       toast.error("Login Failed")
@@ -117,11 +145,20 @@ export default function Server_Form_Login () {
     const verify_session_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/verify-session";
 
     try {
+      // Get token from Cookie first, fallback to Redux
+      const cookieToken = tokenService.getAccessToken();
+      const token = cookieToken || redux_Access_Token;
+      
+      if (!token) {
+        console.warn('No token available for verification');
+        return;
+      }
+
       const response = await fetch(verify_session_Url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
+          "Authorization": `bearer ${token}`
         },
         credentials: 'include' // 同源政策 CORS 需要
       });
@@ -138,12 +175,21 @@ export default function Server_Form_Login () {
   const [user_Info, set_User_Info] = useState();
   const get_User_Info = async () => {
     try {
+      // Get token from Cookie first, fallback to Redux
+      const cookieToken = tokenService.getAccessToken();
+      const token = cookieToken || redux_Access_Token;
+      
+      if (!token) {
+        console.warn('No token available for user info');
+        return;
+      }
+
       const user_Info_Url =  process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/me";
       const response = await fetch(user_Info_Url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
+          "Authorization": `bearer ${token}`
         },
         credentials: 'include' // 同源政策 CORS 需要
       });

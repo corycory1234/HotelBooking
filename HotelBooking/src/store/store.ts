@@ -42,8 +42,7 @@ const persistConfig: PersistConfig<RootState> = {
     "verify_Session", 
     "my_Collection", 
     "hotel_List2", 
-    "traveler_Info",
-    "access_Token"
+    "traveler_Info"
   ],
   // 2.1 你也可以只想持久化部分 slice，例如：whitelist: ["formSearch"] 或 blacklist: ["number"]
   transforms: [formSearch_Transform]

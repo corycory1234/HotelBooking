@@ -3,6 +3,8 @@
 // import { Submit_Traveler_Info } from "@/actions/traveler_Info";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useAuthState } from "@/hooks/useAuthState";
+import { useApiRequest } from "@/hooks/useApiRequest";
 import { z } from "zod";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -25,8 +27,10 @@ interface Zod_Response_Interface {
 export default function Server_Form_Traveler_Info() {
   const router = useRouter();
 
-  // 1. Redux - 查看是否登入
-  const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
+  // 1. 整合的認證狀態 (Cookie + Redux)
+  const { isAuthenticated, accessToken } = useAuthState();
+  const { requireAuth, makeAuthenticatedRequest } = useApiRequest();
+  console.log('📝 TravelerInfo auth check:', { isAuthenticated, hasToken: !!accessToken });
 
   // 2. zod 校驗規則
   const schema = z.object({
@@ -105,10 +109,10 @@ export default function Server_Form_Traveler_Info() {
         })
       } 
       // 7.3  沒有 token, 就跳回'/auth', 但記得要給「當下頁面的搜尋參數」, 好讓登入後, 返回「旅客填寫表單」 
-      else if (redux_Verify_Session.success === false) {
-        toast.error("Please Login First", {icon: "⚠️", duration: 2000})
+      else if (!requireAuth()) {
         await sleep(2000);
         router.push(`/auth?redirect=${encodeURIComponent('/travelerinfo')}`);
+        return;
       } 
       else {
         // 7.3 暫時校驗成功, 就跳轉 信用卡頁面
