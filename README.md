@@ -20,7 +20,7 @@
 - **Cached**: Enhanced API performance using Next.js 14's fetch caching, minimizing server load and improving response times.
 - **Global Reach**: Built-in i18n supporting English and Chinese.
 - **Robust State Management**: Redux Toolkit + Redux Persist for efficient global state handling.
-- **User Authentication**: Integrated Google OAuth 2.0 to provide a secure and convenient way for users to log in.
+- **AI Agent Claude Code**: Integrated Google OAuth 2.0 to provide a secure and convenient way for users to log in.
 - **Custom Hook**: useClickOutside to use repetitive functions.
 - **Vitest**: Vitest for ensuring login Unit Test to push to the correct route and toast message.  
 - **Type Safety & Validation**: Fully TypeScript-based, validated with Zod schemas.
@@ -55,6 +55,7 @@
 | Styling         | Tailwind CSS, CSS Modules             |
 | Internationalization | Next-Intl                        |
 | Maps            | react-leaflet                         |
+| Claude Code     | Use Claude Code for Googlgle OAuth 2.0|
 
 ### **Backend**
 | Category        | Technologies                          |
