@@ -9,7 +9,7 @@
 ## 🖥️ Quick Access
 **Live Demo Environment**
 - Guest Portal: https://hotel-booking-delta-gray.vercel.app/
-- Test Account: `testgotour@gmail.com` / `Abc123456`
+- **Test Account**: `testgotour@gmail.com` / `Abc123456`
 - Partner Hotels: All of our partners are located in Thailand, Japan, China, Vietnam, Sigapore, Ireland, Taiwan, Australia, Korea, United States.
 
 ## 🚀 Project Highlights
@@ -20,6 +20,7 @@
 - **Cached**: Enhanced API performance using Next.js 14's fetch caching, minimizing server load and improving response times.
 - **Global Reach**: Built-in i18n supporting English and Chinese.
 - **Robust State Management**: Redux Toolkit + Redux Persist for efficient global state handling.
+- **User Authentication**: Integrated Google OAuth 2.0 to provide a secure and convenient way for users to log in.
 - **Custom Hook**: useClickOutside to use repetitive functions.
 - **Vitest**: Vitest for ensuring login Unit Test to push to the correct route and toast message.  
 - **Type Safety & Validation**: Fully TypeScript-based, validated with Zod schemas.
