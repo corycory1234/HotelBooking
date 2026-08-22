@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from 'next-intl/middleware';
 import {routing} from './i18n/routing';
+import { updateSession } from './lib/supabase/middleware';
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
+
+export default async function middleware(request: NextRequest) {
+  // next-intl builds the actual response (locale rewrite/redirect); we
+  // then attach any refreshed Supabase session cookies onto it.
+  const response = intlMiddleware(request);
+  return updateSession(request, response);
+}
 
 export const config = {
-  // Match only internationalized pathnames
-  // matcher: ['/', '/(en|zh-TW)/:path*']
-  matcher: ['/((?!api|_next|.*\\..*).*)'],
+  // Match only internationalized pathnames. `/auth/callback` is excluded so
+  // next-intl never rewrites/redirects the OAuth redirect_uri registered
+  // with Google - the route handler manages its own session cookies.
+  matcher: ['/((?!api|_next|auth/callback|.*\\..*).*)'],
 };
 
 // export function middleware (request: NextRequest) {

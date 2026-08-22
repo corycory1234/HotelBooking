@@ -15,6 +15,7 @@ import how_Many_Nights from "@/utils/how_Many_Nights";
 import Offer_List_Json from "@/fakeData/offer_List.json";
 import Payment_Progress_Bar from "@/components/payment_Progress_Bar/payment_Progress_Bar";
 import { useTranslations } from "next-intl";
+import { useApiRequest } from "@/hooks/useApiRequest";
 
 
 // 0. 三家信用卡
@@ -38,7 +39,7 @@ export default function CreditCard() {
 
   // 3. Redux - 指定飯店數據
   const redux_The_Hotel = useSelector((state: RootState) => state.hotel_Detail);
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  const { makeAuthenticatedRequest } = useApiRequest();
 
   const router = useRouter()
 
@@ -128,13 +129,8 @@ export default function CreditCard() {
 
         // 10.3 建立新訂單 API
         const booking_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/bookings";
-        const response = await fetch(booking_Url, {
+        const response = await makeAuthenticatedRequest(booking_Url, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `bearer ${redux_Access_Token}`
-          },
-          credentials: 'include',
           body: JSON.stringify({
             hotelId: redux_The_Hotel.hotel_Id,
             roomId: redux_Booked_Room.roomType_Id,
