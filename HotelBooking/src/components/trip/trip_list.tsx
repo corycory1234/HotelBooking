@@ -9,13 +9,15 @@ import Refresh_Token from "@/utils/refresh_Token";
 import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useApiRequest } from "@/hooks/useApiRequest";
 import { useAuthState } from "@/hooks/useAuthState";
 
 const booking_Buttons = ["Upcoming", "Completed", "Cancelled"];
 
 export default function Trip_List () {
-  // 0. 整合的認證狀態 (Cookie + Supabase + Redux)
-  const { accessToken } = useAuthState();
+  // 0. 整合的認證狀態 (Cookie + Supabase + Redux), 走 server-side proxy 帶 token
+  const { makeAuthenticatedRequest } = useApiRequest();
+  const { isAuthenticated } = useAuthState();
 
   // 1. 當前頁面 - 頂端文字，props傳遞給 <Previous_Page>
   const current_Page_Name = "My Bookings"
@@ -56,17 +58,10 @@ export default function Trip_List () {
   const my_Bookings_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/bookings/my-bookings";
   const [my_Booking_List, set_My_Booking_List] = useState<any[]>([]);
   const get_My_Booking = async () => {
+    if (!isAuthenticated) return;
     try {
       set_Show_Booking_List(false);
-      // await Refresh_Token();
-      const response = await fetch(my_Bookings_Url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${accessToken}`
-        },
-        credentials: 'include'
-      });
+      const response = await makeAuthenticatedRequest(my_Bookings_Url, { method: "GET" });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();
       set_My_Booking_List(result.data)
@@ -80,7 +75,7 @@ export default function Trip_List () {
   // 8. 一進 /trip, 串接我的訂單 - API
   useEffect(() => {
     get_My_Booking()
-  },[]);
+  },[isAuthenticated]);
   // useEffect(() => {
   //   console.log(my_Booking_List, "我的訂單, API返回數據");
   // },[my_Booking_List]);

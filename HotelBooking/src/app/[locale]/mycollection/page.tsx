@@ -13,22 +13,22 @@ import StarRating from "@/components/starrating/star-Rating";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { useAuthState } from "@/hooks/useAuthState";
+import { useApiRequest } from "@/hooks/useApiRequest";
 
 export default function My_Collection () {
+
+  const { isAuthenticated } = useAuthState();
+  const { makeAuthenticatedRequest } = useApiRequest();
 
   // 0. 一進 /mycollection, 串接API
   const my_Collection_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/favorites";
   const [collection_List, set_Collection_List] = useState<any[]>([]);
   const fetch_My_Collection = async () => {
+    if (!isAuthenticated) return;
     try {
       set_Is_Loading(true)
-      const response = await fetch(my_Collection_Url, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
-        credentials: "include"
-      });
+      const response = await makeAuthenticatedRequest(my_Collection_Url, { method: "GET" });
       if(!response.ok) {throw new Error("SERVER ERROR~~!")}
       const result = await response.json()
       set_Collection_List(result);
@@ -40,7 +40,7 @@ export default function My_Collection () {
   };
   useEffect(() => {
     fetch_My_Collection()
-  },[])
+  },[isAuthenticated])
   // useEffect(() => {
   //   console.log(collection_List, "我的最愛 - API返回");
   // },[collection_List])
@@ -56,7 +56,6 @@ export default function My_Collection () {
   // const [collection_List, set_Collection_List] = useState(My_Collection_Json);
   const redux_Collection_List = useSelector((state: RootState) => state.my_Collection.collection_List);
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token)
   // useEffect(() => {
   //   dispatch(update_My_Collection(My_Collection_Json))
   // },[])
@@ -78,7 +77,7 @@ export default function My_Collection () {
   // };
   const delete_The_Collection = async (item: add_Hotel_Detail_Interface) => {
     // 5.1 沒登入, 不給收藏
-    if(redux_Access_Token === '') { 
+    if(!isAuthenticated) {
       toast.error("Please Login First", {icon: "⚠️", duration: 2000})
       return;
     };
@@ -87,13 +86,8 @@ export default function My_Collection () {
       set_Is_Loading(true)
       // 5.2 暫時 先切換愛心 優先 打API
       dispatch(delete_My_Collection({hotel_Id: item.hotel_Id as string, isCollected:item.isCollected}));
-      const response = await fetch(delete_Collectiono_Url, {
+      const response = await makeAuthenticatedRequest(delete_Collectiono_Url, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
-        credentials: "include",
         body: JSON.stringify({
           hotelId: item.hotel_Id
         })

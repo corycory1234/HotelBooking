@@ -10,10 +10,13 @@ import { FiveStarSVG } from "@/components/client_Svg/client_Svg";
 import { useTranslations } from "next-intl";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { useAuthState } from "@/hooks/useAuthState";
 
 export default function My_Review () {
-  // 0. Redux - 令牌
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token)
+  // 0. 走 server-side proxy 帶 token
+  const { makeAuthenticatedRequest } = useApiRequest();
+  const { isAuthenticated } = useAuthState();
 
   // 1. 當前頁面
   const current_Page_Name = "My Review";
@@ -87,17 +90,12 @@ export default function My_Review () {
     event.preventDefault();
     try {
       const send_Review_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/reviews/${booking_Id}`
-      const response = await fetch(send_Review_Url, {
+      const response = await makeAuthenticatedRequest(send_Review_Url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
         body: JSON.stringify({
           rating: hover_Star,
           comment: review
         }),
-        credentials: "include"
       });
       if(!response.ok) {throw new Error("SERVER ERROR~~!")};
       const result = await response.json();
@@ -144,16 +142,10 @@ export default function My_Review () {
   const [my_Booking_List, set_My_Booking_List] = useState<any[]>([]);
   const [review_List, set_Review_List] = useState<any[]>([]);
   const get_My_Booking = async () => {
+    if (!isAuthenticated) return;
     try {
       set_show_Review_List(false);
-      const response = await fetch(my_Bookings_Url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
-        credentials: 'include'
-      });
+      const response = await makeAuthenticatedRequest(my_Bookings_Url, { method: "GET" });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();
       set_My_Booking_List(result.data);
@@ -173,7 +165,7 @@ export default function My_Review () {
   // 14. 一進 /myreview, 串接我的訂單 - API
   useEffect(() => {
     get_My_Booking()
-  },[]);
+  },[isAuthenticated]);
   useEffect(() => {
     get_Review_List();
   },[my_Booking_List]);

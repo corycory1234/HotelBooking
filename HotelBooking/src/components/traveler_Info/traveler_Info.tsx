@@ -16,6 +16,7 @@ import StarRating from "../starrating/star-Rating";
 import how_Many_Nights from "@/utils/how_Many_Nights";
 import Payment_Progress_Bar from "../payment_Progress_Bar/payment_Progress_Bar";
 import { useTranslations } from "next-intl";
+import { useAuthState } from "@/hooks/useAuthState";
 
 
 interface Zod_Response_Interface {
@@ -40,7 +41,7 @@ export default function Traveler_Info () {
   // 1. Redux - 查看是否登入
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
   const redux_Traveler_Name = useSelector((state: RootState) => state.traveler_Info.name);
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  const { isAuthenticated } = useAuthState();
 
   // 2. zod 校驗規則
   const schema = z.object({
@@ -113,8 +114,8 @@ export default function Traveler_Info () {
           phoneError: fieldErrors.phone?.[0] || "",
         })
       } 
-      // 7.3  沒有 token, 就跳回'/auth', 但記得要給「當下頁面的搜尋參數」, 好讓登入後, 返回「旅客填寫表單」 
-      else if (redux_Access_Token === '') {
+      // 7.3  沒有 token, 就跳回'/auth', 但記得要給「當下頁面的搜尋參數」, 好讓登入後, 返回「旅客填寫表單」
+      else if (!isAuthenticated) {
         toast.error("Please Login First", {icon: "⚠️", duration: 2000})
         await sleep(2000);
         router.push(`/auth?redirect=${encodeURIComponent('/travelerinfo')}`);

@@ -20,10 +20,13 @@ import { RootState, AppDispatch } from "@/store/store";
 import { updateKeyword } from "@/store/form-Search/formSearchSlice";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { useAuthState } from "@/hooks/useAuthState";
 
 export default function Booking_Detail () {
-  // 0. Reddux - 令牌
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  // 0. 走 server-side proxy 帶 token
+  const { makeAuthenticatedRequest } = useApiRequest();
+  const { isAuthenticated } = useAuthState();
 
   // 1. 匹配「指定訂單」
   const params = useParams();
@@ -75,17 +78,12 @@ export default function Booking_Detail () {
     event.preventDefault();
     try {
       const send_Review_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/reviews/${the_Booking_Detail.id}`
-      const response = await fetch(send_Review_Url, {
+      const response = await makeAuthenticatedRequest(send_Review_Url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
         body: JSON.stringify({
           rating: hover_Star,
           comment: review
         }),
-        credentials: "include"
       });
       if(!response.ok) {throw new Error("SERVER ERROR~~!")};
       const result = await response.json();
@@ -132,16 +130,10 @@ export default function Booking_Detail () {
   // 12. 指定訂單 API
   const the_Booking_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/bookings/${params.id}`;
   const fetch_The_Booking = async () => {
+    if (!isAuthenticated) return;
     try {
       set_Show_Booking_Detail(false);
-      const response = await fetch(the_Booking_Url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
-        credentials: 'include'
-      });
+      const response = await makeAuthenticatedRequest(the_Booking_Url, { method: "GET" });
       if(!response.ok) {throw new Error(`伺服器錯誤`)};
       const result = await response.json();
       set_The_Booking_Detail(result.data);
@@ -155,7 +147,7 @@ export default function Booking_Detail () {
   // 13. 一進頁面, 串接 指定訂單 API
   useEffect(() => {
     fetch_The_Booking()
-  },[])
+  },[isAuthenticated])
   useEffect(() => {
     // console.log(the_Booking_Detail, "查看指定訂單, API返回數據");
   },[the_Booking_Detail]);

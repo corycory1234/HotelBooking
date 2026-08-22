@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 // 2. 引入 persistor, 才能使用 localStorage
 import { store, persistor } from "../store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import AuthSyncProvider from "./AuthSyncProvider";
 
 // 1. 用於更複雜的狀況
 interface ProviderProps {
@@ -15,7 +16,9 @@ export default function ProviderRedux ({ children }: ProviderProps) {
   return <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {children}
+          <AuthSyncProvider>
+            {children}
+          </AuthSyncProvider>
         </PersistGate>
       </Provider>
     </>

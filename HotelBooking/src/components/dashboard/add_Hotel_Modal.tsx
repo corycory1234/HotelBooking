@@ -8,6 +8,7 @@ import Add_Hotel_Review from "./add_Hotel_Review";
 import { useSelector, useDispatch } from "react-redux";
 import { add_One_Hotel } from "@/store/cms/Hotel_List_Slice";
 import { RootState, AppDispatch } from "@/store/store";
+import { useApiRequest } from "@/hooks/useApiRequest";
 
 
 // 2. 各種房型初始值
@@ -25,7 +26,7 @@ const bed_Type_List = ["singlebed", "doublebed", "queenbed", "kingbed" ,"twinbed
 export default function Add_Hotel_Modal() {
   const dispatch: AppDispatch = useDispatch();
   const redux_Hotel_List = useSelector((state: RootState) => state.hotel_List);
-  const redux_Access_Token = useSelector((state: RootState) => state.access_Token.data.tokens.access_token);
+  const { makeAuthenticatedRequest } = useApiRequest();
   console.log(redux_Hotel_List, "Redux - 飯店列表");
   
   // 1. 所有飯店列表
@@ -232,14 +233,9 @@ export default function Add_Hotel_Modal() {
     // 15. 創建飯店 API
     const create_Hotel_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/hotels";
     try {
-      const response = await fetch(create_Hotel_Url, {
+      const response = await makeAuthenticatedRequest(create_Hotel_Url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
         body: JSON.stringify(new_Hotel),
-        credentials: "include" // 同源政策 CORS 需要
       });
       const data = await response.json();
       console.log(data, "查看創建飯店API", data.data.hotel.hotel_Id, "查看飯店ID");
@@ -248,14 +244,9 @@ export default function Add_Hotel_Modal() {
 
       // 16. 上傳飯店照片 API
       const upload_Hotel_Image_List_Url = process.env.NEXT_PUBLIC_API_BASE_URL + `/hotels/${hotel_Id}/images`
-      const hotel_Image_Lits_Response = await fetch(upload_Hotel_Image_List_Url, {
+      const hotel_Image_Lits_Response = await makeAuthenticatedRequest(upload_Hotel_Image_List_Url, {
         method: "POST",
-        headers: {
-          // "Content-Type": "application/json",
-          "Authorization": `bearer ${redux_Access_Token}`
-        },
         body: hotel_Image_List_Form_Data,
-        // credentials: "include"
       });
       const data2 = await hotel_Image_Lits_Response.json();
       console.log(data2, "查看上傳房店照片API回應");
@@ -273,15 +264,10 @@ export default function Add_Hotel_Modal() {
           files.forEach((file) => {
             room_Type_Image_List_Form_Data.append("images", file);
           });
-        
-        const room_Type_Image_List_Response = await fetch(upload_Room_Type_Image_List_Url, {
+
+        const room_Type_Image_List_Response = await makeAuthenticatedRequest(upload_Room_Type_Image_List_Url, {
           method: "POST",
-          headers: {
-            // "Content-Type": "application/json",
-            "Authorization": `bearer ${redux_Access_Token}`
-          },
           body: room_Type_Image_List_Form_Data,
-          // credentials: "include"
         });
       const data3 = await room_Type_Image_List_Response.json()
       console.log(data3, "查看上傳房型照片 API回應");

@@ -18,8 +18,8 @@ import Image from "next/image";
 import {useLocale, useTranslations} from 'next-intl';
 import { usePathname as i18n_usePathname, useRouter as i18n_useRouter } from "@/i18n/routing";
 import { useAuthState } from "@/hooks/useAuthState";
+import { useApiRequest } from "@/hooks/useApiRequest";
 import { tokenService } from "@/lib/token-service";
-import { cleanSensitiveStorageData } from "@/lib/storage-cleaner";
 import { logout } from "@/lib/logout";
 
 
@@ -50,7 +50,8 @@ export default function Before_Login_Profile () {
   };
 
   // 5. 整合的認證狀態 (Cookie + Redux)
-  const { isAuthenticated, accessToken, loading } = useAuthState();
+  const { isAuthenticated, loading } = useAuthState();
+  const { makeAuthenticatedRequest } = useApiRequest();
   const redux_Verify_Session = useSelector((state: RootState) => state.verify_Session);
   const redux_User_Info = useSelector((state: RootState) => state.access_Token.data.user);
 
@@ -106,13 +107,7 @@ export default function Before_Login_Profile () {
   }
   const get_User_Info = async () => {
     const user_Info_Url = process.env.NEXT_PUBLIC_API_BASE_URL + "/auth/me";
-    const response = await fetch(user_Info_Url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json", 
-        "Authorization":`bearer ${accessToken}`},
-      credentials: 'include'
-    })
+    const response = await makeAuthenticatedRequest(user_Info_Url, { method: "GET" });
     const {data} = await response.json();
     set_User_Info(data);
     set_Modal_Boolean(true);
