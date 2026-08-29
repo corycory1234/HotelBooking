@@ -200,7 +200,7 @@ export default function Before_Login_Profile () {
       ) : !isAuthenticated ? <>
         {/** 登入 */}
         <p className="text-white">{t ("Sign in to see deals and manage your trip")}</p>
-        <Link href={"/auth"}>
+        <Link href={`/auth?redirect=${encodeURIComponent(i18n_PathName)}`}>
           <button type="button" className="bg-green-700 text-white rounded p-2">{t ("Login")}</button>
         </Link>
         {/** 登入 */}
@@ -437,8 +437,8 @@ export default function Before_Login_Profile () {
           <div className="w-4 h-4 bg-gray-300 rounded"></div>
           <div className="w-16 h-4 bg-gray-300 rounded"></div>
         </div>
-      ) : !isAuthenticated ? 
-        <Link href={"/auth"} >
+      ) : !isAuthenticated ?
+        <Link href={`/auth?redirect=${encodeURIComponent(i18n_PathName)}`} >
           <div className="flex justify-between">
             <div className="flex gap-2">
               <ProfileSVG name={"login"} className="w-5 h-auto"></ProfileSVG>
