@@ -36,6 +36,22 @@ vi.mock('react-redux', async () => {
 // 5) sleep
 vi.mock('@/utils/sleep', () => ({ sleep: () => Promise.resolve() }))
 
+// 6) useApiRequest - post-login, `Login` also fires verify_Token()/
+// get_User_Info() through makeAuthenticatedRequest(). Those are follow-up
+// calls unrelated to the login request itself, so stub them out rather than
+// letting them consume the mocked global.fetch queue.
+vi.mock('@/hooks/useApiRequest', () => ({
+  useApiRequest: () => ({
+    makeAuthenticatedRequest: vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({})
+    }),
+    requireAuth: () => true,
+    isAuthenticated: true,
+    accessToken: 'abc'
+  })
+}))
+
 /* ---------- 測試 ---------- */
 test('登入成功後會呼叫 toast.success 並導向首頁', async () => {
   // 讓 fetch 假裝成功
