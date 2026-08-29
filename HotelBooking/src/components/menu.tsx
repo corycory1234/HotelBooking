@@ -63,9 +63,11 @@ export default function Menu () {
       fixed bottom-0 left-0 right-0 z-50 lg:hidden">
 
       <div className="flex-1 flex justify-between">
-        {menu.map((item, index) => 
-          <Link href={`${!isAuthenticated && 
-            item.name === 'Trip' ? '/auth' : item.url}`} 
+        {menu.map((item, index) =>
+          <Link href={`${!isAuthenticated &&
+            // 未登入時點 Trip 會先被導去登入 - 帶上 redirect 參數,
+            // 讓登入完成後能回到原本要去的 /trip,而不是被丟回首頁。
+            item.name === 'Trip' ? `/auth?redirect=${encodeURIComponent('/trip')}` : item.url}`}
             className="flex flex-col items-center gap-2" key={index}>
             <div className={`${item.url === i18n_PathName ? 'text-primary' : ''}`}>
               {item.svgIcon}

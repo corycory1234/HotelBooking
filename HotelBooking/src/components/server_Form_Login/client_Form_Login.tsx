@@ -17,6 +17,7 @@ import { update_Access_Token } from "@/store/access_Token/access_Token_Slice";
 import { createClient } from "@/lib/supabase/client";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { useTranslations } from "next-intl";
+import { sanitizeRedirect } from "@/utils/sanitizeRedirect";
 // const initialState = { message: ""};
 
 
@@ -40,7 +41,13 @@ export default function Server_Form_Login () {
   // 2. 沒有 token, 就跳回'/auth', 但記得要給「當下頁面的搜尋參數」, 好讓登入後, 返回「旅客填寫表單」
   // 2.1 searchParams 專門拿 URL上的 「？後面的搜尋參數」; 沒有搜尋參數, 就是返回首頁
   const searchParams = useSearchParams();
-  const redirect_Url = searchParams.get("redirect") || "/";
+  // Reject anything that isn't a same-origin relative path - a raw
+  // `?redirect=` value is user-controlled and would otherwise be an
+  // open-redirect vector (mirrors the check the OAuth callback route does
+  // server-side in src/app/auth/callback/route.ts).
+  const redirect_Url = typeof window !== "undefined"
+    ? sanitizeRedirect(searchParams.get("redirect"), window.location.origin)
+    : "/";
 
   // Server Action 的狀態 與 函式
   // const [state, formAction] = useFormState(Submit_Login, initialState)
