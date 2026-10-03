@@ -2,7 +2,6 @@
 
 import Client_Input_Password from "@/components/server_Form_Login/client_Input_Password";
 import Client_Input_Confirm_Password from "./client_Input_Confirm_Password";
-import { Submit_Register } from "@/actions/register";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import { useEffect, useState } from "react";
