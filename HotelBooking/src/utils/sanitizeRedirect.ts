@@ -7,6 +7,8 @@
  * `request.nextUrl.origin`) and the traditional email/password login form
  * (client-side, `origin` from `window.location.origin`).
  */
+
+// 防止 ReDirect漏洞, 並且驗證 ?redirect=, 參數只能走同源路徑
 export function sanitizeRedirect(raw: string | null | undefined, origin: string): string {
   if (!raw) return '/';
 

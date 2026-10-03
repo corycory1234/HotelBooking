@@ -18,7 +18,7 @@ export const logout = async (): Promise<void> => {
       console.warn('Supabase signOut failed:', error);
     }
 
-    // Call backend logout endpoint and clear traditional-login cookie tokens
+    // 也呼叫後端 authAPI, 一般Email登入, 也要清除掉 cookie 與 token
     await authAPI.logout();
 
     if (typeof window !== 'undefined') {
